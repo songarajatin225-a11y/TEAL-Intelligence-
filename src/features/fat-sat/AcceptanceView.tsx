@@ -62,14 +62,14 @@ export default function AcceptanceView({ record }: { record: Rec }) {
         <Stat label="Fail" value={s.fail} tone={s.fail ? 'bad' : undefined} />
         <Stat label="Not run" value={s.notRun} />
       </div>
-      {failNoAction.length > 0 && <p className="mb-2 text-[12.5px] text-bad">{failNoAction.length} failed/deviating test(s) without an action.</p>}
+      {failNoAction.length > 0 && <p className="mb-2 text-body text-bad">{failNoAction.length} failed/deviating test(s) without an action.</p>}
       {sections.map((sec) => (
         <div key={sec} className="mb-3">
-          <div className="mb-1 text-[11px] font-semibold uppercase text-ink-3">{sec}</div>
+          <div className="mb-1 text-micro font-semibold uppercase text-ink-3">{sec}</div>
           <div className="overflow-x-auto">
-            <table className="w-full text-[12px]">
+            <table className="w-full text-meta">
               <thead>
-                <tr className="text-left text-[10.5px] uppercase text-ink-3">
+                <tr className="text-left text-micro uppercase text-ink-3">
                   {['ID', 'Test', 'Method', 'Expected', 'Actual', 'Result', 'Evidence', 'Deviation / action'].map((h) => (
                     <th key={h} className="px-1">
                       {h}
@@ -85,7 +85,7 @@ export default function AcceptanceView({ record }: { record: Rec }) {
                       <td className="max-w-[260px] px-1">
                         {t.test}
                         {t.requirement_id && (
-                          <div className="text-[11px]">
+                          <div className="text-micro">
                             <RecordLink id={t.requirement_id} />
                           </div>
                         )}

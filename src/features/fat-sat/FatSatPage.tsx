@@ -53,7 +53,7 @@ export default function FatSatPage() {
           <Button disabled={!pid} onClick={() => void gen('SAT')}>
             Generate SAT
           </Button>
-          {p && <span className="text-[12px] text-ink-3">{n} linked requirement(s) + {ck ? ck.fat.items.length : '—'} FAT checklist items</span>}
+          {p && <span className="text-meta text-ink-3">{n} linked requirement(s) + {ck ? ck.fat.items.length : '—'} FAT checklist items</span>}
         </div>
       </Card>
       <EntityListPage embedded entity="acceptance" title="Protocols" />

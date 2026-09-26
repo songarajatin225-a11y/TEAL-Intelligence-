@@ -108,3 +108,12 @@ export function facets(hits: Hit[]): { entity: Record<string, number>; data_type
   }
   return f;
 }
+
+/** Where a search hit opens: a handbook section (with highlight) or a record page. */
+export function hitLink(h: Pick<Hit, 'entity' | 'ref' | 'id'>, q: string): string {
+  if (h.entity === 'knowledge' && h.ref) {
+    const [p, a] = h.ref.split('#');
+    return `/knowledge/${p}?a=${a}&q=${encodeURIComponent(q)}`;
+  }
+  return `/record/${encodeURIComponent(h.id)}`;
+}

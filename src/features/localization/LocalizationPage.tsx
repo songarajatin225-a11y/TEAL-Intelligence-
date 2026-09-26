@@ -19,7 +19,7 @@ export default function LocalizationPage() {
   const n = (v: string) => (v === '' ? null : Number(v));
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Localization" title="Localization engine" subtitle="Imported component → Indian alternative → supplier → current vs localized cost → lead time → technology gap → risk → validation. Generate candidates from any BOM (import items). Handbook: localize after qualification (Automation Part 52; Semiconductor Part XXXVIII)." />
+      <PageHeader eyebrow="Localization" title="Localization" subtitle="Imported component → Indian alternative → supplier → current vs localized cost → lead time → technology gap → risk → validation. Generate candidates from any BOM (import items). Handbook: localize after qualification (Automation Part 52; Semiconductor Part XXXVIII)." />
       <div className="grid grid-cols-2 gap-2 md:grid-cols-7">
         {['LOCALIZE', 'PARTNER', 'BUY', 'DEVELOP', 'IMPORT', 'UNDECIDED'].map((k) => (
           <Stat key={k} label={k} value={by[k] ?? 0} />

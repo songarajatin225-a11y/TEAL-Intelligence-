@@ -1,5 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import { Plus } from 'lucide-react';
+import { Download, Plus } from 'lucide-react';
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { DataTypeBadge, OriginBadge, StatusBadge, VerificationBadge } from '../../components/badges';
@@ -7,7 +7,8 @@ import { DataTable } from '../../components/DataTable';
 import { EntityForm } from '../../components/EntityForm';
 import { RecordLink, recordPath } from '../../components/RecordLink';
 import { NextActionLine } from '../../components/ThreadPanels';
-import { Button, Drawer, EmptyState, Notice, PageHeader } from '../../components/ui';
+import { EntityDrawer } from '../../components/EntityDrawer';
+import { Button, Drawer, EmptyState, Notice, PageHeader, Popover } from '../../components/ui';
 import type { AnyRecord } from '../../domain';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData, type Rec } from '../../hooks/useData';
@@ -24,7 +25,7 @@ function cellValue(kind: string | undefined, v: unknown): ReactNode {
   if (kind === 'list') return Array.isArray(v) ? (v as unknown[]).map(String).map((x) => x.replace(/^ind-/, '')).join(', ') : String(v);
   if (kind === 'num' || kind === 'money') {
     const n = typeof v === 'object' && v && 'value' in (v as object) ? (v as { value: number | null }).value : (v as number);
-    if (n == null) return <span className="font-mono text-[11px] text-ink-3">UNKNOWN</span>;
+    if (n == null) return <span className="font-mono text-micro text-ink-3">UNKNOWN</span>;
     return <span className="num">{kind === 'money' ? Number(n).toLocaleString('en-IN') : String(n)}</span>;
   }
   if (typeof v === 'object') return JSON.stringify(v).slice(0, 60);
@@ -44,6 +45,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const creating = params.get('new') === '1';
+  const [preview, setPreview] = useState<Rec | null>(null);
   const rows = useMemo(() => records.filter((r) => r.entity === entity && (!filter || filter(r))), [records, entity, filter]);
 
   const columns = useMemo<ColumnDef<Rec, unknown>[]>(() => {
@@ -133,7 +135,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
             {extraActions}
             {!ui?.readOnly && (
               <Button variant="primary" onClick={() => (createTo ? nav(createTo) : setParams({ new: '1' }))}>
-                <Plus className="size-3.5" /> New {def.label.toLowerCase()}
+                <Plus className="size-4" aria-hidden /> New {def.label.toLowerCase()}
               </Button>
             )}
           </>
@@ -146,24 +148,44 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
       )}
       {rows.length ? (
         <DataTable
+          tableKey={entity}
           data={rows}
           columns={columns}
-          onRowClick={(r) => nav(`/record/${encodeURIComponent(r.id)}`)}
+          onRowClick={(r) => setPreview(r)}
           filterPlaceholder={`Filter ${def.plural.toLowerCase()}…`}
           toolbar={
-            <>
-              <Button size="sm" onClick={() => exportRows('csv')}>
-                Export CSV
-              </Button>
-              <Button size="sm" onClick={() => exportRows('json')}>
-                Export JSON
-              </Button>
-              {!ui?.readOnly && (
-                <Button size="sm" onClick={() => fileRef.current?.click()}>
-                  Import
+            <Popover
+              label="Export and import"
+              width="w-56"
+              trigger={({ toggle, open, id }) => (
+                <Button size="sm" onClick={toggle} aria-expanded={open} aria-controls={id}>
+                  <Download className="size-3.5" aria-hidden /> Export
                 </Button>
               )}
-            </>
+            >
+              {(close) => (
+                <ul>
+                  {[
+                    ['Export CSV', () => exportRows('csv')],
+                    ['Export JSON', () => exportRows('json')],
+                    ...(!ui?.readOnly ? ([['Import JSON / CSV…', () => fileRef.current?.click()]] as const) : []),
+                  ].map(([label, f]) => (
+                    <li key={label as string}>
+                      <button
+                        type="button"
+                        className="w-full rounded-lg px-2.5 py-1.5 text-left hover:bg-ink/5"
+                        onClick={() => {
+                          close();
+                          (f as () => void)();
+                        }}
+                      >
+                        {label as string}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Popover>
           }
         />
       ) : (
@@ -185,6 +207,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
         />
       )}
       <input ref={fileRef} type="file" accept=".json,.csv" className="hidden" aria-label="Import file" onChange={(e) => e.target.files?.[0] && void importFile(e.target.files[0])} />
+      <EntityDrawer record={preview} onClose={() => setPreview(null)} />
       <Drawer open={creating} onClose={() => setParams({})} title={`New ${def.label.toLowerCase()}`} wide>
         <EntityForm entity={entity} onCancel={() => setParams({})} onSaved={(r: AnyRecord) => nav(`/record/${encodeURIComponent(r.id)}`)} />
       </Drawer>

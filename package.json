@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "TEAL Engineering Intelligence OS \u2014 GitHub-native engineering digital thread (static-first, IndexedDB workspace).",
+  "description": "TEAL Engineering Intelligence OS — GitHub-native engineering digital thread (static-first, IndexedDB workspace).",
   "scripts": {
     "dev": "npm run data:prepare && vite",
     "build": "npm run data:prepare && tsc -b && vite build",
@@ -28,6 +28,8 @@
     "check": "npm run typecheck && npm run lint && npm test"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
     "@hookform/resolvers": "^5.9.1",
     "@tanstack/react-table": "^8.21.3",
     "@tanstack/react-virtual": "^3.14.13",
@@ -43,6 +45,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^9.39.5",
     "@playwright/test": "1.56",
     "@tailwindcss/vite": "^4.3.3",

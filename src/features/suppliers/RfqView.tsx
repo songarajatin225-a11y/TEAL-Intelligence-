@@ -84,7 +84,7 @@ export default function RfqView({ record }: { record: Rec }) {
     >
       <Notice tone="info">Quotations are entered from real supplier responses. The OS never generates prices. “Lowest compliant” is a comparison aid, not a recommendation.</Notice>
       <div className="my-2 flex flex-wrap items-center gap-2">
-        <span className="text-[12.5px]">
+        <span className="text-body">
           BOM: <RecordLink id={r.bom_id} />
         </span>
         <Select aria-label="Add supplier" value={addSup} onChange={(e) => setAddSup(e.target.value)} className="w-64">
@@ -103,9 +103,9 @@ export default function RfqView({ record }: { record: Rec }) {
         <p className="text-ink-3">Add suppliers to record quotations.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full text-[12px]">
+          <table className="w-full text-meta">
             <thead>
-              <tr className="text-left text-[10.5px] uppercase text-ink-3">
+              <tr className="text-left text-micro uppercase text-ink-3">
                 <th className="px-1">Item</th>
                 {r.supplier_ids.map((s) => (
                   <th key={s} className="px-1">
@@ -122,7 +122,7 @@ export default function RfqView({ record }: { record: Rec }) {
                   <tr key={it.line_id} className="border-t border-line/60 align-top">
                     <td className="max-w-[220px] px-1">
                       <div className="font-medium">{it.part}</div>
-                      <div className="text-[11px] text-ink-3">
+                      <div className="text-micro text-ink-3">
                         {it.quantity} {it.unit} · {it.delivery}
                       </div>
                     </td>
@@ -160,7 +160,7 @@ export default function RfqView({ record }: { record: Rec }) {
                           </option>
                         ))}
                       </Select>
-                      <div className="text-[11px] text-ink-3">{low ? `lowest compliant: ${byId.get(low.supplier_id)?.name} (₹${Math.round(inrOf(low) ?? 0).toLocaleString('en-IN')})` : <Unknown label="no compliant quote" />}</div>
+                      <div className="text-micro text-ink-3">{low ? `lowest compliant: ${byId.get(low.supplier_id)?.name} (₹${Math.round(inrOf(low) ?? 0).toLocaleString('en-IN')})` : <Unknown label="no compliant quote" />}</div>
                     </td>
                   </tr>
                 );

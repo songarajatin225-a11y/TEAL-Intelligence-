@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RecordLink } from '../../components/RecordLink';
-import { Badge, Button, Card, KV, Table, Unknown } from '../../components/ui';
-import type { Product } from '../../domain/entities';
+import { Badge, Button, Card, Chain, KV, Table, Unknown } from '../../components/ui';
+import { MATURITY_STAGES, type Product } from '../../domain/entities';
 import { useData, useEngine, type Rec } from '../../hooks/useData';
 
 const inr = (v: number | null | undefined) => (v == null ? null : `₹ ${Math.round(v).toLocaleString('en-IN')}`);
@@ -14,8 +14,12 @@ export default function ProductDna({ record }: { record: Rec }) {
   const by = (entity: string, field = 'product_id') => records.filter((r) => r.entity === entity && (r as Record<string, unknown>)[field] === p.id);
   const list = (rs: Rec[]) => (rs.length ? <span className="flex flex-wrap gap-x-2">{rs.slice(0, 8).map((r) => <RecordLink key={r.id} id={r.id} />)}{rs.length > 8 && <span className="text-ink-3">+{rs.length - 8}</span>}</span> : <Unknown label="none recorded" />);
   const std = p.standard_content.map((k) => e?.modules.get(k)?.name ?? k);
+  const stageIdx = p.maturity ? MATURITY_STAGES.indexOf(p.maturity) : -1;
   return (
     <div className="space-y-3">
+      <Card title="Development stage" description={p.maturity ? `Currently ${p.maturity}` : 'Maturity not recorded for this platform'}>
+        <Chain label="Product development stages" steps={MATURITY_STAGES.map((m, i) => ({ label: m, state: i < stageIdx ? 'done' : i === stageIdx ? 'current' : 'todo' }))} />
+      </Card>
       <Card
         title="Product DNA"
         actions={
@@ -26,7 +30,7 @@ export default function ProductDna({ record }: { record: Rec }) {
           </Link>
         }
       >
-        <div className="grid gap-3 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           <KV
             items={[
               ['Family', <RecordLink key="f" id={p.family_id} />],
@@ -59,7 +63,7 @@ export default function ProductDna({ record }: { record: Rec }) {
           />
         </div>
       </Card>
-      <div className="grid gap-3 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
         <Card title="Specifications (catalogue)">
           <Table head={['Parameter', 'Value']} dense>
             {p.specs.map((s) => (
@@ -77,8 +81,8 @@ export default function ProductDna({ record }: { record: Rec }) {
                 <Link className="font-medium text-accent-2 hover:underline" to={`/record/app-${p.key}.${a.key}`}>
                   {a.name}
                 </Link>{' '}
-                <Badge>{a.source_key}</Badge> <span className="num text-[11px] text-ink-3">{a.power_w} W</span>
-                <div className="text-[12px] text-ink-2">{a.rationale}</div>
+                <Badge>{a.source_key}</Badge> <span className="num text-micro text-ink-3">{a.power_w} W</span>
+                <div className="text-meta text-ink-2">{a.rationale}</div>
               </li>
             ))}
           </ul>

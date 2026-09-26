@@ -20,7 +20,7 @@ export default function AiPage() {
     <div>
       <PageHeader eyebrow="Knowledge" title="AI context generator & prompt library" subtitle="Prepare structured, provenance-labelled context for Claude, ChatGPT or any assistant. The core platform does not depend on AI." />
       <Notice tone="info">No AI service is called from this site and no API key is stored in it. Copy the text and paste it into the assistant you are authorised to use. Do not paste confidential customer data into external tools unless your policy allows it.</Notice>
-      <div className="mt-3 grid gap-3 xl:grid-cols-[340px_1fr]">
+      <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-[340px_1fr]">
         <Card title="Select">
           <div className="space-y-2">
             <Field label="Object" htmlFor="ai-obj">
@@ -56,10 +56,10 @@ export default function AiPage() {
             >
               <Copy className="size-3.5" /> {copied ? 'Copied' : 'Copy context'}
             </Button>
-            <div className="text-[12px] text-ink-3">Templates: {PROMPT_LIBRARY.map((p) => p.title).join(' · ')}</div>
+            <div className="text-meta text-ink-3">Templates: {PROMPT_LIBRARY.map((p) => p.title).join(' · ')}</div>
           </div>
         </Card>
-        <Textarea aria-label="Generated context" readOnly value={text} className="h-[70vh] font-mono text-[11.5px]" />
+        <Textarea aria-label="Generated context" readOnly value={text} className="h-[70vh] font-mono text-meta" />
       </div>
     </div>
   );

@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="TEAL Engineering Intelligence OS — a GitHub-native engineering digital thread for laser, automation and semiconductor equipment." />
-    <meta name="theme-color" content="#00838a" />
+    <meta name="theme-color" content="#eef3f4" />
+    <script>
+      /* apply saved theme/density before first paint (no flash); mirrors src/app/prefs.ts */
+      try {
+        var p = JSON.parse(localStorage.getItem('teal-os:prefs:v1') || '{}');
+        var t = p.theme === 'dark' || p.theme === 'light' ? p.theme : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.themeResolved = t;
+        document.documentElement.dataset.density = p.density || 'comfortable';
+        document.documentElement.dataset.effects = p.effects || 'full';
+      } catch (e) {}
+    </script>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <title>TEAL Engineering Intelligence OS</title>
+    <title>TEAL Intelligence</title>
   </head>
   <body>
     <div id="root"></div>

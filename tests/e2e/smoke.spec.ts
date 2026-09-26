@@ -1,43 +1,70 @@
 import { expect, go, test } from './fixtures';
 
+/** Every module renders its page title with no runtime errors (all pre-redesign routes kept). */
 const ROUTES: [string, RegExp][] = [
-  ['', /Command Center/],
+  ['', /Mission Control/],
   ['dashboards', /Dashboards/],
-  ['pm', /Product Manager/],
-  ['products', /portfolio/i],
+  ['pm', /My Workspace/],
+  ['activities', /Activities/],
+  ['products', /Products & Platforms/],
   ['configurator', /Configurator/],
-  ['opportunities', /Opportunity/],
+  ['platformization', /Platformization/],
+  ['customers', /Customers/],
+  ['companies', /Companies/],
+  ['opportunities', /Opportunities/],
   ['inquiry', /customer inquiry/],
-  ['applications', /Application/],
-  ['laser', /Laser/],
-  ['calculators', /Calculator/],
-  ['process', /Process/],
-  ['poc', /Proof of concept/],
-  ['doe', /Design of experiments/],
-  ['architecture', /architecture/i],
-  ['semiconductor', /Semiconductor/],
+  ['requirements', /Requirements/],
+  ['traceability', /Traceability/],
+  ['applications', /Applications/],
+  ['materials', /Materials/],
+  ['laser', /Laser Platform/],
+  ['laser-sources', /Laser Sources/],
+  ['optics', /Optics/],
+  ['galvo', /Galvo/],
+  ['calculators', /Calculators/],
+  ['formulas', /Formulas/],
+  ['process', /Process Engineering/],
+  ['poc', /POCs/],
+  ['doe', /DOE Studies/],
+  ['machines', /Machines/],
+  ['architecture', /Architecture/],
+  ['modules', /Modules/],
+  ['reuse', /What Can We Reuse/],
+  ['semiconductor', /Semiconductor Intelligence/],
+  ['equipment-buyer', /Equipment Buyer/],
   ['suppliers', /Suppliers/],
-  ['rfq', /RFQ/],
+  ['rfq', /RFQs/],
+  ['procurement', /Procurement/],
   ['bom', /BOM/],
+  ['items', /Components/],
   ['cost', /Cost/],
   ['projects', /Projects/],
-  ['gates', /G0–G10/],
+  ['gates', /Design Gates/],
+  ['quality', /Risk & FMEA/],
+  ['decisions', /Engineering Decisions/],
+  ['changes', /Change Requests/],
   ['fat-sat', /FAT/],
+  ['production-release', /Production Release/],
   ['localization', /Localization/],
-  ['technology', /Technology radar/],
-  ['knowledge', /Handbook library/],
-  ['memory', /Engineering memory/],
-  ['missing', /What is missing/],
-  ['changed', /What changed/],
-  ['graph', /Knowledge graph/],
+  ['technology', /Technology Radar/],
+  ['roadmap', /Roadmap/],
+  ['global', /Global Intelligence/],
+  ['knowledge', /Engineering Knowledge/],
+  ['search', /Search/],
+  ['memory', /Engineering Memory/],
+  ['missing', /What Is Missing/],
+  ['changed', /What Changed/],
+  ['graph', /Knowledge Graph/],
   ['evidence', /Evidence/],
-  ['ai', /AI context/],
-  ['service', /Field service/],
-  ['admin', /Data management/],
-  ['data-quality', /Data quality/],
+  ['lessons', /Lessons Learned/],
+  ['ai', /AI context/i],
+  ['service', /Field Service/],
+  ['admin', /Data & Workspace/],
+  ['data-quality', /Data Quality/],
   ['reports', /Reports/],
-  ['legacy', /Legacy apps/],
-  ['record/prd-semispm', /./],
+  ['help', /Help Center/],
+  ['legacy', /Legacy Applications/],
+  ['record/prd-semispm', /Semi SPM/],
   ['record/gate-g3', /G3/],
 ];
 
@@ -46,6 +73,7 @@ test.describe('every module renders without runtime errors', () => {
     test(`/${route}`, async ({ page }) => {
       await go(page, route);
       await expect(page.locator('main h1').first()).toHaveText(title);
+      await expect(page.locator('main h1')).toHaveCount(1);
     });
   }
 });
@@ -55,7 +83,7 @@ test('unknown routes show a helpful not-found page', async ({ page }) => {
   await expect(page.getByText('Page not found')).toBeVisible();
 });
 
-test('data types stay visible: DEMO records are labelled', async ({ page }) => {
+test('data types stay visible: demo records are labelled', async ({ page }) => {
   await go(page, 'record/prj-demo-c2i');
-  await expect(page.getByText('DEMO').first()).toBeVisible();
+  await expect(page.getByText(/Demo record/)).toBeVisible();
 });

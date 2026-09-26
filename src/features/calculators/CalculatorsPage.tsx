@@ -77,12 +77,12 @@ function Calc({ spec }: { spec: Spec }) {
         ))}
       </div>
       <div className="mt-2 flex flex-wrap items-baseline gap-2">
-        <span className="font-mono text-[12px] text-ink-3">{r.formula}</span>
-        <span className="ml-auto text-[14px] font-semibold">
+        <span className="font-mono text-meta text-ink-3">{r.formula}</span>
+        <span className="ml-auto text-lead font-semibold">
           <CalcValue c={r} digits={4} />
         </span>
       </div>
-      {r.warnings.length > 0 && <div className="text-[11.5px] text-warn">{r.warnings.join('; ')}</div>}
+      {r.warnings.length > 0 && <div className="text-meta text-warn">{r.warnings.join('; ')}</div>}
     </Card>
   );
 }
@@ -113,9 +113,9 @@ function UnitConverter() {
             <option key={u}>{u}</option>
           ))}
         </Select>
-        <span className="num text-[14px] font-semibold">{out}</span>
+        <span className="num text-lead font-semibold">{out}</span>
       </div>
-      <p className="mt-1 text-[11.5px] text-ink-3">Currency is not converted here: it needs a dated FX rate (Cost Engine → Landed cost). Source values keep their original text.</p>
+      <p className="mt-1 text-meta text-ink-3">Currency is not converted here: it needs a dated FX rate (Cost Engine → Landed cost). Source values keep their original text.</p>
     </Card>
   );
 }
@@ -125,12 +125,12 @@ export default function CalculatorsPage() {
   const [tab, setTab] = useState<keyof typeof GROUPS | 'Units'>('Laser');
   return (
     <div>
-      <PageHeader eyebrow="Laser" title="Calculator engine" subtitle="Every result shows its formula, inputs with units, assumptions and handbook source (click the ? next to a result). Defaults reproduce Automation Handbook Part 54 worked values where the handbook gives the inputs." />
+      <PageHeader eyebrow="Laser" title="Calculators" subtitle="Every result shows its formula, inputs with units, assumptions and handbook source (click the ? next to a result). Defaults reproduce Automation Handbook Part 54 worked values where the handbook gives the inputs." />
       <Tabs label="Calculator groups" value={tab} onChange={setTab} tabs={[...Object.keys(GROUPS).map((k) => ({ key: k as keyof typeof GROUPS, label: k })), { key: 'Units' as const, label: 'Units' }]} />
       {tab === 'Units' ? (
         <UnitConverter />
       ) : (
-        <div className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 2xl:grid-cols-3">
           {GROUPS[tab].map((s) => (
             <Calc key={s.title} spec={s} />
           ))}

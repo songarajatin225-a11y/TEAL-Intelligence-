@@ -11,7 +11,7 @@ import { classifyReuse, findSimilar } from '../services/similarity';
 import { fmtDate, relativeDay } from '../utils/dates';
 import { DataTypeBadge } from './badges';
 import { RecordLink } from './RecordLink';
-import { Badge, Button, Card, Drawer, EmptyState, Select, Textarea } from './ui';
+import { Badge, Button, Drawer, EmptyState, Select, Textarea } from './ui';
 
 export function LinkedRecords({ id }: { id: string }) {
   const { graph } = useData();
@@ -30,17 +30,17 @@ export function LinkedRecords({ id }: { id: string }) {
     <div className="space-y-2">
       {groups.map(([k, list]) => (
         <div key={k}>
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-ink-3">
+          <div className="text-micro font-semibold uppercase tracking-wide text-ink-3">
             {k} <span className="font-normal">({list.length})</span>
           </div>
           <ul className="mt-0.5 space-y-0.5">
             {list.slice(0, 25).map((x) => (
               <li key={x.id} className="flex flex-wrap items-center gap-1.5">
-                <span className="w-24 shrink-0 text-[11px] text-ink-3">{x.dir === 'out' ? x.rel.replace('_', ' ') : `← ${x.rel.replace('_', ' ')}`}</span>
+                <span className="w-24 shrink-0 text-micro text-ink-3">{x.dir === 'out' ? x.rel.replace('_', ' ') : `← ${x.rel.replace('_', ' ')}`}</span>
                 <RecordLink id={x.id} />
               </li>
             ))}
-            {list.length > 25 && <li className="text-[11px] text-ink-3">…and {list.length - 25} more</li>}
+            {list.length > 25 && <li className="text-micro text-ink-3">…and {list.length - 25} more</li>}
           </ul>
         </div>
       ))}
@@ -66,7 +66,7 @@ export function GapsPanel({ id }: { id: string }) {
                 <Badge className="mr-1">{g.category}</Badge>
                 <span className="font-medium">{g.item}</span> — <span className="text-ink-2">{g.detail}</span>
               </div>
-              {g.status !== 'present' && g.action && <div className="text-[12px] text-accent-2">→ {g.action}</div>}
+              {g.status !== 'present' && g.action && <div className="text-meta text-accent-2">→ {g.action}</div>}
             </div>
           </li>
         ))}
@@ -87,11 +87,11 @@ export function SimilarPanel({ record, mode }: { record: AnyRecord; mode: 'simil
   const groups = mode === 'reuse' ? (['Reusable', 'Potentially reusable', 'Requires validation', 'Similar', 'Not compatible'] as const) : null;
   const row = (h: (typeof hits)[number]) => (
     <li key={h.record.id} className="flex flex-wrap items-center gap-1.5 border-b border-line/60 py-1">
-      <span className="num w-10 text-right text-[11px] text-ink-3">{(h.score * 100).toFixed(0)}%</span>
-      <span className="text-[11px] text-ink-3">{ENTITY_BY_TYPE[h.record.entity]?.label}</span>
+      <span className="num w-10 text-right text-micro text-ink-3">{(h.score * 100).toFixed(0)}%</span>
+      <span className="text-micro text-ink-3">{ENTITY_BY_TYPE[h.record.entity]?.label}</span>
       <RecordLink id={h.record.id} />
       <DataTypeBadge t={h.record.data_type} />
-      <span className="w-full pl-12 text-[11.5px] text-ink-3">{h.reasons.slice(0, 4).join(' · ')}</span>
+      <span className="w-full pl-12 text-meta text-ink-3">{h.reasons.slice(0, 4).join(' · ')}</span>
     </li>
   );
   return groups ? (
@@ -103,13 +103,13 @@ export function SimilarPanel({ record, mode }: { record: AnyRecord; mode: 'simil
           <div key={g}>
             <div className="mb-1 flex items-center gap-2">
               <Badge tone={g === 'Reusable' ? 'ok' : g === 'Requires validation' ? 'warn' : g === 'Not compatible' ? 'bad' : 'accent'}>{g}</Badge>
-              <span className="text-[11px] text-ink-3">{list[0].basis}</span>
+              <span className="text-micro text-ink-3">{list[0].basis}</span>
             </div>
             <ul>{list.map(row)}</ul>
           </div>
         );
       })}
-      <p className="text-[11.5px] text-ink-3">Classification rules: src/services/similarity.ts (classifyReuse). DEMO and draft records never count as validated reuse.</p>
+      <p className="text-meta text-ink-3">Classification rules: src/services/similarity.ts (classifyReuse). DEMO and draft records never count as validated reuse.</p>
     </div>
   ) : (
     <ul>{hits.map(row)}</ul>
@@ -138,8 +138,20 @@ export function NextActionLine({ record }: { record: AnyRecord }) {
 }
 
 export function AiContextButton({ id }: { id: string }) {
-  const { graph, byId } = useData();
   const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button size="sm" onClick={() => setOpen(true)}>
+        AI context
+      </Button>
+      <AiContextDrawer id={id} open={open} onClose={() => setOpen(false)} />
+    </>
+  );
+}
+
+/** Copyable, provenance-labelled context for any AI assistant. No API is called (spec §97). */
+export function AiContextDrawer({ id, open, onClose }: { id: string; open: boolean; onClose: () => void }) {
+  const { graph, byId } = useData();
   const [tpl, setTpl] = useState('');
   const [copied, setCopied] = useState(false);
   const r = byId.get(id);
@@ -156,53 +168,21 @@ export function AiContextButton({ id }: { id: string }) {
     }
   };
   return (
-    <>
-      <Button size="sm" onClick={() => setOpen(true)}>
-        AI context
-      </Button>
-      <Drawer open={open} onClose={() => setOpen(false)} title="AI context / prompt" wide>
-        <p className="mb-2 text-ink-2">No AI service is called and no API key is used. Copy this structured, provenance-labelled context into the assistant of your choice.</p>
-        <div className="mb-2 flex flex-wrap items-center gap-2">
-          <Select aria-label="Prompt template" value={tpl} onChange={(e) => setTpl(e.target.value)} className="max-w-xs">
-            <option value="">Context only</option>
-            {templates.map((t) => (
-              <option key={t.key} value={t.key}>
-                {t.title}
-              </option>
-            ))}
-          </Select>
-          <Button variant="primary" onClick={copy}>
-            <Copy className="size-3.5" /> {copied ? 'Copied' : 'Copy context'}
-          </Button>
-        </div>
-        <Textarea readOnly value={text} className="h-[65vh] font-mono text-[11.5px]" aria-label="Generated context" />
-      </Drawer>
-    </>
-  );
-}
-
-export function ThreadCard({ record }: { record: AnyRecord }) {
-  const [tab, setTab] = useState<'linked' | 'missing' | 'reuse' | 'similar'>('linked');
-  return (
-    <Card title="Digital thread">
-      <div role="tablist" aria-label="Thread views" className="mb-2 flex flex-wrap gap-1">
-        {(
-          [
-            ['linked', 'Linked records'],
-            ['missing', 'What is missing?'],
-            ['reuse', 'What can we reuse?'],
-            ['similar', 'Find similar'],
-          ] as const
-        ).map(([k, l]) => (
-          <Button key={k} size="sm" variant={tab === k ? 'primary' : 'default'} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>
-            {l}
-          </Button>
-        ))}
+    <Drawer open={open} onClose={onClose} title="AI context" subtitle="No AI service is called and no key is used — copy this into the assistant of your choice." wide>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <Select aria-label="Prompt template" value={tpl} onChange={(e) => setTpl(e.target.value)} className="max-w-xs">
+          <option value="">Context only</option>
+          {templates.map((t) => (
+            <option key={t.key} value={t.key}>
+              {t.title}
+            </option>
+          ))}
+        </Select>
+        <Button variant="primary" onClick={copy}>
+          <Copy className="size-4" aria-hidden /> {copied ? 'Copied' : 'Copy'}
+        </Button>
       </div>
-      {tab === 'linked' && <LinkedRecords id={record.id} />}
-      {tab === 'missing' && <GapsPanel id={record.id} />}
-      {tab === 'reuse' && <SimilarPanel record={record} mode="reuse" />}
-      {tab === 'similar' && <SimilarPanel record={record} mode="similar" />}
-    </Card>
+      <Textarea readOnly value={text} className="h-[62vh] font-mono text-meta" aria-label="Generated context" />
+    </Drawer>
   );
 }

@@ -65,7 +65,7 @@ export function Gantt({ tasks, onSelect }: { tasks: ProjectTask[]; onSelect?: (i
           );
         })}
       </svg>
-      <p className="text-[11.5px] text-ink-3">
+      <p className="text-meta text-ink-3">
         Red = critical path ({cpm.length} days: {cpm.path.join(' → ')}). Dashed line = today.
       </p>
     </div>
@@ -84,7 +84,7 @@ function GateReviewPanel({ project, def, onChange }: { project: Project; def: Ga
   };
   return (
     <div className="space-y-2">
-      <div className="grid gap-2 text-[12.5px] md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 text-body md:grid-cols-2">
         <div>
           <b>Inputs:</b> {def.inputs}
         </div>
@@ -98,7 +98,7 @@ function GateReviewPanel({ project, def, onChange }: { project: Project; def: Ga
           <b>Exit criteria:</b> {def.exit_criteria}
         </div>
       </div>
-      <div className="text-[11px] font-semibold uppercase text-ink-3">Mandatory evidence</div>
+      <div className="text-micro font-semibold uppercase text-ink-3">Mandatory evidence</div>
       <ul className="space-y-1">
         {r.evidence.map((e, i) => (
           <li key={i} className="grid grid-cols-[1fr_140px_1fr] items-center gap-2">
@@ -114,13 +114,13 @@ function GateReviewPanel({ project, def, onChange }: { project: Project; def: Ga
       </ul>
       <Input aria-label="Approvers" placeholder={`Approvers, comma separated${def.customer_facing ? ' — include Customer (customer-facing gate)' : ''}`} value={(r.approvers ?? []).join(', ')} onChange={(ev) => setR({ ...r, approvers: ev.target.value.split(',').map((x) => x.trim()).filter(Boolean) })} />
       <div>
-        <div className="text-[11px] font-semibold uppercase text-ink-3">Conditions (owner and date required)</div>
+        <div className="text-micro font-semibold uppercase text-ink-3">Conditions (owner and date required)</div>
         {(r.conditions ?? []).map((c, i) => (
           <div key={i} className="mb-1 grid grid-cols-[1fr_140px_150px_auto_auto] gap-1">
             <Input aria-label="Condition" value={c.text} onChange={(ev) => setR({ ...r, conditions: r.conditions!.map((x, j) => (j === i ? { ...x, text: ev.target.value } : x)) })} />
             <Input aria-label="Condition owner" placeholder="owner" value={c.owner} onChange={(ev) => setR({ ...r, conditions: r.conditions!.map((x, j) => (j === i ? { ...x, owner: ev.target.value } : x)) })} />
             <Input aria-label="Condition due date" type="date" value={c.due} onChange={(ev) => setR({ ...r, conditions: r.conditions!.map((x, j) => (j === i ? { ...x, due: ev.target.value } : x)) })} />
-            <label className="flex items-center gap-1 text-[12px]">
+            <label className="flex items-center gap-1 text-meta">
               <input type="checkbox" checked={!!c.closed} onChange={(ev) => setR({ ...r, conditions: r.conditions!.map((x, j) => (j === i ? { ...x, closed: ev.target.checked } : x)) })} /> closed
             </label>
             <Button size="sm" variant="ghost" aria-label="Remove condition" onClick={() => setR({ ...r, conditions: r.conditions!.filter((_, j) => j !== i) })}>
@@ -133,7 +133,7 @@ function GateReviewPanel({ project, def, onChange }: { project: Project; def: Ga
         </Button>
       </div>
       {msg.length > 0 && (
-        <div role="alert" className="rounded border border-bad/40 bg-bad/5 p-2 text-[12.5px] text-bad">
+        <div role="alert" className="rounded border border-bad/40 bg-bad/5 p-2 text-body text-bad">
           Gate cannot pass:
           <ul className="list-disc pl-5">
             {msg.map((m) => (
@@ -229,9 +229,9 @@ export default function ProjectView({ record }: { record: Rec }) {
       {tab === 'gantt' && <Gantt tasks={p.tasks} onSelect={() => setTab('tasks')} />}
       {tab === 'tasks' && (
         <div className="overflow-x-auto">
-          <table className="w-full text-[12px]">
+          <table className="w-full text-meta">
             <thead>
-              <tr className="text-left text-[10.5px] uppercase text-ink-3">
+              <tr className="text-left text-micro uppercase text-ink-3">
                 {['ID', 'Task', 'Owner', 'Start', 'End', 'Depends on', 'Status', 'Gate', 'MS', ''].map((h) => (
                   <th key={h} className="px-1">
                     {h}
@@ -316,7 +316,7 @@ export default function ProjectView({ record }: { record: Rec }) {
               void persist(next, `${g.gate_code} ${g.decision}`);
             }}
           />
-          <p className="mt-2 text-[11.5px] text-ink-3">
+          <p className="mt-2 text-meta text-ink-3">
             Rules R1–R5 (src/services/gates.ts): mandatory evidence, previous gate passed, previous conditions closed, named conditions, customer signature on customer-facing gates. Source: {byId.get('src-automation-handbook')?.name}.
           </p>
         </div>

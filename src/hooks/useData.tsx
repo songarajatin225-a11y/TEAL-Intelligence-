@@ -21,14 +21,16 @@ interface DataState {
   pricing: PricingRules | null;
   lexicon: Lexicon | null;
   costDefaults: Record<string, unknown> | null;
+  /** when master data + drafts were last (re)loaded in this tab */
+  loadedAt: string | null;
   reload: () => void;
 }
 
 const empty = buildGraph([]);
-const Ctx = createContext<DataState>({ status: 'loading', records: [], byId: new Map(), graph: empty, catalog: null, drafts: 0, pricing: null, lexicon: null, costDefaults: null, reload: () => {} });
+const Ctx = createContext<DataState>({ status: 'loading', records: [], byId: new Map(), graph: empty, catalog: null, drafts: 0, pricing: null, lexicon: null, costDefaults: null, loadedAt: null, reload: () => {} });
 
 export function DataProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<Omit<DataState, 'reload'>>({ status: 'loading', records: [], byId: new Map(), graph: empty, catalog: null, drafts: 0, pricing: null, lexicon: null, costDefaults: null });
+  const [state, setState] = useState<Omit<DataState, 'reload'>>({ status: 'loading', records: [], byId: new Map(), graph: empty, catalog: null, drafts: 0, pricing: null, lexicon: null, costDefaults: null, loadedAt: null });
   const version = useSyncExternalStore(workspaceBus.subscribe, workspaceBus.version);
   const [nonce, setNonce] = useState(0);
 
@@ -46,7 +48,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           r.master.config<Record<string, unknown>>('cost-defaults'),
         ]);
         if (cancel) return;
-        setState({ status: 'ready', records, byId: new Map(records.map((x) => [x.id, x])), graph: buildGraph(records), catalog, drafts: drafts.length, pricing, lexicon, costDefaults });
+        setState({ status: 'ready', records, byId: new Map(records.map((x) => [x.id, x])), graph: buildGraph(records), catalog, drafts: drafts.length, pricing, lexicon, costDefaults, loadedAt: new Date().toISOString() });
       } catch (e) {
         if (cancel) return;
         const fe = e instanceof FetchError;

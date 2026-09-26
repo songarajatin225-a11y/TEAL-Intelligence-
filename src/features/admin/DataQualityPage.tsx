@@ -25,7 +25,7 @@ export default function DataQualityPage() {
     <div className="space-y-3">
       <PageHeader
         eyebrow="Admin"
-        title="Data quality"
+        title="Data Quality"
         subtitle="Missing ids, broken references, unregistered sources, unknown units, duplicates, stale prices and verifications, undated FX, conflicts. Errors fail the CI data-quality gate; warnings are reported."
         actions={
           <Button onClick={() => download(`data-quality-${stamp()}.md`, reportMarkdown(report), 'text/markdown')}>
@@ -40,7 +40,7 @@ export default function DataQualityPage() {
         <Stat label="Info" value={report.issues.length - report.errors - report.warnings} />
         <Stat label="Local records" value={localIds.size} sub="drafts included" />
       </div>
-      <div className="grid gap-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
         <Card title="By data type">
           <Counts o={report.by_data_type} />
         </Card>
@@ -64,17 +64,17 @@ export default function DataQualityPage() {
         title={`Issues (${issues.length})`}
         actions={
           <div className="flex gap-1">
-            <Select aria-label="Scope" value={scope} onChange={(e) => setScope(e.target.value as 'all' | 'local')} className="py-0.5 text-[12px]">
+            <Select aria-label="Scope" value={scope} onChange={(e) => setScope(e.target.value as 'all' | 'local')} className="py-0.5 text-meta">
               <option value="all">Master + local</option>
               <option value="local">Local drafts only</option>
             </Select>
-            <Select aria-label="Severity" value={sev} onChange={(e) => setSev(e.target.value as '' | DQIssue['severity'])} className="py-0.5 text-[12px]">
+            <Select aria-label="Severity" value={sev} onChange={(e) => setSev(e.target.value as '' | DQIssue['severity'])} className="py-0.5 text-meta">
               <option value="">All severities</option>
               <option value="error">Errors</option>
               <option value="warning">Warnings</option>
               <option value="info">Info</option>
             </Select>
-            <Select aria-label="Check" value={check} onChange={(e) => setCheck(e.target.value)} className="py-0.5 text-[12px]">
+            <Select aria-label="Check" value={check} onChange={(e) => setCheck(e.target.value)} className="py-0.5 text-meta">
               <option value="">All checks</option>
               {Object.keys(report.checks).map((k) => (
                 <option key={k}>{k}</option>
@@ -99,7 +99,7 @@ export default function DataQualityPage() {
                 </tr>
               ))}
             </Table>
-            {issues.length > 500 && <p className="mt-1 text-[11.5px] text-ink-3">Showing 500 of {issues.length}. Download the report for the full list.</p>}
+            {issues.length > 500 && <p className="mt-1 text-meta text-ink-3">Showing 500 of {issues.length}. Download the report for the full list.</p>}
           </div>
         )}
       </Card>
@@ -115,7 +115,7 @@ function Counts({ o }: { o: Record<string, number> }) {
         .sort((a, b) => b[1] - a[1])
         .map(([k, v]) => (
           <li key={k}>
-            <div className="flex justify-between text-[12px]">
+            <div className="flex justify-between text-meta">
               <span>{k}</span>
               <span className="num">{v}</span>
             </div>

@@ -17,7 +17,7 @@ export default function ServicePage() {
   const mtbf = hours && failures.length ? Number(hours) / failures.length : null;
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Service" title="Field service" subtitle="Machine · issue · alarm · root cause · action · spare · technician · downtime · resolution. MTBF needs operating hours from the field — it is never assumed. No live telemetry is claimed." />
+      <PageHeader eyebrow="Service" title="Field Service" subtitle="Machine · issue · alarm · root cause · action · spare · technician · downtime · resolution. MTBF needs operating hours from the field — it is never assumed. No live telemetry is claimed." />
       <div className="grid grid-cols-2 gap-2 md:grid-cols-6">
         <Stat label="Installed machines" value={machines.length} />
         <Stat label="In warranty" value={machines.filter((m) => m.warranty_until && m.warranty_until >= today).length} />

@@ -21,7 +21,7 @@ export default function RiskView({ record }: { record: Rec }) {
           ['Status', r.risk_status],
         ]}
       />
-      <p className="mt-2 text-[11.5px] text-ink-3">Severity ≥ 9 needs action regardless of RPN. Thresholds (RPN ≥ 200 act, ≥ 100 review) are an ASSUMED team convention — set your own.</p>
+      <p className="mt-2 text-meta text-ink-3">Severity ≥ 9 needs action regardless of RPN. Thresholds (RPN ≥ 200 act, ≥ 100 review) are an ASSUMED team convention — set your own.</p>
     </Card>
   );
 }

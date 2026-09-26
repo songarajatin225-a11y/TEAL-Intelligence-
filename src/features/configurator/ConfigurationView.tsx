@@ -88,7 +88,7 @@ export default function ConfigurationView({ record }: { record: Rec }) {
         </>
       }
     >
-      <div className="grid gap-3 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <KV
           items={[
             ['Designation', <span key="d" className="num">{live.desig}</span>],
@@ -115,7 +115,7 @@ export default function ConfigurationView({ record }: { record: Rec }) {
       {drift && <Notice tone="warn">Catalogue data changed since this configuration was saved: snapshot {inr(snap?.price_estimate_inr)} vs now {inr(live.price.value)}.</Notice>}
       {versions.length > 0 && (
         <div className="mt-3">
-          <div className="mb-1 text-[11px] font-semibold uppercase text-ink-3">Versions</div>
+          <div className="mb-1 text-micro font-semibold uppercase text-ink-3">Versions</div>
           {versions.map((v) => (
             <div key={v.id} className="mb-2">
               <Badge>v{(v as { version?: number }).version ?? 1}</Badge> <RecordLink id={v.id} />

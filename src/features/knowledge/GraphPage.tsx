@@ -29,7 +29,7 @@ export default function GraphPage() {
   const options = records.filter((r) => !filter || r.name.toLowerCase().includes(filter.toLowerCase())).slice(0, 200);
   return (
     <div>
-      <PageHeader eyebrow="Knowledge" title="Knowledge graph" subtitle="Nodes: companies, products, applications, processes, materials, lasers, optics, modules, machines, suppliers, customers, requirements, POCs, BOMs, projects, evidence, sources, lessons. Edges: manufactures, uses, compatible_with, applies_to, built_from, supplied_by, tested_by, derived_from, similar_to, used_in, requires, validated_by, learned_from." />
+      <PageHeader eyebrow="Knowledge" title="Knowledge Graph" subtitle="Nodes: companies, products, applications, processes, materials, lasers, optics, modules, machines, suppliers, customers, requirements, POCs, BOMs, projects, evidence, sources, lessons. Edges: manufactures, uses, compatible_with, applies_to, built_from, supplied_by, tested_by, derived_from, similar_to, used_in, requires, validated_by, learned_from." />
       <div className="mb-3 grid grid-cols-2 gap-2 md:grid-cols-4">
         <Stat label="Nodes" value={graph.byId.size} />
         <Stat label="Edges" value={edgeCount} />
@@ -71,7 +71,7 @@ export default function GraphPage() {
             {center?.name.slice(0, 40)}
           </text>
         </svg>
-        <p className="text-[11.5px] text-ink-3">Click a node to re-centre; click the centre to open the record. Built live from master data + your local drafts.</p>
+        <p className="text-meta text-ink-3">Click a node to re-centre; click the centre to open the record. Built live from master data + your local drafts.</p>
       </Card>
     </div>
   );

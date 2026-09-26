@@ -13,15 +13,15 @@ export default function ApplicationsPage() {
   const cell = (ind: string, proc: string) => apps.filter((a) => a.industries.includes(ind) && a.process === proc);
   return (
     <div>
+      <PageHeader title="Applications" subtitle="Where each TEAL application sits by industry and process. Empty cells are gaps in the portfolio — not evidence that no market exists." />
       <Tabs label="View" value={tab} onChange={setTab} tabs={[{ key: 'matrix', label: 'Industry × process' }, { key: 'list', label: 'All applications', count: apps.length }]} />
       {tab === 'list' ? (
-        <EntityListPage entity="application" title="Application library" />
+        <EntityListPage embedded entity="application" title="All applications" />
       ) : (
         <div>
-          <PageHeader eyebrow="Applications" title="Application library" subtitle="Where each TEAL application sits by industry and process. Empty cells are gaps in the portfolio — not evidence that no market exists." />
           <Card>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-[11.5px]">
+              <table className="w-full border-collapse text-meta">
                 <thead>
                   <tr>
                     <th className="sticky left-0 bg-panel px-1 text-left">Industry</th>

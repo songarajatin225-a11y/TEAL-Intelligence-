@@ -6,11 +6,11 @@ test('create a customer → LOCAL DRAFT → export change package', async ({ pag
   await page.getByLabel('Next action', { exact: true }).fill('Send questionnaire');
   await page.getByRole('button', { name: 'Save local draft' }).click();
   await expect(page.locator('main h1')).toHaveText('E2E Test Customer');
-  await expect(page.getByText('LOCAL DRAFT · NEW').first()).toBeVisible();
+  await expect(page.getByText('Local draft · new').first()).toBeVisible();
 
   await go(page, 'admin');
   await expect(page.getByText('Permanent repository update requires a GitHub commit.')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'E2E Test Customer' })).toBeVisible();
+  await expect(page.locator('main').getByRole('link', { name: 'E2E Test Customer' })).toBeVisible();
   const [dl] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: /Export change package/ }).click()]);
   expect(dl.suggestedFilename()).toMatch(/^teal-change-package-.*\.zip$/);
 });
@@ -23,7 +23,7 @@ test('flagship: customer inquiry → draft package → opportunity with thread',
   await expect(page.getByText(/Semi/).first()).toBeVisible();
   await page.getByRole('button', { name: /^Save \d+ drafts$/ }).click();
   await expect(page.locator('main h1')).toContainText('Inquiry:');
-  await expect(page.getByText('LOCAL DRAFT · NEW').first()).toBeVisible();
+  await expect(page.getByText('Local draft · new').first()).toBeVisible();
 
   await go(page, 'traceability');
   await expect(page.getByText(/Laser source supplied by customer/).first()).toBeVisible();
@@ -34,7 +34,7 @@ test('configuration → generate BOM + cost → cost model computes', async ({ p
   await page.locator('main table a[href*="record/cfg-"]').first().click();
   await page.getByRole('button', { name: 'Generate BOM + cost' }).click();
   await expect(page.locator('main h1')).toContainText('Cost —');
-  await expect(page.getByText('LOCAL DRAFT · NEW').first()).toBeVisible();
+  await expect(page.getByText('Local draft · new').first()).toBeVisible();
 });
 
 test('FAT protocol generated from requirements + handbook checklist, results NOT RUN', async ({ page }) => {

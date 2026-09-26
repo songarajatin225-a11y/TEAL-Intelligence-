@@ -27,7 +27,7 @@ function Library({ only }: { only?: string }) {
   if (!books) return <Loading />;
   return (
     <div>
-      <PageHeader eyebrow="Knowledge" title="Handbook library" subtitle="The three foundational TEAL handbooks, converted to version-controlled Markdown. Text is the handbooks’ own wording; figures are not transcribed; equations are linearised. Search them from the top bar." />
+      <PageHeader eyebrow="Knowledge" title="Engineering Knowledge" subtitle="The three foundational TEAL handbooks, converted to version-controlled Markdown. Text is the handbooks’ own wording; figures are not transcribed; equations are linearised. Search them from the top bar." />
       <div className={only ? 'grid gap-3' : 'grid gap-3 xl:grid-cols-3'}>
         {books.filter((b) => !only || b.handbook === only).map((b) => (
           <Card key={b.handbook} title={b.title} actions={<Badge tone="accent">{b.role}</Badge>}>
@@ -77,24 +77,24 @@ function Reader({ path }: { path: string }) {
   const prev = idx > 0 ? index!.parts[idx - 1] : null;
   const next = index && idx >= 0 && idx < index.parts.length - 1 ? index.parts[idx + 1] : null;
   return (
-    <div className="grid gap-3 xl:grid-cols-[1fr_260px]">
+    <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1fr_260px]">
       <article className="min-w-0 rounded-lg border border-line bg-panel p-4">
-        <div className="mb-2 flex flex-wrap items-center gap-2 text-[12px] text-ink-3">
+        <div className="mb-2 flex flex-wrap items-center gap-2 text-meta text-ink-3">
           <Link to="/knowledge" className="text-accent-2 hover:underline">
             Library
           </Link>
           / {parsed.meta.handbook_title} <DataTypeBadge t={parsed.meta.data_type} /> <VerificationBadge v={parsed.meta.verification_status} />
         </div>
         <Markdown source={parsed.body} highlight={hl} />
-        <div className="mt-4 flex justify-between text-[12.5px]">
+        <div className="mt-4 flex justify-between text-body">
           {prev ? <Link className="text-accent-2" to={`/knowledge/${book}/${prev.file}`}>← {prev.title}</Link> : <span />}
           {next ? <Link className="text-accent-2" to={`/knowledge/${book}/${next.file}`}>{next.title} →</Link> : <span />}
         </div>
-        <p className="mt-3 border-t border-line pt-2 text-[11.5px] text-ink-3">Source: {parsed.meta.source_document} · {parsed.meta.transcription}</p>
+        <p className="mt-3 border-t border-line pt-2 text-meta text-ink-3">Source: {parsed.meta.source_document} · {parsed.meta.transcription}</p>
       </article>
       <aside className="no-print">
         <Card title="In this part">
-          <ul className="max-h-[70vh] space-y-0.5 overflow-y-auto text-[12.5px]">
+          <ul className="max-h-[70vh] space-y-0.5 overflow-y-auto text-body">
             {parsed.body
               .split('\n')
               .filter((l) => /^#{2,3} /.test(l))

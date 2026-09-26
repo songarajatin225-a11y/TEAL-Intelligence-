@@ -41,7 +41,7 @@ export default function MemoryPage() {
   };
   return (
     <div>
-      <PageHeader eyebrow="Knowledge" title="Engineering memory" subtitle="Have we solved this before? Searches POCs, products, machines, modules, applications, suppliers, lessons, projects and the handbooks — then ranks structurally similar TEAL assets." />
+      <PageHeader eyebrow="Knowledge" title="Engineering Memory" subtitle="Have we solved this before? Searches POCs, products, machines, modules, applications, suppliers, lessons, projects and the handbooks — then ranks structurally similar TEAL assets." />
       <form
         className="mb-3 flex gap-2"
         onSubmit={(e) => {
@@ -57,16 +57,16 @@ export default function MemoryPage() {
       {!asked ? (
         <EmptyState title="Describe the engineering problem" explain="The answer is only as good as the memory: lessons, POC results and field records must be captured for this to grow. Nothing is invented." />
       ) : (
-        <div className="grid gap-3 xl:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
           <Card title="Similar TEAL assets (structural + terms)">
             {similar.length ? (
               <ul>
                 {similar.map((h) => (
                   <li key={h.record.id} className="border-b border-line/60 py-1">
-                    <span className="num mr-2 text-[11px] text-ink-3">{(h.score * 100).toFixed(0)}%</span>
-                    <span className="mr-1 text-[11px] text-ink-3">{ENTITY_BY_TYPE[h.record.entity]?.label}</span>
+                    <span className="num mr-2 text-micro text-ink-3">{(h.score * 100).toFixed(0)}%</span>
+                    <span className="mr-1 text-micro text-ink-3">{ENTITY_BY_TYPE[h.record.entity]?.label}</span>
                     <RecordLink id={h.record.id} /> <DataTypeBadge t={h.record.data_type} />
-                    <div className="pl-8 text-[11.5px] text-ink-3">{h.reasons.join(' · ')}</div>
+                    <div className="pl-8 text-meta text-ink-3">{h.reasons.join(' · ')}</div>
                   </li>
                 ))}
               </ul>
@@ -80,7 +80,7 @@ export default function MemoryPage() {
             ) : hits.length ? (
               group(hits).map(([k, list]) => (
                 <div key={k} className="mb-2">
-                  <div className="text-[11px] font-semibold uppercase text-ink-3">
+                  <div className="text-micro font-semibold uppercase text-ink-3">
                     {k} ({list.length})
                   </div>
                   <ul>
@@ -93,7 +93,7 @@ export default function MemoryPage() {
             ) : (
               <p className="text-ink-3">Nothing found.</p>
             )}
-            <Link className="text-[12px] text-accent-2" to={`/search?q=${encodeURIComponent(asked)}`}>
+            <Link className="text-meta text-accent-2" to={`/search?q=${encodeURIComponent(asked)}`}>
               Open full search →
             </Link>
           </Card>

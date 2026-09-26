@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { RecordLink } from '../../components/RecordLink';
-import { Badge, Card, EmptyState, PageHeader, Select, Stat } from '../../components/ui';
+import { Badge, Card, Chain, EmptyState, PageHeader, Select, Stat } from '../../components/ui';
 import type { AcceptanceProtocol, Bom, Module, Requirement } from '../../domain/entities';
 import { useRecords } from '../../hooks/useData';
 import { repo } from '../../repositories';
@@ -16,6 +16,12 @@ export default function TraceabilityPage() {
   const [scope, setScope] = useState('');
   const rows = useMemo(() => traceMatrix(reqs.filter((r) => !scope || r.opportunity_id === scope || r.project_id === scope), boms, protos), [reqs, boms, protos, scope]);
   const complete = rows.filter((r) => !r.missing.length).length;
+  const projects = useRecords<{ gates: { gate_code: string; decision: string }[] }>('project');
+  const machines = useRecords('machine');
+  const lessons = useRecords('lesson');
+  const needs = new Set(rows.map((r) => r.req.opportunity_id ?? r.req.project_id).filter(Boolean)).size;
+  const cov = (n: number) => (!rows.length ? 'todo' : n === rows.length ? 'done' : n ? 'current' : 'gap') as 'todo' | 'done' | 'current' | 'gap';
+  const released = projects.filter((p) => p.gates.some((g) => g.gate_code === 'G10' && g.decision.startsWith('GO'))).length;
   const linkModule = async (req: Requirement & { __origin?: unknown; __dataset?: unknown }, moduleId: string) => {
     const { __origin, __dataset, ...clean } = req;
     void __origin;
@@ -25,7 +31,23 @@ export default function TraceabilityPage() {
   };
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Opportunities" title="Traceability" subtitle="Requirement → design feature → module → BOM → test → FAT → SAT. Links come from requirement.trace, BOM module ids and FAT/SAT tests generated from requirements." />
+      <PageHeader title="Traceability" subtitle="From customer need to field lesson: every requirement is followed through design, BOM, test, FAT, SAT and production. Gaps are shown, never hidden." />
+      <Card title="Engineering chain" description="Coverage across the selected requirements — dashed stages have gaps">
+        <Chain
+          label="Traceability chain"
+          steps={[
+            { label: 'Customer need', sub: `${needs} source${needs === 1 ? '' : 's'}`, to: '/opportunities', state: needs ? 'done' : 'todo' },
+            { label: 'Requirement', sub: `${rows.length} total`, to: '/requirements', state: rows.length ? 'done' : 'todo' },
+            { label: 'Design / module', sub: `${rows.filter((r) => r.modules.length || r.design.length).length}/${rows.length}`, state: cov(rows.filter((r) => r.modules.length || r.design.length).length) },
+            { label: 'BOM line', sub: `${rows.filter((r) => r.bomLines.length).length}/${rows.length}`, to: '/bom', state: cov(rows.filter((r) => r.bomLines.length).length) },
+            { label: 'FAT test', sub: `${rows.filter((r) => r.fat.length).length}/${rows.length}`, to: '/fat-sat', state: cov(rows.filter((r) => r.fat.length).length) },
+            { label: 'SAT test', sub: `${rows.filter((r) => r.sat.length).length}/${rows.length}`, to: '/fat-sat', state: cov(rows.filter((r) => r.sat.length).length) },
+            { label: 'Production', sub: `${released} released`, to: '/production-release', state: released ? 'done' : 'todo' },
+            { label: 'Field', sub: `${machines.length} machines`, to: '/service', state: machines.length ? 'done' : 'todo' },
+            { label: 'Lesson learned', sub: `${lessons.length}`, to: '/lessons', state: lessons.length ? 'done' : 'todo' },
+          ]}
+        />
+      </Card>
       <div className="flex flex-wrap items-end gap-2">
         <Select aria-label="Scope" value={scope} onChange={(e) => setScope(e.target.value)} className="w-96">
           <option value="">All requirements</option>
@@ -43,9 +65,9 @@ export default function TraceabilityPage() {
       ) : (
         <Card>
           <div className="overflow-x-auto">
-            <table className="w-full text-[12px]">
+            <table className="w-full text-meta">
               <thead>
-                <tr className="text-left text-[10.5px] uppercase text-ink-3">
+                <tr className="text-left text-micro uppercase text-ink-3">
                   {['Requirement', 'Design / module', 'BOM', 'FAT', 'SAT', 'Missing links'].map((h) => (
                     <th key={h} className="px-1 py-1">
                       {h}
@@ -58,7 +80,7 @@ export default function TraceabilityPage() {
                   <tr key={r.req.id} className="border-t border-line/60 align-top">
                     <td className="max-w-[260px] px-1 py-1">
                       <RecordLink id={r.req.id} />
-                      <div className="text-[11px] text-ink-3">{r.req.code}</div>
+                      <div className="text-micro text-ink-3">{r.req.code}</div>
                     </td>
                     <td className="px-1 py-1">
                       {r.design.map((d) => (
@@ -69,7 +91,7 @@ export default function TraceabilityPage() {
                           <RecordLink id={m} />
                         </div>
                       ))}
-                      <Select aria-label="Link module" value="" onChange={(e) => e.target.value && void linkModule(r.req as Requirement & { __origin?: unknown }, e.target.value)} className="mt-0.5 py-0.5 text-[11px]">
+                      <Select aria-label="Link module" value="" onChange={(e) => e.target.value && void linkModule(r.req as Requirement & { __origin?: unknown }, e.target.value)} className="mt-0.5 py-0.5 text-micro">
                         <option value="">+ module…</option>
                         {modules.map((m) => (
                           <option key={m.id} value={m.id}>

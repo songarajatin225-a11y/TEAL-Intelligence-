@@ -14,9 +14,9 @@ export default function TechnologyRadarPage() {
   };
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Technology" title="Technology radar" subtitle="Laser, photonics, automation, robotics, vision, semiconductor, AI, digital twin, ultrafast, UV, green, beam shaping, in-process sensing, closed-loop control, MES, Industry 4.0." />
+      <PageHeader eyebrow="Technology" title="Technology Radar" subtitle="Laser, photonics, automation, robotics, vision, semiconductor, AI, digital twin, ultrafast, UV, green, beam shaping, in-process sensing, closed-loop control, MES, Industry 4.0." />
       <Notice tone="info">Radar statuses (Emerging → Declining) are assigned only with linked evidence. Edit a topic, attach evidence records, then set the status. Until then topics are “not assessed” and link to the handbook sections that discuss them.</Notice>
-      <div className="grid gap-2 md:grid-cols-5">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-5">
         {TECH_STATUSES.map((s) => (
           <Card key={s} title={s}>
             <ul className="space-y-0.5">
@@ -34,7 +34,7 @@ export default function TechnologyRadarPage() {
         ))}
       </div>
       <Card title={`Not assessed (${unassessed.length})`}>
-        <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           {unassessed.map((t) => (
             <div key={t.id} className="rounded border border-line p-2">
               <div className="flex items-center justify-between">
@@ -43,7 +43,7 @@ export default function TechnologyRadarPage() {
                 </Link>
                 <Badge>{t.domain}</Badge>
               </div>
-              <ul className="mt-1 space-y-0.5 text-[12px]">
+              <ul className="mt-1 space-y-0.5 text-meta">
                 {(t.knowledge_refs ?? []).slice(0, 4).map((r) => (
                   <li key={r}>
                     <Link to={link(r)} className="text-ink-2 hover:text-accent-2">

@@ -19,7 +19,7 @@ export default function SemiconductorPage() {
     <div className="space-y-3">
       <PageHeader
         eyebrow="Semiconductor"
-        title="Semiconductor intelligence"
+        title="Semiconductor Intelligence"
         subtitle="Where is the opportunity? Raw material → wafer → fab → test → ATMP, with the laser processes the Semiconductor Handbook lists at each step. “Back-end and board-level processes have lower entry barriers than front-end tools; the qualification path runs through OSATs and EMS lines.” (Part XXXII)"
         actions={
           <Link to="/equipment-buyer">
@@ -27,7 +27,7 @@ export default function SemiconductorPage() {
           </Link>
         }
       />
-      <div className="grid gap-2 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-2 xl:grid-cols-5">
         {STAGES.map((st) => (
           <Card key={st} title={st} className={st === 'Back-end / ATMP' ? 'border-accent' : ''}>
             <ol className="space-y-2">
@@ -36,14 +36,14 @@ export default function SemiconductorPage() {
                 .map((s) => (
                   <li key={s.id}>
                     <div className="flex items-center gap-1">
-                      <span className="num text-[11px] text-ink-3">{s.order}</span>
+                      <span className="num text-micro text-ink-3">{s.order}</span>
                       <Link to={`/record/${s.id}`} className="font-medium text-accent-2 hover:underline">
                         {s.name}
                       </Link>
                       {s.laser_relevance && <Badge tone="accent">laser</Badge>}
                     </div>
-                    {s.laser_relevance && <div className="text-[11.5px] text-ink-2">{s.laser_relevance.split(' · ')[0].slice(0, 140)}</div>}
-                    <div className="text-[11px]">
+                    {s.laser_relevance && <div className="text-meta text-ink-2">{s.laser_relevance.split(' · ')[0].slice(0, 140)}</div>}
+                    <div className="text-micro">
                       {(s.knowledge_refs ?? []).slice(0, 2).map((r) => (
                         <Link key={r} to={link(r)} className="mr-2 text-ink-3 hover:text-accent-2">
                           handbook →
@@ -56,12 +56,12 @@ export default function SemiconductorPage() {
           </Card>
         ))}
       </div>
-      <div className="grid gap-3 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
         <Card title="TEAL platforms serving semiconductor">
           <ul className="space-y-1">
             {products.map((p) => (
               <li key={p.id}>
-                <RecordLink id={p.id} /> <span className="text-[12px] text-ink-3">— {p.title}</span>
+                <RecordLink id={p.id} /> <span className="text-meta text-ink-3">— {p.title}</span>
               </li>
             ))}
           </ul>
@@ -75,7 +75,7 @@ export default function SemiconductorPage() {
             ))}
             {!opps.length && <li className="text-ink-3">None.</li>}
           </ul>
-          <Link to="/knowledge/semiconductor/13-parts-xxiv-xxvi-supply-chain-countries-and-india.md?a=part-xxvi-india-semiconductor-ecosystem" className="mt-2 inline-block text-[12px] text-accent-2">
+          <Link to="/knowledge/semiconductor/13-parts-xxiv-xxvi-supply-chain-countries-and-india.md?a=part-xxvi-india-semiconductor-ecosystem" className="mt-2 inline-block text-meta text-accent-2">
             India semiconductor ecosystem (handbook Part XXVI) →
           </Link>
         </Card>

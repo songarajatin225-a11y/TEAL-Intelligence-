@@ -51,7 +51,7 @@ export default function ProcessEnginePage() {
   const libApps = apps.filter((a) => a.material_ids?.includes(mat) && a.process === proc);
   return (
     <div>
-      <PageHeader eyebrow="Process" title="Process engine" subtitle="Material → wavelength → absorption → thermal budget → pulse regime → spot → DOF → throughput → cost per good part. Candidates to test in a POC — not a guaranteed process." />
+      <PageHeader eyebrow="Process" title="Process Engineering" subtitle="Material → wavelength → absorption → thermal budget → pulse regime → spot → DOF → throughput → cost per good part. Candidates to test in a POC — not a guaranteed process." />
       <Card className="mb-3">
         <div className="flex flex-wrap gap-3">
           <Field label="Material" htmlFor="pe-m">
@@ -82,7 +82,7 @@ export default function ProcessEnginePage() {
         </div>
       </Card>
       {m && !m.absorption && <Notice tone="warn">No absorption data for {m.name}: wavelength ranking is UNKNOWN. The engine does not guess material properties.</Notice>}
-      <div className="grid gap-3 xl:grid-cols-[1fr_360px]">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1fr_360px]">
         <Card title="Process candidates by source class">
           <Table head={['Source', 'λ band', 'Absorptance', 'Regime', 'Diffusion / pulse', 'Spot', 'DOF', 'TEAL applications']} dense>
             {ranked.map((r) => (
@@ -92,7 +92,7 @@ export default function ProcessEnginePage() {
                 </td>
                 <td>{r.band}</td>
                 <td className="num">{r.abs == null ? <Unknown /> : r.abs}</td>
-                <td className="text-[11.5px]">{r.regime}</td>
+                <td className="text-meta">{r.regime}</td>
                 <td>{r.diff ? <CalcValue c={r.diff} digits={2} /> : '—'}</td>
                 <td>
                   <CalcValue c={r.spot} digits={2} />
@@ -104,16 +104,16 @@ export default function ProcessEnginePage() {
               </tr>
             ))}
           </Table>
-          <p className="mt-1 text-[11.5px] text-ink-3">Ordering: catalogue applications for this material/process first, then indicative absorptance. Throughput and cost per good part need POC data (cycle time, yield) — see POC / DOE.</p>
+          <p className="mt-1 text-meta text-ink-3">Ordering: catalogue applications for this material/process first, then indicative absorptance. Throughput and cost per good part need POC data (cycle time, yield) — see POC / DOE.</p>
         </Card>
         <div className="space-y-3">
-          <Card title="Application library">
+          <Card title="Applications">
             {libApps.length ? (
               <ul className="space-y-1">
                 {libApps.map((a) => (
                   <li key={a.id}>
-                    <RecordLink id={a.id} /> <span className="text-[11.5px] text-ink-3">on <RecordLink id={a.product_id} /></span>
-                    <div className="text-[12px] text-ink-2">{a.rationale}</div>
+                    <RecordLink id={a.id} /> <span className="text-meta text-ink-3">on <RecordLink id={a.product_id} /></span>
+                    <div className="text-meta text-ink-2">{a.rationale}</div>
                   </li>
                 ))}
               </ul>

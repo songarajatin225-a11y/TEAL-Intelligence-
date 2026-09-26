@@ -5,16 +5,9 @@ import { Badge, Button, Card, EmptyState, ErrorState, Input, Loading, PageHeader
 import { ENTITY_BY_TYPE, SEARCH_PARTITIONS, type SearchPartition } from '../../domain/registry';
 import { useData } from '../../hooks/useData';
 import { workspaceDb } from '../../repositories/workspaceDb';
-import { facets, search, type Hit } from '../../services/search';
+import { facets, hitLink, search, type Hit } from '../../services/search';
 import { BOOK_TITLES } from '../../services/knowledgeChunks';
-
-export function hitLink(h: Hit, q: string): string {
-  if (h.entity === 'knowledge' && h.ref) {
-    const [p, a] = h.ref.split('#');
-    return `/knowledge/${p}?a=${a}&q=${encodeURIComponent(q)}`;
-  }
-  return `/record/${encodeURIComponent(h.id)}`;
-}
+export { hitLink };
 
 export function HitRow({ h, q }: { h: Hit; q: string }) {
   return (
@@ -27,9 +20,9 @@ export function HitRow({ h, q }: { h: Hit; q: string }) {
         <DataTypeBadge t={h.data_type} />
         <VerificationBadge v={h.verification} />
         {h.local && <OriginBadge o="LOCAL_NEW" />}
-        <span className="num ml-auto text-[11px] text-ink-3">{h.score.toFixed(1)}</span>
+        <span className="num ml-auto text-micro text-ink-3">{h.score.toFixed(1)}</span>
       </div>
-      <div className="pl-1 text-[11.5px] text-ink-3">matched: {h.terms.slice(0, 8).join(', ')}</div>
+      <div className="pl-1 text-meta text-ink-3">matched: {h.terms.slice(0, 8).join(', ')}</div>
     </li>
   );
 }
@@ -65,7 +58,7 @@ export default function SearchPage() {
 
   return (
     <div>
-      <PageHeader eyebrow="Knowledge" title="Engineering search" subtitle={'Products, companies, suppliers, lasers, optics, modules, applications, processes, materials, POCs, projects, requirements and the three handbooks. Try: 50W 1064nm nanosecond laser marking source · entity:module vision · "process window" · book:automation takt'} />
+      <PageHeader eyebrow="Knowledge" title="Search" subtitle={'Products, companies, suppliers, lasers, optics, modules, applications, processes, materials, POCs, projects, requirements and the three handbooks. Try: 50W 1064nm nanosecond laser marking source · entity:module vision · "process window" · book:automation takt'} />
       <form
         className="mb-3 flex flex-wrap gap-2"
         onSubmit={(e) => {
@@ -99,10 +92,10 @@ export default function SearchPage() {
       ) : !hits ? (
         <Loading label="Searching…" />
       ) : (
-        <div className="grid gap-3 lg:grid-cols-[220px_1fr]">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-[220px_1fr]">
           <aside className="space-y-3">
             <Card title="Entity">
-              <ul className="space-y-0.5 text-[12.5px]">
+              <ul className="space-y-0.5 text-body">
                 {Object.entries(f.entity)
                   .sort((a, b) => b[1] - a[1])
                   .map(([k, n]) => (
@@ -116,7 +109,7 @@ export default function SearchPage() {
               </ul>
             </Card>
             <Card title="Data type">
-              <ul className="space-y-0.5 text-[12.5px]">
+              <ul className="space-y-0.5 text-body">
                 {Object.entries(f.data_type).map(([k, n]) => (
                   <li key={k}>
                     <button type="button" className={`flex w-full justify-between ${typeF === k ? 'font-semibold text-accent-2' : ''}`} onClick={() => setTypeF(typeF === k ? null : k)}>

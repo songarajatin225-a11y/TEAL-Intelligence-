@@ -73,6 +73,8 @@ export default function ConfiguratorPage() {
       let st = e.initialState(pk);
       const app = params.get('app');
       if (app) st = e.withApplication(st, app);
+      const src = params.get('source');
+      if (src && e.product(st)?.source_keys.includes(src)) st = e.withSource(st, src);
       setS(st);
     }
   }, [e, editing, params, s]);
@@ -108,7 +110,7 @@ export default function ConfiguratorPage() {
     <div>
       <PageHeader
         eyebrow="Products"
-        title="Product Configurator 2.0"
+        title="Configurator"
         subtitle="Laser, application, process, machine configuration, modules, optics, motion, vision, controls, safety, utilities, cost, BOM and compatibility — on the TEAL catalogue data. Prices are parametric ESTIMATES, not quotations."
         actions={
           s && (
@@ -123,7 +125,7 @@ export default function ConfiguratorPage() {
           )
         }
       />
-      <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="min-w-0 space-y-3">
           <Card title="01 · Family & platform">
             <div className="mb-2 flex flex-wrap gap-1">
@@ -133,7 +135,7 @@ export default function ConfiguratorPage() {
                 </Button>
               ))}
             </div>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {byFam(fam || view?.p.family_id || families[0]).map((p) => (
                 <button
                   type="button"
@@ -146,8 +148,8 @@ export default function ConfiguratorPage() {
                   className={clsx('rounded-md border p-2 text-left hover:border-accent', s?.productKey === p.key ? 'border-accent bg-accent-soft' : 'border-line')}
                 >
                   <div className="font-semibold">{p.name}</div>
-                  <div className="text-[12px] text-ink-2">{p.title}</div>
-                  <div className="mt-1 text-[11px] text-ink-3">
+                  <div className="text-meta text-ink-2">{p.title}</div>
+                  <div className="mt-1 text-micro text-ink-3">
                     {p.delivery} · {p.source_keys.join('/')} · from {inr(p.base_price_inr)} est.
                   </div>
                 </button>
@@ -157,18 +159,18 @@ export default function ConfiguratorPage() {
           {s && view && (
             <>
               <Card title="02 · Application">
-                <div className="grid gap-2 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {view.p.applications.map((a) => (
                     <button type="button" key={a.key} onClick={() => setS(e.withApplication(s, a.key))} aria-pressed={s.appKey === a.key} className={clsx('rounded-md border p-2 text-left hover:border-accent', s.appKey === a.key ? 'border-accent bg-accent-soft' : 'border-line')}>
                       <div className="font-medium">{a.name}</div>
-                      <div className="text-[12px] text-ink-2">{a.description}</div>
-                      <div className="mt-0.5 text-[11.5px] text-ink-3">{a.rationale}</div>
+                      <div className="text-meta text-ink-2">{a.description}</div>
+                      <div className="mt-0.5 text-meta text-ink-3">{a.rationale}</div>
                     </button>
                   ))}
                 </div>
               </Card>
               <Card title="03 · Source, power & objective">
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <Field label="Laser source" htmlFor="cfg-src">
                     <Select id="cfg-src" value={s.sourceKey} onChange={(ev) => setS(e.withSource(s, ev.target.value))}>
                       {view.p.source_keys.map((k) => (
@@ -204,8 +206,8 @@ export default function ConfiguratorPage() {
               <Card title="04 · Integration — modules, software, connectivity">
                 {[...new Set([...e.modules.values()].map((m) => m.group))].map((g) => (
                   <fieldset key={g} className="mb-2">
-                    <legend className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-3">{g}</legend>
-                    <div className="grid gap-1 sm:grid-cols-2">
+                    <legend className="mb-1 text-micro font-semibold uppercase tracking-wide text-ink-3">{g}</legend>
+                    <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
                       {[...e.modules.values()]
                         .filter((m) => m.group === g)
                         .map((m) => {
@@ -224,7 +226,7 @@ export default function ConfiguratorPage() {
                               <input type={isSw ? 'radio' : 'checkbox'} name={isSw ? 'sw' : undefined} checked={on} disabled={std} onChange={toggle} className="mt-1" />
                               <span className="min-w-0">
                                 <span className="font-medium">{m.name}</span> {std && <Badge tone="ok">standard</Badge>} {!fits && <Badge tone="warn" title="Fitment rule: not normally fitted to this platform">fitment</Badge>}
-                                <span className="block text-[11.5px] text-ink-3">
+                                <span className="block text-meta text-ink-3">
                                   {m.description} · {std ? 'included' : m.price_estimate_inr ? `${inr(m.price_estimate_inr)} est.` : '—'}
                                 </span>
                               </span>
@@ -243,12 +245,12 @@ export default function ConfiguratorPage() {
         {s && view && (
           <div className="min-w-0 space-y-3 xl:sticky xl:top-14 xl:self-start">
             <Card title="Configuration" actions={<Badge tone="draft">DRAFT</Badge>}>
-              <div className="num mb-1 text-[15px] font-semibold">{view.desig}</div>
-              <div className="mb-2 text-[12px] text-ink-2">{view.p.title}</div>
+              <div className="num mb-1 text-lead font-semibold">{view.desig}</div>
+              <div className="mb-2 text-meta text-ink-2">{view.p.title}</div>
               <div className="rounded-md border border-line bg-panel-2 p-2">
-                <div className="text-[11px] font-semibold uppercase text-ink-3">Price band — parametric ESTIMATE (ex-works)</div>
+                <div className="text-micro font-semibold uppercase text-ink-3">Price band — parametric ESTIMATE (ex-works)</div>
                 <div className="num text-lg font-semibold">{view.price.band ? `${inr(view.price.band[0])} – ${inr(view.price.band[1])}` : <Unknown />}</div>
-                <details className="mt-1 text-[12px]">
+                <details className="mt-1 text-meta">
                   <summary className="cursor-pointer text-accent-2">Breakdown</summary>
                   <Table head={['Item', 'Δ INR']} dense>
                     {view.price.breakdown.map((b, i) => (
@@ -285,7 +287,7 @@ export default function ConfiguratorPage() {
               )}
             </Card>
             <Card title="Compatibility">
-              <ul className="space-y-0.5 text-[12.5px]">
+              <ul className="space-y-0.5 text-body">
                 {view.comp.map((c, i) => (
                   <li key={i} className="flex gap-2">
                     <Badge tone={c.status === 'OK' ? 'ok' : c.status === 'FAIL' ? 'bad' : c.status === 'WARNING' ? 'warn' : 'neutral'}>{c.status}</Badge>
@@ -310,8 +312,8 @@ export default function ConfiguratorPage() {
                           </Button>
                         </span>
                       </div>
-                      <div className="text-[12px] text-ink-2">{h.rule.why}</div>
-                      <div className="text-[11.5px] text-ink-3">{h.items.map((i) => `${i.type === 'std' ? '✓ ' : '+ '}${i.name}`).join(' · ')}</div>
+                      <div className="text-meta text-ink-2">{h.rule.why}</div>
+                      <div className="text-meta text-ink-3">{h.items.map((i) => `${i.type === 'std' ? '✓ ' : '+ '}${i.name}`).join(' · ')}</div>
                     </li>
                   ))}
                 </ul>
@@ -327,7 +329,7 @@ export default function ConfiguratorPage() {
                   </Button>
                   {editing && <Button onClick={() => void save(true)}>Save as new version</Button>}
                 </div>
-                {msg && <p className="text-[12px] text-ink-3">{msg}</p>}
+                {msg && <p className="text-meta text-ink-3">{msg}</p>}
                 <Select aria-label="Compare with" value={compareId} onChange={(ev) => setCompareId(ev.target.value)}>
                   <option value="">Compare with a saved configuration…</option>
                   {saved.map((c) => (
