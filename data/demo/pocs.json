@@ -1,0 +1,51 @@
+{
+  "dataset": {
+    "id": "demo-pocs",
+    "title": "DEMO POCs",
+    "entity": "poc",
+    "description": "A planned POC. No results are recorded.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "poc-demo-pkg-marking",
+      "entity": "poc",
+      "name": "POC — 2D code marking on mould compound",
+      "poc_status": "Samples Awaited",
+      "customer_id": "cus-demo-osat",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "application_id": "app-semispm.perunit",
+      "product_id": "prd-semispm",
+      "objective": "Establish a process window for readable 2D codes on the customer’s mould compound at the required rate",
+      "part": "Customer package samples (type UNKNOWN)",
+      "material_id": "mat-emc",
+      "source_id": "las-fiber",
+      "power_w": 20,
+      "optic_id": "opt-f163",
+      "doe_id": "doe-demo-pkg-marking",
+      "decision": "Undecided",
+      "open_questions": [
+        "Package types and mould compound grades?",
+        "Required code size and grade?",
+        "Customer-supplied laser model and interface?"
+      ],
+      "next_action": {
+        "action": "Receive samples and run DOE",
+        "due": "@today+5",
+        "owner": "Application Engineering"
+      }
+    }
+  ]
+}

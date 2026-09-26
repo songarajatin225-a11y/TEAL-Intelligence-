@@ -1,0 +1,604 @@
+{
+  "generated_from": {
+    "simulator": "TEAL-Laser-Product-Sim-2/index.html",
+    "cost": "TEAL-COST-DEMO-7-8/assets/app.js"
+  },
+  "fx": [
+    {
+      "id": "c1",
+      "code": "INR",
+      "name": "Indian Rupee",
+      "rate": 1,
+      "symbol": "₹"
+    },
+    {
+      "id": "c2",
+      "code": "USD",
+      "name": "US Dollar",
+      "rate": 87.4,
+      "symbol": "$"
+    },
+    {
+      "id": "c3",
+      "code": "EUR",
+      "name": "Euro",
+      "rate": 94.8,
+      "symbol": "€"
+    },
+    {
+      "id": "c4",
+      "code": "JPY",
+      "name": "Japanese Yen",
+      "rate": 0.58,
+      "symbol": "¥"
+    }
+  ],
+  "sim": [
+    {
+      "input": {
+        "plat": "markf",
+        "app": "metal",
+        "src": "fiber",
+        "pw": 30,
+        "lens": "f254",
+        "mods": [],
+        "sw": "desktop",
+        "extra": []
+      },
+      "price": 1400000,
+      "designation": "TEAL-F-FB-30W-F254",
+      "spot_um": 31.952201023037862,
+      "dof_um": 579.7042185608299,
+      "reco": [
+        {
+          "id": "r-fume",
+          "items": [
+            "mod:fume"
+          ]
+        },
+        {
+          "id": "r-vision-mark",
+          "items": [
+            "mod:visfid"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-shuttle-takt",
+          "items": [
+            "mod:shuttle"
+          ]
+        },
+        {
+          "id": "r-med-iq",
+          "items": [
+            "extra:iqoqpq"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "markf",
+        "app": "anod",
+        "src": "mopa",
+        "pw": 50,
+        "lens": "f420",
+        "mods": [
+          "visfid"
+        ],
+        "sw": "desktop",
+        "extra": []
+      },
+      "price": 2717251.2,
+      "designation": "TEAL-F-MP-50W-F420-01M",
+      "spot_um": 52.83434814833031,
+      "dof_um": 1585.0304444499086,
+      "reco": [
+        {
+          "id": "r-fume",
+          "items": [
+            "mod:fume"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-shuttle-takt",
+          "items": [
+            "mod:shuttle"
+          ]
+        },
+        {
+          "id": "r-med-iq",
+          "items": [
+            "extra:iqoqpq"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "markc2i",
+        "app": "dual",
+        "src": "co2",
+        "pw": 30,
+        "lens": "f254",
+        "mods": [
+          "visfid",
+          "conveyor",
+          "fume",
+          "visver",
+          "reject"
+        ],
+        "sw": "inline",
+        "extra": [
+          "mes"
+        ]
+      },
+      "price": 7810000,
+      "designation": "TEAL-PCB-C2i-C10-30W-F254-01M-INL",
+      "spot_um": 188.5438582634724,
+      "dof_um": 2394.5069999460998,
+      "reco": [
+        {
+          "id": "r-pcb-line",
+          "items": [
+            "std:visver"
+          ]
+        },
+        {
+          "id": "r-fume",
+          "items": [
+            "std:fume"
+          ]
+        },
+        {
+          "id": "r-vision-mark",
+          "items": [
+            "std:visfid"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-magazine-board",
+          "items": [
+            "mod:magazine"
+          ]
+        },
+        {
+          "id": "r-med-iq",
+          "items": [
+            "extra:iqoqpq"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "semispm",
+        "app": "perunit",
+        "src": "fiber",
+        "pw": 20,
+        "lens": "f163",
+        "mods": [
+          "magazine",
+          "visver"
+        ],
+        "sw": "inline",
+        "extra": [
+          "secsgem",
+          "mes"
+        ]
+      },
+      "price": 16770000,
+      "designation": "TEAL-SPM-FB-20W-F163-INL",
+      "spot_um": 20.50475892423296,
+      "dof_um": 238.73397890356947,
+      "reco": [
+        {
+          "id": "r-semi-host",
+          "items": [
+            "std:visver"
+          ]
+        },
+        {
+          "id": "r-semi-clean",
+          "items": [
+            "mod:cleanrm"
+          ]
+        },
+        {
+          "id": "r-fume",
+          "items": [
+            "mod:fume"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-tray-semi",
+          "items": [
+            "mod:traytwr"
+          ]
+        },
+        {
+          "id": "r-med-iq",
+          "items": [
+            "extra:iqoqpq"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "weldb",
+        "app": "tab",
+        "src": "green",
+        "pw": 1500,
+        "lens": "f254",
+        "mods": [
+          "weldmon",
+          "wobble",
+          "gascon"
+        ],
+        "sw": "volt",
+        "extra": []
+      },
+      "price": 14703515.625,
+      "designation": "TEAL-B-GR-1500W-F254-VOL",
+      "spot_um": 20.64603758411677,
+      "dof_um": 524.4093546365659,
+      "reco": [
+        {
+          "id": "r-weld-mon",
+          "items": [
+            "std:weldmon"
+          ]
+        },
+        {
+          "id": "r-weld-cu",
+          "items": [
+            "mod:oct",
+            "std:wobble"
+          ]
+        },
+        {
+          "id": "r-weld-dry",
+          "items": [
+            "mod:dryroom"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-gas-weld",
+          "items": [
+            "std:gascon"
+          ]
+        },
+        {
+          "id": "r-oct-deep",
+          "items": [
+            "mod:oct"
+          ]
+        },
+        {
+          "id": "r-wobble-gap",
+          "items": [
+            "std:wobble"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-med-iq",
+          "items": [
+            "extra:iqoqpq"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "cutxg",
+        "app": "haz",
+        "src": "pico",
+        "pw": 100,
+        "lens": "f100",
+        "mods": [
+          "fume"
+        ],
+        "sw": "desktop",
+        "extra": []
+      },
+      "price": 7409250,
+      "designation": "TEAL-X-G-PS-100W-F100",
+      "spot_um": 13.114367310772176,
+      "dof_um": 109.28639425643479,
+      "reco": [
+        {
+          "id": "r-fume",
+          "items": [
+            "std:fume"
+          ]
+        },
+        {
+          "id": "r-remote",
+          "items": [
+            "extra:connect"
+          ]
+        },
+        {
+          "id": "r-gas-cut",
+          "items": [
+            "mod:gascon"
+          ]
+        },
+        {
+          "id": "r-autofoc-3d",
+          "items": [
+            "mod:autofoc"
+          ]
+        },
+        {
+          "id": "r-shuttle-takt",
+          "items": [
+            "mod:shuttle"
+          ]
+        }
+      ]
+    },
+    {
+      "input": {
+        "plat": "robo",
+        "app": "complex3d",
+        "src": "smcw",
+        "pw": 2000,
+        "lens": "f254",
+        "mods": [
+          "robot6"
+        ],
+        "sw": "inline",
+        "extra": [
+          "connect"
+        ]
+      },
+      "price": 98472400,
+      "designation": "TEAL-RoboCell-CW-2000W-F254-INL",
+      "spot_um": 30.278591303460725,
+      "dof_um": 640.8968492565855,
+      "reco": [
+        {
+          "id": "r-turn-robot",
+          "items": [
+            "mod:turntbl"
+          ]
+        },
+        {
+          "id": "r-ce-cell",
+          "items": [
+            "mod:cepath"
+          ]
+        }
+      ]
+    }
+  ],
+  "cost": [
+    {
+      "template_id": "006k1jmy",
+      "qty": 2,
+      "compute": {
+        "basic": 5212080,
+        "freight": 104241.6,
+        "duty": 0,
+        "landing": 78181.2,
+        "gst": 971010.504,
+        "siteBase": 384600,
+        "direct": 10168273.807400001,
+        "overheads": 1931972.023406,
+        "contingency": 363007.37492418004,
+        "totalCost": 12463253.205730181,
+        "profit": 2741915.70526064,
+        "selling": 15205168.910990821,
+        "amc": 1582659.2000000002,
+        "orderValue": 30410337.821981642,
+        "grossMargin": 0.3312620289242547,
+        "netMargin": 0.18032786885245902,
+        "contractValue": 31992997.02198164
+      },
+      "buckets": {
+        "material": 5394502.8,
+        "mechanical": 637000,
+        "electrical": 1444000,
+        "software": 458400,
+        "manufacturing": 233060,
+        "labour": 282960,
+        "design": 682000,
+        "site": 415368,
+        "commissioning": 0,
+        "packaging": 0,
+        "amc": 1582659.2000000002,
+        "commercial": 620983.0074
+      },
+      "teal": {
+        "rawMat": 184000,
+        "boughts": 5028080,
+        "mfgParts": 2314060,
+        "packFwd": 266415.51780000003,
+        "insurance": 3896.2777588999998,
+        "A": 8211819.7955589,
+        "assembly": 168560,
+        "installation": 64000,
+        "debugOqc": 50400,
+        "sga": 2174549.873244712,
+        "oss": 390000,
+        "B": 2847509.873244712,
+        "C": 11059329.668803612,
+        "D": 12934888.501524692,
+        "profit": 1552186.620182963,
+        "warranty": 323372.2125381173
+      }
+    },
+    {
+      "template_id": "006lv9ab",
+      "qty": 2,
+      "compute": {
+        "basic": 5579200,
+        "freight": 111584,
+        "duty": 0,
+        "landing": 83688,
+        "gst": 1039404.96,
+        "siteBase": 261000,
+        "direct": 9880844.23,
+        "overheads": 1383318.1922,
+        "contingency": 337924.872666,
+        "totalCost": 11602087.294866,
+        "profit": 1972354.84012722,
+        "selling": 13574442.13499322,
+        "amc": 239590,
+        "orderValue": 27148884.26998644,
+        "grossMargin": 0.27209942539528637,
+        "netMargin": 0.14529914529914528,
+        "contractValue": 27388474.26998644
+      },
+      "buckets": {
+        "material": 5774472,
+        "mechanical": 1038000,
+        "electrical": 871600,
+        "software": 328400,
+        "manufacturing": 316730,
+        "labour": 304800,
+        "design": 641600,
+        "site": 281880,
+        "commissioning": 0,
+        "packaging": 0,
+        "amc": 239590,
+        "commercial": 323362.23
+      },
+      "teal": {
+        "rawMat": 420000,
+        "boughts": 5159200,
+        "mfgParts": 2226330,
+        "packFwd": 208672.446,
+        "insurance": 4007.1012230000006,
+        "A": 8300089.547223001,
+        "assembly": 208000,
+        "installation": 32000,
+        "debugOqc": 64800,
+        "sga": 1773080.94777784,
+        "oss": 390000,
+        "B": 2467880.9477778403,
+        "C": 10767970.495000841,
+        "D": 12594117.53801268,
+        "profit": 1511294.1045615214,
+        "warranty": 314852.938450317
+      }
+    },
+    {
+      "template_id": "006mcew8",
+      "qty": 2,
+      "compute": {
+        "basic": 1500000,
+        "freight": 30000,
+        "duty": 0,
+        "landing": 22500,
+        "gst": 279450,
+        "siteBase": 57600,
+        "direct": 3514868.18,
+        "overheads": 421784.1816,
+        "contingency": 78733.04723200001,
+        "totalCost": 4015385.4088320006,
+        "profit": 602307.8113248001,
+        "selling": 4617693.220156801,
+        "amc": 0,
+        "orderValue": 9235386.440313602,
+        "grossMargin": 0.2388259651686763,
+        "netMargin": 0.13043478260869565,
+        "contractValue": 9235386.440313602
+      },
+      "buckets": {
+        "material": 1552500,
+        "mechanical": 51000,
+        "electrical": 1152000,
+        "software": 86800,
+        "manufacturing": 72910,
+        "labour": 209600,
+        "design": 198000,
+        "site": 62208.00000000001,
+        "commissioning": 0,
+        "packaging": 0,
+        "amc": 0,
+        "commercial": 129850.18
+      },
+      "teal": {
+        "rawMat": 228000,
+        "boughts": 1272000,
+        "mfgParts": 1275910,
+        "packFwd": 96000,
+        "insurance": 1435.955,
+        "A": 2935553.955,
+        "assembly": 160000,
+        "installation": 6400,
+        "debugOqc": 43200,
+        "sga": 570262.4964000001,
+        "oss": 390000,
+        "B": 1169862.4964,
+        "C": 4105416.4514,
+        "D": 4801656.668304094,
+        "profit": 576198.8001964913,
+        "warranty": 120041.41670760236
+      }
+    }
+  ]
+}

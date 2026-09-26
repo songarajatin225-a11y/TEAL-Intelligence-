@@ -1,0 +1,4302 @@
+{
+  "dataset": {
+    "id": "formulas",
+    "title": "Engineering formula catalogue (Automation Handbook Part 54)",
+    "description": "The handbook formula catalogue: quantity, formula, symbols, worked value and the part that develops it. `implemented_by` marks formulas available in the OS calculator engine.",
+    "entity": "formula",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-automation-handbook"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "fml-m1",
+      "entity": "formula",
+      "code": "M1",
+      "name": "M1 — Force",
+      "discipline": "Mechanical",
+      "quantity": "Force",
+      "formula": "F = m·a",
+      "symbols": "m kg, a m/s²",
+      "worked_value": "35 kg × 2.81 = 98 N",
+      "handbook_part": "Part 12",
+      "implemented_by": "src/calculations/automation.ts#force",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m2",
+      "entity": "formula",
+      "code": "M2",
+      "name": "M2 — Weight",
+      "discipline": "Mechanical",
+      "quantity": "Weight",
+      "formula": "W = m·g",
+      "symbols": "g = 9.81 m/s²",
+      "worked_value": "35 kg → 343 N",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m3",
+      "entity": "formula",
+      "code": "M3",
+      "name": "M3 — Friction force",
+      "discipline": "Mechanical",
+      "quantity": "Friction force",
+      "formula": "F_f = μ·N",
+      "symbols": "μ friction coefficient, N normal force",
+      "worked_value": "0.01 × 343 = 3.4 N",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m4",
+      "entity": "formula",
+      "code": "M4",
+      "name": "M4 — Torque",
+      "discipline": "Mechanical",
+      "quantity": "Torque",
+      "formula": "T = F·r",
+      "symbols": "r m",
+      "worked_value": "100 N × 0.05 m = 5 N·m",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m5",
+      "entity": "formula",
+      "code": "M5",
+      "name": "M5 — Rotary power",
+      "discipline": "Mechanical",
+      "quantity": "Rotary power",
+      "formula": "P = T·ω",
+      "symbols": "ω rad/s",
+      "worked_value": "0.62 N·m × 235.6 = 146 W",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m6",
+      "entity": "formula",
+      "code": "M6",
+      "name": "M6 — Linear power",
+      "discipline": "Mechanical",
+      "quantity": "Linear power",
+      "formula": "P = F·v",
+      "symbols": "v m/s",
+      "worked_value": "110 N × 0.75 = 83 W",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m7",
+      "entity": "formula",
+      "code": "M7",
+      "name": "M7 — Normal stress",
+      "discipline": "Mechanical",
+      "quantity": "Normal stress",
+      "formula": "σ = F / A",
+      "symbols": "A m²",
+      "worked_value": "10 kN / 100 mm² = 100 MPa",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m8",
+      "entity": "formula",
+      "code": "M8",
+      "name": "M8 — Shear stress",
+      "discipline": "Mechanical",
+      "quantity": "Shear stress",
+      "formula": "τ = F / A",
+      "symbols": "—",
+      "worked_value": "5 kN / 50 mm² = 100 MPa",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m9",
+      "entity": "formula",
+      "code": "M9",
+      "name": "M9 — Bending stress",
+      "discipline": "Mechanical",
+      "quantity": "Bending stress",
+      "formula": "σ_b = M·c / I = M / Z",
+      "symbols": "M N·m, c m, I m⁴, Z m³",
+      "worked_value": "—",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m10",
+      "entity": "formula",
+      "code": "M10",
+      "name": "M10 — Torsional stress (solid shaft)",
+      "discipline": "Mechanical",
+      "quantity": "Torsional stress (solid shaft)",
+      "formula": "τ = 16·T / (π·d³)",
+      "symbols": "d m",
+      "worked_value": "25 N·m, 16 mm → 31 MPa",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m11",
+      "entity": "formula",
+      "code": "M11",
+      "name": "M11 — Equivalent stress",
+      "discipline": "Mechanical",
+      "quantity": "Equivalent stress",
+      "formula": "σ_v = √(σ² + 3τ²)",
+      "symbols": "von Mises",
+      "worked_value": "—",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m12",
+      "entity": "formula",
+      "code": "M12",
+      "name": "M12 — Cantilever tip deflection",
+      "discipline": "Mechanical",
+      "quantity": "Cantilever tip deflection",
+      "formula": "δ = F·L³ / (3·E·I)",
+      "symbols": "E Pa, L m",
+      "worked_value": "—",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m13",
+      "entity": "formula",
+      "code": "M13",
+      "name": "M13 — Simply supported, centre load",
+      "discipline": "Mechanical",
+      "quantity": "Simply supported, centre load",
+      "formula": "δ = F·L³ / (48·E·I)",
+      "symbols": "—",
+      "worked_value": "294 N, 1.2 m → 6.0 µm",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m14",
+      "entity": "formula",
+      "code": "M14",
+      "name": "M14 — Simply supported, uniform load",
+      "discipline": "Mechanical",
+      "quantity": "Simply supported, uniform load",
+      "formula": "δ = 5·w·L⁴ / (384·E·I)",
+      "symbols": "w N/m",
+      "worked_value": "220 N/m → 3.4 µm",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m15",
+      "entity": "formula",
+      "code": "M15",
+      "name": "M15 — Fixed–fixed, centre load",
+      "discipline": "Mechanical",
+      "quantity": "Fixed–fixed, centre load",
+      "formula": "δ = F·L³ / (192·E·I)",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m16",
+      "entity": "formula",
+      "code": "M16",
+      "name": "M16 — Second moment, rectangular tube",
+      "discipline": "Mechanical",
+      "quantity": "Second moment, rectangular tube",
+      "formula": "I = [b·h³ − (b−2t)(h−2t)³] / 12",
+      "symbols": "b, h, t m",
+      "worked_value": "150×100×6 → 8.85×10⁶ mm⁴",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m17",
+      "entity": "formula",
+      "code": "M17",
+      "name": "M17 — Second moments, round",
+      "discipline": "Mechanical",
+      "quantity": "Second moments, round",
+      "formula": "I = π·d⁴/64; J = π·d⁴/32",
+      "symbols": "—",
+      "worked_value": "d = 17.5 mm → I = 4.6×10⁻⁹ m⁴",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m18",
+      "entity": "formula",
+      "code": "M18",
+      "name": "M18 — Natural frequency",
+      "discipline": "Mechanical",
+      "quantity": "Natural frequency",
+      "formula": "f = (1/2π)·√(k / m_eff)",
+      "symbols": "k N/m",
+      "worked_value": "4.92×10⁷ N/m, 43 kg → 170 Hz",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m19",
+      "entity": "formula",
+      "code": "M19",
+      "name": "M19 — Thermal expansion",
+      "discipline": "Mechanical",
+      "quantity": "Thermal expansion",
+      "formula": "ΔL = α·L·ΔT",
+      "symbols": "α 1/K",
+      "worked_value": "steel 1 m, 5 K → 60 µm",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m20",
+      "entity": "formula",
+      "code": "M20",
+      "name": "M20 — Rolling bearing life",
+      "discipline": "Mechanical",
+      "quantity": "Rolling bearing life",
+      "formula": "L10 = (C/P)^p · 10⁶ rev; L10h = L10 / (60·n)",
+      "symbols": "p = 3 ball, 10/3 roller",
+      "worked_value": "14 kN, 1.2 kN, 1,500 min⁻¹ → 17,600 h",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m21",
+      "entity": "formula",
+      "code": "M21",
+      "name": "M21 — Linear guide life",
+      "discipline": "Mechanical",
+      "quantity": "Linear guide life",
+      "formula": "L = (C / (f_w·P))³ · L_rated",
+      "symbols": "L_rated 50 or 100 km",
+      "worked_value": "35,100 km",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m22",
+      "entity": "formula",
+      "code": "M22",
+      "name": "M22 — Equivalent torque",
+      "discipline": "Mechanical",
+      "quantity": "Equivalent torque",
+      "formula": "T_e = √(M² + T²)",
+      "symbols": "—",
+      "worked_value": "15, 20 → 25 N·m",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m23",
+      "entity": "formula",
+      "code": "M23",
+      "name": "M23 — Shaft diameter",
+      "discipline": "Mechanical",
+      "quantity": "Shaft diameter",
+      "formula": "d = (16·T_e / (π·τ_allow))^(1/3)",
+      "symbols": "τ_allow Pa",
+      "worked_value": "14.7 mm → 16 mm",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m24",
+      "entity": "formula",
+      "code": "M24",
+      "name": "M24 — Torsional wind-up",
+      "discipline": "Mechanical",
+      "quantity": "Torsional wind-up",
+      "formula": "θ = T·L / (G·J)",
+      "symbols": "G Pa",
+      "worked_value": "—",
+      "handbook_part": "Part 8",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m25",
+      "entity": "formula",
+      "code": "M25",
+      "name": "M25 — Screw axial force",
+      "discipline": "Mechanical",
+      "quantity": "Screw axial force",
+      "formula": "F_a = F_ext + μ·m·g + m·a",
+      "symbols": "—",
+      "worked_value": "0 + 3.4 + 98 + seal 8 ≈ 110 N",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m26",
+      "entity": "formula",
+      "code": "M26",
+      "name": "M26 — Screw drive torque",
+      "discipline": "Mechanical",
+      "quantity": "Screw drive torque",
+      "formula": "T = F·p / (2π·η)",
+      "symbols": "p lead m, η ≈ 0.9",
+      "worked_value": "11.4 N, 20 mm → 0.040 N·m",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m27",
+      "entity": "formula",
+      "code": "M27",
+      "name": "M27 — Screw critical speed",
+      "discipline": "Mechanical",
+      "quantity": "Screw critical speed",
+      "formula": "n_c = 0.8·(60/2π)·(λ²/L²)·√(E·I / (ρ·A))",
+      "symbols": "λ = 3.927 fixed–supported",
+      "worked_value": "7,230 min⁻¹",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m28",
+      "entity": "formula",
+      "code": "M28",
+      "name": "M28 — Euler buckling",
+      "discipline": "Mechanical",
+      "quantity": "Euler buckling",
+      "formula": "P_cr = π²·E·I / (K·L)²",
+      "symbols": "K effective-length factor",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m29",
+      "entity": "formula",
+      "code": "M29",
+      "name": "M29 — Screw DN value",
+      "discipline": "Mechanical",
+      "quantity": "Screw DN value",
+      "formula": "DN = d_mm · n",
+      "symbols": "limit per catalogue",
+      "worked_value": "20 × 2,250 = 45,000",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m30",
+      "entity": "formula",
+      "code": "M30",
+      "name": "M30 — Ball screw life",
+      "discipline": "Mechanical",
+      "quantity": "Ball screw life",
+      "formula": "L = (C_a / F_m)³ · 10⁶ rev",
+      "symbols": "F_m mean axial load",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m31",
+      "entity": "formula",
+      "code": "M31",
+      "name": "M31 — Belt effective pull",
+      "discipline": "Mechanical",
+      "quantity": "Belt effective pull",
+      "formula": "F_e = T / r",
+      "symbols": "r pulley pitch radius",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m32",
+      "entity": "formula",
+      "code": "M32",
+      "name": "M32 — Belt stretch",
+      "discipline": "Mechanical",
+      "quantity": "Belt stretch",
+      "formula": "δ = F·L / (c_sp·b)",
+      "symbols": "c_sp specific stiffness N per mm width, b width",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m33",
+      "entity": "formula",
+      "code": "M33",
+      "name": "M33 — Bolt preload",
+      "discipline": "Mechanical",
+      "quantity": "Bolt preload",
+      "formula": "F ≈ T / (K·d)",
+      "symbols": "K ≈ 0.15–0.2",
+      "worked_value": "M8, 25 N·m → 15.6 kN",
+      "handbook_part": "Part 35",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m34",
+      "entity": "formula",
+      "code": "M34",
+      "name": "M34 — Sling leg tension",
+      "discipline": "Mechanical",
+      "quantity": "Sling leg tension",
+      "formula": "T = W / (n·sinθ)",
+      "symbols": "θ from horizontal",
+      "worked_value": "1.5 t, 2 legs, 60° → 8.5 kN",
+      "handbook_part": "Part 39",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m35",
+      "entity": "formula",
+      "code": "M35",
+      "name": "M35 — Drop deceleration",
+      "discipline": "Mechanical",
+      "quantity": "Drop deceleration",
+      "formula": "a ≈ g·h / s_stop",
+      "symbols": "h drop height",
+      "worked_value": "0.1 m, 5 mm → 196 m/s²",
+      "handbook_part": "Part 39",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m36",
+      "entity": "formula",
+      "code": "M36",
+      "name": "M36 — Squareness from diagonals",
+      "discipline": "Mechanical",
+      "quantity": "Squareness from diagonals",
+      "formula": "γ ≈ (d₁² − d₂²) / (4·a·b)",
+      "symbols": "rad",
+      "worked_value": "71 µrad",
+      "handbook_part": "Part 36",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-m37",
+      "entity": "formula",
+      "code": "M37",
+      "name": "M37 — Sheet-metal bend allowance",
+      "discipline": "Mechanical",
+      "quantity": "Sheet-metal bend allowance",
+      "formula": "BA = θ·(R + K·t)",
+      "symbols": "K-factor 0.3–0.5",
+      "worked_value": "4.4 mm",
+      "handbook_part": "Part 32",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.1 Mechanical",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-1-mechanical"
+      },
+      "tags": [
+        "formula",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "fml-t1",
+      "entity": "formula",
+      "code": "T1",
+      "name": "T1 — Worst-case stack",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Worst-case stack",
+      "formula": "T_WC = Σ |t_i|",
+      "symbols": "t_i ± tolerances",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures. Row repaired: the source table splits this formula at |x|; worked value and part number are missing in the source."
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t2",
+      "entity": "formula",
+      "code": "T2",
+      "name": "T2 — RSS stack",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "RSS stack",
+      "formula": "T_RSS = √(Σ t_i²)",
+      "symbols": "each ±3σ",
+      "worked_value": "±0.040 mm",
+      "handbook_part": "Part 9",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t3",
+      "entity": "formula",
+      "code": "T3",
+      "name": "T3 — Mixed stack",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Mixed stack",
+      "formula": "T = Σ |t_sys| + √(Σ t_rand²)",
+      "symbols": "systematic linear",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures. Row repaired: the source table splits this formula at |x|; worked value and part number are missing in the source."
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t4",
+      "entity": "formula",
+      "code": "T4",
+      "name": "T4 — Modified RSS",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Modified RSS",
+      "formula": "T = C_f·√(Σ t_i²)",
+      "symbols": "C_f ≈ 1.5",
+      "worked_value": "±0.060 mm",
+      "handbook_part": "Part 9",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t5",
+      "entity": "formula",
+      "code": "T5",
+      "name": "T5 — Pin clearance shift",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Pin clearance shift",
+      "formula": "Δ = (D_max − d_min) / 2",
+      "symbols": "—",
+      "worked_value": "0.0145 mm",
+      "handbook_part": "Part 9",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t6",
+      "entity": "formula",
+      "code": "T6",
+      "name": "T6 — Height-to-position error",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Height-to-position error",
+      "formula": "Δxy = Δz·r / f",
+      "symbols": "non-telecentric lens",
+      "worked_value": "0.016 mm",
+      "handbook_part": "Part 9",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t7",
+      "entity": "formula",
+      "code": "T7",
+      "name": "T7 — Angular play",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Angular play",
+      "formula": "Δθ ≈ (Δ₁ + Δ₂) / L",
+      "symbols": "—",
+      "worked_value": "0.36 mrad",
+      "handbook_part": "Part 10",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t8",
+      "entity": "formula",
+      "code": "T8",
+      "name": "T8 — Diamond-pin land width",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Diamond-pin land width",
+      "formula": "b ≤ c·D / (2·Δ)",
+      "symbols": "c clearance, Δ centre mismatch",
+      "worked_value": "1.2 mm",
+      "handbook_part": "Part 10",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-t9",
+      "entity": "formula",
+      "code": "T9",
+      "name": "T9 — Clamp force",
+      "discipline": "Tolerances and fixtures",
+      "quantity": "Clamp force",
+      "formula": "F ≥ SF·(F_p + m·a) / (μ·n)",
+      "symbols": "SF 2–3",
+      "worked_value": "67 N",
+      "handbook_part": "Part 10",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.2 Tolerances and fixtures",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-2-tolerances-and-fixtures"
+      },
+      "tags": [
+        "formula",
+        "tolerances and fixtures"
+      ]
+    },
+    {
+      "id": "fml-n1",
+      "entity": "formula",
+      "code": "N1",
+      "name": "N1 — 1/3 trapezoid top speed",
+      "discipline": "Motion",
+      "quantity": "1/3 trapezoid top speed",
+      "formula": "v = d / (t_m − t_a)",
+      "symbols": "t_a = t_m/3",
+      "worked_value": "0.75 m/s",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n2",
+      "entity": "formula",
+      "code": "N2",
+      "name": "N2 — Acceleration",
+      "discipline": "Motion",
+      "quantity": "Acceleration",
+      "formula": "a = v / t_a",
+      "symbols": "—",
+      "worked_value": "2.81 m/s²",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n3",
+      "entity": "formula",
+      "code": "N3",
+      "name": "N3 — Triangular profile",
+      "discipline": "Motion",
+      "quantity": "Triangular profile",
+      "formula": "a = 4·d / t²; v = a·t/2",
+      "symbols": "—",
+      "worked_value": "2.5 m/s², 1.0 m/s",
+      "handbook_part": "Part 4",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n4",
+      "entity": "formula",
+      "code": "N4",
+      "name": "N4 — Angular acceleration (screw)",
+      "discipline": "Motion",
+      "quantity": "Angular acceleration (screw)",
+      "formula": "α = a·2π / p",
+      "symbols": "—",
+      "worked_value": "884 rad/s²",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n5",
+      "entity": "formula",
+      "code": "N5",
+      "name": "N5 — Motor speed (screw)",
+      "discipline": "Motion",
+      "quantity": "Motor speed (screw)",
+      "formula": "n = 60·v / p",
+      "symbols": "min⁻¹",
+      "worked_value": "2,250",
+      "handbook_part": "Part 12",
+      "implemented_by": "src/calculations/automation.ts#motorSpeedScrew",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n6",
+      "entity": "formula",
+      "code": "N6",
+      "name": "N6 — Reflected load inertia (screw)",
+      "discipline": "Motion",
+      "quantity": "Reflected load inertia (screw)",
+      "formula": "J_L = m·(p/2π)²",
+      "symbols": "kg·m²",
+      "worked_value": "3.55×10⁻⁴",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n7",
+      "entity": "formula",
+      "code": "N7",
+      "name": "N7 — Screw inertia",
+      "discipline": "Motion",
+      "quantity": "Screw inertia",
+      "formula": "J = π·ρ·L·d⁴ / 32",
+      "symbols": "—",
+      "worked_value": "0.74×10⁻⁴",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n8",
+      "entity": "formula",
+      "code": "N8",
+      "name": "N8 — Belt / rack reflected inertia",
+      "discipline": "Motion",
+      "quantity": "Belt / rack reflected inertia",
+      "formula": "J_L = m·r²",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n9",
+      "entity": "formula",
+      "code": "N9",
+      "name": "N9 — Through a gearbox",
+      "discipline": "Motion",
+      "quantity": "Through a gearbox",
+      "formula": "J_motor = J_load / i²; T_motor = T_load / (i·η)",
+      "symbols": "i ratio",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n10",
+      "entity": "formula",
+      "code": "N10",
+      "name": "N10 — Inertia-matching ratio",
+      "discipline": "Motion",
+      "quantity": "Inertia-matching ratio",
+      "formula": "i_opt = √(J_L / J_m)",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n11",
+      "entity": "formula",
+      "code": "N11",
+      "name": "N11 — Acceleration torque",
+      "discipline": "Motion",
+      "quantity": "Acceleration torque",
+      "formula": "T_a = J_Σ·α",
+      "symbols": "—",
+      "worked_value": "0.533 N·m",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n12",
+      "entity": "formula",
+      "code": "N12",
+      "name": "N12 — Friction torque",
+      "discipline": "Motion",
+      "quantity": "Friction torque",
+      "formula": "T_f = (μmg + F_seal + F_ext)·p / (2πη) + T_pre",
+      "symbols": "—",
+      "worked_value": "0.090 N·m",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n13",
+      "entity": "formula",
+      "code": "N13",
+      "name": "N13 — RMS torque",
+      "discipline": "Motion",
+      "quantity": "RMS torque",
+      "formula": "T_RMS = √(Σ T_k²·t_k / t_cycle)",
+      "symbols": "—",
+      "worked_value": "0.173 N·m",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n14",
+      "entity": "formula",
+      "code": "N14",
+      "name": "N14 — Inertia ratio",
+      "discipline": "Motion",
+      "quantity": "Inertia ratio",
+      "formula": "R_J = (J_Σ − J_m) / J_m",
+      "symbols": "—",
+      "worked_value": "4.0",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n15",
+      "entity": "formula",
+      "code": "N15",
+      "name": "N15 — Regenerative energy",
+      "discipline": "Motion",
+      "quantity": "Regenerative energy",
+      "formula": "E = ½·J·ω² − T_f·θ",
+      "symbols": "J",
+      "worked_value": "12.8 J",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n16",
+      "entity": "formula",
+      "code": "N16",
+      "name": "N16 — Bus capacitor absorption",
+      "discipline": "Motion",
+      "quantity": "Bus capacitor absorption",
+      "formula": "E = ½·C·(V_r² − V_bus²)",
+      "symbols": "C F",
+      "worked_value": "10.9 J",
+      "handbook_part": "Part 12",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n17",
+      "entity": "formula",
+      "code": "N17",
+      "name": "N17 — Encoder resolution",
+      "discipline": "Motion",
+      "quantity": "Encoder resolution",
+      "formula": "res = p / (i·2^N)",
+      "symbols": "N bits",
+      "worked_value": "0.019 µm",
+      "handbook_part": "Part 11",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n18",
+      "entity": "formula",
+      "code": "N18",
+      "name": "N18 — Following error (P loop)",
+      "discipline": "Motion",
+      "quantity": "Following error (P loop)",
+      "formula": "e = v / K_v",
+      "symbols": "K_v s⁻¹",
+      "worked_value": "5 mm",
+      "handbook_part": "Part 11",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n19",
+      "entity": "formula",
+      "code": "N19",
+      "name": "N19 — Circular contour shrink",
+      "discipline": "Motion",
+      "quantity": "Circular contour shrink",
+      "formula": "Δr = v² / (2·R·K_v²)",
+      "symbols": "—",
+      "worked_value": "0.4 mm",
+      "handbook_part": "Part 13",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n20",
+      "entity": "formula",
+      "code": "N20",
+      "name": "N20 — Timing position error",
+      "discipline": "Motion",
+      "quantity": "Timing position error",
+      "formula": "Δx = v·Δt",
+      "symbols": "—",
+      "worked_value": "0.5 mm at 1 ms",
+      "handbook_part": "Part 13",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n21",
+      "entity": "formula",
+      "code": "N21",
+      "name": "N21 — Synchronous speed",
+      "discipline": "Motion",
+      "quantity": "Synchronous speed",
+      "formula": "n = 120·f / p_poles",
+      "symbols": "—",
+      "worked_value": "1,500 min⁻¹",
+      "handbook_part": "Part 11",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n22",
+      "entity": "formula",
+      "code": "N22",
+      "name": "N22 — Parallel-station cycle",
+      "discipline": "Motion",
+      "quantity": "Parallel-station cycle",
+      "formula": "CT = max(t_station) + t_transfer",
+      "symbols": "—",
+      "worked_value": "5.3 s",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#parallelStationCycle",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n23",
+      "entity": "formula",
+      "code": "N23",
+      "name": "N23 — Robot CoG and wrist moment",
+      "discipline": "Motion",
+      "quantity": "Robot CoG and wrist moment",
+      "formula": "r = Σm_i r_i / Σm_i; M = m·g·r",
+      "symbols": "—",
+      "worked_value": "96 mm, 2.8 N·m",
+      "handbook_part": "Part 25",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n24",
+      "entity": "formula",
+      "code": "N24",
+      "name": "N24 — Gripper force (friction)",
+      "discipline": "Motion",
+      "quantity": "Gripper force (friction)",
+      "formula": "F_jaw = m·(g + a)·S / (μ·n)",
+      "symbols": "S 2–4",
+      "worked_value": "238 N",
+      "handbook_part": "Part 26",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-n25",
+      "entity": "formula",
+      "code": "N25",
+      "name": "N25 — E-stop deceleration",
+      "discipline": "Motion",
+      "quantity": "E-stop deceleration",
+      "formula": "a = v² / (2·s)",
+      "symbols": "—",
+      "worked_value": "14 m/s²",
+      "handbook_part": "Part 26",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.3 Motion",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-3-motion"
+      },
+      "tags": [
+        "formula",
+        "motion"
+      ]
+    },
+    {
+      "id": "fml-p1",
+      "entity": "formula",
+      "code": "P1",
+      "name": "P1 — Extend force",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Extend force",
+      "formula": "F = p·A·η",
+      "symbols": "p Pa gauge",
+      "worked_value": "×20, 4 bar → 113 N",
+      "handbook_part": "Part 14",
+      "implemented_by": "src/calculations/automation.ts#cylinderExtendForce",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p2",
+      "entity": "formula",
+      "code": "P2",
+      "name": "P2 — Retract force",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Retract force",
+      "formula": "F = p·(A − A_rod)·η",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p3",
+      "entity": "formula",
+      "code": "P3",
+      "name": "P3 — Load ratio",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Load ratio",
+      "formula": "LR = F_load / (p·A)",
+      "symbols": "≤ 0.5–0.7 moving",
+      "worked_value": "53%",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p4",
+      "entity": "formula",
+      "code": "P4",
+      "name": "P4 — Free air per double stroke",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Free air per double stroke",
+      "formula": "V = (A_e + A_r)·s·(p + p_atm)/p_atm",
+      "symbols": "p_atm = 1.013 bar",
+      "worked_value": "0.20 NL",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p5",
+      "entity": "formula",
+      "code": "P5",
+      "name": "P5 — Tube dead volume",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Tube dead volume",
+      "formula": "V_t·(p + p_atm)/p_atm",
+      "symbols": "—",
+      "worked_value": "0.17 NL",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p6",
+      "entity": "formula",
+      "code": "P6",
+      "name": "P6 — Air flow for speed",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Air flow for speed",
+      "formula": "Q = A·v·(p + p_atm)/p_atm",
+      "symbols": "—",
+      "worked_value": "26 NL/min",
+      "handbook_part": "Part 14",
+      "implemented_by": "src/calculations/automation.ts#airFlowForSpeed",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p7",
+      "entity": "formula",
+      "code": "P7",
+      "name": "P7 — Cushioning energy",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Cushioning energy",
+      "formula": "E = ½·m·v²",
+      "symbols": "—",
+      "worked_value": "0.24 J",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p8",
+      "entity": "formula",
+      "code": "P8",
+      "name": "P8 — Line pressure drop",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Line pressure drop",
+      "formula": "Δp = f·(L/D)·ρ·v²/2",
+      "symbols": "Darcy friction f",
+      "worked_value": "—",
+      "handbook_part": "Part 14",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p9",
+      "entity": "formula",
+      "code": "P9",
+      "name": "P9 — Vacuum load case I",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Vacuum load case I",
+      "formula": "F = m·(g + a)·S",
+      "symbols": "vertical lift",
+      "worked_value": "—",
+      "handbook_part": "Part 15",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p10",
+      "entity": "formula",
+      "code": "P10",
+      "name": "P10 — Vacuum load case II",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Vacuum load case II",
+      "formula": "F = m·(g + a/μ)·S",
+      "symbols": "horizontal move",
+      "worked_value": "119 N dry, 359 N oily",
+      "handbook_part": "Part 15",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p11",
+      "entity": "formula",
+      "code": "P11",
+      "name": "P11 — Vacuum load case III",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Vacuum load case III",
+      "formula": "F = (m/μ)·(g + a)·S",
+      "symbols": "vertical face",
+      "worked_value": "—",
+      "handbook_part": "Part 15",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p12",
+      "entity": "formula",
+      "code": "P12",
+      "name": "P12 — Cup diameter",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Cup diameter",
+      "formula": "d = √(4·F / (π·Δp·n))",
+      "symbols": "—",
+      "worked_value": "25 mm",
+      "handbook_part": "Part 15",
+      "implemented_by": "src/calculations/automation.ts#vacuumCupDiameter",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p13",
+      "entity": "formula",
+      "code": "P13",
+      "name": "P13 — Evacuation time",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Evacuation time",
+      "formula": "t = (V/Q)·ln(p₀/p₁)",
+      "symbols": "absolute pressures",
+      "worked_value": "0.14 s",
+      "handbook_part": "Part 15",
+      "implemented_by": "src/calculations/automation.ts#evacuationTime",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p14",
+      "entity": "formula",
+      "code": "P14",
+      "name": "P14 — Vacuum holding force",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Vacuum holding force",
+      "formula": "F = Δp·A_eff·η_seal",
+      "symbols": "—",
+      "worked_value": "1,350 N",
+      "handbook_part": "Part 10",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-p15",
+      "entity": "formula",
+      "code": "P15",
+      "name": "P15 — Leak rate (pressure decay)",
+      "discipline": "Pneumatics and vacuum",
+      "quantity": "Leak rate (pressure decay)",
+      "formula": "Q = V·Δp / Δt",
+      "symbols": "1 Pa·m³/s = 10 mbar·L/s",
+      "worked_value": "1.3×10⁻² mbar·L/s",
+      "handbook_part": "Part 30",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.4 Pneumatics and vacuum",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-4-pneumatics-and-vacuum"
+      },
+      "tags": [
+        "formula",
+        "pneumatics and vacuum"
+      ]
+    },
+    {
+      "id": "fml-e1",
+      "entity": "formula",
+      "code": "E1",
+      "name": "E1 — Three-phase current",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Three-phase current",
+      "formula": "I = P / (√3·V·cosφ·η) or I = S / (√3·V)",
+      "symbols": "V line-to-line",
+      "worked_value": "4.32 kVA → 6.0 A",
+      "handbook_part": "Part 16",
+      "implemented_by": "src/calculations/automation.ts#threePhaseCurrent",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e2",
+      "entity": "formula",
+      "code": "E2",
+      "name": "E2 — Single-phase current",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Single-phase current",
+      "formula": "I = P / (V·cosφ·η)",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e3",
+      "entity": "formula",
+      "code": "E3",
+      "name": "E3 — Demand load",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Demand load",
+      "formula": "S_d = Σ S_i·k_d,i",
+      "symbols": "diversity factors",
+      "worked_value": "4.32 kVA",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e4",
+      "entity": "formula",
+      "code": "E4",
+      "name": "E4 — Cable and protection",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Cable and protection",
+      "formula": "I_b ≤ I_n ≤ I_z·k_temp·k_group",
+      "symbols": "—",
+      "worked_value": "16 A on 4 mm²",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e5",
+      "entity": "formula",
+      "code": "E5",
+      "name": "E5 — Three-phase voltage drop",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Three-phase voltage drop",
+      "formula": "ΔV = √3·I·L·ρ / A",
+      "symbols": "ρ ≈ 0.0225 Ω·mm²/m warm Cu",
+      "worked_value": "4.7 V (1.1%)",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e6",
+      "entity": "formula",
+      "code": "E6",
+      "name": "E6 — DC voltage drop",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "DC voltage drop",
+      "formula": "ΔV = 2·I·L·ρ / A",
+      "symbols": "—",
+      "worked_value": "1.4 V",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e7",
+      "entity": "formula",
+      "code": "E7",
+      "name": "E7 — Earth-fault disconnection",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Earth-fault disconnection",
+      "formula": "Z_s·I_a ≤ U₀",
+      "symbols": "—",
+      "worked_value": "Z_s ≤ 1.44 Ω",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e8",
+      "entity": "formula",
+      "code": "E8",
+      "name": "E8 — 24 V supply",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "24 V supply",
+      "formula": "I ≥ 1.25·Σ I_i·k_i",
+      "symbols": "—",
+      "worked_value": "11.9 A → 20 A",
+      "handbook_part": "Part 16",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e9",
+      "entity": "formula",
+      "code": "E9",
+      "name": "E9 — Joule heating",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Joule heating",
+      "formula": "P = I²·R",
+      "symbols": "—",
+      "worked_value": "200 A, 50 µΩ → 2 W",
+      "handbook_part": "Part 30",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e10",
+      "entity": "formula",
+      "code": "E10",
+      "name": "E10 — Panel heat balance",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Panel heat balance",
+      "formula": "Q_cool = P_loss − k·A·(T_in − T_amb)",
+      "symbols": "k ≈ 5.5 W/m²K",
+      "worked_value": "592 W",
+      "handbook_part": "Part 17",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e11",
+      "entity": "formula",
+      "code": "E11",
+      "name": "E11 — Filter-fan flow",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Filter-fan flow",
+      "formula": "V = 3.1·Q / ΔT",
+      "symbols": "m³/h",
+      "worked_value": "79 m³/h",
+      "handbook_part": "Part 17",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e12",
+      "entity": "formula",
+      "code": "E12",
+      "name": "E12 — Load-cell output",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Load-cell output",
+      "formula": "U = S·U_exc·F/F_nom",
+      "symbols": "S mV/V",
+      "worked_value": "20 mV",
+      "handbook_part": "Part 18",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e13",
+      "entity": "formula",
+      "code": "E13",
+      "name": "E13 — 4–20 mA scaling",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "4–20 mA scaling",
+      "formula": "x = x_min + (I − 4)/16·(x_max − x_min)",
+      "symbols": "mA",
+      "worked_value": "—",
+      "handbook_part": "Part 18",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e14",
+      "entity": "formula",
+      "code": "E14",
+      "name": "E14 — Sensor visibility",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Sensor visibility",
+      "formula": "L/v ≥ t_sensor + t_filter + 2·t_scan",
+      "symbols": "—",
+      "worked_value": "5 ms flag missed at 10 ms scan",
+      "handbook_part": "Part 18",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e15",
+      "entity": "formula",
+      "code": "E15",
+      "name": "E15 — Inductive assured range",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Inductive assured range",
+      "formula": "S_a ≤ 0.81·S_n·k_material",
+      "symbols": "—",
+      "worked_value": "2.6 mm on Al",
+      "handbook_part": "Part 18",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e16",
+      "entity": "formula",
+      "code": "E16",
+      "name": "E16 — PLC reaction time",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "PLC reaction time",
+      "formula": "t = t_in + 2·t_scan + t_out",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 19",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e17",
+      "entity": "formula",
+      "code": "E17",
+      "name": "E17 — EtherCAT frame time",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "EtherCAT frame time",
+      "formula": "t ≈ 8·(B_oh + ΣB)/R + N·t_fwd",
+      "symbols": "R bit/s",
+      "worked_value": "33 µs",
+      "handbook_part": "Part 22",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e18",
+      "entity": "formula",
+      "code": "E18",
+      "name": "E18 — Serial message time",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Serial message time",
+      "formula": "t = n_char·b_frame / baud",
+      "symbols": "—",
+      "worked_value": "24 ms",
+      "handbook_part": "Part 22",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e19",
+      "entity": "formula",
+      "code": "E19",
+      "name": "E19 — Image bandwidth",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Image bandwidth",
+      "formula": "BW = W·H·bits·fps",
+      "symbols": "—",
+      "worked_value": "800 Mbit/s",
+      "handbook_part": "Part 22",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-e20",
+      "entity": "formula",
+      "code": "E20",
+      "name": "E20 — Data volume",
+      "discipline": "Electrical, controls and networks",
+      "quantity": "Data volume",
+      "formula": "D = N_tags·f·B·86,400",
+      "symbols": "—",
+      "worked_value": "138 MB/day",
+      "handbook_part": "Part 49",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.5 Electrical, controls and networks",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-5-electrical-controls-and-networks"
+      },
+      "tags": [
+        "formula",
+        "electrical, controls and networks"
+      ]
+    },
+    {
+      "id": "fml-k1",
+      "entity": "formula",
+      "code": "K1",
+      "name": "K1 — Planned time",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Planned time",
+      "formula": "T_plan = T_cal − T_breaks − T_PM − T_changeover",
+      "symbols": "s",
+      "worked_value": "79,200 s",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#plannedTime",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k2",
+      "entity": "formula",
+      "code": "K2",
+      "name": "K2 — Takt",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Takt",
+      "formula": "T_takt = t_available / Q_demand",
+      "symbols": "—",
+      "worked_value": "7.92 s",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#takt",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k3",
+      "entity": "formula",
+      "code": "K3",
+      "name": "K3 — Ideal cycle time",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Ideal cycle time",
+      "formula": "CT = T_plan·A·P·Q / N_good",
+      "symbols": "—",
+      "worked_value": "6.82 s",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#idealCycleTime",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k4",
+      "entity": "formula",
+      "code": "K4",
+      "name": "K4 — UPH",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "UPH",
+      "formula": "UPH = 3,600 / CT",
+      "symbols": "—",
+      "worked_value": "528",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#uph",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k5",
+      "entity": "formula",
+      "code": "K5",
+      "name": "K5 — OEE",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "OEE",
+      "formula": "OEE = A·P·Q",
+      "symbols": "—",
+      "worked_value": "86.1%",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#oee",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k6",
+      "entity": "formula",
+      "code": "K6",
+      "name": "K6 — Availability",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Availability",
+      "formula": "A = MTBF / (MTBF + MTTR)",
+      "symbols": "—",
+      "worked_value": "92%",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#availabilityFromMtbf",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k7",
+      "entity": "formula",
+      "code": "K7",
+      "name": "K7 — Minimum stations",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Minimum stations",
+      "formula": "N = ⌈Σt_i / CT⌉",
+      "symbols": "—",
+      "worked_value": "2",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#minimumStations",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k8",
+      "entity": "formula",
+      "code": "K8",
+      "name": "K8 — Balance efficiency",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Balance efficiency",
+      "formula": "η = Σt_i / (N·CT)",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#balanceEfficiency",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k9",
+      "entity": "formula",
+      "code": "K9",
+      "name": "K9 — Machines",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Machines",
+      "formula": "N = ⌈UPH_req / UPH_machine⌉",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#machinesRequired",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k10",
+      "entity": "formula",
+      "code": "K10",
+      "name": "K10 — Utilization",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Utilization",
+      "formula": "U = demand / capacity",
+      "symbols": "—",
+      "worked_value": "78%",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#utilization",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k11",
+      "entity": "formula",
+      "code": "K11",
+      "name": "K11 — Buffer",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Buffer",
+      "formula": "B = t_stop,max / T_takt",
+      "symbols": "—",
+      "worked_value": "38 parts",
+      "handbook_part": "Part 4",
+      "implemented_by": "src/calculations/automation.ts#bufferSize",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k12",
+      "entity": "formula",
+      "code": "K12",
+      "name": "K12 — Little's law",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Little's law",
+      "formula": "WIP = TH·LT",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 4",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k13",
+      "entity": "formula",
+      "code": "K13",
+      "name": "K13 — Rolled throughput yield",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Rolled throughput yield",
+      "formula": "RTY = Π FPY_i",
+      "symbols": "—",
+      "worked_value": "97.9%",
+      "handbook_part": "Part 3",
+      "implemented_by": "src/calculations/quality.ts#rolledThroughputYield",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k14",
+      "entity": "formula",
+      "code": "K14",
+      "name": "K14 — Required starts",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Required starts",
+      "formula": "Q_start = Q_good / RTY",
+      "symbols": "—",
+      "worked_value": "10,215",
+      "handbook_part": "Part 3",
+      "implemented_by": "src/calculations/quality.ts#requiredStarts",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k15",
+      "entity": "formula",
+      "code": "K15",
+      "name": "K15 — Series failure rate",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Series failure rate",
+      "formula": "λ = Σλ_i; MTBF = 1/λ",
+      "symbols": "—",
+      "worked_value": "0.348 /h",
+      "handbook_part": "Part 7",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k16",
+      "entity": "formula",
+      "code": "K16",
+      "name": "K16 — Weibull reliability",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Weibull reliability",
+      "formula": "R(t) = exp(−(t/η)^β)",
+      "symbols": "—",
+      "worked_value": "85% at 8,000 h",
+      "handbook_part": "Part 42",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k17",
+      "entity": "formula",
+      "code": "K17",
+      "name": "K17 — Replacement age",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Replacement age",
+      "formula": "t_R = η·(−ln R)^(1/β)",
+      "symbols": "—",
+      "worked_value": "6,500 h",
+      "handbook_part": "Part 42",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k18",
+      "entity": "formula",
+      "code": "K18",
+      "name": "K18 — Spares (Poisson)",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Spares (Poisson)",
+      "formula": "P(X ≤ s) = Σ λ^k·e^−λ / k!",
+      "symbols": "λ = N·t_LT / MTBF",
+      "worked_value": "99.7% with 1 spare",
+      "handbook_part": "Part 41",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k19",
+      "entity": "formula",
+      "code": "K19",
+      "name": "K19 — OEE ramp model",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "OEE ramp model",
+      "formula": "OEE(t) = OEE_T − (OEE_T − OEE₀)·e^(−t/τ)",
+      "symbols": "—",
+      "worked_value": "83.2% at week 6",
+      "handbook_part": "Part 41",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k20",
+      "entity": "formula",
+      "code": "K20",
+      "name": "K20 — Operators needed",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Operators needed",
+      "formula": "N = UPH·t_manual / (3,600·η_op)",
+      "symbols": "—",
+      "worked_value": "3.53",
+      "handbook_part": "Part 1",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k21",
+      "entity": "formula",
+      "code": "K21",
+      "name": "K21 — Lifting load",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Lifting load",
+      "formula": "M = m_part·UPH",
+      "symbols": "kg/h",
+      "worked_value": "867 kg/h",
+      "handbook_part": "Part 2",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-k22",
+      "entity": "formula",
+      "code": "K22",
+      "name": "K22 — Retry effect",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Retry effect",
+      "formula": "CT_eff = CT + Σ p_k·t_retry,k",
+      "symbols": "—",
+      "worked_value": "+0.024 s",
+      "handbook_part": "Part 20",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q1",
+      "entity": "formula",
+      "code": "Q1",
+      "name": "Q1 — Process capability",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Process capability",
+      "formula": "Cp = (USL − LSL)/(6σ); Cpk = min(USL − μ, μ − LSL)/(3σ)",
+      "symbols": "—",
+      "worked_value": "1.67; 1.50",
+      "handbook_part": "Part 3",
+      "implemented_by": "src/calculations/quality.ts#capability",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q2",
+      "entity": "formula",
+      "code": "Q2",
+      "name": "Q2 — Cpk lower bound",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Cpk lower bound",
+      "formula": "Cpk_L ≈ Cpk − z·√(1/(9n) + Cpk²/(2(n−1)))",
+      "symbols": "z = 1.645",
+      "worked_value": "1.24 at n = 50",
+      "handbook_part": "Part 38",
+      "implemented_by": "src/calculations/quality.ts#cpkLowerBound",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q3",
+      "entity": "formula",
+      "code": "Q3",
+      "name": "Q3 — Gauge R&R",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Gauge R&R",
+      "formula": "%GRR = 6·σ_GRR / (USL − LSL)",
+      "symbols": "—",
+      "worked_value": "9.6%",
+      "handbook_part": "Part 43",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q4",
+      "entity": "formula",
+      "code": "Q4",
+      "name": "Q4 — Distinct categories",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Distinct categories",
+      "formula": "ndc = 1.41·σ_part / σ_GRR",
+      "symbols": "≥ 5",
+      "worked_value": "8.8",
+      "handbook_part": "Part 43",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q5",
+      "entity": "formula",
+      "code": "Q5",
+      "name": "Q5 — X-bar chart limits",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "X-bar chart limits",
+      "formula": "X̄̄ ± A₂·R̄",
+      "symbols": "A₂ = 0.577 (n = 5)",
+      "worked_value": "49.6 ± 0.46 W",
+      "handbook_part": "Part 43",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q6",
+      "entity": "formula",
+      "code": "Q6",
+      "name": "Q6 — DOE runs",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "DOE runs",
+      "formula": "N = 2^(k−p)·r + n_c",
+      "symbols": "—",
+      "worked_value": "35",
+      "handbook_part": "Part 3",
+      "implemented_by": "src/calculations/quality.ts#doeRuns",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q7",
+      "entity": "formula",
+      "code": "Q7",
+      "name": "Q7 — Window margin",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Window margin",
+      "formula": "M_w = min(x_max − x, x − x_min) / (3σ_x)",
+      "symbols": "≥ 2",
+      "worked_value": "3.3",
+      "handbook_part": "Part 3",
+      "implemented_by": "src/calculations/quality.ts#windowMargin",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q8",
+      "entity": "formula",
+      "code": "Q8",
+      "name": "Q8 — Verification cycles",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Verification cycles",
+      "formula": "n ≥ ln(1 − C) / ln(1 − p₀)",
+      "symbols": "—",
+      "worked_value": "≈ 3,000",
+      "handbook_part": "Part 37",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q9",
+      "entity": "formula",
+      "code": "Q9",
+      "name": "Q9 — Half-split tests",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "Half-split tests",
+      "formula": "n = ⌈log₂ N⌉",
+      "symbols": "—",
+      "worked_value": "6 for 64",
+      "handbook_part": "Part 37",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-q10",
+      "entity": "formula",
+      "code": "Q10",
+      "name": "Q10 — FMEA risk number",
+      "discipline": "Machine performance, reliability and quality",
+      "quantity": "FMEA risk number",
+      "formula": "RPN = S·O·D",
+      "symbols": "severity first",
+      "worked_value": "216",
+      "handbook_part": "Part 44",
+      "implemented_by": "src/calculations/quality.ts#rpn",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.6 Machine performance, reliability and quality",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-6-machine-performance-reliability-and-quality"
+      },
+      "tags": [
+        "formula",
+        "machine performance, reliability and quality"
+      ]
+    },
+    {
+      "id": "fml-l1",
+      "entity": "formula",
+      "code": "L1",
+      "name": "L1 — Focused spot",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Focused spot",
+      "formula": "d₀ = 4·M²·λ·f / (π·D)",
+      "symbols": "—",
+      "worked_value": "45 µm",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#spotDiameter",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l2",
+      "entity": "formula",
+      "code": "L2",
+      "name": "L2 — Rayleigh range",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Rayleigh range",
+      "formula": "z_R = π·w₀² / (M²·λ)",
+      "symbols": "—",
+      "worked_value": "1.1 mm",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#rayleighRange",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l3",
+      "entity": "formula",
+      "code": "L3",
+      "name": "L3 — Scan field",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Scan field",
+      "formula": "L ≈ f·θ_opt",
+      "symbols": "—",
+      "worked_value": "175 mm",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#scanField",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l4",
+      "entity": "formula",
+      "code": "L4",
+      "name": "L4 — Pulse energy",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Pulse energy",
+      "formula": "E_p = P_avg / f_rep",
+      "symbols": "—",
+      "worked_value": "0.5 mJ",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#pulseEnergy",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l5",
+      "entity": "formula",
+      "code": "L5",
+      "name": "L5 — Peak power",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Peak power",
+      "formula": "P_peak ≈ E_p / τ",
+      "symbols": "—",
+      "worked_value": "5 kW",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#peakPower",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l6",
+      "entity": "formula",
+      "code": "L6",
+      "name": "L6 — Fluence",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Fluence",
+      "formula": "F = E_p / (π·w₀²)",
+      "symbols": "J/cm²",
+      "worked_value": "32 J/cm²",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#fluence",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l7",
+      "entity": "formula",
+      "code": "L7",
+      "name": "L7 — Intensity",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Intensity",
+      "formula": "I = P / (π·w₀²)",
+      "symbols": "—",
+      "worked_value": "9.5×10⁴ W/mm²",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#intensity",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l8",
+      "entity": "formula",
+      "code": "L8",
+      "name": "L8 — Pulse overlap",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Pulse overlap",
+      "formula": "O = 1 − v / (f_rep·d₀)",
+      "symbols": "—",
+      "worked_value": "56%",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#pulseOverlap",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l9",
+      "entity": "formula",
+      "code": "L9",
+      "name": "L9 — Line energy",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Line energy",
+      "formula": "HI = P / v",
+      "symbols": "J/mm",
+      "worked_value": "30 J/mm",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#lineEnergy",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l10",
+      "entity": "formula",
+      "code": "L10",
+      "name": "L10 — Optical density",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Optical density",
+      "formula": "OD = log₁₀(H₀ / MPE)",
+      "symbols": "MPE from IEC 60825-1",
+      "worked_value": "—",
+      "handbook_part": "Part 28",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l11",
+      "entity": "formula",
+      "code": "L11",
+      "name": "L11 — Chiller capacity",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Chiller capacity",
+      "formula": "Q ≥ 1.2·(P_el − P_opt + P_optics)",
+      "symbols": "—",
+      "worked_value": "5.5 kW",
+      "handbook_part": "Part 28",
+      "implemented_by": "src/calculations/laser.ts#chillerCapacity",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l12",
+      "entity": "formula",
+      "code": "L12",
+      "name": "L12 — Hood flow",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Hood flow",
+      "formula": "Q = v_c·(10·x² + A)",
+      "symbols": "unflanged hood",
+      "worked_value": "190 m³/h",
+      "handbook_part": "Part 28",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l13",
+      "entity": "formula",
+      "code": "L13",
+      "name": "L13 — Cooling-water flow",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Cooling-water flow",
+      "formula": "V = Q / (ρ·c_p·ΔT)",
+      "symbols": "—",
+      "worked_value": "15.8 L/min",
+      "handbook_part": "Part 31",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-l14",
+      "entity": "formula",
+      "code": "L14",
+      "name": "L14 — Duct diameter",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Duct diameter",
+      "formula": "D = √(4·V / (π·v))",
+      "symbols": "—",
+      "worked_value": "140 mm",
+      "handbook_part": "Part 31",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v1",
+      "entity": "formula",
+      "code": "V1",
+      "name": "V1 — Pixel size",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Pixel size",
+      "formula": "p ≤ (T/10) / s_px",
+      "symbols": "s_px sub-pixel",
+      "worked_value": "0.04 mm",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v2",
+      "entity": "formula",
+      "code": "V2",
+      "name": "V2 — Magnification",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Magnification",
+      "formula": "m = S_sensor / FOV",
+      "symbols": "—",
+      "worked_value": "0.14",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v3",
+      "entity": "formula",
+      "code": "V3",
+      "name": "V3 — Focal length",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Focal length",
+      "formula": "f ≈ WD·m / (1 + m)",
+      "symbols": "—",
+      "worked_value": "37 mm",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v4",
+      "entity": "formula",
+      "code": "V4",
+      "name": "V4 — Depth of field",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Depth of field",
+      "formula": "DOF ≈ 2·N·c·(1 + m) / m²",
+      "symbols": "—",
+      "worked_value": "6.4 mm",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v5",
+      "entity": "formula",
+      "code": "V5",
+      "name": "V5 — Height scale error",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Height scale error",
+      "formula": "e ≈ r·Δz / WD",
+      "symbols": "—",
+      "worked_value": "0.10 mm",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v6",
+      "entity": "formula",
+      "code": "V6",
+      "name": "V6 — Motion blur",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Motion blur",
+      "formula": "b = v·t_exp",
+      "symbols": "—",
+      "worked_value": "25 µm",
+      "handbook_part": "Part 13",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v7",
+      "entity": "formula",
+      "code": "V7",
+      "name": "V7 — Code size",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Code size",
+      "formula": "L = n_mod·x + 2·q",
+      "symbols": "quiet zone q",
+      "worked_value": "7.2 mm",
+      "handbook_part": "Part 23",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-v8",
+      "entity": "formula",
+      "code": "V8",
+      "name": "V8 — Rotation to 2D angle",
+      "discipline": "Laser, optics and vision",
+      "quantity": "Rotation to 2D angle",
+      "formula": "θ = atan2(ΔY, ΔX) − θ_nom",
+      "symbols": "—",
+      "worked_value": "7.0 mrad",
+      "handbook_part": "Part 24",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.7 Laser, optics and vision",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision"
+      },
+      "tags": [
+        "formula",
+        "laser, optics and vision"
+      ]
+    },
+    {
+      "id": "fml-s1",
+      "entity": "formula",
+      "code": "S1",
+      "name": "S1 — Safety distance (structure)",
+      "discipline": "Safety, cost and project",
+      "quantity": "Safety distance (structure)",
+      "formula": "S = K·T + C",
+      "symbols": "per current ISO 13855",
+      "worked_value": "350 mm (illustrative)",
+      "handbook_part": "Part 27",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-s2",
+      "entity": "formula",
+      "code": "S2",
+      "name": "S2 — Device operations per year",
+      "discipline": "Safety, cost and project",
+      "quantity": "Device operations per year",
+      "formula": "n_op = d_op·h_op·3,600 / t_cycle",
+      "symbols": "—",
+      "worked_value": "48,000",
+      "handbook_part": "Part 27",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-s3",
+      "entity": "formula",
+      "code": "S3",
+      "name": "S3 — MTTF_D from B10_D",
+      "discipline": "Safety, cost and project",
+      "quantity": "MTTF_D from B10_D",
+      "formula": "MTTF_D = B10_D / (0.1·n_op)",
+      "symbols": "—",
+      "worked_value": "417 years (capped)",
+      "handbook_part": "Part 27",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-s4",
+      "entity": "formula",
+      "code": "S4",
+      "name": "S4 — Replacement interval",
+      "discipline": "Safety, cost and project",
+      "quantity": "Replacement interval",
+      "formula": "T10_D = B10_D / n_op",
+      "symbols": "—",
+      "worked_value": "42 years",
+      "handbook_part": "Part 27",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-s5",
+      "entity": "formula",
+      "code": "S5",
+      "name": "S5 — Separation distance (simplified)",
+      "discipline": "Safety, cost and project",
+      "quantity": "Separation distance (simplified)",
+      "formula": "S_p ≥ v_h(T_r + T_s) + v_r·T_r + S_s + C + Z",
+      "symbols": "—",
+      "worked_value": "1.19 m",
+      "handbook_part": "Part 25",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c1",
+      "entity": "formula",
+      "code": "C1",
+      "name": "C1 — Price from margin",
+      "discipline": "Safety, cost and project",
+      "quantity": "Price from margin",
+      "formula": "P = C / (1 − GM − w)",
+      "symbols": "—",
+      "worked_value": "₹92.7 lakh",
+      "handbook_part": "Part 45",
+      "implemented_by": "src/calculations/cost.ts#priceFromMargin",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c2",
+      "entity": "formula",
+      "code": "C2",
+      "name": "C2 — Learning curve",
+      "discipline": "Safety, cost and project",
+      "quantity": "Learning curve",
+      "formula": "C_n = C₁·n^(log₂ b)",
+      "symbols": "b 0.8–0.9",
+      "worked_value": "325 h at n = 4",
+      "handbook_part": "Part 45",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c3",
+      "entity": "formula",
+      "code": "C3",
+      "name": "C3 — Latest PO date",
+      "discipline": "Safety, cost and project",
+      "quantity": "Latest PO date",
+      "formula": "t_PO = t_need − (LT + transit + customs + IQC)",
+      "symbols": "weeks",
+      "worked_value": "week −1",
+      "handbook_part": "Part 33",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c4",
+      "entity": "formula",
+      "code": "C4",
+      "name": "C4 — Landed cost",
+      "discipline": "Safety, cost and project",
+      "quantity": "Landed cost",
+      "formula": "C = P_FOB·FX·(1 + d + f + c)",
+      "symbols": "—",
+      "worked_value": "₹19.6 lakh",
+      "handbook_part": "Part 33",
+      "implemented_by": "src/calculations/cost.ts#landedCost",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c5",
+      "entity": "formula",
+      "code": "C5",
+      "name": "C5 — Total cost of ownership",
+      "discipline": "Safety, cost and project",
+      "quantity": "Total cost of ownership",
+      "formula": "TCO = P + landed + ppm·N·C_def + (1 − OTD)·C_late + service",
+      "symbols": "—",
+      "worked_value": "₹1,00,800 vs ₹98,000",
+      "handbook_part": "Part 34",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c6",
+      "entity": "formula",
+      "code": "C6",
+      "name": "C6 — Payback",
+      "discipline": "Safety, cost and project",
+      "quantity": "Payback",
+      "formula": "PB = capex / net annual saving",
+      "symbols": "—",
+      "worked_value": "1.56 years",
+      "handbook_part": "Part 1",
+      "implemented_by": "src/calculations/cost.ts#payback",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c7",
+      "entity": "formula",
+      "code": "C7",
+      "name": "C7 — Earned value",
+      "discipline": "Safety, cost and project",
+      "quantity": "Earned value",
+      "formula": "SPI = EV/PV; CPI = EV/AC; EAC = BAC/CPI",
+      "symbols": "—",
+      "worked_value": "0.85; 0.89; ₹69.4 lakh",
+      "handbook_part": "Part 46",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c8",
+      "entity": "formula",
+      "code": "C8",
+      "name": "C8 — Platform break-even",
+      "discipline": "Safety, cost and project",
+      "quantity": "Platform break-even",
+      "formula": "N = I_platform / ΔC_machine",
+      "symbols": "—",
+      "worked_value": "≈ 9 machines",
+      "handbook_part": "Part 51",
+      "implemented_by": "src/calculations/cost.ts#platformBreakEven",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c9",
+      "entity": "formula",
+      "code": "C9",
+      "name": "C9 — Localization payback",
+      "discipline": "Safety, cost and project",
+      "quantity": "Localization payback",
+      "formula": "PB = C_qual / ((C_imp − C_loc)·N)",
+      "symbols": "—",
+      "worked_value": "0.11 year",
+      "handbook_part": "Part 52",
+      "implemented_by": "src/calculations/cost.ts#localizationPayback",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c10",
+      "entity": "formula",
+      "code": "C10",
+      "name": "C10 — Value index",
+      "discipline": "Safety, cost and project",
+      "quantity": "Value index",
+      "formula": "V = F / C",
+      "symbols": "—",
+      "worked_value": "—",
+      "handbook_part": "Part 52",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c11",
+      "entity": "formula",
+      "code": "C11",
+      "name": "C11 — Cost of change by stage",
+      "discipline": "Safety, cost and project",
+      "quantity": "Cost of change by stage",
+      "formula": "C ≈ C₀·k^s",
+      "symbols": "k ≈ 10 heuristic",
+      "worked_value": "—",
+      "handbook_part": "Part 47",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    },
+    {
+      "id": "fml-c12",
+      "entity": "formula",
+      "code": "C12",
+      "name": "C12 — Virtual-commissioning saving",
+      "discipline": "Safety, cost and project",
+      "quantity": "Virtual-commissioning saving",
+      "formula": "S = d_saved·C_team/day − C_model",
+      "symbols": "—",
+      "worked_value": "₹9.6 lakh gross",
+      "handbook_part": "Part 50",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Part 54 — 54.8 Safety, cost and project",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/76-part-54-engineering-calculation-handbook.md#54-8-safety-cost-and-project"
+      },
+      "tags": [
+        "formula",
+        "safety, cost and project"
+      ]
+    }
+  ]
+}

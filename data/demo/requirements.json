@@ -1,0 +1,152 @@
+{
+  "dataset": {
+    "id": "demo-requirements",
+    "title": "DEMO requirements (Scenario 1)",
+    "entity": "requirement",
+    "description": "Draft URS lines derived from the Scenario 1 inquiry. Values the customer has not given are left blank.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-01",
+      "entity": "requirement",
+      "code": "URS-001",
+      "name": "Mark a 2D code on each semiconductor package",
+      "level": "URS",
+      "category": "Process",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "verification_method": "Test",
+      "acceptance_criterion": "Code grade to be agreed (e.g. ISO/IEC 29158) — UNKNOWN",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Agree code size, content and minimum grade with customer"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-02",
+      "entity": "requirement",
+      "code": "URS-002",
+      "name": "High throughput",
+      "level": "URS",
+      "category": "Performance",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "unit": "UPH",
+      "verification_method": "Test",
+      "acceptance_criterion": "Run-at-rate at FAT — rate UNKNOWN until customer states it",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Obtain required UPH and shift pattern (Automation Handbook Part 4)"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-03",
+      "entity": "requirement",
+      "code": "URS-003",
+      "name": "Automatic handling of packages/strips",
+      "level": "URS",
+      "category": "Functional",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "verification_method": "Demonstration",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Confirm strip vs singulated units and magazine/tray format"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-04",
+      "entity": "requirement",
+      "code": "URS-004",
+      "name": "Vision inspection of the mark",
+      "level": "URS",
+      "category": "Quality",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "verification_method": "Test",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Define inspection criteria (decode, grade, position)"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-05",
+      "entity": "requirement",
+      "code": "URS-005",
+      "name": "MES communication",
+      "level": "URS",
+      "category": "Interface",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "verification_method": "Test",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Confirm host protocol (SECS/GEM or other) and data dictionary"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "req-demo-s1-06",
+      "entity": "requirement",
+      "code": "URS-006",
+      "name": "Laser source supplied by customer",
+      "level": "URS",
+      "category": "Interface",
+      "priority": "Must",
+      "source": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "verification_method": "Inspection",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "status": "Draft",
+      "next_action": {
+        "action": "Obtain laser model, interface, safety interlock scheme and warranty boundary"
+      }
+    }
+  ]
+}

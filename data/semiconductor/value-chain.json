@@ -1,0 +1,457 @@
+{
+  "dataset": {
+    "id": "semiconductor-value-chain",
+    "title": "Semiconductor value chain (process steps)",
+    "description": "Raw material → packing, with the handbook sections that cover each step and, where the handbook lists one, the laser process used there.",
+    "entity": "semi_step",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-semiconductor-handbook",
+      "src-os-spec"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "sem-raw-material",
+      "entity": "semi_step",
+      "name": "Raw material",
+      "order": 1,
+      "stage": "Materials",
+      "knowledge_refs": [
+        "semiconductor/04-part-ii-from-sand-to-electronic-grade-silicon.md#chapter-3-silicon-raw-materials"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "materials"
+      ]
+    },
+    {
+      "id": "sem-silicon",
+      "entity": "semi_step",
+      "name": "Silicon (purification)",
+      "order": 2,
+      "stage": "Materials",
+      "knowledge_refs": [
+        "semiconductor/04-part-ii-from-sand-to-electronic-grade-silicon.md#chapter-4-silicon-purification"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "materials"
+      ]
+    },
+    {
+      "id": "sem-wafer",
+      "entity": "semi_step",
+      "name": "Wafer",
+      "order": 3,
+      "stage": "Wafer",
+      "laser_relevance": "SiC boule slicing: NIR ps laser forming a subsurface split layer, ~1 µm, Tens of W — Reduce kerf loss on SiC wafering · Wafer marking (front/back): DPSS / fibre, often green or UV; soft-mark and hard-mark, 1 064, 532, 355 nm, Few W average, ns pulses — Wafer ID / OCR / 2D codes (SEMI T7, M12/M13)",
+      "knowledge_refs": [
+        "semiconductor/05-part-iii-wafer-manufacturing.md#chapter-5-crystal-growth",
+        "semiconductor/05-part-iii-wafer-manufacturing.md#chapter-6-ingot-to-wafer",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "wafer"
+      ]
+    },
+    {
+      "id": "sem-fab",
+      "entity": "semi_step",
+      "name": "Fab",
+      "order": 4,
+      "stage": "Front-end fab",
+      "laser_relevance": "Laser annealing — dopant activation: Green DPSS, CO₂ (historic), excimer, 532 nm, 10.6 µm, 308 nm, ns–ms dwell — Ultra-shallow junction activation; IGBT and SiC backside contacts",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-7-inside-a-semiconductor-fab",
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-8-the-complete-wafer-fabrication-flow",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-lithography",
+      "entity": "semi_step",
+      "name": "Lithography",
+      "order": 5,
+      "stage": "Front-end fab",
+      "laser_relevance": "EUV light source: CO₂ drive laser on Sn droplets, 10.6 µm (drive) → 13.5 nm (EUV), Tens of kW drive — EUV lithography · DUV lithography source: Excimer, 248 nm (KrF), 193 nm (ArF), ~40–120 W — Scanners",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-9-lithography",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-deposition",
+      "entity": "semi_step",
+      "name": "Deposition",
+      "order": 6,
+      "stage": "Front-end fab",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-10-thin-film-deposition"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-etch",
+      "entity": "semi_step",
+      "name": "Etch",
+      "order": 7,
+      "stage": "Front-end fab",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-11-etching"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-implant",
+      "entity": "semi_step",
+      "name": "Implant",
+      "order": 8,
+      "stage": "Front-end fab",
+      "laser_relevance": "Laser annealing — dopant activation: Green DPSS, CO₂ (historic), excimer, 532 nm, 10.6 µm, 308 nm, ns–ms dwell — Ultra-shallow junction activation; IGBT and SiC backside contacts",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-12-ion-implantation-and-diffusion",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-cmp",
+      "entity": "semi_step",
+      "name": "CMP",
+      "order": 9,
+      "stage": "Front-end fab",
+      "knowledge_refs": [
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-13-chemical-mechanical-planarization-cmp"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-metrology",
+      "entity": "semi_step",
+      "name": "Metrology",
+      "order": 10,
+      "stage": "Front-end fab",
+      "knowledge_refs": [
+        "semiconductor/09-part-xv-metrology-inspection-and-wafer-test.md#chapter-20-metrology-and-inspection"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-inspection",
+      "entity": "semi_step",
+      "name": "Inspection",
+      "order": 11,
+      "stage": "Front-end fab",
+      "knowledge_refs": [
+        "semiconductor/09-part-xv-metrology-inspection-and-wafer-test.md#chapter-20-metrology-and-inspection"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "front-end fab"
+      ]
+    },
+    {
+      "id": "sem-wafer-test",
+      "entity": "semi_step",
+      "name": "Wafer test",
+      "order": 12,
+      "stage": "Test",
+      "knowledge_refs": [
+        "semiconductor/09-part-xv-metrology-inspection-and-wafer-test.md#chapter-21-wafer-testing-sort-probe"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "test"
+      ]
+    },
+    {
+      "id": "sem-dicing",
+      "entity": "semi_step",
+      "name": "Dicing",
+      "order": 13,
+      "stage": "Back-end / ATMP",
+      "laser_relevance": "Laser grooving (low-k): UV / green ps–ns, 355, 532 nm, ~5–20 W — Remove street layers before blade dicing · Laser full-cut dicing: UV ns/ps, fs for thin wafers, 355, 343, 1 030 nm, ~10–50 W — Die singulation · Stealth dicing: NIR ns/ps, focused internally, ~1 064–1 342 nm (Si transparent above ~1.1 µm), Few W — Zero-kerf dicing for MEMS, memory",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-25-semiconductor-dicing",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-die-attach",
+      "entity": "semi_step",
+      "name": "Die attach",
+      "order": 14,
+      "stage": "Back-end / ATMP",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-wire-bond",
+      "entity": "semi_step",
+      "name": "Wire bond",
+      "order": 15,
+      "stage": "Back-end / ATMP",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-22-traditional-packaging",
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-flip-chip",
+      "entity": "semi_step",
+      "name": "Flip chip",
+      "order": 16,
+      "stage": "Back-end / ATMP",
+      "laser_relevance": "Laser-assisted bonding (LAB): NIR area beam, ~980 nm, Hundreds of W to kW area — Low-warpage flip-chip bonding for thin packages · Temporary-bond laser debond: UV DPSS, 355 nm, Few W — Advanced packaging / thin-wafer handling",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-23-advanced-packaging",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-molding",
+      "entity": "semi_step",
+      "name": "Molding",
+      "order": 17,
+      "stage": "Back-end / ATMP",
+      "laser_relevance": "Laser cleaning: Pulsed fibre (ns), 1 064 nm, 20–500 W — Lead-frame and pad cleaning; mould flash removal (deflash); pre-bond",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-marking",
+      "entity": "semi_step",
+      "name": "Marking",
+      "order": 18,
+      "stage": "Back-end / ATMP",
+      "laser_relevance": "Package marking: Fibre / green / UV (formerly CO₂), 1 064, 532, 355 nm, 10–50 W — Device ID, date code, logo",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow",
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxii-lasers-in-semiconductor-and-electronics-manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Laser relevance quoted from Part XXXII (indicative parameters)."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-final-test",
+      "entity": "semi_step",
+      "name": "Final test",
+      "order": 19,
+      "stage": "Back-end / ATMP",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-burn-in",
+      "entity": "semi_step",
+      "name": "Burn-in",
+      "order": 20,
+      "stage": "Back-end / ATMP",
+      "knowledge_refs": [
+        "semiconductor/17-parts-xxxiii-xxxiv-quality-failure-analysis-reliability-and-standards.md#33-2-reliability-testing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    },
+    {
+      "id": "sem-packing",
+      "entity": "semi_step",
+      "name": "Packing",
+      "order": 21,
+      "stage": "Back-end / ATMP",
+      "knowledge_refs": [
+        "semiconductor/10-parts-xvi-xviii-packaging-atmp-and-dicing.md#chapter-24-the-complete-atmp-flow"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "No laser process listed for this step in Part XXXII."
+      },
+      "tags": [
+        "semiconductor",
+        "back-end / atmp"
+      ]
+    }
+  ]
+}

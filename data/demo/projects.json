@@ -1,0 +1,135 @@
+{
+  "dataset": {
+    "id": "demo-projects",
+    "title": "DEMO projects",
+    "entity": "project",
+    "description": "Scenario 2 project skeleton. Gate reviews are recorded in the browser workspace.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "prj-demo-c2i",
+      "entity": "project",
+      "name": "C2i inline PCB marking — DEMO EMS Customer",
+      "customer_id": "cus-demo-ems",
+      "opportunity_id": "opp-demo-pcb-co2",
+      "product_id": "prd-markc2i",
+      "configuration_id": "cfg-demo-c2i",
+      "cost_model_id": "cst-tpl-006k1jmy",
+      "scope": "Dual-head CO₂ inline PCB marking with grading and reject (Scenario 2).",
+      "start": "@today-10",
+      "end": "@today+160",
+      "currency": "INR",
+      "budget": null,
+      "tasks": [
+        {
+          "id": "t1",
+          "name": "Requirement capture & URS",
+          "start": "@today-10",
+          "end": "@today+2",
+          "status": "In Progress",
+          "gate_code": "G0",
+          "owner": "PM"
+        },
+        {
+          "id": "t2",
+          "name": "Sample marking on customer boards",
+          "start": "@today+0",
+          "end": "@today+10",
+          "status": "Not Started",
+          "depends_on": [
+            "t1"
+          ],
+          "owner": "Application Engineering"
+        },
+        {
+          "id": "t3",
+          "name": "Concept & architecture",
+          "start": "@today+3",
+          "end": "@today+25",
+          "status": "Not Started",
+          "depends_on": [
+            "t1"
+          ],
+          "gate_code": "G2",
+          "owner": "System Engineer"
+        },
+        {
+          "id": "t4",
+          "name": "Detailed design",
+          "start": "@today+25",
+          "end": "@today+70",
+          "status": "Not Started",
+          "depends_on": [
+            "t3"
+          ],
+          "gate_code": "G3"
+        },
+        {
+          "id": "t5",
+          "name": "Procurement release",
+          "start": "@today+60",
+          "end": "@today+75",
+          "status": "Not Started",
+          "depends_on": [
+            "t4"
+          ],
+          "gate_code": "G4"
+        },
+        {
+          "id": "t6",
+          "name": "Build & integration",
+          "start": "@today+75",
+          "end": "@today+130",
+          "status": "Not Started",
+          "depends_on": [
+            "t5"
+          ],
+          "gate_code": "G7"
+        },
+        {
+          "id": "t7",
+          "name": "FAT",
+          "start": "@today+130",
+          "end": "@today+140",
+          "status": "Not Started",
+          "depends_on": [
+            "t6"
+          ],
+          "gate_code": "G8",
+          "milestone": true
+        },
+        {
+          "id": "t8",
+          "name": "Ship, install, SAT",
+          "start": "@today+140",
+          "end": "@today+160",
+          "status": "Not Started",
+          "depends_on": [
+            "t7"
+          ],
+          "gate_code": "G9",
+          "milestone": true
+        }
+      ],
+      "gates": [],
+      "next_action": {
+        "action": "Complete G0 evidence: signed URS values and CTQ list",
+        "due": "@today+2",
+        "owner": "PM"
+      }
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "suppliers",
+    "title": "Suppliers (legacy vendor master — DEMO)",
+    "description": "Vendor list from the legacy cost platform. Relationship data is seed/DEMO until TEAL Procurement confirms it.",
+    "entity": "supplier",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-legacy-cost-platform"
+    ],
+    "partition": "suppliers"
+  },
+  "records": [
+    {
+      "id": "sup-bosch-rexroth-india",
+      "entity": "supplier",
+      "name": "Bosch Rexroth India",
+      "category": "Motion & Linear",
+      "country": "India",
+      "typical_lead_time": "6 wk",
+      "payment_terms": "45 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-smc-pneumatics-india",
+      "entity": "supplier",
+      "name": "SMC Pneumatics India",
+      "category": "Pneumatics",
+      "country": "India",
+      "typical_lead_time": "3 wk",
+      "payment_terms": "30 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-siemens-india",
+      "entity": "supplier",
+      "name": "Siemens India",
+      "category": "PLC & Drives",
+      "country": "India",
+      "typical_lead_time": "8 wk",
+      "payment_terms": "60 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-keyence-india",
+      "entity": "supplier",
+      "name": "Keyence India",
+      "category": "Sensors & Vision",
+      "country": "India",
+      "typical_lead_time": "4 wk",
+      "payment_terms": "30 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-ipg-photonics",
+      "entity": "supplier",
+      "name": "IPG Photonics",
+      "category": "Laser Sources",
+      "typical_lead_time": "12 wk",
+      "payment_terms": "LC",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-scanlab-gmbh",
+      "entity": "supplier",
+      "name": "Scanlab GmbH",
+      "category": "Galvo Scanners",
+      "typical_lead_time": "10 wk",
+      "payment_terms": "Advance",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-misumi-india",
+      "entity": "supplier",
+      "name": "Misumi India",
+      "category": "Standard Parts",
+      "country": "India",
+      "typical_lead_time": "2 wk",
+      "payment_terms": "30 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-local-fabricator-hosur",
+      "entity": "supplier",
+      "name": "Local Fabricator - Hosur",
+      "category": "Fabrication",
+      "country": "India",
+      "typical_lead_time": "3 wk",
+      "payment_terms": "30 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-rittal-india",
+      "entity": "supplier",
+      "name": "Rittal India",
+      "category": "Enclosures",
+      "country": "India",
+      "typical_lead_time": "5 wk",
+      "payment_terms": "45 days",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-universal-robots",
+      "entity": "supplier",
+      "name": "Universal Robots",
+      "category": "Cobots",
+      "typical_lead_time": "8 wk",
+      "payment_terms": "Advance",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "vendor",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    }
+  ]
+}

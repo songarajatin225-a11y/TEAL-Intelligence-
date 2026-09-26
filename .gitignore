@@ -1,0 +1,13 @@
+node_modules
+dist
+public/data
+public/knowledge
+public/search-index
+public/graph
+test-results
+playwright-report
+*.local
+.DS_Store
+node_modules/.tmp
+# handbook sources (.docx) are converted to Markdown; the binaries are not committed
+knowledge/sources/*.docx

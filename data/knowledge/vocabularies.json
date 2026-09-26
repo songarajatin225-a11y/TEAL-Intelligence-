@@ -1,0 +1,818 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "vocabularies",
+    "title": "Controlled vocabularies (PM tracker)",
+    "description": "Dropdown vocabularies from the legacy product-management tracker (workstreams, application categories, laser types, packages, stages …).",
+    "entity": "vocabulary",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-pm-tracker"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "voc-status",
+      "entity": "vocabulary",
+      "key": "status",
+      "name": "status",
+      "values": [
+        "Not Started",
+        "In Progress",
+        "Waiting for Customer",
+        "Waiting for Internal Team",
+        "Technical Evaluation",
+        "Sample",
+        "Demo",
+        "Trial",
+        "Qualification",
+        "Completed",
+        "On Hold",
+        "Cancelled",
+        "Blocked"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.status",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-priority",
+      "entity": "vocabulary",
+      "key": "priority",
+      "name": "priority",
+      "values": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.priority",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-probability",
+      "entity": "vocabulary",
+      "key": "probability",
+      "name": "probability",
+      "values": [
+        "10",
+        "25",
+        "50",
+        "75",
+        "90",
+        "100"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.probability",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-workstream",
+      "entity": "vocabulary",
+      "key": "workstream",
+      "name": "workstream",
+      "values": [
+        "Customer Development",
+        "Business Development",
+        "Product Management",
+        "Application Engineering",
+        "Technical Evaluation",
+        "R&D",
+        "Laser Diode Localization",
+        "Supplier Development",
+        "Partner Development",
+        "Internal Coordination",
+        "Reporting",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.workstream",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-opportunity-stage",
+      "entity": "vocabulary",
+      "key": "opportunityStage",
+      "name": "opportunityStage",
+      "values": [
+        "Lead",
+        "Contacted",
+        "Discussion",
+        "Technical Evaluation",
+        "Sample",
+        "Demo",
+        "Trial",
+        "Qualification",
+        "Commercial",
+        "Order",
+        "Lost"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.opportunityStage",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-opportunity-type",
+      "entity": "vocabulary",
+      "key": "opportunityType",
+      "name": "opportunityType",
+      "values": [
+        "New Business",
+        "Repeat Business",
+        "Localization",
+        "Design-in",
+        "Second Source",
+        "Evaluation Only",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.opportunityType",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-application-category",
+      "entity": "vocabulary",
+      "key": "applicationCategory",
+      "name": "applicationCategory",
+      "values": [
+        "LiDAR",
+        "Laser Range Finder",
+        "Target Designation",
+        "EO/IR",
+        "Laser Warning",
+        "Directed Energy",
+        "Optical Communication",
+        "Datacom",
+        "Telecom",
+        "Fibre Laser Pump",
+        "3D Sensing",
+        "Industrial Laser",
+        "Laser Marking",
+        "Laser Welding",
+        "Laser Cutting",
+        "Semiconductor Equipment",
+        "Inspection",
+        "Metrology",
+        "Medical",
+        "Defence Optics",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.applicationCategory",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-industry",
+      "entity": "vocabulary",
+      "key": "industry",
+      "name": "industry",
+      "values": [
+        "Defence",
+        "Aerospace",
+        "Telecom",
+        "Datacentre",
+        "Industrial",
+        "Medical",
+        "Automotive",
+        "Semiconductor",
+        "Research / Academia",
+        "Consumer",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.industry",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-segment",
+      "entity": "vocabulary",
+      "key": "segment",
+      "name": "segment",
+      "values": [
+        "Strategic",
+        "Key Account",
+        "Growth",
+        "Emerging",
+        "Long Tail"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.segment",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-customer-type",
+      "entity": "vocabulary",
+      "key": "customerType",
+      "name": "customerType",
+      "values": [
+        "OEM",
+        "System Integrator",
+        "Defence Lab",
+        "PSU",
+        "Research Institute",
+        "Distributor",
+        "Contract Manufacturer",
+        "End User",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.customerType",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-laser-type",
+      "entity": "vocabulary",
+      "key": "laserType",
+      "name": "laserType",
+      "values": [
+        "Laser Diode",
+        "Diode Bar",
+        "Diode Stack",
+        "VCSEL",
+        "DFB",
+        "DBR",
+        "SLED",
+        "Fibre Laser",
+        "DPSS",
+        "Solid State",
+        "Er:Glass",
+        "CO2",
+        "Quantum Cascade",
+        "Laser Module",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.laserType",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-operating-mode",
+      "entity": "vocabulary",
+      "key": "operatingMode",
+      "name": "operatingMode",
+      "values": [
+        "CW",
+        "Pulsed",
+        "QCW",
+        "Modulated",
+        "CW / Pulsed"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.operatingMode",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-package",
+      "entity": "vocabulary",
+      "key": "package",
+      "name": "package",
+      "values": [
+        "TO-Can",
+        "TO-56",
+        "TO-9",
+        "Butterfly",
+        "C-Mount",
+        "CS-Mount",
+        "HHL",
+        "DIL",
+        "Chip on Submount",
+        "Bare Die",
+        "Fibre Coupled Module",
+        "Custom",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.package",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-tec",
+      "entity": "vocabulary",
+      "key": "tec",
+      "name": "tec",
+      "values": [
+        "TEC",
+        "Non-TEC",
+        "Both"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.tec",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-yes-no",
+      "entity": "vocabulary",
+      "key": "yesNo",
+      "name": "yesNo",
+      "values": [
+        "Yes",
+        "No"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.yesNo",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-yes-no-na",
+      "entity": "vocabulary",
+      "key": "yesNoNa",
+      "name": "yesNoNa",
+      "values": [
+        "Yes",
+        "No",
+        "Not Required"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.yesNoNa",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-interest",
+      "entity": "vocabulary",
+      "key": "interest",
+      "name": "interest",
+      "values": [
+        "High",
+        "Medium",
+        "Low",
+        "Unknown"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.interest",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-potential",
+      "entity": "vocabulary",
+      "key": "potential",
+      "name": "potential",
+      "values": [
+        "High",
+        "Medium",
+        "Low",
+        "Not Feasible"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.potential",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-fit",
+      "entity": "vocabulary",
+      "key": "fit",
+      "name": "fit",
+      "values": [
+        "Excellent",
+        "Good",
+        "Partial",
+        "Poor",
+        "Unknown"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.fit",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-qualification-status",
+      "entity": "vocabulary",
+      "key": "qualificationStatus",
+      "name": "qualificationStatus",
+      "values": [
+        "Not Started",
+        "In Progress",
+        "Qualified",
+        "Failed",
+        "On Hold",
+        "Not Required"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.qualificationStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-procurement-status",
+      "entity": "vocabulary",
+      "key": "procurementStatus",
+      "name": "procurementStatus",
+      "values": [
+        "Not Started",
+        "Enquiry",
+        "RFQ Received",
+        "Quotation Submitted",
+        "Negotiation",
+        "PO Received",
+        "Repeat Order",
+        "Lost"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.procurementStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-application-status",
+      "entity": "vocabulary",
+      "key": "applicationStatus",
+      "name": "applicationStatus",
+      "values": [
+        "Identified",
+        "Under Study",
+        "Technical Evaluation",
+        "Solution Proposed",
+        "Sample",
+        "Demo / Trial",
+        "Qualification",
+        "Won",
+        "Dropped",
+        "On Hold"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.applicationStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-product-status",
+      "entity": "vocabulary",
+      "key": "productStatus",
+      "name": "productStatus",
+      "values": [
+        "Proposed",
+        "Active",
+        "Under Evaluation",
+        "Qualified",
+        "Not Suitable",
+        "Obsolete",
+        "On Hold"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.productStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-sample-status",
+      "entity": "vocabulary",
+      "key": "sampleStatus",
+      "name": "sampleStatus",
+      "values": [
+        "Requested",
+        "Supplier Confirmation",
+        "In Transit",
+        "Received",
+        "Internal Testing",
+        "Customer Demo",
+        "Customer Trial",
+        "Feedback",
+        "Qualification",
+        "Closed"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.sampleStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-localization-stage",
+      "entity": "vocabulary",
+      "key": "localizationStage",
+      "name": "localizationStage",
+      "values": [
+        "Concept",
+        "Technology Evaluation",
+        "Supplier Identification",
+        "Sample",
+        "Characterization",
+        "Prototype",
+        "Testing",
+        "Reliability",
+        "Qualification",
+        "Localization",
+        "Production"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.localizationStage",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-work-status",
+      "entity": "vocabulary",
+      "key": "workStatus",
+      "name": "workStatus",
+      "values": [
+        "Not Started",
+        "In Progress",
+        "Completed",
+        "On Hold",
+        "Blocked",
+        "Not Required"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.workStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-meeting-type",
+      "entity": "vocabulary",
+      "key": "meetingType",
+      "name": "meetingType",
+      "values": [
+        "Customer Visit",
+        "Online Meeting",
+        "Call",
+        "Technical Discussion",
+        "Commercial Discussion",
+        "Internal Review",
+        "Conference / Exhibition",
+        "Supplier Meeting",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.meetingType",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-partner-type",
+      "entity": "vocabulary",
+      "key": "partnerType",
+      "name": "partnerType",
+      "values": [
+        "Component Supplier",
+        "Module Supplier",
+        "Technology Partner",
+        "Manufacturing Partner",
+        "Distributor",
+        "Research Partner",
+        "Contract Manufacturer",
+        "Other"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.partnerType",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-engagement",
+      "entity": "vocabulary",
+      "key": "engagement",
+      "name": "engagement",
+      "values": [
+        "Identified",
+        "Initial Contact",
+        "Under Discussion",
+        "Technical Evaluation",
+        "Commercial Discussion",
+        "Active Partner",
+        "On Hold",
+        "Discontinued"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.engagement",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-nda-status",
+      "entity": "vocabulary",
+      "key": "ndaStatus",
+      "name": "ndaStatus",
+      "values": [
+        "Not Required",
+        "Not Started",
+        "Under Discussion",
+        "Signed",
+        "Expired"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.ndaStatus",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-import-dependency",
+      "entity": "vocabulary",
+      "key": "importDependency",
+      "name": "importDependency",
+      "values": [
+        "Full Import",
+        "Partial Import",
+        "Indigenous",
+        "Unknown"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.importDependency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-threat-level",
+      "entity": "vocabulary",
+      "key": "threatLevel",
+      "name": "threatLevel",
+      "values": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.threatLevel",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-business-potential",
+      "entity": "vocabulary",
+      "key": "businessPotential",
+      "name": "businessPotential",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.businessPotential",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "voc-currency",
+      "entity": "vocabulary",
+      "key": "currency",
+      "name": "currency",
+      "values": [
+        "USD",
+        "EUR",
+        "GBP",
+        "INR",
+        "JPY"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-pm-tracker",
+        "document": "Product-Tracker-/js/schema.js",
+        "section": "V.currency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    }
+  ]
+}

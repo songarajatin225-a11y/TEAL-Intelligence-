@@ -1,0 +1,299 @@
+{
+  "dataset": {
+    "id": "demo-does",
+    "title": "DEMO DOE plans",
+    "entity": "doe",
+    "description": "An unrun full-factorial DOE plan. All results are null (not measured).",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "doe-demo-pkg-marking",
+      "entity": "doe",
+      "name": "DOE — power × speed × frequency on EMC",
+      "poc_id": "poc-demo-pkg-marking",
+      "design": "full_factorial",
+      "factors": [
+        {
+          "name": "Average power",
+          "unit": "W",
+          "levels": [
+            10,
+            15,
+            20
+          ]
+        },
+        {
+          "name": "Mark speed",
+          "unit": "mm/s",
+          "levels": [
+            500,
+            1000,
+            2000
+          ]
+        },
+        {
+          "name": "Pulse frequency",
+          "unit": "kHz",
+          "levels": [
+            20,
+            50
+          ]
+        }
+      ],
+      "responses": [
+        {
+          "name": "Code grade (0–4)",
+          "lsl": 3,
+          "usl": null,
+          "target": 4
+        },
+        {
+          "name": "Mark contrast (%)",
+          "unit": "%",
+          "lsl": null,
+          "usl": null,
+          "target": null
+        }
+      ],
+      "constraints": [
+        "No damage to die (verify by X-ray / decap if required)"
+      ],
+      "noise_factors": [
+        "Mould compound lot",
+        "Surface texture"
+      ],
+      "replicates": 1,
+      "runs": [
+        {
+          "run": 1,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 500,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 2,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 500,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 3,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 1000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 4,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 1000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 5,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 2000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 6,
+          "settings": {
+            "Average power": 10,
+            "Mark speed": 2000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 7,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 500,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 8,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 500,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 9,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 1000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 10,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 1000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 11,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 2000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 12,
+          "settings": {
+            "Average power": 15,
+            "Mark speed": 2000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 13,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 500,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 14,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 500,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 15,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 1000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 16,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 1000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 17,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 2000,
+            "Pulse frequency": 20
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        },
+        {
+          "run": 18,
+          "settings": {
+            "Average power": 20,
+            "Mark speed": 2000,
+            "Pulse frequency": 50
+          },
+          "results": {
+            "Code grade (0–4)": null,
+            "Mark contrast (%)": null
+          }
+        }
+      ]
+    }
+  ]
+}

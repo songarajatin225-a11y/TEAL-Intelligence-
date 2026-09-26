@@ -1,0 +1,324 @@
+{
+  "dataset": {
+    "id": "technologies",
+    "title": "Technology radar topics",
+    "description": "Radar topics from the OS specification. Radar status is deliberately unassessed until evidence is attached.",
+    "entity": "technology",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "partition": "research"
+  },
+  "records": [
+    {
+      "id": "tec-laser",
+      "entity": "technology",
+      "name": "Laser",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/01-front-matter.md#laser-technology-hierarchy",
+        "laser/02-part-i-physics-understanding-light-from-first-principles.md#1-4-quantum-mechanics-relevant-to-lasers",
+        "laser/02-part-i-physics-understanding-light-from-first-principles.md#1-10-electromagnetic-radiation-the-spectrum-and-the-laser-wavelength-map",
+        "laser/03-part-ii-laser-science-laser-physics-and-laser-architecture.md#2-6-ordinary-light-vs-laser-light",
+        "laser/03-part-ii-laser-science-laser-physics-and-laser-architecture.md#2-7-generic-laser-architecture",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-2-solid-state-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-3-fiber-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-4-gas-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-5-semiconductor-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-6-ultrafast-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-7-specialised-lasers",
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-8-laser-wavelengths-source-absorption-and-application-map"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-photonics",
+      "entity": "technology",
+      "name": "Photonics",
+      "domain": "Photonics",
+      "radar_status": null,
+      "knowledge_refs": [
+        "semiconductor/16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md#part-xxxi-semiconductor-lasers-and-photonics"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-automation",
+      "entity": "technology",
+      "name": "Automation",
+      "domain": "Automation",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/13-part-xii-automation-and-vision.md#12-3-integration-with-automation",
+        "automation/04-part-1-industrial-automation-fundamentals.md#part-1-industrial-automation-fundamentals",
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#7-5-automation"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-robotics",
+      "entity": "technology",
+      "name": "Robotics",
+      "domain": "Robotics",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-5-laser-robotics-machine-vision",
+        "automation/32-part-25-robotics.md#part-25-robotics"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-vision",
+      "entity": "technology",
+      "name": "Vision",
+      "domain": "Vision",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/13-part-xii-automation-and-vision.md#12-1-vision-system-building-blocks",
+        "laser/13-part-xii-automation-and-vision.md#12-2-the-vision-guided-processing-loop",
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-5-laser-robotics-machine-vision",
+        "automation/31-part-24-machine-vision.md#part-24-machine-vision",
+        "automation/31-part-24-machine-vision.md#24-7-industrial-example-vision-guided-laser-marking",
+        "automation/57-part-47-engineering-change-management.md#47-4-components-revision-rules",
+        "automation/72-case-8-vision-inspection-machine-cylindrical-cells.md#case-8-vision-inspection-machine-cylindrical-cells",
+        "automation/76-part-54-engineering-calculation-handbook.md#54-7-laser-optics-and-vision",
+        "automation/79-part-57-engineering-checklists.md#57-6-vision-review-g3"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-semiconductor",
+      "entity": "technology",
+      "name": "Semiconductor",
+      "domain": "Semiconductor",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-5-semiconductor-lasers",
+        "laser/14-part-xiii-semiconductor-laser-applications.md#13-3-materials-silicon-and-compound-semiconductors",
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-6-additive-manufacturing-and-laser-based-semiconductor-processing",
+        "automation/37-part-29-semiconductor-equipment.md#part-29-semiconductor-equipment",
+        "automation/37-part-29-semiconductor-equipment.md#29-7-industrial-example-semiconductor-equipment-types",
+        "automation/68-case-4-semiconductor-package-marking-machine-leadframe-strips.md#case-4-semiconductor-package-marking-machine-leadframe-strips",
+        "automation/74-case-10-complete-semiconductor-atmp-back-end-line.md#case-10-complete-semiconductor-atmp-back-end-line",
+        "semiconductor/03-part-i-semiconductor-fundamentals.md#chapter-1-what-is-a-semiconductor",
+        "semiconductor/03-part-i-semiconductor-fundamentals.md#1-1-conductors-insulators-semiconductors",
+        "semiconductor/03-part-i-semiconductor-fundamentals.md#2-3-semiconductor-materials-comparison",
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#chapter-7-inside-a-semiconductor-fab",
+        "semiconductor/07-parts-x-xiii-transistors-devices-design-and-nodes.md#part-xi-semiconductor-device-taxonomy"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-ai",
+      "entity": "technology",
+      "name": "AI",
+      "domain": "Digital",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/03-part-ii-laser-science-laser-physics-and-laser-architecture.md#2-3-metastable-states-pumping-and-gain",
+        "laser/05-part-iv-beam-engineering.md#4-3-beam-waist-rayleigh-range-divergence-and-depth-of-focus",
+        "laser/12-part-xi-laser-system-and-machine-architecture.md#11-1-optical-chain",
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-4-real-time-monitoring-closed-loop-control-ai-and-digital-twins",
+        "automation/08-part-5-machine-concept-development.md#5-10-troubleshooting-concept-level-failures",
+        "automation/24-part-18-sensors-and-instrumentation.md#18-4-components-wiring-output-and-failure-modes",
+        "automation/25-part-19-plc-engineering.md#19-4-components-the-plc-selection-chain",
+        "automation/36-part-28-laser-equipment-integration.md#28-10-troubleshooting-laser-failures",
+        "automation/47-part-38-factory-acceptance-test-fat.md#38-10-troubleshooting-why-fats-fail",
+        "automation/50-part-41-production-ramp-up.md#41-4-components-training-and-spares",
+        "automation/52-part-42-reliability-and-maintenance.md#part-42-reliability-and-maintenance",
+        "automation/52-part-42-reliability-and-maintenance.md#42-7-industrial-example-maintenance-schedule-for-the-laser-marking-cell"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-digital-twin",
+      "entity": "technology",
+      "name": "Digital twin",
+      "domain": "Digital",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-4-real-time-monitoring-closed-loop-control-ai-and-digital-twins",
+        "automation/61-part-50-industry-4-0.md#50-3-architecture-digital-twin-types"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-ultrafast",
+      "entity": "technology",
+      "name": "Ultrafast",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/04-part-iii-laser-sources-complete-classification.md#3-6-ultrafast-lasers",
+        "laser/11-part-x-laser-manufacturing-processes.md#10-15-ultrafast-lasers-in-processing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-uv",
+      "entity": "technology",
+      "name": "UV",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/11-part-x-laser-manufacturing-processes.md#10-14-the-uv-laser",
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-1-blue-green-and-uv-sources",
+        "semiconductor/06-parts-iv-ix-the-semiconductor-fab.md#9-4-why-euv-is-difficult"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-green",
+      "entity": "technology",
+      "name": "Green",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-1-blue-green-and-uv-sources"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-beam-shaping",
+      "entity": "technology",
+      "name": "Beam shaping",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/06-part-v-laser-optics.md#5-4-beam-shaping-and-diffractive-optics",
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-2-beam-shaping"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-in-process-sensing",
+      "entity": "technology",
+      "name": "In-process sensing",
+      "domain": "Laser",
+      "radar_status": null,
+      "knowledge_refs": [],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-closed-loop-control",
+      "entity": "technology",
+      "name": "Closed-loop control",
+      "domain": "Automation",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md#25-4-real-time-monitoring-closed-loop-control-ai-and-digital-twins"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-mes",
+      "entity": "technology",
+      "name": "MES",
+      "domain": "Digital",
+      "radar_status": null,
+      "knowledge_refs": [
+        "laser/03-part-ii-laser-science-laser-physics-and-laser-architecture.md#2-2-population-inversion-and-level-schemes",
+        "laser/10-part-ix-laser-material-interaction.md#9-5-ablation-regimes-photothermal-photochemical-non-thermal",
+        "automation/29-part-23-mes-and-traceability.md#part-23-mes-and-traceability",
+        "automation/29-part-23-mes-and-traceability.md#23-3-architecture-equipment-to-mes",
+        "semiconductor/07-parts-x-xiii-transistors-devices-design-and-nodes.md#chapter-15-how-a-transistor-becomes-a-computer"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-industry-4-0",
+      "entity": "technology",
+      "name": "Industry 4.0",
+      "domain": "Digital",
+      "radar_status": null,
+      "knowledge_refs": [
+        "automation/61-part-50-industry-4-0.md#part-50-industry-4-0"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    }
+  ]
+}

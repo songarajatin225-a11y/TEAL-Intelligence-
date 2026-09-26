@@ -1,0 +1,136 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "module-conflicts",
+    "title": "Module conflicts",
+    "description": "Module pairs that cannot sensibly coexist on one machine (from the legacy configurator code, MODCONFLICT).",
+    "entity": "module_conflict",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "modules"
+  },
+  "records": [
+    {
+      "id": "mcf-cleanrm.dryroom",
+      "entity": "module_conflict",
+      "name": "cleanrm × dryroom",
+      "a": "mod-cleanrm",
+      "b": "mod-dryroom",
+      "reason": "A cleanroom canopy and a dry-room shell are different environmental strategies.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-glovebx.fume",
+      "entity": "module_conflict",
+      "name": "glovebx × fume",
+      "a": "mod-glovebx",
+      "b": "mod-fume",
+      "reason": "An inert-backfilled chamber and open extraction defeat one another.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-rotoidx.turntbl",
+      "entity": "module_conflict",
+      "name": "rotoidx × turntbl",
+      "a": "mod-rotoidx",
+      "b": "mod-turntbl",
+      "reason": "Two indexing tables cannot occupy the same work position.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-rotoidx.shuttle",
+      "entity": "module_conflict",
+      "name": "rotoidx × shuttle",
+      "a": "mod-rotoidx",
+      "b": "mod-shuttle",
+      "reason": "A dial and a shuttle are alternative ways to present the same part.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-turntbl.shuttle",
+      "entity": "module_conflict",
+      "name": "turntbl × shuttle",
+      "a": "mod-turntbl",
+      "b": "mod-shuttle",
+      "reason": "A turntable and a shuttle table are alternative load strategies.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-conveyor.r2r",
+      "entity": "module_conflict",
+      "name": "conveyor × r2r",
+      "a": "mod-conveyor",
+      "b": "mod-r2r",
+      "reason": "Discrete transport and continuous web are different material formats.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    },
+    {
+      "id": "mcf-robot6.cobotld",
+      "entity": "module_conflict",
+      "name": "robot6 × cobotld",
+      "a": "mod-robot6",
+      "b": "mod-cobotld",
+      "reason": "One manipulator per load station.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/index.html",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MODCONFLICT"
+      }
+    }
+  ]
+}

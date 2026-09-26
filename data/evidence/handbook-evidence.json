@@ -1,0 +1,2479 @@
+{
+  "dataset": {
+    "id": "handbook-evidence",
+    "title": "Evidence extracted from handbooks",
+    "description": "Claims extracted verbatim from handbook tables, each pointing at the handbook section.",
+    "entity": "evidence",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-laser-handbook",
+      "src-semiconductor-handbook"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "evd-semi.wafer.0",
+      "entity": "evidence",
+      "name": "Laser use in Wafer: SiC boule slicing",
+      "claim": "SiC boule slicing uses NIR ps laser forming a subsurface split layer at ~1 µm (Tens of W) on SiC for Reduce kerf loss on SiC wafering.",
+      "entity_id": "sem-wafer",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "SiC boule slicing | NIR ps laser forming a subsurface split layer | ~1 µm | Tens of W | SiC | Reduce kerf loss on SiC wafering | DISCO (KABRA), Halo Industries, others",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.wafer.1",
+      "entity": "evidence",
+      "name": "Laser use in Wafer: Wafer marking (front/back)",
+      "claim": "Wafer marking (front/back) uses DPSS / fibre, often green or UV; soft-mark and hard-mark at 1 064, 532, 355 nm (Few W average, ns pulses) on Si, SiC, GaAs, glass for Wafer ID / OCR / 2D codes (SEMI T7, M12/M13).",
+      "entity_id": "sem-wafer",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Wafer marking (front/back) | DPSS / fibre, often green or UV; soft-mark and hard-mark | 1 064, 532, 355 nm | Few W average, ns pulses | Si, SiC, GaAs, glass | Wafer ID / OCR / 2D codes (SEMI T7, M12/M13) | EO Technics, Keyence, Han’s Laser, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.fab.0",
+      "entity": "evidence",
+      "name": "Laser use in Fab: Laser annealing — dopant activation",
+      "claim": "Laser annealing — dopant activation uses Green DPSS, CO₂ (historic), excimer at 532 nm, 10.6 µm, 308 nm (ns–ms dwell) on Si, SiC backside for Ultra-shallow junction activation; IGBT and SiC backside contacts.",
+      "entity_id": "sem-fab",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Green DPSS, CO₂ (historic), excimer | 532 nm, 10.6 µm, 308 nm | ns–ms dwell | Si, SiC backside | Ultra-shallow junction activation; IGBT and SiC backside contacts | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.lithography.0",
+      "entity": "evidence",
+      "name": "Laser use in Lithography: EUV light source",
+      "claim": "EUV light source uses CO₂ drive laser on Sn droplets at 10.6 µm (drive) → 13.5 nm (EUV) (Tens of kW drive) on Tin for EUV lithography.",
+      "entity_id": "sem-lithography",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "EUV light source | CO₂ drive laser on Sn droplets | 10.6 µm (drive) → 13.5 nm (EUV) | Tens of kW drive | Tin | EUV lithography | TRUMPF (drive laser) for ASML",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.lithography.1",
+      "entity": "evidence",
+      "name": "Laser use in Lithography: DUV lithography source",
+      "claim": "DUV lithography source uses Excimer at 248 nm (KrF), 193 nm (ArF) (~40–120 W) on — for Scanners.",
+      "entity_id": "sem-lithography",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "DUV lithography source | Excimer | 248 nm (KrF), 193 nm (ArF) | ~40–120 W | — | Scanners | Cymer (ASML), Gigaphoton",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.implant.0",
+      "entity": "evidence",
+      "name": "Laser use in Implant: Laser annealing — dopant activation",
+      "claim": "Laser annealing — dopant activation uses Green DPSS, CO₂ (historic), excimer at 532 nm, 10.6 µm, 308 nm (ns–ms dwell) on Si, SiC backside for Ultra-shallow junction activation; IGBT and SiC backside contacts.",
+      "entity_id": "sem-implant",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Green DPSS, CO₂ (historic), excimer | 532 nm, 10.6 µm, 308 nm | ns–ms dwell | Si, SiC backside | Ultra-shallow junction activation; IGBT and SiC backside contacts | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.dicing.0",
+      "entity": "evidence",
+      "name": "Laser use in Dicing: Laser grooving (low-k)",
+      "claim": "Laser grooving (low-k) uses UV / green ps–ns at 355, 532 nm (~5–20 W) on Low-k dielectric, metal stacks for Remove street layers before blade dicing.",
+      "entity_id": "sem-dicing",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser grooving (low-k) | UV / green ps–ns | 355, 532 nm | ~5–20 W | Low-k dielectric, metal stacks | Remove street layers before blade dicing | DISCO, ASMPT, EO Technics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.dicing.1",
+      "entity": "evidence",
+      "name": "Laser use in Dicing: Laser full-cut dicing",
+      "claim": "Laser full-cut dicing uses UV ns/ps, fs for thin wafers at 355, 343, 1 030 nm (~10–50 W) on Si, GaAs, sapphire, thin wafers for Die singulation.",
+      "entity_id": "sem-dicing",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser full-cut dicing | UV ns/ps, fs for thin wafers | 355, 343, 1 030 nm | ~10–50 W | Si, GaAs, sapphire, thin wafers | Die singulation | DISCO, ASMPT, EO Technics, Han’s",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.dicing.2",
+      "entity": "evidence",
+      "name": "Laser use in Dicing: Stealth dicing",
+      "claim": "Stealth dicing uses NIR ns/ps, focused internally at ~1 064–1 342 nm (Si transparent above ~1.1 µm) (Few W) on Si, SiC, sapphire, glass for Zero-kerf dicing for MEMS, memory.",
+      "entity_id": "sem-dicing",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Stealth dicing | NIR ns/ps, focused internally | ~1 064–1 342 nm (Si transparent above ~1.1 µm) | Few W | Si, SiC, sapphire, glass | Zero-kerf dicing for MEMS, memory | DISCO (Hamamatsu SD engine)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.flip-chip.0",
+      "entity": "evidence",
+      "name": "Laser use in Flip chip: Laser-assisted bonding (LAB)",
+      "claim": "Laser-assisted bonding (LAB) uses NIR area beam at ~980 nm (Hundreds of W to kW area) on Flip-chip solder joints for Low-warpage flip-chip bonding for thin packages.",
+      "entity_id": "sem-flip-chip",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser-assisted bonding (LAB) | NIR area beam | ~980 nm | Hundreds of W to kW area | Flip-chip solder joints | Low-warpage flip-chip bonding for thin packages | Pac Tech, K&S, Korean LAB suppliers",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.flip-chip.1",
+      "entity": "evidence",
+      "name": "Laser use in Flip chip: Temporary-bond laser debond",
+      "claim": "Temporary-bond laser debond uses UV DPSS at 355 nm (Few W) on Release layer on glass carrier for Advanced packaging / thin-wafer handling.",
+      "entity_id": "sem-flip-chip",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Temporary-bond laser debond | UV DPSS | 355 nm | Few W | Release layer on glass carrier | Advanced packaging / thin-wafer handling | EV Group, SUSS, Brewer Science (materials)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.molding.0",
+      "entity": "evidence",
+      "name": "Laser use in Molding: Laser cleaning",
+      "claim": "Laser cleaning uses Pulsed fibre (ns) at 1 064 nm (20–500 W) on Oxides, organics, mould residue for Lead-frame and pad cleaning; mould flash removal (deflash); pre-bond.",
+      "entity_id": "sem-molding",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser cleaning | Pulsed fibre (ns) | 1 064 nm | 20–500 W | Oxides, organics, mould residue | Lead-frame and pad cleaning; mould flash removal (deflash); pre-bond | Various; domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-semi.marking.0",
+      "entity": "evidence",
+      "name": "Laser use in Marking: Package marking",
+      "claim": "Package marking uses Fibre / green / UV (formerly CO₂) at 1 064, 532, 355 nm (10–50 W) on Mould compound, metal lids, ceramic for Device ID, date code, logo.",
+      "entity_id": "sem-marking",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Package marking | Fibre / green / UV (formerly CO₂) | 1 064, 532, 355 nm | 10–50 W | Mould compound, metal lids, ceramic | Device ID, date code, logo | EO Technics, Han’s, Keyence, ASMPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Handbook states parameters are indicative."
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.0",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "claim": "IPG Photonics — Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | IPG Photonics, TRUMPF, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.1",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "claim": "IPG Photonics — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | IPG, TRUMPF (SPI Lasers), Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.2",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "IPG Photonics — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.3",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "IPG Photonics — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.4",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "IPG Photonics — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ipg-photonics.5",
+      "entity": "evidence",
+      "name": "IPG Photonics: Named as an example equipment supplier for Laser welding.",
+      "claim": "IPG Photonics — Named as an example equipment supplier for Laser welding.",
+      "entity_id": "co-ipg-photonics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser welding | TRUMPF, IPG, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.6",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "claim": "TRUMPF — Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | IPG Photonics, TRUMPF, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.7",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "claim": "TRUMPF — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | IPG, TRUMPF (SPI Lasers), Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.8",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as a representative CO₂ laser source supplier ((outside China)).",
+      "claim": "TRUMPF — Named as a representative CO₂ laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "CO₂ | Coherent, Novanta (Synrad), Luxinar, TRUMPF (incl. Access Laser)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.9",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "TRUMPF — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.10",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "TRUMPF — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.11",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as an example equipment supplier for Laser ablation / patterning.",
+      "claim": "TRUMPF — Named as an example equipment supplier for Laser ablation / patterning.",
+      "entity_id": "co-trumpf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser ablation / patterning | 3D-Micromac, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.12",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as an example equipment supplier for Laser welding.",
+      "claim": "TRUMPF — Named as an example equipment supplier for Laser welding.",
+      "entity_id": "co-trumpf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser welding | TRUMPF, IPG, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.13",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as an example equipment supplier for Laser cutting.",
+      "claim": "TRUMPF — Named as an example equipment supplier for Laser cutting.",
+      "entity_id": "co-trumpf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser cutting | LPKF, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf.14",
+      "entity": "evidence",
+      "name": "TRUMPF: Named as an example equipment supplier for EUV light source.",
+      "claim": "TRUMPF — Named as an example equipment supplier for EUV light source.",
+      "entity_id": "co-trumpf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "EUV light source | TRUMPF (drive laser) for ASML",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.15",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative High-power CW fiber laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | IPG Photonics, TRUMPF, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.16",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | IPG, TRUMPF (SPI Lasers), Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.17",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative CO₂ laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative CO₂ laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "CO₂ | Coherent, Novanta (Synrad), Luxinar, TRUMPF (incl. Access Laser)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.18",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | MKS Spectra-Physics, Coherent, Lumentum, Photonics Industries, EdgeWave",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.19",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.20",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.21",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.22",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "VCSEL and telecom lasers | Lumentum, Coherent, Broadcom, ams OSRAM, TRUMPF Photonic Components",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.23",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Excimer laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Excimer laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Excimer | Cymer (ASML), Gigaphoton (lithography); Coherent (industrial, display, medical OEM)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.24",
+      "entity": "evidence",
+      "name": "Coherent: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "Coherent — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-coherent",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.25",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for Laser lift-off (LLO).",
+      "claim": "Coherent — Named as an example equipment supplier for Laser lift-off (LLO).",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser lift-off (LLO) | Coherent (UVblade), AP Systems, Philoptics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.26",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for ELA (excimer laser annealing).",
+      "claim": "Coherent — Named as an example equipment supplier for ELA (excimer laser annealing).",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "ELA (excimer laser annealing) | Coherent, AP Systems",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.27",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for Laser ablation / patterning.",
+      "claim": "Coherent — Named as an example equipment supplier for Laser ablation / patterning.",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser ablation / patterning | 3D-Micromac, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.28",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for Laser welding.",
+      "claim": "Coherent — Named as an example equipment supplier for Laser welding.",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser welding | TRUMPF, IPG, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.29",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for Laser cutting.",
+      "claim": "Coherent — Named as an example equipment supplier for Laser cutting.",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser cutting | LPKF, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.coherent.30",
+      "entity": "evidence",
+      "name": "Coherent: Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "claim": "Coherent — Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "entity_id": "co-coherent",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Micromachining (MEMS, glass) | LPKF (LIDE), 3D-Micromac, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.raycus.31",
+      "entity": "evidence",
+      "name": "Raycus: Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "claim": "Raycus — Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "entity_id": "co-raycus",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | Raycus, Maxphotonics, JPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.raycus.32",
+      "entity": "evidence",
+      "name": "Raycus: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "claim": "Raycus — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "entity_id": "co-raycus",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | JPT, Raycus, Maxphotonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.maxphotonics.33",
+      "entity": "evidence",
+      "name": "Maxphotonics: Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "claim": "Maxphotonics — Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "entity_id": "co-maxphotonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | Raycus, Maxphotonics, JPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.maxphotonics.34",
+      "entity": "evidence",
+      "name": "Maxphotonics: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "claim": "Maxphotonics — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "entity_id": "co-maxphotonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | JPT, Raycus, Maxphotonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.jpt.35",
+      "entity": "evidence",
+      "name": "JPT: Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "claim": "JPT — Named as a representative High-power CW fiber laser source supplier ((China)).",
+      "entity_id": "co-jpt",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "High-power CW fiber | Raycus, Maxphotonics, JPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.jpt.36",
+      "entity": "evidence",
+      "name": "JPT: Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "claim": "JPT — Named as a representative Pulsed fiber (ns Q-switched, MOPA) laser source supplier ((China)).",
+      "entity_id": "co-jpt",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Pulsed fiber (ns Q-switched, MOPA) | JPT, Raycus, Maxphotonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.novanta.37",
+      "entity": "evidence",
+      "name": "Novanta: Named as a representative CO₂ laser source supplier ((outside China)).",
+      "claim": "Novanta — Named as a representative CO₂ laser source supplier ((outside China)).",
+      "entity_id": "co-novanta",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "CO₂ | Coherent, Novanta (Synrad), Luxinar, TRUMPF (incl. Access Laser)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.luxinar.38",
+      "entity": "evidence",
+      "name": "Luxinar: Named as a representative CO₂ laser source supplier ((outside China)).",
+      "claim": "Luxinar — Named as a representative CO₂ laser source supplier ((outside China)).",
+      "entity_id": "co-luxinar",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "CO₂ | Coherent, Novanta (Synrad), Luxinar, TRUMPF (incl. Access Laser)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.mks-spectra-physics.39",
+      "entity": "evidence",
+      "name": "MKS Spectra-Physics: Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "claim": "MKS Spectra-Physics — Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "entity_id": "co-mks-spectra-physics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | MKS Spectra-Physics, Coherent, Lumentum, Photonics Industries, EdgeWave",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.mks-spectra-physics.40",
+      "entity": "evidence",
+      "name": "MKS Spectra-Physics: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "MKS Spectra-Physics — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-mks-spectra-physics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.mks-spectra-physics.41",
+      "entity": "evidence",
+      "name": "MKS Spectra-Physics: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "MKS Spectra-Physics — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-mks-spectra-physics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lumentum.42",
+      "entity": "evidence",
+      "name": "Lumentum: Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "claim": "Lumentum — Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "entity_id": "co-lumentum",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | MKS Spectra-Physics, Coherent, Lumentum, Photonics Industries, EdgeWave",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lumentum.43",
+      "entity": "evidence",
+      "name": "Lumentum: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "Lumentum — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-lumentum",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lumentum.44",
+      "entity": "evidence",
+      "name": "Lumentum: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "Lumentum — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-lumentum",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lumentum.45",
+      "entity": "evidence",
+      "name": "Lumentum: Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "claim": "Lumentum — Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "entity_id": "co-lumentum",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "VCSEL and telecom lasers | Lumentum, Coherent, Broadcom, ams OSRAM, TRUMPF Photonic Components",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.photonics-industries.46",
+      "entity": "evidence",
+      "name": "Photonics Industries: Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "claim": "Photonics Industries — Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "entity_id": "co-photonics-industries",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | MKS Spectra-Physics, Coherent, Lumentum, Photonics Industries, EdgeWave",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.edgewave.47",
+      "entity": "evidence",
+      "name": "EdgeWave: Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "claim": "EdgeWave — Named as a representative DPSS UV and green (ns) laser source supplier ((outside China)).",
+      "entity_id": "co-edgewave",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | MKS Spectra-Physics, Coherent, Lumentum, Photonics Industries, EdgeWave",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.huaray.48",
+      "entity": "evidence",
+      "name": "Huaray: Named as a representative DPSS UV and green (ns) laser source supplier ((China)).",
+      "claim": "Huaray — Named as a representative DPSS UV and green (ns) laser source supplier ((China)).",
+      "entity_id": "co-huaray",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | Huaray, Inno Laser",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.huaray.49",
+      "entity": "evidence",
+      "name": "Huaray: Named as a representative Ultrafast (ps/fs) laser source supplier ((China)).",
+      "claim": "Huaray — Named as a representative Ultrafast (ps/fs) laser source supplier ((China)).",
+      "entity_id": "co-huaray",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | Huaray, YSL Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.inno-laser.50",
+      "entity": "evidence",
+      "name": "Inno Laser: Named as a representative DPSS UV and green (ns) laser source supplier ((China)).",
+      "claim": "Inno Laser — Named as a representative DPSS UV and green (ns) laser source supplier ((China)).",
+      "entity_id": "co-inno-laser",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "DPSS UV and green (ns) | Huaray, Inno Laser",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.light-conversion.51",
+      "entity": "evidence",
+      "name": "Light Conversion: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "Light Conversion — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-light-conversion",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.light-conversion.52",
+      "entity": "evidence",
+      "name": "Light Conversion: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "Light Conversion — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-light-conversion",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.amplitude.53",
+      "entity": "evidence",
+      "name": "Amplitude: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "Amplitude — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-amplitude",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.amplitude.54",
+      "entity": "evidence",
+      "name": "Amplitude: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "Amplitude — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-amplitude",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.nkt-photonics.55",
+      "entity": "evidence",
+      "name": "NKT Photonics: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "NKT Photonics — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-nkt-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.nkt-photonics.56",
+      "entity": "evidence",
+      "name": "NKT Photonics: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "NKT Photonics — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-nkt-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ekspla.57",
+      "entity": "evidence",
+      "name": "EKSPLA: Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "claim": "EKSPLA — Named as a representative Ultrafast (ps/fs) laser source supplier ((outside China)).",
+      "entity_id": "co-ekspla",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | TRUMPF, Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, NKT Photonics (Hamamatsu), EKSPLA, Lumentum, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ysl-photonics.58",
+      "entity": "evidence",
+      "name": "YSL Photonics: Named as a representative Ultrafast (ps/fs) laser source supplier ((China)).",
+      "claim": "YSL Photonics — Named as a representative Ultrafast (ps/fs) laser source supplier ((China)).",
+      "entity_id": "co-ysl-photonics",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Ultrafast (ps/fs) | Huaray, YSL Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.laserline.59",
+      "entity": "evidence",
+      "name": "Laserline: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "Laserline — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-laserline",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.nuburu.60",
+      "entity": "evidence",
+      "name": "Nuburu: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "Nuburu — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-nuburu",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.shimadzu.61",
+      "entity": "evidence",
+      "name": "Shimadzu: Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "claim": "Shimadzu — Named as a representative Direct diode, blue and green laser source supplier ((outside China)).",
+      "entity_id": "co-shimadzu",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Direct diode, blue and green | Laserline, TRUMPF, Coherent, Nuburu, Shimadzu, IPG",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.nlight.62",
+      "entity": "evidence",
+      "name": "nLIGHT: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "nLIGHT — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-nlight",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.jenoptik.63",
+      "entity": "evidence",
+      "name": "Jenoptik: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "Jenoptik — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-jenoptik",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ams-osram.64",
+      "entity": "evidence",
+      "name": "ams OSRAM: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "ams OSRAM — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-ams-osram",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ams-osram.65",
+      "entity": "evidence",
+      "name": "ams OSRAM: Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "claim": "ams OSRAM — Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "entity_id": "co-ams-osram",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "VCSEL and telecom lasers | Lumentum, Coherent, Broadcom, ams OSRAM, TRUMPF Photonic Components",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.hamamatsu.66",
+      "entity": "evidence",
+      "name": "Hamamatsu: Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "claim": "Hamamatsu — Named as a representative Laser diodes and pumps laser source supplier ((outside China)).",
+      "entity_id": "co-hamamatsu",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Coherent, Lumentum, IPG (captive), nLIGHT, Jenoptik, ams OSRAM, Hamamatsu",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.focuslight.67",
+      "entity": "evidence",
+      "name": "Focuslight: Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "claim": "Focuslight — Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "entity_id": "co-focuslight",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Focuslight (components), BWT, Everbright",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.bwt.68",
+      "entity": "evidence",
+      "name": "BWT: Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "claim": "BWT — Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "entity_id": "co-bwt",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Focuslight (components), BWT, Everbright",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.everbright.69",
+      "entity": "evidence",
+      "name": "Everbright: Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "claim": "Everbright — Named as a representative Laser diodes and pumps laser source supplier ((China)).",
+      "entity_id": "co-everbright",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Laser diodes and pumps | Focuslight (components), BWT, Everbright",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.broadcom.70",
+      "entity": "evidence",
+      "name": "Broadcom: Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "claim": "Broadcom — Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "entity_id": "co-broadcom",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "VCSEL and telecom lasers | Lumentum, Coherent, Broadcom, ams OSRAM, TRUMPF Photonic Components",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.trumpf-photonic-components.71",
+      "entity": "evidence",
+      "name": "TRUMPF Photonic Components: Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "claim": "TRUMPF Photonic Components — Named as a representative VCSEL and telecom lasers laser source supplier ((outside China)).",
+      "entity_id": "co-trumpf-photonic-components",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "VCSEL and telecom lasers | Lumentum, Coherent, Broadcom, ams OSRAM, TRUMPF Photonic Components",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.cymer.72",
+      "entity": "evidence",
+      "name": "Cymer: Named as a representative Excimer laser source supplier ((outside China)).",
+      "claim": "Cymer — Named as a representative Excimer laser source supplier ((outside China)).",
+      "entity_id": "co-cymer",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Excimer | Cymer (ASML), Gigaphoton (lithography); Coherent (industrial, display, medical OEM)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.cymer.73",
+      "entity": "evidence",
+      "name": "Cymer: Named as an example equipment supplier for DUV lithography source.",
+      "claim": "Cymer — Named as an example equipment supplier for DUV lithography source.",
+      "entity_id": "co-cymer",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "DUV lithography source | Cymer (ASML), Gigaphoton",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.gigaphoton.74",
+      "entity": "evidence",
+      "name": "Gigaphoton: Named as a representative Excimer laser source supplier ((outside China)).",
+      "claim": "Gigaphoton — Named as a representative Excimer laser source supplier ((outside China)).",
+      "entity_id": "co-gigaphoton",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Excimer | Cymer (ASML), Gigaphoton (lithography); Coherent (industrial, display, medical OEM)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.gigaphoton.75",
+      "entity": "evidence",
+      "name": "Gigaphoton: Named as an example equipment supplier for DUV lithography source.",
+      "claim": "Gigaphoton — Named as an example equipment supplier for DUV lithography source.",
+      "entity_id": "co-gigaphoton",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "DUV lithography source | Cymer (ASML), Gigaphoton",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.thales.76",
+      "entity": "evidence",
+      "name": "Thales: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "Thales — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-thales",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.toptica.77",
+      "entity": "evidence",
+      "name": "TOPTICA: Named as a representative Scientific laser source supplier ((outside China)).",
+      "claim": "TOPTICA — Named as a representative Scientific laser source supplier ((outside China)).",
+      "entity_id": "co-toptica",
+      "source_id": "src-laser-handbook",
+      "document": "The Complete Laser Handbook",
+      "section": "21.3 Laser source suppliers by technology class",
+      "excerpt": "Scientific | Coherent, MKS Spectra-Physics, Light Conversion, Amplitude, Thales, TOPTICA, NKT Photonics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.eo-technics.78",
+      "entity": "evidence",
+      "name": "EO Technics: Named as an example equipment supplier for Wafer marking (front/back).",
+      "claim": "EO Technics — Named as an example equipment supplier for Wafer marking (front/back).",
+      "entity_id": "co-eo-technics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Wafer marking (front/back) | EO Technics, Keyence, Han’s Laser, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.eo-technics.79",
+      "entity": "evidence",
+      "name": "EO Technics: Named as an example equipment supplier for Laser grooving (low-k).",
+      "claim": "EO Technics — Named as an example equipment supplier for Laser grooving (low-k).",
+      "entity_id": "co-eo-technics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser grooving (low-k) | DISCO, ASMPT, EO Technics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.eo-technics.80",
+      "entity": "evidence",
+      "name": "EO Technics: Named as an example equipment supplier for Laser full-cut dicing.",
+      "claim": "EO Technics — Named as an example equipment supplier for Laser full-cut dicing.",
+      "entity_id": "co-eo-technics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser full-cut dicing | DISCO, ASMPT, EO Technics, Han’s",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.eo-technics.81",
+      "entity": "evidence",
+      "name": "EO Technics: Named as an example equipment supplier for Package marking.",
+      "claim": "EO Technics — Named as an example equipment supplier for Package marking.",
+      "entity_id": "co-eo-technics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Package marking | EO Technics, Han’s, Keyence, ASMPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.keyence.82",
+      "entity": "evidence",
+      "name": "Keyence: Named as an example equipment supplier for Wafer marking (front/back).",
+      "claim": "Keyence — Named as an example equipment supplier for Wafer marking (front/back).",
+      "entity_id": "co-keyence",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Wafer marking (front/back) | EO Technics, Keyence, Han’s Laser, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.keyence.83",
+      "entity": "evidence",
+      "name": "Keyence: Named as an example equipment supplier for Package marking.",
+      "claim": "Keyence — Named as an example equipment supplier for Package marking.",
+      "entity_id": "co-keyence",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Package marking | EO Technics, Han’s, Keyence, ASMPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.keyence.84",
+      "entity": "evidence",
+      "name": "Keyence: Named as an example equipment supplier for PCB marking.",
+      "claim": "Keyence — Named as an example equipment supplier for PCB marking.",
+      "entity_id": "co-keyence",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "PCB marking | Keyence, Han’s, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.hans-laser.85",
+      "entity": "evidence",
+      "name": "Han’s Laser: Named as an example equipment supplier for Wafer marking (front/back).",
+      "claim": "Han’s Laser — Named as an example equipment supplier for Wafer marking (front/back).",
+      "entity_id": "co-hans-laser",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Wafer marking (front/back) | EO Technics, Keyence, Han’s Laser, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.hans-laser.86",
+      "entity": "evidence",
+      "name": "Han’s Laser: Named as an example equipment supplier for Laser full-cut dicing.",
+      "claim": "Han’s Laser — Named as an example equipment supplier for Laser full-cut dicing.",
+      "entity_id": "co-hans-laser",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser full-cut dicing | DISCO, ASMPT, EO Technics, Han’s",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.hans-laser.87",
+      "entity": "evidence",
+      "name": "Han’s Laser: Named as an example equipment supplier for Package marking.",
+      "claim": "Han’s Laser — Named as an example equipment supplier for Package marking.",
+      "entity_id": "co-hans-laser",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Package marking | EO Technics, Han’s, Keyence, ASMPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.hans-laser.88",
+      "entity": "evidence",
+      "name": "Han’s Laser: Named as an example equipment supplier for PCB marking.",
+      "claim": "Han’s Laser — Named as an example equipment supplier for PCB marking.",
+      "entity_id": "co-hans-laser",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "PCB marking | Keyence, Han’s, domestic integrators",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.disco.89",
+      "entity": "evidence",
+      "name": "DISCO: Named as an example equipment supplier for Laser grooving (low-k).",
+      "claim": "DISCO — Named as an example equipment supplier for Laser grooving (low-k).",
+      "entity_id": "co-disco",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser grooving (low-k) | DISCO, ASMPT, EO Technics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.disco.90",
+      "entity": "evidence",
+      "name": "DISCO: Named as an example equipment supplier for Laser full-cut dicing.",
+      "claim": "DISCO — Named as an example equipment supplier for Laser full-cut dicing.",
+      "entity_id": "co-disco",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser full-cut dicing | DISCO, ASMPT, EO Technics, Han’s",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.disco.91",
+      "entity": "evidence",
+      "name": "DISCO: Named as an example equipment supplier for Stealth dicing.",
+      "claim": "DISCO — Named as an example equipment supplier for Stealth dicing.",
+      "entity_id": "co-disco",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Stealth dicing | DISCO (Hamamatsu SD engine)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.disco.92",
+      "entity": "evidence",
+      "name": "DISCO: Named as an example equipment supplier for SiC boule slicing.",
+      "claim": "DISCO — Named as an example equipment supplier for SiC boule slicing.",
+      "entity_id": "co-disco",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "SiC boule slicing | DISCO (KABRA), Halo Industries, others",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.asmpt.93",
+      "entity": "evidence",
+      "name": "ASMPT: Named as an example equipment supplier for Laser grooving (low-k).",
+      "claim": "ASMPT — Named as an example equipment supplier for Laser grooving (low-k).",
+      "entity_id": "co-asmpt",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser grooving (low-k) | DISCO, ASMPT, EO Technics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.asmpt.94",
+      "entity": "evidence",
+      "name": "ASMPT: Named as an example equipment supplier for Laser full-cut dicing.",
+      "claim": "ASMPT — Named as an example equipment supplier for Laser full-cut dicing.",
+      "entity_id": "co-asmpt",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser full-cut dicing | DISCO, ASMPT, EO Technics, Han’s",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.asmpt.95",
+      "entity": "evidence",
+      "name": "ASMPT: Named as an example equipment supplier for Package marking.",
+      "claim": "ASMPT — Named as an example equipment supplier for Package marking.",
+      "entity_id": "co-asmpt",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Package marking | EO Technics, Han’s, Keyence, ASMPT",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.halo-industries.96",
+      "entity": "evidence",
+      "name": "Halo Industries: Named as an example equipment supplier for SiC boule slicing.",
+      "claim": "Halo Industries — Named as an example equipment supplier for SiC boule slicing.",
+      "entity_id": "co-halo-industries",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "SiC boule slicing | DISCO (KABRA), Halo Industries, others",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ap-systems.97",
+      "entity": "evidence",
+      "name": "AP Systems: Named as an example equipment supplier for Laser lift-off (LLO).",
+      "claim": "AP Systems — Named as an example equipment supplier for Laser lift-off (LLO).",
+      "entity_id": "co-ap-systems",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser lift-off (LLO) | Coherent (UVblade), AP Systems, Philoptics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ap-systems.98",
+      "entity": "evidence",
+      "name": "AP Systems: Named as an example equipment supplier for ELA (excimer laser annealing).",
+      "claim": "AP Systems — Named as an example equipment supplier for ELA (excimer laser annealing).",
+      "entity_id": "co-ap-systems",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "ELA (excimer laser annealing) | Coherent, AP Systems",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.philoptics.99",
+      "entity": "evidence",
+      "name": "Philoptics: Named as an example equipment supplier for Laser lift-off (LLO).",
+      "claim": "Philoptics — Named as an example equipment supplier for Laser lift-off (LLO).",
+      "entity_id": "co-philoptics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser lift-off (LLO) | Coherent (UVblade), AP Systems, Philoptics",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.ev-group.100",
+      "entity": "evidence",
+      "name": "EV Group: Named as an example equipment supplier for Temporary-bond laser debond.",
+      "claim": "EV Group — Named as an example equipment supplier for Temporary-bond laser debond.",
+      "entity_id": "co-ev-group",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Temporary-bond laser debond | EV Group, SUSS, Brewer Science (materials)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.suss.101",
+      "entity": "evidence",
+      "name": "SUSS: Named as an example equipment supplier for Temporary-bond laser debond.",
+      "claim": "SUSS — Named as an example equipment supplier for Temporary-bond laser debond.",
+      "entity_id": "co-suss",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Temporary-bond laser debond | EV Group, SUSS, Brewer Science (materials)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.brewer-science.102",
+      "entity": "evidence",
+      "name": "Brewer Science: Named as an example equipment supplier for Temporary-bond laser debond.",
+      "claim": "Brewer Science — Named as an example equipment supplier for Temporary-bond laser debond.",
+      "entity_id": "co-brewer-science",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Temporary-bond laser debond | EV Group, SUSS, Brewer Science (materials)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.applied-materials.103",
+      "entity": "evidence",
+      "name": "Applied Materials: Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "claim": "Applied Materials — Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "entity_id": "co-applied-materials",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.screen.104",
+      "entity": "evidence",
+      "name": "SCREEN: Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "claim": "SCREEN — Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "entity_id": "co-screen",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.veeco.105",
+      "entity": "evidence",
+      "name": "Veeco: Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "claim": "Veeco — Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "entity_id": "co-veeco",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.mitsui.106",
+      "entity": "evidence",
+      "name": "Mitsui: Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "claim": "Mitsui — Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "entity_id": "co-mitsui",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.3d-micromac.107",
+      "entity": "evidence",
+      "name": "3D-Micromac: Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "claim": "3D-Micromac — Named as an example equipment supplier for Laser annealing — dopant activation.",
+      "entity_id": "co-3d-micromac",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser annealing — dopant activation | Applied Materials, SCREEN (LASSE), Veeco, Mitsui, 3D-Micromac",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.3d-micromac.108",
+      "entity": "evidence",
+      "name": "3D-Micromac: Named as an example equipment supplier for Laser ablation / patterning.",
+      "claim": "3D-Micromac — Named as an example equipment supplier for Laser ablation / patterning.",
+      "entity_id": "co-3d-micromac",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser ablation / patterning | 3D-Micromac, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.3d-micromac.109",
+      "entity": "evidence",
+      "name": "3D-Micromac: Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "claim": "3D-Micromac — Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "entity_id": "co-3d-micromac",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Micromachining (MEMS, glass) | LPKF (LIDE), 3D-Micromac, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.mitsubishi-electric.110",
+      "entity": "evidence",
+      "name": "Mitsubishi Electric: Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "claim": "Mitsubishi Electric — Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "entity_id": "co-mitsubishi-electric",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser drilling (PCB, substrates) | Mitsubishi Electric, Via Mechanics, ESI (MKS), LPKF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.via-mechanics.111",
+      "entity": "evidence",
+      "name": "Via Mechanics: Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "claim": "Via Mechanics — Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "entity_id": "co-via-mechanics",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser drilling (PCB, substrates) | Mitsubishi Electric, Via Mechanics, ESI (MKS), LPKF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.esi.112",
+      "entity": "evidence",
+      "name": "ESI: Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "claim": "ESI — Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "entity_id": "co-esi",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser drilling (PCB, substrates) | Mitsubishi Electric, Via Mechanics, ESI (MKS), LPKF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.esi.113",
+      "entity": "evidence",
+      "name": "ESI: Named as an example equipment supplier for Laser trimming.",
+      "claim": "ESI — Named as an example equipment supplier for Laser trimming.",
+      "entity_id": "co-esi",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser trimming | ESI (MKS), Heraeus",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lpkf.114",
+      "entity": "evidence",
+      "name": "LPKF: Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "claim": "LPKF — Named as an example equipment supplier for Laser drilling (PCB, substrates).",
+      "entity_id": "co-lpkf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser drilling (PCB, substrates) | Mitsubishi Electric, Via Mechanics, ESI (MKS), LPKF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lpkf.115",
+      "entity": "evidence",
+      "name": "LPKF: Named as an example equipment supplier for Laser cutting.",
+      "claim": "LPKF — Named as an example equipment supplier for Laser cutting.",
+      "entity_id": "co-lpkf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser cutting | LPKF, Coherent, TRUMPF",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.lpkf.116",
+      "entity": "evidence",
+      "name": "LPKF: Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "claim": "LPKF — Named as an example equipment supplier for Micromachining (MEMS, glass).",
+      "entity_id": "co-lpkf",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Micromachining (MEMS, glass) | LPKF (LIDE), 3D-Micromac, Coherent",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.heraeus.117",
+      "entity": "evidence",
+      "name": "Heraeus: Named as an example equipment supplier for Laser trimming.",
+      "claim": "Heraeus — Named as an example equipment supplier for Laser trimming.",
+      "entity_id": "co-heraeus",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser trimming | ESI (MKS), Heraeus",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.apollo-seiko.118",
+      "entity": "evidence",
+      "name": "Apollo Seiko: Named as an example equipment supplier for Laser soldering.",
+      "claim": "Apollo Seiko — Named as an example equipment supplier for Laser soldering.",
+      "entity_id": "co-apollo-seiko",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser soldering | Apollo Seiko, Unitechnologies, Pac Tech (Seika)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.unitechnologies.119",
+      "entity": "evidence",
+      "name": "Unitechnologies: Named as an example equipment supplier for Laser soldering.",
+      "claim": "Unitechnologies — Named as an example equipment supplier for Laser soldering.",
+      "entity_id": "co-unitechnologies",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser soldering | Apollo Seiko, Unitechnologies, Pac Tech (Seika)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.pac-tech.120",
+      "entity": "evidence",
+      "name": "Pac Tech: Named as an example equipment supplier for Laser soldering.",
+      "claim": "Pac Tech — Named as an example equipment supplier for Laser soldering.",
+      "entity_id": "co-pac-tech",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser soldering | Apollo Seiko, Unitechnologies, Pac Tech (Seika)",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.pac-tech.121",
+      "entity": "evidence",
+      "name": "Pac Tech: Named as an example equipment supplier for Laser-assisted bonding (LAB).",
+      "claim": "Pac Tech — Named as an example equipment supplier for Laser-assisted bonding (LAB).",
+      "entity_id": "co-pac-tech",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser-assisted bonding (LAB) | Pac Tech, K&S, Korean LAB suppliers",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    },
+    {
+      "id": "evd-co.k-s.122",
+      "entity": "evidence",
+      "name": "K&S: Named as an example equipment supplier for Laser-assisted bonding (LAB).",
+      "claim": "K&S — Named as an example equipment supplier for Laser-assisted bonding (LAB).",
+      "entity_id": "co-k-s",
+      "source_id": "src-semiconductor-handbook",
+      "document": "The Complete Semiconductor Industry Handbook",
+      "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+      "excerpt": "Laser-assisted bonding (LAB) | Pac Tech, K&S, Korean LAB suppliers",
+      "verification_status": "SOURCE_DOCUMENTED",
+      "confidence": "MEDIUM",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "verification_status": "SOURCE_DOCUMENTED"
+      }
+    }
+  ]
+}

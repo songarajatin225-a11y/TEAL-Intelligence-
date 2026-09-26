@@ -1,0 +1,167 @@
+{
+  "handbook": "laser",
+  "title": "The Complete Laser Handbook",
+  "role": "HOW CAN THE PROCESS WORK?",
+  "parts": [
+    {
+      "file": "00-the-complete-laser-handbook.md",
+      "title": "The Complete Laser Handbook",
+      "chars": 233
+    },
+    {
+      "file": "01-front-matter.md",
+      "title": "Front Matter",
+      "chars": 8356
+    },
+    {
+      "file": "02-part-i-physics-understanding-light-from-first-principles.md",
+      "title": "Part I — Physics: Understanding Light from First Principles",
+      "chars": 11899
+    },
+    {
+      "file": "03-part-ii-laser-science-laser-physics-and-laser-architecture.md",
+      "title": "Part II — Laser Science: Laser Physics and Laser Architecture",
+      "chars": 13118
+    },
+    {
+      "file": "04-part-iii-laser-sources-complete-classification.md",
+      "title": "Part III — Laser Sources: Complete Classification",
+      "chars": 33851
+    },
+    {
+      "file": "05-part-iv-beam-engineering.md",
+      "title": "Part IV — Beam Engineering",
+      "chars": 5588
+    },
+    {
+      "file": "06-part-v-laser-optics.md",
+      "title": "Part V — Laser Optics",
+      "chars": 9892
+    },
+    {
+      "file": "07-part-vi-beam-delivery.md",
+      "title": "Part VI — Beam Delivery",
+      "chars": 6257
+    },
+    {
+      "file": "08-part-vii-galvo-scanning-and-motion.md",
+      "title": "Part VII — Galvo Scanning and Motion",
+      "chars": 7442
+    },
+    {
+      "file": "09-part-viii-laser-process-heads.md",
+      "title": "Part VIII — Laser Process Heads",
+      "chars": 6038
+    },
+    {
+      "file": "10-part-ix-laser-material-interaction.md",
+      "title": "Part IX — Laser–Material Interaction",
+      "chars": 9293
+    },
+    {
+      "file": "11-part-x-laser-manufacturing-processes.md",
+      "title": "Part X — Laser Manufacturing Processes",
+      "chars": 40751
+    },
+    {
+      "file": "12-part-xi-laser-system-and-machine-architecture.md",
+      "title": "Part XI — Laser System and Machine Architecture",
+      "chars": 7286
+    },
+    {
+      "file": "13-part-xii-automation-and-vision.md",
+      "title": "Part XII — Automation and Vision",
+      "chars": 4694
+    },
+    {
+      "file": "14-part-xiii-semiconductor-laser-applications.md",
+      "title": "Part XIII — Semiconductor Laser Applications",
+      "chars": 5275
+    },
+    {
+      "file": "15-part-xiv-electronics-and-ems.md",
+      "title": "Part XIV — Electronics and EMS",
+      "chars": 3831
+    },
+    {
+      "file": "16-part-xv-battery-and-new-energy.md",
+      "title": "Part XV — Battery and New Energy",
+      "chars": 4929
+    },
+    {
+      "file": "17-part-xvi-automotive.md",
+      "title": "Part XVI — Automotive",
+      "chars": 3646
+    },
+    {
+      "file": "18-part-xvii-aerospace.md",
+      "title": "Part XVII — Aerospace",
+      "chars": 2796
+    },
+    {
+      "file": "19-part-xviii-medical.md",
+      "title": "Part XVIII — Medical",
+      "chars": 4735
+    },
+    {
+      "file": "20-part-xix-consumer-and-end-products.md",
+      "title": "Part XIX — Consumer and End Products",
+      "chars": 16268
+    },
+    {
+      "file": "21-part-xx-laser-application-industry-matrix.md",
+      "title": "Part XX — Laser Application × Industry Matrix",
+      "chars": 6158
+    },
+    {
+      "file": "22-part-xxi-supplier-ecosystem.md",
+      "title": "Part XXI — Supplier Ecosystem",
+      "chars": 9275
+    },
+    {
+      "file": "23-part-xxii-the-india-laser-ecosystem.md",
+      "title": "Part XXII — The India Laser Ecosystem",
+      "chars": 5935
+    },
+    {
+      "file": "24-part-xxiii-economics-and-product-management.md",
+      "title": "Part XXIII — Economics and Product Management",
+      "chars": 12544
+    },
+    {
+      "file": "25-part-xxiv-safety-standards-quality-and-metrology.md",
+      "title": "Part XXIV — Safety, Standards, Quality and Metrology",
+      "chars": 8733
+    },
+    {
+      "file": "26-part-xxv-advanced-and-emerging-technologies-and-the-road-to-2040.md",
+      "title": "Part XXV — Advanced and Emerging Technologies, and the Road to 2040",
+      "chars": 7307
+    },
+    {
+      "file": "27-part-xxvi-reference-machine-architectures-and-case-studies.md",
+      "title": "Part XXVI — Reference Machine Architectures and Case Studies",
+      "chars": 18286
+    },
+    {
+      "file": "28-part-xxvii-reference-tables-and-troubleshooting.md",
+      "title": "Part XXVII — Reference Tables and Troubleshooting",
+      "chars": 7729
+    },
+    {
+      "file": "29-part-xxviii-master-laser-technology-map.md",
+      "title": "Part XXVIII — Master Laser Technology Map",
+      "chars": 3968
+    },
+    {
+      "file": "30-back-matter.md",
+      "title": "Back Matter",
+      "chars": 18340
+    }
+  ],
+  "stats": {
+    "tables": 177,
+    "equations": 0,
+    "headings": 174
+  }
+}
