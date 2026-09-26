@@ -59,6 +59,13 @@ export const HELP: Record<string, HelpEntry> = {
     terms: [['Confidence', 'Share of matched sources that are verified or source-documented. DEMO records never count as verified.']],
     workflow: ['Ask the question.', 'Read the direct answer and confidence.', 'Open the findings and evidence; check the unknowns.', 'Act on the recommended next steps.'],
   },
+  '/rooms': { what: 'Rooms put everything about one program, product, POC, supplier, opportunity or customer in one place: next action, attention, activities and meetings, risks, decisions and changes, lessons, engineering work, health, gaps, timeline and evidence.', workflow: ['Pick a room.', 'Clear “Now” first.', 'Log activities, risks, decisions, changes and lessons from the room — they are linked automatically.'] },
+  '/leads': {
+    what: 'LeadConnect captures a lead at an exhibition in under a minute. One save creates the customer (if new), a Lead-stage opportunity and a dated follow-up activity — all local drafts.',
+    terms: [['Event tag', 'Every lead carries event:<name>, so an event’s leads can be reviewed and exported together.']],
+    workflow: ['Type the event once.', 'Company, contact, product of interest, what they asked.', 'Save — the form clears for the next visitor.', 'After the show, work the follow-ups in My Workspace.'],
+  },
+  '/business-case': { what: 'Competitors recorded on opportunities and companies, market size with a source for every figure, and a cash-flow business case (NPV, payback, margin) with ±10 % sensitivity. Nothing is looked up or invented.', terms: [['TAM / SAM / SOM', 'Total, serviceable and obtainable market — each must be a subset of the one before.'], ['NPV', 'Σ cash flow ÷ (1 + r)^year, year 0 = investment.']] },
   '/compare': { what: 'Up to four records of one type side by side. Rows that differ are highlighted; “Only differences” hides the rest. Unknown values stay unknown.', workflow: ['Pick a type, or use “Compare with…” on a record.', 'Add records.', 'Toggle “Only differences”.'] },
   '/supplier-risk': { what: 'Recorded supplier risk against dependency (component-master items naming the supplier). Suppliers without an assessment stay UNKNOWN — the system never assigns risk.', terms: [['Single-source', 'The supplier is the only vendor for that component category.'], ['Long-lead', 'Lead time of 8 weeks or more.']] },
   '/duplicates': { what: 'Likely duplicate records within each type, with the rule that matched. Nothing is merged automatically — compare the pair, then edit or delete one as a local draft.' },

@@ -942,12 +942,18 @@ export const Lesson = z.object({
 export type Lesson = z.infer<typeof Lesson>;
 
 export const TECH_STATUSES = ['Emerging', 'Developing', 'Commercial', 'Mature', 'Declining'] as const;
+/** TEAL's own stance on a technology — a team decision (with rationale), not a market claim. */
+export const TECH_ADOPTION = ['Adopt', 'Evaluate', 'Monitor', 'Emerging', 'Avoid'] as const;
 export const Technology = z.object({
   ...baseShape,
   entity: z.literal('technology'),
   domain: z.string(),
   /** Only assigned with evidence; null = not assessed */
   radar_status: z.enum(TECH_STATUSES).nullable(),
+  /** User-managed radar ring; null / absent = not classified */
+  adoption: z.enum(TECH_ADOPTION).nullable().optional(),
+  adoption_rationale: z.string().optional(),
+  adoption_reviewed: IsoDate.optional(),
   evidence_ids: refs.optional(),
   knowledge_refs: z.array(z.string()).optional(),
 });

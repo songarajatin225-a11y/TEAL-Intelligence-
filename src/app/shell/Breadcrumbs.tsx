@@ -21,6 +21,11 @@ export function useCrumbs(): Crumb[] {
     const page = def?.route ? pageFor(def.route) : undefined;
     return [...(page ? [{ label: page.section.label, to: page.section.pages[0].to }, { label: page.label, to: page.to }] : def ? [{ label: def.plural, to: def.route }] : []), { label: r?.name ?? 'Record' }];
   }
+  const room = /^\/room\/(.+)$/.exec(pathname);
+  if (room) {
+    const r = byId.get(decodeURIComponent(room[1]));
+    return [{ label: 'Work', to: '/pm' }, { label: 'Rooms', to: '/rooms' }, { label: r ? `${r.name} — room` : 'Room' }];
+  }
   const page = pageFor(pathname);
   if (!page) return [{ label: 'Page' }];
   const out: Crumb[] = [{ label: page.section.label, to: page.section.pages[0].to !== page.to ? page.section.pages[0].to : undefined }, { label: page.label, to: pathname !== page.to ? page.to : undefined }];

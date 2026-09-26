@@ -1,4 +1,4 @@
-import { Columns2, Copy, Maximize2, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
+import { Columns2, Copy, DoorOpen, Maximize2, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
 import { lazy, Suspense, useEffect, useMemo, useState, type ComponentType } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { isFavorite, toggleFavorite, usePrefs } from '../../app/prefs';
@@ -11,7 +11,7 @@ import { fieldLabel, renderValue } from '../../components/fieldValue';
 import { RecordLink } from '../../components/RecordLink';
 import { AiContextDrawer, GapsPanel, LinkedRecords, NextActionLine, SimilarPanel } from '../../components/ThreadPanels';
 import { toast } from '../../components/toast';
-import { Badge, Button, Card, Drawer, EmptyState, IconButton, KV, Loading, Notice, Popover, Tabs, Unknown } from '../../components/ui';
+import { Badge, Button, buttonClass, Card, Drawer, EmptyState, IconButton, KV, Loading, Notice, Popover, Tabs, Unknown } from '../../components/ui';
 import { WhyButton } from '../../components/why';
 import type { AnyRecord } from '../../domain';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
@@ -23,6 +23,7 @@ import { neighbours } from '../../services/graph';
 import { whyForRecord } from '../../services/why';
 import { fmtDate } from '../../utils/dates';
 import { ENTITY_UI } from './entityUi';
+import { isRoomEntity, ROOM_LABEL, roomPath } from '../rooms/rooms';
 
 /* Entity-specific main panels, code-split. Each receives the record. */
 type Main = ComponentType<{ record: Rec }>;
@@ -185,6 +186,11 @@ export default function RecordPage() {
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 no-print">
+          {isRoomEntity(r.entity) && (
+            <Link to={roomPath(r.id)} className={buttonClass('secondary')}>
+              <DoorOpen className="size-4" aria-hidden /> {ROOM_LABEL[r.entity]} room
+            </Link>
+          )}
           <WhyButton record={r} label="Why?" />
           <IconButton label={fav ? 'Unpin from sidebar' : 'Pin to sidebar'} icon={fav ? PinOff : Pin} onClick={() => toggleFavorite({ id: r.id, name: r.name, entity: r.entity })} active={fav} />
           {!ui?.readOnly && (

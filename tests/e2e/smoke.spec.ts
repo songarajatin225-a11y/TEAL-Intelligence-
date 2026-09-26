@@ -69,6 +69,10 @@ const ROUTES: [string, RegExp][] = [
   ['duplicates', /Duplicates/],
   ['supplier-risk', /Supplier Risk/],
   ['units', /Unit Converter/],
+  ['rooms', /Rooms/],
+  ['room/prd-markf', /Mark F-Series/],
+  ['leads', /LeadConnect/],
+  ['business-case', /Market & Business Case/],
   ['record/prd-semispm', /Semi SPM/],
   ['record/gate-g3', /G3/],
 ];

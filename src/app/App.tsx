@@ -44,6 +44,13 @@ const ALIASES: Record<string, string> = {
   'unit-converter': '/units',
   'data-management': '/admin',
   settings: '/admin',
+  leadconnect: '/leads',
+  'lead-connect': '/leads',
+  'event-leads': '/leads',
+  market: '/business-case',
+  competitors: '/business-case',
+  programs: '/rooms?type=project',
+  room: '/rooms',
 };
 
 const list = (entity: string, props: Record<string, unknown> = {}) => <EntityListPage entity={entity} {...props} />;
@@ -122,6 +129,10 @@ const router = createHashRouter([
       { path: 'help', element: L(() => import('../features/admin/HelpPage')) },
       { path: 'legacy', element: L(() => import('../features/admin/LegacyAppsPage')) },
       { path: 'legacy/:app', element: L(() => import('../features/admin/LegacyAppsPage')) },
+      { path: 'rooms', element: L(() => import('../features/rooms/RoomsPage')) },
+      { path: 'room/:id', element: L(() => import('../features/rooms/RoomPage')) },
+      { path: 'leads', element: L(() => import('../features/leads/LeadsPage')) },
+      { path: 'business-case', element: L(() => import('../features/strategy/BusinessCasePage')) },
       { path: 'compare', element: L(() => import('../features/entities/ComparePage')) },
       { path: 'ask', element: L(() => import('../features/knowledge/AskPage')) },
       { path: 'duplicates', element: L(() => import('../features/admin/DuplicatesPage')) },

@@ -161,7 +161,7 @@ test.describe('mobile', () => {
 });
 
 test.describe('accessibility (axe, WCAG 2.2 A/AA rules)', () => {
-  for (const route of ['', 'products', 'record/prd-semispm', 'laser', 'cost', 'admin']) {
+  for (const route of ['', 'products', 'record/prd-semispm', 'laser', 'cost', 'admin', 'room/prj-demo-c2i', 'leads', 'business-case', 'technology', 'ask?q=takt', 'supplier-risk', 'activities', 'graph']) {
     for (const theme of ['light', 'dark'] as const) {
       test(`/${route} — ${theme}`, async ({ page }) => {
         await page.emulateMedia({ colorScheme: theme });
