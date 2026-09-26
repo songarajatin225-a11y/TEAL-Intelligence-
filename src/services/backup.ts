@@ -53,6 +53,6 @@ export async function importWorkspace(json: unknown, mode: 'merge' | 'replace' =
     await db.drafts.bulkPut(good);
     await db.changelog.add({ record_id: '*', entity: '*', action: 'update', at: new Date().toISOString(), summary: `Imported workspace backup (${good.length} records)` });
   });
-  workspaceBus.emit();
+  workspaceBus.emit({ action: 'import', summary: `Workspace backup (${good.length} records)` });
   return { ok: true, imported: good.length, rejected, message: `Imported ${good.length} record(s)${rejected.length ? `; ${rejected.length} rejected (invalid)` : ''}.` };
 }

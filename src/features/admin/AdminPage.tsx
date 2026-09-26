@@ -28,7 +28,7 @@ export default function AdminPage() {
 
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Admin" title="Data management" subtitle="Local workspace, change packages, backups, legacy import and the local workspace lock." />
+      <PageHeader eyebrow="Admin" title="Data & Workspace" subtitle="Local workspace, change packages, backups, legacy import and the local workspace lock." />
       <Notice tone="draft">
         <strong>Permanent repository update requires a GitHub commit.</strong> Records you create or edit here are LOCAL DRAFTS stored in this browser (IndexedDB). Export a change package and apply it with <code>scripts/data/applyChangePackage.ts</code> in a pull request to update master data.
       </Notice>
@@ -40,7 +40,7 @@ export default function AdminPage() {
         <Stat label="Data quality" value="Run" to="/data-quality" />
       </div>
       <DraftsCard drafts={drafts} />
-      <div className="grid gap-3 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
         <ChangePackageCard drafts={drafts} />
         <BackupCard />
       </div>
@@ -61,14 +61,14 @@ function DraftsCard({ drafts }: { drafts: DraftRow[] }) {
       await db.drafts.clear();
       await db.changelog.add({ record_id: '*', entity: '*', action: 'restore', at: new Date().toISOString(), summary: `Discarded all local drafts (${drafts.length})` });
     });
-    workspaceBus.emit();
+    workspaceBus.emit({ action: 'delete', summary: `All local drafts (${drafts.length})` });
   };
   return (
     <Card
       title={`Local workspace (${drafts.length})`}
       actions={
         <div className="flex gap-1">
-          <Select aria-label="Filter drafts by entity" value={filter} onChange={(e) => setFilter(e.target.value)} className="py-0.5 text-[12px]">
+          <Select aria-label="Filter drafts by entity" value={filter} onChange={(e) => setFilter(e.target.value)} className="py-0.5 text-meta">
             <option value="">All entities</option>
             {entities.map((e) => (
               <option key={e}>{e}</option>
@@ -146,8 +146,8 @@ function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
   };
   return (
     <Card title="TEAL change package">
-      <p className="mb-2 text-[12.5px] text-ink-2">A ZIP with manifest.json, data/&lt;entity&gt;/&lt;id&gt;.json, changes/changelog.json and documents/README.md. It is the reviewed path from local drafts to GitHub master data.</p>
-      <div className="grid gap-2 md:grid-cols-2">
+      <p className="mb-2 text-body text-ink-2">A ZIP with manifest.json, data/&lt;entity&gt;/&lt;id&gt;.json, changes/changelog.json and documents/README.md. It is the reviewed path from local drafts to GitHub master data.</p>
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         <Field label="Prepared by" htmlFor="cp-by" hint="Your name or initials — stored in the manifest">
           <Input id="cp-by" value={by} onChange={(e) => setBy(e.target.value)} />
         </Field>
@@ -171,10 +171,10 @@ function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
       )}
       {preview && (
         <div className="mt-2 rounded border border-line p-2">
-          <div className="text-[12px] text-ink-2">
+          <div className="text-meta text-ink-2">
             Created {fmtDate(preview.manifest.created_at)} by {preview.manifest.created_by} · {preview.manifest.records.length} record(s) · {preview.manifest.note}
           </div>
-          <ul className="my-1 max-h-40 overflow-y-auto text-[12px]">
+          <ul className="my-1 max-h-40 overflow-y-auto text-meta">
             {preview.manifest.records.map((r) => (
               <li key={r.id}>
                 <Badge tone={r.action === 'delete' ? 'bad' : 'draft'}>{r.action}</Badge> {r.entity} · {r.name} <span className="text-ink-3">({r.id})</span>
@@ -211,7 +211,7 @@ function BackupCard() {
   };
   return (
     <Card title="Workspace backup">
-      <p className="mb-2 text-[12.5px] text-ink-2">Everything in this browser’s workspace (drafts, change log, saved searches, preferences) as one JSON file. Import validates every record against its schema; invalid records are reported and skipped.</p>
+      <p className="mb-2 text-body text-ink-2">Everything in this browser’s workspace (drafts, change log, saved searches, preferences) as one JSON file. Import validates every record against its schema; invalid records are reported and skipped.</p>
       <div className="flex flex-wrap items-end gap-2">
         <Button variant="primary" onClick={() => void exp()}>
           <Download className="size-3.5" /> Export backup
@@ -285,10 +285,10 @@ function LegacyImportCard() {
   return (
     <Card title="Import from legacy apps">
       <Notice tone="warn">Legacy data stays in this browser. It is your own working data (customers, contacts, quotations) — do not put it into the public repository. Imported records are DRAFT / USER_CREATED and unverified.</Notice>
-      <div className="mt-2 grid gap-3 md:grid-cols-2">
+      <div className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-2">
         <div className="space-y-1.5">
           <div className="font-medium">Product Management Tracker</div>
-          <p className="text-[12px] text-ink-3">Customers → customers, opportunities/pipeline → opportunities, tasks and follow-ups → activities, sample/POC tracking → POCs.</p>
+          <p className="text-meta text-ink-3">Customers → customers, opportunities/pipeline → opportunities, tasks and follow-ups → activities, sample/POC tracking → POCs.</p>
           <div className="flex flex-wrap gap-2">
             <Button onClick={() => void fromBrowser('tracker')}>Read from this browser</Button>
             <Button onClick={() => trackerFile.current?.click()}>
@@ -299,7 +299,7 @@ function LegacyImportCard() {
         </div>
         <div className="space-y-1.5">
           <div className="font-medium">Cost Platform</div>
-          <p className="text-[12px] text-ink-3">Costing projects → cost models (all buckets, landed, markup, TEAL sheet) with their customers. Encrypted vaults must be exported from the legacy app first.</p>
+          <p className="text-meta text-ink-3">Costing projects → cost models (all buckets, landed, markup, TEAL sheet) with their customers. Encrypted vaults must be exported from the legacy app first.</p>
           <div className="flex flex-wrap gap-2">
             <Button onClick={() => void fromBrowser('cost')}>Read from this browser</Button>
             <Button onClick={() => costFile.current?.click()}>
@@ -315,7 +315,7 @@ function LegacyImportCard() {
         </div>
       )}
       {result && (
-        <div className="mt-2 space-y-1.5 rounded border border-line p-2 text-[12.5px]">
+        <div className="mt-2 space-y-1.5 rounded border border-line p-2 text-body">
           <div className="flex flex-wrap gap-1">
             {Object.entries(result.counts).map(([k, v]) => (
               <Badge key={k}>
@@ -345,7 +345,7 @@ function LegacyImportCard() {
           </Button>
         </div>
       )}
-      <p className="mt-2 text-[11.5px] text-ink-3">
+      <p className="mt-2 text-meta text-ink-3">
         The legacy apps themselves remain available under <Link className="text-accent-2" to="/legacy">Legacy apps</Link>.
       </p>
     </Card>
@@ -380,7 +380,7 @@ function LockCard() {
         A convenience screen lock for a shared computer. It is <strong>not</strong> secure authentication: the passphrase hash lives in this browser, anyone with access to the browser profile or developer tools can bypass it, and it protects nothing published on GitHub Pages. Never rely on it for confidential data — keep confidential data out of the public site.
       </Notice>
       <div className="mt-2 flex flex-wrap items-end gap-2">
-        <span className="text-[12.5px]">Status: {locked == null ? '…' : locked ? <Badge tone="warn">lock set</Badge> : <Badge>no lock</Badge>}</span>
+        <span className="text-body">Status: {locked == null ? '…' : locked ? <Badge tone="warn">lock set</Badge> : <Badge>no lock</Badge>}</span>
         <Field label={locked ? 'New passphrase' : 'Passphrase'} htmlFor="lk-a">
           <Input id="lk-a" type="password" autoComplete="new-password" value={a} onChange={(e) => setA(e.target.value)} />
         </Field>
@@ -396,7 +396,7 @@ function LockCard() {
           </Button>
         )}
       </div>
-      {msg && <p className="mt-1 text-[12px] text-ink-2">{msg}</p>}
+      {msg && <p className="mt-1 text-meta text-ink-2">{msg}</p>}
     </Card>
   );
 }

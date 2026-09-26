@@ -17,14 +17,14 @@ export default function OpportunityView({ record }: { record: Rec }) {
       <ol className="mb-3 flex flex-wrap gap-1" aria-label="Stage">
         {OPPORTUNITY_STAGES.map((s, i) => (
           <li key={s}>
-            <button type="button" onClick={() => setStage(s)} aria-current={s === o.stage ? 'step' : undefined} className={`rounded px-2 py-1 text-[11.5px] font-semibold ${s === o.stage ? 'bg-accent text-white' : i < idx ? 'bg-accent-soft text-accent-2' : 'bg-panel-2 text-ink-3'} ${s === 'Lost' ? 'ml-2' : ''}`}>
+            <button type="button" onClick={() => setStage(s)} aria-current={s === o.stage ? 'step' : undefined} className={`rounded px-2 py-1 text-meta font-semibold ${s === o.stage ? 'bg-accent text-white' : i < idx ? 'bg-accent-soft text-accent-2' : 'bg-panel-2 text-ink-3'} ${s === 'Lost' ? 'ml-2' : ''}`}>
               {s}
             </button>
           </li>
         ))}
       </ol>
       {o.inquiry_text && <blockquote className="mb-3 border-l-2 border-accent pl-3 text-ink-2">“{o.inquiry_text}”</blockquote>}
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {(
           [
             ['Requirements', 'requirement', '/requirements?new=1'],
@@ -38,7 +38,7 @@ export default function OpportunityView({ record }: { record: Rec }) {
           const l = linked(e);
           return (
             <div key={e} className="rounded border border-line p-2">
-              <div className="mb-1 flex items-center justify-between text-[11px] font-semibold uppercase text-ink-3">
+              <div className="mb-1 flex items-center justify-between text-micro font-semibold uppercase text-ink-3">
                 {label} <span className="num">{l.length}</span>
               </div>
               <ul className="space-y-0.5">
@@ -49,7 +49,7 @@ export default function OpportunityView({ record }: { record: Rec }) {
                 ))}
               </ul>
               {!l.length && (
-                <Link to={to} className="text-[12px] text-accent-2 hover:underline">
+                <Link to={to} className="text-meta text-accent-2 hover:underline">
                   + add
                 </Link>
               )}

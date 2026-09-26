@@ -29,7 +29,7 @@ export default function ReusePage() {
   }, [asked, lexicon, e, mode, records]);
   return (
     <div>
-      <PageHeader eyebrow="Modules" title="What can we reuse?" subtitle="Existing products, modules, POCs, BOMs, suppliers, configurations, lessons — classified Reusable / Potentially reusable / Requires validation / Similar / Not compatible." />
+      <PageHeader eyebrow="Modules" title="What Can We Reuse?" subtitle="Existing products, modules, POCs, BOMs, suppliers, configurations, lessons — classified Reusable / Potentially reusable / Requires validation / Similar / Not compatible." />
       <div className="mb-3 flex flex-wrap items-end gap-2">
         <Select aria-label="Mode" value={mode} onChange={(ev) => setMode(ev.target.value as 'record' | 'text')} className="w-44">
           <option value="text">Describe a need</option>
@@ -62,7 +62,7 @@ export default function ReusePage() {
       {!probe ? (
         <EmptyState title="Describe the need or pick a record" explain="Reuse is found by structured similarity (family, process, material, source, modules, industry) plus shared engineering terms." />
       ) : (
-        <div className="grid gap-3 xl:grid-cols-[1fr_380px]">
+        <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1fr_380px]">
           <Card title="Reusable assets">
             <SimilarPanel record={probe} mode="reuse" />
           </Card>
@@ -72,11 +72,11 @@ export default function ReusePage() {
                 {platforms.map((m) => (
                   <li key={m.product.id}>
                     <Badge tone="ok">Reusable platform</Badge> <RecordLink id={m.product.id} />
-                    <div className="text-[12px] text-ink-3">{m.why.map((w) => w.d).join('; ')}</div>
-                    <div className="text-[12px]">
+                    <div className="text-meta text-ink-3">{m.why.map((w) => w.d).join('; ')}</div>
+                    <div className="text-meta">
                       Standard content: {m.product.standard_content.length ? m.product.standard_content.map((k) => e?.modules.get(k)?.name ?? k).join(', ') : 'none'}
                     </div>
-                    <Link className="text-[12px] text-accent-2" to={`/configurator?product=${m.product.key}&app=${m.appKey}`}>
+                    <Link className="text-meta text-accent-2" to={`/configurator?product=${m.product.key}&app=${m.appKey}`}>
                       Configure →
                     </Link>
                   </li>

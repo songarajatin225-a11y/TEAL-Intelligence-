@@ -9,6 +9,8 @@ export function download(filename: string, data: string | Uint8Array, mime = 'ap
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  // confirmation toast (listened to by the shell; harmless when nothing listens)
+  window.dispatchEvent(new CustomEvent('teal:toast', { detail: { id: Date.now(), title: 'Exported', detail: filename, tone: 'success' } }));
 }
 
 const csvCell = (v: unknown): string => {

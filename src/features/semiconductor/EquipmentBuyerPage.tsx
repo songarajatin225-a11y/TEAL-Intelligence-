@@ -67,8 +67,8 @@ export default function EquipmentBuyerPage() {
   const c = costOfOwnership({ fixed: v('fixed'), recurring: v('recurring'), yield_loss: v('yield_loss'), throughput_per_h: v('throughput_per_h'), utilisation: v('utilisation'), yield: v('yield'), hours: v('hours') });
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Semiconductor" title="Semiconductor equipment buyer" subtitle="What a fab / OSAT buyer asks of equipment — process, throughput, accuracy, automation (SECS/GEM, GEM300, E84), MES, utilities, footprint, safety (SEMI S2), service, localization. Buy on cost of ownership, not purchase price." />
-      <Card title="Buyer’s criteria (Semiconductor Handbook Part XXXVI)" actions={<Link className="text-[12px] text-accent-2" to={`/knowledge/${FILE}?a=part-xxxvi-semiconductor-equipment-buyers-guide`}>Open section →</Link>}>
+      <PageHeader eyebrow="Semiconductor" title="Equipment Buyer" subtitle="What a fab / OSAT buyer asks of equipment — process, throughput, accuracy, automation (SECS/GEM, GEM300, E84), MES, utilities, footprint, safety (SEMI S2), service, localization. Buy on cost of ownership, not purchase price." />
+      <Card title="Buyer’s criteria (Semiconductor Handbook Part XXXVI)" actions={<Link className="text-meta text-accent-2" to={`/knowledge/${FILE}?a=part-xxxvi-semiconductor-equipment-buyers-guide`}>Open section →</Link>}>
         {err ? (
           <ErrorState what="The buyer’s guide section could not be loaded." todo="Open it from the Knowledge library." />
         ) : !crit ? (

@@ -18,7 +18,7 @@ export default function GateDefinitionView({ record }: { record: Rec }) {
           ['Customer-facing', d.customer_facing ? 'Yes — customer signature required' : 'No'],
         ]}
       />
-      <Link to="/knowledge/automation/83-design-review-gates-g0-g10.md" className="mt-2 inline-block text-[12px] text-accent-2 hover:underline">
+      <Link to="/knowledge/automation/83-design-review-gates-g0-g10.md" className="mt-2 inline-block text-meta text-accent-2 hover:underline">
         Read the handbook section →
       </Link>
     </Card>

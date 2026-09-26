@@ -34,6 +34,20 @@ CALCULATED, INFERRED, AI_GENERATED, USER_CREATED) and a verification status. Dem
 labelled DEMO; prices are ESTIMATE / DEMO unless quoted; unknown values show **UNKNOWN**; POC,
 DOE, FAT and SAT results are never pre-filled.
 
+## Using it
+
+* **Mission Control** (home) shows what needs attention, your work, business and engineering signals.
+* The sidebar groups ~60 pages into ten domains; a **workspace** (Engineering, Product Management,
+  Laser, Semiconductor, Supply Chain, Intelligence, Executive) changes emphasis, never data.
+* **⌘K / Ctrl K** command palette · **/** search · **N** create · **G then H/W/P/L/K** go · **F** focus mode · **?** shortcuts.
+* Click a row to inspect it in a drawer; records open with essentials first — related records,
+  intelligence, evidence, history and raw fields are one tab away.
+* Every record shows its **health** (Healthy · Attention · At Risk · Incomplete, with reasons) and a
+  **relationship bar**; lists switch between **table, cards and board** and keep **saved views**.
+* **Compare** up to four records side by side; **Ask Intelligence** answers questions from records
+  and handbooks with sources and a confidence — local retrieval, no AI model.
+* Light / dark / system theme, comfortable / compact / reading density, reduced effects — all saved in your browser.
+
 ## Run it
 
 ```bash

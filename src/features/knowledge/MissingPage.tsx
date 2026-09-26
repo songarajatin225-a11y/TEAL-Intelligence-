@@ -24,15 +24,15 @@ export default function MissingPage() {
   const [sel, setSel] = useState(summary[0]?.r.id ?? '');
   return (
     <div>
-      <PageHeader eyebrow="Digital thread" title="What is missing?" subtitle="Missing requirements, process data, POCs, modules, suppliers, technology, validation, certification, cost and documents — found by walking the thread." />
-      <div className="grid gap-3 xl:grid-cols-[380px_1fr]">
+      <PageHeader eyebrow="Digital thread" title="What Is Missing?" subtitle="Missing requirements, process data, POCs, modules, suppliers, technology, validation, certification, cost and documents — found by walking the thread." />
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[380px_1fr]">
         <Card title="Active work, most gaps first">
           {summary.length ? (
             <ul className="space-y-1">
               {summary.map((s) => (
                 <li key={s.r.id}>
                   <button type="button" onClick={() => setSel(s.r.id)} className={`w-full rounded px-1 py-0.5 text-left ${sel === s.r.id ? 'bg-accent-soft' : ''}`}>
-                    <Badge tone={s.missing ? 'bad' : 'ok'}>{s.missing} missing</Badge> <Badge tone="warn">{s.partial} partial</Badge> <span className="text-[11px] text-ink-3">{s.r.entity}</span>
+                    <Badge tone={s.missing ? 'bad' : 'ok'}>{s.missing} missing</Badge> <Badge tone="warn">{s.partial} partial</Badge> <span className="text-micro text-ink-3">{s.r.entity}</span>
                     <div>{s.r.name}</div>
                   </button>
                 </li>

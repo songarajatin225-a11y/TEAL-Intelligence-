@@ -1,11 +1,18 @@
 {
-  "name": "TEAL Engineering Intelligence OS",
-  "short_name": "TEAL OS",
-  "description": "GitHub-native engineering digital thread for TEAL.",
+  "name": "TEAL Intelligence",
+  "short_name": "TEAL Intelligence",
+  "description": "TEAL Engineering Intelligence \u2014 the connected engineering workspace.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f3f5f6",
-  "theme_color": "#00838a",
-  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+  "background_color": "#eef3f4",
+  "theme_color": "#007c83",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }

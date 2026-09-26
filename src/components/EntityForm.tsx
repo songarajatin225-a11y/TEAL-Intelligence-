@@ -100,7 +100,7 @@ export function EntityForm({ entity, record, onSaved, onCancel }: { entity: stri
     <form onSubmit={submit} className="space-y-3" noValidate>
       <Notice tone="draft">Saved as a LOCAL DRAFT in this browser. Permanent repository update requires a GitHub commit (Admin → Change package).</Notice>
       {errors.length > 0 && (
-        <div role="alert" className="rounded-md border border-bad/40 bg-bad/5 p-2 text-[12.5px] text-bad">
+        <div role="alert" className="rounded-md border border-bad/40 bg-bad/5 p-2 text-body text-bad">
           <div className="font-semibold">Not saved — fix these fields:</div>
           <ul className="list-disc pl-5">
             {errors.map((e, i) => (
@@ -168,7 +168,7 @@ export function EntityForm({ entity, record, onSaved, onCancel }: { entity: stri
           <Input id="f-tags" {...register('tags')} />
         </Field>
         <fieldset className="grid grid-cols-1 gap-3 rounded-md border border-line p-2 md:col-span-2 md:grid-cols-3">
-          <legend className="px-1 text-[11.5px] font-semibold text-ink-2">Next required action</legend>
+          <legend className="px-1 text-meta font-semibold text-ink-2">Next required action</legend>
           <div className="md:col-span-3">
             <Input aria-label="Next action" placeholder="What must happen next?" {...register('na_action')} />
           </div>

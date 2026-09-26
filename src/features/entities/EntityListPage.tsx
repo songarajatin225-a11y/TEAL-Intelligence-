@@ -1,13 +1,16 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import { Plus } from 'lucide-react';
+import { Bookmark, Download, KanbanSquare, LayoutGrid, Plus, Table2, Trash2 } from 'lucide-react';
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { setPrefs, usePrefs, type ListView } from '../../app/prefs';
 import { DataTypeBadge, OriginBadge, StatusBadge, VerificationBadge } from '../../components/badges';
 import { DataTable } from '../../components/DataTable';
 import { EntityForm } from '../../components/EntityForm';
 import { RecordLink, recordPath } from '../../components/RecordLink';
 import { NextActionLine } from '../../components/ThreadPanels';
-import { Button, Drawer, EmptyState, Notice, PageHeader } from '../../components/ui';
+import { EntityDrawer } from '../../components/EntityDrawer';
+import { toast } from '../../components/toast';
+import { Button, Drawer, EmptyState, Input, Notice, PageHeader, Popover, SegmentedControl } from '../../components/ui';
 import type { AnyRecord } from '../../domain';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData, type Rec } from '../../hooks/useData';
@@ -15,6 +18,7 @@ import { newLocalId, repo, ValidationFailure } from '../../repositories';
 import { fmtDate } from '../../utils/dates';
 import { download, parseCsv, readFileText, stamp, toCsv } from '../../utils/export';
 import { ENTITY_UI } from './entityUi';
+import { boardKey, matchesQuery, RecordBoard, RecordCards } from './ListViews';
 
 function cellValue(kind: string | undefined, v: unknown): ReactNode {
   if (v == null || v === '') return <span className="text-ink-3">—</span>;
@@ -24,7 +28,7 @@ function cellValue(kind: string | undefined, v: unknown): ReactNode {
   if (kind === 'list') return Array.isArray(v) ? (v as unknown[]).map(String).map((x) => x.replace(/^ind-/, '')).join(', ') : String(v);
   if (kind === 'num' || kind === 'money') {
     const n = typeof v === 'object' && v && 'value' in (v as object) ? (v as { value: number | null }).value : (v as number);
-    if (n == null) return <span className="font-mono text-[11px] text-ink-3">UNKNOWN</span>;
+    if (n == null) return <span className="font-mono text-micro text-ink-3">UNKNOWN</span>;
     return <span className="num">{kind === 'money' ? Number(n).toLocaleString('en-IN') : String(n)}</span>;
   }
   if (typeof v === 'object') return JSON.stringify(v).slice(0, 60);
@@ -44,7 +48,31 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const creating = params.get('new') === '1';
+  const [preview, setPreview] = useState<Rec | null>(null);
   const rows = useMemo(() => records.filter((r) => r.entity === entity && (!filter || filter(r))), [records, entity, filter]);
+  const prefs = usePrefs();
+  const board = boardKey(entity);
+  const view: ListView = ((v) => (v === 'board' && !board ? 'table' : v))(prefs.listView[entity] ?? 'table');
+  const setView = (v: ListView) => setPrefs((p) => ({ listView: { ...p.listView, [entity]: v } }));
+  const q = params.get('q') ?? '';
+  const setQ = (v: string) =>
+    setParams(
+      (p) => {
+        if (v) p.set('q', v);
+        else p.delete('q');
+        return p;
+      },
+      { replace: true },
+    );
+  const filtered = useMemo(() => (view === 'table' ? rows : rows.filter((r) => matchesQuery(r, q))), [rows, q, view]);
+  const saved = prefs.savedViews.filter((v) => v.entity === entity);
+  const [viewName, setViewName] = useState('');
+  const saveView = () => {
+    const name = viewName.trim() || (q ? `“${q}”` : `${view} view`);
+    setPrefs((p) => ({ savedViews: [...p.savedViews, { id: `${entity}:${Date.now()}`, name, entity, q, view }] }));
+    setViewName('');
+    toast('View saved', { detail: `${name} — in this browser` });
+  };
 
   const columns = useMemo<ColumnDef<Rec, unknown>[]>(() => {
     const cols: ColumnDef<Rec, unknown>[] = [
@@ -133,7 +161,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
             {extraActions}
             {!ui?.readOnly && (
               <Button variant="primary" onClick={() => (createTo ? nav(createTo) : setParams({ new: '1' }))}>
-                <Plus className="size-3.5" /> New {def.label.toLowerCase()}
+                <Plus className="size-4" aria-hidden /> New {def.label.toLowerCase()}
               </Button>
             )}
           </>
@@ -145,27 +173,127 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
         </div>
       )}
       {rows.length ? (
-        <DataTable
-          data={rows}
-          columns={columns}
-          onRowClick={(r) => nav(`/record/${encodeURIComponent(r.id)}`)}
-          filterPlaceholder={`Filter ${def.plural.toLowerCase()}…`}
-          toolbar={
-            <>
-              <Button size="sm" onClick={() => exportRows('csv')}>
-                Export CSV
-              </Button>
-              <Button size="sm" onClick={() => exportRows('json')}>
-                Export JSON
-              </Button>
-              {!ui?.readOnly && (
-                <Button size="sm" onClick={() => fileRef.current?.click()}>
-                  Import
+        <>
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <SegmentedControl<ListView>
+              label="View"
+              size="sm"
+              value={view}
+              onChange={setView}
+              options={[
+                { value: 'table', label: 'Table', icon: Table2 },
+                { value: 'cards', label: 'Cards', icon: LayoutGrid },
+                ...(board ? [{ value: 'board' as const, label: 'Board', icon: KanbanSquare }] : []),
+              ]}
+            />
+            {view !== 'table' && (
+              <div className="w-full sm:w-64">
+                <Input aria-label={`Filter ${def.plural.toLowerCase()}`} placeholder={`Filter ${def.plural.toLowerCase()}…`} value={q} onChange={(e) => setQ(e.target.value)} className="h-8 py-1" />
+              </div>
+            )}
+            <Popover
+              label="Saved views"
+              width="w-72"
+              align="start"
+              trigger={({ toggle, open, id }) => (
+                <Button size="sm" variant="ghost" onClick={toggle} aria-expanded={open} aria-controls={id}>
+                  <Bookmark className="size-3.5" aria-hidden /> Views{saved.length ? ` (${saved.length})` : ''}
                 </Button>
               )}
-            </>
-          }
+            >
+              {(close) => (
+                <div className="space-y-2">
+                  {saved.length ? (
+                    <ul>
+                      {saved.map((v) => (
+                        <li key={v.id} className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            className="min-w-0 flex-1 truncate rounded-lg px-2.5 py-1.5 text-left hover:bg-ink/5"
+                            onClick={() => {
+                              setView(v.view);
+                              setQ(v.q);
+                              close();
+                            }}
+                          >
+                            {v.name} <span className="text-micro text-ink-3">· {v.view}</span>
+                          </button>
+                          <button type="button" aria-label={`Delete view ${v.name}`} className="rounded-lg p-1.5 text-ink-3 hover:bg-bad/10 hover:text-bad" onClick={() => setPrefs((p) => ({ savedViews: p.savedViews.filter((x) => x.id !== v.id) }))}>
+                            <Trash2 className="size-3.5" aria-hidden />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="px-1 text-meta text-ink-3">No saved views yet. Save the current layout and filter to come back to it.</p>
+                  )}
+                  <form
+                    className="flex gap-1.5 border-t border-line pt-2"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      saveView();
+                      close();
+                    }}
+                  >
+                    <Input aria-label="View name" placeholder="Name this view" value={viewName} onChange={(e) => setViewName(e.target.value)} className="h-8 flex-1 py-1" />
+                    <Button size="sm" type="submit">
+                      Save
+                    </Button>
+                  </form>
+                </div>
+              )}
+            </Popover>
+          </div>
+          {view === 'cards' ? (
+            <RecordCards entity={entity} rows={filtered} onOpen={setPreview} />
+          ) : view === 'board' ? (
+            <RecordBoard entity={entity} rows={filtered} onOpen={setPreview} readOnly={ui?.readOnly} />
+          ) : (
+            <DataTable
+              tableKey={entity}
+              filter={q}
+              onFilterChange={setQ}
+              data={rows}
+              columns={columns}
+              onRowClick={(r) => setPreview(r)}
+              filterPlaceholder={`Filter ${def.plural.toLowerCase()}…`}
+              toolbar={
+                <Popover
+                  label="Export and import"
+                  width="w-56"
+                  trigger={({ toggle, open, id }) => (
+                    <Button size="sm" onClick={toggle} aria-expanded={open} aria-controls={id}>
+                      <Download className="size-3.5" aria-hidden /> Export
+                    </Button>
+                  )}
+                >
+                  {(close) => (
+                    <ul>
+                      {[
+                        ['Export CSV', () => exportRows('csv')],
+                        ['Export JSON', () => exportRows('json')],
+                        ...(!ui?.readOnly ? ([['Import JSON / CSV…', () => fileRef.current?.click()]] as const) : []),
+                      ].map(([label, f]) => (
+                        <li key={label as string}>
+                          <button
+                            type="button"
+                            className="w-full rounded-lg px-2.5 py-1.5 text-left hover:bg-ink/5"
+                            onClick={() => {
+                              close();
+                              (f as () => void)();
+                            }}
+                          >
+                            {label as string}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </Popover>
+              }
         />
+          )}
+        </>
       ) : (
         <EmptyState
           title={`No ${def.plural.toLowerCase()} yet`}
@@ -185,6 +313,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
         />
       )}
       <input ref={fileRef} type="file" accept=".json,.csv" className="hidden" aria-label="Import file" onChange={(e) => e.target.files?.[0] && void importFile(e.target.files[0])} />
+      <EntityDrawer record={preview} onClose={() => setPreview(null)} />
       <Drawer open={creating} onClose={() => setParams({})} title={`New ${def.label.toLowerCase()}`} wide>
         <EntityForm entity={entity} onCancel={() => setParams({})} onSaved={(r: AnyRecord) => nav(`/record/${encodeURIComponent(r.id)}`)} />
       </Drawer>

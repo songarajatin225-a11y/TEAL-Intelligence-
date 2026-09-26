@@ -15,7 +15,7 @@ export default function ProductsPage() {
     <div>
       <PageHeader
         eyebrow="Products"
-        title="TEAL product portfolio"
+        title="Products & Platforms"
         subtitle="Family → platform → variant → customer configuration. Specifications from the TEAL Laser Automation Solutions catalogue (2026) via the legacy configurator; base prices are parametric ESTIMATES."
         actions={
           <>
@@ -30,9 +30,9 @@ export default function ProductsPage() {
       />
       <div className="space-y-3">
         {fams.map((f) => (
-          <Card key={f.id} title={`${f.name} — ${f.segment}`} actions={<span className="text-[11px] text-ink-3">Catalogue ch. {f.chapter}</span>}>
+          <Card key={f.id} title={`${f.name} — ${f.segment}`} actions={<span className="text-micro text-ink-3">Catalogue ch. {f.chapter}</span>}>
             <p className="mb-2 text-ink-2">{f.description}</p>
-            <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
               {prods
                 .filter((p) => p.family_id === f.id)
                 .map((p) => (
@@ -41,8 +41,8 @@ export default function ProductsPage() {
                       <span className="font-semibold">{p.name}</span>
                       <StatusBadge s={p.maturity} />
                     </div>
-                    <div className="text-[12px] text-ink-2">{p.title}</div>
-                    <div className="mt-1 text-[11px] text-ink-3">
+                    <div className="text-meta text-ink-2">{p.title}</div>
+                    <div className="mt-1 text-micro text-ink-3">
                       {p.delivery} · {p.source_keys.join('/')} · {p.applications.length} applications · from {inr(p.base_price_inr)} est. · {configs.filter((c) => (c as { product_id?: string }).product_id === p.id).length} configurations
                     </div>
                   </Link>

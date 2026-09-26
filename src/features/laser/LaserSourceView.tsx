@@ -26,7 +26,7 @@ export default function LaserSourceView({ record }: { record: Rec }) {
   const suppliers = companies.filter((c) => ((c as { technologies?: string[] }).technologies ?? []).some((t) => (catWords.includes('co2') && /co₂|co2/i.test(t)) || (catWords.includes('ultrafast') && /ultrafast/i.test(t)) || ((catWords.includes('uv') || catWords.includes('green')) && /dpss uv and green/i.test(t)) || (catWords.includes('q-switched') || catWords.includes('mopa') ? /pulsed fiber/i.test(t) : false) || (catWords.includes('fiber cw') && /cw fiber/i.test(t))));
   return (
     <Card title="Laser source">
-      <div className="grid gap-3 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <KV
           items={[
             ['Kind', s.kind === 'class' ? 'Source class (no manufacturer)' : 'Manufacturer product'],
@@ -42,7 +42,7 @@ export default function LaserSourceView({ record }: { record: Rec }) {
           ]}
         />
         <div className="space-y-2">
-          <div className="text-[11px] font-semibold uppercase text-ink-3">Quick optics</div>
+          <div className="text-micro font-semibold uppercase text-ink-3">Quick optics</div>
           <div className="grid grid-cols-3 gap-2">
             <Field label="Objective" htmlFor="ls-o">
               <Select id="ls-o" value={opt} onChange={(e) => setOpt(e.target.value)}>
@@ -92,8 +92,8 @@ export default function LaserSourceView({ record }: { record: Rec }) {
               </tr>
             )}
           </Table>
-          <div className="text-[11px] font-semibold uppercase text-ink-3">Representative suppliers (Laser Handbook §21.3)</div>
-          <div className="text-[12.5px]">{suppliers.length ? suppliers.map((c) => <RecordLink key={c.id} id={c.id} />).reduce<React.ReactNode[]>((a, x, i) => (i ? [...a, ', ', x] : [x]), []) : <Unknown label="none matched" />}</div>
+          <div className="text-micro font-semibold uppercase text-ink-3">Representative suppliers (Laser Handbook §21.3)</div>
+          <div className="text-body">{suppliers.length ? suppliers.map((c) => <RecordLink key={c.id} id={c.id} />).reduce<React.ReactNode[]>((a, x, i) => (i ? [...a, ', ', x] : [x]), []) : <Unknown label="none matched" />}</div>
         </div>
       </div>
     </Card>

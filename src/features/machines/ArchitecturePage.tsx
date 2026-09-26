@@ -138,7 +138,7 @@ export default function ArchitecturePage() {
   if (!configs.length) return <EmptyState title="No configurations" explain="Create a configuration in Configurator 2.0 first; the architecture is derived from it." />;
   return (
     <div>
-      <PageHeader eyebrow="Machines" title="Machine architecture builder" subtitle="Input → handling → positioning → process → inspection → output, with controls, safety, utilities and data layers. Derived from the configuration; drag nodes, add nodes and typed connections." />
+      <PageHeader eyebrow="Machines" title="Architecture" subtitle="Input → handling → positioning → process → inspection → output, with controls, safety, utilities and data layers. Derived from the configuration; drag nodes, add nodes and typed connections." />
       <Notice tone="draft">Canvas layout is saved in this browser only (workspace preferences). It is an architecture sketch, not a released design.</Notice>
       <div className="my-2 flex flex-wrap items-center gap-2">
         <Select aria-label="Configuration" value={cfgId} onChange={(ev) => setParams({ cfg: ev.target.value })} className="w-96">
@@ -233,7 +233,7 @@ export default function ArchitecturePage() {
             </g>
           ))}
         </svg>
-        <div className="mt-1 flex flex-wrap gap-2 text-[11.5px]">
+        <div className="mt-1 flex flex-wrap gap-2 text-meta">
           {Object.entries(CONN).map(([k, c]) => (
             <span key={k} className="inline-flex items-center gap-1">
               <span className="inline-block h-0.5 w-5" style={{ background: c }} /> {k}

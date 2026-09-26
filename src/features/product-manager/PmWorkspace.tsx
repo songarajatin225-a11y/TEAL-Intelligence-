@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { StatusBadge } from '../../components/badges';
 import { RecordLink } from '../../components/RecordLink';
 import { NextActionLine } from '../../components/ThreadPanels';
@@ -33,7 +33,7 @@ function ActivityRow({ a }: { a: Activity & Rec }) {
           <StatusBadge s={a.priority} />
           <StatusBadge s={a.status} />
         </div>
-        <div className="text-[12px] text-ink-3">
+        <div className="text-meta text-ink-3">
           {a.due_date && <span className={a.due_date < todayIso() && !done ? 'text-bad' : ''}>due {fmtDate(a.due_date)} ({relativeDay(a.due_date)})</span>}
           {a.customer_id && (
             <>
@@ -96,7 +96,7 @@ function QuickAdd() {
       <Button type="submit" variant="primary">
         Add
       </Button>
-      {msg && <span className="text-[12px] text-ink-3">{msg}</span>}
+      {msg && <span className="text-meta text-ink-3">{msg}</span>}
     </form>
   );
 }
@@ -104,7 +104,9 @@ function QuickAdd() {
 /** PRODUCT MANAGER COMMAND CENTER (spec §10, §67, §112) — the tracker, on the shared entity model. */
 export default function PmWorkspace() {
   const { records } = useData();
-  const [tab, setTab] = useState<Tab>('today');
+  const [params] = useSearchParams();
+  const initial = params.get('tab') as Tab | null;
+  const [tab, setTab] = useState<Tab>(initial && ['today', 'week', 'overdue', 'followups', 'meetings', 'next'].includes(initial) ? initial : 'today');
   const today = todayIso();
   const weekEnd = addDays(today, 7);
   const acts = useMemo(() => records.filter((r) => r.entity === 'activity') as (Activity & Rec)[], [records]);
@@ -128,11 +130,11 @@ export default function PmWorkspace() {
 
   return (
     <div>
-      <PageHeader eyebrow="Product Manager" title="Product Manager workspace" subtitle="Daily activities, follow-ups, meetings and next actions — linked to the same customers, opportunities, products and projects as the rest of the OS." />
+      <PageHeader eyebrow="Product Manager" title="My Workspace" subtitle="Daily activities, follow-ups, meetings and next actions — linked to the same customers, opportunities, products and projects as the rest of the OS." />
       <Card className="mb-3">
         <QuickAdd />
       </Card>
-      <div className="grid gap-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <Tabs
             label="Workspace views"
@@ -152,7 +154,7 @@ export default function PmWorkspace() {
               {na.map((x) => (
                 <li key={x.record.id} className="border-b border-line/60 py-1.5">
                   <RecordLink id={x.record.id} showEntity />
-                  <div className="pl-1 text-[12.5px]">
+                  <div className="pl-1 text-body">
                     <NextActionLine record={x.record} />
                   </div>
                 </li>
@@ -170,7 +172,7 @@ export default function PmWorkspace() {
         </div>
         <div className="space-y-3">
           <Card title="Portfolio">
-            <div className="grid grid-cols-1 gap-1 text-[12.5px]">
+            <div className="grid grid-cols-1 gap-1 text-body">
               {section('Customers', '/customers', count('customer'))}
               {section('Opportunities (active)', '/opportunities', count('opportunity', isActive))}
               {section('POCs / samples (active)', '/poc', count('poc', isActive))}

@@ -25,7 +25,7 @@ export default function ProductionReleasePage() {
   const cap = capability(vals, { lsl: lsl === '' ? null : Number(lsl), usl: usl === '' ? null : Number(usl) });
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Validation" title="Production release (G10)" subtitle="Ownership transfers only when ramp targets are sustained, capability is confirmed on production lots, training is complete and spares are on site." />
+      <PageHeader eyebrow="Validation" title="Production Release" subtitle="Ownership transfers only when ramp targets are sustained, capability is confirmed on production lots, training is complete and spares are on site." />
       <Select aria-label="Project" value={pid} onChange={(e) => setPid(e.target.value)} className="max-w-md">
         {projects.map((x) => (
           <option key={x.id} value={x.id}>
@@ -34,7 +34,7 @@ export default function ProductionReleasePage() {
         ))}
       </Select>
       {p && (
-        <div className="grid gap-3 xl:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
           <Card title="Status">
             <ul className="space-y-1">
               <li>
@@ -44,7 +44,7 @@ export default function ProductionReleasePage() {
                 SAT protocol: {sat[0] ? <RecordLink id={sat[0].id} /> : <Badge tone="warn">none</Badge>} {satSum && `— ${satSum.pass} pass, ${satSum.fail} fail, ${satSum.notRun} not run`}
               </li>
             </ul>
-            <div className="mt-2 text-[11px] font-semibold uppercase text-ink-3">G10 checklist (Automation Handbook §57.14)</div>
+            <div className="mt-2 text-micro font-semibold uppercase text-ink-3">G10 checklist (Automation Handbook §57.14)</div>
             {ck ? (
               <ul className="list-disc pl-5">
                 {ck.production_release.items.map((i) => (
@@ -54,7 +54,7 @@ export default function ProductionReleasePage() {
             ) : (
               <Loading />
             )}
-            <Link to={`/record/${p.id}`} className="mt-2 inline-block text-[12px] text-accent-2">
+            <Link to={`/record/${p.id}`} className="mt-2 inline-block text-meta text-accent-2">
               Record the G10 decision in the project →
             </Link>
           </Card>
@@ -69,7 +69,7 @@ export default function ProductionReleasePage() {
               </Field>
             </div>
             <Textarea aria-label="Measured values" placeholder="values separated by spaces, commas or new lines" value={data} onChange={(e) => setData(e.target.value)} className="mt-2" />
-            <div className="mt-2 text-[12.5px]">
+            <div className="mt-2 text-body">
               {cap.message}
               {cap.status === 'CALCULATED' && (
                 <div className="num">

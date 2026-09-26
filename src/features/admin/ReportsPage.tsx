@@ -52,7 +52,7 @@ export default function ReportsPage() {
       {tab === 'cost' && <Cost />}
       {tab === 'trace' && <Trace />}
       {tab === 'export' && <DatasetExport />}
-      <p className="text-[11px] text-ink-3">Generated {new Date().toLocaleString()} by TEAL Engineering Intelligence OS · static GitHub Pages build · local drafts are included and marked.</p>
+      <p className="text-micro text-ink-3">Generated {new Date().toLocaleString()} by TEAL Engineering Intelligence OS · static GitHub Pages build · local drafts are included and marked.</p>
     </div>
   );
 }
@@ -134,7 +134,7 @@ function Projects() {
           ))}
         </Table>
       </div>
-      <p className="mt-1 text-[11px] text-ink-3">✔ GO · ◐ conditional GO · ✖ HOLD / NO-GO / recycle · · not started</p>
+      <p className="mt-1 text-micro text-ink-3">✔ GO · ◐ conditional GO · ✖ HOLD / NO-GO / recycle · · not started</p>
     </Card>
   );
 }
@@ -162,7 +162,7 @@ function Cost() {
           </tr>
         ))}
       </Table>
-      <p className="mt-1 text-[11px] text-ink-3">Costs use the rates, FX and markups recorded in each model. Template and DEMO models are not quotations.</p>
+      <p className="mt-1 text-micro text-ink-3">Costs use the rates, FX and markups recorded in each model. Template and DEMO models are not quotations.</p>
     </Card>
   );
 }
@@ -227,7 +227,7 @@ function DatasetExport() {
           <Download className="size-3.5" /> CSV ({rows.length})
         </Button>
       </div>
-      <p className="mt-2 text-[12px] text-ink-3">CSV cells that start with =, +, - or @ are escaped against spreadsheet formula injection. Nested fields are JSON-encoded.</p>
+      <p className="mt-2 text-meta text-ink-3">CSV cells that start with =, +, - or @ are escaped against spreadsheet formula injection. Nested fields are JSON-encoded.</p>
     </Card>
   );
 }

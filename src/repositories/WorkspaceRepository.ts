@@ -68,7 +68,7 @@ export class WorkspaceRepository {
       await db.drafts.put(row);
       await db.changelog.add({ record_id: record.id, entity: record.entity, action: existing || isMaster ? 'update' : 'create', at: nowIso(), summary: summary ?? String(record.name) });
     });
-    workspaceBus.emit();
+    workspaceBus.emit({ action: existing || isMaster ? 'update' : 'create', summary: summary ?? String(record.name) });
     return record;
   }
 
@@ -92,7 +92,7 @@ export class WorkspaceRepository {
         await db.changelog.add({ record_id: r.id, entity: r.entity, action: existing || master.has(r.id) ? 'update' : 'create', at: nowIso(), summary: `${summary}: ${r.name}` });
       }
     });
-    workspaceBus.emit();
+    workspaceBus.emit({ action: 'batch', summary: `${summary} (${records.length})` });
     return records;
   }
 
@@ -107,7 +107,7 @@ export class WorkspaceRepository {
       }
       await db.changelog.add({ record_id: id, entity, action: 'delete', at: nowIso(), summary: name });
     });
-    workspaceBus.emit();
+    workspaceBus.emit({ action: 'delete', summary: name });
   }
 
   /** Discard a local draft/tombstone and fall back to master data (if any). */
@@ -119,6 +119,6 @@ export class WorkspaceRepository {
       await db.drafts.delete(id);
       await db.changelog.add({ record_id: id, entity: row.entity, action: 'restore', at: nowIso(), summary: `Discarded local draft of ${String(row.record.name ?? id)}` });
     });
-    workspaceBus.emit();
+    workspaceBus.emit({ action: 'restore', summary: String(row.record.name ?? id) });
   }
 }

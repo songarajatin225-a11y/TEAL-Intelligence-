@@ -13,7 +13,7 @@ export default function GatesPage() {
   const projects = useRecords<Project>('project');
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Governance" title="Design review gates G0–G10" subtitle="“A gate is a decision, not a meeting: the project proceeds only when the exit criteria are met, or when named risks are consciously accepted by the approvers with an owner and date.” — Automation Equipment Building Handbook. A gate cannot pass with mandatory evidence missing." />
+      <PageHeader eyebrow="Governance" title="Design Gates G0–G10" subtitle="“A gate is a decision, not a meeting: the project proceeds only when the exit criteria are met, or when named risks are consciously accepted by the approvers with an owner and date.” — Automation Equipment Building Handbook. A gate cannot pass with mandatory evidence missing." />
       <Card title="Portfolio gate health">
         {projects.length ? (
           <Table head={['Project', ...defs.map((d) => d.code)]} dense>

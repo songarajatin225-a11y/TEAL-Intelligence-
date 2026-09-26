@@ -53,16 +53,16 @@ export default function Dashboards() {
             <Stat label="Open risks" value={d.risks.filter((r) => r.risk_status === 'Open').length} to="/quality" />
             <Stat label="Localization items" value={count('localization')} to="/localization" />
           </div>
-          <div className="grid gap-3 xl:grid-cols-3">
-            <Card title="Opportunity pipeline">
+          <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
+            <Card title="Opportunities">
               <div className="h-56">
                 <ResponsiveContainer>
                   <BarChart data={d.pipeline}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--c-line)" />
-                    <XAxis dataKey="stage" tick={{ fontSize: 10 }} interval={0} angle={-30} textAnchor="end" height={50} />
-                    <YAxis allowDecimals={false} tick={{ fontSize: 10 }} width={24} />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="var(--c-accent)" />
+                    <CartesianGrid vertical={false} stroke="var(--c-line)" />
+                    <XAxis dataKey="stage" tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} interval={0} angle={-30} textAnchor="end" height={50} />
+                    <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} width={24} />
+                    <Tooltip cursor={{ fill: 'var(--c-accent-soft)' }} contentStyle={{ background: 'var(--glass-bg-strong)', border: '1px solid var(--glass-border)', borderRadius: 12, boxShadow: 'var(--glass-shadow)', color: 'var(--c-ink)', fontSize: 12 }} />
+                    <Bar dataKey="count" fill="var(--c-accent)" radius={[6, 6, 0, 0]} maxBarSize={36} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -71,11 +71,11 @@ export default function Dashboards() {
               <div className="h-56">
                 <ResponsiveContainer>
                   <BarChart data={d.gateRows}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--c-line)" />
-                    <XAxis dataKey="gate" tick={{ fontSize: 10 }} />
-                    <YAxis allowDecimals={false} tick={{ fontSize: 10 }} width={24} />
-                    <Tooltip />
-                    <Bar dataKey="passed" fill="var(--c-ok)" />
+                    <CartesianGrid vertical={false} stroke="var(--c-line)" />
+                    <XAxis dataKey="gate" tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} />
+                    <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} width={24} />
+                    <Tooltip cursor={{ fill: 'var(--c-accent-soft)' }} contentStyle={{ background: 'var(--glass-bg-strong)', border: '1px solid var(--glass-border)', borderRadius: 12, boxShadow: 'var(--glass-shadow)', color: 'var(--c-ink)', fontSize: 12 }} />
+                    <Bar dataKey="passed" fill="var(--c-ok)" radius={[6, 6, 0, 0]} maxBarSize={36} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -84,11 +84,11 @@ export default function Dashboards() {
               <div className="h-56">
                 <ResponsiveContainer>
                   <BarChart data={d.margins}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--c-line)" />
-                    <XAxis dataKey="name" tick={{ fontSize: 9 }} interval={0} angle={-30} textAnchor="end" height={60} />
-                    <YAxis tick={{ fontSize: 10 }} width={28} />
-                    <Tooltip />
-                    <Bar dataKey="margin" fill="var(--c-info)" />
+                    <CartesianGrid vertical={false} stroke="var(--c-line)" />
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} interval={0} angle={-30} textAnchor="end" height={60} />
+                    <YAxis tick={{ fontSize: 11, fill: 'var(--c-ink-3)' }} axisLine={false} tickLine={false} width={28} />
+                    <Tooltip cursor={{ fill: 'var(--c-accent-soft)' }} contentStyle={{ background: 'var(--glass-bg-strong)', border: '1px solid var(--glass-border)', borderRadius: 12, boxShadow: 'var(--glass-shadow)', color: 'var(--c-ink)', fontSize: 12 }} />
+                    <Bar dataKey="margin" fill="var(--c-info)" radius={[6, 6, 0, 0]} maxBarSize={36} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

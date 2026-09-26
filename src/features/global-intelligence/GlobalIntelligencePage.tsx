@@ -20,6 +20,7 @@ export default function GlobalIntelligencePage() {
   const products = records.filter((r) => r.entity === 'laser_source' && (r as { kind?: string }).kind === 'product');
   return (
     <div className="space-y-3">
+      <PageHeader title="Global Intelligence" subtitle="Companies, products, specifications, applications, sources, evidence, verification — curated from permitted public sources through a reviewed GitHub pipeline. No live scraping from the browser." />
       <Tabs
         label="Global intelligence"
         value={tab}
@@ -34,7 +35,6 @@ export default function GlobalIntelligencePage() {
       />
       {tab === 'overview' && (
         <>
-          <PageHeader eyebrow="Global intelligence" title="Global engineering intelligence" subtitle="Companies, products, specifications, applications, sources, evidence, verification — curated from permitted public sources through a reviewed GitHub pipeline. No live scraping from the browser." />
           <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
             <Stat label="Public / external records" value={ext.length} />
             <Stat label="Companies" value={companies.length} sub="handbook-named, with evidence" />
@@ -54,12 +54,12 @@ export default function GlobalIntelligencePage() {
                 Search
               </Button>
             </form>
-            <p className="mt-2 text-[12.5px] text-ink-2">
+            <p className="mt-2 text-body text-ink-2">
               Returns TEAL source classes, platforms, applications, handbook sections and handbook-named suppliers with evidence. Then use <Link className="text-accent-2" to="/memory">Find similar</Link>, <Link className="text-accent-2" to="/reuse">What can we reuse?</Link> and <Link className="text-accent-2" to="/missing">What is missing?</Link>. Honest gap: no verified manufacturer datasheet records exist yet — they must be ingested.
             </p>
           </Card>
           <Card title="Controlled ingestion pipeline (spec §22, §101)">
-            <ol className="flex flex-wrap items-center gap-1 text-[12px]">
+            <ol className="flex flex-wrap items-center gap-1 text-meta">
               {PIPELINE.map((s, i) => (
                 <li key={s} className="flex items-center gap-1">
                   <Badge tone={i === 6 || i === 7 ? 'warn' : 'accent'}>{s}</Badge>
@@ -67,11 +67,11 @@ export default function GlobalIntelligencePage() {
                 </li>
               ))}
             </ol>
-            <p className="mt-2 text-[12.5px] text-ink-2">Scripts: scripts/ingestion/discoverSources, fetchSource, parseProduct, normalizeCompany, normalizeProduct, deduplicate, generateEvidence, validateDataset, generateSearchIndex, generateCatalog. They respect robots.txt, terms of service, copyright, rate limits and authentication boundaries, and never bypass paywalls or CAPTCHA (docs/INGESTION.md).</p>
+            <p className="mt-2 text-body text-ink-2">Scripts: scripts/ingestion/discoverSources, fetchSource, parseProduct, normalizeCompany, normalizeProduct, deduplicate, generateEvidence, validateDataset, generateSearchIndex, generateCatalog. They respect robots.txt, terms of service, copyright, rate limits and authentication boundaries, and never bypass paywalls or CAPTCHA (docs/INGESTION.md).</p>
           </Card>
         </>
       )}
-      {tab === 'companies' && <EntityListPage entity="company" title="Global company database" />}
+      {tab === 'companies' && <EntityListPage embedded entity="company" title="Global company database" />}
       {(tab === 'research' || tab === 'patents' || tab === 'market') && (
         <EmptyState
           title={`No ${tab} records curated`}

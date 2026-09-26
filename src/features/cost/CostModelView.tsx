@@ -116,15 +116,15 @@ export default function CostModelView({ record }: { record: Rec }) {
             <div className="mb-2 flex flex-wrap gap-1">
               {COST_MODULE_KEYS.map((k) => (
                 <Button key={k} size="sm" variant={mod === k ? 'primary' : 'default'} onClick={() => setMod(k)}>
-                  {COST_MODULE_META[k].label} <span className="num ml-1 text-[11px] opacity-80">{lakh(c.buckets[k])}</span>
+                  {COST_MODULE_META[k].label} <span className="num ml-1 text-micro opacity-80">{lakh(c.buckets[k])}</span>
                 </Button>
               ))}
             </div>
-            <p className="mb-1 text-[12px] text-ink-3">Line formula: {COST_MODULE_META[mod].formula}</p>
+            <p className="mb-1 text-meta text-ink-3">Line formula: {COST_MODULE_META[mod].formula}</p>
             <div className="overflow-x-auto">
-              <table className="w-full text-[12.5px]">
+              <table className="w-full text-body">
                 <thead>
-                  <tr className="text-left text-[11px] uppercase text-ink-3">
+                  <tr className="text-left text-micro uppercase text-ink-3">
                     {COST_COLS[mod].map((col) => (
                       <th key={col.k} className="px-1 py-1">
                         {col.l}
@@ -165,7 +165,7 @@ export default function CostModelView({ record }: { record: Rec }) {
               <Plus className="size-3.5" /> Add line
             </Button>
             {mod === 'material' && (
-              <p className="mt-2 text-[12px] text-ink-3">
+              <p className="mt-2 text-meta text-ink-3">
                 Material bucket = basic {inr(c.basic)} + freight {inr(c.freight)} + duty {inr(c.duty)} + landing {inr(c.landing)} = {inr(c.buckets.material)}. GST {inr(c.gst)} recorded for cash-flow only and excluded from cost (legacy rule).
               </p>
             )}
@@ -205,7 +205,7 @@ export default function CostModelView({ record }: { record: Rec }) {
               <div className="flex flex-wrap items-center gap-2">
                 <Input id="ptw" type="number" className="w-48" value={target} onChange={(e) => setTarget(e.target.value)} />
                 {ptw && (
-                  <span className="text-[12.5px]">
+                  <span className="text-body">
                     implied mark-up <b className="num">{ptw.markupPct.toFixed(1)}%</b> · margin <b className="num">{ptw.marginPct.toFixed(1)}%</b> · gap to current price <b className="num">{inr(ptw.gap)}</b> {ptw.marginPct < floor.minMargin && <Badge tone="bad">below approval floor</Badge>}
                   </span>
                 )}
@@ -266,7 +266,7 @@ export default function CostModelView({ record }: { record: Rec }) {
                     <td className="num">{p.value == null ? <Unknown /> : `${p.value.toFixed(2)} y`}</td>
                     <td className="num">{bomLead == null ? <Unknown /> : `${bomLead} wk`}</td>
                     <td className="num">{bomRisk ?? <Unknown />}</td>
-                    <td className="text-[11.5px] text-ink-3">{s.note}</td>
+                    <td className="text-meta text-ink-3">{s.note}</td>
                   </tr>
                 );
               })}
@@ -274,7 +274,7 @@ export default function CostModelView({ record }: { record: Rec }) {
           </div>
         )}
         {tab === 'economics' && (
-          <div className="grid gap-3 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
             <div className="space-y-2">
               <p className="text-ink-2">Customer economics — enter the customer’s figures. Nothing is assumed.</p>
               {(
@@ -302,9 +302,9 @@ export default function CostModelView({ record }: { record: Rec }) {
           </div>
         )}
         {tab === 'params' && (
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             <fieldset className="space-y-1 rounded border border-line p-2">
-              <legend className="px-1 text-[11.5px] font-semibold">Landed % (on material)</legend>
+              <legend className="px-1 text-meta font-semibold">Landed % (on material)</legend>
               {(['freightPct', 'dutyPct', 'landingPct', 'gstPct', 'siteContPct'] as const).map((k) => (
                 <Field key={k} label={k} htmlFor={`l-${k}`}>
                   <Input id={`l-${k}`} type="number" step="any" value={m.landed[k]} onChange={(e) => update({ ...m, landed: { ...m.landed, [k]: Number(e.target.value) } })} />
@@ -312,7 +312,7 @@ export default function CostModelView({ record }: { record: Rec }) {
               ))}
             </fieldset>
             <fieldset className="space-y-1 rounded border border-line p-2">
-              <legend className="px-1 text-[11.5px] font-semibold">Mark-up %</legend>
+              <legend className="px-1 text-meta font-semibold">Mark-up %</legend>
               {(['overheadPct', 'contingencyPct', 'profitPct'] as const).map((k) => (
                 <Field key={k} label={k} htmlFor={`m-${k}`}>
                   <Input id={`m-${k}`} type="number" step="any" value={m.markup[k]} onChange={(e) => update({ ...m, markup: { ...m.markup, [k]: Number(e.target.value) } })} />
@@ -323,7 +323,7 @@ export default function CostModelView({ record }: { record: Rec }) {
               </Field>
             </fieldset>
             <fieldset className="space-y-1 rounded border border-line p-2">
-              <legend className="px-1 text-[11.5px] font-semibold">TEAL sheet</legend>
+              <legend className="px-1 text-meta font-semibold">TEAL sheet</legend>
               {(['insurancePct', 'sgaPct', 'warrantyPct', 'profitPct', 'ossMonthly', 'stationHc', 'ossMonths'] as const).map((k) => (
                 <Field key={k} label={k} htmlFor={`t-${k}`}>
                   <Input id={`t-${k}`} type="number" step="any" value={t.T[k]} onChange={(e) => update({ ...m, teal: { ...t.T, [k]: Number(e.target.value) } })} />
@@ -365,7 +365,7 @@ function LandedTab({ m, fx }: { m: CostModel; fx: ReturnType<typeof useFx> }) {
                 </td>
                 <td className="num">{rate?.rate_to_inr ?? <Unknown />}</td>
                 <td>{rate?.as_of ?? <Unknown label="UNDATED" />}</td>
-                <td className="text-[11.5px] text-ink-3">{rate?.source ?? '—'}</td>
+                <td className="text-meta text-ink-3">{rate?.source ?? '—'}</td>
                 <td className="num">
                   <CalcValue c={lc} />
                 </td>

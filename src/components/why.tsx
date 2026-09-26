@@ -31,9 +31,9 @@ export function WhyProvider({ children }: { children: ReactNode }) {
                 {it.status && <Badge>{it.status}</Badge>}
                 <span className="font-medium">{it.title}</span>
               </div>
-              {it.detail && <pre className="whitespace-pre-wrap break-words font-sans text-[12.5px] text-ink-2">{it.detail}</pre>}
+              {it.detail && <pre className="whitespace-pre-wrap break-words font-sans text-body text-ink-2">{it.detail}</pre>}
               {it.ref && (
-                <div className="mt-1 text-[12px]">
+                <div className="mt-1 text-meta">
                   {it.ref.includes('.md') ? (
                     <Link className="text-accent-2 underline" to={`/knowledge/${it.ref.replace('#', '?a=')}`}>
                       Open handbook section
@@ -61,14 +61,14 @@ export function WhyButton({ record, calc, label = 'Why?', title }: { record?: An
   return (
     <button
       type="button"
-      className="inline-flex items-center gap-0.5 rounded px-1 text-[11px] font-semibold text-accent-2 hover:bg-accent-soft no-print"
+      className={label ? 'inline-flex h-9 items-center gap-1.5 rounded-control border border-line-strong bg-solid/70 px-3 text-body font-medium text-accent-2 hover:border-accent/50 hover:bg-accent-soft no-print' : 'inline-flex items-center rounded-full p-0.5 text-accent-2 hover:bg-accent-soft no-print'}
       aria-label={`Why? ${title ?? record?.name ?? calc?.label ?? ''}`}
       onClick={() => {
         if (calc) open(title ?? calc.label, whyForCalc(calc));
         else if (record) open(title ?? record.name, whyForRecord(record, graph));
       }}
     >
-      <HelpCircle className="size-3" aria-hidden />
+      <HelpCircle className={label ? 'size-4' : 'size-3.5'} aria-hidden />
       {label}
     </button>
   );
@@ -76,10 +76,10 @@ export function WhyButton({ record, calc, label = 'Why?', title }: { record?: An
 
 /** A calculated number with its unit and a WHY? link to formula, inputs, assumptions and source. */
 export function CalcValue({ c, digits = 3, unitOverride }: { c: CalcResult | null | undefined; digits?: number; unitOverride?: string }) {
-  if (!c) return <span className="font-mono text-[11px] text-ink-3">UNKNOWN</span>;
+  if (!c) return <span className="font-mono text-micro text-ink-3">UNKNOWN</span>;
   return (
     <span className="inline-flex items-baseline gap-1">
-      <span className={c.value == null ? 'font-mono text-[11px] font-semibold text-ink-3' : 'num'} title={c.warnings.join('; ') || undefined}>
+      <span className={c.value == null ? 'font-mono text-micro font-semibold text-ink-3' : 'num'} title={c.warnings.join('; ') || undefined}>
         {c.value == null ? 'UNKNOWN' : fmtNum(c.value, digits)}
       </span>
       {c.value != null && <span className="text-ink-3">{unitOverride ?? c.unit}</span>}

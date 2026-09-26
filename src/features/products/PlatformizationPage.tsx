@@ -32,8 +32,8 @@ export default function PlatformizationPage() {
   const be = platformBreakEven({ investment: inv ? Number(inv) : null, saving_per_machine: save ? Number(save) : null });
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Products" title="Product platformization" subtitle="Common modules, standard interfaces, reusable software, reusable BOM, common suppliers, standard validation and documentation — from the catalogue and every saved configuration. “The product manager’s job is to make the second machine cheaper and faster than the first.” (Automation Handbook Part 59)" />
-      <div className="grid gap-3 xl:grid-cols-2">
+      <PageHeader eyebrow="Products" title="Platformization" subtitle="Common modules, standard interfaces, reusable software, reusable BOM, common suppliers, standard validation and documentation — from the catalogue and every saved configuration. “The product manager’s job is to make the second machine cheaper and faster than the first.” (Automation Handbook Part 59)" />
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
         <Card title="Module commonality">
           <Table head={['Module', 'Standard on', 'Configured in', 'Class']} dense>
             {usage.map(([k, u]) => (
@@ -47,7 +47,7 @@ export default function PlatformizationPage() {
               </tr>
             ))}
           </Table>
-          <p className="mt-1 text-[11.5px] text-ink-3">Rule: standard content on ≥2 platforms = platform module; used ≥2 times overall = candidate for standardisation.</p>
+          <p className="mt-1 text-meta text-ink-3">Rule: standard content on ≥2 platforms = platform module; used ≥2 times overall = candidate for standardisation.</p>
         </Card>
         <div className="space-y-3">
           <Card title="Architecture families (beam delivery)">
@@ -63,11 +63,11 @@ export default function PlatformizationPage() {
             <ul className="space-y-1">
               {sources.map(([s, ps]) => (
                 <li key={s}>
-                  <RecordLink id={`las-${s}`} /> <span className="text-[11.5px] text-ink-3">on {ps.length} platforms</span>
+                  <RecordLink id={`las-${s}`} /> <span className="text-meta text-ink-3">on {ps.length} platforms</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-1 text-[11.5px] text-ink-3">LaserSuite software editions ({[...(e?.modules.values() ?? [])].filter((m) => m.kind === 'software').length}) are the reusable software layer across all platforms.</p>
+            <p className="mt-1 text-meta text-ink-3">LaserSuite software editions ({[...(e?.modules.values() ?? [])].filter((m) => m.kind === 'software').length}) are the reusable software layer across all platforms.</p>
           </Card>
           <Card title="Platform break-even (Handbook C8)">
             <div className="flex flex-wrap gap-2">

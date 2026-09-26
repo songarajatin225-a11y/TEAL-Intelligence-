@@ -21,22 +21,22 @@ export default function RoadmapPage() {
   };
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Roadmap" title="Product roadmap" subtitle="Idea → opportunity → research → feasibility → POC → concept → prototype → pilot → product → platform → scale. “Most equipment companies stall between pilot and productization.” (Automation Handbook §59.3). Track owner, investment, revenue signal, technology gap, customer signal, dependencies, risk and milestones on each item." />
+      <PageHeader eyebrow="Roadmap" title="Roadmap" subtitle="Idea → opportunity → research → feasibility → POC → concept → prototype → pilot → product → platform → scale. “Most equipment companies stall between pilot and productization.” (Automation Handbook §59.3). Track owner, investment, revenue signal, technology gap, customer signal, dependencies, risk and milestones on each item." />
       <div className="flex gap-2 overflow-x-auto pb-2">
         {ROADMAP_STAGES.map((s) => {
           const items = place(s);
           return (
             <section key={s} aria-label={s} className="w-52 shrink-0 rounded-lg border border-line bg-panel-2">
-              <header className="flex justify-between border-b border-line px-2 py-1.5 text-[11.5px] font-semibold uppercase text-ink-2">
+              <header className="flex justify-between border-b border-line px-2 py-1.5 text-meta font-semibold uppercase text-ink-2">
                 {s} <span className="num">{items.length}</span>
               </header>
               <ul className="space-y-1 p-1.5">
                 {items.map((i) => (
-                  <li key={i.id} className="rounded border border-line bg-panel p-1.5 text-[12px]">
+                  <li key={i.id} className="rounded border border-line bg-panel p-1.5 text-meta">
                     <Link className="text-accent-2 hover:underline" to={`/record/${encodeURIComponent(i.id)}`}>
                       {i.name}
                     </Link>
-                    <div className="mt-0.5 flex gap-1 text-[10.5px] text-ink-3">
+                    <div className="mt-0.5 flex gap-1 text-micro text-ink-3">
                       {i.type} <DataTypeBadge t={i.data_type} />
                     </div>
                   </li>

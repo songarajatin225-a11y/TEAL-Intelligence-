@@ -129,8 +129,8 @@ export default function BomView({ record }: { record: Rec }) {
         <Stat label="Long-lead (≥12 wk)" value={totals.longLead.length} />
         <Stat label="Import items" value={totals.imports.length} />
       </div>
-      {totals.unknown > 0 && <Notice tone="warn">Lines with UNKNOWN cost are excluded from totals — get quotations through the RFQ engine.</Notice>}
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-[12.5px]">
+      {totals.unknown > 0 && <Notice tone="warn">Lines with UNKNOWN cost are excluded from totals — request quotations with Generate RFQ.</Notice>}
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-body">
         <label>
           Type{' '}
           <Select aria-label="BOM type" value={b.bom_type} onChange={(e) => (setB({ ...b, bom_type: e.target.value as Bom['bom_type'] }), setDirty(true))} className="inline w-36">
@@ -144,9 +144,9 @@ export default function BomView({ record }: { record: Rec }) {
         </label>
       </div>
       <div className="mt-2 overflow-x-auto">
-        <table className="w-full text-[12px]">
+        <table className="w-full text-meta">
           <thead>
-            <tr className="text-left text-[10.5px] uppercase text-ink-3">
+            <tr className="text-left text-micro uppercase text-ink-3">
               {['#', 'Level', 'Description', 'Part no.', 'Mfr', 'Supplier', 'Qty', 'Unit', 'M/B', 'Unit cost', 'Cur', 'Basis', 'LT wk', 'MOQ', 'Risk', 'Alt', 'Rev', 'Imp', ''].map((h) => (
                 <th key={h} className="px-1 py-1">
                   {h}

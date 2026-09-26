@@ -55,14 +55,14 @@ export default function LegacyAppsPage() {
   }
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Admin" title="Legacy apps" subtitle="The three original apps remain available. Their functionality is migrated into the OS step by step; see docs/02_LEGACY_FEATURE_MAP.md for the feature-by-feature status." />
+      <PageHeader eyebrow="Admin" title="Legacy Applications" subtitle="The three original apps remain available. Their functionality is migrated into the OS step by step; see docs/02_LEGACY_FEATURE_MAP.md for the feature-by-feature status." />
       {app && <Notice tone="warn">No legacy app called “{app}”.</Notice>}
-      <div className="grid gap-3 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
         {(Object.keys(APPS) as AppKey[]).map((k) => {
           const a = APPS[k];
           return (
             <Card key={k} title={a.title}>
-              <div className="space-y-2 text-[12.5px]">
+              <div className="space-y-2 text-body">
                 <p>{a.what}</p>
                 <p>
                   <span className="font-semibold">In the OS: </span>

@@ -18,7 +18,7 @@ export function RecordLink({ id, showEntity, fallback }: { id?: string | null; s
     );
   return (
     <span className="inline-flex flex-wrap items-center gap-1">
-      {showEntity && <span className="text-[11px] text-ink-3">{ENTITY_BY_TYPE[r.entity]?.label}:</span>}
+      {showEntity && <span className="text-micro text-ink-3">{ENTITY_BY_TYPE[r.entity]?.label}:</span>}
       <Link to={recordPath(id)} className="text-accent-2 hover:underline">
         {r.name}
       </Link>

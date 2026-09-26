@@ -1,7 +1,7 @@
 {
   "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/decision.schema.json",
-  "title": "Decision record",
-  "description": "TEAL Engineering Intelligence OS — Decision record record (id prefix \"edr-\"). Generated from src/domain; do not edit.",
+  "title": "Engineering decision",
+  "description": "TEAL Engineering Intelligence OS — Engineering decision record (id prefix \"edr-\"). Generated from src/domain; do not edit.",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {

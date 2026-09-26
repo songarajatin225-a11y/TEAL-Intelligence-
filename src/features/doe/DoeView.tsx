@@ -115,14 +115,14 @@ export default function DoeView({ record }: { record: Rec }) {
           </>
         }
       >
-        <div className="mb-2 text-[12.5px] text-ink-2">
+        <div className="mb-2 text-body text-ink-2">
           POC: {d.poc_id ? <RecordLink id={d.poc_id} /> : '—'} · Design: full factorial · {d.factors.length} factor(s) · {d.replicates} replicate(s) · <b>{fullFactorialRuns(d.factors.map((f) => f.levels.length), d.replicates)}</b> runs · measured {measured.length}
         </div>
         <details className="mb-2">
-          <summary className="cursor-pointer text-[12.5px] text-accent-2">Edit factors & levels</summary>
-          <div className="mt-2 grid gap-2 md:grid-cols-[1fr_auto]">
+          <summary className="cursor-pointer text-body text-accent-2">Edit factors & levels</summary>
+          <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-[1fr_auto]">
             <Field label="One factor per line: name | unit | level1, level2, …" htmlFor="doe-f">
-              <textarea id="doe-f" className="min-h-[80px] w-full rounded-md border border-line bg-panel p-2 font-mono text-[12px]" value={factorText} onChange={(e) => setFactorText(e.target.value)} />
+              <textarea id="doe-f" className="min-h-[80px] w-full rounded-md border border-line bg-panel p-2 font-mono text-meta" value={factorText} onChange={(e) => setFactorText(e.target.value)} />
             </Field>
             <div className="flex flex-col gap-2">
               <Field label="Replicates" htmlFor="doe-r">
@@ -134,9 +134,9 @@ export default function DoeView({ record }: { record: Rec }) {
         </details>
         {!spot && <Notice tone="info">Link a laser source and optic on the POC to get per-run fluence, pulse overlap and line energy.</Notice>}
         <div className="max-h-[520px] overflow-auto">
-          <table className="w-full text-[12px]">
+          <table className="w-full text-meta">
             <thead className="sticky top-0 bg-panel">
-              <tr className="text-left text-[10.5px] uppercase text-ink-3">
+              <tr className="text-left text-micro uppercase text-ink-3">
                 <th className="px-1">Run</th>
                 {d.factors.map((f) => (
                   <th key={f.name} className="px-1">
@@ -211,11 +211,11 @@ export default function DoeView({ record }: { record: Rec }) {
                     </tr>
                   ))}
                 </Table>
-                <div className="mt-1 text-[12.5px]">
+                <div className="mt-1 text-body">
                   Process window ({a.inSpec} run(s) in spec):{' '}
                   {a.resp.lsl == null && a.resp.usl == null ? <Unknown label="set LSL/USL on the response to define a window" /> : a.window.map((w) => `${w.factor} ${w.min ?? '—'}–${w.max ?? '—'} ${w.unit ?? ''}`).join(' · ')}
                 </div>
-                <div className="text-[12px] text-ink-3">Capability: {a.cap.status === 'CALCULATED' ? `Ppk ${a.cap.ppk.value?.toFixed(2)} (n=${a.cap.n})` : `${a.cap.message} (need ≥ ${MIN_SAMPLES} results)`}</div>
+                <div className="text-meta text-ink-3">Capability: {a.cap.status === 'CALCULATED' ? `Ppk ${a.cap.ppk.value?.toFixed(2)} (n=${a.cap.n})` : `${a.cap.message} (need ≥ ${MIN_SAMPLES} results)`}</div>
               </>
             )}
           </div>

@@ -52,7 +52,7 @@ export default function PocView({ record }: { record: Rec }) {
     <Card
       title={
         <span className="flex items-center gap-2">
-          Proof of concept {dirty && <Badge tone="draft">unsaved</Badge>}
+          POC plan {dirty && <Badge tone="draft">unsaved</Badge>}
         </span>
       }
       actions={
@@ -64,13 +64,13 @@ export default function PocView({ record }: { record: Rec }) {
       <ol className="mb-3 flex flex-wrap gap-1" aria-label="POC status">
         {POC_STATUSES.map((s) => (
           <li key={s}>
-            <button type="button" aria-current={p.poc_status === s ? 'step' : undefined} onClick={() => upd({ poc_status: s })} className={`rounded px-2 py-1 text-[11.5px] font-semibold ${p.poc_status === s ? 'bg-accent text-white' : 'bg-panel-2 text-ink-3'}`}>
+            <button type="button" aria-current={p.poc_status === s ? 'step' : undefined} onClick={() => upd({ poc_status: s })} className={`rounded px-2 py-1 text-meta font-semibold ${p.poc_status === s ? 'bg-accent text-white' : 'bg-panel-2 text-ink-3'}`}>
               {s}
             </button>
           </li>
         ))}
       </ol>
-      <div className="grid gap-3 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <KV
           items={[
             ['Objective', p.objective],
@@ -85,7 +85,7 @@ export default function PocView({ record }: { record: Rec }) {
         />
         <div className="space-y-2">
           <div>
-            <div className="mb-1 text-[11px] font-semibold uppercase text-ink-3">Measurements (actual)</div>
+            <div className="mb-1 text-micro font-semibold uppercase text-ink-3">Measurements (actual)</div>
             {ms.map((m, i) => (
               <div key={i} className="mb-1 grid grid-cols-[1fr_80px_60px_1fr_auto] gap-1">
                 <Input aria-label="Characteristic" value={m.characteristic} onChange={(e) => upd({ measurements: ms.map((x, j) => (j === i ? { ...x, characteristic: e.target.value } : x)) })} />
@@ -102,14 +102,14 @@ export default function PocView({ record }: { record: Rec }) {
             </Button>
           </div>
           <div>
-            <div className="mb-1 text-[11px] font-semibold uppercase text-ink-3">Decision</div>
+            <div className="mb-1 text-micro font-semibold uppercase text-ink-3">Decision</div>
             <Select aria-label="Decision" value={p.decision} onChange={(e) => upd({ decision: e.target.value as Poc['decision'] })}>
               {POC_DECISIONS.map((d) => (
                 <option key={d}>{d}</option>
               ))}
             </Select>
             {p.decision !== 'Undecided' && !ms.length && <Notice tone="warn">A decision without recorded measurements is not evidence-based. Record the measurements that support it.</Notice>}
-            <textarea aria-label="Conclusion" className="mt-1 min-h-[60px] w-full rounded-md border border-line bg-panel p-2 text-[13px]" placeholder="Conclusion and evidence…" value={p.conclusion ?? ''} onChange={(e) => upd({ conclusion: e.target.value })} />
+            <textarea aria-label="Conclusion" className="mt-1 min-h-[60px] w-full rounded-md border border-line bg-panel p-2 text-body" placeholder="Conclusion and evidence…" value={p.conclusion ?? ''} onChange={(e) => upd({ conclusion: e.target.value })} />
           </div>
         </div>
       </div>

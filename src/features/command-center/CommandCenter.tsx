@@ -1,45 +1,48 @@
+import clsx from 'clsx';
+import { Activity, AlertOctagon, ArrowRight, BookOpen, Boxes, Briefcase, Clock, Cpu, FileSearch, FlaskConical, Gauge, HeartPulse, ListChecks, Package, Plus, Radar, ShieldAlert, Sparkles, TrendingUp, Zap, type LucideIcon } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DataTypeBadge, StatusBadge } from '../../components/badges';
-import { RecordLink } from '../../components/RecordLink';
-import { Badge, Card, PageHeader, Stat } from '../../components/ui';
-import type { Activity, CostModel, Opportunity, Product, Project, Risk } from '../../domain/entities';
+import { workspaceDef } from '../../app/nav';
+import { usePrefs } from '../../app/prefs';
+import { useRecents } from '../../app/shell/recents';
+import { useShell } from '../../app/shell/ShellContext';
+import { useAttention } from '../../app/shell/StatusCenter';
+import { DataConfidence, StatusBadge } from '../../components/badges';
+import { recordPath } from '../../components/RecordLink';
+import { Button, buttonClass, Card, EmptyState, SectionHeader } from '../../components/ui';
+import type { Activity as Act, CostModel, Opportunity, Poc, Product, Project, Risk } from '../../domain/entities';
 import { OPPORTUNITY_STAGES } from '../../domain/entities';
+import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { summarizeCostModel, useFx } from '../../hooks/useCost';
 import { useData } from '../../hooks/useData';
 import { workspaceDb, type ChangeLogRow } from '../../repositories/workspaceDb';
-import { isActive, nextActions } from '../../services/nextAction';
+import { attentionCounts, type AttentionItem } from '../../services/attention';
+import { runDataQuality } from '../../services/dataQuality';
+import { isActive } from '../../services/nextAction';
 import { fmtDate, relativeDay, todayIso } from '../../utils/dates';
 import { fetchJson } from '../../utils/paths';
 
-const inr = (v: number) => `₹ ${(v / 1e5).toLocaleString('en-IN', { maximumFractionDigits: 1 })} L`;
+const inr = (v: number) => `₹${(v / 1e5).toLocaleString('en-IN', { maximumFractionDigits: 1 })} L`;
+const LEVEL: Record<AttentionItem['level'], { label: string; tone: string; bar: string; icon: LucideIcon }> = {
+  critical: { label: 'Critical', tone: 'text-bad', bar: 'bg-bad', icon: AlertOctagon },
+  attention: { label: 'Attention', tone: 'text-warn', bar: 'bg-warn', icon: ShieldAlert },
+  info: { label: 'Check', tone: 'text-info', bar: 'bg-info', icon: ListChecks },
+};
 
-function Q({ n, q, children, to }: { n: number; q: string; children: React.ReactNode; to?: string }) {
-  return (
-    <Card
-      title={
-        <span>
-          <span className="mr-1 text-accent">{String(n).padStart(2, '0')}</span> {q}
-        </span>
-      }
-      actions={
-        to && (
-          <Link to={to} className="text-[11.5px] text-accent-2 hover:underline">
-            Open →
-          </Link>
-        )
-      }
-    >
-      {children}
-    </Card>
-  );
-}
-
-/** COMMAND CENTER (spec §156): ten questions, answered from the live digital thread. */
+/**
+ * MISSION CONTROL (spec §19–§20, §80): Attention → My work → Business → Engineering →
+ * Intelligence → Activity. Same underlying data as the V1 "ten questions", presented by priority.
+ */
 export default function CommandCenter() {
   const { records, catalog, drafts } = useData();
+  const prefs = usePrefs();
+  const shell = useShell();
   const fx = useFx();
   const today = todayIso();
+  const attention = useAttention();
+  const counts = attentionCounts(attention);
+  const recents = useRecents(6);
+  const [filter, setFilter] = useState<AttentionItem['level'] | 'due' | null>(null);
   const [changes, setChanges] = useState<ChangeLogRow[]>([]);
   const [sections, setSections] = useState<number | null>(null);
   useEffect(() => {
@@ -48,198 +51,451 @@ export default function CommandCenter() {
       .catch(() => setSections(null));
   }, []);
   useEffect(() => {
-    workspaceDb().changelog.orderBy('seq').reverse().limit(8).toArray().then(setChanges).catch(() => setChanges([]));
+    workspaceDb().changelog.orderBy('seq').reverse().limit(6).toArray().then(setChanges).catch(() => setChanges([]));
   }, [records]);
 
   const d = useMemo(() => {
     const of = <T,>(e: string) => records.filter((r) => r.entity === e) as unknown as (T & (typeof records)[number])[];
     const opps = of<Opportunity>('opportunity');
-    const acts = of<Activity>('activity');
     const projects = of<Project>('project');
+    const pocs = of<Poc>('poc');
+    const acts = of<Act>('activity').filter((a) => isActive(a));
     const risks = of<Risk>('risk');
     const products = of<Product>('product');
-    const cms = of<CostModel>('cost_model');
-    const na = nextActions(records, today);
-    const overdueActs = acts.filter((a) => isActive(a) && a.due_date && a.due_date < today && a.status !== 'Completed');
-    const blocked = acts.filter((a) => a.status === 'Blocked' || !!a.blocker).filter((a) => isActive(a));
-    const openRisks = risks.filter((r) => r.risk_status === 'Open');
-    const stages = OPPORTUNITY_STAGES.map((s) => ({ s, n: opps.filter((o) => o.stage === s).length }));
+    const costs = of<CostModel>('cost_model').map((m) => ({ m, s: summarizeCostModel(m, fx) }));
     const stdUse = new Map<string, number>();
     for (const p of products) for (const k of p.standard_content) stdUse.set(k, (stdUse.get(k) ?? 0) + 1);
-    const costs = cms.map((m) => ({ m, s: summarizeCostModel(m, fx) }));
-    return { opps, acts, projects, risks, products, na, overdueActs, blocked, openRisks, stages, stdUse: [...stdUse.entries()].sort((a, b) => b[1] - a[1]), costs, techs: records.filter((r) => r.entity === 'technology'), pocs: records.filter((r) => r.entity === 'poc' && isActive(r)) };
-  }, [records, today, fx]);
+    const dq = runDataQuality(records);
+    const activeOpps = opps.filter(isActive);
+    return {
+      opps,
+      activeOpps,
+      projects: projects.filter(isActive),
+      pocs: pocs.filter(isActive),
+      acts: acts.sort((a, b) => (a.due_date ?? '9999').localeCompare(b.due_date ?? '9999')),
+      openRisks: risks.filter((r) => r.risk_status === 'Open'),
+      products,
+      costs,
+      stages: OPPORTUNITY_STAGES.filter((s) => s !== 'Lost').map((s) => ({ s, n: opps.filter((o) => o.stage === s).length })),
+      stdUse: [...stdUse.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4),
+      techs: records.filter((r) => r.entity === 'technology'),
+      dq,
+      dueSoon: attention.filter((a) => a.dueInDays != null && a.dueInDays >= 0 && a.dueInDays <= 7).length,
+    };
+  }, [records, fx, attention]);
 
-  const recentDatasets = [...(catalog?.datasets ?? [])].sort((a, b) => b.last_updated.localeCompare(a.last_updated)).slice(0, 5);
-  const assessed = d.techs.filter((t) => (t as { radar_status?: string | null }).radar_status).length;
+  const exec = prefs.workspace === 'executive';
+  const ws = workspaceDef(prefs.workspace);
+  const active = d.activeOpps.length + d.projects.length + d.pocs.length;
+  const shown = attention.filter((a) => !filter || (filter === 'due' ? a.dueInDays != null && a.dueInDays >= 0 && a.dueInDays <= 7 : a.level === filter));
+  const health = d.dq.errors ? { label: 'Needs attention', tone: 'text-bad' } : d.dq.warnings ? { label: 'Incomplete', tone: 'text-warn' } : { label: 'Healthy', tone: 'text-ok' };
+
+  const strip: { key: AttentionItem['level'] | 'due' | null; label: string; value: number; tone: string; icon: LucideIcon }[] = [
+    { key: 'critical', label: 'Critical', value: counts.critical, tone: counts.critical ? 'text-bad' : 'text-ink-3', icon: AlertOctagon },
+    { key: 'attention', label: 'Attention', value: counts.attention, tone: counts.attention ? 'text-warn' : 'text-ink-3', icon: ShieldAlert },
+    { key: null, label: 'Active', value: active, tone: 'text-accent-2', icon: Activity },
+    { key: 'due', label: 'Due in 7 days', value: d.dueSoon, tone: d.dueSoon ? 'text-info' : 'text-ink-3', icon: Clock },
+  ];
+
+  const quick: { label: string; icon: LucideIcon; run: () => void }[] = [
+    { label: 'New product', icon: Sparkles, run: () => shell.openQuickCreate('product') },
+    { label: 'New project', icon: Briefcase, run: () => shell.openQuickCreate('project') },
+    { label: 'New POC', icon: FlaskConical, run: () => shell.openQuickCreate('poc') },
+    { label: 'New requirement', icon: ListChecks, run: () => shell.openQuickCreate('requirement') },
+    { label: 'New RFQ', icon: FileSearch, run: () => shell.openQuickCreate('rfq') },
+    { label: 'New BOM', icon: Package, run: () => shell.openQuickCreate('bom') },
+  ];
 
   return (
-    <div>
-      <PageHeader eyebrow="TEAL Engineering Intelligence OS" title="Command Center" subtitle="One connected engineering system: global intelligence → customer → application → process → product → machine → cost → supplier → project → FAT/SAT → field → lessons → next product." />
-      <div className="mb-3 grid grid-cols-2 gap-2 md:grid-cols-4 xl:grid-cols-8">
-        <Stat label="Active opportunities" value={d.opps.filter(isActive).length} to="/opportunities" />
-        <Stat label="Active projects" value={d.projects.filter(isActive).length} to="/projects" />
-        <Stat label="Active POCs" value={d.pocs.length} to="/poc" />
-        <Stat label="Overdue actions" value={d.na.filter((x) => x.overdue).length + d.overdueActs.length} tone={d.na.some((x) => x.overdue) || d.overdueActs.length ? 'bad' : undefined} to="/pm" />
-        <Stat label="Open risks" value={d.openRisks.length} tone={d.openRisks.length ? 'warn' : undefined} to="/quality" />
-        <Stat label="TEAL platforms" value={d.products.length} to="/products" />
-        <Stat label="Knowledge entries" value={sections ?? '—'} sub="handbook sections + knowledge records" to="/knowledge" />
-        <Stat label="Local drafts" value={drafts} sub="this browser" to="/admin" />
+    <div className="space-y-6">
+      {/* header */}
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="max-w-3xl">
+          <div className="mb-1 text-micro font-semibold uppercase tracking-[0.1em] text-accent-2">TEAL Intelligence · {ws.label}</div>
+          <h1 className="text-title font-semibold tracking-[-0.02em]">{exec ? 'Executive View' : 'Mission Control'}</h1>
+          <p className="mt-1 text-lead text-ink-2">A connected view of products, customers, processes, projects, cost, suppliers and engineering knowledge.</p>
+        </div>
+        <div className="flex items-center gap-2 text-meta text-ink-3">
+          <span className="signal signal-live text-ok" aria-hidden />
+          Data {catalog?.generated_at ?? '—'} · {records.length} records{drafts ? ` · ${drafts} local draft${drafts === 1 ? '' : 's'}` : ''}
+        </div>
       </div>
 
-      <div className="grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
-        <Q n={1} q="What is happening?" to="/changed">
-          <ul className="space-y-1">
-            {changes.map((c) => (
-              <li key={c.seq} className="flex gap-2">
-                <Badge>{c.action}</Badge>
-                <span className="min-w-0 truncate">{c.summary}</span>
-                <span className="ml-auto shrink-0 text-[11px] text-ink-3">{fmtDate(c.at)}</span>
-              </li>
-            ))}
-            {!changes.length && <li className="text-ink-3">No local activity yet in this browser. Master data: {catalog?.datasets.length} datasets, {records.length} records.</li>}
-          </ul>
-        </Q>
-        <Q n={2} q="What needs attention?" to="/pm">
-          <ul className="space-y-1">
-            {d.na
-              .filter((x) => x.overdue || (x.dueInDays != null && x.dueInDays <= 2))
-              .slice(0, 7)
-              .map((x) => (
-                <li key={x.record.id} className="flex flex-wrap items-center gap-1.5">
-                  <Badge tone={x.overdue ? 'bad' : 'warn'}>{relativeDay(x.due)}</Badge>
-                  <RecordLink id={x.record.id} />
-                  <span className="w-full pl-1 text-[12px] text-ink-2">→ {x.action}</span>
-                </li>
-              ))}
-            {d.openRisks.slice(0, 3).map((r) => (
-              <li key={r.id} className="flex items-center gap-1.5">
-                <Badge tone="warn">risk</Badge>
-                <RecordLink id={r.id} />
-              </li>
-            ))}
-          </ul>
-        </Q>
-        <Q n={3} q="What are we building?" to="/projects">
-          <ul className="space-y-1.5">
-            {d.projects.slice(0, 6).map((p) => {
-              const passed = p.gates.filter((g) => g.decision === 'GO' || g.decision === 'GO WITH CONDITIONS').length;
-              return (
-                <li key={p.id}>
-                  <RecordLink id={p.id} /> <DataTypeBadge t={p.data_type} />
-                  <div className="mt-0.5 flex h-1.5 overflow-hidden rounded bg-panel-2" aria-label={`${passed} of 11 gates passed`}>
-                    <div className="bg-accent" style={{ width: `${(passed / 11) * 100}%` }} />
-                  </div>
-                  <div className="text-[11px] text-ink-3">{passed}/11 gates · {p.tasks.length} tasks · ends {fmtDate(p.end)}</div>
-                </li>
-              );
-            })}
-            {!d.projects.length && <li className="text-ink-3">No projects yet.</li>}
-          </ul>
-        </Q>
-        <Q n={4} q="What do customers want?" to="/opportunities">
-          <div className="mb-2 flex flex-wrap gap-1">
-            {d.stages.map((s) => (
-              <span key={s.s} className="rounded border border-line px-1.5 py-0.5 text-[11.5px]">
-                {s.s} <b className="num">{s.n}</b>
+      {/* priority strip */}
+      <div role="group" aria-label="Priority" className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {strip.map((s) => {
+          const on = filter === s.key && s.key !== null;
+          return (
+            <button
+              key={s.label}
+              type="button"
+              aria-pressed={on}
+              onClick={() => setFilter(on || s.key === null ? null : s.key)}
+              className={clsx('surface interactive flex items-center gap-3 rounded-card px-4 py-3 text-left', on && 'ring-2 ring-accent')}
+            >
+              <span className={clsx('grid size-10 shrink-0 place-items-center rounded-xl bg-ink/[0.05]', s.tone)}>
+                <s.icon className="size-5" aria-hidden />
               </span>
-            ))}
+              <span>
+                <span className={clsx('num block text-metric font-semibold leading-none', s.value ? 'text-ink' : 'text-ink-3')}>{s.value}</span>
+                <span className="text-meta text-ink-3">{s.label}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* attention hero + side rail */}
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
+        <section aria-labelledby="attn" className="surface glass-edge rounded-panel p-5 xl:col-span-8">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 id="attn" className="text-section font-semibold tracking-[-0.015em]">
+                What needs your attention?
+              </h2>
+              <p className="text-meta text-ink-3">{filter ? `Filtered: ${strip.find((s) => s.key === filter)?.label}` : 'Overdue and due-soon actions, blocked work, open risks, awaited samples'}</p>
+            </div>
+            {filter && (
+              <Button size="sm" variant="ghost" onClick={() => setFilter(null)}>
+                Show all
+              </Button>
+            )}
           </div>
-          <ul className="space-y-1">
-            {d.opps.filter(isActive).slice(0, 5).map((o) => (
-              <li key={o.id} className="flex flex-wrap items-center gap-1.5">
-                <StatusBadge s={o.stage} /> <RecordLink id={o.id} />
-              </li>
-            ))}
-          </ul>
-          <Link to="/inquiry" className="mt-2 inline-block text-[12px] font-semibold text-accent-2 hover:underline">
-            + Create product from a customer inquiry
-          </Link>
-        </Q>
-        <Q n={5} q="What is blocked?" to="/activities">
-          <ul className="space-y-1">
-            {d.blocked.slice(0, 6).map((a) => (
-              <li key={a.id}>
-                <RecordLink id={a.id} />
-                {a.blocker && <div className="text-[12px] text-bad">Blocker: {a.blocker}</div>}
-              </li>
-            ))}
-            {d.pocs
-              .filter((p) => (p as { poc_status?: string }).poc_status === 'Samples Awaited')
-              .map((p) => (
-                <li key={p.id}>
-                  <RecordLink id={p.id} /> <span className="text-[12px] text-warn">samples awaited</span>
+          {shown.length ? (
+            <ol className="divide-y divide-line">
+              {shown.slice(0, exec ? 4 : 7).map((a) => {
+                const l = LEVEL[a.level];
+                return (
+                  <li key={a.id} className="group relative flex flex-col gap-2 py-3 pl-4 sm:flex-row sm:items-center sm:gap-4">
+                    <span className={clsx('absolute top-3 bottom-3 left-0 w-1 rounded-full', l.bar)} aria-hidden />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={clsx('inline-flex items-center gap-1 text-micro font-semibold uppercase tracking-[0.06em]', l.tone)}>
+                          <l.icon className="size-3.5" aria-hidden />
+                          {l.label}
+                        </span>
+                        <span className="text-micro text-ink-3">{a.context}</span>
+                      </div>
+                      <Link to={recordPath(a.recordId)} className="mt-0.5 block truncate text-lead font-medium hover:text-accent-2">
+                        {a.title}
+                      </Link>
+                      {a.action && <p className="truncate text-meta text-ink-2">→ {a.action}</p>}
+                    </div>
+                    <div className="flex shrink-0 items-center justify-between gap-4 text-meta sm:justify-end">
+                      {a.owner && <span className="hidden text-ink-3 md:inline">{a.owner}</span>}
+                      {a.due && <span className={clsx('num font-medium', a.level === 'critical' ? 'text-bad' : 'text-ink-2')}>{relativeDay(a.due)}</span>}
+                      <Link to={recordPath(a.recordId)} className={buttonClass('secondary', 'sm')}>
+                        Open <ArrowRight className="size-3.5" aria-hidden />
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          ) : (
+            <EmptyState compact icon={HeartPulse} title="Nothing needs attention" explain="Every active record has a next action on time and no risk is critical." />
+          )}
+          {shown.length > 7 && (
+            <p className="mt-2 text-meta text-ink-3">
+              +{shown.length - 7} more in the attention centre (bell icon) and <Link className="text-accent-2 hover:underline" to="/pm">My Workspace</Link>.
+            </p>
+          )}
+        </section>
+
+        <div className="space-y-4 xl:col-span-4">
+          <Card title="Quick actions">
+            <div className="grid grid-cols-2 gap-2">
+              {quick.map((q) => (
+                <button key={q.label} type="button" onClick={q.run} className="flex items-center gap-2 rounded-control border border-line-strong bg-solid/50 px-3 py-2.5 text-left text-meta font-medium transition-colors hover:border-accent/50 hover:bg-accent-soft/50">
+                  <q.icon className="size-4 shrink-0 text-accent-2" aria-hidden />
+                  {q.label}
+                </button>
+              ))}
+            </div>
+          </Card>
+          <Card title="Recently opened" actions={<span className="text-micro text-ink-3">this browser</span>}>
+            {recents.length ? (
+              <ul className="-mx-1 space-y-0.5">
+                {recents.map((r) => (
+                  <li key={r.id}>
+                    <Link to={recordPath(r.id)} className="flex items-center justify-between gap-2 rounded-lg px-1 py-1 hover:bg-ink/5">
+                      <span className="truncate">{r.name}</span>
+                      <span className="shrink-0 text-micro text-ink-3">{ENTITY_BY_TYPE[r.entity]?.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-meta text-ink-3">Records you open appear here.</p>
+            )}
+          </Card>
+          <Card title="System">
+            <dl className="grid grid-cols-[1fr_auto] gap-y-2 text-meta">
+              <dt className="text-ink-3">Data quality</dt>
+              <dd>
+                <Link to="/data-quality" className={clsx('font-medium hover:underline', health.tone)}>
+                  {health.label}
+                </Link>
+              </dd>
+              <dt className="text-ink-3">Records / datasets</dt>
+              <dd className="num">
+                {records.length} / {catalog?.datasets.length ?? 0}
+              </dd>
+              <dt className="text-ink-3">Local drafts</dt>
+              <dd>
+                <Link to="/admin" className="num hover:underline">
+                  {drafts}
+                </Link>
+              </dd>
+              <dt className="text-ink-3">Knowledge sections</dt>
+              <dd className="num">{sections ?? '—'}</dd>
+            </dl>
+          </Card>
+        </div>
+      </div>
+
+      {/* my work / business */}
+      <section aria-label={exec ? 'Business' : 'My work'}>
+        <SectionHeader title={exec ? 'Portfolio & delivery' : 'My work'} description={exec ? 'Projects, pipeline and portfolio' : 'Projects, opportunities, POCs and activities in flight'} />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Card title="Projects" icon={Briefcase} actions={<MoreLink to="/projects" />}>
+            {d.projects.length ? (
+              <ul className="space-y-3">
+                {d.projects.slice(0, 4).map((p) => {
+                  const passed = p.gates.filter((g) => g.decision === 'GO' || g.decision === 'GO WITH CONDITIONS').length;
+                  return (
+                    <li key={p.id}>
+                      <Link to={recordPath(p.id)} className="block truncate font-medium hover:text-accent-2">
+                        {p.name}
+                      </Link>
+                      <div className="mt-1.5 flex gap-0.5" role="img" aria-label={`${passed} of 11 gates passed`}>
+                        {Array.from({ length: 11 }).map((_, i) => (
+                          <span key={i} className={clsx('h-1.5 flex-1 rounded-full', i < passed ? 'bg-accent' : i === passed ? 'bg-accent/35' : 'bg-ink/10')} />
+                        ))}
+                      </div>
+                      <div className="mt-1 flex justify-between text-micro text-ink-3">
+                        <span>Next: G{passed}</span>
+                        <span>ends {fmtDate(p.end)}</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <Empty text="No active projects" to="/projects" />
+            )}
+          </Card>
+          <Card title="Opportunities" icon={Zap} actions={<MoreLink to="/opportunities" />}>
+            <PipelineBars stages={d.stages} />
+            <ul className="mt-3 space-y-1.5">
+              {d.activeOpps.slice(0, 3).map((o) => (
+                <li key={o.id} className="flex items-center justify-between gap-2">
+                  <Link to={recordPath(o.id)} className="min-w-0 truncate hover:text-accent-2">
+                    {o.name}
+                  </Link>
+                  <StatusBadge s={o.stage} />
                 </li>
               ))}
-            {!d.blocked.length && <li className="text-ink-3">Nothing flagged as blocked.</li>}
-          </ul>
-        </Q>
-        <Q n={6} q="What can we reuse?" to="/reuse">
-          <p className="mb-1 text-ink-2">
-            {d.products.length} catalogue platforms · {records.filter((r) => r.entity === 'module').length} modules · {records.filter((r) => r.entity === 'application').length} applications
-          </p>
-          <div className="text-[11px] font-semibold uppercase text-ink-3">Most reused standard content</div>
-          <ul className="mt-0.5 space-y-0.5">
-            {d.stdUse.slice(0, 5).map(([k, n]) => (
-              <li key={k} className="flex items-center gap-2">
-                <RecordLink id={`mod-${k}`} /> <span className="text-[11px] text-ink-3">on {n} platforms</span>
-              </li>
-            ))}
-          </ul>
-        </Q>
-        <Q n={7} q="What does it cost?" to="/cost">
-          <ul className="space-y-1">
-            {d.costs.slice(0, 5).map(({ m, s }) => (
-              <li key={m.id} className="flex flex-wrap items-center gap-1.5">
-                <RecordLink id={m.id} /> <DataTypeBadge t={m.data_type} />
-                <span className="w-full pl-1 text-[12px] text-ink-2">
-                  Selling <b className="num">{inr(s.c.selling)}</b> · net margin <b className="num">{(s.c.netMargin * 100).toFixed(1)}%</b> · TEAL D <b className="num">{inr(s.t.D)}</b>
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-1 text-[11px] text-ink-3">Values from DEMO/legacy seed rates are labelled DEMO; they are not quotations.</p>
-        </Q>
-        <Q n={8} q="What is changing?" to="/changed">
-          <div className="text-[11px] font-semibold uppercase text-ink-3">Master data (GitHub)</div>
-          <ul className="mb-2 space-y-0.5">
-            {recentDatasets.map((ds) => (
-              <li key={ds.id} className="flex gap-2">
-                <span className="min-w-0 truncate">{ds.title}</span>
-                <span className="ml-auto shrink-0 text-[11px] text-ink-3">
-                  v{ds.version} · {fmtDate(ds.last_updated)}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <div className="text-[11.5px] text-ink-3">Git history is the change history of master data.</div>
-        </Q>
-        <Q n={9} q="What technology is emerging?" to="/technology">
-          <p className="text-ink-2">
-            {d.techs.length} radar topics tracked; <b>{assessed}</b> assessed. Radar status is assigned only with evidence — unassessed topics link to the handbook sections that discuss them.
-          </p>
-          <div className="mt-1 flex flex-wrap gap-1">
-            {d.techs.slice(0, 10).map((t) => (
-              <Link key={t.id} to={`/record/${t.id}`} className="rounded border border-line px-1.5 py-0.5 text-[11.5px] hover:border-accent">
-                {t.name}
+            </ul>
+          </Card>
+          {exec ? (
+            <Card title="Portfolio" icon={Package} actions={<MoreLink to="/products" />}>
+              <div className="num text-metric font-semibold">{d.products.length}</div>
+              <p className="text-meta text-ink-3">TEAL platforms · {records.filter((r) => r.entity === 'module').length} reusable modules · {records.filter((r) => r.entity === 'application').length} applications</p>
+              <Link to="/roadmap" className="mt-3 inline-flex items-center gap-1 text-meta font-medium text-accent-2 hover:underline">
+                Strategic roadmap <ArrowRight className="size-3.5" aria-hidden />
               </Link>
-            ))}
+            </Card>
+          ) : (
+            <Card title="POCs" icon={FlaskConical} actions={<MoreLink to="/poc" />}>
+              {d.pocs.length ? (
+                <ul className="space-y-2">
+                  {d.pocs.slice(0, 4).map((p) => (
+                    <li key={p.id}>
+                      <Link to={recordPath(p.id)} className="block truncate font-medium hover:text-accent-2">
+                        {p.name}
+                      </Link>
+                      <div className="mt-0.5 flex items-center gap-2">
+                        <StatusBadge s={p.poc_status} />
+                        <DataConfidence dataType={p.data_type} verification={p.provenance?.verification_status} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Empty text="No active POCs" to="/poc" />
+              )}
+            </Card>
+          )}
+          {exec ? (
+            <Card title="Risks" icon={ShieldAlert} actions={<MoreLink to="/quality" />}>
+              <div className={clsx('num text-metric font-semibold', d.openRisks.length && 'text-warn')}>{d.openRisks.length}</div>
+              <p className="text-meta text-ink-3">open risks</p>
+              <ul className="mt-2 space-y-1">
+                {d.openRisks.slice(0, 3).map((r) => (
+                  <li key={r.id} className="truncate text-meta">
+                    <Link to={recordPath(r.id)} className="hover:text-accent-2">
+                      {r.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ) : (
+            <Card title="Activities" icon={ListChecks} actions={<MoreLink to="/activities" />}>
+              {d.acts.length ? (
+                <ul className="space-y-2">
+                  {d.acts.slice(0, 5).map((a) => (
+                    <li key={a.id} className="flex items-start justify-between gap-2">
+                      <Link to={recordPath(a.id)} className="min-w-0 truncate hover:text-accent-2">
+                        {a.name}
+                      </Link>
+                      <span className={clsx('num shrink-0 text-micro', a.due_date && a.due_date < today ? 'text-bad' : 'text-ink-3')}>{a.due_date ? relativeDay(a.due_date) : '—'}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Empty text="No open activities" to="/activities" />
+              )}
+            </Card>
+          )}
+        </div>
+      </section>
+
+      {/* business + engineering signals */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <section aria-label="Business">
+          <SectionHeader title="Business" description="Cost models on real cost logic — labels say how reliable each figure is" />
+          <Card title="Cost & margin" icon={TrendingUp} actions={<MoreLink to="/cost" />}>
+            {d.costs.length ? (
+              <ul className="divide-y divide-line">
+                {d.costs.slice(0, 4).map(({ m, s }) => (
+                  <li key={m.id} className="flex flex-wrap items-center gap-x-4 gap-y-0.5 py-2">
+                    <div className="min-w-0 flex-1">
+                      <Link to={recordPath(m.id)} className="block truncate font-medium hover:text-accent-2">
+                        {m.name}
+                      </Link>
+                      <DataConfidence dataType={m.data_type} verification={m.provenance?.verification_status} />
+                    </div>
+                    <div className="text-right">
+                      <div className="num font-semibold">{inr(s.c.selling)}</div>
+                      <div className="num text-micro text-ink-3">net {(s.c.netMargin * 100).toFixed(1)}%</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Empty text="No cost models yet" to="/cost" />
+            )}
+          </Card>
+        </section>
+        <section aria-label="Engineering signals">
+          <SectionHeader title="Engineering signals" description="What is moving across the engineering system" />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Signal icon={Boxes} title="Most reused content" to="/reuse">
+              <ul className="space-y-1">
+                {d.stdUse.map(([k, n]) => (
+                  <li key={k} className="flex justify-between gap-2 text-meta">
+                    <Link to={recordPath(`mod-${k}`)} className="truncate hover:text-accent-2">
+                      {(records.find((r) => r.id === `mod-${k}`)?.name as string | undefined) ?? k}
+                    </Link>
+                    <span className="num shrink-0 text-ink-3">×{n}</span>
+                  </li>
+                ))}
+              </ul>
+            </Signal>
+            <Signal icon={Radar} title="Technology" to="/technology">
+              <p className="text-meta text-ink-2">
+                <b className="num text-ink">{d.techs.length}</b> topics tracked · <b className="num text-ink">{d.techs.filter((t) => (t as { radar_status?: string | null }).radar_status).length}</b> assessed
+              </p>
+              <p className="mt-1 text-micro text-ink-3">Radar positions are set only with evidence.</p>
+            </Signal>
+            <Signal icon={BookOpen} title="Knowledge" to="/knowledge">
+              <p className="text-meta text-ink-2">
+                <b className="num text-ink">{sections ?? '—'}</b> handbook sections · <b className="num text-ink">{records.filter((r) => r.entity === 'evidence').length}</b> evidence records
+              </p>
+            </Signal>
+            <Signal icon={Activity} title="Recent changes" to="/changed">
+              {changes.length ? (
+                <ul className="space-y-1">
+                  {changes.slice(0, 3).map((c) => (
+                    <li key={c.seq} className="truncate text-meta">
+                      <span className="text-ink-3">{c.action}</span> {c.summary}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-meta text-ink-3">No local changes yet. Master data v{catalog?.generated_at}.</p>
+              )}
+            </Signal>
           </div>
-        </Q>
-        <Q n={10} q="What should we do next?" to="/pm">
-          <ol className="space-y-1">
-            {d.na.slice(0, 8).map((x) => (
-              <li key={x.record.id} className="flex flex-wrap items-center gap-1.5">
-                {x.source === 'SUGGESTED' ? <Badge tone="draft">suggested</Badge> : x.due ? <Badge tone={x.overdue ? 'bad' : 'neutral'}>{relativeDay(x.due)}</Badge> : <Badge>no date</Badge>}
-                <span>{x.action ?? <span className="text-bad">No next action defined</span>}</span>
-                <span className="w-full pl-1 text-[11.5px] text-ink-3">
-                  <RecordLink id={x.record.id} showEntity />
-                </span>
-              </li>
-            ))}
-          </ol>
-        </Q>
+        </section>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Shortcut icon={Sparkles} title="Create a product from an inquiry" text="Paste the customer’s words; get the full draft thread." to="/inquiry" />
+        <Shortcut icon={Cpu} title="Semiconductor Intelligence" text="Value chain, equipment buyer view, localization." to="/semiconductor" />
+        <Shortcut icon={Gauge} title="Dashboards" text="Management, engineering, procurement, quality, service." to="/dashboards" />
       </div>
     </div>
+  );
+}
+
+function MoreLink({ to }: { to: string }) {
+  return (
+    <Link to={to} className="inline-flex items-center gap-1 text-meta font-medium text-accent-2 hover:underline">
+      All <ArrowRight className="size-3.5" aria-hidden />
+    </Link>
+  );
+}
+
+function Empty({ text, to }: { text: string; to: string }) {
+  return (
+    <p className="text-meta text-ink-3">
+      {text}.{' '}
+      <Link to={to} className="text-accent-2 hover:underline">
+        Open
+      </Link>
+    </p>
+  );
+}
+
+function PipelineBars({ stages }: { stages: { s: string; n: number }[] }) {
+  const max = Math.max(1, ...stages.map((x) => x.n));
+  return (
+    <div className="flex h-16 items-end gap-1" role="img" aria-label={`Pipeline: ${stages.map((x) => `${x.s} ${x.n}`).join(', ')}`}>
+      {stages.map((x) => (
+        <div key={x.s} className="flex flex-1 flex-col items-center gap-1" title={`${x.s}: ${x.n}`}>
+          <div className={clsx('w-full rounded-md', x.n ? 'bg-accent/75' : 'bg-ink/[0.07]')} style={{ height: `${Math.max(6, (x.n / max) * 48)}px` }} />
+          <span className="w-full truncate text-center text-[0.625rem] text-ink-3">{x.s.slice(0, 4)}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Signal({ icon: Icon, title, to, children }: { icon: LucideIcon; title: string; to: string; children: React.ReactNode }) {
+  return (
+    <div className="surface rounded-card p-4">
+      <Link to={to} className="mb-2 flex items-center gap-2 font-semibold hover:text-accent-2">
+        <Icon className="size-4 text-accent-2" aria-hidden /> {title}
+      </Link>
+      {children}
+    </div>
+  );
+}
+
+function Shortcut({ icon: Icon, title, text, to }: { icon: LucideIcon; title: string; text: string; to: string }) {
+  return (
+    <Link to={to} className="surface interactive flex items-start gap-3 rounded-card p-4">
+      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-2">
+        <Icon className="size-5" aria-hidden />
+      </span>
+      <span>
+        <span className="block font-semibold">{title}</span>
+        <span className="block text-meta text-ink-3">{text}</span>
+      </span>
+      <Plus className="sr-only" aria-hidden />
+    </Link>
   );
 }

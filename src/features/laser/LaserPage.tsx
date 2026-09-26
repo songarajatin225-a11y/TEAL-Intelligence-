@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tabs } from '../../components/ui';
+import { PageHeader, Tabs } from '../../components/ui';
 import { EntityListPage } from '../entities/EntityListPage';
 
 /** LASER INTELLIGENCE (spec §25): TEAL source classes + curated manufacturer products. */
@@ -8,6 +8,7 @@ export default function LaserPage() {
   const [tab, setTab] = useState<'class' | 'product'>('class');
   return (
     <div>
+      <PageHeader title="Laser Sources" subtitle="Source technologies offered by TEAL platforms, and manufacturer models once curated. Class parameters are representative — not datasheets." />
       <Tabs
         label="Laser database"
         value={tab}
@@ -18,11 +19,12 @@ export default function LaserPage() {
         ]}
       />
       {tab === 'class' ? (
-        <EntityListPage entity="laser_source" title="Laser intelligence — source classes" filter={(r) => (r as { kind?: string }).kind === 'class'} intro="The 12 source technologies the TEAL configurator offers, with representative parameters for diffraction-limited estimates. Not datasheets." />
+        <EntityListPage embedded entity="laser_source" title="TEAL source classes" filter={(r) => (r as { kind?: string }).kind === 'class'} intro="The 12 source technologies the TEAL configurator offers, with representative parameters for diffraction-limited estimates. Not datasheets." />
       ) : (
         <EntityListPage
+          embedded
           entity="laser_source"
-          title="Laser intelligence — manufacturer products"
+          title="Manufacturer products"
           filter={(r) => (r as { kind?: string }).kind === 'product'}
           intro={
             <>

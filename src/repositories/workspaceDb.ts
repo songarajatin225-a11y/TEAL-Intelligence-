@@ -85,8 +85,12 @@ export function setWorkspaceDb(db: WorkspaceDb): void {
   _db = db;
 }
 
-/* A tiny change bus so views re-query after local writes. */
-type Listener = () => void;
+/* A tiny change bus so views re-query after local writes (and the shell can confirm them). */
+export interface WorkspaceEvent {
+  action: 'create' | 'update' | 'delete' | 'restore' | 'import' | 'batch';
+  summary: string;
+}
+type Listener = (e?: WorkspaceEvent) => void;
 const listeners = new Set<Listener>();
 let version = 0;
 export const workspaceBus = {
@@ -94,9 +98,9 @@ export const workspaceBus = {
     listeners.add(l);
     return () => listeners.delete(l);
   },
-  emit(): void {
+  emit(e?: WorkspaceEvent): void {
     version++;
-    listeners.forEach((l) => l());
+    listeners.forEach((l) => l(e));
   },
   version(): number {
     return version;
