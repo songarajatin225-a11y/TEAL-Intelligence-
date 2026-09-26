@@ -123,6 +123,12 @@ models, nothing fabricated.
 | **Duplicates** `/duplicates` | Admin | same normalised name / code / model / designation / serial, or ≥ 75 % shared name words; never auto-merged |
 | **Unit Converter** `/units` | Engineering | the calculators' unit engine; currency deliberately excluded (needs a dated FX rate) |
 | **Route aliases** | e.g. `/fmea`, `/risks`, `/ecr`, `/components`, `/radar`, `/follow-ups`, `/meetings`, `/settings` | redirect to the canonical page; every earlier URL still works |
+| **Rooms** `/rooms`, `/room/:id` | "Program / Product / POC / Supplier / Opportunity / Customer room" button on those records | a view over the thread: Now (next action + attention), activities & meetings, risks, decisions & changes, lessons, engineering work, health, gaps, timeline, evidence. Log activity / risk / decision / change / lesson from the room — pre-linked to it |
+| **LeadConnect** `/leads` | Work; Quick create → "Event lead" | one atomic save → customer (if new) + Lead-stage opportunity (value UNKNOWN) + dated follow-up, tagged `event:<name>`; grouped by event, CSV per event; personal-data warning |
+| **Market & Business Case** `/business-case` | Strategy | competitors only from opportunities / company roles; TAM ⊇ SAM ⊇ SOM with a source per figure (UNSOURCED flagged); NPV, payback, margin, ±10 % sensitivity (`src/calculations/businessCase.ts`) — ESTIMATE from your inputs; worksheet kept in this browser, Markdown export |
+| **Radar rings** | Technology Radar | TEAL's ring (Adopt · Evaluate · Monitor · Emerging · Avoid) is a team decision that needs a written reason; market maturity stays separate and evidence-gated |
+| **Multi-step forms** | every create/edit form with 9+ fields | Essentials → Links → Details → Notes & next action; save from any step; validation jumps to the failing step |
+| **Graph focus** | Knowledge Graph | hover / tab to a node → others dim, relation explained; toggle record types to dim them; keyboard re-centre |
 | **Full screen**, **low-power** | record More menu; Appearance → Visual effects "Low power" | presentation only |
 
 ## 9. Verification

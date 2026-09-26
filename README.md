@@ -46,6 +46,9 @@ DOE, FAT and SAT results are never pre-filled.
   **relationship bar**; lists switch between **table, cards and board** and keep **saved views**.
 * **Compare** up to four records side by side; **Ask Intelligence** answers questions from records
   and handbooks with sources and a confidence — local retrieval, no AI model.
+* **Rooms** gather one program, product, POC, supplier, opportunity or customer in one place;
+  **LeadConnect** captures event leads; **Market & Business Case** holds sourced market sizing and an
+  NPV/payback case with sensitivity; the **Technology Radar** carries TEAL's own rings with reasons.
 * Light / dark / system theme, comfortable / compact / reading density, reduced effects — all saved in your browser.
 
 ## Run it

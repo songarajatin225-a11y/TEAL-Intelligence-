@@ -92,6 +92,7 @@ const STATUS: Record<string, Tone> = {
   'In Progress': 'info', Active: 'info', Analysis: 'info', Issued: 'info', Proposal: 'info', Negotiation: 'info', Feasibility: 'info', POC: 'info', Requirement: 'info', Discovery: 'info',
   Blocked: 'bad', Lost: 'bad', 'NO-GO': 'bad', FAIL: 'bad', 'Not feasible': 'bad', Critical: 'bad', Conflicted: 'bad', Cancelled: 'bad',
   Open: 'warn', Waiting: 'warn', 'GO WITH CONDITIONS': 'warn', 'Samples Awaited': 'warn', High: 'warn', 'PASS WITH DEVIATION': 'warn', Mitigating: 'warn', 'At Risk': 'warn', Stale: 'warn',
+  Adopt: 'ok', Evaluate: 'info', Monitor: 'neutral', Emerging: 'accent', Avoid: 'bad',
   Draft: 'draft', Estimated: 'draft', Lead: 'neutral', Planned: 'neutral', 'Not Started': 'neutral', PENDING: 'neutral', 'NOT RUN': 'neutral', Undecided: 'neutral', Deprecated: 'neutral', Obsolete: 'neutral', Unknown: 'neutral',
 };
 const TONE_ICON: Partial<Record<Tone, LucideIcon>> = { ok: CheckCircle2, bad: Ban, warn: AlertTriangle, info: CircleDot, draft: PencilLine, demo: FlaskConical };

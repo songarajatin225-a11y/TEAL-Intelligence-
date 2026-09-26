@@ -54,8 +54,8 @@ export function Layout() {
   }, []);
   const openQuickCreate = useCallback(
     (entity?: string) => {
-      if (entity === 'product') nav('/inquiry');
-      else if (entity === 'configuration') nav('/configurator');
+      const to = CREATE_OPTIONS.find((o) => o.entity === entity)?.to;
+      if (to) nav(to);
       else setCreate(entity ?? 'project');
     },
     [nav],

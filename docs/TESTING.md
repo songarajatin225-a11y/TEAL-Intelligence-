@@ -21,6 +21,7 @@ CI runs all of these (`validate.yml`, `test.yml`, `data-quality.yml`); deploy re
 | `units.test.ts` | unit conversion, quantity parsing (original text preserved), currency never converted without FX |
 | `gates.test.ts` | gate definitions from the handbook; rules R1–R5; critical path and cycle detection |
 | `health.test.ts` | entity health dimensions and status rules, duplicate detection (normalisation, per-type only), Ask Intelligence answers only from matches and says UNKNOWN otherwise |
+| `round3.test.ts` | business case cash flow / NPV / payback / sensitivity, market checks, LeadConnect records (schema-valid, linked, no duplicate customer, refusals), room presets |
 | `attention.test.ts` | Mission Control attention ranking, de-duplication per record, closed work never raised |
 | `ingestion.test.ts` | robots.txt (RFC 9309), refusals (disabled, http, outside inbox, 401/402/403/429, CAPTCHA), parsing with units, company normalization, dedupe conflicts, evidence, schema validation |
 
@@ -49,11 +50,12 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 
 | File | Covers |
 |---|---|
-| `smoke.spec.ts` | all 69 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
+| `smoke.spec.ts` | all 73 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
 | `workflows.spec.ts` | create customer → LOCAL DRAFT → change-package download; inquiry → package → opportunity → traceability; configuration → BOM + cost; FAT generation (NOT RUN); search; configurator physics/compatibility; backup download |
 | `offline.spec.ts` | after one visit the app and data load offline and the shell says so |
 | `intelligence.spec.ts` | health + relationship bar, compare, table/cards/board, saved views, board quick edit, Ask Intelligence, supplier risk matrix, unit converter, duplicates, route aliases |
-| `shell.spec.ts` | navigation shell, command palette, search, shortcuts, quick create, drawers, tabs, pins, theme/density, workspaces, focus mode, help, onboarding, mobile, and **axe-core accessibility** (light + dark) |
+| `rooms.spec.ts` | program room + pre-linked activity, rooms index, LeadConnect, business case, radar rings, multi-step forms, graph focus |
+| `shell.spec.ts` | navigation shell, command palette, search, shortcuts, quick create, drawers, tabs, pins, theme/density, workspaces, focus mode, help, onboarding, mobile, and **axe-core accessibility** (light + dark, 14 pages) |
 
 `tests/e2e/fixtures.ts` fails any test that logs a page error or console error.
 

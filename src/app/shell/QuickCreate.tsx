@@ -1,4 +1,4 @@
-import { Briefcase, ClipboardCheck, FileSearch, FlaskConical, GitBranch, Hammer, Layers, Lightbulb, ListChecks, Package, Plus, ShieldAlert, Sparkles, Truck, Users, Zap, type LucideIcon } from 'lucide-react';
+import { Briefcase, ClipboardCheck, FileSearch, FlaskConical, GitBranch, Hammer, Layers, Lightbulb, ListChecks, Package, Plus, ShieldAlert, Sparkles, Truck, Users, Zap, type LucideIcon, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { EntityForm } from '../../components/EntityForm';
 import { recordPath } from '../../components/RecordLink';
@@ -11,6 +11,7 @@ export const CREATE_OPTIONS: { entity: string; label: string; icon: LucideIcon; 
   { entity: 'configuration', label: 'Machine configuration', icon: Layers, to: '/configurator' },
   { entity: 'project', label: 'Project', icon: Briefcase },
   { entity: 'opportunity', label: 'Opportunity', icon: Zap },
+  { entity: 'lead', label: 'Event lead (LeadConnect)', icon: UserPlus, to: '/leads', hint: 'Customer + opportunity + follow-up in one step' },
   { entity: 'customer', label: 'Customer', icon: Users },
   { entity: 'requirement', label: 'Requirement', icon: ClipboardCheck },
   { entity: 'poc', label: 'POC', icon: FlaskConical },
