@@ -1,4 +1,4 @@
-name: Search index
+name: Data index
 
 # Rebuilds the partitioned MiniSearch indexes and the knowledge graph when data or handbooks
 # change, and reports partition sizes. The deployed site builds its own copy (deploy.yml).

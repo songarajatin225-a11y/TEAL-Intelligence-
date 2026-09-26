@@ -6,7 +6,9 @@ import { recordPath } from '../../components/RecordLink';
 import { Button, Popover, Tooltip } from '../../components/ui';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData, useOnline } from '../../hooks/useData';
-import { workspaceDb, type DraftRow } from '../../repositories/workspaceDb';
+import type { DraftRow } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
+import { providers, type SyncStatus } from '../../services/providers';
 import { attentionCounts, attentionItems, type AttentionItem } from '../../services/attention';
 import { buildChangePackage } from '../../services/changePackage';
 import { download, stamp } from '../../utils/export';
@@ -84,11 +86,13 @@ export function AttentionCenter() {
 
 /** System status (spec §38): connected / offline with cached data, freshness, local data. */
 export function SystemStatus() {
+  const [sync, setSync] = useState<SyncStatus | null>(null);
   const online = useOnline();
   const { catalog, records, loadedAt, drafts } = useData();
   const [sw, setSw] = useState(false);
   useEffect(() => {
     setSw(!!navigator.serviceWorker?.controller);
+    void providers.sync.status().then(setSync);
   }, [loadedAt]);
   return (
     <Popover
@@ -103,8 +107,8 @@ export function SystemStatus() {
           className={clsx('inline-flex h-9 items-center gap-2 rounded-control px-2.5 text-meta font-medium hover:bg-ink/5', online ? 'text-ink-2' : 'bg-warn/10 text-warn')}
         >
           <span className={clsx('signal', online ? 'signal-live text-ok' : 'text-warn')} aria-hidden />
-          <span className={clsx(online && 'hidden xl:inline')}>{online ? 'Connected' : 'Offline — cached engineering data'}</span>
-          <span className="sr-only">{online ? 'System status: connected' : ''}</span>
+          <span className={clsx(online && 'hidden xl:inline')}>{online ? 'Online' : 'Offline — cached engineering data'}</span>
+          <span className="sr-only">{online ? 'System status: online' : ''}</span>
         </button>
       )}
     >
@@ -112,7 +116,7 @@ export function SystemStatus() {
         <div className="space-y-3 p-2.5">
           <div className="flex items-center gap-2 font-semibold">
             {online ? <Wifi className="size-4 text-ok" aria-hidden /> : <CloudOff className="size-4 text-warn" aria-hidden />}
-            {online ? 'Connected' : 'Offline mode'}
+            {online ? 'Online' : 'Offline mode'}
           </div>
           <p className="text-meta text-ink-2">{online ? 'Master data is served from GitHub Pages; your drafts live in this browser.' : 'Showing the last cached copy of the engineering data. Local drafts keep working; nothing is lost.'}</p>
           <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-meta">
@@ -128,6 +132,8 @@ export function SystemStatus() {
             <dd>{sw ? 'Yes — app and visited data cached' : 'After the next visit (service worker installing)'}</dd>
             <dt className="text-ink-3">Local drafts</dt>
             <dd className="num">{drafts}</dd>
+            <dt className="text-ink-3">Sync</dt>
+            <dd>{sync ? `${sync.state}${sync.pending ? ` · ${sync.pending} change(s)` : ''}` : '—'}</dd>
           </dl>
           <Link to="/changed" className="block text-meta font-medium text-accent-2 hover:underline">
             What changed?
@@ -142,16 +148,20 @@ export function SystemStatus() {
 export function DraftsIndicator() {
   const { drafts, loadedAt } = useData();
   const [rows, setRows] = useState<DraftRow[]>([]);
+  const [sync, setSync] = useState<SyncStatus | null>(null);
   useEffect(() => {
-    workspaceDb().drafts.toArray().then(setRows).catch(() => setRows([]));
+    void DatabaseService.drafts().then(setRows);
+    void providers.sync.status().then(setSync);
   }, [drafts, loadedAt]);
   if (!drafts) return null;
   const groups = new Map<string, number>();
   for (const r of rows) groups.set(r.entity, (groups.get(r.entity) ?? 0) + 1);
   const exportPkg = async () => {
-    const log = await workspaceDb().changelog.toArray();
+    const log = await DatabaseService.changelog();
     const { zip } = buildChangePackage(rows, log, '', '');
     download(`teal-change-package-${stamp()}.zip`, zip, 'application/zip');
+    await providers.sync.markExported();
+    setSync(await providers.sync.status());
   };
   return (
     <Popover
@@ -163,6 +173,7 @@ export function DraftsIndicator() {
             <PencilLine className="size-3.5" aria-hidden />
             <span className="num">{drafts}</span>
             <span className="hidden lg:inline">draft{drafts === 1 ? '' : 's'}</span>
+            {sync && sync.state !== 'SYNCED' && <span className="hidden text-micro font-bold tracking-[0.04em] 2xl:inline">· {sync.state === 'SYNC PENDING' ? 'SYNC PENDING' : 'LOCAL DATA'}</span>}
           </button>
         </Tooltip>
       )}
@@ -171,6 +182,11 @@ export function DraftsIndicator() {
         <div className="p-2.5">
           <div className="font-semibold">Workspace drafts</div>
           <p className="mt-0.5 text-meta text-ink-3">Stored only in this browser. Permanent repository update requires a GitHub commit.</p>
+          {sync && (
+            <p className="mt-1.5 text-micro font-semibold tracking-[0.04em] text-draft">
+              {sync.state === 'SYNC PENDING' ? `SYNC PENDING — ${sync.pending} change(s) since the last export` : sync.state === 'LOCAL DATA ONLY' ? 'LOCAL DATA — never exported as a change package' : 'SYNCED — exported; awaiting pull request'}
+            </p>
+          )}
           <ul className="my-2.5 space-y-1">
             {[...groups.entries()].map(([e, n]) => (
               <li key={e} className="flex justify-between text-meta">

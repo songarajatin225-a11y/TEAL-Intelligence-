@@ -3,7 +3,9 @@ import { Bookmark, Download, KanbanSquare, LayoutGrid, Plus, Table2, Trash2 } fr
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { setPrefs, usePrefs, type ListView } from '../../app/prefs';
-import { DataTypeBadge, OriginBadge, StatusBadge, VerificationBadge } from '../../components/badges';
+import { OriginBadge, StatusBadge } from '../../components/badges';
+import { TrustBadge } from '../../components/TrustBadge';
+import { trustLabel } from '../../services/trust';
 import { DataTable } from '../../components/DataTable';
 import { EntityForm } from '../../components/EntityForm';
 import { RecordLink, recordPath } from '../../components/RecordLink';
@@ -98,8 +100,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
         },
         cell: ({ row }: { row: { original: Rec } }) => cellValue(c.kind, (row.original as Record<string, unknown>)[c.key]),
       })),
-      { id: 'data_type', header: 'Data', accessorFn: (r) => r.data_type, cell: ({ row }) => <DataTypeBadge t={row.original.data_type} /> },
-      { id: 'verification', header: 'Verification', accessorFn: (r) => r.provenance?.verification_status, cell: ({ row }) => <VerificationBadge v={row.original.provenance?.verification_status} /> },
+      { id: 'trust', header: 'Trust', accessorFn: (r) => trustLabel(r), cell: ({ row }) => <TrustBadge record={row.original} /> },
     ];
     if (def?.requiresNextAction) cols.push({ id: 'next', header: 'Next action', accessorFn: (r) => r.next_action?.action ?? '', cell: ({ row }) => <NextActionLine record={row.original} /> });
     return cols;

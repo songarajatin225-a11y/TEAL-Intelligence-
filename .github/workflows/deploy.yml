@@ -1,6 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Checkout → Install → Validate → Test → Generate indexes → Build → Deploy (spec §99).
+# Push → Install → Lint → Type check → Validate data → Test → Build → Deploy (spec §99, master prompt §53).
+# validate.yml runs install, data validation, generated-file and secret checks, typecheck and lint;
+# test.yml runs unit/integration and end-to-end tests. Build and deploy run only when both pass.
 # Requires Settings → Pages → Source: "GitHub Actions".
 on:
   push:

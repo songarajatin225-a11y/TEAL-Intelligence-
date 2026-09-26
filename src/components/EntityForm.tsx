@@ -63,7 +63,7 @@ export function EntityForm({ entity, record, onSaved, onCancel, preset }: { enti
   const [saving, setSaving] = useState(false);
   const fields = useMemo(() => ui?.fields ?? [], [ui]);
   const initial = useMemo(() => {
-    const base: FormValues = { name: record?.name ?? '', description: String(record?.description ?? ''), na_action: record?.next_action?.action ?? '', na_due: record?.next_action?.due ?? '', na_owner: record?.next_action?.owner ?? '', owner: String(record?.owner ?? ''), tags: (record?.tags ?? []).join(', ') };
+    const base: FormValues = { name: record?.name ?? String(preset?.name ?? ''), description: String(record?.description ?? preset?.description ?? ''), na_action: record?.next_action?.action ?? '', na_due: record?.next_action?.due ?? '', na_owner: record?.next_action?.owner ?? '', owner: String(record?.owner ?? ''), tags: (record?.tags ?? []).join(', ') };
     for (const f of fields) base[f.key] = toForm(f, record ? (record as Record<string, unknown>)[f.key] : (preset?.[f.key] ?? ui?.defaults?.[f.key]));
     return base;
   }, [record, fields, ui, preset]);

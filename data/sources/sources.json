@@ -143,6 +143,20 @@
       "tags": [
         "specification"
       ]
+    },
+    {
+      "id": "src-os-master-prompt",
+      "entity": "source",
+      "name": "TEAL Intelligence OS — Final Master Prompt (Digital Product & Technology Intelligence Platform)",
+      "description": "TEAL’s product definition for the platform (65 sections): domains, business flow, engines, IA, trust labels, acceptance checklist. Source of the domain taxonomies.",
+      "kind": "internal",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED"
+      },
+      "tags": [
+        "specification"
+      ]
     }
   ]
 }

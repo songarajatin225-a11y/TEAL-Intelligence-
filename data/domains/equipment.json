@@ -1,0 +1,16 @@
+{
+  "dataset": {
+    "id": "equipment",
+    "title": "Equipment intelligence",
+    "description": "Market equipment by domain (semiconductor, battery, EMS …). Empty until records are added from sourced datasheets — nothing is seeded.",
+    "entity": "equipment",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-os-master-prompt"
+    ],
+    "partition": "records"
+  },
+  "records": []
+}

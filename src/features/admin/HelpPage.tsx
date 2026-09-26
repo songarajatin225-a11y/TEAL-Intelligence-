@@ -41,9 +41,9 @@ export default function HelpPage() {
           </ol>
         </Card>
         <Card title="Your data" icon={ShieldCheck}>
-          <p className="text-ink-2">Master data comes from the GitHub repository. Anything you create or edit is a <b className="text-ink">local draft</b> stored only in this browser. Export a change package from Data & Workspace to propose it for the repository.</p>
+          <p className="text-ink-2">Master data comes from the GitHub repository. Anything you create or edit is a <b className="text-ink">local draft</b> stored only in this browser. Export a change package from Data Manager to propose it for the repository.</p>
           <Link to="/admin" className="mt-2 inline-block font-medium text-accent-2 hover:underline">
-            Data & Workspace →
+            Data Manager →
           </Link>
         </Card>
         <Card title="Workspaces" icon={Layers} description="Change emphasis, never data">

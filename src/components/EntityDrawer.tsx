@@ -12,6 +12,7 @@ import { neighbours } from '../services/graph';
 import { DataConfidence, OriginBadge, StatusBadge } from './badges';
 import { fieldLabel, renderValue } from './fieldValue';
 import { HealthBadge, useHealth } from './Health';
+import { TrustBadge } from './TrustBadge';
 import { recordPath } from './RecordLink';
 import { NextActionLine } from './ThreadPanels';
 import { buttonClass, Drawer, IconButton, KV } from './ui';
@@ -49,6 +50,7 @@ export function EntityDrawer({ record, onClose }: { record: (AnyRecord & { __ori
           <span>{def?.label}</span>
           <StatusBadge s={status} />
           {health && <HealthBadge health={health} />}
+          <TrustBadge record={r} />
           <OriginBadge o={r.__origin} />
         </span>
       }

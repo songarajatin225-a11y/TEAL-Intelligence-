@@ -78,6 +78,10 @@ export const ENTITY_DEFS = [
   d({ entity: 'localization', schema: E.Localization, prefix: 'loc', label: 'Localization item', plural: 'Localization items', route: '/localization', partition: 'suppliers', searchFields: ['imported_component', 'indian_alternative', 'classification'], requiresNextAction: false }),
   d({ entity: 'vocabulary', schema: E.Vocabulary, prefix: 'voc', label: 'Vocabulary', plural: 'Vocabularies', route: '/admin', partition: 'knowledge', searchFields: ['key'] }),
   d({ entity: 'formula', schema: E.Formula, prefix: 'fml', label: 'Formula', plural: 'Formulas', route: '/calculators', partition: 'knowledge', searchFields: ['code', 'quantity', 'formula', 'discipline'] }),
+  d({ entity: 'domain', schema: E.Domain, prefix: 'dom', label: 'Domain', plural: 'Domains', route: '/domains', partition: 'knowledge', searchFields: ['code', 'summary', 'lifecycle', 'laser_applications', 'keywords'] }),
+  d({ entity: 'equipment', schema: E.Equipment, prefix: 'eqp', label: 'Equipment', plural: 'Equipment', route: '/equipment', partition: 'records', searchFields: ['equipment_type', 'process', 'material'] }),
+  d({ entity: 'article', schema: E.Article, prefix: 'kb', label: 'Knowledge article', plural: 'Knowledge articles', route: '/articles', partition: 'knowledge', searchFields: ['category', 'summary', 'technical_details', 'design_considerations'] }),
+  d({ entity: 'roadmap_item', schema: E.RoadmapItem, prefix: 'rdm', label: 'Roadmap item', plural: 'Roadmap items', route: '/roadmap', partition: 'records', searchFields: ['kind', 'capability', 'target_market', 'milestone'] }),
   d({ entity: 'reference', schema: E.ReferenceRow, prefix: 'ref', label: 'Reference row', plural: 'Reference data', route: '/admin', partition: 'records', searchFields: ['table'] }),
 ] as const;
 

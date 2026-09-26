@@ -66,6 +66,22 @@ export const HELP: Record<string, HelpEntry> = {
     workflow: ['Type the event once.', 'Company, contact, product of interest, what they asked.', 'Save — the form clears for the next visitor.', 'After the show, work the follow-ups in My Workspace.'],
   },
   '/business-case': { what: 'Competitors recorded on opportunities and companies, market size with a source for every figure, and a cash-flow business case (NPV, payback, margin) with ±10 % sensitivity. Nothing is looked up or invented.', terms: [['TAM / SAM / SOM', 'Total, serviceable and obtainable market — each must be a subset of the one before.'], ['NPV', 'Σ cash flow ÷ (1 + r)^year, year 0 = investment.']] },
+  '/value': { what: 'Business value of the platform: records held, how much is reused across products, which domains are covered and where products stand. Counts of records only.' },
+  '/domains': { what: 'The domain architecture: Laser & Photonics, Electronics & EMS, Semiconductor, Battery & New Energy, Industrial Automation, Advanced Manufacturing. Each domain is a data record — adding a domain needs no code.' },
+  '/cross-domain': { what: 'Technology × domain matrix. A number is TEAL application records in that domain’s industries; ● means the domain’s taxonomy names the technology. Empty means no record says so.' },
+  '/solution': {
+    what: 'The Application Intelligence engine and universal configurator: industry → part → material → process → application → technology → machine → subsystem, then requirements, architecture, suppliers, indicative BOM and cost, risks, localization and development complexity.',
+    terms: [['Complexity', 'High = no catalogued application or a failed check; Medium = modules added, warnings, or inline / fully automatic handling; Low otherwise.'], ['Automation level', 'Adds handling modules by a published rule, only where they fit the platform and do not conflict.']],
+    workflow: ['Pick industry, material and process.', 'Choose one of the matching TEAL applications.', 'Set throughput, accuracy and automation.', 'Open in the configurator or create an opportunity.'],
+  },
+  '/product-architecture': { what: 'Product → system → subsystem → module → component, with specification, supplier and cost at the leaves, for a platform’s standard configuration or a saved configuration.' },
+  '/development': { what: 'Product development lifecycle (17 stages). Each opportunity or project sits at its first stage without evidence; every stage shows the rule it needs.' },
+  '/capture': { what: 'Structured customer requirements. Each filled field becomes a URS requirement; nothing is filled in for the customer and no acceptance criterion is assumed.' },
+  '/execution': { what: 'Project tasks and activities as kanban, table, timeline, calendar and milestones, plus a severity × occurrence risk matrix. Moving a card saves a local draft.' },
+  '/documents': { what: 'Generate PRD, RFQ, technical specification, BOM, supplier comparison, POC plan, DFM checklist, validation plan, MOM, product review and technology assessment from records. UNKNOWN where nothing is recorded.' },
+  '/opportunity-matrix': { what: 'Every opportunity against market, industry, customer, application, technology, market size, capability, partner need, investment, development time, localization and strategic relevance. No automatic scores.' },
+  '/settings': { what: 'Appearance, workspace, the provider seams (data, search, sync, auth) and the honest security limits of a static GitHub Pages app.' },
+  '/import-export': { what: 'Export any dataset as CSV/JSON, export drafts as a change package, back up or restore the workspace, import legacy data.' },
   '/compare': { what: 'Up to four records of one type side by side. Rows that differ are highlighted; “Only differences” hides the rest. Unknown values stay unknown.', workflow: ['Pick a type, or use “Compare with…” on a record.', 'Add records.', 'Toggle “Only differences”.'] },
   '/supplier-risk': { what: 'Recorded supplier risk against dependency (component-master items naming the supplier). Suppliers without an assessment stay UNKNOWN — the system never assigns risk.', terms: [['Single-source', 'The supplier is the only vendor for that component category.'], ['Long-lead', 'Lead time of 8 weeks or more.']] },
   '/duplicates': { what: 'Likely duplicate records within each type, with the rule that matched. Nothing is merged automatically — compare the pair, then edit or delete one as a local draft.' },
@@ -80,6 +96,9 @@ export function helpFor(pathname: string): HelpEntry | undefined {
 }
 
 export const GLOSSARY: [string, string][] = [
+  ['Trust labels', 'VERIFIED · REFERENCE · ESTIMATED · USER ADDED · TO BE VALIDATED · DEMO DATA — one label per record, derived from its data type, verification and origin.'],
+  ['TRL', 'Technology Readiness Level 1–9. Maturity lane follows only from TRL: 1–3 Emerging, 4–5 Experimental, 6–7 Developing, 8–9 Mature, 9 + ≥3 suppliers Commodity.'],
+  ['Sync pending', 'Local changes made after the last change-package export. Nothing syncs automatically; a pull request makes changes permanent.'],
   ['Health', 'Healthy · Attention · At Risk · Incomplete — computed from completeness, evidence, thread gaps, timeliness and open risks. Every dimension shows its reason.'],
   ['Digital thread', 'Every record links to the ones it came from and leads to: inquiry → requirement → product → BOM → cost → project → FAT/SAT → field → lesson.'],
   ['Local draft', 'Created or edited in this browser. Permanent repository update requires a GitHub commit (via a change package).'],

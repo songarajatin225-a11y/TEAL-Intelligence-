@@ -4,9 +4,10 @@ import { DataTypeBadge, OriginBadge, VerificationBadge } from '../../components/
 import { Badge, Button, Card, EmptyState, ErrorState, Input, Loading, PageHeader } from '../../components/ui';
 import { ENTITY_BY_TYPE, SEARCH_PARTITIONS, type SearchPartition } from '../../domain/registry';
 import { useData } from '../../hooks/useData';
-import { workspaceDb } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
 import { facets, hitLink, search, type Hit } from '../../services/search';
 import { BOOK_TITLES } from '../../services/knowledgeChunks';
+import { ParametricPanel } from '../../components/ParametricPanel';
 export { hitLink };
 
 export function HitRow({ h, q }: { h: Hit; q: string }) {
@@ -58,7 +59,7 @@ export default function SearchPage() {
 
   return (
     <div>
-      <PageHeader eyebrow="Knowledge" title="Search" subtitle={'Products, companies, suppliers, lasers, optics, modules, applications, processes, materials, POCs, projects, requirements and the three handbooks. Try: 50W 1064nm nanosecond laser marking source · entity:module vision · "process window" · book:automation takt'} />
+      <PageHeader eyebrow="Knowledge" title="Search" subtitle={'Products, companies, suppliers, lasers, optics, modules, applications, processes, materials, POCs, projects, requirements and the three handbooks. Try: 20–50W UV laser semiconductor marking · 50W 1064nm nanosecond laser marking source · entity:module vision · "process window" · book:automation takt'} />
       <form
         className="mb-3 flex flex-wrap gap-2"
         onSubmit={(e) => {
@@ -72,7 +73,7 @@ export default function SearchPage() {
         </Button>
         <Button
           onClick={async () => {
-            if (q) await workspaceDb().saved.add({ query: q, partitions: parts, created_at: new Date().toISOString() });
+            if (q) await DatabaseService.addSavedSearch({ query: q, partitions: parts, created_at: new Date().toISOString() });
           }}
         >
           Save search
@@ -85,6 +86,11 @@ export default function SearchPage() {
           </Button>
         ))}
       </div>
+      {q && (
+        <div className="mb-3">
+          <ParametricPanel q={q} />
+        </div>
+      )}
       {!q ? (
         <EmptyState title="Search the engineering system" explain="Everything in the master data, your local drafts and 1,000+ handbook sections is indexed. Filters and facets appear with results." />
       ) : err ? (

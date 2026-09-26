@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { RecordLink } from '../../components/RecordLink';
 import { Badge, Card, PageHeader, Table } from '../../components/ui';
 import { useData } from '../../hooks/useData';
-import { workspaceDb, type ChangeLogRow } from '../../repositories/workspaceDb';
+import { type ChangeLogRow } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
 import { fmtDate, todayIso, daysBetween } from '../../utils/dates';
 
 /**
@@ -14,7 +15,7 @@ export default function ChangedPage() {
   const { records, catalog } = useData();
   const [log, setLog] = useState<ChangeLogRow[]>([]);
   useEffect(() => {
-    workspaceDb().changelog.orderBy('seq').reverse().limit(200).toArray().then(setLog).catch(() => setLog([]));
+    void DatabaseService.changelog({ limit: 200 }).then(setLog);
   }, [records]);
   const today = todayIso();
   const flags = useMemo(() => {

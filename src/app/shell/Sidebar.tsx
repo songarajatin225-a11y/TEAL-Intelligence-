@@ -85,7 +85,7 @@ function SectionFlyout({ section, pathname }: { section: NavSection; pathname: s
   const show = () => {
     window.clearTimeout(timer.current);
     const r = anchor.current?.getBoundingClientRect();
-    if (r) setPos({ top: Math.min(r.top, window.innerHeight - 40 - section.pages.length * 34), left: r.right + 6 });
+    if (r) setPos({ top: Math.max(8, Math.min(r.top, window.innerHeight - 40 - section.pages.length * 34)), left: r.right + 6 });
   };
   const hide = () => {
     timer.current = window.setTimeout(() => setPos(null), 120);
@@ -107,15 +107,20 @@ function SectionFlyout({ section, pathname }: { section: NavSection; pathname: s
           <div id={`fly-${section.id}`} className="fixed z-[65]" style={{ top: Math.max(8, pos.top), left: pos.left }} onMouseEnter={show} onMouseLeave={hide} onClick={() => setPos(null)}>
             <div className="glass-strong w-60 animate-pop-in rounded-card p-1.5">
               <div className="px-2.5 pt-1 pb-1.5 text-micro font-semibold uppercase tracking-[0.08em] text-ink-3">{section.label}</div>
-              <ul>
-                {section.pages.map((p) => (
+              <ul className="scroll-thin max-h-[calc(100vh-5rem)] overflow-y-auto">
+                {section.pages.map((p, pi) => [
+                  p.group && p.group !== section.pages[pi - 1]?.group && (
+                    <li key={`g-${p.group}`} aria-hidden className="px-2.5 pt-1.5 pb-0.5 text-micro font-semibold uppercase tracking-[0.07em] text-ink-3">
+                      {p.group}
+                    </li>
+                  ),
                   <li key={p.to}>
                     <NavLink to={p.to} end={p.to === '/'} onBlur={hide} onFocus={show} className={({ isActive: a }) => clsx('flex items-center gap-2.5 rounded-lg px-2.5 py-1.5', a ? 'bg-accent-soft text-accent-2' : 'hover:bg-ink/5')}>
                       <p.icon className="size-4 shrink-0 opacity-80" aria-hidden />
                       {p.label}
                     </NavLink>
-                  </li>
-                ))}
+                  </li>,
+                ])}
               </ul>
             </div>
           </div>,
@@ -205,7 +210,12 @@ export function Sidebar({ mobile, onNavigate }: { mobile?: boolean; onNavigate?:
                     </button>
                     {open && (
                       <ul id={listId} className="mt-0.5 mb-1.5 ml-[1.15rem] space-y-px border-l border-line pl-2">
-                        {section.pages.map((p) => (
+                        {section.pages.map((p, pi) => [
+                          p.group && p.group !== section.pages[pi - 1]?.group && (
+                            <li key={`g-${p.group}`} aria-hidden className="px-2 pt-2 pb-0.5 text-micro font-semibold uppercase tracking-[0.07em] text-ink-3 first:pt-0.5">
+                              {p.group}
+                            </li>
+                          ),
                           <li key={p.to}>
                             <NavLink
                               to={p.to}
@@ -214,8 +224,8 @@ export function Sidebar({ mobile, onNavigate }: { mobile?: boolean; onNavigate?:
                             >
                               {p.label}
                             </NavLink>
-                          </li>
-                        ))}
+                          </li>,
+                        ])}
                       </ul>
                     )}
                   </li>

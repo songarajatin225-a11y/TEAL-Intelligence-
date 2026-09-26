@@ -249,6 +249,48 @@
     },
     "industry": {
       "type": "string"
+    },
+    "market": {
+      "type": "string"
+    },
+    "domain_id": {
+      "type": "string"
+    },
+    "technology_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "market_size": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "market_size_source": {
+      "type": "string"
+    },
+    "teal_capability": {
+      "type": "string"
+    },
+    "partner_requirement": {
+      "type": "string"
+    },
+    "investment": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "development_time": {
+      "type": "string"
+    },
+    "localization_potential": {
+      "type": "string"
+    },
+    "strategic_relevance": {
+      "type": "string"
     }
   },
   "required": [

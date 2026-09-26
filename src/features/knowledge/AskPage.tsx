@@ -2,13 +2,14 @@ import { ArrowRight, BookOpen, FileSearch, Lightbulb, Link2, MessageSquareText, 
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { DataTypeBadge, VerificationBadge } from '../../components/badges';
+import { ParametricPanel } from '../../components/ParametricPanel';
 import { Badge, Button, Card, ErrorState, Input, Loading, Notice, PageHeader } from '../../components/ui';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData } from '../../hooks/useData';
 import { composeAnswer, type Answer, type AnswerItem } from '../../services/ask';
 import { search } from '../../services/search';
 
-const EXAMPLES = ['What laser is used for marking stainless steel?', 'Which suppliers provide motion components?', 'How is takt time calculated?', 'What does the G1 gate require?', 'Fibre laser for PCB depaneling'];
+const EXAMPLES = ['Find 20–50W UV lasers suitable for semiconductor marking', 'What laser is used for marking stainless steel?', 'Which suppliers provide motion components?', 'How is takt time calculated?', 'What does the G1 gate require?', 'Fibre laser for PCB depaneling'];
 const CONF_TONE = { High: 'ok', Medium: 'warn', Low: 'bad', None: 'neutral' } as const;
 
 function Items({ items, empty }: { items: AnswerItem[]; empty: string }) {
@@ -97,6 +98,7 @@ export default function AskPage() {
           </ul>
         </Card>
       )}
+      {q && <ParametricPanel q={q} />}
       {busy && <Loading label="Searching the knowledge base…" />}
       {err && <ErrorState what="The search index could not be loaded." why="The index files may not be cached for offline use yet." todo="Reconnect and try again." />}
 

@@ -547,3 +547,23 @@ export function costOfOwnership(p: { fixed?: number | null; recurring?: number |
     positive('TH', 'U', 'Y', 'H'),
   );
 }
+
+/** C1 (rearranged) — gross margin GM = (P − C) / P */
+export function grossMargin(p: { price?: number | null; cost?: number | null }): CalcResult {
+  return calc(
+    { id: 'gross_margin', label: 'Gross margin', formula: 'GM = (P − C) / P', unit: '%', source: { ...part54('C1', 'cost'), citation: `${part54('C1', 'cost').citation} (rearranged)` }, assumptions: ['Cost and price in the same currency and on the same basis (e.g. both ex-works)'] },
+    [input('P', 'Selling price', p.price, 'INR'), input('C', 'Cost', p.cost, 'INR')],
+    (v) => ((v.P - v.C) / v.P) * 100,
+    positive('P'),
+  );
+}
+
+/** Local content share LC = local cost / total cost (import dependency = 1 − LC) */
+export function localContent(p: { local_cost?: number | null; imported_cost?: number | null }): CalcResult {
+  return calc(
+    { id: 'local_content', label: 'Local content', formula: 'LC = C_local / (C_local + C_import)', unit: '%', source: { citation: 'Definition — value share of locally sourced cost (Semiconductor Handbook Part XXXVIII discusses localization; no formula code)' }, assumptions: ['Both costs landed and in the same currency', 'Import dependency = 100 % − LC'] },
+    [input('L', 'Local cost', p.local_cost, 'INR'), input('I', 'Imported cost (landed)', p.imported_cost, 'INR')],
+    (v) => (v.L / (v.L + v.I)) * 100,
+    (v) => (v.L + v.I > 0 && v.L >= 0 && v.I >= 0 ? null : 'Costs must be ≥ 0 and not both zero'),
+  );
+}

@@ -609,18 +609,18 @@ export function Chain({ steps, label }: { steps: { label: ReactNode; sub?: React
               s.to && 'hover:border-accent',
             )}
           >
-            <div className="text-meta font-semibold text-ink">{s.label}</div>
+            <div className={clsx('text-meta font-semibold text-ink', steps.length > 9 && 'whitespace-nowrap')}>{s.label}</div>
             {s.sub != null && <div className="num text-micro text-ink-3">{s.sub}</div>}
           </div>
         );
         return (
-          <li key={i} className={clsx('flex flex-1 items-center', steps.length > 7 ? 'min-w-[4.75rem]' : 'min-w-[6.5rem]')}>
+          <li key={i} className={clsx('flex items-center', steps.length > 9 ? 'flex-none' : steps.length > 7 ? 'min-w-[4.75rem] flex-1' : 'min-w-[6.5rem] flex-1')}>
             {s.to ? (
-              <Link to={s.to} className="block min-w-0 flex-1 rounded-control">
+              <Link to={s.to} className={clsx('block rounded-control', steps.length > 9 ? 'flex-none' : 'min-w-0 flex-1')}>
                 {inner}
               </Link>
             ) : (
-              <div className="min-w-0 flex-1">{inner}</div>
+              <div className={steps.length > 9 ? 'flex-none' : 'min-w-0 flex-1'}>{inner}</div>
             )}
             {i < steps.length - 1 && (
               <span className={clsx('flex shrink-0 items-center text-accent', steps.length > 7 ? 'w-3.5' : 'w-5')} aria-hidden>

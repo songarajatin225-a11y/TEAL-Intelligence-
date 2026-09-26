@@ -5,6 +5,8 @@ import { Badge, Button, Card, PageHeader, Select, Stat, Table } from '../../comp
 import type { AnyRecord } from '../../domain';
 import { useData } from '../../hooks/useData';
 import { reportMarkdown, runDataQuality, type DQIssue } from '../../services/dataQuality';
+import { findDuplicates } from '../../services/duplicates';
+import { Link } from 'react-router-dom';
 import { download, stamp } from '../../utils/export';
 
 const SEV_TONE = { error: 'bad', warning: 'warn', info: 'info' } as const;
@@ -14,18 +16,22 @@ const SEV_TONE = { error: 'bad', warning: 'warn', info: 'info' } as const;
  * → reports/data-quality.md), here applied to master + this browser's local drafts.
  */
 export default function DataQualityPage() {
-  const { records } = useData();
+  const { records, catalog } = useData();
   const [scope, setScope] = useState<'all' | 'local'>('all');
   const [sev, setSev] = useState<'' | DQIssue['severity']>('');
   const [check, setCheck] = useState('');
   const report = useMemo(() => runDataQuality(records as unknown as AnyRecord[]), [records]);
   const localIds = useMemo(() => new Set(records.filter((r) => r.__origin !== 'MASTER').map((r) => r.id)), [records]);
+  const dupes = useMemo(() => findDuplicates(records as unknown as AnyRecord[]).length, [records]);
+  const withIssue = useMemo(() => new Set(report.issues.filter((i) => i.severity === 'error' && i.id).map((i) => i.id)), [report]);
+  const missingSources = useMemo(() => records.filter((r) => r.entity !== 'source' && !r.provenance?.source_id && r.data_type !== 'USER_CREATED' && r.data_type !== 'CALCULATED').length, [records]);
+  const lastUpdated = catalog?.datasets.map((d) => d.last_updated).sort().at(-1);
   const issues = report.issues.filter((i) => (scope === 'all' || (i.id && localIds.has(i.id))) && (!sev || i.severity === sev) && (!check || i.check === check));
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Admin"
-        title="Data Quality"
+        eyebrow="Data"
+        title="Data Health"
         subtitle="Missing ids, broken references, unregistered sources, unknown units, duplicates, stale prices and verifications, undated FX, conflicts. Errors fail the CI data-quality gate; warnings are reported."
         actions={
           <Button onClick={() => download(`data-quality-${stamp()}.md`, reportMarkdown(report), 'text/markdown')}>
@@ -33,13 +39,18 @@ export default function DataQualityPage() {
           </Button>
         }
       />
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
-        <Stat label="Records checked" value={report.records} />
-        <Stat label="Errors" value={report.errors} tone={report.errors ? 'bad' : 'ok'} />
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-4 xl:grid-cols-7">
+        <Stat label="Records" value={report.records} sub={`${localIds.size} local drafts included`} />
+        <Stat label="Valid" value={report.records - withIssue.size} sub="no error-level issue" tone="ok" />
         <Stat label="Warnings" value={report.warnings} tone={report.warnings ? 'warn' : 'ok'} />
-        <Stat label="Info" value={report.issues.length - report.errors - report.warnings} />
-        <Stat label="Local records" value={localIds.size} sub="drafts included" />
+        <Stat label="Errors" value={report.errors} tone={report.errors ? 'bad' : 'ok'} />
+        <Stat label="Duplicates" value={dupes} sub="likely pairs" tone={dupes ? 'warn' : undefined} to="/duplicates" />
+        <Stat label="Missing sources" value={missingSources} sub="no provenance source" tone={missingSources ? 'warn' : undefined} />
+        <Stat label="Last updated" value={<span className="text-section">{lastUpdated ?? '—'}</span>} sub="newest dataset" />
       </div>
+      <p className="text-micro text-ink-3">
+        Missing sources counts records other than user-created or calculated ones with no provenance source. Review duplicates on <Link to="/duplicates" className="text-accent-2 hover:underline">Duplicates</Link>.
+      </p>
       <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
         <Card title="By data type">
           <Counts o={report.by_data_type} />

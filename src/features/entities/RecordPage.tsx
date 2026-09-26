@@ -7,6 +7,7 @@ import { DataConfidence, DataTypeBadge, OriginBadge, StatusBadge, VerificationBa
 import { EntityForm } from '../../components/EntityForm';
 import { HealthBadge, HealthCard, useHealth } from '../../components/Health';
 import { RelationshipBar } from '../../components/RelationshipBar';
+import { TrustBadge } from '../../components/TrustBadge';
 import { fieldLabel, renderValue } from '../../components/fieldValue';
 import { RecordLink } from '../../components/RecordLink';
 import { AiContextDrawer, GapsPanel, LinkedRecords, NextActionLine, SimilarPanel } from '../../components/ThreadPanels';
@@ -17,7 +18,8 @@ import type { AnyRecord } from '../../domain';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData, type Rec } from '../../hooks/useData';
 import { repo } from '../../repositories';
-import { workspaceDb, type ChangeLogRow } from '../../repositories/workspaceDb';
+import { type ChangeLogRow } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
 import { whatIsMissing } from '../../services/gaps';
 import { neighbours } from '../../services/graph';
 import { whyForRecord } from '../../services/why';
@@ -181,6 +183,7 @@ export default function RecordPage() {
             <StatusBadge s={status} />
             {health && <HealthBadge health={health} />}
             <OriginBadge o={r.__origin} />
+            <TrustBadge record={r} />
             <DataConfidence dataType={r.data_type} verification={p?.verification_status} source={p?.document ?? p?.source_id} lastVerified={p?.last_verified} />
             {r.updated_at && <span className="text-micro text-ink-3">· updated {fmtDate(r.updated_at)}</span>}
           </div>
@@ -227,7 +230,7 @@ export default function RecordPage() {
           {r.data_type === 'DEMO'
             ? 'Demo record — fictional data that demonstrates the workflow. Not real customer or engineering data.'
             : isDraft
-              ? 'Local draft — stored only in this browser. Permanent repository update requires a GitHub commit (Data & Workspace → change package).'
+              ? 'Local draft — stored only in this browser. Permanent repository update requires a GitHub commit (Data Manager → change package).'
               : 'Draft — generated or entered without validation. Review before relying on it.'}
         </Notice>
       )}
@@ -273,6 +276,7 @@ export default function RecordPage() {
               <Card title="Trust" description="Where this came from and how far to rely on it">
                 <KV
                   items={[
+                    ['Trust label', <TrustBadge key="t" record={r} />],
                     ['Data type', <DataTypeBadge key="d" t={r.data_type} />],
                     ['Verification', <VerificationBadge key="v" v={p?.verification_status} />],
                     ['Source', p?.source_id ? <RecordLink id={p.source_id} /> : <Unknown label="not recorded" />],
@@ -401,13 +405,7 @@ function EvidenceTab({ record }: { record: Rec }) {
 function HistoryTab({ record }: { record: Rec }) {
   const [rows, setRows] = useState<ChangeLogRow[] | null>(null);
   useEffect(() => {
-    workspaceDb()
-      .changelog.where('record_id')
-      .equals(record.id)
-      .reverse()
-      .sortBy('seq')
-      .then(setRows)
-      .catch(() => setRows([]));
+    void DatabaseService.changelog({ recordId: record.id }).then(setRows);
   }, [record.id, record.updated_at]);
   return (
     <Card title="History" description="Local changes in this browser. Master-data history is the Git log of its dataset.">
