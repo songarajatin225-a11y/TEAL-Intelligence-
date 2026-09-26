@@ -74,6 +74,23 @@
       "sha256": "ab3a784ad71f3ec9"
     },
     {
+      "id": "acceptance-checklists",
+      "title": "FAT / SAT / production-release checklists",
+      "path": "config/acceptance-checklists.json",
+      "description": "Checklist items verbatim from the Automation Equipment Building Handbook (§38.8 sample FAT checklist, §57.12 FAT readiness G8, §57.13 SAT readiness G9, §57.14 production release G10).",
+      "entity": "config",
+      "kind": "config",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": null,
+      "source_ids": [
+        "src-automation-handbook"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "sha256": "5c7b5b9e6be8a4bd"
+    },
+    {
       "id": "configurator-pricing-rules",
       "title": "Configurator pricing rules",
       "path": "config/configurator-pricing-rules.json",
@@ -122,7 +139,7 @@
         "src-legacy-laser-sim"
       ],
       "data_type": "TEAL_INTERNAL",
-      "sha256": "eb9e4c7385691f76"
+      "sha256": "3953df05fc6565f3"
     },
     {
       "id": "cost-templates",

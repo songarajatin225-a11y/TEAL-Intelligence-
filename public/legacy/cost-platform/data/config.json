@@ -1,0 +1,164 @@
+{
+  "company": {
+    "name": "Titan Engineering & Automation Limited",
+    "short": "TEAL",
+    "tagline": "A Tata Enterprise",
+    "product": "Costing & Estimation Platform"
+  },
+  "brand": {
+    "logo": "",
+    "logoDark": ""
+  },
+  "businessUnits": [
+    "Factory Automation",
+    "Special Purpose Machines",
+    "Semiconductor Equipment",
+    "Laser Systems",
+    "Vision Systems",
+    "Robotics & Material Handling",
+    "Tooling & Fixtures",
+    "Precision Machining",
+    "Sheet Metal Fabrication",
+    "Electrical Control Panels",
+    "Process Equipment",
+    "Industrial Automation",
+    "Service & AMC",
+    "R&D / Prototype"
+  ],
+  "productCategories": [
+    "Assembly Line",
+    "Test & Inspection Station",
+    "Laser Marking System",
+    "Laser Welding Cell",
+    "Laser Cleaning System",
+    "ATMP Equipment",
+    "Pick & Place Cell",
+    "Leak Test Machine",
+    "Control Panel",
+    "Fixture Set",
+    "Machined Component",
+    "Retrofit / Upgrade",
+    "AMC Contract",
+    "Prototype Build"
+  ],
+  "roles": {
+    "Super Admin": {
+      "modules": "all",
+      "masters": true,
+      "approve": true,
+      "export": true,
+      "admin": true
+    },
+    "Admin": {
+      "modules": "all",
+      "masters": true,
+      "approve": true,
+      "export": true,
+      "admin": true
+    },
+    "Cost Engineer": {
+      "modules": "all",
+      "masters": false,
+      "approve": false,
+      "export": true,
+      "admin": false
+    },
+    "Mechanical Engineer": {
+      "modules": [
+        "material",
+        "mechanical",
+        "manufacturing"
+      ],
+      "masters": false,
+      "approve": false,
+      "export": false,
+      "admin": false
+    },
+    "Electrical Engineer": {
+      "modules": [
+        "electrical",
+        "software"
+      ],
+      "masters": false,
+      "approve": false,
+      "export": false,
+      "admin": false
+    },
+    "Procurement": {
+      "modules": [
+        "material"
+      ],
+      "masters": true,
+      "approve": false,
+      "export": true,
+      "admin": false
+    },
+    "Manufacturing": {
+      "modules": [
+        "manufacturing",
+        "labour"
+      ],
+      "masters": false,
+      "approve": false,
+      "export": false,
+      "admin": false
+    },
+    "Finance": {
+      "modules": [],
+      "masters": true,
+      "approve": true,
+      "export": true,
+      "admin": false
+    },
+    "Sales": {
+      "modules": [
+        "commercial",
+        "amc"
+      ],
+      "masters": false,
+      "approve": false,
+      "export": true,
+      "admin": false
+    },
+    "Project Manager": {
+      "modules": "all",
+      "masters": false,
+      "approve": false,
+      "export": true,
+      "admin": false
+    },
+    "Viewer": {
+      "modules": [],
+      "masters": false,
+      "approve": false,
+      "export": false,
+      "admin": false
+    }
+  },
+  "defaults": {
+    "landed": {
+      "freightPct": 2,
+      "dutyPct": 0,
+      "landingPct": 1.5,
+      "gstPct": 18,
+      "siteContPct": 8
+    },
+    "markup": {
+      "overheadPct": 14,
+      "contingencyPct": 3,
+      "profitPct": 18
+    },
+    "currency": "INR",
+    "codePrefix": "TEAL-Q26-"
+  },
+  "statuses": [
+    "Draft",
+    "Submitted",
+    "Under Review",
+    "Approved",
+    "Quoted",
+    "Won",
+    "Lost",
+    "Returned"
+  ]
+}

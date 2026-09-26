@@ -79,7 +79,10 @@
         "lead frame",
         "decap",
         "interposer",
-        "package mark"
+        "package mark",
+        "package",
+        "strip",
+        "leadframe"
       ],
       "volt": [
         "battery",
@@ -190,7 +193,10 @@
         "bga",
         "qfp",
         "soic",
-        "encapsulat"
+        "encapsulat",
+        "package",
+        "ic package",
+        "semiconductor package"
       ]
     },
     "need": {
@@ -386,6 +392,28 @@
         "throughput",
         "speed"
       ]
+    },
+    "_os_additions": {
+      "process": {
+        "semi": [
+          "package",
+          "strip",
+          "leadframe"
+        ]
+      },
+      "material": {
+        "emc": [
+          "package",
+          "ic package",
+          "semiconductor package"
+        ]
+      },
+      "need": {
+        "magazine": [
+          "strip",
+          "magazine"
+        ]
+      }
     }
   }
 }

@@ -508,8 +508,50 @@ function technology() {
   return records.length;
 }
 
+/* ======================================= acceptance / release checklists */
+function checklists() {
+  const section = (prefix: string, heading: string) => {
+    const { file, text } = readPart('automation', prefix);
+    const start = text.indexOf(`### ${heading}`);
+    if (start < 0) throw new Error(`Section not found: ${heading}`);
+    const rest = text.slice(start + 4 + heading.length);
+    const end = rest.search(/\n### /);
+    const body = end >= 0 ? rest.slice(0, end) : rest;
+    const items: { section: string; item: string }[] = [];
+    let cur = 'General';
+    for (const l of body.split('\n')) {
+      const t = l.trim();
+      if (!t) continue;
+      if (t.startsWith('- ')) items.push({ section: cur, item: t.slice(2).trim() });
+      else if (!t.startsWith('|') && t.length < 40) cur = t;
+    }
+    if (!items.length) throw new Error(`No items in ${heading}`);
+    return { ref: ref('automation', file, heading), heading, items };
+  };
+  const fat = section('47-', '38.8 Sample FAT checklist');
+  const g8 = section('79-', '57.12 FAT readiness (G8)');
+  const g9 = section('79-', '57.13 SAT readiness (G9)');
+  const g10 = section('79-', '57.14 Production release (G10)');
+  writeJson(join(DATA_DIR, 'config', 'acceptance-checklists.json'), {
+    dataset: {
+      id: 'acceptance-checklists',
+      kind: 'config',
+      title: 'FAT / SAT / production-release checklists',
+      description: 'Checklist items verbatim from the Automation Equipment Building Handbook (§38.8 sample FAT checklist, §57.12 FAT readiness G8, §57.13 SAT readiness G9, §57.14 production release G10).',
+      entity: 'config',
+      version: '1.0.0',
+      last_updated: TODAY,
+      data_type: 'TEAL_INTERNAL',
+      source_ids: ['src-automation-handbook'],
+    },
+    config: { fat, fat_readiness: g8, sat_readiness: g9, production_release: g10 },
+  });
+  return fat.items.length + g8.items.length + g9.items.length + g10.items.length;
+}
+
 const g = gates();
+const ck = checklists();
 const f = formulas();
 const s = semiconductor();
 const t = technology();
-console.log(`gates=${g} formulas=${f} semi=${JSON.stringify(s)} technologies=${t}`);
+console.log(`checklist items=${ck} gates=${g} formulas=${f} semi=${JSON.stringify(s)} technologies=${t}`);

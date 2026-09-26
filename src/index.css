@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+/* TEAL Engineering Intelligence OS — industrial, dense, structured (spec §116). */
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: var(--c-bg);
+  --color-panel: var(--c-panel);
+  --color-panel-2: var(--c-panel-2);
+  --color-line: var(--c-line);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-accent: var(--c-accent);
+  --color-accent-2: var(--c-accent-2);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-ok: var(--c-ok);
+  --color-warn: var(--c-warn);
+  --color-bad: var(--c-bad);
+  --color-info: var(--c-info);
+  --color-demo: var(--c-demo);
+  --color-draft: var(--c-draft);
+}
+
+:root {
+  --c-bg: #f3f5f6;
+  --c-panel: #ffffff;
+  --c-panel-2: #f8fafa;
+  --c-line: #dde3e6;
+  --c-ink: #13232b;
+  --c-ink-2: #3f525c;
+  --c-ink-3: #6b7d87;
+  --c-accent: #00838a;
+  --c-accent-2: #006a70;
+  --c-accent-soft: #e2f3f3;
+  --c-ok: #1b7f5a;
+  --c-warn: #a86a00;
+  --c-bad: #b3261e;
+  --c-info: #2a5db0;
+  --c-demo: #7a4fb0;
+  --c-draft: #b8800c;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0d161b;
+    --c-panel: #131f25;
+    --c-panel-2: #172630;
+    --c-line: #26363f;
+    --c-ink: #e3ecef;
+    --c-ink-2: #b5c4cb;
+    --c-ink-3: #82949d;
+    --c-accent: #2bb7bd;
+    --c-accent-2: #5fd0d4;
+    --c-accent-soft: #123237;
+    --c-ok: #4cc28e;
+    --c-warn: #e0a53a;
+    --c-bad: #ef6b62;
+    --c-info: #7aa6ee;
+    --c-demo: #b594e0;
+    --c-draft: #e3b54a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --c-bg: #0d161b;
+  --c-panel: #131f25;
+  --c-panel-2: #172630;
+  --c-line: #26363f;
+  --c-ink: #e3ecef;
+  --c-ink-2: #b5c4cb;
+  --c-ink-3: #82949d;
+  --c-accent: #2bb7bd;
+  --c-accent-2: #5fd0d4;
+  --c-accent-soft: #123237;
+  --c-ok: #4cc28e;
+  --c-warn: #e0a53a;
+  --c-bad: #ef6b62;
+  --c-info: #7aa6ee;
+  --c-demo: #b594e0;
+  --c-draft: #e3b54a;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+.md h1 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 1.2rem 0 0.5rem;
+}
+.md h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.1rem 0 0.4rem;
+  scroll-margin-top: 80px;
+}
+.md h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0.9rem 0 0.3rem;
+  scroll-margin-top: 80px;
+}
+.md p {
+  margin: 0.4rem 0;
+  max-width: 78ch;
+}
+.md ul {
+  list-style: disc;
+  padding-left: 1.3rem;
+  margin: 0.4rem 0;
+}
+.md table {
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+  font-size: 12px;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.md th,
+.md td {
+  border: 1px solid var(--c-line);
+  padding: 4px 7px;
+  vertical-align: top;
+  text-align: left;
+}
+.md th {
+  background: var(--c-panel-2);
+  font-weight: 600;
+}
+.md mark {
+  background: var(--c-accent-soft);
+  color: inherit;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}

@@ -506,6 +506,26 @@ function products() {
   });
 }
 
+/* ======================================================= lexicon additions */
+// OS additions to the legacy lexicon, kept separate and recorded in the dataset (`_os_additions`)
+// so they are distinguishable from the legacy terms. Reason: semiconductor package inquiries
+// ("marking of semiconductor packages") did not reach the package-marking platform.
+const LEX_ADDITIONS: Json = {
+  process: { semi: ['package', 'strip', 'leadframe'] },
+  material: { emc: ['package', 'ic package', 'semiconductor package'] },
+  need: { magazine: ['strip', 'magazine'] },
+};
+function mergeLexicon(base: Json, add: Json): Json {
+  const out: Json = JSON.parse(JSON.stringify(base));
+  for (const [group, entries] of Object.entries(add)) {
+    for (const [key, terms] of Object.entries(entries as Json)) {
+      out[group][key] = [...new Set([...(out[group][key] ?? []), ...(terms as string[])])];
+    }
+  }
+  out._os_additions = add;
+  return out;
+}
+
 /* ================================================================= modules */
 const MODCONFLICT: [string, string, string][] = [
   ['cleanrm', 'dryroom', 'A cleanroom canopy and a dry-room shell are different environmental strategies.'],
@@ -625,7 +645,7 @@ function modules() {
       data_type: 'TEAL_INTERNAL',
       source_ids: ['src-legacy-laser-sim'],
     }),
-    config: SIM.LEX,
+    config: mergeLexicon(SIM.LEX, LEX_ADDITIONS),
   });
 }
 

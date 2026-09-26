@@ -6,6 +6,4 @@ import type { z } from 'zod';
 import type { baseShape } from './common';
 
 /** The minimal shape every record satisfies (used by generic services). */
-export type AnyRecord = {
-  [K in keyof typeof baseShape]: z.infer<(typeof baseShape)[K]>;
-} & { entity: string } & Record<string, unknown>;
+export type AnyRecord = z.infer<z.ZodObject<typeof baseShape>> & { entity: string } & Record<string, unknown>;

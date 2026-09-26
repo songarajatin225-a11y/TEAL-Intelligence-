@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TEAL Costing — Vault Tool</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>.teal-app{display:block;overflow:auto;height:auto;min-height:100%}</style>
+</head>
+<body>
+<div class="teal-app" id="app" data-theme="light">
+  <div class="tool">
+    <div class="lock-mark" style="margin-bottom:14px">
+      <svg viewBox="0 0 24 24" width="30" height="30" style="color:var(--teal)">
+        <circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 2.2v19.6M2.2 12h19.6" stroke="currentColor" stroke-width=".9" opacity=".5"/>
+        <path d="M12 12 L12 3.4 A8.6 8.6 0 0 1 20.6 12 Z" fill="currentColor" opacity=".92"/></svg>
+      <div><b>Vault Tool</b><small>Encrypt &amp; decrypt the costing data files</small></div>
+    </div>
+    <div class="lock-rule"></div>
+
+    <div class="row" style="margin-bottom:16px">
+      <button class="btn primary" id="mEnc">Encrypt</button>
+      <button class="btn" id="mDec">Decrypt</button>
+    </div>
+
+    <!-- ENCRYPT -->
+    <div id="encPane">
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head"><h3>1 · Source data</h3>
+          <button class="btn sm" id="loadCur">Load current data/ files</button></div>
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+            <div class="field"><label>config.json</label><input type="file" accept=".json" id="fCfg" class="inp"></div>
+            <div class="field"><label>masters.json</label><input type="file" accept=".json" id="fMas" class="inp"></div>
+            <div class="field"><label>projects.json</label><input type="file" accept=".json" id="fPrj" class="inp"></div>
+          </div>
+          <div id="srcState" style="margin-top:11px;font-size:11.5px;color:var(--ink-3)">Nothing loaded yet.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head"><h3>2 · Passphrase</h3></div>
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+            <div class="field"><label>Passphrase</label><input type="password" class="inp" id="p1" placeholder="Four random words beats one clever word"></div>
+            <div class="field"><label>Confirm</label><input type="password" class="inp" id="p2"></div>
+          </div>
+          <div id="pState" style="margin-top:10px;font-size:11.5px;color:var(--ink-3)">
+            Everyone who needs the platform uses this one passphrase. Changing it means regenerating the vault.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>3 · Generate</h3></div>
+        <div class="card-body">
+          <button class="btn primary" id="go" disabled>Generate vault.enc</button>
+          <div id="outState" style="margin-top:11px;font-size:11.5px;color:var(--ink-3)">
+            AES-256-GCM · PBKDF2-SHA256 · 310,000 iterations · random salt and IV per build.</div>
+          <div style="margin-top:13px;padding:10px 12px;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;font-size:11.5px;line-height:1.6">
+            <b>After downloading:</b> put <span class="mono">vault.enc</span> in <span class="mono">data/</span>, then
+            <b>delete <span class="mono">config.json</span>, <span class="mono">masters.json</span> and
+            <span class="mono">projects.json</span> from the repository</b> — otherwise the plaintext is still public.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECRYPT -->
+    <div id="decPane" style="display:none">
+      <div class="card">
+        <div class="card-head"><h3>Recover the JSON files</h3></div>
+        <div class="card-body">
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+            <div class="field"><label>vault.enc</label><input type="file" id="fVault" class="inp"></div>
+            <div class="field"><label>Passphrase</label><input type="password" class="inp" id="p3"></div>
+          </div>
+          <button class="btn primary" id="goDec" style="margin-top:12px">Decrypt &amp; download</button>
+          <div id="decState" style="margin-top:11px;font-size:11.5px;color:var(--ink-3)">
+            Downloads config.json, masters.json and projects.json so you can edit and re-encrypt.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const KDF_ITER = 310000;
+const $ = (s) => document.querySelector(s);
+function b64(buf){const b=new Uint8Array(buf);let o="",N=0x8000;
+  for(let i=0;i<b.length;i+=N)o+=String.fromCharCode.apply(null,b.subarray(i,i+N));return btoa(o);}
+const unb64=(s)=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function deriveKey(pass,salt,iter){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pass),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:iter,hash:"SHA-256"},base,
+    {name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+}
+function dl(name,text){const u=URL.createObjectURL(new Blob([text],{type:"application/json"}));
+  const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),800);}
+const readFile=(f)=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(f);});
+
+let SRC={config:null,masters:null,projects:null};
+function refresh(){
+  const have=SRC.config&&SRC.masters&&SRC.projects;
+  const p1=$("#p1").value,p2=$("#p2").value;
+  const okPass=p1.length>=10&&p1===p2;
+  $("#srcState").textContent=have
+    ? `Loaded — ${(SRC.projects.projects||[]).length} projects, ${Object.keys(SRC.masters).length} master tables.`
+    : "Load all three files, or click Load current data/ files.";
+  $("#pState").textContent=!p1?"Everyone who needs the platform uses this one passphrase."
+    :p1.length<10?"Too short — use at least 10 characters. Four random words works well."
+    :p1!==p2?"The two entries do not match.":"Passphrase accepted.";
+  $("#pState").style.color=okPass?"var(--green)":(p1?"var(--signal)":"var(--ink-3)");
+  $("#go").disabled=!(have&&okPass);
+}
+["p1","p2"].forEach(id=>$("#"+id).addEventListener("input",refresh));
+const pick=(id,key)=>$("#"+id).addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  try{SRC[key]=JSON.parse(await readFile(f));}catch(err){alert("Not valid JSON: "+f.name);}
+  refresh();
+});
+pick("fCfg","config");pick("fMas","masters");pick("fPrj","projects");
+
+$("#loadCur").addEventListener("click",async()=>{
+  try{
+    const [c,m,p]=await Promise.all(["data/config.json","data/masters.json","data/projects.json"]
+      .map(u=>fetch(u+"?v="+Date.now()).then(r=>{if(!r.ok)throw new Error(u);return r.json();})));
+    SRC={config:c,masters:m,projects:p};refresh();
+  }catch(e){$("#srcState").textContent="Could not read data/ — pick the files manually, or serve this page over http.";}
+});
+
+$("#go").addEventListener("click",async()=>{
+  const btn=$("#go");btn.disabled=true;btn.textContent="Deriving key…";
+  try{
+    const salt=crypto.getRandomValues(new Uint8Array(16));
+    const key=await deriveKey($("#p1").value,salt,KDF_ITER);
+    const bundle={config:SRC.config,masters:SRC.masters,
+      projects:SRC.projects.projects||[],templates:SRC.projects.templates||[],audit:SRC.projects.audit||[]};
+    const iv=crypto.getRandomValues(new Uint8Array(12));
+    const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(JSON.stringify(bundle)));
+    dl("vault.enc",JSON.stringify({v:1,alg:"AES-256-GCM",kdf:"PBKDF2-SHA256",iter:KDF_ITER,
+      salt:b64(salt),iv:b64(iv),ct:b64(ct)},null,0));
+    $("#outState").textContent=`vault.enc written — ${(ct.byteLength/1024).toFixed(0)} KB of ciphertext.`;
+    $("#outState").style.color="var(--green)";
+  }catch(e){$("#outState").textContent="Failed: "+e.message;$("#outState").style.color="var(--signal)";}
+  btn.disabled=false;btn.textContent="Generate vault.enc";
+});
+
+$("#goDec").addEventListener("click",async()=>{
+  const f=$("#fVault").files[0];const pass=$("#p3").value;
+  if(!f||!pass){$("#decState").textContent="Pick the vault file and enter the passphrase.";return;}
+  $("#decState").textContent="Deriving key…";
+  try{
+    const v=JSON.parse(await readFile(f));
+    const key=await deriveKey(pass,unb64(v.salt),v.iter||KDF_ITER);
+    const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(v.iv)},key,unb64(v.ct));
+    const b=JSON.parse(new TextDecoder().decode(pt));
+    dl("config.json",JSON.stringify(b.config,null,2));
+    dl("masters.json",JSON.stringify(b.masters,null,2));
+    dl("projects.json",JSON.stringify({projects:b.projects,templates:b.templates,audit:b.audit},null,2));
+    $("#decState").textContent="Decrypted — three files downloaded.";$("#decState").style.color="var(--green)";
+  }catch(e){$("#decState").textContent="Wrong passphrase, or the file is not a vault.";$("#decState").style.color="var(--signal)";}
+});
+
+$("#mEnc").addEventListener("click",()=>{$("#encPane").style.display="";$("#decPane").style.display="none";
+  $("#mEnc").className="btn primary";$("#mDec").className="btn";});
+$("#mDec").addEventListener("click",()=>{$("#encPane").style.display="none";$("#decPane").style.display="";
+  $("#mDec").className="btn primary";$("#mEnc").className="btn";});
+refresh();
+</script>
+</body>
+</html>

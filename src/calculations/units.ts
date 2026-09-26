@@ -145,7 +145,7 @@ export interface ParsedQuantity {
  * Returns null when no number/unit can be read. The original text is preserved.
  */
 export function parseQuantity(text: string): ParsedQuantity | null {
-  const t = text.trim().replace(/ /g, ' ');
+  const t = text.trim().replace(/\u00a0/g, ' ');
   const cur = /^(₹|\$|€|¥)\s*([\d,]+(?:\.\d+)?)/.exec(t);
   if (cur) return { value: parseFloat(cur[2].replace(/,/g, '')), unit: cur[1], original: text };
   const m = /(-?[\d,]*\.?\d+(?:[eE][-+]?\d+)?)\s*(?:[–-]\s*[\d.]+\s*)?([a-zA-Zµ°²³/%·()]+)?/.exec(t);
@@ -162,5 +162,5 @@ export function fmtNum(v: number | null | undefined, digits = 3): string {
   if (v == null || !Number.isFinite(v)) return 'UNKNOWN';
   const a = Math.abs(v);
   if (a !== 0 && (a >= 1e6 || a < 1e-3)) return v.toExponential(2).replace('e', ' × 10^');
-  return Number(v.toPrecision(digits)).toLocaleString('en-IN', { maximumFractionDigits: 6 });
+  return Number(v.toPrecision(Math.min(21, Math.max(1, Math.round(digits))))).toLocaleString('en-IN', { maximumFractionDigits: 6 });
 }

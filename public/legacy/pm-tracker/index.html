@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sign in to the Laser Applications Product Manager Operating Tracker.">
+<meta name="color-scheme" content="light dark">
+<title>Sign in · Laser Applications PM Tracker</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script>
+  /* Apply the saved theme before first paint to avoid a flash. */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('lpm.prefs') || '{}');
+      var t = p.theme || 'system';
+      if (t === 'system') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* defaults to light */ }
+  })();
+</script>
+</head>
+<body>
+<div class="auth-page">
+  <div style="width:100%;max-width:420px">
+
+    <div class="row row--between mb-3">
+      <span class="small muted">Laser Applications PM — Operating Tracker</span>
+      <button type="button" class="icon-btn" id="btnThemeToggle" aria-label="Toggle light and dark theme"></button>
+    </div>
+
+    <!-- First-time setup -->
+    <section class="auth-card" id="setupView" hidden>
+      <div class="auth-brand">
+        <div class="auth-brand__logo" aria-hidden="true">LP</div>
+        <div>
+          <div class="auth-title">Create your local account</div>
+          <div class="auth-sub">First-time setup on this browser</div>
+        </div>
+      </div>
+      <form class="auth-form" id="setupForm" novalidate>
+        <div class="auth-alert" id="setupError" hidden role="alert"></div>
+        <div class="field">
+          <label for="setupUsername">Username</label>
+          <input type="text" id="setupUsername" autocomplete="username" required minlength="3"
+                 placeholder="e.g. product.manager">
+        </div>
+        <div class="field">
+          <label for="setupPassword">Password</label>
+          <input type="password" id="setupPassword" autocomplete="new-password" required>
+          <div class="pw-meter"><div class="pw-meter__bar" id="setupPwBar"></div></div>
+          <div class="hint">At least 8 characters, including a letter and a number.</div>
+        </div>
+        <div class="field">
+          <label for="setupPassword2">Confirm password</label>
+          <input type="password" id="setupPassword2" autocomplete="new-password" required>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="setupSample" checked>
+          <label for="setupSample">Load a small demonstration dataset</label>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block" id="setupSubmit">Create account &amp; continue</button>
+      </form>
+      <div class="auth-note">
+        This authentication protects the application interface and local browser data. It is not equivalent
+        to server-side authentication and should not be used as a security boundary for confidential shared data.
+        There is no password recovery — keep a JSON backup of your data.
+      </div>
+    </section>
+
+    <!-- Sign in -->
+    <section class="auth-card" id="loginView" hidden>
+      <div class="auth-brand">
+        <div class="auth-brand__logo" aria-hidden="true">LP</div>
+        <div>
+          <div class="auth-title">Sign in</div>
+          <div class="auth-sub">Laser Applications PM — Operating Tracker</div>
+        </div>
+      </div>
+      <form class="auth-form" id="loginForm" novalidate>
+        <div class="auth-alert" id="loginError" hidden role="alert"></div>
+        <div class="field">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="loginRemember">
+          <label for="loginRemember">Remember this session on this device</label>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block" id="loginSubmit">Sign in</button>
+      </form>
+      <div class="auth-note">
+        Data is stored only in this browser (IndexedDB). Use Settings → Data Management to export a backup
+        before clearing site data or moving to another device.
+      </div>
+    </section>
+
+    <!-- Environment problem -->
+    <section class="auth-card" id="blockedView" hidden>
+      <div class="auth-brand">
+        <div class="auth-brand__logo" aria-hidden="true">!</div>
+        <div>
+          <div class="auth-title">Cannot start</div>
+          <div class="auth-sub">Browser environment issue</div>
+        </div>
+      </div>
+      <p class="secondary" id="blockedMessage"></p>
+      <button type="button" class="btn btn--block" onclick="window.location.reload()">Try again</button>
+    </section>
+
+  </div>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/database.js"></script>
+<script src="js/schema.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/crud.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

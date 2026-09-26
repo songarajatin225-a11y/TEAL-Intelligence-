@@ -150,7 +150,7 @@ export function computeCost(p: CostInputs, fx: FxTable): CostResult {
   const buckets = Object.fromEntries(COST_MODULE_KEYS.map((k) => [k, 0])) as Record<CostModuleKey, number>;
   for (const key of COST_MODULE_KEYS) {
     if (key === 'commercial') continue;
-    const rows = (p.lines[key] ?? []).map((r) => ({ ...r, _amt: lineAmount(key, r, fx) }));
+    const rows: (LineRow & { _amt: number })[] = (p.lines[key] ?? []).map((r) => ({ ...r, _amt: lineAmount(key, r, fx) }));
     for (const r of rows) {
       if (!Number.isFinite(r._amt)) {
         warnings.push(`${COST_MODULE_META[key].label}: no FX rate for "${String(r.cur)}" on "${String(r.item ?? r.desc ?? '')}" — line excluded`);
@@ -521,4 +521,29 @@ export function applyScenario(p: CostInputs, s: ScenarioDef): CostInputs {
     },
     markup: { ...p.markup, contingencyPct: p.markup.contingencyPct + (s.contingency_add_pct ?? 0) },
   };
+}
+
+/** Cost of ownership per good unit — Semiconductor Handbook Part XXXVI (buyer’s guide; SEMI E35 context). */
+export function costOfOwnership(p: { fixed?: number | null; recurring?: number | null; yield_loss?: number | null; throughput_per_h?: number | null; utilisation?: number | null; yield?: number | null; hours?: number | null }): CalcResult {
+  return calc(
+    {
+      id: 'coo',
+      label: 'Cost of ownership per good unit',
+      formula: 'COO = (C_fixed + C_recurring + C_yield loss) / (Throughput × Utilisation × Yield × Hours)',
+      unit: 'INR/unit',
+      source: { citation: 'The Complete Semiconductor Industry Handbook, Part XXXVI — Semiconductor equipment buyer’s guide', ref: 'semiconductor/18-parts-xxxvi-xxxviii-xli-buyers-guide-opportunities-localization-and-co.md#part-xxxvi-semiconductor-equipment-buyers-guide' },
+      assumptions: ['Costs and hours over the same period', 'Throughput at the customer’s recipe including overheads'],
+    },
+    [
+      input('Cf', 'Fixed cost (depreciation, installation, facility share)', p.fixed, 'INR'),
+      input('Cr', 'Recurring cost (labour, consumables, spares, utilities, service)', p.recurring, 'INR'),
+      input('Cy', 'Yield-loss cost', p.yield_loss ?? 0, 'INR'),
+      input('TH', 'Throughput', p.throughput_per_h, 'units/h'),
+      input('U', 'Utilisation', p.utilisation, ''),
+      input('Y', 'Yield', p.yield, ''),
+      input('H', 'Hours in period', p.hours, 'h'),
+    ],
+    (v) => (v.Cf + v.Cr + v.Cy) / (v.TH * v.U * v.Y * v.H),
+    positive('TH', 'U', 'Y', 'H'),
+  );
 }

@@ -1,0 +1,265 @@
+{
+  "dataset": {
+    "id": "acceptance-checklists",
+    "kind": "config",
+    "title": "FAT / SAT / production-release checklists",
+    "description": "Checklist items verbatim from the Automation Equipment Building Handbook (§38.8 sample FAT checklist, §57.12 FAT readiness G8, §57.13 SAT readiness G9, §57.14 production release G10).",
+    "entity": "config",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-automation-handbook"
+    ]
+  },
+  "config": {
+    "fat": {
+      "ref": "automation/47-part-38-factory-acceptance-test-fat.md#38-8-sample-fat-checklist",
+      "heading": "38.8 Sample FAT checklist",
+      "items": [
+        {
+          "section": "Readiness",
+          "item": "Internal dry-run FAT completed and signed (Gate 8)"
+        },
+        {
+          "section": "Readiness",
+          "item": "Customer samples received and logged"
+        },
+        {
+          "section": "Readiness",
+          "item": "Test instruments calibrated; GR&R done on acceptance gauges"
+        },
+        {
+          "section": "Readiness",
+          "item": "Software versions frozen and recorded"
+        },
+        {
+          "section": "Documentation",
+          "item": "Electrical, pneumatic and mechanical drawings current"
+        },
+        {
+          "section": "Documentation",
+          "item": "Risk assessment and safety validation plan available"
+        },
+        {
+          "section": "Documentation",
+          "item": "Draft user and maintenance manuals, spare list"
+        },
+        {
+          "section": "Mechanical and electrical",
+          "item": "Workmanship, labels, guards, cable routing inspected"
+        },
+        {
+          "section": "Mechanical and electrical",
+          "item": "Protective bonding and insulation tests recorded"
+        },
+        {
+          "section": "Mechanical and electrical",
+          "item": "Air leak test at idle within limit"
+        },
+        {
+          "section": "Functional",
+          "item": "All I/O verified against I/O list"
+        },
+        {
+          "section": "Functional",
+          "item": "Auto, manual, maintenance, setup modes behave per mode matrix"
+        },
+        {
+          "section": "Functional",
+          "item": "Recipes load, validate, and are version-logged"
+        },
+        {
+          "section": "Functional",
+          "item": "User levels restrict functions correctly"
+        },
+        {
+          "section": "Safety",
+          "item": "Every safety function validated with fault injection"
+        },
+        {
+          "section": "Safety",
+          "item": "Stopping times measured; safety distances confirmed"
+        },
+        {
+          "section": "Safety",
+          "item": "Guard locking releases only under safe conditions"
+        },
+        {
+          "section": "Performance and quality",
+          "item": "Run-at-rate completed; cycle time and availability recorded"
+        },
+        {
+          "section": "Performance and quality",
+          "item": "Accuracy and repeatability within specification"
+        },
+        {
+          "section": "Performance and quality",
+          "item": "Capability demonstrated on agreed sample size and basis"
+        },
+        {
+          "section": "Performance and quality",
+          "item": "Changeover time demonstrated"
+        },
+        {
+          "section": "Data and recovery",
+          "item": "Traceability records complete; MES offline test passed"
+        },
+        {
+          "section": "Data and recovery",
+          "item": "Alarms trigger with correct texts; first-out works"
+        },
+        {
+          "section": "Data and recovery",
+          "item": "Recovery tested at every state; power-loss recovery tested"
+        },
+        {
+          "section": "Close-out",
+          "item": "Deviations classified with owners and dates"
+        },
+        {
+          "section": "Close-out",
+          "item": "FAT report signed; shipment release decision recorded"
+        }
+      ]
+    },
+    "fat_readiness": {
+      "ref": "automation/79-part-57-engineering-checklists.md#57-12-fat-readiness-g8",
+      "heading": "57.12 FAT readiness (G8)",
+      "items": [
+        {
+          "section": "General",
+          "item": "Internal dry-run FAT completed exactly per protocol"
+        },
+        {
+          "section": "General",
+          "item": "Run-at-rate achieved internally"
+        },
+        {
+          "section": "General",
+          "item": "Safety validation complete; stopping times measured"
+        },
+        {
+          "section": "General",
+          "item": "Calibration records complete"
+        },
+        {
+          "section": "General",
+          "item": "Customer samples received; GR&R on acceptance gauges"
+        },
+        {
+          "section": "General",
+          "item": "Draft manuals, drawings and spare list ready"
+        },
+        {
+          "section": "General",
+          "item": "Deviation classes and release criteria agreed"
+        },
+        {
+          "section": "General",
+          "item": "Punch list without class A items"
+        },
+        {
+          "section": "General",
+          "item": "Utilities and consumables for FAT in place"
+        },
+        {
+          "section": "General",
+          "item": "Customer invitation and agenda issued"
+        }
+      ]
+    },
+    "sat_readiness": {
+      "ref": "automation/79-part-57-engineering-checklists.md#57-13-sat-readiness-g9",
+      "heading": "57.13 SAT readiness (G9)",
+      "items": [
+        {
+          "section": "General",
+          "item": "Site readiness verified with measured utility values"
+        },
+        {
+          "section": "General",
+          "item": "Installation plan, permits and lifting plan approved"
+        },
+        {
+          "section": "General",
+          "item": "Transport locks removed and recorded"
+        },
+        {
+          "section": "General",
+          "item": "Staged power-up done; software restored from backups"
+        },
+        {
+          "section": "General",
+          "item": "Safety functions re-validated at site"
+        },
+        {
+          "section": "General",
+          "item": "References re-measured; recalibration where needed"
+        },
+        {
+          "section": "General",
+          "item": "Network and MES connectivity tested with customer IT"
+        },
+        {
+          "section": "General",
+          "item": "Production parts and operators available"
+        },
+        {
+          "section": "General",
+          "item": "FAT class B deviations closed or scheduled"
+        },
+        {
+          "section": "General",
+          "item": "SAT protocol signed off by customer"
+        }
+      ]
+    },
+    "production_release": {
+      "ref": "automation/79-part-57-engineering-checklists.md#57-14-production-release-g10",
+      "heading": "57.14 Production release (G10)",
+      "items": [
+        {
+          "section": "General",
+          "item": "SAT signed; acceptance certificate issued"
+        },
+        {
+          "section": "General",
+          "item": "Run-at-rate and ramp targets met for the agreed period"
+        },
+        {
+          "section": "General",
+          "item": "Capability confirmed on production lots"
+        },
+        {
+          "section": "General",
+          "item": "Operators and technicians trained on all shifts with records"
+        },
+        {
+          "section": "General",
+          "item": "Spares and consumables on site"
+        },
+        {
+          "section": "General",
+          "item": "PM plan loaded into the customer's maintenance system"
+        },
+        {
+          "section": "General",
+          "item": "Control plan adopted by customer quality"
+        },
+        {
+          "section": "General",
+          "item": "As-built documentation delivered and archived"
+        },
+        {
+          "section": "General",
+          "item": "Open items with owners and dates agreed"
+        },
+        {
+          "section": "General",
+          "item": "Warranty start and service contacts confirmed"
+        }
+      ]
+    }
+  }
+}

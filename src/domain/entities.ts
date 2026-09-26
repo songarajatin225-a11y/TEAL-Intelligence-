@@ -202,6 +202,7 @@ export const PROCESSES = [
   'Packaging',
   'Trimming',
   'Micromachining',
+  'Other',
 ] as const;
 
 export const Industry = z.object({
@@ -701,7 +702,7 @@ export const GateReview = z.object({
   date: IsoDate.optional(),
   approvers: z.array(z.string()).optional(),
   evidence: z.array(GateEvidenceItem),
-  conditions: z.array(z.object({ text: z.string(), owner: z.string(), due: IsoDate })).optional(),
+  conditions: z.array(z.object({ text: z.string(), owner: z.string(), due: IsoDate, closed: z.boolean().optional() })).optional(),
   risks: z.array(z.string()).optional(),
   notes: z.string().optional(),
 });
