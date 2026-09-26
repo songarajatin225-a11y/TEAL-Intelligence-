@@ -57,9 +57,9 @@ the browser = the application · IndexedDB = local working database.
 
 Records created/edited in the browser are stored in IndexedDB with `origin: LOCAL_DRAFT` and a
 **LOCAL DRAFT** badge. The UI never claims GitHub master data has changed. Users export a
-**TEAL CHANGE PACKAGE** (zip-less folder layout serialised as JSON: `manifest.json`, `data/`,
-`changes/`, `documents/`) and commit it via PR; `scripts/data/applyChangePackage.ts` applies it
-to `/data` for review.
+**TEAL CHANGE PACKAGE** (a ZIP: `manifest.json`, `data/<entity>/<id>.json`,
+`changes/changelog.json`, `documents/README.md`) and commit it via PR;
+`scripts/data/applyChangePackage.ts` applies it to `/data` for review.
 
 ## 5. Search
 
@@ -72,11 +72,13 @@ partition; local drafts indexed in-browser at runtime.
 
 `deploy.yml` builds on push to `main` and publishes `dist/` with `actions/deploy-pages`.
 Vite `base` = `/<repo>/` from `GITHUB_REPOSITORY` (fallback `/TEAL-Intelligence-/`); HashRouter
-avoids 404s on deep links. Legacy apps are copied verbatim into `public/legacy/*`.
+avoids 404s on deep links. Legacy apps are copied into `public/legacy/*` by
+`scripts/migration/embedLegacyApps.ts` — functionally unchanged, with the cosmetic admin PIN and
+the cost platform's seeded customer projects removed.
 
 ## 7. PWA
 
-`public/sw.js` caches the app shell + core datasets (stale-while-revalidate for data). The top
+`public/sw.js` caches the app shell + datasets (network-first for data, cached copy offline). The top
 bar shows **OFFLINE MODE** when `navigator.onLine` is false and data is labelled "cached".
 
 ## 8. AI

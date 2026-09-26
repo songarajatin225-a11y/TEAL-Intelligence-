@@ -119,6 +119,7 @@ function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
   };
   const openPkg = async (f: File) => {
     try {
+      if (f.size > 25 * 1024 * 1024) throw new Error('file is larger than 25 MB');
       const parsed = parseChangePackage(new Uint8Array(await f.arrayBuffer()));
       setPreview(parsed);
       setMsg(null);

@@ -2,7 +2,9 @@
 
 Columns follow spec §131: feature · current implementation · data · business logic ·
 reusable component · duplicate · missing · migration action. "Phase" is the roadmap phase in
-`06_IMPLEMENTATION_ROADMAP.md`; the **Status** column is kept current as work lands.
+`06_IMPLEMENTATION_ROADMAP.md`; the **Status** column is kept current as work lands
+(last reviewed with the full P0/P1 build — see [05_MIGRATION_PLAN.md](05_MIGRATION_PLAN.md) and
+[MIGRATION.md](MIGRATION.md)).
 
 Legend — Status: ✅ migrated · 🔗 preserved via embedded legacy app · ⏳ planned · ✖ intentionally not migrated
 
@@ -55,9 +57,9 @@ Legend — Status: ✅ migrated · 🔗 preserved via embedded legacy app · ⏳
 | Products (laser diode parts) | CRUD | `products` | — | Schema | Laser/Product DB | — | Imported as external products | P0 | ✅ |
 | Meetings | CRUD | `meetings` | Follow-ups | Schema | Activities | — | Native Meetings (activity kind = meeting) | P0 | ✅ |
 | Samples / demos / trials | CRUD | `samples` | — | Schema | POC Engine | — | Imported as POC records (stage from sample status) | P0 | ✅ |
-| Localization | CRUD | `localization` | Stages | Schema | Localization Engine | — | Imported; native Localization Engine ⏳ | P1 | ✅ import / ⏳ engine |
+| Localization | CRUD | `localization` | Stages | Schema | Localization Engine | — | Imported; native Localization Engine (candidates from BOM import items, payback C9) | P1 | ✅ |
 | Suppliers / partners | CRUD | `suppliers` | — | Schema | Supplier Intelligence | — | Imported as suppliers | P0/P1 | ✅ |
-| Competitors | CRUD | `competitors` | Threat level | Schema | Market Intelligence | — | Imported as competitor notes | P1 | ✅ import |
+| Competitors | CRUD | `competitors` | Threat level | Schema | Market Intelligence | — | Imported as `company` records with role competitor | P1 | ✅ |
 | Daily log / weekly review | CRUD | `dailyLogs`, `weeklyReviews` | — | Schema | PM workspace notes | — | Imported as workspace notes | P0 | ✅ |
 | Dashboard / reports | Pages | derived | KPIs | Concept | Command Center, PM workspace | — | Rebuilt natively | P0 | ✅ |
 | Backup / restore JSON, CSV export | export.js | all | — | Format | Workspace backup | — | OS backup + legacy backup importer | P0 | ✅ |

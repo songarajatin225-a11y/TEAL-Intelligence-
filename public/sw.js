@@ -1,6 +1,7 @@
 /* TEAL OS service worker — offline shell + cached data (spec §124).
-   Navigation and app assets: cache-first after first load. Data, search indexes and knowledge:
-   stale-while-revalidate, so offline use shows the last cached version (the UI shows OFFLINE MODE). */
+   Navigation: network-first, cached index.html offline. Data, search indexes, graph, knowledge:
+   network-first so a new deploy is used immediately; the last cached copy is served offline (the UI
+   shows OFFLINE MODE). Hashed app assets: cache-first (their names change with every build). */
 const VERSION = 'teal-os-v1';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './favicon.svg', './data/catalog.json'];
 
@@ -22,14 +23,13 @@ self.addEventListener('fetch', (e) => {
   }
   e.respondWith(
     caches.open(VERSION).then(async (cache) => {
-      const cached = await cache.match(req);
-      const network = fetch(req)
-        .then((res) => {
+      const fromNetwork = () =>
+        fetch(req).then((res) => {
           if (res.ok) cache.put(req, res.clone());
           return res;
-        })
-        .catch(() => cached);
-      return isData ? cached || network : cached || network;
+        });
+      if (isData) return fromNetwork().catch(async () => (await cache.match(req)) ?? Response.error());
+      return (await cache.match(req)) ?? fromNetwork();
     }),
   );
 });
