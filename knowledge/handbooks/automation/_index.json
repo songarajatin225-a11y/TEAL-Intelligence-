@@ -1,0 +1,447 @@
+{
+  "handbook": "automation",
+  "title": "Automation Equipment Building Handbook",
+  "role": "HOW DO WE TURN THE PROCESS INTO A REPEATABLE MACHINE?",
+  "parts": [
+    {
+      "file": "00-front-matter.md",
+      "title": "Front matter",
+      "chars": 603
+    },
+    {
+      "file": "01-executive-overview.md",
+      "title": "Executive overview",
+      "chars": 4673
+    },
+    {
+      "file": "02-part-0-how-to-use-this-handbook.md",
+      "title": "Part 0 — How to use this handbook",
+      "chars": 8154
+    },
+    {
+      "file": "03-foundations-and-requirements.md",
+      "title": "Foundations and requirements",
+      "chars": 461
+    },
+    {
+      "file": "04-part-1-industrial-automation-fundamentals.md",
+      "title": "Part 1 — Industrial automation fundamentals",
+      "chars": 11588
+    },
+    {
+      "file": "05-part-2-customer-requirement-to-machine-requirement.md",
+      "title": "Part 2 — Customer requirement to machine requirement",
+      "chars": 14672
+    },
+    {
+      "file": "06-part-3-process-engineering.md",
+      "title": "Part 3 — Process engineering",
+      "chars": 10397
+    },
+    {
+      "file": "07-part-4-cycle-time-and-capacity-engineering.md",
+      "title": "Part 4 — Cycle time and capacity engineering",
+      "chars": 10417
+    },
+    {
+      "file": "08-part-5-machine-concept-development.md",
+      "title": "Part 5 — Machine concept development",
+      "chars": 9171
+    },
+    {
+      "file": "09-part-6-machine-architecture.md",
+      "title": "Part 6 — Machine architecture",
+      "chars": 8463
+    },
+    {
+      "file": "10-part-7-machine-module-breakdown.md",
+      "title": "Part 7 — Machine module breakdown",
+      "chars": 11832
+    },
+    {
+      "file": "11-mechanical-engineering.md",
+      "title": "Mechanical engineering",
+      "chars": 334
+    },
+    {
+      "file": "12-part-8-mechanical-engineering.md",
+      "title": "Part 8 — Mechanical engineering",
+      "chars": 12769
+    },
+    {
+      "file": "13-part-9-gd-t-and-tolerance-stack-up.md",
+      "title": "Part 9 — GD&T and tolerance stack-up",
+      "chars": 11221
+    },
+    {
+      "file": "14-part-10-fixture-and-jig-design.md",
+      "title": "Part 10 — Fixture and jig design",
+      "chars": 12487
+    },
+    {
+      "file": "15-motion-pneumatics-and-vacuum.md",
+      "title": "Motion, pneumatics and vacuum",
+      "chars": 410
+    },
+    {
+      "file": "16-part-11-motion-control.md",
+      "title": "Part 11 — Motion control",
+      "chars": 12393
+    },
+    {
+      "file": "17-part-12-servo-sizing.md",
+      "title": "Part 12 — Servo sizing",
+      "chars": 13315
+    },
+    {
+      "file": "18-part-13-multi-axis-motion-and-synchronization.md",
+      "title": "Part 13 — Multi-axis motion and synchronization",
+      "chars": 10833
+    },
+    {
+      "file": "19-part-14-pneumatics.md",
+      "title": "Part 14 — Pneumatics",
+      "chars": 11750
+    },
+    {
+      "file": "20-part-15-vacuum-engineering.md",
+      "title": "Part 15 — Vacuum engineering",
+      "chars": 10592
+    },
+    {
+      "file": "21-electrical-controls-and-software.md",
+      "title": "Electrical, controls and software",
+      "chars": 560
+    },
+    {
+      "file": "22-part-16-electrical-engineering.md",
+      "title": "Part 16 — Electrical engineering",
+      "chars": 10648
+    },
+    {
+      "file": "23-part-17-electrical-panel-design.md",
+      "title": "Part 17 — Electrical panel design",
+      "chars": 10221
+    },
+    {
+      "file": "24-part-18-sensors-and-instrumentation.md",
+      "title": "Part 18 — Sensors and instrumentation",
+      "chars": 11685
+    },
+    {
+      "file": "25-part-19-plc-engineering.md",
+      "title": "Part 19 — PLC engineering",
+      "chars": 11586
+    },
+    {
+      "file": "26-part-20-machine-software-architecture.md",
+      "title": "Part 20 — Machine software architecture",
+      "chars": 9669
+    },
+    {
+      "file": "27-part-21-hmi-design.md",
+      "title": "Part 21 — HMI design",
+      "chars": 7696
+    },
+    {
+      "file": "28-part-22-industrial-communication.md",
+      "title": "Part 22 — Industrial communication",
+      "chars": 9935
+    },
+    {
+      "file": "29-part-23-mes-and-traceability.md",
+      "title": "Part 23 — MES and traceability",
+      "chars": 10428
+    },
+    {
+      "file": "30-vision-robotics-and-safety.md",
+      "title": "Vision, robotics and safety",
+      "chars": 358
+    },
+    {
+      "file": "31-part-24-machine-vision.md",
+      "title": "Part 24 — Machine vision",
+      "chars": 11031
+    },
+    {
+      "file": "32-part-25-robotics.md",
+      "title": "Part 25 — Robotics",
+      "chars": 12085
+    },
+    {
+      "file": "33-part-26-end-effector-design.md",
+      "title": "Part 26 — End-effector design",
+      "chars": 9079
+    },
+    {
+      "file": "34-part-27-machine-safety.md",
+      "title": "Part 27 — Machine safety",
+      "chars": 13968
+    },
+    {
+      "file": "35-process-equipment-domains.md",
+      "title": "Process equipment domains",
+      "chars": 412
+    },
+    {
+      "file": "36-part-28-laser-equipment-integration.md",
+      "title": "Part 28 — Laser equipment integration",
+      "chars": 14513
+    },
+    {
+      "file": "37-part-29-semiconductor-equipment.md",
+      "title": "Part 29 — Semiconductor equipment",
+      "chars": 10447
+    },
+    {
+      "file": "38-part-30-battery-and-ev-equipment.md",
+      "title": "Part 30 — Battery and EV equipment",
+      "chars": 9550
+    },
+    {
+      "file": "39-part-31-machine-utilities.md",
+      "title": "Part 31 — Machine utilities",
+      "chars": 8592
+    },
+    {
+      "file": "40-build-procure-and-deliver.md",
+      "title": "Build, procure and deliver",
+      "chars": 631
+    },
+    {
+      "file": "41-part-32-design-for-manufacturing-and-assembly.md",
+      "title": "Part 32 — Design for manufacturing and assembly",
+      "chars": 7580
+    },
+    {
+      "file": "42-part-33-bom-and-procurement-engineering.md",
+      "title": "Part 33 — BOM and procurement engineering",
+      "chars": 8154
+    },
+    {
+      "file": "43-part-34-supplier-engineering.md",
+      "title": "Part 34 — Supplier engineering",
+      "chars": 9190
+    },
+    {
+      "file": "44-part-35-machine-build-and-assembly.md",
+      "title": "Part 35 — Machine build and assembly",
+      "chars": 8199
+    },
+    {
+      "file": "45-part-36-alignment-and-calibration.md",
+      "title": "Part 36 — Alignment and calibration",
+      "chars": 7625
+    },
+    {
+      "file": "46-part-37-debugging-and-troubleshooting.md",
+      "title": "Part 37 — Debugging and troubleshooting",
+      "chars": 8342
+    },
+    {
+      "file": "47-part-38-factory-acceptance-test-fat.md",
+      "title": "Part 38 — Factory acceptance test (FAT)",
+      "chars": 8686
+    },
+    {
+      "file": "48-part-39-packing-and-transportation.md",
+      "title": "Part 39 — Packing and transportation",
+      "chars": 6365
+    },
+    {
+      "file": "49-part-40-installation-and-site-acceptance-test-sat.md",
+      "title": "Part 40 — Installation and site acceptance test (SAT)",
+      "chars": 7529
+    },
+    {
+      "file": "50-part-41-production-ramp-up.md",
+      "title": "Part 41 — Production ramp-up",
+      "chars": 6778
+    },
+    {
+      "file": "51-sustain-and-govern.md",
+      "title": "Sustain and govern",
+      "chars": 420
+    },
+    {
+      "file": "52-part-42-reliability-and-maintenance.md",
+      "title": "Part 42 — Reliability and maintenance",
+      "chars": 7498
+    },
+    {
+      "file": "53-part-43-quality-engineering.md",
+      "title": "Part 43 — Quality engineering",
+      "chars": 7200
+    },
+    {
+      "file": "54-part-44-fmea.md",
+      "title": "Part 44 — FMEA",
+      "chars": 8020
+    },
+    {
+      "file": "55-part-45-cost-engineering.md",
+      "title": "Part 45 — Cost engineering",
+      "chars": 7341
+    },
+    {
+      "file": "56-part-46-project-management.md",
+      "title": "Part 46 — Project management",
+      "chars": 7631
+    },
+    {
+      "file": "57-part-47-engineering-change-management.md",
+      "title": "Part 47 — Engineering change management",
+      "chars": 6606
+    },
+    {
+      "file": "58-part-48-documentation.md",
+      "title": "Part 48 — Documentation",
+      "chars": 7243
+    },
+    {
+      "file": "59-scale-the-business.md",
+      "title": "Scale the business",
+      "chars": 417
+    },
+    {
+      "file": "60-part-49-machine-digitalization.md",
+      "title": "Part 49 — Machine digitalization",
+      "chars": 6139
+    },
+    {
+      "file": "61-part-50-industry-4-0.md",
+      "title": "Part 50 — Industry 4.0",
+      "chars": 7131
+    },
+    {
+      "file": "62-part-51-standardization-and-platformization.md",
+      "title": "Part 51 — Standardization and platformization",
+      "chars": 7349
+    },
+    {
+      "file": "63-part-52-localization-and-value-engineering.md",
+      "title": "Part 52 — Localization and value engineering",
+      "chars": 8088
+    },
+    {
+      "file": "64-case-studies.md",
+      "title": "Case studies",
+      "chars": 980
+    },
+    {
+      "file": "65-case-1-automatic-laser-marking-machine-ev-motor-housings.md",
+      "title": "Case 1 — Automatic laser marking machine (EV motor housings)",
+      "chars": 4030
+    },
+    {
+      "file": "66-case-2-laser-welding-machine-stainless-sensor-housings.md",
+      "title": "Case 2 — Laser welding machine (stainless sensor housings)",
+      "chars": 3941
+    },
+    {
+      "file": "67-case-3-pcb-laser-marking-machine-inline-smt.md",
+      "title": "Case 3 — PCB laser marking machine (inline SMT)",
+      "chars": 3948
+    },
+    {
+      "file": "68-case-4-semiconductor-package-marking-machine-leadframe-strips.md",
+      "title": "Case 4 — Semiconductor package marking machine (leadframe strips)",
+      "chars": 4180
+    },
+    {
+      "file": "69-case-5-wafer-handling-and-inspection-machine.md",
+      "title": "Case 5 — Wafer handling and inspection machine",
+      "chars": 4688
+    },
+    {
+      "file": "70-case-6-battery-busbar-laser-welding-machine-prismatic-modules.md",
+      "title": "Case 6 — Battery busbar laser welding machine (prismatic modules)",
+      "chars": 4674
+    },
+    {
+      "file": "71-case-7-robotic-assembly-cell-power-connector.md",
+      "title": "Case 7 — Robotic assembly cell (power connector)",
+      "chars": 4580
+    },
+    {
+      "file": "72-case-8-vision-inspection-machine-cylindrical-cells.md",
+      "title": "Case 8 — Vision inspection machine (cylindrical cells)",
+      "chars": 4431
+    },
+    {
+      "file": "73-case-9-high-speed-pick-and-place-machine-ic-packages-tray-to-tape.md",
+      "title": "Case 9 — High-speed pick-and-place machine (IC packages, tray to tape)",
+      "chars": 4266
+    },
+    {
+      "file": "74-case-10-complete-semiconductor-atmp-back-end-line.md",
+      "title": "Case 10 — Complete semiconductor ATMP back-end line",
+      "chars": 5353
+    },
+    {
+      "file": "75-reference.md",
+      "title": "Reference",
+      "chars": 507
+    },
+    {
+      "file": "76-part-54-engineering-calculation-handbook.md",
+      "title": "Part 54 — Engineering calculation handbook",
+      "chars": 15194
+    },
+    {
+      "file": "77-part-55-component-selection-handbook.md",
+      "title": "Part 55 — Component selection handbook",
+      "chars": 8209
+    },
+    {
+      "file": "78-part-56-industrial-standards-and-compliance-map.md",
+      "title": "Part 56 — Industrial standards and compliance map",
+      "chars": 9534
+    },
+    {
+      "file": "79-part-57-engineering-checklists.md",
+      "title": "Part 57 — Engineering checklists",
+      "chars": 7837
+    },
+    {
+      "file": "80-part-58-master-machine-development-checklist.md",
+      "title": "Part 58 — Master machine development checklist",
+      "chars": 4731
+    },
+    {
+      "file": "81-product-view-gates-templates-and-playbook.md",
+      "title": "Product view, gates, templates and playbook",
+      "chars": 436
+    },
+    {
+      "file": "82-part-59-product-manager-view.md",
+      "title": "Part 59 — Product manager view",
+      "chars": 8033
+    },
+    {
+      "file": "83-design-review-gates-g0-g10.md",
+      "title": "Design review gates G0–G10",
+      "chars": 4535
+    },
+    {
+      "file": "84-engineering-document-templates.md",
+      "title": "Engineering document templates",
+      "chars": 7718
+    },
+    {
+      "file": "85-part-60-the-machine-builder-playbook.md",
+      "title": "Part 60 — The Machine Builder Playbook",
+      "chars": 4955
+    },
+    {
+      "file": "86-final-master-check.md",
+      "title": "Final master check",
+      "chars": 4043
+    }
+  ],
+  "stats": {
+    "tables": 392,
+    "equations": 225,
+    "headings": 783
+  }
+}

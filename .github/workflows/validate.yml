@@ -1,0 +1,39 @@
+name: Validate
+
+# Schema-validates every dataset, checks generated files are current, typechecks and lints.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate datasets against the domain schemas
+        run: npm run data:validate
+      - name: Generated files are up to date (JSON Schemas, catalog)
+        run: |
+          npm run data:schemas
+          npm run data:catalog
+          git diff --exit-code -- schemas data/catalog.json || {
+            echo "::error::schemas/ or data/catalog.json is stale — run 'npm run data:schemas && npm run data:catalog' and commit the result.";
+            exit 1;
+          }
+      - name: No secrets or private keys committed
+        run: |
+          if git grep -nIE '(sk-[A-Za-z0-9]{20,}|sk-ant-[A-Za-z0-9-]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----)' -- . ':!package-lock.json'; then
+            echo "::error::Possible secret in the repository. Remove it and rotate the credential."; exit 1;
+          fi
+      - run: npm run typecheck
+      - run: npm run lint

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Operating dashboard for a laser applications product manager: KPIs, charts, follow-ups, overdue items and top opportunities.">
+<meta name="color-scheme" content="light dark">
+<title>Dashboard · Laser Applications PM Tracker</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script>
+  /* Apply the saved theme before first paint to avoid a flash. */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('lpm.prefs') || '{}');
+      var t = p.theme || 'system';
+      if (t === 'system') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) { /* defaults to light */ }
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="app-shell" id="appShell">
+  <main class="main" id="main">
+    <div class="page" id="pageRoot">
+
+      <div class="page__head">
+        <div class="dash-title-block">
+          <h1 class="dash-title">Laser Applications Product Manager — Operating Dashboard</h1>
+          <div class="dash-sub" id="dashMeta">Loading…</div>
+        </div>
+        <div class="page__actions no-print">
+          <button type="button" class="btn" id="btnRefresh">Refresh</button>
+          <button type="button" class="btn" id="btnPrint">Print</button>
+        </div>
+      </div>
+
+      <section aria-label="Key performance indicators">
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-card skeleton" style="height:84px"></div>
+          <div class="kpi-card skeleton" style="height:84px"></div>
+          <div class="kpi-card skeleton" style="height:84px"></div>
+          <div class="kpi-card skeleton" style="height:84px"></div>
+          <div class="kpi-card skeleton" style="height:84px"></div>
+        </div>
+      </section>
+
+      <section class="chart-grid" aria-label="Charts">
+        <div class="card">
+          <div class="card__head"><span class="card__title">Activity status</span>
+            <span class="card__hint">All activities</span></div>
+          <div class="card__body"><div class="chart-box"><canvas id="chartStatus"
+            role="img" aria-label="Activities by status"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Opportunity funnel</span>
+            <span class="card__hint">Activities + customers</span></div>
+          <div class="card__body"><div class="chart-box"><canvas id="chartFunnel"
+            role="img" aria-label="Opportunities by stage"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Workstream distribution</span>
+            <span class="card__hint">All activities</span></div>
+          <div class="card__body"><div class="chart-box"><canvas id="chartWorkstream"
+            role="img" aria-label="Activities by workstream"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Priority</span>
+            <span class="card__hint">Open activities</span></div>
+          <div class="card__body"><div class="chart-box"><canvas id="chartPriority"
+            role="img" aria-label="Open activities by priority"></canvas></div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid" aria-label="Action panels">
+        <div class="card">
+          <div class="card__head"><span class="card__title">Today's priorities</span>
+            <span class="card__hint">Top 3</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelPriorities"></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Follow-ups due</span>
+            <span class="card__hint"><span data-count-followups>0</span> due</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelFollowups"></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Upcoming deadlines</span>
+            <span class="card__hint"><span data-count-upcoming>0</span> in 7 days</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelUpcoming"></div></div>
+        </div>
+      </section>
+
+      <section class="panel-grid" aria-label="Escalation panels">
+        <div class="card">
+          <div class="card__head"><span class="card__title">Overdue</span>
+            <span class="card__hint"><span data-count-overdue>0</span> items</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelOverdue"></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Management attention</span>
+            <span class="card__hint"><span data-count-management>0</span> items</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelManagement"></div></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><span class="card__title">Top opportunities</span>
+            <span class="card__hint">By weighted value</span></div>
+          <div class="card__body card__body--flush"><div class="panel-list" id="panelOpportunities"></div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/utils.js"></script>
+<script src="js/database.js"></script>
+<script src="js/schema.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/crud.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

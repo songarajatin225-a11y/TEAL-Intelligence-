@@ -1,0 +1,332 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "standards",
+    "title": "Standards referenced by TEAL equipment",
+    "description": "Standards the configurator references (laser safety, machinery safety, code grading, SEMI, ESD, cleanroom, 21 CFR 11).",
+    "entity": "standard",
+    "data_type": "PUBLIC",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "std-iec60825-1",
+      "entity": "standard",
+      "name": "IEC 60825-1",
+      "code": "IEC 60825-1",
+      "description": "Safety of laser products — equipment classification and requirements",
+      "scope": "Every enclosed system; defines the Class 1 condition",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iec60825_1",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iec60825-4",
+      "entity": "standard",
+      "name": "IEC 60825-4",
+      "code": "IEC 60825-4",
+      "description": "Safety of laser products — laser guards",
+      "scope": "Cabins and guarding around robot and gantry cells",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iec60825_4",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iso12100",
+      "entity": "standard",
+      "name": "ISO 12100",
+      "code": "ISO 12100",
+      "description": "Safety of machinery — risk assessment and risk reduction",
+      "scope": "Cell-level risk assessment and residual-risk file",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iso12100",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iso13849",
+      "entity": "standard",
+      "name": "ISO 13849-1",
+      "code": "ISO 13849-1",
+      "description": "Safety-related parts of control systems",
+      "scope": "Performance level of interlock and E-stop circuits",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iso13849",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iso29158",
+      "entity": "standard",
+      "name": "ISO/IEC 29158",
+      "code": "ISO/IEC 29158",
+      "description": "Direct part mark quality guideline",
+      "scope": "Grading of marked 2D codes (AIM DPM)",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iso29158",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iso15415",
+      "entity": "standard",
+      "name": "ISO/IEC 15415",
+      "code": "ISO/IEC 15415",
+      "description": "2D symbol print quality test specification",
+      "scope": "Grading of printed and label 2D codes",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iso15415",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-semi-t7",
+      "entity": "standard",
+      "name": "SEMI T7",
+      "code": "SEMI T7",
+      "description": "Back-surface marking of double-side polished wafers",
+      "scope": "Wafer back-side identity",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.semi_t7",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-semi-m12",
+      "entity": "standard",
+      "name": "SEMI M12",
+      "code": "SEMI M12",
+      "description": "Serial alphanumeric marking of the front surface of wafers",
+      "scope": "Wafer front-side identity",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.semi_m12",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-semi-m13",
+      "entity": "standard",
+      "name": "SEMI M13",
+      "code": "SEMI M13",
+      "description": "Alphanumeric marking of silicon wafers",
+      "scope": "Wafer character set and placement",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.semi_m13",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-semi-e30",
+      "entity": "standard",
+      "name": "SEMI E30 / E37 / E40",
+      "code": "SEMI E30 / E37 / E40",
+      "description": "GEM, HSMS and processing management",
+      "scope": "Fab and OSAT host communication",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.semi_e30",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-smema",
+      "entity": "standard",
+      "name": "IPC-SMEMA-9851",
+      "code": "IPC-SMEMA-9851",
+      "description": "Mechanical equipment interface standard",
+      "scope": "Board handshake between inline machines",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.smema",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-hermes",
+      "entity": "standard",
+      "name": "IPC-HERMES-9852",
+      "code": "IPC-HERMES-9852",
+      "description": "Machine-to-machine communication in SMT",
+      "scope": "Digital successor to SMEMA on SMT lines",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.hermes",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iec61340",
+      "entity": "standard",
+      "name": "IEC 61340-5-1",
+      "code": "IEC 61340-5-1",
+      "description": "Protection of electronic devices from electrostatic phenomena",
+      "scope": "ESD-safe build and dry-room handling",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iec61340",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-iso14644",
+      "entity": "standard",
+      "name": "ISO 14644-1",
+      "code": "ISO 14644-1",
+      "description": "Cleanrooms — classification of air cleanliness by particle concentration",
+      "scope": "Cleanroom-compatible construction",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.iso14644",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    },
+    {
+      "id": "std-cfr11",
+      "entity": "standard",
+      "name": "21 CFR Part 11",
+      "code": "21 CFR Part 11",
+      "description": "Electronic records and electronic signatures",
+      "scope": "Validated sites using audit-trailed software",
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "STD.cfr11",
+        "note": "Title and scope as summarised in the legacy configurator. Consult the current edition of the standard itself."
+      },
+      "tags": [
+        "standard"
+      ]
+    }
+  ]
+}

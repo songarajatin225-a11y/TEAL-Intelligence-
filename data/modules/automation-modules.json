@@ -1,0 +1,969 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "automation-modules",
+    "title": "Module library",
+    "description": "Automation modules (catalogue Ch. 13), LaserSuite software editions and connectivity/compliance packages, with fitment rules.",
+    "entity": "module",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "modules"
+  },
+  "records": [
+    {
+      "id": "mod-visfid",
+      "entity": "module",
+      "key": "visfid",
+      "kind": "automation",
+      "name": "Fiducial / part-locate vision",
+      "description": "Automatic part location and mark-placement correction",
+      "group": "Vision & verification",
+      "price_estimate_inr": 650000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.visfid",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "vision & verification"
+      ]
+    },
+    {
+      "id": "mod-visver",
+      "entity": "module",
+      "key": "visver",
+      "kind": "automation",
+      "name": "Mark verification & grading",
+      "description": "In-machine decode + ISO/IEC 29158 / 15415 grading",
+      "group": "Vision & verification",
+      "price_estimate_inr": 750000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.visver",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "vision & verification"
+      ]
+    },
+    {
+      "id": "mod-weldmon",
+      "entity": "module",
+      "key": "weldmon",
+      "kind": "automation",
+      "name": "Photodiode weld monitor",
+      "description": "Per-weld plasma / temperature envelopes",
+      "group": "Vision & verification",
+      "price_estimate_inr": 700000,
+      "fitment": {
+        "fam": [
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.weldmon",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "vision & verification"
+      ]
+    },
+    {
+      "id": "mod-oct",
+      "entity": "module",
+      "key": "oct",
+      "kind": "automation",
+      "name": "Inline OCT depth monitoring",
+      "description": "Direct keyhole depth measurement, ± 50 µm",
+      "group": "Vision & verification",
+      "price_estimate_inr": 2600000,
+      "fitment": {
+        "fam": [
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.oct",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "vision & verification"
+      ]
+    },
+    {
+      "id": "mod-seamtrk",
+      "entity": "module",
+      "key": "seamtrk",
+      "kind": "automation",
+      "name": "Laser seam tracking",
+      "description": "Real-time path correction with touch-sense backup",
+      "group": "Vision & verification",
+      "price_estimate_inr": 950000,
+      "fitment": {
+        "fam": [
+          "weld",
+          "cut"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.seamtrk",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "vision & verification"
+      ]
+    },
+    {
+      "id": "mod-autofoc",
+      "entity": "module",
+      "key": "autofoc",
+      "kind": "automation",
+      "name": "Auto Z-focus (triangulation)",
+      "description": "Mixed-height parts without manual refocus",
+      "group": "Optics & motion",
+      "price_estimate_inr": 450000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "galvo2",
+          "gantry"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.autofoc",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-scan3d",
+      "entity": "module",
+      "key": "scan3d",
+      "kind": "automation",
+      "name": "3-axis scan head",
+      "description": "Stepped and curved surfaces within one field",
+      "group": "Optics & motion",
+      "price_estimate_inr": 850000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "galvo2",
+          "gantry"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.scan3d",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-wobble",
+      "entity": "module",
+      "key": "wobble",
+      "kind": "automation",
+      "name": "Wobble module",
+      "description": "Gap tolerance and melt-pool control",
+      "group": "Optics & motion",
+      "price_estimate_inr": 550000,
+      "fitment": {
+        "fam": [
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.wobble",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-rotary",
+      "entity": "module",
+      "key": "rotary",
+      "kind": "automation",
+      "name": "Rotary / 4th axis",
+      "description": "Cylindrical and circumferential work",
+      "group": "Optics & motion",
+      "price_estimate_inr": 350000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "gantry"
+        ],
+        "noFam": [
+          "semi"
+        ],
+        "noPlat": [
+          "markc2i",
+          "marku",
+          "markit"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.rotary",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-shuttle",
+      "entity": "module",
+      "key": "shuttle",
+      "kind": "automation",
+      "name": "Dual-station shuttle table",
+      "description": "Load-while-process on a two-position table",
+      "group": "Optics & motion",
+      "price_estimate_inr": 550000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "gantry"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.shuttle",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-gascon",
+      "entity": "module",
+      "key": "gascon",
+      "kind": "automation",
+      "name": "Process-gas console",
+      "description": "Shield or cutting gas, N₂ / Ar / air / O₂",
+      "group": "Optics & motion",
+      "price_estimate_inr": 320000,
+      "fitment": {
+        "fam": [
+          "weld",
+          "cut",
+          "clean"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.gascon",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "optics & motion"
+      ]
+    },
+    {
+      "id": "mod-conveyor",
+      "entity": "module",
+      "key": "conveyor",
+      "kind": "automation",
+      "name": "SMEMA / edge-belt conveyor",
+      "description": "Inline transport with line handshakes",
+      "group": "Handling & flow",
+      "price_estimate_inr": 650000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.conveyor",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-rotoidx",
+      "entity": "module",
+      "key": "rotoidx",
+      "kind": "automation",
+      "name": "Rotary indexer",
+      "description": "4 / 6 / 8-station dial, load overlaps process",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1200000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "robot"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.rotoidx",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-robot6",
+      "entity": "module",
+      "key": "robot6",
+      "kind": "automation",
+      "name": "6-axis robot integration",
+      "description": "Full-3D manipulation or process carrying",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1800000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.robot6",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-cobotld",
+      "entity": "module",
+      "key": "cobotld",
+      "kind": "automation",
+      "name": "Cobot loading",
+      "description": "Force-limited, operator-shared workspace",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1100000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.cobotld",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-feeder",
+      "entity": "module",
+      "key": "feeder",
+      "kind": "automation",
+      "name": "Bowl / flex feeder",
+      "description": "Bulk singulation and orientation",
+      "group": "Handling & flow",
+      "price_estimate_inr": 900000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "robot"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.feeder",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-magazine",
+      "entity": "module",
+      "key": "magazine",
+      "kind": "automation",
+      "name": "Magazine loader",
+      "description": "Strip and board magazine-to-magazine",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1400000,
+      "fitment": {
+        "fam": [
+          "mark",
+          "semi"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.magazine",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-traytwr",
+      "entity": "module",
+      "key": "traytwr",
+      "kind": "automation",
+      "name": "Tray tower",
+      "description": "Stack storage for delicate oriented parts",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1000000,
+      "fitment": {
+        "fam": [
+          "mark",
+          "semi",
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.traytwr",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-turntbl",
+      "entity": "module",
+      "key": "turntbl",
+      "kind": "automation",
+      "name": "2-station servo turntable",
+      "description": "Operator loads while the cell processes",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1400000,
+      "fitment": {
+        "deliv": [
+          "galvo",
+          "gantry",
+          "robot"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.turntbl",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-reject",
+      "entity": "module",
+      "key": "reject",
+      "kind": "automation",
+      "name": "Reject / NG station",
+      "description": "Documented removal with sealed bins",
+      "group": "Handling & flow",
+      "price_estimate_inr": 280000,
+      "fitment": {
+        "noDeliv": [
+          "handpiece"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.reject",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-r2r",
+      "entity": "module",
+      "key": "r2r",
+      "kind": "automation",
+      "name": "Roll-to-roll module",
+      "description": "Continuous web processing",
+      "group": "Handling & flow",
+      "price_estimate_inr": 1600000,
+      "fitment": {
+        "fam": [
+          "cut",
+          "volt",
+          "mark"
+        ],
+        "mat": [
+          "cu",
+          "al",
+          "pi",
+          "poly",
+          "fr4"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.r2r",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "handling & flow"
+      ]
+    },
+    {
+      "id": "mod-fume",
+      "entity": "module",
+      "key": "fume",
+      "kind": "automation",
+      "name": "Filtered fume extraction",
+      "description": "Flow-monitored, process-inhibit on failure",
+      "group": "Environment & safety",
+      "price_estimate_inr": 280000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.fume",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "environment & safety"
+      ]
+    },
+    {
+      "id": "mod-cleanrm",
+      "entity": "module",
+      "key": "cleanrm",
+      "kind": "automation",
+      "name": "Cleanroom build",
+      "description": "ISO-class materials, sealed cable management",
+      "group": "Environment & safety",
+      "price_estimate_inr": 1500000,
+      "fitment": {
+        "fam": [
+          "semi"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.cleanrm",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "environment & safety"
+      ]
+    },
+    {
+      "id": "mod-dryroom",
+      "entity": "module",
+      "key": "dryroom",
+      "kind": "automation",
+      "name": "Dry-room build",
+      "description": "To −40 °C dew point, static-safe per IEC 61340-5-1",
+      "group": "Environment & safety",
+      "price_estimate_inr": 1200000,
+      "fitment": {
+        "fam": [
+          "volt",
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.dryroom",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "environment & safety"
+      ]
+    },
+    {
+      "id": "mod-glovebx",
+      "entity": "module",
+      "key": "glovebx",
+      "kind": "automation",
+      "name": "Controlled atmosphere / glovebox",
+      "description": "N₂, Ar or He backfill chamber",
+      "group": "Environment & safety",
+      "price_estimate_inr": 2200000,
+      "fitment": {
+        "fam": [
+          "volt",
+          "weld"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.glovebx",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "environment & safety"
+      ]
+    },
+    {
+      "id": "mod-cepath",
+      "entity": "module",
+      "key": "cepath",
+      "kind": "automation",
+      "name": "CE-path documentation",
+      "description": "Full-cell conformity file, not laser only",
+      "group": "Environment & safety",
+      "price_estimate_inr": 450000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "MOD.cepath",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "environment & safety"
+      ]
+    },
+    {
+      "id": "mod-desktop",
+      "entity": "module",
+      "key": "desktop",
+      "kind": "software",
+      "name": "LaserSuite Desktop",
+      "description": "Recipe management, code engines, local database",
+      "group": "LaserSuite software",
+      "price_estimate_inr": 0,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SW.desktop",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "lasersuite software"
+      ]
+    },
+    {
+      "id": "mod-inline",
+      "entity": "module",
+      "key": "inline",
+      "kind": "software",
+      "name": "LaserSuite Inline",
+      "description": "Adds transport, handshakes and order queues",
+      "group": "LaserSuite software",
+      "price_estimate_inr": 450000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SW.inline",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "lasersuite software"
+      ]
+    },
+    {
+      "id": "mod-volt",
+      "entity": "module",
+      "key": "volt",
+      "kind": "software",
+      "name": "LaserSuite Volt",
+      "description": "Adds battery genealogy models, cell → pack",
+      "group": "LaserSuite software",
+      "price_estimate_inr": 750000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SW.volt",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "lasersuite software"
+      ]
+    },
+    {
+      "id": "mod-regulated",
+      "entity": "module",
+      "key": "regulated",
+      "kind": "software",
+      "name": "LaserSuite Regulated",
+      "description": "Adds e-signature user controls and audit trails",
+      "group": "LaserSuite software",
+      "price_estimate_inr": 950000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SW.regulated",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "lasersuite software"
+      ]
+    },
+    {
+      "id": "mod-connect",
+      "entity": "module",
+      "key": "connect",
+      "kind": "connectivity",
+      "name": "TEAL Connect (remote)",
+      "description": "Outbound-only diagnostics and health telemetry",
+      "group": "Connectivity",
+      "price_estimate_inr": 320000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "EXTRA.connect",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "connectivity"
+      ]
+    },
+    {
+      "id": "mod-secsgem",
+      "entity": "module",
+      "key": "secsgem",
+      "kind": "connectivity",
+      "name": "SECS/GEM host interface",
+      "description": "E30 / E37 / E40 class connectivity",
+      "group": "Connectivity",
+      "price_estimate_inr": 800000,
+      "fitment": {
+        "fam": [
+          "semi",
+          "volt",
+          "auto"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "EXTRA.secsgem",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "connectivity"
+      ]
+    },
+    {
+      "id": "mod-mes",
+      "entity": "module",
+      "key": "mes",
+      "kind": "connectivity",
+      "name": "MES / ERP integration",
+      "description": "OPC UA, MQTT, REST — order download, result upload",
+      "group": "Connectivity",
+      "price_estimate_inr": 520000,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "EXTRA.mes",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "connectivity"
+      ]
+    },
+    {
+      "id": "mod-iqoqpq",
+      "entity": "module",
+      "key": "iqoqpq",
+      "kind": "compliance",
+      "name": "IQ/OQ/PQ validation package",
+      "description": "Protocols and execution support for validated sites",
+      "group": "Compliance",
+      "price_estimate_inr": 650000,
+      "fitment": {
+        "fam": [
+          "weld",
+          "semi",
+          "mark",
+          "auto"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "EXTRA.iqoqpq",
+        "note": "Module list price is a configurator ESTIMATE (INR), not a quotation. Module DNA fields (interfaces, utilities, accuracy, suppliers) are UNKNOWN until documented."
+      },
+      "tags": [
+        "compliance"
+      ]
+    }
+  ]
+}

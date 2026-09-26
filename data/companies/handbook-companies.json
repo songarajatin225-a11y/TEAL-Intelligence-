@@ -1,0 +1,1401 @@
+{
+  "dataset": {
+    "id": "handbook-companies",
+    "title": "Companies named in the handbooks",
+    "description": "Laser-source and laser-equipment suppliers named as representative examples in the Laser Handbook §21.3 and Semiconductor Handbook Part XXXII. Each claim has an evidence record.",
+    "entity": "company",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "PUBLIC",
+    "source_ids": [
+      "src-laser-handbook",
+      "src-semiconductor-handbook"
+    ],
+    "partition": "companies"
+  },
+  "records": [
+    {
+      "id": "co-ipg-photonics",
+      "entity": "company",
+      "name": "IPG Photonics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)",
+        "Ultrafast (ps/fs)",
+        "Direct diode, blue and green",
+        "Laser diodes and pumps",
+        "Laser welding"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-trumpf",
+      "entity": "company",
+      "name": "TRUMPF",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)",
+        "CO₂",
+        "Ultrafast (ps/fs)",
+        "Direct diode, blue and green",
+        "Laser ablation / patterning",
+        "Laser welding",
+        "Laser cutting",
+        "EUV light source"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-coherent",
+      "entity": "company",
+      "name": "Coherent",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)",
+        "CO₂",
+        "DPSS UV and green (ns)",
+        "Ultrafast (ps/fs)",
+        "Direct diode, blue and green",
+        "Laser diodes and pumps",
+        "VCSEL and telecom lasers",
+        "Excimer",
+        "Scientific",
+        "Laser lift-off (LLO)",
+        "ELA (excimer laser annealing)",
+        "Laser ablation / patterning",
+        "Laser welding",
+        "Laser cutting",
+        "Micromachining (MEMS, glass)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-raycus",
+      "entity": "company",
+      "name": "Raycus",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-maxphotonics",
+      "entity": "company",
+      "name": "Maxphotonics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-jpt",
+      "entity": "company",
+      "name": "JPT",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "High-power CW fiber",
+        "Pulsed fiber (ns Q-switched, MOPA)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-novanta",
+      "entity": "company",
+      "name": "Novanta",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "CO₂"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-luxinar",
+      "entity": "company",
+      "name": "Luxinar",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "CO₂"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-mks-spectra-physics",
+      "entity": "company",
+      "name": "MKS Spectra-Physics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)",
+        "Ultrafast (ps/fs)",
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-lumentum",
+      "entity": "company",
+      "name": "Lumentum",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)",
+        "Ultrafast (ps/fs)",
+        "Laser diodes and pumps",
+        "VCSEL and telecom lasers"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-photonics-industries",
+      "entity": "company",
+      "name": "Photonics Industries",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-edgewave",
+      "entity": "company",
+      "name": "EdgeWave",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-huaray",
+      "entity": "company",
+      "name": "Huaray",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)",
+        "Ultrafast (ps/fs)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-inno-laser",
+      "entity": "company",
+      "name": "Inno Laser",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "DPSS UV and green (ns)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-light-conversion",
+      "entity": "company",
+      "name": "Light Conversion",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Ultrafast (ps/fs)",
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-amplitude",
+      "entity": "company",
+      "name": "Amplitude",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Ultrafast (ps/fs)",
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-nkt-photonics",
+      "entity": "company",
+      "name": "NKT Photonics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Ultrafast (ps/fs)",
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-ekspla",
+      "entity": "company",
+      "name": "EKSPLA",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Ultrafast (ps/fs)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-ysl-photonics",
+      "entity": "company",
+      "name": "YSL Photonics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Ultrafast (ps/fs)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-laserline",
+      "entity": "company",
+      "name": "Laserline",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Direct diode, blue and green"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-nuburu",
+      "entity": "company",
+      "name": "Nuburu",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Direct diode, blue and green"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-shimadzu",
+      "entity": "company",
+      "name": "Shimadzu",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Direct diode, blue and green"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-nlight",
+      "entity": "company",
+      "name": "nLIGHT",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-jenoptik",
+      "entity": "company",
+      "name": "Jenoptik",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-ams-osram",
+      "entity": "company",
+      "name": "ams OSRAM",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps",
+        "VCSEL and telecom lasers"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-hamamatsu",
+      "entity": "company",
+      "name": "Hamamatsu",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-focuslight",
+      "entity": "company",
+      "name": "Focuslight",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-bwt",
+      "entity": "company",
+      "name": "BWT",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-everbright",
+      "entity": "company",
+      "name": "Everbright",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser diodes and pumps"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-broadcom",
+      "entity": "company",
+      "name": "Broadcom",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "VCSEL and telecom lasers"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-trumpf-photonic-components",
+      "entity": "company",
+      "name": "TRUMPF Photonic Components",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "VCSEL and telecom lasers"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-cymer",
+      "entity": "company",
+      "name": "Cymer",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Excimer",
+        "DUV lithography source"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-gigaphoton",
+      "entity": "company",
+      "name": "Gigaphoton",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Excimer",
+        "DUV lithography source"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-thales",
+      "entity": "company",
+      "name": "Thales",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-toptica",
+      "entity": "company",
+      "name": "TOPTICA",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Scientific"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-laser-handbook",
+        "section": "21.3 Laser source suppliers by technology class",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-eo-technics",
+      "entity": "company",
+      "name": "EO Technics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Wafer marking (front/back)",
+        "Laser grooving (low-k)",
+        "Laser full-cut dicing",
+        "Package marking"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-keyence",
+      "entity": "company",
+      "name": "Keyence",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Wafer marking (front/back)",
+        "Package marking",
+        "PCB marking"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-hans-laser",
+      "entity": "company",
+      "name": "Han’s Laser",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Wafer marking (front/back)",
+        "Laser full-cut dicing",
+        "Package marking",
+        "PCB marking"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-disco",
+      "entity": "company",
+      "name": "DISCO",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser grooving (low-k)",
+        "Laser full-cut dicing",
+        "Stealth dicing",
+        "SiC boule slicing"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-asmpt",
+      "entity": "company",
+      "name": "ASMPT",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser grooving (low-k)",
+        "Laser full-cut dicing",
+        "Package marking"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-halo-industries",
+      "entity": "company",
+      "name": "Halo Industries",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "SiC boule slicing"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-ap-systems",
+      "entity": "company",
+      "name": "AP Systems",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser lift-off (LLO)",
+        "ELA (excimer laser annealing)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-philoptics",
+      "entity": "company",
+      "name": "Philoptics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser lift-off (LLO)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-ev-group",
+      "entity": "company",
+      "name": "EV Group",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Temporary-bond laser debond"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-suss",
+      "entity": "company",
+      "name": "SUSS",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Temporary-bond laser debond"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-brewer-science",
+      "entity": "company",
+      "name": "Brewer Science",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Temporary-bond laser debond"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-applied-materials",
+      "entity": "company",
+      "name": "Applied Materials",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser annealing — dopant activation"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-screen",
+      "entity": "company",
+      "name": "SCREEN",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser annealing — dopant activation"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-veeco",
+      "entity": "company",
+      "name": "Veeco",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser annealing — dopant activation"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-mitsui",
+      "entity": "company",
+      "name": "Mitsui",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser annealing — dopant activation"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-3d-micromac",
+      "entity": "company",
+      "name": "3D-Micromac",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser annealing — dopant activation",
+        "Laser ablation / patterning",
+        "Micromachining (MEMS, glass)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-mitsubishi-electric",
+      "entity": "company",
+      "name": "Mitsubishi Electric",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser drilling (PCB, substrates)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-via-mechanics",
+      "entity": "company",
+      "name": "Via Mechanics",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser drilling (PCB, substrates)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-esi",
+      "entity": "company",
+      "name": "ESI",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser drilling (PCB, substrates)",
+        "Laser trimming"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-lpkf",
+      "entity": "company",
+      "name": "LPKF",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser drilling (PCB, substrates)",
+        "Laser cutting",
+        "Micromachining (MEMS, glass)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-heraeus",
+      "entity": "company",
+      "name": "Heraeus",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser trimming"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-apollo-seiko",
+      "entity": "company",
+      "name": "Apollo Seiko",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser soldering"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-unitechnologies",
+      "entity": "company",
+      "name": "Unitechnologies",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser soldering"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-pac-tech",
+      "entity": "company",
+      "name": "Pac Tech",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser soldering",
+        "Laser-assisted bonding (LAB)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    },
+    {
+      "id": "co-k-s",
+      "entity": "company",
+      "name": "K&S",
+      "roles": [
+        "manufacturer"
+      ],
+      "technologies": [
+        "Laser-assisted bonding (LAB)"
+      ],
+      "data_type": "PUBLIC",
+      "provenance": {
+        "source_id": "src-semiconductor-handbook",
+        "section": "Part XXXII — Lasers in semiconductor and electronics manufacturing",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "note": "Named in a TEAL handbook as a representative/example supplier. Country, products and India presence are UNKNOWN until curated through the ingestion pipeline."
+      },
+      "tags": [
+        "handbook-named"
+      ]
+    }
+  ]
+}

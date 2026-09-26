@@ -1,0 +1,145 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "industries",
+    "title": "Industries served",
+    "description": "Industries the TEAL laser portfolio serves (configurator taxonomy).",
+    "entity": "industry",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "applications"
+  },
+  "records": [
+    {
+      "id": "ind-ems",
+      "entity": "industry",
+      "name": "Electronics / EMS",
+      "code": "EMS",
+      "description": "PCB assembly, connectors, enclosures",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.ems"
+      }
+    },
+    {
+      "id": "ind-semi",
+      "entity": "industry",
+      "name": "Semiconductor / ATMP",
+      "code": "Semiconductor",
+      "description": "Wafer, package, substrate, test",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.semi"
+      }
+    },
+    {
+      "id": "ind-battery",
+      "entity": "industry",
+      "name": "Battery & e-mobility",
+      "code": "Battery",
+      "description": "Cell, module, pack, traction drive",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.battery"
+      }
+    },
+    {
+      "id": "ind-auto",
+      "entity": "industry",
+      "name": "Automotive",
+      "code": "Automotive",
+      "description": "Powertrain, body, interior, sensors",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.auto"
+      }
+    },
+    {
+      "id": "ind-medical",
+      "entity": "industry",
+      "name": "Medical devices",
+      "code": "Medical",
+      "description": "Instruments, implants, UDI marking",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.medical"
+      }
+    },
+    {
+      "id": "ind-aero",
+      "entity": "industry",
+      "name": "Aerospace & defence",
+      "code": "Aerospace",
+      "description": "Structures, fasteners, traceability",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.aero"
+      }
+    },
+    {
+      "id": "ind-genengg",
+      "entity": "industry",
+      "name": "General engineering",
+      "code": "General Engineering",
+      "description": "Fabrication, tooling, job work",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.genengg"
+      }
+    },
+    {
+      "id": "ind-consumer",
+      "entity": "industry",
+      "name": "Consumer & jewellery",
+      "code": "Consumer",
+      "description": "Cosmetic marking, personalisation",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "IND.consumer"
+      }
+    }
+  ]
+}

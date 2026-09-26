@@ -1,0 +1,88 @@
+{
+  "dataset": {
+    "id": "demo-opportunities",
+    "title": "DEMO opportunities",
+    "entity": "opportunity",
+    "description": "Scenario opportunities. Values and probabilities are intentionally UNKNOWN.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "opp-demo-pkg-marking",
+      "entity": "opportunity",
+      "name": "Inline package marking line (Scenario 1)",
+      "stage": "Requirement",
+      "customer_id": "cus-demo-osat",
+      "industry": "Semiconductor",
+      "inquiry_text": "Need inline laser marking of semiconductor packages, 2D code, high throughput, automatic handling, vision inspection and MES communication. Customer supplies laser.",
+      "product_id": "prd-semispm",
+      "value": null,
+      "probability": null,
+      "technical_status": "Requirements being drafted",
+      "commercial_status": "No price discussed",
+      "next_action": {
+        "action": "Run \"Create product from inquiry\" and review the draft package with the customer",
+        "due": "@today+1",
+        "owner": "Product Manager"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "opp-demo-pcb-co2",
+      "entity": "opportunity",
+      "name": "CO₂ inline PCB marking (Scenario 2)",
+      "stage": "Feasibility",
+      "customer_id": "cus-demo-ems",
+      "industry": "EMS",
+      "product_id": "prd-markc2i",
+      "configuration_id": "cfg-demo-c2i",
+      "value": null,
+      "probability": null,
+      "technical_status": "Platform fit identified (Mark PCB C2i)",
+      "next_action": {
+        "action": "Plan sample marking on customer boards (solder mask colours)",
+        "due": "@today+4",
+        "owner": "Application Engineering"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "opp-demo-atmp",
+      "entity": "opportunity",
+      "name": "ATMP back-end laser equipment study (Scenario 3)",
+      "stage": "Discovery",
+      "customer_id": "cus-demo-osat",
+      "industry": "ATMP",
+      "value": null,
+      "probability": null,
+      "technical_status": "Mapping laser processes to the ATMP flow",
+      "next_action": {
+        "action": "Review Semiconductor Handbook Part XXXII against TEAL modules and list gaps",
+        "due": "@today+7",
+        "owner": "Product Manager"
+      }
+    }
+  ]
+}

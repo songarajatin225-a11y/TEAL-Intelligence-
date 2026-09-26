@@ -1,0 +1,148 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "sources",
+    "title": "Sources",
+    "description": "Registry of every source the OS cites. Evidence and provenance reference these ids.",
+    "entity": "source",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": []
+  },
+  "records": [
+    {
+      "id": "src-laser-handbook",
+      "entity": "source",
+      "name": "The Complete Laser Handbook",
+      "description": "From Photon to Industrial Laser Systems, Processes, Machines & End-Product Applications. 28 parts.",
+      "kind": "handbook",
+      "author": "Jatin Songara — Laser and Photonics Vertical, Titan Engineering and Automation Ltd.",
+      "published": "2026-09-22",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED",
+        "document": "The_Complete_Laser_Handbook.docx"
+      },
+      "tags": [
+        "handbook",
+        "laser"
+      ]
+    },
+    {
+      "id": "src-automation-handbook",
+      "entity": "source",
+      "name": "Automation Equipment Building Handbook",
+      "description": "From customer requirement to machine architecture, engineering, manufacturing, FAT, SAT and production. Edition 1.0; 60 parts, 12 books, 10 case studies, 11 design-review gates, 177 formulas.",
+      "kind": "handbook",
+      "author": "Jatin Songara — Project Manager, Laser & Photonics Vertical, TEAL",
+      "published": "2026-09-26",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED",
+        "document": "Automation_Equipment_Building_Handbook.docx"
+      },
+      "tags": [
+        "handbook",
+        "automation"
+      ]
+    },
+    {
+      "id": "src-semiconductor-handbook",
+      "entity": "source",
+      "name": "The Complete Semiconductor Industry Handbook",
+      "description": "From Silicon to Chips to Systems to Everything.",
+      "kind": "handbook",
+      "author": "Jatin Songara — Laser & Photonics Vertical, Titan Engineering & Automation Ltd.",
+      "published": "2026-09-21",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED",
+        "document": "The_Complete_Semiconductor_Industry_Handbook_1.docx"
+      },
+      "tags": [
+        "handbook",
+        "semiconductor"
+      ]
+    },
+    {
+      "id": "src-legacy-laser-sim",
+      "entity": "source",
+      "name": "Legacy TEAL Laser Equipment Configurator (data.json)",
+      "description": "Value store of the legacy configurator (_updated 2026-08-02). Its README states the configuration data is derived from \"TEAL Laser Automation Solutions — Product Catalogue, 2026 Edition (Ch. 02–13)\" and that prices are indicative ex-works estimates from a parametric model, not quotations.",
+      "kind": "legacy_app",
+      "url": "https://github.com/songarajatin225-a11y/TEAL-Laser-Product-Sim-2",
+      "retrieved_at": "2026-09-26",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED",
+        "source_url": "https://github.com/songarajatin225-a11y/TEAL-Laser-Product-Sim-2"
+      },
+      "tags": [
+        "legacy"
+      ]
+    },
+    {
+      "id": "src-teal-catalogue-2026",
+      "entity": "source",
+      "name": "TEAL Laser Automation Solutions — Product Catalogue, 2026 Edition",
+      "description": "Referenced by the legacy configurator as the origin of its platform data. The catalogue itself is not in this repository.",
+      "kind": "internal",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "UNKNOWN",
+        "note": "Document not available to the OS; cited second-hand via the legacy configurator."
+      },
+      "tags": [
+        "catalogue"
+      ]
+    },
+    {
+      "id": "src-legacy-cost-platform",
+      "entity": "source",
+      "name": "Legacy TEAL Costing & Estimation Platform (data/*.json)",
+      "description": "Seed masters of the legacy cost platform. Mixes real company names with fabricated demonstration records (e.g. items attributed to vendors that do not make them). Treated as DEMO.",
+      "kind": "legacy_app",
+      "url": "https://github.com/songarajatin225-a11y/TEAL-COST-DEMO-7-8",
+      "retrieved_at": "2026-09-26",
+      "data_type": "DEMO",
+      "provenance": {
+        "verification_status": "UNKNOWN",
+        "source_url": "https://github.com/songarajatin225-a11y/TEAL-COST-DEMO-7-8"
+      },
+      "tags": [
+        "legacy"
+      ]
+    },
+    {
+      "id": "src-legacy-pm-tracker",
+      "entity": "source",
+      "name": "Legacy Laser Applications PM Operating Tracker (js/schema.js)",
+      "description": "Controlled vocabularies and entity definitions of the legacy product-management tracker.",
+      "kind": "legacy_app",
+      "url": "https://github.com/songarajatin225-a11y/Product-Tracker-",
+      "retrieved_at": "2026-09-26",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED",
+        "source_url": "https://github.com/songarajatin225-a11y/Product-Tracker-"
+      },
+      "tags": [
+        "legacy"
+      ]
+    },
+    {
+      "id": "src-os-spec",
+      "entity": "source",
+      "name": "TEAL Engineering Intelligence OS — Final Master Build Specification (GitHub-only V1)",
+      "description": "The build specification for this platform. Source of module lists, workflows and enumerations (e.g. application industries, laser categories, radar statuses).",
+      "kind": "internal",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED"
+      },
+      "tags": [
+        "specification"
+      ]
+    }
+  ]
+}

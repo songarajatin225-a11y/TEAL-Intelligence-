@@ -1,0 +1,47 @@
+{
+  "dataset": {
+    "id": "demo-configurations",
+    "title": "DEMO configurations",
+    "entity": "configuration",
+    "description": "Example configuration for Scenario 2.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "cfg-demo-c2i",
+      "entity": "configuration",
+      "name": "C2i — dual-side PCB ID, inline, graded",
+      "product_id": "prd-markc2i",
+      "application_key": "dual",
+      "source_key": "co2",
+      "power_w": 30,
+      "lens_key": "f254",
+      "modules": [
+        "visfid",
+        "conveyor",
+        "fume",
+        "visver",
+        "reject"
+      ],
+      "software": "inline",
+      "extras": [
+        "mes"
+      ],
+      "opportunity_id": "opp-demo-pcb-co2",
+      "customer_id": "cus-demo-ems",
+      "version": 1
+    }
+  ]
+}

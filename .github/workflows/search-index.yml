@@ -1,0 +1,39 @@
+name: Search index
+
+# Rebuilds the partitioned MiniSearch indexes and the knowledge graph when data or handbooks
+# change, and reports partition sizes. The deployed site builds its own copy (deploy.yml).
+on:
+  push:
+    branches: [main]
+    paths: ['data/**', 'knowledge/**', 'src/services/searchDocs.ts', 'src/services/knowledgeChunks.ts', 'scripts/ingestion/generateSearchIndex.ts']
+  pull_request:
+    paths: ['data/**', 'knowledge/**', 'src/services/searchDocs.ts', 'src/services/knowledgeChunks.ts', 'scripts/ingestion/generateSearchIndex.ts']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run data:catalog && npm run data:publish && npm run data:graph && npm run data:index
+      - name: Partition sizes
+        run: |
+          echo '### Search index partitions' >> "$GITHUB_STEP_SUMMARY"
+          echo '| Partition | Bytes |' >> "$GITHUB_STEP_SUMMARY"
+          echo '|---|---|' >> "$GITHUB_STEP_SUMMARY"
+          for f in public/search-index/*.json; do echo "| $(basename "$f" .json) | $(stat -c %s "$f") |" >> "$GITHUB_STEP_SUMMARY"; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: search-index
+          path: |
+            public/search-index
+            public/graph
+          retention-days: 7

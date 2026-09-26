@@ -1,0 +1,797 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "recommendation-rules",
+    "title": "Configurator recommendation rules",
+    "description": "27 engineering recommendation rules. A rule fires when all its conditions match; it can only recommend equipment the platform can physically accept.",
+    "entity": "rule",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "rul-pcb-line",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Inline PCB traceability",
+      "why": "Inline board marking is only auditable if every code is graded as it is made and failures are physically segregated.",
+      "iff": {
+        "plat": [
+          "markc2i",
+          "marku",
+          "markit"
+        ]
+      },
+      "then": {
+        "mods": [
+          "visver",
+          "reject"
+        ],
+        "extra": [
+          "mes"
+        ],
+        "sw": "inline"
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-pcb-line"
+      }
+    },
+    {
+      "id": "rul-semi-host",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Semiconductor host integration",
+      "why": "OSAT and fab lines expect SECS/GEM handshakes and per-unit records; retrofitting them later means re-qualifying the tool.",
+      "iff": {
+        "fam": [
+          "semi"
+        ]
+      },
+      "then": {
+        "mods": [
+          "visver"
+        ],
+        "extra": [
+          "secsgem",
+          "mes"
+        ],
+        "sw": "inline"
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-semi-host"
+      }
+    },
+    {
+      "id": "rul-semi-clean",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Cleanroom compatibility",
+      "why": "Wafer and package tools sit inside classified space — particulate control has to be designed in, not added.",
+      "iff": {
+        "plat": [
+          "semiwm",
+          "semispm"
+        ]
+      },
+      "then": {
+        "mods": [
+          "cleanrm"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-semi-clean"
+      }
+    },
+    {
+      "id": "rul-volt-gen",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Battery genealogy",
+      "why": "Cell-to-pack recall exposure is the reason to capture genealogy at the point of marking rather than reconstructing it later.",
+      "iff": {
+        "fam": [
+          "volt"
+        ]
+      },
+      "then": {
+        "mods": [
+          "visver"
+        ],
+        "extra": [
+          "mes"
+        ],
+        "sw": "volt"
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-volt-gen"
+      }
+    },
+    {
+      "id": "rul-weld-mon",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Weld process monitoring",
+      "why": "A weld you cannot measure is a weld you cannot warrant; monitoring turns each joint into inspectable data.",
+      "iff": {
+        "fam": [
+          "weld"
+        ]
+      },
+      "then": {
+        "mods": [
+          "weldmon"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-weld-mon"
+      }
+    },
+    {
+      "id": "rul-weld-cu",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Copper joint control",
+      "why": "Copper welding is unstable at the melt boundary — depth monitoring is what makes the process capable rather than merely repeatable.",
+      "iff": {
+        "plat": [
+          "weldb"
+        ],
+        "src": [
+          "green",
+          "smcw"
+        ]
+      },
+      "then": {
+        "mods": [
+          "oct",
+          "wobble"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-weld-cu"
+      }
+    },
+    {
+      "id": "rul-weld-dry",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Dry-room environment",
+      "why": "Electrode-area humidity degrades cell performance; the cell build must match the room it will live in.",
+      "iff": {
+        "plat": [
+          "weldb"
+        ]
+      },
+      "then": {
+        "mods": [
+          "dryroom"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-weld-dry"
+      }
+    },
+    {
+      "id": "rul-med-val",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Regulated-site validation",
+      "why": "Medical and hermetic work is audited on evidence, so e-signature controls and IQ/OQ/PQ belong in the machine scope from day one.",
+      "iff": {
+        "plat": [
+          "weldh"
+        ]
+      },
+      "then": {
+        "extra": [
+          "iqoqpq"
+        ],
+        "sw": "regulated"
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-med-val"
+      }
+    },
+    {
+      "id": "rul-fume",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Extraction and operator exposure",
+      "why": "Marking, cutting and cleaning all generate process emissions; filtered extraction with flow monitoring is the baseline duty of care.",
+      "iff": {
+        "fam": [
+          "mark",
+          "cut",
+          "clean",
+          "semi"
+        ]
+      },
+      "then": {
+        "mods": [
+          "fume"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-fume"
+      }
+    },
+    {
+      "id": "rul-vision-mark",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Placement accuracy",
+      "why": "Fixture tolerance, not the scanner, usually limits mark placement — fiducial correction removes that variable.",
+      "iff": {
+        "fam": [
+          "mark",
+          "volt"
+        ]
+      },
+      "then": {
+        "mods": [
+          "visfid"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-vision-mark"
+      }
+    },
+    {
+      "id": "rul-3d",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Non-flat surfaces",
+      "why": "Stepped and curved parts drift out of focus across the field; a 3-axis head holds spot size where a 2-axis head cannot.",
+      "iff": {
+        "app": [
+          "deep",
+          "tool",
+          "complex3d",
+          "corner"
+        ],
+        "deliv": [
+          "galvo",
+          "galvo2",
+          "gantry"
+        ]
+      },
+      "then": {
+        "mods": [
+          "scan3d"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-3d"
+      }
+    },
+    {
+      "id": "rul-rotary",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Cylindrical work",
+      "why": "Circumferential features need synchronised rotation to keep energy density constant around the part.",
+      "iff": {
+        "app": [
+          "cylcan",
+          "feed",
+          "canseam"
+        ]
+      },
+      "then": {
+        "mods": [
+          "rotary"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-rotary"
+      }
+    },
+    {
+      "id": "rul-remote",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Remote support",
+      "why": "Diagnostics that need a site visit cost days; outbound telemetry resolves most faults the same shift.",
+      "iff": {},
+      "then": {
+        "extra": [
+          "connect"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-remote"
+      }
+    },
+    {
+      "id": "rul-gas-weld",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Shield gas",
+      "why": "An unshielded weld pool oxidises as it solidifies; the joint looks acceptable and fails on test.",
+      "iff": {
+        "fam": [
+          "weld"
+        ]
+      },
+      "then": {
+        "mods": [
+          "gascon"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-gas-weld"
+      }
+    },
+    {
+      "id": "rul-gas-cut",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Cutting gas",
+      "why": "Assist gas ejects the melt from the kerf — without it the cut redeposits and the edge closes behind the beam.",
+      "iff": {
+        "fam": [
+          "cut"
+        ]
+      },
+      "then": {
+        "mods": [
+          "gascon"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-gas-cut"
+      }
+    },
+    {
+      "id": "rul-oct-deep",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Deep-penetration control",
+      "why": "Above a kilowatt the process runs in keyhole; penetration cannot be inferred from the surface, so it has to be measured.",
+      "iff": {
+        "fam": [
+          "weld"
+        ],
+        "pwMin": 800
+      },
+      "then": {
+        "mods": [
+          "oct"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-oct-deep"
+      }
+    },
+    {
+      "id": "rul-wobble-gap",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Gap bridging",
+      "why": "Real assemblies do not present zero gap; beam oscillation widens the fusion zone enough to tolerate the fit-up you actually get.",
+      "iff": {
+        "fam": [
+          "weld"
+        ],
+        "not": {
+          "plat": [
+            "weldh"
+          ]
+        }
+      },
+      "then": {
+        "mods": [
+          "wobble"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-wobble-gap"
+      }
+    },
+    {
+      "id": "rul-seam-track",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Seam following",
+      "why": "Thermal distortion moves the joint during the weld; a fixed path walks off it on long seams.",
+      "iff": {
+        "fam": [
+          "weld"
+        ],
+        "deliv": [
+          "robot",
+          "gantry"
+        ]
+      },
+      "then": {
+        "mods": [
+          "seamtrk"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-seam-track"
+      }
+    },
+    {
+      "id": "rul-autofoc-3d",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Mixed-height parts",
+      "why": "Spot size is only valid at focus; a part family with varying height loses fluence long before the operator sees a defect.",
+      "iff": {
+        "deliv": [
+          "galvo",
+          "galvo2",
+          "gantry"
+        ]
+      },
+      "then": {
+        "mods": [
+          "autofoc"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-autofoc-3d"
+      }
+    },
+    {
+      "id": "rul-shuttle-takt",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Load while processing",
+      "why": "On a single-station table the machine waits for the operator; a second station returns that time to production.",
+      "iff": {
+        "fam": [
+          "mark",
+          "cut"
+        ],
+        "deliv": [
+          "galvo",
+          "gantry"
+        ],
+        "not": {
+          "plat": [
+            "markc2i",
+            "marku",
+            "markit"
+          ]
+        }
+      },
+      "then": {
+        "mods": [
+          "shuttle"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-shuttle-takt"
+      }
+    },
+    {
+      "id": "rul-magazine-board",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Board handling",
+      "why": "Manual board loading is where inline traceability breaks down — magazine-to-magazine keeps the chain intact.",
+      "iff": {
+        "fam": [
+          "mark"
+        ],
+        "plat": [
+          "markc2i",
+          "marku",
+          "markit"
+        ]
+      },
+      "then": {
+        "mods": [
+          "magazine"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-magazine-board"
+      }
+    },
+    {
+      "id": "rul-tray-semi",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Oriented package handling",
+      "why": "Singulated packages cannot be bulk fed without damage; tray handling preserves orientation and surface.",
+      "iff": {
+        "fam": [
+          "semi"
+        ]
+      },
+      "then": {
+        "mods": [
+          "traytwr"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-tray-semi"
+      }
+    },
+    {
+      "id": "rul-r2r-web",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Continuous web",
+      "why": "Foil and film arrive on a reel; cutting them as sheets adds a conversion step the process does not need.",
+      "iff": {
+        "fam": [
+          "cut",
+          "volt"
+        ],
+        "mat": [
+          "cu",
+          "al",
+          "pi",
+          "poly"
+        ]
+      },
+      "then": {
+        "mods": [
+          "r2r"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-r2r-web"
+      }
+    },
+    {
+      "id": "rul-turn-robot",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Operator-safe loading",
+      "why": "A turntable keeps the operator outside the guarded volume while the cell runs, which is what makes the interlock scheme workable.",
+      "iff": {
+        "deliv": [
+          "robot"
+        ]
+      },
+      "then": {
+        "mods": [
+          "turntbl"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-turn-robot"
+      }
+    },
+    {
+      "id": "rul-glovebox-cell",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Reactive-material atmosphere",
+      "why": "Lithium-bearing assemblies react with atmospheric moisture during processing; an inert backfill is a process requirement, not a precaution.",
+      "iff": {
+        "fam": [
+          "volt"
+        ],
+        "pwMin": 200
+      },
+      "then": {
+        "mods": [
+          "glovebx"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-glovebox-cell"
+      }
+    },
+    {
+      "id": "rul-ce-cell",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Whole-cell conformity",
+      "why": "A CE-marked laser inside an integrated cell does not make the cell compliant — the conformity file has to cover the machine as delivered.",
+      "iff": {
+        "deliv": [
+          "robot",
+          "gantry"
+        ]
+      },
+      "then": {
+        "mods": [
+          "cepath"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-ce-cell"
+      }
+    },
+    {
+      "id": "rul-med-iq",
+      "entity": "rule",
+      "rule_type": "recommendation",
+      "name": "Validated-site protocols",
+      "why": "Medical and implant-adjacent production is audited on documented evidence; retrofitting IQ/OQ/PQ after installation repeats the qualification.",
+      "iff": {
+        "fam": [
+          "weld",
+          "semi",
+          "mark"
+        ],
+        "not": {
+          "deliv": [
+            "handpiece"
+          ]
+        }
+      },
+      "then": {
+        "extra": [
+          "iqoqpq"
+        ]
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "RECO.r-med-iq"
+      }
+    }
+  ]
+}

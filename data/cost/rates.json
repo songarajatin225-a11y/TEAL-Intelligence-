@@ -1,0 +1,1546 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "cost-rates",
+    "title": "Cost reference data (legacy seed — DEMO)",
+    "description": "Machine-hour, labour and engineering rates, material rates, tax, freight, plant overheads, approval bands and FX from the legacy cost platform seed. DEMO / UNKNOWN verification.",
+    "entity": "reference",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-legacy-cost-platform"
+    ]
+  },
+  "records": [
+    {
+      "id": "ref-process_rate.p1",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "CNC Milling (VMC)",
+      "values": {
+        "name": "CNC Milling (VMC)",
+        "rate": 1250,
+        "uom": "hr",
+        "dept": "Machining"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p2",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Manual Milling",
+      "values": {
+        "name": "Manual Milling",
+        "rate": 650,
+        "uom": "hr",
+        "dept": "Machining"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p3",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "CNC Turning",
+      "values": {
+        "name": "CNC Turning",
+        "rate": 1100,
+        "uom": "hr",
+        "dept": "Machining"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p4",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Manual Turning",
+      "values": {
+        "name": "Manual Turning",
+        "rate": 600,
+        "uom": "hr",
+        "dept": "Machining"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p5",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Band Saw Cutting",
+      "values": {
+        "name": "Band Saw Cutting",
+        "rate": 380,
+        "uom": "hr",
+        "dept": "Preparation"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p6",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Surface Grinding",
+      "values": {
+        "name": "Surface Grinding",
+        "rate": 850,
+        "uom": "hr",
+        "dept": "Grinding"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p7",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Cylindrical Grinding",
+      "values": {
+        "name": "Cylindrical Grinding",
+        "rate": 950,
+        "uom": "hr",
+        "dept": "Grinding"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p8",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Wire EDM",
+      "values": {
+        "name": "Wire EDM",
+        "rate": 1450,
+        "uom": "hr",
+        "dept": "EDM"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p9",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Sinker EDM",
+      "values": {
+        "name": "Sinker EDM",
+        "rate": 1600,
+        "uom": "hr",
+        "dept": "EDM"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p10",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Laser Cutting",
+      "values": {
+        "name": "Laser Cutting",
+        "rate": 1350,
+        "uom": "hr",
+        "dept": "Sheet Metal"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p11",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Press Brake / Bending",
+      "values": {
+        "name": "Press Brake / Bending",
+        "rate": 900,
+        "uom": "hr",
+        "dept": "Sheet Metal"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p12",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Welding (TIG/MIG)",
+      "values": {
+        "name": "Welding (TIG/MIG)",
+        "rate": 720,
+        "uom": "hr",
+        "dept": "Fabrication"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p13",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Deburring",
+      "values": {
+        "name": "Deburring",
+        "rate": 420,
+        "uom": "hr",
+        "dept": "Finishing"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p14",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Polishing / Lapping",
+      "values": {
+        "name": "Polishing / Lapping",
+        "rate": 560,
+        "uom": "hr",
+        "dept": "Finishing"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p15",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Heat Treatment",
+      "values": {
+        "name": "Heat Treatment",
+        "rate": 480,
+        "uom": "hr",
+        "dept": "Treatment"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p16",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Painting",
+      "values": {
+        "name": "Painting",
+        "rate": 400,
+        "uom": "hr",
+        "dept": "Treatment"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p17",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Powder Coating",
+      "values": {
+        "name": "Powder Coating",
+        "rate": 450,
+        "uom": "hr",
+        "dept": "Treatment"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p18",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Anodizing / Plating",
+      "values": {
+        "name": "Anodizing / Plating",
+        "rate": 520,
+        "uom": "hr",
+        "dept": "Treatment"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p19",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Sub-Assembly",
+      "values": {
+        "name": "Sub-Assembly",
+        "rate": 620,
+        "uom": "hr",
+        "dept": "Assembly"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p20",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "CMM / Inspection",
+      "values": {
+        "name": "CMM / Inspection",
+        "rate": 980,
+        "uom": "hr",
+        "dept": "Quality"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p21",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Packing",
+      "values": {
+        "name": "Packing",
+        "rate": 340,
+        "uom": "hr",
+        "dept": "Despatch"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-process_rate.p22",
+      "entity": "reference",
+      "table": "process_rate",
+      "name": "Dispatch Handling",
+      "values": {
+        "name": "Dispatch Handling",
+        "rate": 300,
+        "uom": "hr",
+        "dept": "Despatch"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "process_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l1",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Mechanical Assembly Technician",
+      "values": {
+        "name": "Mechanical Assembly Technician",
+        "rate": 2400,
+        "uom": "manday",
+        "ot": 450
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l2",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Electrical Assembly Technician",
+      "values": {
+        "name": "Electrical Assembly Technician",
+        "rate": 2600,
+        "uom": "manday",
+        "ot": 490
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l3",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Quality Inspector",
+      "values": {
+        "name": "Quality Inspector",
+        "rate": 2800,
+        "uom": "manday",
+        "ot": 520
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l4",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Test Engineer",
+      "values": {
+        "name": "Test Engineer",
+        "rate": 3600,
+        "uom": "manday",
+        "ot": 670
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l5",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Packing Operator",
+      "values": {
+        "name": "Packing Operator",
+        "rate": 1600,
+        "uom": "manday",
+        "ot": 300
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l6",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Installation Technician",
+      "values": {
+        "name": "Installation Technician",
+        "rate": 3200,
+        "uom": "manday",
+        "ot": 600
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l7",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Commissioning Engineer",
+      "values": {
+        "name": "Commissioning Engineer",
+        "rate": 4800,
+        "uom": "manday",
+        "ot": 900
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-labour_rate.l8",
+      "entity": "reference",
+      "table": "labour_rate",
+      "name": "Technical Writer",
+      "values": {
+        "name": "Technical Writer",
+        "rate": 2600,
+        "uom": "manday",
+        "ot": 480
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "labour_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e1",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Mechanical Design",
+      "values": {
+        "name": "Mechanical Design",
+        "rate": 5200,
+        "uom": "manday",
+        "dept": "Engineering"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e2",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Electrical Design",
+      "values": {
+        "name": "Electrical Design",
+        "rate": 5400,
+        "uom": "manday",
+        "dept": "Engineering"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e3",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Controls Engineering",
+      "values": {
+        "name": "Controls Engineering",
+        "rate": 6200,
+        "uom": "manday",
+        "dept": "Controls"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e4",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Software Development",
+      "values": {
+        "name": "Software Development",
+        "rate": 6800,
+        "uom": "manday",
+        "dept": "Software"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e5",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Vision Engineering",
+      "values": {
+        "name": "Vision Engineering",
+        "rate": 7200,
+        "uom": "manday",
+        "dept": "Vision"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e6",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Robot Programming",
+      "values": {
+        "name": "Robot Programming",
+        "rate": 6600,
+        "uom": "manday",
+        "dept": "Robotics"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e7",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Simulation / FEA",
+      "values": {
+        "name": "Simulation / FEA",
+        "rate": 6000,
+        "uom": "manday",
+        "dept": "Engineering"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e8",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Documentation",
+      "values": {
+        "name": "Documentation",
+        "rate": 3200,
+        "uom": "manday",
+        "dept": "Engineering"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-engineering_rate.e9",
+      "entity": "reference",
+      "table": "engineering_rate",
+      "name": "Project Management",
+      "values": {
+        "name": "Project Management",
+        "rate": 7500,
+        "uom": "manday",
+        "dept": "PMO"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "engineering_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m1",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "MS Plate IS2062 Gr.B",
+      "values": {
+        "name": "MS Plate IS2062 Gr.B",
+        "uom": "kg",
+        "rate": 78,
+        "scrap": 8
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m2",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "SS 304 Sheet",
+      "values": {
+        "name": "SS 304 Sheet",
+        "uom": "kg",
+        "rate": 265,
+        "scrap": 6
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m3",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "SS 316L Sheet",
+      "values": {
+        "name": "SS 316L Sheet",
+        "uom": "kg",
+        "rate": 410,
+        "scrap": 6
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m4",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "Aluminium 6061 T6",
+      "values": {
+        "name": "Aluminium 6061 T6",
+        "uom": "kg",
+        "rate": 395,
+        "scrap": 12
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m5",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "EN8 Round Bar",
+      "values": {
+        "name": "EN8 Round Bar",
+        "uom": "kg",
+        "rate": 96,
+        "scrap": 15
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m6",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "EN24 Round Bar",
+      "values": {
+        "name": "EN24 Round Bar",
+        "uom": "kg",
+        "rate": 145,
+        "scrap": 15
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m7",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "Aluminium Extrusion 45x45",
+      "values": {
+        "name": "Aluminium Extrusion 45x45",
+        "uom": "m",
+        "rate": 840,
+        "scrap": 5
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m8",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "Granite Base (Grade 0)",
+      "values": {
+        "name": "Granite Base (Grade 0)",
+        "uom": "kg",
+        "rate": 520,
+        "scrap": 0
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-material_rate.m9",
+      "entity": "reference",
+      "table": "material_rate",
+      "name": "Delrin / POM Rod",
+      "values": {
+        "name": "Delrin / POM Rod",
+        "uom": "kg",
+        "rate": 480,
+        "scrap": 18
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "material_rate",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-tax.t1",
+      "entity": "reference",
+      "table": "tax",
+      "name": "GST - Machinery",
+      "values": {
+        "name": "GST - Machinery",
+        "rate": 18,
+        "type": "GST"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "tax",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-tax.t2",
+      "entity": "reference",
+      "table": "tax",
+      "name": "GST - Services",
+      "values": {
+        "name": "GST - Services",
+        "rate": 18,
+        "type": "GST"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "tax",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-tax.t3",
+      "entity": "reference",
+      "table": "tax",
+      "name": "Basic Customs Duty",
+      "values": {
+        "name": "Basic Customs Duty",
+        "rate": 7.5,
+        "type": "Duty"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "tax",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-tax.t4",
+      "entity": "reference",
+      "table": "tax",
+      "name": "Social Welfare Surch.",
+      "values": {
+        "name": "Social Welfare Surch.",
+        "rate": 10,
+        "type": "Duty"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "tax",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-tax.t5",
+      "entity": "reference",
+      "table": "tax",
+      "name": "IGST on Imports",
+      "values": {
+        "name": "IGST on Imports",
+        "rate": 18,
+        "type": "GST"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "tax",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-freight.f1",
+      "entity": "reference",
+      "table": "freight",
+      "name": "Domestic Road - FTL",
+      "values": {
+        "name": "Domestic Road - FTL",
+        "basis": "% of value",
+        "rate": 1.8
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "freight",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-freight.f2",
+      "entity": "reference",
+      "table": "freight",
+      "name": "Domestic Road - LTL",
+      "values": {
+        "name": "Domestic Road - LTL",
+        "basis": "% of value",
+        "rate": 2.6
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "freight",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-freight.f3",
+      "entity": "reference",
+      "table": "freight",
+      "name": "Air Import",
+      "values": {
+        "name": "Air Import",
+        "basis": "% of value",
+        "rate": 5.5
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "freight",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-freight.f4",
+      "entity": "reference",
+      "table": "freight",
+      "name": "Sea Import FCL",
+      "values": {
+        "name": "Sea Import FCL",
+        "basis": "% of value",
+        "rate": 3.2
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "freight",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-freight.f5",
+      "entity": "reference",
+      "table": "freight",
+      "name": "Export - Air",
+      "values": {
+        "name": "Export - Air",
+        "basis": "% of value",
+        "rate": 6
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "freight",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-plant.pl1",
+      "entity": "reference",
+      "table": "plant",
+      "name": "TEAL Hosur - Plant 1",
+      "values": {
+        "name": "TEAL Hosur - Plant 1",
+        "ohRate": 14,
+        "capacity": "3-shift"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "plant",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-plant.pl2",
+      "entity": "reference",
+      "table": "plant",
+      "name": "TEAL Hosur - Plant 2",
+      "values": {
+        "name": "TEAL Hosur - Plant 2",
+        "ohRate": 16,
+        "capacity": "2-shift"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "plant",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-plant.pl3",
+      "entity": "reference",
+      "table": "plant",
+      "name": "TEAL Bengaluru - Photonics",
+      "values": {
+        "name": "TEAL Bengaluru - Photonics",
+        "ohRate": 19,
+        "capacity": "2-shift"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "plant",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-plant.pl4",
+      "entity": "reference",
+      "table": "plant",
+      "name": "TEAL Coimbatore",
+      "values": {
+        "name": "TEAL Coimbatore",
+        "ohRate": 12,
+        "capacity": "2-shift"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "plant",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-approval_band.a1",
+      "entity": "reference",
+      "table": "approval_band",
+      "name": "Up to ₹25 L",
+      "values": {
+        "band": "Up to ₹25 L",
+        "approver": "Project Manager",
+        "minMargin": 18
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "approval_band",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-approval_band.a2",
+      "entity": "reference",
+      "table": "approval_band",
+      "name": "₹25 L – ₹1 Cr",
+      "values": {
+        "band": "₹25 L – ₹1 Cr",
+        "approver": "Finance",
+        "minMargin": 22
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "approval_band",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-approval_band.a3",
+      "entity": "reference",
+      "table": "approval_band",
+      "name": "₹1 Cr – ₹5 Cr",
+      "values": {
+        "band": "₹1 Cr – ₹5 Cr",
+        "approver": "Vertical Head",
+        "minMargin": 25
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "approval_band",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-approval_band.a4",
+      "entity": "reference",
+      "table": "approval_band",
+      "name": "Above ₹5 Cr",
+      "values": {
+        "band": "Above ₹5 Cr",
+        "approver": "Business Head",
+        "minMargin": 28
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "approval_band",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      }
+    },
+    {
+      "id": "ref-fx.inr",
+      "entity": "reference",
+      "table": "fx",
+      "name": "INR → INR",
+      "values": {
+        "code": "INR",
+        "name": "Indian Rupee",
+        "rate_to_inr": 1,
+        "symbol": "₹",
+        "as_of": null,
+        "source": "legacy cost platform seed"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "currency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "ASSUMPTION",
+        "confidence": "LOW",
+        "note": "FX rate from legacy seed with NO date or source recorded. Replace with a dated rate from Finance before quoting."
+      }
+    },
+    {
+      "id": "ref-fx.usd",
+      "entity": "reference",
+      "table": "fx",
+      "name": "USD → INR",
+      "values": {
+        "code": "USD",
+        "name": "US Dollar",
+        "rate_to_inr": 87.4,
+        "symbol": "$",
+        "as_of": null,
+        "source": "legacy cost platform seed"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "currency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "ASSUMPTION",
+        "confidence": "LOW",
+        "note": "FX rate from legacy seed with NO date or source recorded. Replace with a dated rate from Finance before quoting."
+      }
+    },
+    {
+      "id": "ref-fx.eur",
+      "entity": "reference",
+      "table": "fx",
+      "name": "EUR → INR",
+      "values": {
+        "code": "EUR",
+        "name": "Euro",
+        "rate_to_inr": 94.8,
+        "symbol": "€",
+        "as_of": null,
+        "source": "legacy cost platform seed"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "currency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "ASSUMPTION",
+        "confidence": "LOW",
+        "note": "FX rate from legacy seed with NO date or source recorded. Replace with a dated rate from Finance before quoting."
+      }
+    },
+    {
+      "id": "ref-fx.jpy",
+      "entity": "reference",
+      "table": "fx",
+      "name": "JPY → INR",
+      "values": {
+        "code": "JPY",
+        "name": "Japanese Yen",
+        "rate_to_inr": 0.58,
+        "symbol": "¥",
+        "as_of": null,
+        "source": "legacy cost platform seed"
+      },
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "currency",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "ASSUMPTION",
+        "confidence": "LOW",
+        "note": "FX rate from legacy seed with NO date or source recorded. Replace with a dated rate from Finance before quoting."
+      }
+    }
+  ]
+}

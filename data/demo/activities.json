@@ -1,0 +1,141 @@
+{
+  "dataset": {
+    "id": "demo-activities",
+    "title": "DEMO activities",
+    "entity": "activity",
+    "description": "Product-manager activities for the demonstration day.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-1",
+      "entity": "activity",
+      "kind": "follow_up",
+      "name": "Follow up: OSAT marking inquiry — confirm UPH and package list",
+      "priority": "High",
+      "status": "In Progress",
+      "due_date": "@today",
+      "customer_id": "cus-demo-osat",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "next_action": {
+        "action": "Call process engineering lead",
+        "due": "@today"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-2",
+      "entity": "activity",
+      "kind": "meeting",
+      "name": "Technical meeting: package marking requirements review",
+      "priority": "High",
+      "status": "Not Started",
+      "due_date": "@today+1",
+      "customer_id": "cus-demo-osat",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "attendees": "PM, Application Engineering, customer process team (DEMO)"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-3",
+      "entity": "activity",
+      "kind": "task",
+      "name": "Send POC plan for mould-compound marking",
+      "priority": "Medium",
+      "status": "Not Started",
+      "due_date": "@today-2",
+      "customer_id": "cus-demo-osat",
+      "poc_id": "poc-demo-pkg-marking",
+      "blocker": "Samples not yet received"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-4",
+      "entity": "activity",
+      "kind": "task",
+      "name": "Request UV DPSS datasheets from candidate suppliers (Laser Handbook §21.3 list)",
+      "priority": "Medium",
+      "status": "Waiting",
+      "due_date": "@today+3",
+      "workstream": "Supplier Development"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-5",
+      "entity": "activity",
+      "kind": "task",
+      "name": "Prepare G1 concept review pack — C2i PCB marking",
+      "priority": "High",
+      "status": "In Progress",
+      "due_date": "@today+6",
+      "customer_id": "cus-demo-ems",
+      "project_id": "prj-demo-c2i"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-6",
+      "entity": "activity",
+      "kind": "task",
+      "name": "Localization: list imported items on the C2i BOM",
+      "priority": "Low",
+      "status": "Not Started",
+      "due_date": "@today+12",
+      "project_id": "prj-demo-c2i",
+      "workstream": "Localization"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "act-demo-7",
+      "entity": "activity",
+      "kind": "call",
+      "name": "Battery customer: busbar welding discovery call",
+      "priority": "Medium",
+      "status": "Completed",
+      "due_date": "@today-1",
+      "customer_id": "cus-demo-battery",
+      "minutes": "DEMO: customer interested; joint design and materials to be shared."
+    }
+  ]
+}

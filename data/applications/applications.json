@@ -1,0 +1,2433 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "applications",
+    "title": "Application library",
+    "description": "Applications TEAL platforms are configured for, each with process, material, recommended source/power and the engineering rationale.",
+    "entity": "application",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "applications"
+  },
+  "records": [
+    {
+      "id": "app-markf.metal",
+      "entity": "application",
+      "name": "Metals — general traceability",
+      "description": "Steel, SS, Al, brass, Ti, Ni alloys",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Medical",
+        "Automotive",
+        "Consumer"
+      ],
+      "product_id": "prd-markf",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Steels absorb 1064 nm gratefully. Annealing gives corrosion-safe marks for medical and food contact.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf.apps.metal"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markf.anod",
+      "entity": "application",
+      "name": "Anodised Al / colour",
+      "description": "Black on anodised, colour on SS/Ti",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Medical",
+        "Automotive",
+        "Consumer"
+      ],
+      "product_id": "prd-markf",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 30,
+      "rationale": "MOPA pulse control produces deep blacks on anodised aluminium without breaching the anodic layer.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf.apps.anod"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markf.deep",
+      "entity": "application",
+      "name": "Deep engraving",
+      "description": "Tooling, dies, VIN and plate marking",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Medical",
+        "Automotive",
+        "Consumer"
+      ],
+      "product_id": "prd-markf",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 100,
+      "rationale": "Higher average power and multi-pass strategies drive depth; 100 W is the productive engraving point.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf.apps.deep"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markf.plastic",
+      "entity": "application",
+      "name": "Engineering plastics",
+      "description": "ABS, PC, PEEK — markable grades",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Medical",
+        "Automotive",
+        "Consumer"
+      ],
+      "product_id": "prd-markf",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Polymer response is grade- and additive-dependent; TEAL validates against your actual resin.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf.apps.plastic"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markf.medical",
+      "entity": "application",
+      "name": "Medical annealing",
+      "description": "Instruments, implant-adjacent, UDI",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Medical",
+        "Automotive",
+        "Consumer"
+      ],
+      "product_id": "prd-markf",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Anneal marks leave the passive layer intact — the regime for corrosion-critical medical marking.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf.apps.medical"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markm.colour",
+      "entity": "application",
+      "name": "Colour marking on SS / Ti",
+      "description": "Oxide-layer colour control",
+      "process": "Marking",
+      "industries": [
+        "Consumer",
+        "EMS",
+        "Medical",
+        "Automotive"
+      ],
+      "product_id": "prd-markm",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 20,
+      "rationale": "Tunable pulse duration controls oxide thickness — the mechanism behind repeatable colour on stainless and titanium.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markm.apps.colour"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markm.black",
+      "entity": "application",
+      "name": "Black on anodised Al",
+      "description": "Consumer and enclosure cosmetics",
+      "process": "Marking",
+      "industries": [
+        "Consumer",
+        "EMS",
+        "Medical",
+        "Automotive"
+      ],
+      "product_id": "prd-markm",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 30,
+      "rationale": "Low-fluence, high-frequency MOPA parameter sets mark within the anodic layer without cracking it.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markm.apps.black"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markm.foil",
+      "entity": "application",
+      "name": "Thin foils & films",
+      "description": "Low heat input, no burn-through",
+      "process": "Marking",
+      "industries": [
+        "Consumer",
+        "EMS",
+        "Medical",
+        "Automotive"
+      ],
+      "product_id": "prd-markm",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 20,
+      "rationale": "Short pulses limit heat penetration — the requirement on foils, plated layers and battery tabs.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markm.apps.foil"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markm.sensitive",
+      "entity": "application",
+      "name": "Heat-sensitive plastics",
+      "description": "Light-toned and filled polymers",
+      "process": "Marking",
+      "industries": [
+        "Consumer",
+        "EMS",
+        "Medical",
+        "Automotive"
+      ],
+      "product_id": "prd-markm",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 20,
+      "rationale": "Pulse tailoring produces contrast by foaming or carbonising selectively, without melt distortion.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markm.apps.sensitive"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markc2i.dual",
+      "entity": "application",
+      "name": "Dual-side board ID",
+      "description": "Top + bottom DMC and alphanumeric",
+      "process": "Marking",
+      "industries": [
+        "EMS"
+      ],
+      "product_id": "prd-markc2i",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": 30,
+      "rationale": "CO₂ at 10.6 µm ablates solder mask with high contrast without attacking the copper beneath — the industry-standard chemistry for PCB identity.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markc2i.apps.dual"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markc2i.panel",
+      "entity": "application",
+      "name": "Panel & depanel marks",
+      "description": "Step-and-repeat, bad-board marking",
+      "process": "Marking",
+      "industries": [
+        "EMS"
+      ],
+      "product_id": "prd-markc2i",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": 30,
+      "rationale": "Panel maps with multi-board step-and-repeat; X-out logic suppresses marks on rejected boards.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markc2i.apps.panel"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markc2i.white",
+      "entity": "application",
+      "name": "White / specialty mask",
+      "description": "Difficult mask chemistries",
+      "process": "Marking",
+      "industries": [
+        "EMS"
+      ],
+      "product_id": "prd-markc2i",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-co293",
+      "recommended_power_w": 30,
+      "rationale": "9.3 µm is absorbed more strongly by some mask formulations, recovering contrast where 10.6 µm reads flat.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markc2i.apps.white"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-marku.micro",
+      "entity": "application",
+      "name": "Micro DMC on rigid & flex",
+      "description": "Codes from 1 × 1 mm",
+      "process": "Marking",
+      "industries": [
+        "EMS",
+        "Semiconductor",
+        "Medical"
+      ],
+      "product_id": "prd-marku",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "At 355 nm the mark forms by photochemical reaction rather than heat — fine, high-contrast codes with negligible thermal input.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.marku.apps.micro"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-marku.flex",
+      "entity": "application",
+      "name": "Flex circuit & coverlay",
+      "description": "Polyimide, thin laminates",
+      "process": "Marking",
+      "industries": [
+        "EMS",
+        "Semiconductor",
+        "Medical"
+      ],
+      "product_id": "prd-marku",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-pi"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "Flex and coverlay delaminate under thermal marking; UV keeps the substrate intact.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.marku.apps.flex"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-marku.comp",
+      "entity": "application",
+      "name": "Component-level marking",
+      "description": "Populated assemblies, connectors",
+      "process": "Marking",
+      "industries": [
+        "EMS",
+        "Semiconductor",
+        "Medical"
+      ],
+      "product_id": "prd-marku",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 3,
+      "rationale": "Low pulse energy allows marking on populated boards without risk to adjacent devices.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.marku.apps.comp"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-marku.medpoly",
+      "entity": "application",
+      "name": "Medical polymer UDI",
+      "description": "PEEK, PC, medical-grade resins",
+      "process": "Marking",
+      "industries": [
+        "EMS",
+        "Semiconductor",
+        "Medical"
+      ],
+      "product_id": "prd-marku",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "UV marking is validated for medical polymers where carbonisation is not acceptable.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.marku.apps.medpoly"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markit.motf",
+      "entity": "application",
+      "name": "Marking-on-the-fly",
+      "description": "Continuous conveyor, encoder-synced",
+      "process": "Marking",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Battery"
+      ],
+      "product_id": "prd-markit",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "Queue-tracking handles multiple parts in field simultaneously; the beam chases the product rather than stopping it.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markit.apps.motf"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markit.indexed",
+      "entity": "application",
+      "name": "Indexed conveyor marking",
+      "description": "Stop-and-mark at station",
+      "process": "Marking",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Battery"
+      ],
+      "product_id": "prd-markit",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Indexed presentation gives the tightest placement accuracy where takt allows a brief dwell.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markit.apps.indexed"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markit.rotarym",
+      "entity": "application",
+      "name": "Rotary-dial multi-station",
+      "description": "Load, mark, verify, unload",
+      "process": "Marking",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Battery"
+      ],
+      "product_id": "prd-markit",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Overlapping load and process on a dial collapses effective cycle time to the longest single station.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markit.apps.rotarym"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-markit.cell",
+      "entity": "application",
+      "name": "Cell & can marking",
+      "description": "18650 / 21700 / 4680, prismatic",
+      "process": "Marking",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Battery"
+      ],
+      "product_id": "prd-markit",
+      "family_id": "fam-mark",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 30,
+      "rationale": "MOPA parameter sets deliver dark codes on aluminium and nickel-plated steel with negligible heat into the cell.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markit.apps.cell"
+      },
+      "tags": [
+        "mark"
+      ]
+    },
+    {
+      "id": "app-weldp.microspot",
+      "entity": "application",
+      "name": "Micro spot welds",
+      "description": "Sensors, relays, hybrids",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "EMS",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldp",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 150,
+      "rationale": "Shaped millisecond pulses put energy where resistance welding cannot reach, without electrode wear drift.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldp.apps.microspot"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldp.seam",
+      "entity": "application",
+      "name": "Continuous & stitch seams",
+      "description": "Enclosures, instruments",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "EMS",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldp",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 500,
+      "rationale": "CW single-mode with wobble gives continuous seams with controlled heat input on thin sections.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldp.apps.seam"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldp.wire",
+      "entity": "application",
+      "name": "Wire-to-pad & terminals",
+      "description": "Connector and terminal joints",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "EMS",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldp",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 150,
+      "rationale": "Fine spots and per-weld energy monitoring make structural joints out of what used to be soldering.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldp.apps.wire"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldp.tool",
+      "entity": "application",
+      "name": "Repair & tool welding",
+      "description": "Die and mould build-up",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "EMS",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldp",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 150,
+      "rationale": "Localised deposition with minimal HAZ preserves surrounding tool geometry and hardness.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldp.apps.tool"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldb.tab",
+      "entity": "application",
+      "name": "Cell tab-to-terminal",
+      "description": "Foil stacks to collectors",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "product_id": "prd-weldb",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-green",
+      "recommended_power_w": 1500,
+      "rationale": "Green at 532 nm is strongly absorbed by copper, stabilising the melt where 1 µm reflects and stutters.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldb.apps.tab"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldb.busbar",
+      "entity": "application",
+      "name": "Module & pack busbars",
+      "description": "2–6 mm Cu / Al sections",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "product_id": "prd-weldb",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 3000,
+      "rationale": "Ring-mode beam shaping plus wobble keeps the keyhole stable through thick section, suppressing spatter.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldb.apps.busbar"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldb.hairpin",
+      "entity": "application",
+      "name": "Hairpin stator pairs",
+      "description": "E-motor winding joints",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "product_id": "prd-weldb",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 2000,
+      "rationale": "Tight, repeatable joints at rate; monitoring turns each weld into inspectable data for the traction warranty.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldb.apps.hairpin"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldb.canseam",
+      "entity": "application",
+      "name": "Cell can & lid seaming",
+      "description": "Hermetic cell closure",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "product_id": "prd-weldb",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 1500,
+      "rationale": "Controlled heat input avoids damaging cell internals while achieving a continuous sealed seam.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldb.apps.canseam"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldr.seam3d",
+      "entity": "application",
+      "name": "3D continuous & stitch seams",
+      "description": "Housings, frames, brackets",
+      "process": "Welding",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldr",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 3000,
+      "rationale": "When the seam moves in three dimensions the beam should follow, not the part — remote optics on six axes.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldr.apps.seam3d"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldr.corner",
+      "entity": "application",
+      "name": "Corner & lap joints",
+      "description": "Sheet-metal assemblies",
+      "process": "Welding",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldr",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 2000,
+      "rationale": "Low distortion versus TIG/MIG removes most post-weld straightening and finishing cost.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldr.apps.corner"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldr.edrive",
+      "entity": "application",
+      "name": "E-drive components",
+      "description": "Motor housings, covers",
+      "process": "Welding",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace"
+      ],
+      "product_id": "prd-weldr",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": 3000,
+      "rationale": "Cycle-repeatable robotic paths replace scarce skilled welders on cosmetic and structural seams.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldr.apps.edrive"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldh.tocan",
+      "entity": "application",
+      "name": "TO-can & butterfly sealing",
+      "description": "Optoelectronic packages",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "Aerospace",
+        "Semiconductor"
+      ],
+      "product_id": "prd-weldh",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ni"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 150,
+      "rationale": "Ramp-shaped pulses seal without cracking glass-to-metal feedthroughs or disturbing internal optics.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldh.apps.tocan"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldh.implant",
+      "entity": "application",
+      "name": "Implant enclosure seams",
+      "description": "Titanium, long-term hermeticity",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "Aerospace",
+        "Semiconductor"
+      ],
+      "product_id": "prd-weldh",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ti"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 300,
+      "rationale": "Overlap-controlled seam generation with per-pulse energy logging produces the evidence a regulator expects.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldh.apps.implant"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldh.mems",
+      "entity": "application",
+      "name": "Sensor & MEMS packages",
+      "description": "Vacuum and pressure references",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "Aerospace",
+        "Semiconductor"
+      ],
+      "product_id": "prd-weldh",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 150,
+      "rationale": "Fine spots and inert shielding hold vacuum integrity through the life of the device.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldh.apps.mems"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-weldh.feed",
+      "entity": "application",
+      "name": "Feedthrough & bellows",
+      "description": "Instrument and aerospace details",
+      "process": "Welding",
+      "industries": [
+        "Medical",
+        "Aerospace",
+        "Semiconductor"
+      ],
+      "product_id": "prd-weldh",
+      "family_id": "fam-weld",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": 300,
+      "rationale": "Circumferential seams on runout-compensating chucks keep penetration uniform around the joint.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldh.apps.feed"
+      },
+      "tags": [
+        "weld"
+      ]
+    },
+    {
+      "id": "app-cleanp.rust",
+      "entity": "application",
+      "name": "Rust & oxide removal",
+      "description": "Ferrous de-rusting, spot work",
+      "process": "Cleaning",
+      "industries": [
+        "General Engineering",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-cleanp",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 200,
+      "rationale": "Pulsed ablation is self-limiting — oxide leaves, base metal stays. No media, no disposal stream.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleanp.apps.rust"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleanp.weldprep",
+      "entity": "application",
+      "name": "Weld preparation",
+      "description": "Pre- and post-weld cleanup",
+      "process": "Cleaning",
+      "industries": [
+        "General Engineering",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-cleanp",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 200,
+      "rationale": "Clean joint faces immediately before welding, at the fixture, without moving the assembly.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleanp.apps.weldprep"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleanp.mould",
+      "entity": "application",
+      "name": "Mould & die touch-up",
+      "description": "Tooling de-flash on the press",
+      "process": "Cleaning",
+      "industries": [
+        "General Engineering",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-cleanp",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 100,
+      "rationale": "Low average power lifts residue without dimensional attack on the tool surface.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleanp.apps.mould"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleanp.paint",
+      "entity": "application",
+      "name": "Paint & coating removal",
+      "description": "Selective stripping, MRO",
+      "process": "Cleaning",
+      "industries": [
+        "General Engineering",
+        "Automotive",
+        "Aerospace"
+      ],
+      "product_id": "prd-cleanp",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 300,
+      "rationale": "Layer-by-layer removal with controlled fluence, stopping at the substrate.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleanp.apps.paint"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleana.prebond",
+      "entity": "application",
+      "name": "Pre-weld / pre-bond prep",
+      "description": "Busbars, tabs, hairpins",
+      "process": "Cleaning",
+      "industries": [
+        "Automotive",
+        "Battery",
+        "General Engineering"
+      ],
+      "product_id": "prd-cleana",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 500,
+      "rationale": "Path-programmed optics deliver identical energy to the same area every cycle — cleanliness becomes an auditable parameter.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleana.apps.prebond"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleana.mouldcell",
+      "entity": "application",
+      "name": "Mould & tool cleaning",
+      "description": "Scheduled tooling stations",
+      "process": "Cleaning",
+      "industries": [
+        "Automotive",
+        "Battery",
+        "General Engineering"
+      ],
+      "product_id": "prd-cleana",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 1000,
+      "rationale": "Replaces dry-ice and solvent cycles whose cost scales linearly with volume.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleana.apps.mouldcell"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleana.celltray",
+      "entity": "application",
+      "name": "Battery cell & tray",
+      "description": "Cell surfaces, trays, carriers",
+      "process": "Cleaning",
+      "industries": [
+        "Automotive",
+        "Battery",
+        "General Engineering"
+      ],
+      "product_id": "prd-cleana",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 500,
+      "rationale": "Dry, particulate-managed cleaning compatible with the electrode-area environment.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleana.apps.celltray"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cleana.coating",
+      "entity": "application",
+      "name": "Selective coating removal",
+      "description": "Masked and patterned strip",
+      "process": "Cleaning",
+      "industries": [
+        "Automotive",
+        "Battery",
+        "General Engineering"
+      ],
+      "product_id": "prd-cleana",
+      "family_id": "fam-clean",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 2000,
+      "rationale": "Robot paths give sharp boundaries where masking would otherwise be required.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleana.apps.coating"
+      },
+      "tags": [
+        "clean"
+      ]
+    },
+    {
+      "id": "app-cutxg.electrode",
+      "entity": "application",
+      "name": "Battery electrode & foil",
+      "description": "Cu 6–12 µm, Al 10–20 µm",
+      "process": "Cutting",
+      "industries": [
+        "Battery",
+        "EMS",
+        "Medical"
+      ],
+      "product_id": "prd-cutxg",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 200,
+      "rationale": "Tool-free geometry with no burr and no mechanical slitting stress on the electrode edge.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxg.apps.electrode"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxg.flexpcb",
+      "entity": "application",
+      "name": "Flexible PCB singulation",
+      "description": "Coverlay and outline cutting",
+      "process": "Cutting",
+      "industries": [
+        "Battery",
+        "EMS",
+        "Medical"
+      ],
+      "product_id": "prd-cutxg",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-pi"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 15,
+      "rationale": "UV avoids the delamination and carbonisation that IR produces on polyimide stacks.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxg.apps.flexpcb"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxg.film",
+      "entity": "application",
+      "name": "Film, gasket & kiss-cut",
+      "description": "Adhesives, shielding, mesh",
+      "process": "Cutting",
+      "industries": [
+        "Battery",
+        "EMS",
+        "Medical"
+      ],
+      "product_id": "prd-cutxg",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 200,
+      "rationale": "Die and punch tooling cost and lead time disappear; geometry changes are a CAD edit.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxg.apps.film"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxg.haz",
+      "entity": "application",
+      "name": "HAZ-critical micro cuts",
+      "description": "Stents, thin precision profiles",
+      "process": "Cutting",
+      "industries": [
+        "Battery",
+        "EMS",
+        "Medical"
+      ],
+      "product_id": "prd-cutxg",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": 100,
+      "rationale": "Picosecond pulses interact before heat diffuses — the cleanest edges on the most sensitive materials.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxg.apps.haz"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxt.thinmetal",
+      "entity": "application",
+      "name": "Thin metal profiles",
+      "description": "SS, Al, brass shim and sheet",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Consumer"
+      ],
+      "product_id": "prd-cutxt",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 500,
+      "rationale": "Precision guides and capacitive height sensing deliver thin-gauge edge quality plate cutters cannot.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxt.apps.thinmetal"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxt.plastics",
+      "entity": "application",
+      "name": "Engineering plastics",
+      "description": "Acrylic, PC, technical sheet",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Consumer"
+      ],
+      "product_id": "prd-cutxt",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": 150,
+      "rationale": "CO₂ is efficiently absorbed by organics that ignore 1064 nm — one table serves both material worlds.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxt.apps.plastics"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxt.glassscribe",
+      "entity": "application",
+      "name": "Glass scribe-and-break",
+      "description": "Controlled-depth grooving",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Consumer"
+      ],
+      "product_id": "prd-cutxt",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-glass"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 300,
+      "rationale": "Scribe modes turn brittleness into an asset, avoiding the chipping of mechanical dicing.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxt.apps.glassscribe"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-cutxt.ceramic",
+      "entity": "application",
+      "name": "Alumina / AlN scribing",
+      "description": "Electronics substrates",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Consumer"
+      ],
+      "product_id": "prd-cutxt",
+      "family_id": "fam-cut",
+      "material_ids": [
+        "mat-al2o3"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 500,
+      "rationale": "Controlled-depth grooves give clean snap lines on technical ceramic substrates.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxt.apps.ceramic"
+      },
+      "tags": [
+        "cut"
+      ]
+    },
+    {
+      "id": "app-semiwm.frontid",
+      "entity": "application",
+      "name": "Front-side scribe ID",
+      "description": "Incoming wafer identity",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semiwm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-si"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "Font geometry, dot morphology and depth are tuned per film stack against your OCR readers, then locked in recipe.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semiwm.apps.frontid"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semiwm.backid",
+      "entity": "application",
+      "name": "Back-side ID post-grind",
+      "description": "Identity that survives backgrind",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semiwm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-si"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "Marks placed and profiled so downstream readers still resolve them after thinning and film deposition.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semiwm.apps.backid"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semiwm.code2d",
+      "entity": "application",
+      "name": "2D wafer codes",
+      "description": "Lot and slot data marking",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semiwm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-si"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "Machine-readable codes to SEMI convention keep foundry and OSAT interoperability intact.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semiwm.apps.code2d"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semiwm.reflect",
+      "entity": "application",
+      "name": "High-reflectivity films",
+      "description": "Metallised and mirrored stacks",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semiwm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-green",
+      "recommended_power_w": 5,
+      "rationale": "Green couples into reflective films where UV or IR scatter, holding mark consistency across the stack.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semiwm.apps.reflect"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semispm.mould",
+      "entity": "application",
+      "name": "Mould-compound marking",
+      "description": "QFN, QFP, BGA, SOIC, modules",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semispm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-emc"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Contrast on epoxy mould compound with grading correlated to your reader optics — readability engineered, not hoped for.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semispm.apps.mould"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semispm.perunit",
+      "entity": "application",
+      "name": "Per-unit DMC serialisation",
+      "description": "Unit-level traceability",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semispm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-emc"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Every unit posts identity to the host with map correlation, so test and tape-and-reel inherit clean data.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semispm.apps.perunit"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semispm.substrate",
+      "entity": "application",
+      "name": "Substrate & strip ID",
+      "description": "Laminate and lead-frame carriers",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semispm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-green",
+      "recommended_power_w": 20,
+      "rationale": "Green gives contrast on substrates where IR marks read weak or damage the surface finish.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semispm.apps.substrate"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semispm.fine",
+      "entity": "application",
+      "name": "Fine-pitch micro codes",
+      "description": "0.5 mm DMC and below",
+      "process": "Marking",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semispm",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-emc"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": 5,
+      "rationale": "UV holds cell definition at code sizes where thermal marking blurs the module boundary.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semispm.apps.fine"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semils.alumina",
+      "entity": "application",
+      "name": "Alumina substrate scribing",
+      "description": "Electronics substrate singulation",
+      "process": "Cutting",
+      "industries": [
+        "Semiconductor",
+        "EMS"
+      ],
+      "product_id": "prd-semils",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-al2o3"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "Controlled-depth grooving gives predictable break lines without micro-cracking the ceramic.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semils.apps.alumina"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semils.aln",
+      "entity": "application",
+      "name": "AlN scribing",
+      "description": "High thermal-conductivity substrates",
+      "process": "Cutting",
+      "industries": [
+        "Semiconductor",
+        "EMS"
+      ],
+      "product_id": "prd-semils",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-aln"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "AlN demands tighter depth control than alumina; parameters are established per supplier lot.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semils.apps.aln"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semils.glasss",
+      "entity": "application",
+      "name": "Glass scribing",
+      "description": "Display and sensor glass",
+      "process": "Cutting",
+      "industries": [
+        "Semiconductor",
+        "EMS"
+      ],
+      "product_id": "prd-semils",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-glass"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": 30,
+      "rationale": "Ultrashort pulses scribe glass with chip-free edges where nanosecond regimes fracture.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semils.apps.glasss"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semidc.fa",
+      "entity": "application",
+      "name": "Failure-analysis decap",
+      "description": "Selective cavity opening",
+      "process": "Micromachining",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semidc",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-emc"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Dry, controlled removal opens the cavity without the bond-wire attack and handling burden of pure acid decap.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semidc.apps.fa"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-semidc.wiresafe",
+      "entity": "application",
+      "name": "Wire-safe window opening",
+      "description": "Preserving bond integrity",
+      "process": "Micromachining",
+      "industries": [
+        "Semiconductor"
+      ],
+      "product_id": "prd-semidc",
+      "family_id": "fam-semi",
+      "material_ids": [
+        "mat-emc"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Layer-by-layer ablation with camera process view stops short of the wire loop plane.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semidc.apps.wiresafe"
+      },
+      "tags": [
+        "semi"
+      ]
+    },
+    {
+      "id": "app-voltm.cylcan",
+      "entity": "application",
+      "name": "Cylindrical can marking",
+      "description": "18650 / 21700 / 4680",
+      "process": "Marking",
+      "industries": [
+        "Battery"
+      ],
+      "product_id": "prd-voltm",
+      "family_id": "fam-volt",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 30,
+      "rationale": "MOPA delivers dark, high-contrast codes on aluminium and nickel-plated steel with negligible heat into the cell.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltm.apps.cylcan"
+      },
+      "tags": [
+        "volt"
+      ]
+    },
+    {
+      "id": "app-voltm.prismatic",
+      "entity": "application",
+      "name": "Prismatic housing",
+      "description": "Flat-face cell identity",
+      "process": "Marking",
+      "industries": [
+        "Battery"
+      ],
+      "product_id": "prd-voltm",
+      "family_id": "fam-volt",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": 30,
+      "rationale": "Flat presentation allows larger codes and in-line grading before the cell enters formation.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltm.apps.prismatic"
+      },
+      "tags": [
+        "volt"
+      ]
+    },
+    {
+      "id": "app-voltm.pouch",
+      "entity": "application",
+      "name": "Pouch material marking",
+      "description": "Laminate film identity",
+      "process": "Marking",
+      "industries": [
+        "Battery"
+      ],
+      "product_id": "prd-voltm",
+      "family_id": "fam-volt",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "Low fluence marks the laminate without compromising the barrier layer.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltm.apps.pouch"
+      },
+      "tags": [
+        "volt"
+      ]
+    },
+    {
+      "id": "app-voltt.agg",
+      "entity": "application",
+      "name": "Genealogy aggregation",
+      "description": "Cell → module → pack",
+      "process": "Marking",
+      "industries": [
+        "Battery"
+      ],
+      "product_id": "prd-voltt",
+      "family_id": "fam-volt",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 20,
+      "rationale": "One record per unit tying weld scores, mark grades and parameters together — the record your recall team will need.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltt.apps.agg"
+      },
+      "tags": [
+        "volt"
+      ]
+    },
+    {
+      "id": "app-voltt.eol",
+      "entity": "application",
+      "name": "End-of-line traceability",
+      "description": "Pack plate marking and verify",
+      "process": "Marking",
+      "industries": [
+        "Battery"
+      ],
+      "product_id": "prd-voltt",
+      "family_id": "fam-volt",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Final identity applied and verified, closing the data chain before dispatch.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltt.apps.eol"
+      },
+      "tags": [
+        "volt"
+      ]
+    },
+    {
+      "id": "app-roto.multi",
+      "entity": "application",
+      "name": "Multi-process cell",
+      "description": "Clean, mark, verify in one dial",
+      "process": "Handling",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Medical"
+      ],
+      "product_id": "prd-roto",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "Sequential stations around the dial collapse several operations into one takt and one fixture datum.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.roto.apps.multi"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-roto.highrate",
+      "entity": "application",
+      "name": "High-rate single process",
+      "description": "Load-while-process",
+      "process": "Handling",
+      "industries": [
+        "Automotive",
+        "EMS",
+        "General Engineering",
+        "Medical"
+      ],
+      "product_id": "prd-roto",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "Overlapping load with process makes effective cycle equal to the longest station, not their sum.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.roto.apps.highrate"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-lin.inline",
+      "entity": "application",
+      "name": "Inline integration",
+      "description": "Into existing conveyorised flow",
+      "process": "Handling",
+      "industries": [
+        "EMS",
+        "Automotive",
+        "Battery"
+      ],
+      "product_id": "prd-lin",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Products flow through multiple processes without leaving the pallet datum, so accuracy compounds rather than degrades.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.lin.apps.inline"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-lin.highmix",
+      "entity": "application",
+      "name": "High-mix production",
+      "description": "Recipe-driven changeover",
+      "process": "Handling",
+      "industries": [
+        "EMS",
+        "Automotive",
+        "Battery"
+      ],
+      "product_id": "prd-lin",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-fr4"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 30,
+      "rationale": "Bypass lanes and buffers absorb model changes without stopping the upstream line.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.lin.apps.highmix"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-robo.complex3d",
+      "entity": "application",
+      "name": "Complex 3D geometry",
+      "description": "Parts a fixed optic cannot reach",
+      "process": "Handling",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace",
+        "Battery"
+      ],
+      "product_id": "prd-robo",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 100,
+      "rationale": "Six axes present the part or carry the head wherever the feature sits, without bespoke fixturing per variant.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.robo.apps.complex3d"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-robo.multimachine",
+      "entity": "application",
+      "name": "Multi-machine tending",
+      "description": "One robot, several processes",
+      "process": "Handling",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace",
+        "Battery"
+      ],
+      "product_id": "prd-robo",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 100,
+      "rationale": "Tool changers let a single cell cover marking, cleaning and inspection on a shared takt.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.robo.apps.multimachine"
+      },
+      "tags": [
+        "auto"
+      ]
+    },
+    {
+      "id": "app-robo.collab",
+      "entity": "application",
+      "name": "Collaborative loading",
+      "description": "Operator-shared workspace",
+      "process": "Handling",
+      "industries": [
+        "Automotive",
+        "General Engineering",
+        "Aerospace",
+        "Battery"
+      ],
+      "product_id": "prd-robo",
+      "family_id": "fam-auto",
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": 50,
+      "rationale": "Force-limited handling suits light parts and frequent redeployment without full guarding.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.robo.apps.collab"
+      },
+      "tags": [
+        "auto"
+      ]
+    }
+  ]
+}

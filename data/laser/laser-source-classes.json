@@ -1,0 +1,596 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "laser-source-classes",
+    "title": "Laser source classes (TEAL configurator)",
+    "description": "The 12 source technology options the TEAL configurator offers, with representative optical parameters. No manufacturer models — see Global Intelligence for curated external products.",
+    "entity": "laser_source",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim",
+      "src-teal-catalogue-2026"
+    ],
+    "partition": "laser"
+  },
+  "records": [
+    {
+      "id": "las-fiber",
+      "entity": "laser_source",
+      "name": "Fiber (Q-switched)",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Fiber",
+        "Q-switched",
+        "Nanosecond"
+      ],
+      "wavelength": {
+        "value": 1064,
+        "unit": "nm",
+        "original": "1064 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 100,
+        "unit": "ns",
+        "original": "100 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        20,
+        100
+      ],
+      "m2": 1.3,
+      "beam_diameter_mm": 14,
+      "wall_plug_efficiency": 0.3,
+      "price_premium": 1,
+      "display_color": "#E0552B",
+      "short_code": "FB",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.fiber",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "fiber",
+        "q-switched",
+        "nanosecond"
+      ]
+    },
+    {
+      "id": "las-mopa",
+      "entity": "laser_source",
+      "name": "Fiber MOPA",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Fiber",
+        "MOPA",
+        "Nanosecond"
+      ],
+      "wavelength": {
+        "value": 1064,
+        "unit": "nm",
+        "original": "1064 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 2,
+        "unit": "ns",
+        "original": "2 ns (representative)"
+      },
+      "pulse_duration_range": [
+        2,
+        500
+      ],
+      "repetition_rate_khz": [
+        1,
+        4000
+      ],
+      "m2": 1.3,
+      "beam_diameter_mm": 14,
+      "wall_plug_efficiency": 0.27,
+      "price_premium": 1.12,
+      "display_color": "#EE6B33",
+      "short_code": "MP",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.mopa",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "fiber",
+        "mopa",
+        "nanosecond"
+      ]
+    },
+    {
+      "id": "las-qcw",
+      "entity": "laser_source",
+      "name": "QCW fiber",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Fiber",
+        "QCW"
+      ],
+      "wavelength": {
+        "value": 1064,
+        "unit": "nm",
+        "original": "1064 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 500000,
+        "unit": "ns",
+        "original": "500000 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        0.1,
+        1
+      ],
+      "m2": 1.1,
+      "beam_diameter_mm": 12,
+      "wall_plug_efficiency": 0.25,
+      "price_premium": 1.22,
+      "display_color": "#E8703A",
+      "short_code": "QC",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.qcw",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "fiber",
+        "qcw"
+      ]
+    },
+    {
+      "id": "las-smcw",
+      "entity": "laser_source",
+      "name": "CW single-mode fiber",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Fiber",
+        "CW"
+      ],
+      "wavelength": {
+        "value": 1070,
+        "unit": "nm",
+        "original": "1070 nm"
+      },
+      "mode": "cw",
+      "pulse_duration": null,
+      "pulse_duration_range": null,
+      "repetition_rate_khz": null,
+      "m2": 1.05,
+      "beam_diameter_mm": 12,
+      "wall_plug_efficiency": 0.35,
+      "price_premium": 1.28,
+      "display_color": "#D94F26",
+      "short_code": "CW",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.smcw",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "fiber",
+        "cw"
+      ]
+    },
+    {
+      "id": "las-uv",
+      "entity": "laser_source",
+      "name": "UV DPSS (THG)",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "UV",
+        "DPSS",
+        "Nanosecond"
+      ],
+      "wavelength": {
+        "value": 355,
+        "unit": "nm",
+        "original": "355 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 25,
+        "unit": "ns",
+        "original": "25 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        20,
+        150
+      ],
+      "m2": 1.2,
+      "beam_diameter_mm": 10,
+      "wall_plug_efficiency": 0.03,
+      "price_premium": 1.55,
+      "display_color": "#8A5CF0",
+      "short_code": "UV",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.uv",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "uv",
+        "dpss",
+        "nanosecond"
+      ]
+    },
+    {
+      "id": "las-green",
+      "entity": "laser_source",
+      "name": "Green DPSS (SHG)",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Green",
+        "DPSS",
+        "Nanosecond"
+      ],
+      "wavelength": {
+        "value": 532,
+        "unit": "nm",
+        "original": "532 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 15,
+        "unit": "ns",
+        "original": "15 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        10,
+        100
+      ],
+      "m2": 1.2,
+      "beam_diameter_mm": 10,
+      "wall_plug_efficiency": 0.07,
+      "price_premium": 1.4,
+      "display_color": "#28C36A",
+      "short_code": "GR",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.green",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "green",
+        "dpss",
+        "nanosecond"
+      ]
+    },
+    {
+      "id": "las-blue",
+      "entity": "laser_source",
+      "name": "Blue diode",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Blue",
+        "Diode",
+        "CW"
+      ],
+      "wavelength": {
+        "value": 450,
+        "unit": "nm",
+        "original": "450 nm"
+      },
+      "mode": "cw",
+      "pulse_duration": null,
+      "pulse_duration_range": null,
+      "repetition_rate_khz": null,
+      "m2": 2,
+      "beam_diameter_mm": 10,
+      "wall_plug_efficiency": 0.38,
+      "price_premium": 1.45,
+      "display_color": "#2E7CE4",
+      "short_code": "BL",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.blue",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "blue",
+        "diode",
+        "cw"
+      ]
+    },
+    {
+      "id": "las-co2",
+      "entity": "laser_source",
+      "name": "Sealed RF CO₂ (10.6 µm)",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "CO2",
+        "CW"
+      ],
+      "wavelength": {
+        "value": 10600,
+        "unit": "nm",
+        "original": "10.6 µm"
+      },
+      "mode": "cw",
+      "pulse_duration": null,
+      "pulse_duration_range": null,
+      "repetition_rate_khz": null,
+      "m2": 1.1,
+      "beam_diameter_mm": 20,
+      "wall_plug_efficiency": 0.1,
+      "price_premium": 1,
+      "display_color": "#C0392B",
+      "short_code": "C10",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.co2",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "co2",
+        "cw"
+      ]
+    },
+    {
+      "id": "las-co293",
+      "entity": "laser_source",
+      "name": "Sealed RF CO₂ (9.3 µm)",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "CO2",
+        "CW"
+      ],
+      "wavelength": {
+        "value": 9300,
+        "unit": "nm",
+        "original": "9.3 µm"
+      },
+      "mode": "cw",
+      "pulse_duration": null,
+      "pulse_duration_range": null,
+      "repetition_rate_khz": null,
+      "m2": 1.1,
+      "beam_diameter_mm": 20,
+      "wall_plug_efficiency": 0.09,
+      "price_premium": 1.16,
+      "display_color": "#AF3527",
+      "short_code": "C93",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.co293",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "co2",
+        "cw"
+      ]
+    },
+    {
+      "id": "las-pico",
+      "entity": "laser_source",
+      "name": "Picosecond",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Picosecond",
+        "Ultrafast"
+      ],
+      "wavelength": {
+        "value": 1030,
+        "unit": "nm",
+        "original": "1030 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 0.01,
+        "unit": "ns",
+        "original": "0.01 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        200,
+        2000
+      ],
+      "m2": 1.2,
+      "beam_diameter_mm": 12,
+      "wall_plug_efficiency": 0.1,
+      "price_premium": 1.85,
+      "display_color": "#F0A32E",
+      "short_code": "PS",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.pico",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "picosecond",
+        "ultrafast"
+      ]
+    },
+    {
+      "id": "las-femto",
+      "entity": "laser_source",
+      "name": "Femtosecond",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Femtosecond",
+        "Ultrafast"
+      ],
+      "wavelength": {
+        "value": 1030,
+        "unit": "nm",
+        "original": "1030 nm"
+      },
+      "mode": "pulsed",
+      "pulse_duration": {
+        "value": 0.0003,
+        "unit": "ns",
+        "original": "0.0003 ns (representative)"
+      },
+      "pulse_duration_range": null,
+      "repetition_rate_khz": [
+        200,
+        1000
+      ],
+      "m2": 1.2,
+      "beam_diameter_mm": 12,
+      "wall_plug_efficiency": 0.08,
+      "price_premium": 2.4,
+      "display_color": "#F5C542",
+      "short_code": "FS",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.femto",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "femtosecond",
+        "ultrafast"
+      ]
+    },
+    {
+      "id": "las-diode",
+      "entity": "laser_source",
+      "name": "Direct diode",
+      "description": "Source technology option offered by the TEAL configurator (not a specific manufacturer model).",
+      "kind": "class",
+      "manufacturer": null,
+      "model": null,
+      "categories": [
+        "Diode",
+        "CW"
+      ],
+      "wavelength": {
+        "value": 940,
+        "unit": "nm",
+        "original": "915–980 nm"
+      },
+      "mode": "cw",
+      "pulse_duration": null,
+      "pulse_duration_range": null,
+      "repetition_rate_khz": null,
+      "m2": 18,
+      "beam_diameter_mm": 12,
+      "wall_plug_efficiency": 0.45,
+      "price_premium": 0.92,
+      "display_color": "#D4483C",
+      "short_code": "DD",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "SRC.diode",
+        "note": "Representative parameters used by the configurator for diffraction-limited estimates. Not a datasheet."
+      },
+      "tags": [
+        "source-class",
+        "diode",
+        "cw"
+      ]
+    }
+  ]
+}

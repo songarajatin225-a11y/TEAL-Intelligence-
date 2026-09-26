@@ -1,0 +1,151 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "product-families",
+    "title": "TEAL laser product families",
+    "description": "The seven TEAL laser product families (catalogue chapters 02–08).",
+    "entity": "product_family",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim",
+      "src-teal-catalogue-2026"
+    ],
+    "partition": "products"
+  },
+  "records": [
+    {
+      "id": "fam-mark",
+      "entity": "product_family",
+      "key": "mark",
+      "name": "TEAL Mark",
+      "chapter": "02",
+      "segment": "Marking & Traceability",
+      "description": "Permanent identification and traceability, at production speed.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.mark",
+        "note": "Catalogue chapter 02."
+      }
+    },
+    {
+      "id": "fam-weld",
+      "entity": "product_family",
+      "key": "weld",
+      "name": "TEAL Weld",
+      "chapter": "03",
+      "segment": "Welding & Joining",
+      "description": "Micron-level joining for electronics, e-mobility and medical.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.weld",
+        "note": "Catalogue chapter 03."
+      }
+    },
+    {
+      "id": "fam-clean",
+      "entity": "product_family",
+      "key": "clean",
+      "name": "TEAL Clean",
+      "chapter": "04",
+      "segment": "Cleaning & Surface Prep",
+      "description": "Non-contact, chemical-free surface preparation.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.clean",
+        "note": "Catalogue chapter 04."
+      }
+    },
+    {
+      "id": "fam-cut",
+      "entity": "product_family",
+      "key": "cut",
+      "name": "TEAL Cut",
+      "chapter": "05",
+      "segment": "Cutting & Micro-machining",
+      "description": "Precision profiling of foils, films, ceramics and metals.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.cut",
+        "note": "Catalogue chapter 05."
+      }
+    },
+    {
+      "id": "fam-semi",
+      "entity": "product_family",
+      "key": "semi",
+      "name": "TEAL Semi",
+      "chapter": "06",
+      "segment": "Semiconductor / ATMP",
+      "description": "Wafer-to-package marking, trimming and traceability.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.semi",
+        "note": "Catalogue chapter 06."
+      }
+    },
+    {
+      "id": "fam-volt",
+      "entity": "product_family",
+      "key": "volt",
+      "name": "TEAL Volt",
+      "chapter": "07",
+      "segment": "Battery Manufacturing",
+      "description": "Cell-to-pack laser processing for the gigafactory era.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.volt",
+        "note": "Catalogue chapter 07."
+      }
+    },
+    {
+      "id": "fam-auto",
+      "entity": "product_family",
+      "key": "auto",
+      "name": "TEAL Automate",
+      "chapter": "08",
+      "segment": "Customised Automation",
+      "description": "Turnkey cells, lines and Industry 4.0 integration.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "FAM.auto",
+        "note": "Catalogue chapter 08."
+      }
+    }
+  ]
+}

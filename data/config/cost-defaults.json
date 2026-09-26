@@ -1,0 +1,170 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "cost-defaults",
+    "kind": "config",
+    "title": "Cost engine defaults",
+    "description": "Default landed-cost %, mark-up % and TEAL cost-sheet parameters from the legacy platform. ASSUMPTIONS — set per job.",
+    "entity": "config",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-legacy-cost-platform"
+    ]
+  },
+  "config": {
+    "landed": {
+      "freightPct": 2,
+      "dutyPct": 0,
+      "landingPct": 1.5,
+      "gstPct": 18,
+      "siteContPct": 8
+    },
+    "markup": {
+      "overheadPct": 14,
+      "contingencyPct": 3,
+      "profitPct": 18
+    },
+    "teal": {
+      "insurancePct": 0.05,
+      "sgaPct": 8,
+      "warrantyPct": 2.5,
+      "profitPct": 12,
+      "ossMonthly": 65000,
+      "stationHc": 0.5,
+      "ossMonths": 12,
+      "packRate": 1600
+    },
+    "currency": "INR",
+    "business_units": [
+      "Factory Automation",
+      "Special Purpose Machines",
+      "Semiconductor Equipment",
+      "Laser Systems",
+      "Vision Systems",
+      "Robotics & Material Handling",
+      "Tooling & Fixtures",
+      "Precision Machining",
+      "Sheet Metal Fabrication",
+      "Electrical Control Panels",
+      "Process Equipment",
+      "Industrial Automation",
+      "Service & AMC",
+      "R&D / Prototype"
+    ],
+    "product_categories": [
+      "Assembly Line",
+      "Test & Inspection Station",
+      "Laser Marking System",
+      "Laser Welding Cell",
+      "Laser Cleaning System",
+      "ATMP Equipment",
+      "Pick & Place Cell",
+      "Leak Test Machine",
+      "Control Panel",
+      "Fixture Set",
+      "Machined Component",
+      "Retrofit / Upgrade",
+      "AMC Contract",
+      "Prototype Build"
+    ],
+    "vocab": {
+      "TYPE_MECH": [
+        "Fabrication",
+        "Machining",
+        "Sheet Metal",
+        "Standard Parts",
+        "Motion Components",
+        "Bearings & Guides",
+        "Fasteners",
+        "Pneumatics",
+        "Hydraulics",
+        "Surface Treatment",
+        "Assembly Hardware",
+        "Inspection Tooling"
+      ],
+      "TYPE_ELEC": [
+        "PLC",
+        "HMI",
+        "Servo Motor",
+        "Servo Drive",
+        "VFD",
+        "Sensors",
+        "Vision Camera",
+        "Lighting",
+        "Cables & Glands",
+        "Panel & Enclosure",
+        "Safety Components",
+        "Wiring Accessories",
+        "Test Instruments"
+      ],
+      "ACT_SW": [
+        "PLC Programming",
+        "HMI Development",
+        "Robot Programming",
+        "Vision Programming",
+        "SCADA / MES Interface",
+        "Application Software",
+        "Software Documentation",
+        "FAT Software Validation"
+      ],
+      "ACT_LAB": [
+        "Mechanical Assembly",
+        "Electrical Assembly",
+        "In-process Inspection",
+        "Functional Testing",
+        "Packing",
+        "Installation",
+        "Commissioning",
+        "Operator Training",
+        "As-built Documentation"
+      ],
+      "HEAD_SITE": [
+        "Engineer Deployment",
+        "Air / Rail Travel",
+        "Accommodation",
+        "Food & Per Diem",
+        "Local Transport",
+        "Equipment Rental",
+        "Consumables at Site",
+        "Site Facilities"
+      ],
+      "HEAD_COMM": [
+        "Outward Freight",
+        "Transit Insurance",
+        "Export Packaging",
+        "Special Tooling",
+        "Certification (CE/UL)",
+        "Warranty Provision",
+        "Third-Party Services",
+        "Finance / LC Charges",
+        "Miscellaneous"
+      ],
+      "HEAD_AMC": [
+        "Preventive Maintenance Labour",
+        "Spare Parts Kit",
+        "Travel & Lodging",
+        "Consumables",
+        "Remote Support",
+        "Calibration"
+      ],
+      "MAT_CLASS": [
+        "Raw Material",
+        "Standard Component",
+        "Bought-Out Assembly",
+        "Import Item",
+        "Consumable"
+      ],
+      "COMM_ACTS": [
+        "Assembly Mechanical",
+        "Assembly Electrical",
+        "Testing Mechanical",
+        "Programming & Testing",
+        "OQC",
+        "Dispatch",
+        "LBU - SW",
+        "LBU - OSS"
+      ]
+    }
+  }
+}

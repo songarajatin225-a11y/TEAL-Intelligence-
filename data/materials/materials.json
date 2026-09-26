@@ -1,0 +1,766 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "materials",
+    "title": "Materials",
+    "description": "Engineering materials with thermal properties and indicative absorptance by wavelength band. null = UNKNOWN.",
+    "entity": "material",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim",
+      "src-os-spec"
+    ],
+    "partition": "applications"
+  },
+  "records": [
+    {
+      "id": "mat-steel",
+      "entity": "material",
+      "name": "Carbon steel",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 50,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1538,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 7850,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 490,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.6,
+        "blue": 0.6,
+        "green": 0.55,
+        "ir": 0.35,
+        "co2": 0.1
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.steel",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-ss",
+      "entity": "material",
+      "name": "Stainless 304",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 16,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1450,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 8000,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 500,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.6,
+        "blue": 0.58,
+        "green": 0.55,
+        "ir": 0.35,
+        "co2": 0.1
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.ss",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-al",
+      "entity": "material",
+      "name": "Aluminium",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 237,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 660,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 2700,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 900,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.25,
+        "blue": 0.16,
+        "green": 0.15,
+        "ir": 0.08,
+        "co2": 0.02
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.al",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-cu",
+      "entity": "material",
+      "name": "Copper",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 401,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1085,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 8960,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 385,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.55,
+        "blue": 0.55,
+        "green": 0.4,
+        "ir": 0.04,
+        "co2": 0.015
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.cu",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-ti",
+      "entity": "material",
+      "name": "Titanium",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 22,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1668,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 4510,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 520,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.55,
+        "blue": 0.52,
+        "green": 0.5,
+        "ir": 0.42,
+        "co2": 0.12
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.ti",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-ni",
+      "entity": "material",
+      "name": "Nickel",
+      "category": "Metal",
+      "thermal_conductivity": {
+        "value": 91,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1455,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 8900,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 440,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.5,
+        "blue": 0.45,
+        "green": 0.42,
+        "ir": 0.28,
+        "co2": 0.05
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.ni",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-si",
+      "entity": "material",
+      "name": "Silicon",
+      "category": "Semiconductor",
+      "thermal_conductivity": {
+        "value": 150,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1414,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 2330,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 700,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.65,
+        "blue": 0.62,
+        "green": 0.6,
+        "ir": 0.3,
+        "co2": 0.05
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.si",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-sic",
+      "entity": "material",
+      "name": "Silicon carbide",
+      "category": "Semiconductor",
+      "thermal_conductivity": {
+        "value": 370,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 2730,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 3210,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 690,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.7,
+        "blue": 0.55,
+        "green": 0.35,
+        "ir": 0.15,
+        "co2": 0.08
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.sic",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-al2o3",
+      "entity": "material",
+      "name": "Alumina",
+      "category": "Ceramic",
+      "thermal_conductivity": {
+        "value": 30,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 2072,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 3950,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 880,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.45,
+        "blue": 0.2,
+        "green": 0.15,
+        "ir": 0.12,
+        "co2": 0.9
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.al2o3",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-aln",
+      "entity": "material",
+      "name": "Aluminium nitride",
+      "category": "Ceramic",
+      "thermal_conductivity": {
+        "value": 170,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 2200,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 3260,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 740,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.5,
+        "blue": 0.25,
+        "green": 0.18,
+        "ir": 0.14,
+        "co2": 0.88
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.aln",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-glass",
+      "entity": "material",
+      "name": "Soda-lime glass",
+      "category": "Glass",
+      "thermal_conductivity": {
+        "value": 1,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 1000,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 2500,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 840,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.35,
+        "blue": 0.02,
+        "green": 0.01,
+        "ir": 0.02,
+        "co2": 0.92
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.glass",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": []
+    },
+    {
+      "id": "mat-fr4",
+      "entity": "material",
+      "name": "FR4 / solder mask",
+      "category": "PCB / laminate",
+      "thermal_conductivity": {
+        "value": 0.3,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 300,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 1850,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 1100,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.75,
+        "blue": 0.35,
+        "green": 0.3,
+        "ir": 0.15,
+        "co2": 0.92
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.fr4",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": [
+        "organic"
+      ]
+    },
+    {
+      "id": "mat-pi",
+      "entity": "material",
+      "name": "Polyimide",
+      "category": "Polymer film",
+      "thermal_conductivity": {
+        "value": 0.15,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 400,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 1420,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 1090,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.85,
+        "blue": 0.45,
+        "green": 0.35,
+        "ir": 0.12,
+        "co2": 0.94
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.pi",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": [
+        "organic"
+      ]
+    },
+    {
+      "id": "mat-poly",
+      "entity": "material",
+      "name": "Engineering polymer",
+      "category": "Polymer",
+      "thermal_conductivity": {
+        "value": 0.2,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 250,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 1200,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 1500,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.7,
+        "blue": 0.3,
+        "green": 0.25,
+        "ir": 0.1,
+        "co2": 0.93
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.poly",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": [
+        "organic"
+      ]
+    },
+    {
+      "id": "mat-emc",
+      "entity": "material",
+      "name": "Epoxy mould compound",
+      "category": "Semiconductor package",
+      "thermal_conductivity": {
+        "value": 0.7,
+        "unit": "W/(m·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "melting_point": {
+        "value": 350,
+        "unit": "°C",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "density": {
+        "value": 1900,
+        "unit": "kg/m³",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "specific_heat": {
+        "value": 1000,
+        "unit": "J/(kg·K)",
+        "status": "SOURCE_DOCUMENTED"
+      },
+      "absorption": {
+        "uv": 0.72,
+        "blue": 0.4,
+        "green": 0.35,
+        "ir": 0.3,
+        "co2": 0.9
+      },
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "LOW",
+        "section": "MAT.emc",
+        "note": "Carried over from the legacy configurator, which describes them as handbook data for a clean flat surface. The primary reference was not recorded — verify against a primary source before using for design. Absorption values are indicative only."
+      },
+      "tags": [
+        "organic"
+      ]
+    },
+    {
+      "id": "mat-gan",
+      "entity": "material",
+      "name": "Gallium nitride (GaN)",
+      "category": "Semiconductor",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Listed in the OS specification (§33). No property data held — UNKNOWN. Do not infer."
+      },
+      "tags": [
+        "properties-unknown"
+      ]
+    },
+    {
+      "id": "mat-soldermask",
+      "entity": "material",
+      "name": "Solder mask",
+      "category": "PCB / laminate",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Listed in the OS specification (§33). No property data held — UNKNOWN. Do not infer."
+      },
+      "tags": [
+        "properties-unknown"
+      ]
+    },
+    {
+      "id": "mat-battery-electrode",
+      "entity": "material",
+      "name": "Battery electrode materials",
+      "category": "Battery",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Listed in the OS specification (§33). No property data held — UNKNOWN. Do not infer."
+      },
+      "tags": [
+        "properties-unknown"
+      ]
+    },
+    {
+      "id": "mat-composite",
+      "entity": "material",
+      "name": "Composites (fibre-reinforced polymers)",
+      "category": "Composite",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "UNKNOWN",
+        "note": "Listed in the OS specification (§33). No property data held — UNKNOWN. Do not infer."
+      },
+      "tags": [
+        "properties-unknown"
+      ]
+    }
+  ]
+}

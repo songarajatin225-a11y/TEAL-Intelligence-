@@ -1,0 +1,2644 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "platforms",
+    "title": "TEAL laser platforms (products)",
+    "description": "22 TEAL platforms with sources, powers, objectives, standard content, specifications and applications.",
+    "entity": "product",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim",
+      "src-teal-catalogue-2026"
+    ],
+    "partition": "products"
+  },
+  "records": [
+    {
+      "id": "prd-markf",
+      "entity": "product",
+      "key": "markf",
+      "name": "Mark F-Series",
+      "family_id": "fam-mark",
+      "code": "F",
+      "title": "Fiber Laser Marking Workstation",
+      "tagline": "The universal traceability workhorse — 20 to 100 W, desktop to inline, one software.",
+      "description": "The universal traceability workhorse — 20 to 100 W, desktop to inline, one software.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "mopa"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30,
+        50,
+        100
+      ],
+      "default_power_w": 30,
+      "lens_keys": [
+        "f163",
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [],
+      "specs": [
+        {
+          "label": "Marking speed",
+          "value": "up to 7,000 mm/s"
+        },
+        {
+          "label": "Scan repeatability",
+          "value": "± 2.5 µm"
+        },
+        {
+          "label": "Placement accuracy",
+          "value": "± 25 µm with vision"
+        },
+        {
+          "label": "Part envelope",
+          "value": "600 × 400 × 300 mm"
+        },
+        {
+          "label": "Z-axis",
+          "value": "300 mm motorised"
+        },
+        {
+          "label": "Safety",
+          "value": "Class 1 per IEC 60825-1"
+        }
+      ],
+      "industries": [
+        "ind-genengg",
+        "ind-ems",
+        "ind-medical",
+        "ind-auto",
+        "ind-consumer"
+      ],
+      "lead_time_weeks": 26,
+      "warranty_months": 12,
+      "install_weeks": 3,
+      "base_price_inr": 1400000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "metal",
+          "name": "Metals — general traceability",
+          "description": "Steel, SS, Al, brass, Ti, Ni alloys",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "steel",
+          "rationale": "Steels absorb 1064 nm gratefully. Annealing gives corrosion-safe marks for medical and food contact."
+        },
+        {
+          "key": "anod",
+          "name": "Anodised Al / colour",
+          "description": "Black on anodised, colour on SS/Ti",
+          "source_key": "mopa",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "MOPA pulse control produces deep blacks on anodised aluminium without breaching the anodic layer."
+        },
+        {
+          "key": "deep",
+          "name": "Deep engraving",
+          "description": "Tooling, dies, VIN and plate marking",
+          "source_key": "fiber",
+          "power_w": 100,
+          "material_key": "steel",
+          "rationale": "Higher average power and multi-pass strategies drive depth; 100 W is the productive engraving point."
+        },
+        {
+          "key": "plastic",
+          "name": "Engineering plastics",
+          "description": "ABS, PC, PEEK — markable grades",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "poly",
+          "rationale": "Polymer response is grade- and additive-dependent; TEAL validates against your actual resin."
+        },
+        {
+          "key": "medical",
+          "name": "Medical annealing",
+          "description": "Instruments, implant-adjacent, UDI",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "ss",
+          "rationale": "Anneal marks leave the passive layer intact — the regime for corrosion-critical medical marking."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markf",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "mark",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-markm",
+      "entity": "product",
+      "key": "markm",
+      "name": "Mark M-Series",
+      "family_id": "fam-mark",
+      "code": "M",
+      "title": "MOPA Fiber Marking Workstation",
+      "tagline": "Pulse-shaped marking for colour, contrast and heat-sensitive work.",
+      "description": "Pulse-shaped marking for colour, contrast and heat-sensitive work.",
+      "delivery": "galvo",
+      "source_keys": [
+        "mopa"
+      ],
+      "default_source_key": "mopa",
+      "powers_w": [
+        20,
+        30,
+        50,
+        100
+      ],
+      "default_power_w": 30,
+      "lens_keys": [
+        "f163",
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [],
+      "specs": [
+        {
+          "label": "Pulse width",
+          "value": "tunable, 2–500 ns"
+        },
+        {
+          "label": "Marking speed",
+          "value": "up to 7,000 mm/s"
+        },
+        {
+          "label": "Scan repeatability",
+          "value": "± 2.5 µm"
+        },
+        {
+          "label": "Safety",
+          "value": "Class 1 per IEC 60825-1"
+        }
+      ],
+      "industries": [
+        "ind-consumer",
+        "ind-ems",
+        "ind-medical",
+        "ind-auto"
+      ],
+      "lead_time_weeks": 26,
+      "warranty_months": 12,
+      "install_weeks": 3,
+      "base_price_inr": 2200000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "colour",
+          "name": "Colour marking on SS / Ti",
+          "description": "Oxide-layer colour control",
+          "source_key": "mopa",
+          "power_w": 20,
+          "material_key": "ss",
+          "rationale": "Tunable pulse duration controls oxide thickness — the mechanism behind repeatable colour on stainless and titanium."
+        },
+        {
+          "key": "black",
+          "name": "Black on anodised Al",
+          "description": "Consumer and enclosure cosmetics",
+          "source_key": "mopa",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "Low-fluence, high-frequency MOPA parameter sets mark within the anodic layer without cracking it."
+        },
+        {
+          "key": "foil",
+          "name": "Thin foils & films",
+          "description": "Low heat input, no burn-through",
+          "source_key": "mopa",
+          "power_w": 20,
+          "material_key": "cu",
+          "rationale": "Short pulses limit heat penetration — the requirement on foils, plated layers and battery tabs."
+        },
+        {
+          "key": "sensitive",
+          "name": "Heat-sensitive plastics",
+          "description": "Light-toned and filled polymers",
+          "source_key": "mopa",
+          "power_w": 20,
+          "material_key": "poly",
+          "rationale": "Pulse tailoring produces contrast by foaming or carbonising selectively, without melt distortion."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markm",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "mark",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-markc2i",
+      "entity": "product",
+      "key": "markc2i",
+      "name": "Mark PCB C2i",
+      "family_id": "fam-mark",
+      "code": "PCB-C2i",
+      "title": "Dual-Head CO₂ Inline PCB Marking System",
+      "tagline": "Simultaneous top-and-bottom PCB traceability — the board never flips, the line never waits.",
+      "description": "Simultaneous top-and-bottom PCB traceability — the board never flips, the line never waits.",
+      "delivery": "galvo2",
+      "source_keys": [
+        "co2",
+        "co293"
+      ],
+      "default_source_key": "co2",
+      "powers_w": [
+        30
+      ],
+      "default_power_w": 30,
+      "lens_keys": [
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "visfid",
+        "conveyor",
+        "fume",
+        "visver"
+      ],
+      "specs": [
+        {
+          "label": "Laser",
+          "value": "2 × 30 W RF-excited sealed CO₂, air-cooled"
+        },
+        {
+          "label": "Field / speed",
+          "value": "175 × 175 mm per head · 7,000 mm/s"
+        },
+        {
+          "label": "Code capability",
+          "value": "DMC from 3 × 3 mm (ECC200), cell ≥ 0.25 mm"
+        },
+        {
+          "label": "Panel size",
+          "value": "50 × 50 to 460 × 460 mm (600 mm option)"
+        },
+        {
+          "label": "Handling",
+          "value": "SMEMA 1.2 both ends, ESD-safe edge belts"
+        },
+        {
+          "label": "Positioning",
+          "value": "± 0.05 mm with fiducial correction"
+        },
+        {
+          "label": "Cycle time",
+          "value": "≤ 3.5 s/board, both sides incl. transfer"
+        },
+        {
+          "label": "Changeover",
+          "value": "< 60 s, fully recipe-driven"
+        },
+        {
+          "label": "Throughput",
+          "value": "up to 1,000 boards/hour dual-side"
+        },
+        {
+          "label": "Mark grade",
+          "value": "≥ ISO 29158 Grade B typical"
+        },
+        {
+          "label": "Utilities",
+          "value": "230 V 1-ph, < 3 kVA · CDA 5 bar · 2 × 250 m³/h"
+        },
+        {
+          "label": "Footprint",
+          "value": "1,250 × 1,450 × 1,650 mm · conveyor 900 ± 20 mm"
+        }
+      ],
+      "industries": [
+        "ind-ems"
+      ],
+      "lead_time_weeks": 30,
+      "warranty_months": 12,
+      "install_weeks": 5,
+      "base_price_inr": 6560000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "dual",
+          "name": "Dual-side board ID",
+          "description": "Top + bottom DMC and alphanumeric",
+          "source_key": "co2",
+          "power_w": 30,
+          "material_key": "fr4",
+          "rationale": "CO₂ at 10.6 µm ablates solder mask with high contrast without attacking the copper beneath — the industry-standard chemistry for PCB identity."
+        },
+        {
+          "key": "panel",
+          "name": "Panel & depanel marks",
+          "description": "Step-and-repeat, bad-board marking",
+          "source_key": "co2",
+          "power_w": 30,
+          "material_key": "fr4",
+          "rationale": "Panel maps with multi-board step-and-repeat; X-out logic suppresses marks on rejected boards."
+        },
+        {
+          "key": "white",
+          "name": "White / specialty mask",
+          "description": "Difficult mask chemistries",
+          "source_key": "co293",
+          "power_w": 30,
+          "material_key": "fr4",
+          "rationale": "9.3 µm is absorbed more strongly by some mask formulations, recovering contrast where 10.6 µm reads flat."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markc2i",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "mark",
+        "galvo2"
+      ]
+    },
+    {
+      "id": "prd-marku",
+      "entity": "product",
+      "key": "marku",
+      "name": "Mark PCB U-Series",
+      "family_id": "fam-mark",
+      "code": "PCB-U",
+      "title": "UV Inline PCB & Polymer Marking System",
+      "tagline": "Cold marking at 355 nm — micro-codes on solder mask, flex and coverlay without a trace of heat damage.",
+      "description": "Cold marking at 355 nm — micro-codes on solder mask, flex and coverlay without a trace of heat damage.",
+      "delivery": "galvo",
+      "source_keys": [
+        "uv"
+      ],
+      "default_source_key": "uv",
+      "powers_w": [
+        3,
+        5,
+        10
+      ],
+      "default_power_w": 5,
+      "lens_keys": [
+        "f100",
+        "f163"
+      ],
+      "default_lens_key": "f163",
+      "standard_content": [
+        "visfid",
+        "conveyor",
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Laser",
+          "value": "3 / 5 / 10 W 355 nm DPSS, < 25 ns, 20–150 kHz"
+        },
+        {
+          "label": "Field",
+          "value": "110 × 110 mm"
+        },
+        {
+          "label": "Minimum feature",
+          "value": "15 µm"
+        },
+        {
+          "label": "Crystal management",
+          "value": "Automated THG spot-shift with health analytics"
+        },
+        {
+          "label": "Handling",
+          "value": "SMEMA inline (shared with PCB C2i) or benchtop Class 1"
+        }
+      ],
+      "industries": [
+        "ind-ems",
+        "ind-semi",
+        "ind-medical"
+      ],
+      "lead_time_weeks": 30,
+      "warranty_months": 12,
+      "install_weeks": 5,
+      "base_price_inr": 5400000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "micro",
+          "name": "Micro DMC on rigid & flex",
+          "description": "Codes from 1 × 1 mm",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "fr4",
+          "rationale": "At 355 nm the mark forms by photochemical reaction rather than heat — fine, high-contrast codes with negligible thermal input."
+        },
+        {
+          "key": "flex",
+          "name": "Flex circuit & coverlay",
+          "description": "Polyimide, thin laminates",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "pi",
+          "rationale": "Flex and coverlay delaminate under thermal marking; UV keeps the substrate intact."
+        },
+        {
+          "key": "comp",
+          "name": "Component-level marking",
+          "description": "Populated assemblies, connectors",
+          "source_key": "uv",
+          "power_w": 3,
+          "material_key": "fr4",
+          "rationale": "Low pulse energy allows marking on populated boards without risk to adjacent devices."
+        },
+        {
+          "key": "medpoly",
+          "name": "Medical polymer UDI",
+          "description": "PEEK, PC, medical-grade resins",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "poly",
+          "rationale": "UV marking is validated for medical polymers where carbonisation is not acceptable."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.marku",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "mark",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-markit",
+      "entity": "product",
+      "key": "markit",
+      "name": "Mark iT-Series",
+      "family_id": "fam-mark",
+      "code": "iT",
+      "title": "Inline & Marking-On-The-Fly Traceability",
+      "tagline": "Serialisation at line speed — conveyor, rotary or on-the-fly, synchronised to your takt.",
+      "description": "Serialisation at line speed — conveyor, rotary or on-the-fly, synchronised to your takt.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "mopa",
+        "uv",
+        "co2",
+        "green"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30,
+        50,
+        100
+      ],
+      "powers_by_source": {
+        "fiber": [
+          20,
+          30,
+          50,
+          100
+        ],
+        "mopa": [
+          20,
+          30,
+          50,
+          100
+        ],
+        "uv": [
+          3,
+          5,
+          10
+        ],
+        "green": [
+          5,
+          10,
+          20
+        ],
+        "co2": [
+          10,
+          30,
+          60
+        ]
+      },
+      "default_power_w": 50,
+      "lens_keys": [
+        "f163",
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "visfid",
+        "conveyor"
+      ],
+      "specs": [
+        {
+          "label": "Throughput",
+          "value": "up to 200 parts/min (part- and content-dependent)"
+        },
+        {
+          "label": "MOTF speed",
+          "value": "product speed to 120 m/min, encoder-synchronised"
+        },
+        {
+          "label": "Rotary variants",
+          "value": "4 / 6 / 8-station dials, load-while-mark"
+        },
+        {
+          "label": "Data",
+          "value": "MES serial request → mark → verify → post, with store-and-forward"
+        }
+      ],
+      "industries": [
+        "ind-auto",
+        "ind-ems",
+        "ind-genengg",
+        "ind-battery"
+      ],
+      "lead_time_weeks": 30,
+      "warranty_months": 12,
+      "install_weeks": 5,
+      "base_price_inr": 4200000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "motf",
+          "name": "Marking-on-the-fly",
+          "description": "Continuous conveyor, encoder-synced",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "steel",
+          "rationale": "Queue-tracking handles multiple parts in field simultaneously; the beam chases the product rather than stopping it."
+        },
+        {
+          "key": "indexed",
+          "name": "Indexed conveyor marking",
+          "description": "Stop-and-mark at station",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "steel",
+          "rationale": "Indexed presentation gives the tightest placement accuracy where takt allows a brief dwell."
+        },
+        {
+          "key": "rotarym",
+          "name": "Rotary-dial multi-station",
+          "description": "Load, mark, verify, unload",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "steel",
+          "rationale": "Overlapping load and process on a dial collapses effective cycle time to the longest single station."
+        },
+        {
+          "key": "cell",
+          "name": "Cell & can marking",
+          "description": "18650 / 21700 / 4680, prismatic",
+          "source_key": "mopa",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "MOPA parameter sets deliver dark codes on aluminium and nickel-plated steel with negligible heat into the cell."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.markit",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "mark",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-weldp",
+      "entity": "product",
+      "key": "weldp",
+      "name": "Weld P-Series",
+      "family_id": "fam-weld",
+      "code": "P",
+      "title": "Precision Laser Welding Workstation",
+      "tagline": "Micron-accurate spot and seam welding for components where heat is the enemy.",
+      "description": "Micron-accurate spot and seam welding for components where heat is the enemy.",
+      "delivery": "galvo",
+      "source_keys": [
+        "qcw",
+        "smcw"
+      ],
+      "default_source_key": "qcw",
+      "powers_w": [
+        150,
+        300,
+        450
+      ],
+      "powers_by_source": {
+        "qcw": [
+          150,
+          300,
+          450
+        ],
+        "smcw": [
+          500,
+          1000,
+          2000
+        ]
+      },
+      "default_power_w": 150,
+      "lens_keys": [
+        "f163",
+        "f230",
+        "f254"
+      ],
+      "default_lens_key": "f230",
+      "standard_content": [
+        "weldmon",
+        "gascon"
+      ],
+      "specs": [
+        {
+          "label": "Sources",
+          "value": "QCW 150 W avg / 1.5 kW peak, or CW single-mode 500 W–2 kW"
+        },
+        {
+          "label": "Delivery",
+          "value": "160 × 160 mm welding scan head or fixed optic"
+        },
+        {
+          "label": "Spot",
+          "value": "30–600 µm"
+        },
+        {
+          "label": "Motion",
+          "value": "CNC XY(Z) 300 × 300 mm, optional 4th-axis rotary"
+        },
+        {
+          "label": "Pulse control",
+          "value": "0.2 ms shaping slices"
+        },
+        {
+          "label": "Monitoring",
+          "value": "Photodiode plasma / temperature / back-reflection"
+        }
+      ],
+      "industries": [
+        "ind-medical",
+        "ind-ems",
+        "ind-auto",
+        "ind-aero"
+      ],
+      "lead_time_weeks": 32,
+      "warranty_months": 12,
+      "install_weeks": 5,
+      "base_price_inr": 5200000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "microspot",
+          "name": "Micro spot welds",
+          "description": "Sensors, relays, hybrids",
+          "source_key": "qcw",
+          "power_w": 150,
+          "material_key": "ss",
+          "rationale": "Shaped millisecond pulses put energy where resistance welding cannot reach, without electrode wear drift."
+        },
+        {
+          "key": "seam",
+          "name": "Continuous & stitch seams",
+          "description": "Enclosures, instruments",
+          "source_key": "smcw",
+          "power_w": 500,
+          "material_key": "ss",
+          "rationale": "CW single-mode with wobble gives continuous seams with controlled heat input on thin sections."
+        },
+        {
+          "key": "wire",
+          "name": "Wire-to-pad & terminals",
+          "description": "Connector and terminal joints",
+          "source_key": "qcw",
+          "power_w": 150,
+          "material_key": "cu",
+          "rationale": "Fine spots and per-weld energy monitoring make structural joints out of what used to be soldering."
+        },
+        {
+          "key": "tool",
+          "name": "Repair & tool welding",
+          "description": "Die and mould build-up",
+          "source_key": "qcw",
+          "power_w": 150,
+          "material_key": "steel",
+          "rationale": "Localised deposition with minimal HAZ preserves surrounding tool geometry and hardness."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldp",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "weld",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-weldb",
+      "entity": "product",
+      "key": "weldb",
+      "name": "Weld B-Series",
+      "family_id": "fam-weld",
+      "code": "B",
+      "title": "Battery Tab, Busbar & E-Mobility Welding",
+      "tagline": "Copper and aluminium, joined at gigafactory speed — spatter suppressed, every weld measured.",
+      "description": "Copper and aluminium, joined at gigafactory speed — spatter suppressed, every weld measured.",
+      "delivery": "galvo",
+      "source_keys": [
+        "smcw",
+        "green"
+      ],
+      "default_source_key": "smcw",
+      "powers_w": [
+        1500,
+        2000,
+        3000,
+        6000
+      ],
+      "powers_by_source": {
+        "smcw": [
+          1500,
+          2000,
+          3000,
+          6000
+        ],
+        "green": [
+          500,
+          1000,
+          1500,
+          2000
+        ]
+      },
+      "default_power_w": 2000,
+      "lens_keys": [
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f420",
+      "standard_content": [
+        "weldmon",
+        "wobble",
+        "gascon"
+      ],
+      "specs": [
+        {
+          "label": "Sources",
+          "value": "CW fiber 1.5 / 2 / 3 / 6 kW, ring-mode option"
+        },
+        {
+          "label": "Delivery",
+          "value": "Remote scan head, 300 × 300 mm field"
+        },
+        {
+          "label": "Wobble",
+          "value": "circle / figure-8 / linear, to 1 kHz"
+        },
+        {
+          "label": "Penetration control",
+          "value": "± 50 µm with inline OCT option"
+        },
+        {
+          "label": "Environment",
+          "value": "Dry-room builds to −40 °C dew point"
+        }
+      ],
+      "industries": [
+        "ind-battery",
+        "ind-auto"
+      ],
+      "lead_time_weeks": 38,
+      "warranty_months": 12,
+      "install_weeks": 10,
+      "base_price_inr": 13500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "tab",
+          "name": "Cell tab-to-terminal",
+          "description": "Foil stacks to collectors",
+          "source_key": "green",
+          "power_w": 1500,
+          "material_key": "cu",
+          "rationale": "Green at 532 nm is strongly absorbed by copper, stabilising the melt where 1 µm reflects and stutters."
+        },
+        {
+          "key": "busbar",
+          "name": "Module & pack busbars",
+          "description": "2–6 mm Cu / Al sections",
+          "source_key": "smcw",
+          "power_w": 3000,
+          "material_key": "cu",
+          "rationale": "Ring-mode beam shaping plus wobble keeps the keyhole stable through thick section, suppressing spatter."
+        },
+        {
+          "key": "hairpin",
+          "name": "Hairpin stator pairs",
+          "description": "E-motor winding joints",
+          "source_key": "smcw",
+          "power_w": 2000,
+          "material_key": "cu",
+          "rationale": "Tight, repeatable joints at rate; monitoring turns each weld into inspectable data for the traction warranty."
+        },
+        {
+          "key": "canseam",
+          "name": "Cell can & lid seaming",
+          "description": "Hermetic cell closure",
+          "source_key": "smcw",
+          "power_w": 1500,
+          "material_key": "al",
+          "rationale": "Controlled heat input avoids damaging cell internals while achieving a continuous sealed seam."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldb",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "weld",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-weldr",
+      "entity": "product",
+      "key": "weldr",
+      "name": "Weld R-Cell",
+      "family_id": "fam-weld",
+      "code": "R",
+      "title": "Robotic Laser Welding Cell",
+      "tagline": "Six axes, one beam — 3D seam welding in a turnkey Class 1 safety cell.",
+      "description": "Six axes, one beam — 3D seam welding in a turnkey Class 1 safety cell.",
+      "delivery": "robot",
+      "source_keys": [
+        "smcw"
+      ],
+      "default_source_key": "smcw",
+      "powers_w": [
+        2000,
+        3000,
+        6000
+      ],
+      "default_power_w": 3000,
+      "lens_keys": [
+        "f420"
+      ],
+      "default_lens_key": "f420",
+      "standard_content": [
+        "robot6",
+        "seamtrk",
+        "wobble",
+        "turntbl",
+        "gascon"
+      ],
+      "specs": [
+        {
+          "label": "Robot",
+          "value": "6-axis, 12–50 kg payload class"
+        },
+        {
+          "label": "Source",
+          "value": "CW fiber 2–3 kW standard, to 6 kW"
+        },
+        {
+          "label": "Gap tolerance",
+          "value": "to 0.3 mm with wobble module"
+        },
+        {
+          "label": "Seam tracking",
+          "value": "Laser-line sensor with real-time correction"
+        },
+        {
+          "label": "Turntable",
+          "value": "2-station servo, Ø 1,200 mm, 250 kg/side"
+        },
+        {
+          "label": "Safety",
+          "value": "Class 1 cabin per IEC 60825-4, light curtains at load face"
+        }
+      ],
+      "industries": [
+        "ind-auto",
+        "ind-genengg",
+        "ind-aero"
+      ],
+      "lead_time_weeks": 40,
+      "warranty_months": 12,
+      "install_weeks": 12,
+      "base_price_inr": 16000000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "seam3d",
+          "name": "3D continuous & stitch seams",
+          "description": "Housings, frames, brackets",
+          "source_key": "smcw",
+          "power_w": 3000,
+          "material_key": "steel",
+          "rationale": "When the seam moves in three dimensions the beam should follow, not the part — remote optics on six axes."
+        },
+        {
+          "key": "corner",
+          "name": "Corner & lap joints",
+          "description": "Sheet-metal assemblies",
+          "source_key": "smcw",
+          "power_w": 2000,
+          "material_key": "steel",
+          "rationale": "Low distortion versus TIG/MIG removes most post-weld straightening and finishing cost."
+        },
+        {
+          "key": "edrive",
+          "name": "E-drive components",
+          "description": "Motor housings, covers",
+          "source_key": "smcw",
+          "power_w": 3000,
+          "material_key": "al",
+          "rationale": "Cycle-repeatable robotic paths replace scarce skilled welders on cosmetic and structural seams."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldr",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "weld",
+        "robot"
+      ]
+    },
+    {
+      "id": "prd-weldh",
+      "entity": "product",
+      "key": "weldh",
+      "name": "Weld H-Series",
+      "family_id": "fam-weld",
+      "code": "H",
+      "title": "Hermetic & Medical Micro-Welding",
+      "tagline": "Leak-tight seams on packages, implants and sensors — with the documentation regulated industries demand.",
+      "description": "Leak-tight seams on packages, implants and sensors — with the documentation regulated industries demand.",
+      "delivery": "galvo",
+      "source_keys": [
+        "qcw"
+      ],
+      "default_source_key": "qcw",
+      "powers_w": [
+        150,
+        300,
+        450
+      ],
+      "default_power_w": 300,
+      "lens_keys": [
+        "f100",
+        "f163"
+      ],
+      "default_lens_key": "f100",
+      "standard_content": [
+        "gascon"
+      ],
+      "specs": [
+        {
+          "label": "Source",
+          "value": "QCW fiber 150–450 W peak class"
+        },
+        {
+          "label": "Pulse resolution",
+          "value": "0.05 ms segment control"
+        },
+        {
+          "label": "Spot",
+          "value": "50–300 µm"
+        },
+        {
+          "label": "Leak criterion",
+          "value": "1 × 10⁻⁹ mbar·l/s helium, repeatable"
+        },
+        {
+          "label": "Vision",
+          "value": "Coaxial microscope, 20–100× with weld replay"
+        },
+        {
+          "label": "Atmosphere",
+          "value": "Air, N₂, Ar, He backfill or full glovebox"
+        },
+        {
+          "label": "Validation",
+          "value": "IQ/OQ/PQ pathway built into delivery"
+        }
+      ],
+      "industries": [
+        "ind-medical",
+        "ind-aero",
+        "ind-semi"
+      ],
+      "lead_time_weeks": 34,
+      "warranty_months": 12,
+      "install_weeks": 8,
+      "base_price_inr": 6800000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "tocan",
+          "name": "TO-can & butterfly sealing",
+          "description": "Optoelectronic packages",
+          "source_key": "qcw",
+          "power_w": 150,
+          "material_key": "ni",
+          "rationale": "Ramp-shaped pulses seal without cracking glass-to-metal feedthroughs or disturbing internal optics."
+        },
+        {
+          "key": "implant",
+          "name": "Implant enclosure seams",
+          "description": "Titanium, long-term hermeticity",
+          "source_key": "qcw",
+          "power_w": 300,
+          "material_key": "ti",
+          "rationale": "Overlap-controlled seam generation with per-pulse energy logging produces the evidence a regulator expects."
+        },
+        {
+          "key": "mems",
+          "name": "Sensor & MEMS packages",
+          "description": "Vacuum and pressure references",
+          "source_key": "qcw",
+          "power_w": 150,
+          "material_key": "ss",
+          "rationale": "Fine spots and inert shielding hold vacuum integrity through the life of the device."
+        },
+        {
+          "key": "feed",
+          "name": "Feedthrough & bellows",
+          "description": "Instrument and aerospace details",
+          "source_key": "qcw",
+          "power_w": 300,
+          "material_key": "ss",
+          "rationale": "Circumferential seams on runout-compensating chucks keep penetration uniform around the joint."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.weldh",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "weld",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-cleanp",
+      "entity": "product",
+      "key": "cleanp",
+      "name": "Clean CL-P",
+      "family_id": "fam-clean",
+      "code": "CL-P",
+      "title": "Portable Laser Cleaning System",
+      "tagline": "A trolley, a hand-piece and 100–300 watts of pulsed light — surface preparation wherever the part is.",
+      "description": "A trolley, a hand-piece and 100–300 watts of pulsed light — surface preparation wherever the part is.",
+      "delivery": "handpiece",
+      "source_keys": [
+        "fiber"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        100,
+        200,
+        300
+      ],
+      "default_power_w": 200,
+      "lens_keys": [
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Source",
+          "value": "100 / 200 / 300 W pulsed fiber, air-cooled"
+        },
+        {
+          "label": "Format",
+          "value": "Lockable industrial trolley"
+        },
+        {
+          "label": "Hand-piece",
+          "value": "Adjustable scan width to 300 mm, interchangeable focus"
+        },
+        {
+          "label": "Recipes",
+          "value": "Material/contaminant memory, two-touch recall"
+        },
+        {
+          "label": "Safety",
+          "value": "Eyewear, beacons, key control, trigger interlock included"
+        }
+      ],
+      "industries": [
+        "ind-genengg",
+        "ind-auto",
+        "ind-aero"
+      ],
+      "lead_time_weeks": 8,
+      "warranty_months": 12,
+      "install_weeks": 1,
+      "base_price_inr": 900000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "rust",
+          "name": "Rust & oxide removal",
+          "description": "Ferrous de-rusting, spot work",
+          "source_key": "fiber",
+          "power_w": 200,
+          "material_key": "steel",
+          "rationale": "Pulsed ablation is self-limiting — oxide leaves, base metal stays. No media, no disposal stream."
+        },
+        {
+          "key": "weldprep",
+          "name": "Weld preparation",
+          "description": "Pre- and post-weld cleanup",
+          "source_key": "fiber",
+          "power_w": 200,
+          "material_key": "steel",
+          "rationale": "Clean joint faces immediately before welding, at the fixture, without moving the assembly."
+        },
+        {
+          "key": "mould",
+          "name": "Mould & die touch-up",
+          "description": "Tooling de-flash on the press",
+          "source_key": "fiber",
+          "power_w": 100,
+          "material_key": "steel",
+          "rationale": "Low average power lifts residue without dimensional attack on the tool surface."
+        },
+        {
+          "key": "paint",
+          "name": "Paint & coating removal",
+          "description": "Selective stripping, MRO",
+          "source_key": "fiber",
+          "power_w": 300,
+          "material_key": "steel",
+          "rationale": "Layer-by-layer removal with controlled fluence, stopping at the substrate."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleanp",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "clean",
+        "handpiece"
+      ]
+    },
+    {
+      "id": "prd-cleana",
+      "entity": "product",
+      "key": "cleana",
+      "name": "Clean CL-A",
+      "family_id": "fam-clean",
+      "code": "CL-A",
+      "title": "Automated Laser Cleaning Cell",
+      "tagline": "Robot- or gantry-guided cleaning stations — from busbar prep to mould plates, every cycle logged.",
+      "description": "Robot- or gantry-guided cleaning stations — from busbar prep to mould plates, every cycle logged.",
+      "delivery": "robot",
+      "source_keys": [
+        "fiber"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        200,
+        500,
+        1000,
+        2000
+      ],
+      "default_power_w": 500,
+      "lens_keys": [
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "robot6",
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Source",
+          "value": "200 W–2 kW pulsed, or hybrid pulsed/CW"
+        },
+        {
+          "label": "Motion",
+          "value": "6-axis robot or 2–3 axis gantry, optional part rotary"
+        },
+        {
+          "label": "Enclosure",
+          "value": "Class 1 with auto doors, high-capacity extraction"
+        },
+        {
+          "label": "Verification",
+          "value": "Pre/post-clean vision with pass/fail records"
+        },
+        {
+          "label": "Integration",
+          "value": "LaserSuite recipes per part, PLC handshake, MES logging"
+        }
+      ],
+      "industries": [
+        "ind-auto",
+        "ind-battery",
+        "ind-genengg"
+      ],
+      "lead_time_weeks": 32,
+      "warranty_months": 12,
+      "install_weeks": 6,
+      "base_price_inr": 5500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "prebond",
+          "name": "Pre-weld / pre-bond prep",
+          "description": "Busbars, tabs, hairpins",
+          "source_key": "fiber",
+          "power_w": 500,
+          "material_key": "cu",
+          "rationale": "Path-programmed optics deliver identical energy to the same area every cycle — cleanliness becomes an auditable parameter."
+        },
+        {
+          "key": "mouldcell",
+          "name": "Mould & tool cleaning",
+          "description": "Scheduled tooling stations",
+          "source_key": "fiber",
+          "power_w": 1000,
+          "material_key": "steel",
+          "rationale": "Replaces dry-ice and solvent cycles whose cost scales linearly with volume."
+        },
+        {
+          "key": "celltray",
+          "name": "Battery cell & tray",
+          "description": "Cell surfaces, trays, carriers",
+          "source_key": "fiber",
+          "power_w": 500,
+          "material_key": "al",
+          "rationale": "Dry, particulate-managed cleaning compatible with the electrode-area environment."
+        },
+        {
+          "key": "coating",
+          "name": "Selective coating removal",
+          "description": "Masked and patterned strip",
+          "source_key": "fiber",
+          "power_w": 2000,
+          "material_key": "al",
+          "rationale": "Robot paths give sharp boundaries where masking would otherwise be required."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cleana",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "clean",
+        "robot"
+      ]
+    },
+    {
+      "id": "prd-cutxg",
+      "entity": "product",
+      "key": "cutxg",
+      "name": "Cut X-G",
+      "family_id": "fam-cut",
+      "code": "X-G",
+      "title": "Galvo Precision Cutting System",
+      "tagline": "Beam-steered micro cutting of foils, films and flexible circuits — fiber, UV or picosecond engines.",
+      "description": "Beam-steered micro cutting of foils, films and flexible circuits — fiber, UV or picosecond engines.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "uv",
+        "pico"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        100,
+        200,
+        300
+      ],
+      "powers_by_source": {
+        "fiber": [
+          100,
+          200,
+          300
+        ],
+        "uv": [
+          10,
+          15,
+          20
+        ],
+        "pico": [
+          50,
+          100
+        ]
+      },
+      "default_power_w": 200,
+      "lens_keys": [
+        "f163",
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Engines",
+          "value": "100–300 W ns fiber · 10–20 W UV · picosecond option"
+        },
+        {
+          "label": "Fields",
+          "value": "110–300 mm with step-and-repeat stitching"
+        },
+        {
+          "label": "Fixturing",
+          "value": "Vacuum and pin registration; roll-to-roll module"
+        },
+        {
+          "label": "Foil capability",
+          "value": "Cu 6–12 µm, Al 10–20 µm"
+        }
+      ],
+      "industries": [
+        "ind-battery",
+        "ind-ems",
+        "ind-medical"
+      ],
+      "lead_time_weeks": 30,
+      "warranty_months": 12,
+      "install_weeks": 5,
+      "base_price_inr": 4500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "electrode",
+          "name": "Battery electrode & foil",
+          "description": "Cu 6–12 µm, Al 10–20 µm",
+          "source_key": "fiber",
+          "power_w": 200,
+          "material_key": "cu",
+          "rationale": "Tool-free geometry with no burr and no mechanical slitting stress on the electrode edge."
+        },
+        {
+          "key": "flexpcb",
+          "name": "Flexible PCB singulation",
+          "description": "Coverlay and outline cutting",
+          "source_key": "uv",
+          "power_w": 15,
+          "material_key": "pi",
+          "rationale": "UV avoids the delamination and carbonisation that IR produces on polyimide stacks."
+        },
+        {
+          "key": "film",
+          "name": "Film, gasket & kiss-cut",
+          "description": "Adhesives, shielding, mesh",
+          "source_key": "fiber",
+          "power_w": 200,
+          "material_key": "poly",
+          "rationale": "Die and punch tooling cost and lead time disappear; geometry changes are a CAD edit."
+        },
+        {
+          "key": "haz",
+          "name": "HAZ-critical micro cuts",
+          "description": "Stents, thin precision profiles",
+          "source_key": "pico",
+          "power_w": 100,
+          "material_key": "ss",
+          "rationale": "Picosecond pulses interact before heat diffuses — the cleanest edges on the most sensitive materials."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxg",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "cut",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-cutxt",
+      "entity": "product",
+      "key": "cutxt",
+      "name": "Cut X-T",
+      "family_id": "fam-cut",
+      "code": "X-T",
+      "title": "Precision Gantry Cutting Table",
+      "tagline": "Large-format accuracy for thin metals, plastics, glass scribing and technical ceramics.",
+      "description": "Large-format accuracy for thin metals, plastics, glass scribing and technical ceramics.",
+      "delivery": "gantry",
+      "source_keys": [
+        "fiber",
+        "co2"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        300,
+        500,
+        1000
+      ],
+      "powers_by_source": {
+        "fiber": [
+          300,
+          500,
+          1000
+        ],
+        "co2": [
+          60,
+          100,
+          150
+        ]
+      },
+      "default_power_w": 500,
+      "lens_keys": [
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "gascon",
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Work area",
+          "value": "900 × 600 or 1,300 × 900 mm"
+        },
+        {
+          "label": "Sources",
+          "value": "300 W–1 kW fiber and/or 60–150 W sealed CO₂"
+        },
+        {
+          "label": "Height control",
+          "value": "Capacitive, with automatic head selection"
+        },
+        {
+          "label": "Gas",
+          "value": "N₂ / air / O₂ console, honeycomb and pin tables"
+        },
+        {
+          "label": "Registration",
+          "value": "Camera edge and fiducial"
+        }
+      ],
+      "industries": [
+        "ind-genengg",
+        "ind-ems",
+        "ind-consumer"
+      ],
+      "lead_time_weeks": 32,
+      "warranty_months": 12,
+      "install_weeks": 6,
+      "base_price_inr": 6200000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "thinmetal",
+          "name": "Thin metal profiles",
+          "description": "SS, Al, brass shim and sheet",
+          "source_key": "fiber",
+          "power_w": 500,
+          "material_key": "ss",
+          "rationale": "Precision guides and capacitive height sensing deliver thin-gauge edge quality plate cutters cannot."
+        },
+        {
+          "key": "plastics",
+          "name": "Engineering plastics",
+          "description": "Acrylic, PC, technical sheet",
+          "source_key": "co2",
+          "power_w": 150,
+          "material_key": "poly",
+          "rationale": "CO₂ is efficiently absorbed by organics that ignore 1064 nm — one table serves both material worlds."
+        },
+        {
+          "key": "glassscribe",
+          "name": "Glass scribe-and-break",
+          "description": "Controlled-depth grooving",
+          "source_key": "fiber",
+          "power_w": 300,
+          "material_key": "glass",
+          "rationale": "Scribe modes turn brittleness into an asset, avoiding the chipping of mechanical dicing."
+        },
+        {
+          "key": "ceramic",
+          "name": "Alumina / AlN scribing",
+          "description": "Electronics substrates",
+          "source_key": "fiber",
+          "power_w": 500,
+          "material_key": "al2o3",
+          "rationale": "Controlled-depth grooves give clean snap lines on technical ceramic substrates."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.cutxt",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "cut",
+        "gantry"
+      ]
+    },
+    {
+      "id": "prd-semiwm",
+      "entity": "product",
+      "key": "semiwm",
+      "name": "Semi WM-300",
+      "family_id": "fam-semi",
+      "code": "WM-300",
+      "title": "Wafer Marking System",
+      "tagline": "SEMI-standard wafer identity — soft or hard marks, front or back side, cassette to cassette.",
+      "description": "SEMI-standard wafer identity — soft or hard marks, front or back side, cassette to cassette.",
+      "delivery": "galvo",
+      "source_keys": [
+        "uv",
+        "green"
+      ],
+      "default_source_key": "uv",
+      "powers_w": [
+        3,
+        5,
+        10
+      ],
+      "default_power_w": 5,
+      "lens_keys": [
+        "f100",
+        "f163"
+      ],
+      "default_lens_key": "f100",
+      "standard_content": [
+        "visver",
+        "secsgem"
+      ],
+      "specs": [
+        {
+          "label": "Wafer sizes",
+          "value": "150 / 200 / 300 mm bridge tool"
+        },
+        {
+          "label": "Standards",
+          "value": "SEMI T7 / M12 / M13 conventions"
+        },
+        {
+          "label": "Regimes",
+          "value": "Soft-mark low-stress dot or hard-mark engraving"
+        },
+        {
+          "label": "Handling",
+          "value": "Edge-grip robot, notch/flat pre-aligner, double-slot sensing"
+        },
+        {
+          "label": "Verification",
+          "value": "In-line OCR read-back with mark-quality scoring"
+        },
+        {
+          "label": "Host",
+          "value": "SECS/GEM (E30/E37/E40 class)"
+        },
+        {
+          "label": "Environment",
+          "value": "ISO Class 5-compatible mini-environment option"
+        }
+      ],
+      "industries": [
+        "ind-semi"
+      ],
+      "lead_time_weeks": 44,
+      "warranty_months": 12,
+      "install_weeks": 14,
+      "base_price_inr": 24000000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "frontid",
+          "name": "Front-side scribe ID",
+          "description": "Incoming wafer identity",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "si",
+          "rationale": "Font geometry, dot morphology and depth are tuned per film stack against your OCR readers, then locked in recipe."
+        },
+        {
+          "key": "backid",
+          "name": "Back-side ID post-grind",
+          "description": "Identity that survives backgrind",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "si",
+          "rationale": "Marks placed and profiled so downstream readers still resolve them after thinning and film deposition."
+        },
+        {
+          "key": "code2d",
+          "name": "2D wafer codes",
+          "description": "Lot and slot data marking",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "si",
+          "rationale": "Machine-readable codes to SEMI convention keep foundry and OSAT interoperability intact."
+        },
+        {
+          "key": "reflect",
+          "name": "High-reflectivity films",
+          "description": "Metallised and mirrored stacks",
+          "source_key": "green",
+          "power_w": 5,
+          "material_key": "al",
+          "rationale": "Green couples into reflective films where UV or IR scatter, holding mark consistency across the stack."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semiwm",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "semi",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-semispm",
+      "entity": "product",
+      "key": "semispm",
+      "name": "Semi SPM",
+      "family_id": "fam-semi",
+      "code": "SPM",
+      "title": "Strip & Package Marking System",
+      "tagline": "Magazine-to-magazine package identity — per-unit 2D codes, OCV verified, at OSAT throughput.",
+      "description": "Magazine-to-magazine package identity — per-unit 2D codes, OCV verified, at OSAT throughput.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "green",
+        "uv"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30,
+        50
+      ],
+      "powers_by_source": {
+        "fiber": [
+          20,
+          30,
+          50
+        ],
+        "green": [
+          10,
+          20,
+          30
+        ],
+        "uv": [
+          3,
+          5,
+          10
+        ]
+      },
+      "default_power_w": 20,
+      "lens_keys": [
+        "f163",
+        "f254"
+      ],
+      "default_lens_key": "f163",
+      "standard_content": [
+        "magazine",
+        "visver"
+      ],
+      "specs": [
+        {
+          "label": "Handling",
+          "value": "Magazine-to-magazine with pusher/indexer; JEDEC tray option"
+        },
+        {
+          "label": "Engines",
+          "value": "Fiber, green or UV per compound and contrast"
+        },
+        {
+          "label": "Correction",
+          "value": "Strip-level and per-image fiducial; X-out map import"
+        },
+        {
+          "label": "Verification",
+          "value": "100 % OCV plus DMC grading to ISO/IEC 29158"
+        },
+        {
+          "label": "Host",
+          "value": "SECS/GEM or MES connector, per-unit records"
+        },
+        {
+          "label": "Build",
+          "value": "Static-safe, cleanroom-compatible, low-particulate extraction"
+        }
+      ],
+      "industries": [
+        "ind-semi"
+      ],
+      "lead_time_weeks": 40,
+      "warranty_months": 12,
+      "install_weeks": 12,
+      "base_price_inr": 15000000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "mould",
+          "name": "Mould-compound marking",
+          "description": "QFN, QFP, BGA, SOIC, modules",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "emc",
+          "rationale": "Contrast on epoxy mould compound with grading correlated to your reader optics — readability engineered, not hoped for."
+        },
+        {
+          "key": "perunit",
+          "name": "Per-unit DMC serialisation",
+          "description": "Unit-level traceability",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "emc",
+          "rationale": "Every unit posts identity to the host with map correlation, so test and tape-and-reel inherit clean data."
+        },
+        {
+          "key": "substrate",
+          "name": "Substrate & strip ID",
+          "description": "Laminate and lead-frame carriers",
+          "source_key": "green",
+          "power_w": 20,
+          "material_key": "fr4",
+          "rationale": "Green gives contrast on substrates where IR marks read weak or damage the surface finish."
+        },
+        {
+          "key": "fine",
+          "name": "Fine-pitch micro codes",
+          "description": "0.5 mm DMC and below",
+          "source_key": "uv",
+          "power_w": 5,
+          "material_key": "emc",
+          "rationale": "UV holds cell definition at code sizes where thermal marking blurs the module boundary."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semispm",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "semi",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-semils",
+      "entity": "product",
+      "key": "semils",
+      "name": "Semi LS",
+      "family_id": "fam-semi",
+      "code": "LS",
+      "title": "Substrate Scribing System",
+      "tagline": "Alumina and AlN scribing with controlled depth and clean snap quality.",
+      "description": "Alumina and AlN scribing with controlled depth and clean snap quality.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "pico"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        30,
+        50,
+        100
+      ],
+      "default_power_w": 50,
+      "lens_keys": [
+        "f163",
+        "f254"
+      ],
+      "default_lens_key": "f163",
+      "standard_content": [
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Materials",
+          "value": "Alumina, AlN, glass and specialised stacks"
+        },
+        {
+          "label": "Control",
+          "value": "Programmed depth with snap-quality optimisation"
+        },
+        {
+          "label": "Basis",
+          "value": "Grooving programmes executed as joint developments"
+        }
+      ],
+      "industries": [
+        "ind-semi",
+        "ind-ems"
+      ],
+      "lead_time_weeks": 34,
+      "warranty_months": 12,
+      "install_weeks": 8,
+      "base_price_inr": 8500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "alumina",
+          "name": "Alumina substrate scribing",
+          "description": "Electronics substrate singulation",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "al2o3",
+          "rationale": "Controlled-depth grooving gives predictable break lines without micro-cracking the ceramic."
+        },
+        {
+          "key": "aln",
+          "name": "AlN scribing",
+          "description": "High thermal-conductivity substrates",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "aln",
+          "rationale": "AlN demands tighter depth control than alumina; parameters are established per supplier lot."
+        },
+        {
+          "key": "glasss",
+          "name": "Glass scribing",
+          "description": "Display and sensor glass",
+          "source_key": "pico",
+          "power_w": 30,
+          "material_key": "glass",
+          "rationale": "Ultrashort pulses scribe glass with chip-free edges where nanosecond regimes fracture."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semils",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "semi",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-semidc",
+      "entity": "product",
+      "key": "semidc",
+      "name": "Semi DC",
+      "family_id": "fam-semi",
+      "code": "DC",
+      "title": "Laser Decapsulation System",
+      "tagline": "Selective, dry, wire-safe EMC removal for failure analysis — acid time cut by an order of magnitude.",
+      "description": "Selective, dry, wire-safe EMC removal for failure analysis — acid time cut by an order of magnitude.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30
+      ],
+      "default_power_w": 20,
+      "lens_keys": [
+        "f100",
+        "f163"
+      ],
+      "default_lens_key": "f100",
+      "standard_content": [
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Format",
+          "value": "Bench system with camera process view"
+        },
+        {
+          "label": "Process",
+          "value": "Laser-assisted EMC removal, wire-safe openings"
+        },
+        {
+          "label": "Benefit",
+          "value": "Order-of-magnitude reduction in acid exposure time"
+        }
+      ],
+      "industries": [
+        "ind-semi"
+      ],
+      "lead_time_weeks": 24,
+      "warranty_months": 12,
+      "install_weeks": 4,
+      "base_price_inr": 4200000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "fa",
+          "name": "Failure-analysis decap",
+          "description": "Selective cavity opening",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "emc",
+          "rationale": "Dry, controlled removal opens the cavity without the bond-wire attack and handling burden of pure acid decap."
+        },
+        {
+          "key": "wiresafe",
+          "name": "Wire-safe window opening",
+          "description": "Preserving bond integrity",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "emc",
+          "rationale": "Layer-by-layer ablation with camera process view stops short of the wire loop plane."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.semidc",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "semi",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-voltm",
+      "entity": "product",
+      "key": "voltm",
+      "name": "Volt-M",
+      "family_id": "fam-volt",
+      "code": "Volt-M",
+      "title": "Cell & Can Marking System",
+      "tagline": "Permanent, corrosion-safe cell identity at line rate — cylindrical, prismatic or pouch.",
+      "description": "Permanent, corrosion-safe cell identity at line rate — cylindrical, prismatic or pouch.",
+      "delivery": "galvo",
+      "source_keys": [
+        "mopa",
+        "fiber"
+      ],
+      "default_source_key": "mopa",
+      "powers_w": [
+        20,
+        30,
+        50
+      ],
+      "default_power_w": 30,
+      "lens_keys": [
+        "f163",
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "visver"
+      ],
+      "specs": [
+        {
+          "label": "Throughput",
+          "value": "to 120 ppm single-lane; multi-lane scaling"
+        },
+        {
+          "label": "Formats",
+          "value": "18650 / 21700 / 4680, prismatic housings, pouch"
+        },
+        {
+          "label": "Grade discipline",
+          "value": "Every code read and graded, ISO/IEC 29158 ≥ B target"
+        },
+        {
+          "label": "Genealogy",
+          "value": "Per-cell record posted to MES"
+        },
+        {
+          "label": "Handling",
+          "value": "Rotary spindles, servo belts or encoder-synced MOTF"
+        }
+      ],
+      "industries": [
+        "ind-battery"
+      ],
+      "lead_time_weeks": 30,
+      "warranty_months": 12,
+      "install_weeks": 6,
+      "base_price_inr": 3800000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "cylcan",
+          "name": "Cylindrical can marking",
+          "description": "18650 / 21700 / 4680",
+          "source_key": "mopa",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "MOPA delivers dark, high-contrast codes on aluminium and nickel-plated steel with negligible heat into the cell."
+        },
+        {
+          "key": "prismatic",
+          "name": "Prismatic housing",
+          "description": "Flat-face cell identity",
+          "source_key": "mopa",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "Flat presentation allows larger codes and in-line grading before the cell enters formation."
+        },
+        {
+          "key": "pouch",
+          "name": "Pouch material marking",
+          "description": "Laminate film identity",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "al",
+          "rationale": "Low fluence marks the laminate without compromising the barrier layer."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltm",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "volt",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-voltt",
+      "entity": "product",
+      "key": "voltt",
+      "name": "Volt-T",
+      "family_id": "fam-volt",
+      "code": "Volt-T",
+      "title": "Traceability & Genealogy Station",
+      "tagline": "Aggregating weld scores, mark grades and parameters into one genealogy per cell, module and pack.",
+      "description": "Aggregating weld scores, mark grades and parameters into one genealogy per cell, module and pack.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30
+      ],
+      "default_power_w": 20,
+      "lens_keys": [
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "visver"
+      ],
+      "specs": [
+        {
+          "label": "Function",
+          "value": "Read, verify and aggregate identity across line stages"
+        },
+        {
+          "label": "Data",
+          "value": "LaserSuite Volt genealogy model"
+        },
+        {
+          "label": "Scope",
+          "value": "Cell → module → pack record consolidation"
+        }
+      ],
+      "industries": [
+        "ind-battery"
+      ],
+      "lead_time_weeks": 26,
+      "warranty_months": 12,
+      "install_weeks": 4,
+      "base_price_inr": 2800000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "agg",
+          "name": "Genealogy aggregation",
+          "description": "Cell → module → pack",
+          "source_key": "fiber",
+          "power_w": 20,
+          "material_key": "al",
+          "rationale": "One record per unit tying weld scores, mark grades and parameters together — the record your recall team will need."
+        },
+        {
+          "key": "eol",
+          "name": "End-of-line traceability",
+          "description": "Pack plate marking and verify",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "al",
+          "rationale": "Final identity applied and verified, closing the data chain before dispatch."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.voltt",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "volt",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-roto",
+      "entity": "product",
+      "key": "roto",
+      "name": "RotoCell",
+      "family_id": "fam-auto",
+      "code": "RotoCell",
+      "title": "Rotary Indexing Laser Cell",
+      "tagline": "4/6/8-station dial with process stations around it — load and unload overlap process time.",
+      "description": "4/6/8-station dial with process stations around it — load and unload overlap process time.",
+      "delivery": "galvo",
+      "source_keys": [
+        "fiber",
+        "mopa",
+        "uv",
+        "green",
+        "co2"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30,
+        50,
+        100
+      ],
+      "powers_by_source": {
+        "fiber": [
+          20,
+          30,
+          50,
+          100
+        ],
+        "mopa": [
+          20,
+          30,
+          50,
+          100
+        ],
+        "uv": [
+          3,
+          5,
+          10
+        ],
+        "green": [
+          5,
+          10,
+          20
+        ],
+        "co2": [
+          10,
+          30,
+          60
+        ]
+      },
+      "default_power_w": 50,
+      "lens_keys": [
+        "f163",
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "rotoidx",
+        "fume"
+      ],
+      "specs": [
+        {
+          "label": "Architecture",
+          "value": "4 / 6 / 8-station rotary table, Ø 800–1,500 mm"
+        },
+        {
+          "label": "Cycle window",
+          "value": "2–10 s"
+        },
+        {
+          "label": "Loading",
+          "value": "Operator or robot presented"
+        },
+        {
+          "label": "Safety",
+          "value": "Risk assessment to ISO 12100, PL-rated circuits"
+        }
+      ],
+      "industries": [
+        "ind-auto",
+        "ind-ems",
+        "ind-genengg",
+        "ind-medical"
+      ],
+      "lead_time_weeks": 34,
+      "warranty_months": 12,
+      "install_weeks": 8,
+      "base_price_inr": 7500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "multi",
+          "name": "Multi-process cell",
+          "description": "Clean, mark, verify in one dial",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "steel",
+          "rationale": "Sequential stations around the dial collapse several operations into one takt and one fixture datum."
+        },
+        {
+          "key": "highrate",
+          "name": "High-rate single process",
+          "description": "Load-while-process",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "steel",
+          "rationale": "Overlapping load with process makes effective cycle equal to the longest station, not their sum."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.roto",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "auto",
+        "galvo"
+      ]
+    },
+    {
+      "id": "prd-lin",
+      "entity": "product",
+      "key": "lin",
+      "name": "LinCell",
+      "family_id": "fam-auto",
+      "code": "LinCell",
+      "title": "Pallet Inline Transfer System",
+      "tagline": "Pallet-based transfer with SMEMA/Hermes interfaces, lift-and-locate stations, buffers and bypass.",
+      "description": "Pallet-based transfer with SMEMA/Hermes interfaces, lift-and-locate stations, buffers and bypass.",
+      "delivery": "gantry",
+      "source_keys": [
+        "fiber",
+        "uv",
+        "co2",
+        "green"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        20,
+        30,
+        50,
+        100
+      ],
+      "powers_by_source": {
+        "fiber": [
+          20,
+          30,
+          50,
+          100
+        ],
+        "uv": [
+          3,
+          5,
+          10
+        ],
+        "co2": [
+          10,
+          30,
+          60
+        ],
+        "green": [
+          5,
+          10,
+          20
+        ]
+      },
+      "default_power_w": 30,
+      "lens_keys": [
+        "f163",
+        "f254"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "conveyor"
+      ],
+      "specs": [
+        {
+          "label": "Architecture",
+          "value": "Pallet transfer, lift-and-locate stations"
+        },
+        {
+          "label": "Interfaces",
+          "value": "SMEMA / Hermes, buffers and bypass lanes"
+        },
+        {
+          "label": "Changeover",
+          "value": "Recipe-driven for high-mix flows"
+        },
+        {
+          "label": "Controls",
+          "value": "Siemens, Beckhoff, Mitsubishi or Rockwell per your standard"
+        }
+      ],
+      "industries": [
+        "ind-ems",
+        "ind-auto",
+        "ind-battery"
+      ],
+      "lead_time_weeks": 38,
+      "warranty_months": 12,
+      "install_weeks": 10,
+      "base_price_inr": 9500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "inline",
+          "name": "Inline integration",
+          "description": "Into existing conveyorised flow",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "fr4",
+          "rationale": "Products flow through multiple processes without leaving the pallet datum, so accuracy compounds rather than degrades."
+        },
+        {
+          "key": "highmix",
+          "name": "High-mix production",
+          "description": "Recipe-driven changeover",
+          "source_key": "fiber",
+          "power_w": 30,
+          "material_key": "fr4",
+          "rationale": "Bypass lanes and buffers absorb model changes without stopping the upstream line."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.lin",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "auto",
+        "gantry"
+      ]
+    },
+    {
+      "id": "prd-robo",
+      "entity": "product",
+      "key": "robo",
+      "name": "RoboCell",
+      "family_id": "fam-auto",
+      "code": "RoboCell",
+      "title": "Robotic Laser Process Cell",
+      "tagline": "6-axis, SCARA or collaborative robot with laser head, tool changers and flexible fixturing.",
+      "description": "6-axis, SCARA or collaborative robot with laser head, tool changers and flexible fixturing.",
+      "delivery": "robot",
+      "source_keys": [
+        "fiber",
+        "smcw",
+        "mopa",
+        "green"
+      ],
+      "default_source_key": "fiber",
+      "powers_w": [
+        50,
+        100,
+        500,
+        1000,
+        2000
+      ],
+      "powers_by_source": {
+        "fiber": [
+          20,
+          50,
+          100,
+          200
+        ],
+        "mopa": [
+          20,
+          50,
+          100
+        ],
+        "smcw": [
+          500,
+          1000,
+          2000,
+          3000
+        ],
+        "green": [
+          100,
+          500,
+          1000
+        ]
+      },
+      "default_power_w": 100,
+      "lens_keys": [
+        "f254",
+        "f420"
+      ],
+      "default_lens_key": "f254",
+      "standard_content": [
+        "robot6"
+      ],
+      "specs": [
+        {
+          "label": "Robot",
+          "value": "6-axis, SCARA or collaborative"
+        },
+        {
+          "label": "Flexibility",
+          "value": "Tool changers, one robot serving several processes"
+        },
+        {
+          "label": "Safety",
+          "value": "Fenced or collaborative concepts, Class 1 guarding"
+        },
+        {
+          "label": "Vision",
+          "value": "2D/3D-guided picking and datum-referenced placement"
+        }
+      ],
+      "industries": [
+        "ind-auto",
+        "ind-genengg",
+        "ind-aero",
+        "ind-battery"
+      ],
+      "lead_time_weeks": 36,
+      "warranty_months": 12,
+      "install_weeks": 10,
+      "base_price_inr": 8500000,
+      "maturity": "Product",
+      "applications": [
+        {
+          "key": "complex3d",
+          "name": "Complex 3D geometry",
+          "description": "Parts a fixed optic cannot reach",
+          "source_key": "fiber",
+          "power_w": 100,
+          "material_key": "steel",
+          "rationale": "Six axes present the part or carry the head wherever the feature sits, without bespoke fixturing per variant."
+        },
+        {
+          "key": "multimachine",
+          "name": "Multi-machine tending",
+          "description": "One robot, several processes",
+          "source_key": "fiber",
+          "power_w": 100,
+          "material_key": "steel",
+          "rationale": "Tool changers let a single cell cover marking, cleaning and inspection on a shared takt."
+        },
+        {
+          "key": "collab",
+          "name": "Collaborative loading",
+          "description": "Operator-shared workspace",
+          "source_key": "fiber",
+          "power_w": 50,
+          "material_key": "al",
+          "rationale": "Force-limited handling suits light parts and frequent redeployment without full guarding."
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "PLAT.robo",
+        "note": "Specifications as published in the configurator. base_price_inr is a parametric ex-works ESTIMATE, not a quotation. Maturity \"Product\" = listed in the 2026 catalogue."
+      },
+      "tags": [
+        "auto",
+        "robot"
+      ]
+    }
+  ]
+}

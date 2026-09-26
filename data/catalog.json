@@ -1,0 +1,650 @@
+{
+  "generated_at": "2026-09-26",
+  "datasets": [
+    {
+      "id": "applications",
+      "title": "Application library",
+      "path": "applications/applications.json",
+      "description": "Applications TEAL platforms are configured for, each with process, material, recommended source/power and the engineering rationale.",
+      "entity": "application",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 76,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/application.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "applications",
+      "sha256": "2a059d9a2d424b97"
+    },
+    {
+      "id": "industries",
+      "title": "Industries served",
+      "path": "applications/industries.json",
+      "description": "Industries the TEAL laser portfolio serves (configurator taxonomy).",
+      "entity": "industry",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 8,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/industry.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "applications",
+      "sha256": "47501b84f3bc30c4"
+    },
+    {
+      "id": "handbook-companies",
+      "title": "Companies named in the handbooks",
+      "path": "companies/handbook-companies.json",
+      "description": "Laser-source and laser-equipment suppliers named as representative examples in the Laser Handbook §21.3 and Semiconductor Handbook Part XXXII. Each claim has an evidence record.",
+      "entity": "company",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 60,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/company.schema.json",
+      "source_ids": [
+        "src-laser-handbook",
+        "src-semiconductor-handbook"
+      ],
+      "data_type": "PUBLIC",
+      "partition": "companies",
+      "sha256": "fc37193ba42307a0"
+    },
+    {
+      "id": "item-master",
+      "title": "Item master (legacy seed — DEMO)",
+      "path": "components/item-master.json",
+      "description": "TEAL stock-code catalogue structure carried over from the legacy cost platform. Prices, vendors and lead times are DEMO seed values — not quotations and not verified.",
+      "entity": "component",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 58,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/component.schema.json",
+      "source_ids": [
+        "src-legacy-cost-platform"
+      ],
+      "data_type": "DEMO",
+      "sha256": "ab3a784ad71f3ec9"
+    },
+    {
+      "id": "acceptance-checklists",
+      "title": "FAT / SAT / production-release checklists",
+      "path": "config/acceptance-checklists.json",
+      "description": "Checklist items verbatim from the Automation Equipment Building Handbook (§38.8 sample FAT checklist, §57.12 FAT readiness G8, §57.13 SAT readiness G9, §57.14 production release G10).",
+      "entity": "config",
+      "kind": "config",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": null,
+      "source_ids": [
+        "src-automation-handbook"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "sha256": "5c7b5b9e6be8a4bd"
+    },
+    {
+      "id": "configurator-pricing-rules",
+      "title": "Configurator pricing rules",
+      "path": "config/configurator-pricing-rules.json",
+      "description": "Parametric price-band rules: band_lo/band_hi multipliers, power scaling up/down, large-objective uplift. Output is an ESTIMATE.",
+      "entity": "config",
+      "kind": "config",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": null,
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "sha256": "cafcb97c27ac0547"
+    },
+    {
+      "id": "cost-defaults",
+      "title": "Cost engine defaults",
+      "path": "config/cost-defaults.json",
+      "description": "Default landed-cost %, mark-up % and TEAL cost-sheet parameters from the legacy platform. ASSUMPTIONS — set per job.",
+      "entity": "config",
+      "kind": "config",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": null,
+      "source_ids": [
+        "src-legacy-cost-platform"
+      ],
+      "data_type": "DEMO",
+      "sha256": "70d7c68a15fc36d7"
+    },
+    {
+      "id": "inquiry-lexicon",
+      "title": "Inquiry lexicon",
+      "path": "config/inquiry-lexicon.json",
+      "description": "Terms that map free-text customer inquiries to process families, materials, needs (modules), scale and care signals. Used by \"Create product from customer inquiry\".",
+      "entity": "config",
+      "kind": "config",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": null,
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "sha256": "3953df05fc6565f3"
+    },
+    {
+      "id": "cost-templates",
+      "title": "Cost templates (legacy — DEMO)",
+      "path": "cost/cost-templates.json",
+      "description": "Starting cost structures from the legacy cost platform. Use as a structure, not as prices.",
+      "entity": "cost_model",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 3,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/cost_model.schema.json",
+      "source_ids": [
+        "src-legacy-cost-platform"
+      ],
+      "data_type": "DEMO",
+      "sha256": "4a75b4ea274f0b05"
+    },
+    {
+      "id": "cost-rates",
+      "title": "Cost reference data (legacy seed — DEMO)",
+      "path": "cost/rates.json",
+      "description": "Machine-hour, labour and engineering rates, material rates, tax, freight, plant overheads, approval bands and FX from the legacy cost platform seed. DEMO / UNKNOWN verification.",
+      "entity": "reference",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 70,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/reference.schema.json",
+      "source_ids": [
+        "src-legacy-cost-platform"
+      ],
+      "data_type": "DEMO",
+      "sha256": "2b7456143dd380b5"
+    },
+    {
+      "id": "demo-activities",
+      "title": "DEMO activities",
+      "path": "demo/activities.json",
+      "description": "Product-manager activities for the demonstration day.",
+      "entity": "activity",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 7,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/activity.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "0c56988ea40d8fbc"
+    },
+    {
+      "id": "demo-configurations",
+      "title": "DEMO configurations",
+      "path": "demo/configurations.json",
+      "description": "Example configuration for Scenario 2.",
+      "entity": "configuration",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/configuration.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "7de1fe299ea91376"
+    },
+    {
+      "id": "demo-customers",
+      "title": "DEMO customers",
+      "path": "demo/customers.json",
+      "description": "Fictional customers for the demonstration scenarios.",
+      "entity": "customer",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 3,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/customer.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "1616647240231aa5"
+    },
+    {
+      "id": "demo-does",
+      "title": "DEMO DOE plans",
+      "path": "demo/does.json",
+      "description": "An unrun full-factorial DOE plan. All results are null (not measured).",
+      "entity": "doe",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/doe.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "aca2fba24d468d37"
+    },
+    {
+      "id": "demo-opportunities",
+      "title": "DEMO opportunities",
+      "path": "demo/opportunities.json",
+      "description": "Scenario opportunities. Values and probabilities are intentionally UNKNOWN.",
+      "entity": "opportunity",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 3,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/opportunity.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "5150074d485a6b53"
+    },
+    {
+      "id": "demo-pocs",
+      "title": "DEMO POCs",
+      "path": "demo/pocs.json",
+      "description": "A planned POC. No results are recorded.",
+      "entity": "poc",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/poc.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "0cc06fe0b743f9ff"
+    },
+    {
+      "id": "demo-projects",
+      "title": "DEMO projects",
+      "path": "demo/projects.json",
+      "description": "Scenario 2 project skeleton. Gate reviews are recorded in the browser workspace.",
+      "entity": "project",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/project.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "425070caf562447a"
+    },
+    {
+      "id": "demo-requirements",
+      "title": "DEMO requirements (Scenario 1)",
+      "path": "demo/requirements.json",
+      "description": "Draft URS lines derived from the Scenario 1 inquiry. Values the customer has not given are left blank.",
+      "entity": "requirement",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 6,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/requirement.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "50bb338f6631b0ee"
+    },
+    {
+      "id": "demo-risks",
+      "title": "DEMO risks",
+      "path": "demo/risks.json",
+      "description": "Starter risks for Scenario 1. S/O/D are not scored (would require engineering judgement).",
+      "entity": "risk",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 2,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/risk.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "DEMO",
+      "relative_dates": true,
+      "sha256": "cfc9c0e414715cc5"
+    },
+    {
+      "id": "handbook-evidence",
+      "title": "Evidence extracted from handbooks",
+      "path": "evidence/handbook-evidence.json",
+      "description": "Claims extracted verbatim from handbook tables, each pointing at the handbook section.",
+      "entity": "evidence",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 136,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/evidence.schema.json",
+      "source_ids": [
+        "src-laser-handbook",
+        "src-semiconductor-handbook"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "9ebc8577b4849a1d"
+    },
+    {
+      "id": "gate-definitions",
+      "title": "Design review gates G0–G10",
+      "path": "gates/gate-definitions.json",
+      "description": "Inputs, outputs and documents, approval criteria, responsible functions and exit criteria for each gate, verbatim from the Automation Equipment Building Handbook.",
+      "entity": "gate_definition",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 11,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/gate_definition.schema.json",
+      "source_ids": [
+        "src-automation-handbook"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "183a9f3d95f95567"
+    },
+    {
+      "id": "formulas",
+      "title": "Engineering formula catalogue (Automation Handbook Part 54)",
+      "path": "knowledge/formulas.json",
+      "description": "The handbook formula catalogue: quantity, formula, symbols, worked value and the part that develops it. `implemented_by` marks formulas available in the OS calculator engine.",
+      "entity": "formula",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 177,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/formula.schema.json",
+      "source_ids": [
+        "src-automation-handbook"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "fd69c30607d3ca9d"
+    },
+    {
+      "id": "recommendation-rules",
+      "title": "Configurator recommendation rules",
+      "path": "knowledge/recommendation-rules.json",
+      "description": "27 engineering recommendation rules. A rule fires when all its conditions match; it can only recommend equipment the platform can physically accept.",
+      "entity": "rule",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 27,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/rule.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "1a0527b5979f70bf"
+    },
+    {
+      "id": "standards",
+      "title": "Standards referenced by TEAL equipment",
+      "path": "knowledge/standards.json",
+      "description": "Standards the configurator references (laser safety, machinery safety, code grading, SEMI, ESD, cleanroom, 21 CFR 11).",
+      "entity": "standard",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 15,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/standard.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "PUBLIC",
+      "partition": "knowledge",
+      "sha256": "92f2990a3f9f7aa2"
+    },
+    {
+      "id": "vocabularies",
+      "title": "Controlled vocabularies (PM tracker)",
+      "path": "knowledge/vocabularies.json",
+      "description": "Dropdown vocabularies from the legacy product-management tracker (workstreams, application categories, laser types, packages, stages …).",
+      "entity": "vocabulary",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 34,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/vocabulary.schema.json",
+      "source_ids": [
+        "src-legacy-pm-tracker"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "c440cee092279ebd"
+    },
+    {
+      "id": "laser-source-classes",
+      "title": "Laser source classes (TEAL configurator)",
+      "path": "laser/laser-source-classes.json",
+      "description": "The 12 source technology options the TEAL configurator offers, with representative optical parameters. No manufacturer models — see Global Intelligence for curated external products.",
+      "entity": "laser_source",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 12,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/laser_source.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim",
+        "src-teal-catalogue-2026"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "laser",
+      "sha256": "f4ed0f157b564459"
+    },
+    {
+      "id": "materials",
+      "title": "Materials",
+      "path": "materials/materials.json",
+      "description": "Engineering materials with thermal properties and indicative absorptance by wavelength band. null = UNKNOWN.",
+      "entity": "material",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 19,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/material.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim",
+        "src-os-spec"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "applications",
+      "sha256": "23df9a18cf6d2b5c"
+    },
+    {
+      "id": "automation-modules",
+      "title": "Module library",
+      "path": "modules/automation-modules.json",
+      "description": "Automation modules (catalogue Ch. 13), LaserSuite software editions and connectivity/compliance packages, with fitment rules.",
+      "entity": "module",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 34,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/module.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "modules",
+      "sha256": "c11ec7617393068b"
+    },
+    {
+      "id": "module-conflicts",
+      "title": "Module conflicts",
+      "path": "modules/module-conflicts.json",
+      "description": "Module pairs that cannot sensibly coexist on one machine (from the legacy configurator code, MODCONFLICT).",
+      "entity": "module_conflict",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 7,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/module_conflict.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "modules",
+      "sha256": "0db480cc1d494a1b"
+    },
+    {
+      "id": "f-theta-objectives",
+      "title": "F-theta objectives (TEAL configurator)",
+      "path": "optics/f-theta-objectives.json",
+      "description": "Objective options offered by the configurator: focal length and addressable field. Coating, damage threshold and manufacturer are UNKNOWN until documented.",
+      "entity": "optic",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 5,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/optic.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "laser",
+      "sha256": "d5101d1da5885d3a"
+    },
+    {
+      "id": "platforms",
+      "title": "TEAL laser platforms (products)",
+      "path": "products/platforms.json",
+      "description": "22 TEAL platforms with sources, powers, objectives, standard content, specifications and applications.",
+      "entity": "product",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 22,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/product.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim",
+        "src-teal-catalogue-2026"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "products",
+      "sha256": "2cb5ec45b2e39d94"
+    },
+    {
+      "id": "product-families",
+      "title": "TEAL laser product families",
+      "path": "products/product-families.json",
+      "description": "The seven TEAL laser product families (catalogue chapters 02–08).",
+      "entity": "product_family",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 7,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/product_family.schema.json",
+      "source_ids": [
+        "src-legacy-laser-sim",
+        "src-teal-catalogue-2026"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "products",
+      "sha256": "a01b4ff46b56c51b"
+    },
+    {
+      "id": "semiconductor-value-chain",
+      "title": "Semiconductor value chain (process steps)",
+      "path": "semiconductor/value-chain.json",
+      "description": "Raw material → packing, with the handbook sections that cover each step and, where the handbook lists one, the laser process used there.",
+      "entity": "semi_step",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 21,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/semi_step.schema.json",
+      "source_ids": [
+        "src-semiconductor-handbook",
+        "src-os-spec"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "2839ce095c8cea37"
+    },
+    {
+      "id": "sources",
+      "title": "Sources",
+      "path": "sources/sources.json",
+      "description": "Registry of every source the OS cites. Evidence and provenance reference these ids.",
+      "entity": "source",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 8,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/source.schema.json",
+      "source_ids": [],
+      "data_type": "TEAL_INTERNAL",
+      "sha256": "c05d9bea18fc5dc1"
+    },
+    {
+      "id": "suppliers",
+      "title": "Suppliers (legacy vendor master — DEMO)",
+      "path": "suppliers/suppliers.json",
+      "description": "Vendor list from the legacy cost platform. Relationship data is seed/DEMO until TEAL Procurement confirms it.",
+      "entity": "supplier",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 10,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/supplier.schema.json",
+      "source_ids": [
+        "src-legacy-cost-platform"
+      ],
+      "data_type": "DEMO",
+      "partition": "suppliers",
+      "sha256": "5b80c4abac9cd378"
+    },
+    {
+      "id": "technologies",
+      "title": "Technology radar topics",
+      "path": "technology/technologies.json",
+      "description": "Radar topics from the OS specification. Radar status is deliberately unassessed until evidence is attached.",
+      "entity": "technology",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 16,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/technology.schema.json",
+      "source_ids": [
+        "src-os-spec"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "research",
+      "sha256": "81d113d3d6af3924"
+    }
+  ]
+}

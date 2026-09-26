@@ -1,0 +1,1208 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "cost-templates",
+    "title": "Cost templates (legacy — DEMO)",
+    "description": "Starting cost structures from the legacy cost platform. Use as a structure, not as prices.",
+    "entity": "cost_model",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-legacy-cost-platform"
+    ]
+  },
+  "records": [
+    {
+      "id": "cst-tpl-006k1jmy",
+      "entity": "cost_model",
+      "name": "Template — Inline laser marking cell — 2 station",
+      "description": "Standard photonics cell with vision verification",
+      "currency": "INR",
+      "qty": 1,
+      "lines": {
+        "material": [
+          {
+            "id": "0002xkls",
+            "item": "Fibre laser source 30W MOPA",
+            "cls": "Import Item",
+            "vendor": "IPG Photonics",
+            "qty": 2,
+            "uom": "no",
+            "price": 9800,
+            "cur": "USD",
+            "code": "TL-LSR-0020",
+            "spec": "1064nm, 30W, pulse 2–350ns, air cooled"
+          },
+          {
+            "id": "0003h1hg",
+            "item": "3-axis galvo scan head",
+            "cls": "Import Item",
+            "vendor": "Scanlab GmbH",
+            "qty": 2,
+            "uom": "no",
+            "price": 7400,
+            "cur": "EUR",
+            "code": "TL-OPT-0010",
+            "spec": "XY2-100, 14mm aperture, 3-axis dynamic focus"
+          },
+          {
+            "id": "0004gnva",
+            "item": "Linear stage 600mm + servo",
+            "cls": "Bought-Out Assembly",
+            "vendor": "Bosch Rexroth India",
+            "qty": 2,
+            "uom": "no",
+            "price": 285000,
+            "cur": "INR",
+            "code": "TL-MOT-0010",
+            "spec": "Ballscrew, 600mm travel, ±20µm, servo"
+          },
+          {
+            "id": "0005al2r",
+            "item": "Machine vision camera 5MP",
+            "cls": "Standard Component",
+            "vendor": "Keyence India",
+            "qty": 4,
+            "uom": "no",
+            "price": 148000,
+            "cur": "INR",
+            "code": "TL-SEN-0010",
+            "spec": "GigE, 5MP mono, global shutter"
+          },
+          {
+            "id": "0006c592",
+            "item": "Aluminium extrusion frame kit",
+            "cls": "Raw Material",
+            "vendor": "Misumi India",
+            "qty": 2,
+            "uom": "set",
+            "price": 92000,
+            "cur": "INR",
+            "code": "TL-RAW-0010",
+            "spec": "6063 T6, anodised, 45x45 slot 10"
+          },
+          {
+            "id": "00072638",
+            "item": "Class-1 laser enclosure",
+            "cls": "Bought-Out Assembly",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 2,
+            "uom": "no",
+            "price": 210000,
+            "cur": "INR",
+            "code": "TL-ENC-0040",
+            "spec": "Interlocked, viewing window OD6@1064nm"
+          },
+          {
+            "id": "00081b7t",
+            "item": "Fume extraction unit",
+            "cls": "Standard Component",
+            "vendor": "Misumi India",
+            "qty": 2,
+            "uom": "no",
+            "price": 165000,
+            "cur": "INR",
+            "code": "TL-SAF-0030",
+            "spec": "HEPA + carbon, 300m3/h, laser rated"
+          }
+        ],
+        "mechanical": [
+          {
+            "id": "0009x959",
+            "item": "Granite base machining & lapping",
+            "type": "Machining",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 2,
+            "rate": 148000
+          },
+          {
+            "id": "000akpka",
+            "item": "Product nest fixtures",
+            "type": "Fabrication",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 8,
+            "rate": 22000
+          },
+          {
+            "id": "000byibt",
+            "item": "Pneumatic clamping set",
+            "type": "Pneumatics",
+            "vendor": "SMC Pneumatics India",
+            "qty": 2,
+            "rate": 64000
+          },
+          {
+            "id": "000c6pqo",
+            "item": "Hard anodising — frame parts",
+            "type": "Surface Treatment",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 2,
+            "rate": 18500
+          }
+        ],
+        "electrical": [
+          {
+            "id": "000dunaa",
+            "item": "Safety PLC + I/O",
+            "type": "PLC",
+            "make": "Siemens India",
+            "qty": 2,
+            "rate": 186000,
+            "code": "TL-ELE-0010",
+            "spec": "Fail-safe CPU, 32DI/32DO, PROFIsafe"
+          },
+          {
+            "id": "000eev3k",
+            "item": "15in HMI panel",
+            "type": "HMI",
+            "make": "Siemens India",
+            "qty": 2,
+            "rate": 92000,
+            "code": "TL-ELE-0030",
+            "spec": "15in TFT, multitouch, PROFINET"
+          },
+          {
+            "id": "000fxz70",
+            "item": "Servo drive 750W",
+            "type": "Servo Drive",
+            "make": "Siemens India",
+            "qty": 4,
+            "rate": 68000,
+            "code": "TL-ELE-0050",
+            "spec": "1-axis, 750W, PROFINET, STO"
+          },
+          {
+            "id": "000g6c01",
+            "item": "Light curtain + interlocks",
+            "type": "Safety Components",
+            "make": "Keyence India",
+            "qty": 2,
+            "rate": 124000,
+            "code": "TL-SAF-0010",
+            "spec": "Type 4, 14mm res, 900mm height"
+          },
+          {
+            "id": "000hxlox",
+            "item": "Control panel — Rittal 1200x800",
+            "type": "Panel & Enclosure",
+            "make": "Rittal India",
+            "qty": 2,
+            "rate": 138000,
+            "code": "TL-ENC-0010",
+            "spec": "Rittal TS8, RAL7035, IP55"
+          },
+          {
+            "id": "000ilis4",
+            "item": "Cable set & glands",
+            "type": "Cables & Glands",
+            "make": "Rittal India",
+            "qty": 2,
+            "rate": 46000,
+            "code": "TL-CON-0010",
+            "spec": "Shielded servo + PROFINET, glands"
+          }
+        ],
+        "software": [
+          {
+            "id": "000j9zx4",
+            "item": "PLC Programming",
+            "res": "Controls Engineering",
+            "md": 22,
+            "rate": 6200
+          },
+          {
+            "id": "000kyw76",
+            "item": "HMI Development",
+            "res": "Controls Engineering",
+            "md": 12,
+            "rate": 6200
+          },
+          {
+            "id": "000l1g3i",
+            "item": "Vision Programming",
+            "res": "Vision Engineering",
+            "md": 16,
+            "rate": 7200
+          },
+          {
+            "id": "000m1e2y",
+            "item": "SCADA / MES Interface",
+            "res": "Software Development",
+            "md": 14,
+            "rate": 6800
+          },
+          {
+            "id": "000nrxum",
+            "item": "FAT Software Validation",
+            "res": "Controls Engineering",
+            "md": 6,
+            "rate": 6200
+          }
+        ],
+        "manufacturing": [
+          {
+            "id": "000obn5w",
+            "proc": "CNC Milling (VMC)",
+            "dept": "Machining",
+            "part": "Base plate & brackets",
+            "setup": 6,
+            "hrs": 68,
+            "rate": 1250
+          },
+          {
+            "id": "000pa9re",
+            "proc": "Wire EDM",
+            "dept": "EDM",
+            "part": "Nest inserts",
+            "setup": 3,
+            "hrs": 22,
+            "rate": 1450
+          },
+          {
+            "id": "000qti14",
+            "proc": "Surface Grinding",
+            "dept": "Grinding",
+            "part": "Datum surfaces",
+            "setup": 2,
+            "hrs": 18,
+            "rate": 850
+          },
+          {
+            "id": "000r084r",
+            "proc": "Laser Cutting",
+            "dept": "Sheet Metal",
+            "part": "Guarding panels",
+            "setup": 2,
+            "hrs": 14,
+            "rate": 1350
+          },
+          {
+            "id": "000su2ga",
+            "proc": "Welding (TIG/MIG)",
+            "dept": "Fabrication",
+            "part": "Frame weldment",
+            "setup": 3,
+            "hrs": 26,
+            "rate": 720
+          },
+          {
+            "id": "000thu5o",
+            "proc": "Powder Coating",
+            "dept": "Treatment",
+            "part": "Guards & frame",
+            "setup": 1,
+            "hrs": 12,
+            "rate": 450
+          },
+          {
+            "id": "000u1olj",
+            "proc": "CMM / Inspection",
+            "dept": "Quality",
+            "part": "Final dimensional",
+            "setup": 1,
+            "hrs": 16,
+            "rate": 980
+          },
+          {
+            "id": "000vl3ok",
+            "proc": "Sub-Assembly",
+            "dept": "Assembly",
+            "part": "Optics module",
+            "setup": 2,
+            "hrs": 34,
+            "rate": 620
+          }
+        ],
+        "labour": [
+          {
+            "id": "000wfwck",
+            "item": "Mechanical Assembly",
+            "cat": "Mechanical Assembly Technician",
+            "md": 34,
+            "rate": 2400,
+            "ot": 40,
+            "otr": 450
+          },
+          {
+            "id": "000x6y7g",
+            "item": "Electrical Assembly",
+            "cat": "Electrical Assembly Technician",
+            "md": 22,
+            "rate": 2600,
+            "ot": 24,
+            "otr": 490
+          },
+          {
+            "id": "000yao8d",
+            "item": "Functional Testing",
+            "cat": "Test Engineer",
+            "md": 14,
+            "rate": 3600,
+            "ot": 0,
+            "otr": 450
+          },
+          {
+            "id": "000z5ohk",
+            "item": "Packing",
+            "cat": "Packing Operator",
+            "md": 4,
+            "rate": 1600,
+            "ot": 0,
+            "otr": 450
+          },
+          {
+            "id": "0010biie",
+            "item": "Commissioning",
+            "cat": "Commissioning Engineer",
+            "md": 12,
+            "rate": 4800,
+            "ot": 0,
+            "otr": 450
+          }
+        ],
+        "design": [
+          {
+            "id": "0011ppg0",
+            "disc": "Mechanical Design",
+            "scope": "Station layout, optics mount, safety enclosure",
+            "md": 32,
+            "rate": 5200,
+            "nre": 0
+          },
+          {
+            "id": "0012hk4n",
+            "disc": "Electrical Design",
+            "scope": "Panel GA, schematics, BOM",
+            "md": 18,
+            "rate": 5400,
+            "nre": 0
+          },
+          {
+            "id": "0013ziv2",
+            "disc": "Controls Engineering",
+            "scope": "Sequence & safety architecture",
+            "md": 14,
+            "rate": 6200,
+            "nre": 0
+          },
+          {
+            "id": "00145pn4",
+            "disc": "Simulation / FEA",
+            "scope": "Thermal & vibration study on optics bench",
+            "md": 6,
+            "rate": 6000,
+            "nre": 120000
+          },
+          {
+            "id": "00157qxp",
+            "disc": "Documentation",
+            "scope": "O&M manual, CE file",
+            "md": 8,
+            "rate": 3200,
+            "nre": 0
+          },
+          {
+            "id": "00165sn8",
+            "disc": "Project Management",
+            "scope": "Full programme",
+            "md": 20,
+            "rate": 7500,
+            "nre": 0
+          }
+        ],
+        "site": [
+          {
+            "id": "00174474",
+            "head": "Engineer Deployment",
+            "loc": "Hosur",
+            "pax": 3,
+            "days": 12,
+            "rate": 4800
+          },
+          {
+            "id": "0018jup8",
+            "head": "Air / Rail Travel",
+            "loc": "Bengaluru–Hosur",
+            "pax": 3,
+            "days": 2,
+            "rate": 4500
+          },
+          {
+            "id": "0019bsil",
+            "head": "Accommodation",
+            "loc": "Hosur",
+            "pax": 3,
+            "days": 12,
+            "rate": 3200
+          },
+          {
+            "id": "001a5t43",
+            "head": "Food & Per Diem",
+            "loc": "Hosur",
+            "pax": 3,
+            "days": 12,
+            "rate": 1200
+          },
+          {
+            "id": "001bcvai",
+            "head": "Local Transport",
+            "loc": "Hosur",
+            "pax": 1,
+            "days": 12,
+            "rate": 2200
+          }
+        ],
+        "commercial": [
+          {
+            "id": "001cqu51",
+            "head": "Outward Freight",
+            "basis": "Lump sum",
+            "val": 145000
+          },
+          {
+            "id": "001d39ub",
+            "head": "Transit Insurance",
+            "basis": "% of direct cost",
+            "val": 0.35
+          },
+          {
+            "id": "001eel0b",
+            "head": "Export Packaging",
+            "basis": "Lump sum",
+            "val": 88000
+          },
+          {
+            "id": "001frp93",
+            "head": "Certification (CE/UL)",
+            "basis": "Lump sum",
+            "val": 240000
+          },
+          {
+            "id": "001gea8g",
+            "head": "Warranty Provision",
+            "basis": "% of direct cost",
+            "val": 1.2
+          }
+        ],
+        "amc": [
+          {
+            "id": "001hd7tz",
+            "head": "Preventive Maintenance Labour",
+            "tier": "Standard",
+            "visits": 4,
+            "rate": 42000,
+            "esc": 6,
+            "yrs": 3
+          },
+          {
+            "id": "001i8k49",
+            "head": "Spare Parts Kit",
+            "tier": "Standard",
+            "visits": 1,
+            "rate": 260000,
+            "esc": 8,
+            "yrs": 3
+          },
+          {
+            "id": "001jlxru",
+            "head": "Travel & Lodging",
+            "tier": "Standard",
+            "visits": 4,
+            "rate": 16000,
+            "esc": 6,
+            "yrs": 3
+          }
+        ]
+      },
+      "landed": {
+        "freightPct": 2,
+        "dutyPct": 0,
+        "landingPct": 1.5,
+        "gstPct": 18,
+        "siteContPct": 8
+      },
+      "markup": {
+        "overheadPct": 19,
+        "contingencyPct": 3,
+        "profitPct": 22
+      },
+      "teal": {
+        "insurancePct": 0.05,
+        "sgaPct": 8,
+        "warrantyPct": 2.5,
+        "profitPct": 12,
+        "ossMonthly": 65000,
+        "stationHc": 0.5,
+        "ossMonths": 12,
+        "packRate": 1600
+      },
+      "scenario": "Base",
+      "assumptions": [
+        "Template lines and rates are legacy DEMO seed values."
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/projects.json",
+        "section": "templates",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      },
+      "tags": [
+        "template"
+      ]
+    },
+    {
+      "id": "cst-tpl-006lv9ab",
+      "entity": "cost_model",
+      "name": "Template — Rotary SPM — 8 station",
+      "description": "Cam indexer platform with test station",
+      "currency": "INR",
+      "qty": 1,
+      "lines": {
+        "material": [
+          {
+            "id": "0030fd11",
+            "item": "Cam indexer 8-station",
+            "cls": "Bought-Out Assembly",
+            "vendor": "Misumi India",
+            "qty": 1,
+            "uom": "no",
+            "price": 1240000,
+            "cur": "INR",
+            "code": "TL-MOT-0070",
+            "spec": "Barrel cam, 8 stops, 300mm PCD"
+          },
+          {
+            "id": "00311s2v",
+            "item": "Helium leak detector",
+            "cls": "Import Item",
+            "vendor": "Keyence India",
+            "qty": 1,
+            "uom": "no",
+            "price": 34000,
+            "cur": "EUR",
+            "code": "TL-SEN-0070",
+            "spec": "5x10-10 mbar.l/s, mass spectrometer"
+          },
+          {
+            "id": "0032j7g0",
+            "item": "Servo gearbox package",
+            "cls": "Standard Component",
+            "vendor": "Bosch Rexroth India",
+            "qty": 3,
+            "uom": "no",
+            "price": 168000,
+            "cur": "INR",
+            "code": "TL-MOT-0060",
+            "spec": "Planetary, ratio 10, backlash <5 arcmin"
+          },
+          {
+            "id": "003346p1",
+            "item": "Pneumatic valve terminal",
+            "cls": "Standard Component",
+            "vendor": "SMC Pneumatics India",
+            "qty": 2,
+            "uom": "no",
+            "price": 96000,
+            "cur": "INR",
+            "code": "TL-PNU-0010",
+            "spec": "16 station, PROFINET, 5/2"
+          },
+          {
+            "id": "00346isl",
+            "item": "Machine base weldment",
+            "cls": "Raw Material",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 1,
+            "uom": "no",
+            "price": 420000,
+            "cur": "INR"
+          }
+        ],
+        "mechanical": [
+          {
+            "id": "0035p3s0",
+            "item": "Station tooling — 8 sets",
+            "type": "Fabrication",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 8,
+            "rate": 78000
+          },
+          {
+            "id": "0036sqhm",
+            "item": "Guarding & polycarbonate",
+            "type": "Sheet Metal",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 1,
+            "rate": 240000
+          },
+          {
+            "id": "0037cshj",
+            "item": "Linear guides & rails",
+            "type": "Bearings & Guides",
+            "vendor": "Bosch Rexroth India",
+            "qty": 12,
+            "rate": 14500
+          }
+        ],
+        "electrical": [
+          {
+            "id": "0038as12",
+            "item": "PLC S7-1500",
+            "type": "PLC",
+            "make": "Siemens India",
+            "qty": 1,
+            "rate": 320000,
+            "code": "TL-ELE-0020",
+            "spec": "1516-3 PN/DP, 1MB work memory"
+          },
+          {
+            "id": "0039l53m",
+            "item": "12in HMI",
+            "type": "HMI",
+            "make": "Siemens India",
+            "qty": 1,
+            "rate": 74000
+          },
+          {
+            "id": "003aocbu",
+            "item": "Proximity & pressure sensors",
+            "type": "Sensors",
+            "make": "Keyence India",
+            "qty": 42,
+            "rate": 4800
+          },
+          {
+            "id": "003brk8t",
+            "item": "Control panel",
+            "type": "Panel & Enclosure",
+            "make": "Rittal India",
+            "qty": 1,
+            "rate": 190000,
+            "code": "TL-ENC-0010",
+            "spec": "Rittal TS8, RAL7035, IP55"
+          },
+          {
+            "id": "003c5bq4",
+            "item": "Safety relay & E-stops",
+            "type": "Safety Components",
+            "make": "Siemens India",
+            "qty": 1,
+            "rate": 86000,
+            "code": "TL-SAF-0020",
+            "spec": "Cat 4 PL e, 3NO+1NC"
+          }
+        ],
+        "software": [
+          {
+            "id": "003dhqyq",
+            "item": "PLC Programming",
+            "res": "Controls Engineering",
+            "md": 28,
+            "rate": 6200
+          },
+          {
+            "id": "003eyslg",
+            "item": "HMI Development",
+            "res": "Controls Engineering",
+            "md": 14,
+            "rate": 6200
+          },
+          {
+            "id": "003fc10j",
+            "item": "SCADA / MES Interface",
+            "res": "Software Development",
+            "md": 10,
+            "rate": 6800
+          }
+        ],
+        "manufacturing": [
+          {
+            "id": "003gyg27",
+            "proc": "CNC Milling (VMC)",
+            "dept": "Machining",
+            "part": "Tooling plates",
+            "setup": 8,
+            "hrs": 96,
+            "rate": 1250
+          },
+          {
+            "id": "003hcmju",
+            "proc": "CNC Turning",
+            "dept": "Machining",
+            "part": "Bushes & pins",
+            "setup": 4,
+            "hrs": 42,
+            "rate": 1100
+          },
+          {
+            "id": "003i2ofm",
+            "proc": "Laser Cutting",
+            "dept": "Sheet Metal",
+            "part": "Guards",
+            "setup": 2,
+            "hrs": 20,
+            "rate": 1350
+          },
+          {
+            "id": "003jwr9r",
+            "proc": "Press Brake / Bending",
+            "dept": "Sheet Metal",
+            "part": "Guard panels",
+            "setup": 2,
+            "hrs": 16,
+            "rate": 900
+          },
+          {
+            "id": "003ki49i",
+            "proc": "Welding (TIG/MIG)",
+            "dept": "Fabrication",
+            "part": "Base frame",
+            "setup": 4,
+            "hrs": 44,
+            "rate": 720
+          },
+          {
+            "id": "003lqlhc",
+            "proc": "Powder Coating",
+            "dept": "Treatment",
+            "part": "Frame & guards",
+            "setup": 1,
+            "hrs": 18,
+            "rate": 450
+          },
+          {
+            "id": "003mcbwg",
+            "proc": "Sub-Assembly",
+            "dept": "Assembly",
+            "part": "Station modules",
+            "setup": 4,
+            "hrs": 72,
+            "rate": 620
+          }
+        ],
+        "labour": [
+          {
+            "id": "003na4h7",
+            "item": "Mechanical Assembly",
+            "cat": "Mechanical Assembly Technician",
+            "md": 48,
+            "rate": 2400,
+            "ot": 56,
+            "otr": 450
+          },
+          {
+            "id": "003ofkid",
+            "item": "Electrical Assembly",
+            "cat": "Electrical Assembly Technician",
+            "md": 26,
+            "rate": 2600,
+            "ot": 0,
+            "otr": 450
+          },
+          {
+            "id": "003pzr8p",
+            "item": "Functional Testing",
+            "cat": "Test Engineer",
+            "md": 18,
+            "rate": 3600,
+            "ot": 0,
+            "otr": 450
+          },
+          {
+            "id": "003q2vqd",
+            "item": "Installation",
+            "cat": "Installation Technician",
+            "md": 10,
+            "rate": 3200,
+            "ot": 0,
+            "otr": 450
+          }
+        ],
+        "design": [
+          {
+            "id": "003r8s25",
+            "disc": "Mechanical Design",
+            "scope": "Machine GA & station tooling",
+            "md": 44,
+            "rate": 5200,
+            "nre": 0
+          },
+          {
+            "id": "003shof1",
+            "disc": "Electrical Design",
+            "scope": "Schematics & panel",
+            "md": 20,
+            "rate": 5400,
+            "nre": 0
+          },
+          {
+            "id": "003t6dja",
+            "disc": "Controls Engineering",
+            "scope": "Sequence design",
+            "md": 16,
+            "rate": 6200,
+            "nre": 0
+          },
+          {
+            "id": "003uzknt",
+            "disc": "Documentation",
+            "scope": "Manuals",
+            "md": 8,
+            "rate": 3200,
+            "nre": 0
+          },
+          {
+            "id": "003vd8dk",
+            "disc": "Project Management",
+            "scope": "Full programme",
+            "md": 24,
+            "rate": 7500,
+            "nre": 0
+          }
+        ],
+        "site": [
+          {
+            "id": "003wqj8o",
+            "head": "Engineer Deployment",
+            "loc": "Bidadi",
+            "pax": 3,
+            "days": 10,
+            "rate": 4800
+          },
+          {
+            "id": "003x4f3e",
+            "head": "Accommodation",
+            "loc": "Bidadi",
+            "pax": 3,
+            "days": 10,
+            "rate": 2800
+          },
+          {
+            "id": "003yuakm",
+            "head": "Food & Per Diem",
+            "loc": "Bidadi",
+            "pax": 3,
+            "days": 10,
+            "rate": 1100
+          }
+        ],
+        "commercial": [
+          {
+            "id": "003zj6ey",
+            "head": "Outward Freight",
+            "basis": "Lump sum",
+            "val": 180000
+          },
+          {
+            "id": "00400vky",
+            "head": "Transit Insurance",
+            "basis": "% of direct cost",
+            "val": 0.3
+          },
+          {
+            "id": "0041hb5a",
+            "head": "Warranty Provision",
+            "basis": "% of direct cost",
+            "val": 1.2
+          }
+        ],
+        "amc": [
+          {
+            "id": "0042nqbp",
+            "head": "Preventive Maintenance Labour",
+            "tier": "Basic",
+            "visits": 2,
+            "rate": 38000,
+            "esc": 5,
+            "yrs": 3
+          }
+        ]
+      },
+      "landed": {
+        "freightPct": 2,
+        "dutyPct": 0,
+        "landingPct": 1.5,
+        "gstPct": 18,
+        "siteContPct": 8
+      },
+      "markup": {
+        "overheadPct": 14,
+        "contingencyPct": 3,
+        "profitPct": 17
+      },
+      "teal": {
+        "insurancePct": 0.05,
+        "sgaPct": 8,
+        "warrantyPct": 2.5,
+        "profitPct": 12,
+        "ossMonthly": 65000,
+        "stationHc": 0.5,
+        "ossMonths": 12,
+        "packRate": 1600
+      },
+      "scenario": "Base",
+      "assumptions": [
+        "Template lines and rates are legacy DEMO seed values."
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/projects.json",
+        "section": "templates",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      },
+      "tags": [
+        "template"
+      ]
+    },
+    {
+      "id": "cst-tpl-006mcew8",
+      "entity": "cost_model",
+      "name": "Template — Control panel build — per panel",
+      "description": "Panel shop standard build",
+      "currency": "INR",
+      "qty": 1,
+      "lines": {
+        "material": [
+          {
+            "id": "00601evl",
+            "item": "Rittal enclosure 1800x800",
+            "cls": "Standard Component",
+            "vendor": "Rittal India",
+            "qty": 6,
+            "uom": "no",
+            "price": 96000,
+            "cur": "INR"
+          },
+          {
+            "id": "0061uu11",
+            "item": "MCB / MCCB set",
+            "cls": "Standard Component",
+            "vendor": "Siemens India",
+            "qty": 6,
+            "uom": "set",
+            "price": 74000,
+            "cur": "INR"
+          },
+          {
+            "id": "0062v3jg",
+            "item": "Terminal & wiring kit",
+            "cls": "Consumable",
+            "vendor": "Rittal India",
+            "qty": 6,
+            "uom": "set",
+            "price": 38000,
+            "cur": "INR"
+          },
+          {
+            "id": "0063nzfp",
+            "item": "Panel cooling unit",
+            "cls": "Standard Component",
+            "vendor": "Rittal India",
+            "qty": 6,
+            "uom": "no",
+            "price": 42000,
+            "cur": "INR",
+            "code": "TL-ENC-0030",
+            "spec": "Air/air, 1000W, 415V"
+          }
+        ],
+        "mechanical": [
+          {
+            "id": "00645wwr",
+            "item": "Gland plate machining",
+            "type": "Machining",
+            "vendor": "Local Fabricator - Hosur",
+            "qty": 6,
+            "rate": 8500
+          }
+        ],
+        "electrical": [
+          {
+            "id": "0065ok5z",
+            "item": "PLC CPU",
+            "type": "PLC",
+            "make": "Siemens India",
+            "qty": 6,
+            "rate": 148000,
+            "code": "TL-ELE-0020",
+            "spec": "1516-3 PN/DP, 1MB work memory"
+          },
+          {
+            "id": "0066w4eq",
+            "item": "Safety relay",
+            "type": "Safety Components",
+            "make": "Siemens India",
+            "qty": 6,
+            "rate": 26000,
+            "code": "TL-SAF-0020",
+            "spec": "Cat 4 PL e, 3NO+1NC"
+          },
+          {
+            "id": "0067m3x9",
+            "item": "Wiring accessories",
+            "type": "Wiring Accessories",
+            "make": "Rittal India",
+            "qty": 6,
+            "rate": 18000
+          }
+        ],
+        "software": [
+          {
+            "id": "0068hwx1",
+            "item": "PLC Programming",
+            "res": "Controls Engineering",
+            "md": 14,
+            "rate": 6200
+          }
+        ],
+        "manufacturing": [
+          {
+            "id": "0069eeuk",
+            "proc": "Laser Cutting",
+            "dept": "Sheet Metal",
+            "part": "Gland plates",
+            "setup": 1,
+            "hrs": 8,
+            "rate": 1350
+          },
+          {
+            "id": "006a4etr",
+            "proc": "Sub-Assembly",
+            "dept": "Assembly",
+            "part": "Panel build",
+            "setup": 2,
+            "hrs": 96,
+            "rate": 620
+          }
+        ],
+        "labour": [
+          {
+            "id": "006b3sl5",
+            "item": "Electrical Assembly",
+            "cat": "Electrical Assembly Technician",
+            "md": 54,
+            "rate": 2600,
+            "ot": 40,
+            "otr": 490
+          },
+          {
+            "id": "006cit6s",
+            "item": "Functional Testing",
+            "cat": "Test Engineer",
+            "md": 12,
+            "rate": 3600,
+            "ot": 0,
+            "otr": 450
+          },
+          {
+            "id": "006dql7b",
+            "item": "Packing",
+            "cat": "Packing Operator",
+            "md": 4,
+            "rate": 1600,
+            "ot": 0,
+            "otr": 450
+          }
+        ],
+        "design": [
+          {
+            "id": "006e1mps",
+            "disc": "Electrical Design",
+            "scope": "Panel GA & schematics",
+            "md": 22,
+            "rate": 5400,
+            "nre": 0
+          },
+          {
+            "id": "006fdjp8",
+            "disc": "Documentation",
+            "scope": "As-built drawings",
+            "md": 6,
+            "rate": 3200,
+            "nre": 0
+          },
+          {
+            "id": "006gakaj",
+            "disc": "Project Management",
+            "scope": "Programme",
+            "md": 8,
+            "rate": 7500,
+            "nre": 0
+          }
+        ],
+        "site": [
+          {
+            "id": "006hk8mt",
+            "head": "Engineer Deployment",
+            "loc": "Pune",
+            "pax": 2,
+            "days": 6,
+            "rate": 4800
+          }
+        ],
+        "commercial": [
+          {
+            "id": "006i6r7h",
+            "head": "Outward Freight",
+            "basis": "Lump sum",
+            "val": 96000
+          },
+          {
+            "id": "006jcd1i",
+            "head": "Warranty Provision",
+            "basis": "% of direct cost",
+            "val": 1
+          }
+        ],
+        "amc": []
+      },
+      "landed": {
+        "freightPct": 2,
+        "dutyPct": 0,
+        "landingPct": 1.5,
+        "gstPct": 18,
+        "siteContPct": 8
+      },
+      "markup": {
+        "overheadPct": 12,
+        "contingencyPct": 2,
+        "profitPct": 15
+      },
+      "teal": {
+        "insurancePct": 0.05,
+        "sgaPct": 8,
+        "warrantyPct": 2.5,
+        "profitPct": 12,
+        "ossMonthly": 65000,
+        "stationHc": 0.5,
+        "ossMonths": 12,
+        "packRate": 1600
+      },
+      "scenario": "Base",
+      "assumptions": [
+        "Template lines and rates are legacy DEMO seed values."
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/projects.json",
+        "section": "templates",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Legacy cost-platform seed data. Treat as DEMO until confirmed by TEAL Finance / Procurement."
+      },
+      "tags": [
+        "template"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "f-theta-objectives",
+    "title": "F-theta objectives (TEAL configurator)",
+    "description": "Objective options offered by the configurator: focal length and addressable field. Coating, damage threshold and manufacturer are UNKNOWN until documented.",
+    "entity": "optic",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ],
+    "partition": "laser"
+  },
+  "records": [
+    {
+      "id": "opt-f100",
+      "entity": "optic",
+      "name": "F100 f-theta objective",
+      "optic_type": "f_theta",
+      "manufacturer": null,
+      "model": null,
+      "focal_length_mm": 100,
+      "scan_field_mm": 70,
+      "short_code": "F100",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "LENS.f100"
+      },
+      "tags": [
+        "f-theta"
+      ]
+    },
+    {
+      "id": "opt-f163",
+      "entity": "optic",
+      "name": "F163 f-theta objective",
+      "optic_type": "f_theta",
+      "manufacturer": null,
+      "model": null,
+      "focal_length_mm": 163,
+      "scan_field_mm": 110,
+      "short_code": "F163",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "LENS.f163"
+      },
+      "tags": [
+        "f-theta"
+      ]
+    },
+    {
+      "id": "opt-f230",
+      "entity": "optic",
+      "name": "F230 f-theta objective",
+      "optic_type": "f_theta",
+      "manufacturer": null,
+      "model": null,
+      "focal_length_mm": 230,
+      "scan_field_mm": 160,
+      "short_code": "F230",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "LENS.f230"
+      },
+      "tags": [
+        "f-theta"
+      ]
+    },
+    {
+      "id": "opt-f254",
+      "entity": "optic",
+      "name": "F254 f-theta objective",
+      "optic_type": "f_theta",
+      "manufacturer": null,
+      "model": null,
+      "focal_length_mm": 254,
+      "scan_field_mm": 175,
+      "short_code": "F254",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "LENS.f254"
+      },
+      "tags": [
+        "f-theta"
+      ]
+    },
+    {
+      "id": "opt-f420",
+      "entity": "optic",
+      "name": "F420 f-theta objective",
+      "optic_type": "f_theta",
+      "manufacturer": null,
+      "model": null,
+      "focal_length_mm": 420,
+      "scan_field_mm": 300,
+      "short_code": "F420",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-legacy-laser-sim",
+        "document": "TEAL-Laser-Product-Sim-2/data.json",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "MEDIUM",
+        "section": "LENS.f420"
+      },
+      "tags": [
+        "f-theta"
+      ]
+    }
+  ]
+}

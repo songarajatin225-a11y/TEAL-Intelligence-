@@ -1,0 +1,122 @@
+{
+  "handbook": "semiconductor",
+  "title": "The Complete Semiconductor Industry Handbook",
+  "role": "WHERE IS THE OPPORTUNITY?",
+  "parts": [
+    {
+      "file": "00-the-complete-semiconductor-industry-handbook.md",
+      "title": "The Complete Semiconductor Industry Handbook",
+      "chars": 204
+    },
+    {
+      "file": "01-contents.md",
+      "title": "Contents",
+      "chars": 3102
+    },
+    {
+      "file": "02-how-to-use-this-handbook.md",
+      "title": "How to use this handbook",
+      "chars": 2895
+    },
+    {
+      "file": "03-part-i-semiconductor-fundamentals.md",
+      "title": "Part I — Semiconductor fundamentals",
+      "chars": 10070
+    },
+    {
+      "file": "04-part-ii-from-sand-to-electronic-grade-silicon.md",
+      "title": "Part II — From sand to electronic-grade silicon",
+      "chars": 6269
+    },
+    {
+      "file": "05-part-iii-wafer-manufacturing.md",
+      "title": "Part III — Wafer manufacturing",
+      "chars": 8943
+    },
+    {
+      "file": "06-parts-iv-ix-the-semiconductor-fab.md",
+      "title": "Parts IV–IX — The semiconductor fab",
+      "chars": 20463
+    },
+    {
+      "file": "07-parts-x-xiii-transistors-devices-design-and-nodes.md",
+      "title": "Parts X–XIII — Transistors, devices, design and nodes",
+      "chars": 15552
+    },
+    {
+      "file": "08-part-xiv-memory.md",
+      "title": "Part XIV — Memory",
+      "chars": 7044
+    },
+    {
+      "file": "09-part-xv-metrology-inspection-and-wafer-test.md",
+      "title": "Part XV — Metrology, inspection and wafer test",
+      "chars": 5336
+    },
+    {
+      "file": "10-parts-xvi-xviii-packaging-atmp-and-dicing.md",
+      "title": "Parts XVI–XVIII — Packaging, ATMP and dicing",
+      "chars": 11441
+    },
+    {
+      "file": "11-parts-xix-xx-equipment-and-materials-ecosystems.md",
+      "title": "Parts XIX–XX — Equipment and materials ecosystems",
+      "chars": 12111
+    },
+    {
+      "file": "12-parts-xxi-xxiii-from-chip-to-product.md",
+      "title": "Parts XXI–XXIII — From chip to product",
+      "chars": 10693
+    },
+    {
+      "file": "13-parts-xxiv-xxvi-supply-chain-countries-and-india.md",
+      "title": "Parts XXIV–XXVI — Supply chain, countries and India",
+      "chars": 12871
+    },
+    {
+      "file": "14-parts-xxvii-xxix-business-models-fab-economics-and-yield.md",
+      "title": "Parts XXVII–XXIX — Business models, fab economics and yield",
+      "chars": 8321
+    },
+    {
+      "file": "15-part-xxx-technology-roadmap.md",
+      "title": "Part XXX — Technology roadmap",
+      "chars": 4200
+    },
+    {
+      "file": "16-parts-xxxi-xxxii-semiconductor-lasers-photonics-and-lasers-in-semicond.md",
+      "title": "Parts XXXI–XXXII — Semiconductor lasers, photonics and lasers in semiconductor manufacturing",
+      "chars": 10346
+    },
+    {
+      "file": "17-parts-xxxiii-xxxiv-quality-failure-analysis-reliability-and-standards.md",
+      "title": "Parts XXXIII–XXXIV — Quality, failure analysis, reliability and standards",
+      "chars": 6819
+    },
+    {
+      "file": "18-parts-xxxvi-xxxviii-xli-buyers-guide-opportunities-localization-and-co.md",
+      "title": "Parts XXXVI–XXXVIII & XLI — Buyer’s guide, opportunities, localization and company landscape",
+      "chars": 13115
+    },
+    {
+      "file": "19-parts-xlvii-xlix-case-studies.md",
+      "title": "Parts XLVII–XLIX — Case studies",
+      "chars": 8063
+    },
+    {
+      "file": "20-parts-xxxix-xlvi-l-master-maps-and-the-industry-on-one-page.md",
+      "title": "Parts XXXIX, XLVI, L — Master maps and the industry on one page",
+      "chars": 7649
+    },
+    {
+      "file": "21-part-xxxv-glossary.md",
+      "title": "Part XXXV — Glossary",
+      "chars": 26056
+    }
+  ],
+  "stats": {
+    "tables": 83,
+    "equations": 14,
+    "headings": 136
+  }
+}

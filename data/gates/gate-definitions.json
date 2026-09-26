@@ -1,0 +1,374 @@
+{
+  "dataset": {
+    "id": "gate-definitions",
+    "title": "Design review gates G0–G10",
+    "description": "Inputs, outputs and documents, approval criteria, responsible functions and exit criteria for each gate, verbatim from the Automation Equipment Building Handbook.",
+    "entity": "gate_definition",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-automation-handbook"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "gate-g0",
+      "entity": "gate_definition",
+      "code": "G0",
+      "order": 0,
+      "name": "G0 Requirement review",
+      "inputs": "Customer inquiry, VOC, samples, site data",
+      "outputs": "URS (signed values), assumptions list, CTQ list, takt and CT_ideal, market and regulation list, feasibility plan",
+      "approval_criteria": "Every URS line has value, condition, verification and acceptance; process status known",
+      "responsible": "Project manager → head of engineering, sales, customer",
+      "exit_criteria": "Customer signs URS values; feasibility funded",
+      "mandatory_evidence": [
+        "URS (signed values)",
+        "assumptions list",
+        "CTQ list",
+        "takt and CT_ideal",
+        "market and regulation list",
+        "feasibility plan"
+      ],
+      "customer_facing": true,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g1",
+      "entity": "gate_definition",
+      "code": "G1",
+      "order": 1,
+      "name": "G1 Concept review",
+      "inputs": "URS, process trial data",
+      "outputs": "Concept matrix with sensitivity, selected concept and fallback, time chart, first error budget, cost ±30%, risk register, long-lead list",
+      "approval_criteria": "Process feasible on real samples; CT and accuracy credible with margin",
+      "responsible": "System engineer → engineering head, product manager",
+      "exit_criteria": "Concept chosen; long-lead POs released with change terms",
+      "mandatory_evidence": [
+        "Concept matrix with sensitivity",
+        "selected concept and fallback",
+        "time chart",
+        "first error budget",
+        "cost ±30%",
+        "risk register",
+        "long-lead list"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g2",
+      "entity": "gate_definition",
+      "code": "G2",
+      "order": 2,
+      "name": "G2 Architecture review",
+      "inputs": "Selected concept",
+      "outputs": "Six architecture views, N² matrix and ICDs, module specs, seven budgets, safety concept with PLr, utility sheet, data dictionary, FRS, cost ±15%",
+      "approval_criteria": "Budgets closed with margin; interfaces owned; customer agrees FRS, data and utilities",
+      "responsible": "System engineer → discipline leads, safety engineer, customer",
+      "exit_criteria": "Architecture baseline frozen",
+      "mandatory_evidence": [
+        "Six architecture views",
+        "N² matrix and ICDs",
+        "module specs",
+        "seven budgets",
+        "safety concept with PLr",
+        "utility sheet",
+        "data dictionary",
+        "FRS",
+        "cost ±15%"
+      ],
+      "customer_facing": true,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g3",
+      "entity": "gate_definition",
+      "code": "G3",
+      "order": 3,
+      "name": "G3 Detailed design review",
+      "inputs": "Architecture baseline",
+      "outputs": "Drawings, schematics, pneumatic diagrams, I/O list, calculations, DFMEA, SRS and PL calculations, BOM rev A, FAT protocol draft",
+      "approval_criteria": "Discipline checklists passed (Part 57); calculations independently checked; DFMEA high-priority actions closed",
+      "responsible": "Mechanical, electrical, controls leads → system engineer, quality",
+      "exit_criteria": "Design baseline frozen; change control active",
+      "mandatory_evidence": [
+        "Drawings",
+        "schematics",
+        "pneumatic diagrams",
+        "I/O list",
+        "calculations",
+        "DFMEA",
+        "SRS and PL calculations",
+        "BOM rev A",
+        "FAT protocol draft"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g4",
+      "entity": "gate_definition",
+      "code": "G4",
+      "order": 4,
+      "name": "G4 Procurement release",
+      "inputs": "Design baseline",
+      "outputs": "Released BOM with classes, approved suppliers, POs, landed costs",
+      "approval_criteria": "BOM complete and classified; critical items dual-sourced or risk-accepted",
+      "responsible": "Procurement lead → project manager, finance",
+      "exit_criteria": "All POs placed; long-lead status green or mitigated",
+      "mandatory_evidence": [
+        "Released BOM with classes",
+        "approved suppliers",
+        "POs",
+        "landed costs"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g5",
+      "entity": "gate_definition",
+      "code": "G5",
+      "order": 5,
+      "name": "G5 Manufacturing readiness",
+      "inputs": "Released drawings",
+      "outputs": "Vendor packages, inspection plan, FAI plan, panel build package",
+      "approval_criteria": "Drawings and inspection plans released at correct revisions",
+      "responsible": "Manufacturing lead → quality",
+      "exit_criteria": "Fabrication started with controlled documents",
+      "mandatory_evidence": [
+        "Vendor packages",
+        "inspection plan",
+        "FAI plan",
+        "panel build package"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g6",
+      "entity": "gate_definition",
+      "code": "G6",
+      "order": 6,
+      "name": "G6 Assembly readiness",
+      "inputs": "Received parts",
+      "outputs": "Kits, IQC records, assembly instructions, build book",
+      "approval_criteria": "≥ 95% kitted per step; IQC passed; instructions available",
+      "responsible": "Assembly lead → manufacturing, quality",
+      "exit_criteria": "Assembly started",
+      "mandatory_evidence": [
+        "Kits",
+        "IQC records",
+        "assembly instructions",
+        "build book"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g7",
+      "entity": "gate_definition",
+      "code": "G7",
+      "order": 7,
+      "name": "G7 Integration readiness",
+      "inputs": "Assembled machine, tested panel",
+      "outputs": "Wiring test records, controlled software release, safe power-up procedure",
+      "approval_criteria": "Bonding and insulation tests passed; software versioned; safety program reviewed",
+      "responsible": "Controls lead → system engineer, safety engineer",
+      "exit_criteria": "First power-up and integration started",
+      "mandatory_evidence": [
+        "Wiring test records",
+        "controlled software release",
+        "safe power-up procedure"
+      ],
+      "customer_facing": false,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g8",
+      "entity": "gate_definition",
+      "code": "G8",
+      "order": 8,
+      "name": "G8 FAT readiness",
+      "inputs": "Integrated machine",
+      "outputs": "Dry-run FAT report, safety validation, calibration records, draft manuals, spare list",
+      "approval_criteria": "Dry-run passed exactly per protocol; run-at-rate achieved; no open class A items",
+      "responsible": "Project manager → system engineer, quality, customer invitation",
+      "exit_criteria": "Customer FAT scheduled",
+      "mandatory_evidence": [
+        "Dry-run FAT report",
+        "safety validation",
+        "calibration records",
+        "draft manuals",
+        "spare list"
+      ],
+      "customer_facing": true,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g9",
+      "entity": "gate_definition",
+      "code": "G9",
+      "order": 9,
+      "name": "G9 SAT readiness",
+      "inputs": "Shipped and installed machine",
+      "outputs": "Site readiness record with measured utilities, installation log, re-validation and recalibration records",
+      "approval_criteria": "Safety re-validated; references restored; IT connectivity confirmed",
+      "responsible": "Service lead → project manager, customer",
+      "exit_criteria": "SAT started",
+      "mandatory_evidence": [
+        "Site readiness record with measured utilities",
+        "installation log",
+        "re-validation and recalibration records"
+      ],
+      "customer_facing": true,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "gate-g10",
+      "entity": "gate_definition",
+      "code": "G10",
+      "order": 10,
+      "name": "G10 Production release",
+      "inputs": "SAT-accepted machine in ramp",
+      "outputs": "Ramp data, capability on production lots, training records, spares list, as-built documents, open-item list",
+      "approval_criteria": "Ramp targets sustained for the agreed period; training complete; spares on site",
+      "responsible": "Customer production and service lead → project manager, product manager",
+      "exit_criteria": "Ownership transferred; warranty and service mode",
+      "mandatory_evidence": [
+        "Ramp data",
+        "capability on production lots",
+        "training records",
+        "spares list",
+        "as-built documents",
+        "open-item list"
+      ],
+      "customer_facing": true,
+      "description": "Gate rules: Documents are distributed at least two working days before the review. Approvers decide go, go-with-conditions (named risks with owner and date), or no-go. Conditions carried forward appear in the risk register and are closed before the next gate. Customer-facing gates (G0, G2, FAT, SAT, G10) include the customer's signature. Gate records are kept in the project file and reviewed in post-project lessons learned.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-automation-handbook",
+        "document": "Automation Equipment Building Handbook",
+        "section": "Design review gates G0–G10",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Knowledge ref automation/83-design-review-gates-g0-g10.md#design-review-gates-g0-g10. mandatory_evidence is the \"Outputs and documents\" cell split at commas (INFERRED split of handbook text). Detailed checklists: Part 57."
+      },
+      "tags": [
+        "gate"
+      ]
+    }
+  ]
+}

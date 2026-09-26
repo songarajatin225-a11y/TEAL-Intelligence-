@@ -1,0 +1,89 @@
+{
+  "dataset": {
+    "id": "demo-customers",
+    "title": "DEMO customers",
+    "entity": "customer",
+    "description": "Fictional customers for the demonstration scenarios.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-os-spec"
+    ],
+    "relative_dates": true
+  },
+  "records": [
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "cus-demo-osat",
+      "entity": "customer",
+      "name": "DEMO OSAT Customer",
+      "industry": "Semiconductor",
+      "segment": "Strategic",
+      "location": "India (DEMO)",
+      "sites": [
+        "Assembly & test site (DEMO)"
+      ],
+      "contacts": [
+        {
+          "name": "DEMO Contact — Process Engineering",
+          "role": "Process engineering"
+        }
+      ],
+      "next_action": {
+        "action": "Confirm package types, UPH and host protocol for the marking line",
+        "due": "@today+2",
+        "owner": "Product Manager"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "cus-demo-ems",
+      "entity": "customer",
+      "name": "DEMO EMS Customer",
+      "industry": "EMS",
+      "segment": "Key Account",
+      "location": "India (DEMO)",
+      "contacts": [
+        {
+          "name": "DEMO Contact — SMT Engineering",
+          "role": "SMT engineering"
+        }
+      ],
+      "next_action": {
+        "action": "Share C2i concept and ask for board samples",
+        "due": "@today+5",
+        "owner": "Product Manager"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-spec",
+        "verification_status": "DRAFT",
+        "note": "DEMO scenario record (spec §133–§137). Not real customer data."
+      },
+      "id": "cus-demo-battery",
+      "entity": "customer",
+      "name": "DEMO Battery Pack Customer",
+      "industry": "Battery",
+      "segment": "Growth",
+      "location": "India (DEMO)",
+      "next_action": {
+        "action": "Qualify busbar welding interest (materials, joint design)",
+        "due": "@today+9",
+        "owner": "Product Manager"
+      }
+    }
+  ]
+}

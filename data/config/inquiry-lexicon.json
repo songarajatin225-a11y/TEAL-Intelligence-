@@ -1,0 +1,419 @@
+{
+  "dataset": {
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "id": "inquiry-lexicon",
+    "kind": "config",
+    "title": "Inquiry lexicon",
+    "description": "Terms that map free-text customer inquiries to process families, materials, needs (modules), scale and care signals. Used by \"Create product from customer inquiry\".",
+    "entity": "config",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-legacy-laser-sim"
+    ]
+  },
+  "config": {
+    "process": {
+      "mark": [
+        "mark",
+        "marking",
+        "engrav",
+        "etch",
+        "identif",
+        "serial",
+        "traceab",
+        "2d code",
+        "dmc",
+        "datamatrix",
+        "barcode",
+        "logo",
+        "part number",
+        "udi",
+        "anneal"
+      ],
+      "weld": [
+        "weld",
+        "join",
+        "joining",
+        "seam",
+        "spot weld",
+        "hermetic",
+        "seal",
+        "braze",
+        "stitch",
+        "hairpin"
+      ],
+      "clean": [
+        "clean",
+        "derust",
+        "rust",
+        "descal",
+        "strip",
+        "paint remov",
+        "degreas",
+        "oxide",
+        "surface prep",
+        "pre-treat",
+        "deflash"
+      ],
+      "cut": [
+        "cut",
+        "cutting",
+        "slit",
+        "singulat",
+        "profil",
+        "trim",
+        "kerf",
+        "drill",
+        "perforat",
+        "notch",
+        "scribe"
+      ],
+      "semi": [
+        "wafer",
+        "die ",
+        "semiconductor",
+        "atmp",
+        "osat",
+        "fab",
+        "lead frame",
+        "decap",
+        "interposer",
+        "package mark",
+        "package",
+        "strip",
+        "leadframe"
+      ],
+      "volt": [
+        "battery",
+        "cell ",
+        "busbar",
+        "tab weld",
+        "pouch",
+        "prismatic",
+        "18650",
+        "21700",
+        "4680",
+        "gigafactory",
+        "electrode"
+      ],
+      "auto": [
+        "automat",
+        "turnkey",
+        "integrat",
+        "production line",
+        "rotary table",
+        "pick and place",
+        "material handling"
+      ]
+    },
+    "material": {
+      "steel": [
+        "steel",
+        "mild steel",
+        "carbon steel",
+        "ms plate"
+      ],
+      "ss": [
+        "stainless",
+        "ss304",
+        "ss316",
+        "304",
+        "316",
+        "inox"
+      ],
+      "al": [
+        "alumin",
+        "anodis",
+        "anodiz",
+        "al alloy"
+      ],
+      "cu": [
+        "copper",
+        "brass",
+        "bronze",
+        "cu busbar"
+      ],
+      "ti": [
+        "titanium"
+      ],
+      "ni": [
+        "nickel",
+        "inconel",
+        "plated steel"
+      ],
+      "si": [
+        "silicon",
+        "wafer",
+        "sic",
+        "gan"
+      ],
+      "fr4": [
+        "pcb",
+        "fr4",
+        "solder mask",
+        "printed circuit",
+        "board",
+        "panel"
+      ],
+      "pi": [
+        "polyimide",
+        "flex circuit",
+        "kapton",
+        "coverlay",
+        "flexible circuit"
+      ],
+      "poly": [
+        "plastic",
+        "polymer",
+        "abs",
+        "polycarbonate",
+        "peek",
+        "nylon",
+        "acrylic",
+        "resin"
+      ],
+      "glass": [
+        "glass"
+      ],
+      "al2o3": [
+        "alumina",
+        "ceramic substrate"
+      ],
+      "aln": [
+        "aln",
+        "aluminium nitride",
+        "aluminum nitride"
+      ],
+      "emc": [
+        "mould compound",
+        "mold compound",
+        "epoxy",
+        "qfn",
+        "bga",
+        "qfp",
+        "soic",
+        "encapsulat",
+        "package",
+        "ic package",
+        "semiconductor package"
+      ]
+    },
+    "need": {
+      "visfid": [
+        "accuracy",
+        "accurate",
+        "precise",
+        "placement",
+        "position",
+        "align",
+        "fiducial",
+        "tolerance"
+      ],
+      "visver": [
+        "verify",
+        "verificat",
+        "grade",
+        "grading",
+        "readab",
+        "ocv",
+        "29158",
+        "15415",
+        "quality check",
+        "inspect"
+      ],
+      "conveyor": [
+        "inline",
+        "in-line",
+        "conveyor",
+        "smema",
+        "hermes",
+        "continuous flow",
+        "existing line"
+      ],
+      "fume": [
+        "fume",
+        "extract",
+        "smoke",
+        "dust",
+        "ventilat",
+        "emission"
+      ],
+      "rotary": [
+        "cylindric",
+        "round part",
+        "tube",
+        "shaft",
+        "rotat",
+        "360",
+        "circumferen",
+        "ring"
+      ],
+      "scan3d": [
+        "curved",
+        "stepped",
+        "3d surface",
+        "uneven",
+        "contour",
+        "varying height"
+      ],
+      "robot6": [
+        "robot",
+        "six axis",
+        "6 axis",
+        "complex geometry",
+        "3d part",
+        "articulat"
+      ],
+      "cleanrm": [
+        "cleanroom",
+        "clean room",
+        "iso class",
+        "particulate",
+        "fab environment"
+      ],
+      "dryroom": [
+        "dry room",
+        "dew point",
+        "humidity control"
+      ],
+      "glovebx": [
+        "inert",
+        "nitrogen",
+        "argon",
+        "glovebox",
+        "controlled atmosphere",
+        "vacuum"
+      ],
+      "oct": [
+        "penetration",
+        "weld depth",
+        "depth control",
+        "oct"
+      ],
+      "magazine": [
+        "magazine",
+        "strip",
+        "jedec",
+        "tray",
+        "carrier"
+      ],
+      "rotoidx": [
+        "rotary index",
+        "dial",
+        "multi station",
+        "indexing"
+      ],
+      "reject": [
+        "reject",
+        "segregat",
+        "bad part",
+        "scrap",
+        "fail part"
+      ],
+      "cobotld": [
+        "cobot",
+        "collaborat",
+        "operator load"
+      ],
+      "r2r": [
+        "roll to roll",
+        "reel",
+        "web",
+        "continuous strip"
+      ],
+      "cepath": [
+        "ce mark",
+        "ce path",
+        "conformity",
+        "export to europe"
+      ],
+      "seamtrk": [
+        "seam track",
+        "gap",
+        "fit up",
+        "tolerance stack"
+      ],
+      "wobble": [
+        "gap",
+        "spatter",
+        "bridging"
+      ]
+    },
+    "scale": {
+      "high": [
+        "high volume",
+        "mass production",
+        "gigafactory",
+        "million",
+        "24/7",
+        "three shift",
+        "high throughput",
+        "ppm",
+        "parts per minute"
+      ],
+      "low": [
+        "low volume",
+        "prototype",
+        "job work",
+        "r&d",
+        "lab",
+        "pilot",
+        "small batch",
+        "one off"
+      ]
+    },
+    "care": {
+      "heat": [
+        "no heat",
+        "heat sensitive",
+        "cold",
+        "minimal haz",
+        "haz",
+        "low thermal",
+        "delicate",
+        "thin"
+      ],
+      "medical": [
+        "medical",
+        "implant",
+        "surgical",
+        "udi",
+        "fda",
+        "iso 13485",
+        "validated",
+        "regulated"
+      ],
+      "speed": [
+        "fast",
+        "cycle time",
+        "takt",
+        "seconds",
+        "throughput",
+        "speed"
+      ]
+    },
+    "_os_additions": {
+      "process": {
+        "semi": [
+          "package",
+          "strip",
+          "leadframe"
+        ]
+      },
+      "material": {
+        "emc": [
+          "package",
+          "ic package",
+          "semiconductor package"
+        ]
+      },
+      "need": {
+        "magazine": [
+          "strip",
+          "magazine"
+        ]
+      }
+    }
+  }
+}
