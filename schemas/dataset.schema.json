@@ -1,0 +1,84 @@
+{
+  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/dataset.schema.json",
+  "title": "TEAL dataset file",
+  "description": "Every file under /data: a `dataset` header plus `records` (or `config` for configuration datasets). Records are validated per entity schema.",
+  "type": "object",
+  "required": [
+    "dataset"
+  ],
+  "properties": {
+    "dataset": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "last_updated": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+        },
+        "data_type": {
+          "type": "string",
+          "enum": [
+            "TEAL_INTERNAL",
+            "PUBLIC",
+            "EXTERNAL",
+            "DEMO",
+            "CALCULATED",
+            "INFERRED",
+            "AI_GENERATED",
+            "USER_CREATED"
+          ]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_version": {
+          "type": "string"
+        },
+        "partition": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "entity",
+        "version",
+        "last_updated",
+        "data_type",
+        "source_ids"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "config": {
+      "type": "object"
+    }
+  }
+}

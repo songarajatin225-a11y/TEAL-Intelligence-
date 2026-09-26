@@ -50,7 +50,8 @@ export function buildCatalog(): { generated_at: string; datasets: CatalogEntry[]
       sha256: createHash('sha256').update(readFileSync(p)).digest('hex').slice(0, 16),
     };
   });
-  return { generated_at: new Date().toISOString().slice(0, 10), datasets };
+  // deterministic: the catalog date is the newest dataset date, so CI can detect a stale catalog
+  return { generated_at: datasets.map((d) => d.last_updated).sort().at(-1) ?? '1970-01-01', datasets };
 }
 
 const isMain = process.argv[1]?.endsWith('generateCatalog.ts');

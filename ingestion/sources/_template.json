@@ -1,0 +1,33 @@
+{
+  "id": "example-manufacturer-catalogue",
+  "name": "Example — manufacturer-provided laser source catalogue (TEMPLATE, not a real source)",
+  "publisher": "Name of the publishing organisation",
+  "kind": "file",
+  "location": "ingestion/inbox/example-catalogue.csv",
+  "format": "csv",
+  "target_entity": "laser_source",
+  "data_type": "EXTERNAL",
+  "license": "State the licence or permission, e.g. 'Provided by the manufacturer for internal comparison; facts only'",
+  "terms_url": "https://example.com/terms",
+  "permission": {
+    "basis": "manufacturer-provided",
+    "reviewed_by": "Reviewer name",
+    "reviewed_at": "2026-01-01",
+    "notes": "What was checked: licence, robots.txt, terms of use, whether facts may be stored in a PUBLIC repository"
+  },
+  "enabled": false,
+  "rate_limit_ms": 5000,
+  "key_columns": ["Manufacturer", "Model"],
+  "mapping": {
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "family": "Series",
+    "wavelength": { "column": "Wavelength", "type": "quantity", "unit": "nm" },
+    "average_power_w": { "column": "Power (W)", "type": "list", "separator": "/", "items": "number" },
+    "mode": { "constant": "pulsed" },
+    "m2": { "column": "M2", "type": "number" },
+    "beam_diameter_mm": { "column": "Beam diameter (mm)", "type": "number" },
+    "cooling": "Cooling",
+    "datasheet_url": "Datasheet"
+  }
+}

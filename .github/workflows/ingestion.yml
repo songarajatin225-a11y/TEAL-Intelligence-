@@ -1,0 +1,37 @@
+name: Ingestion (manual)
+
+# Runs the reviewed-source ingestion pipeline and uploads review candidates. It never commits:
+# a human reviews ingestion/candidates/<source>/REVIEW.md and opens a pull request (spec §101).
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Source id from ingestion/sources/ (empty = all enabled sources)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run ingest:discover
+      - name: Ingest (input passed via env, never interpolated into the script)
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: npm run ingest -- ${SOURCE:+"$SOURCE"}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ingestion-candidates
+          path: ingestion/candidates
+          if-no-files-found: ignore
+          retention-days: 30

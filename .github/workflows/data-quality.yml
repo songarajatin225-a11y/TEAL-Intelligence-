@@ -1,0 +1,38 @@
+name: Data quality
+
+# Missing sources, broken references, invalid units, duplicates, stale prices/verifications,
+# undated FX, conflicts (spec §104). Errors fail; the report is attached to every run.
+on:
+  push:
+    branches: [main]
+    paths: ['data/**', 'src/domain/**', 'src/services/dataQuality.ts', 'scripts/data/**']
+  pull_request:
+    paths: ['data/**', 'src/domain/**', 'src/services/dataQuality.ts', 'scripts/data/**']
+  schedule:
+    - cron: '17 3 * * 1' # weekly: staleness grows even when nothing is committed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Data quality report
+        run: npm run data:quality
+      - name: Publish summary
+        if: always()
+        run: test -f reports/data-quality.md && cat reports/data-quality.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data-quality-report
+          path: reports/
+          retention-days: 30

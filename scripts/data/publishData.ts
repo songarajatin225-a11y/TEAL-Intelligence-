@@ -9,8 +9,10 @@ import { DATA_DIR, PUBLIC_DIR, ROOT } from '../lib/dataset';
 
 const outData = join(PUBLIC_DIR, 'data');
 const outKnowledge = join(PUBLIC_DIR, 'knowledge');
-for (const d of [outData, outKnowledge]) if (existsSync(d)) rmSync(d, { recursive: true });
+const outSchemas = join(PUBLIC_DIR, 'schemas');
+for (const d of [outData, outKnowledge, outSchemas]) if (existsSync(d)) rmSync(d, { recursive: true });
 mkdirSync(outData, { recursive: true });
 cpSync(DATA_DIR, outData, { recursive: true, filter: (src) => !src.endsWith('.md') });
 cpSync(join(ROOT, 'knowledge'), outKnowledge, { recursive: true, filter: (src) => !/\.(docx|py)$/.test(src) });
-console.log('✔ Published data → public/data, knowledge → public/knowledge');
+if (existsSync(join(ROOT, 'schemas'))) cpSync(join(ROOT, 'schemas'), outSchemas, { recursive: true });
+console.log('✔ Published data → public/data, knowledge → public/knowledge, schemas → public/schemas');

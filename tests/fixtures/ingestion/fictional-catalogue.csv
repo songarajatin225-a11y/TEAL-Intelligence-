@@ -1,0 +1,6 @@
+Manufacturer,Model,Series,Wavelength,Power (W),M2,Beam diameter (mm),Cooling,Datasheet
+Fictional Photonics GmbH,FX-20,FX,1064 nm,20/30,1.3,7,Air,
+Fictional Photonics GmbH,FX-50,FX,1.064 µm,50,1.5,7,Air,
+FICTIONAL PHOTONICS,FX-50,FX,1064 nm,50,1.6,7,Air,
+Test Lasers Ltd.,TL-UV3,TL,355nm,3,n/a,,Water,
+,,,532 nm,5,,,,

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "TEAL Engineering Intelligence OS — GitHub-native engineering digital thread (static-first, IndexedDB workspace).",
+  "description": "TEAL Engineering Intelligence OS \u2014 GitHub-native engineering digital thread (static-first, IndexedDB workspace).",
   "scripts": {
     "dev": "npm run data:prepare && vite",
     "build": "npm run data:prepare && tsc -b && vite build",
@@ -20,7 +20,12 @@
     "data:graph": "tsx scripts/data/generateGraph.ts",
     "data:index": "tsx scripts/ingestion/generateSearchIndex.ts",
     "data:publish": "tsx scripts/data/publishData.ts",
-    "data:prepare": "npm run data:validate && npm run data:catalog && npm run data:publish && npm run data:graph && npm run data:index"
+    "data:prepare": "npm run data:validate && npm run data:schemas && npm run data:catalog && npm run data:publish && npm run data:graph && npm run data:index",
+    "data:apply": "tsx scripts/data/applyChangePackage.ts",
+    "ingest:discover": "tsx scripts/ingestion/discoverSources.ts",
+    "ingest": "tsx scripts/ingestion/runIngestion.ts",
+    "legacy:embed": "tsx scripts/migration/embedLegacyApps.ts",
+    "check": "npm run typecheck && npm run lint && npm test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
