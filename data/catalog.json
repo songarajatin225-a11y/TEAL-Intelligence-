@@ -255,15 +255,16 @@
       "entity": "opportunity",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 3,
+      "record_count": 6,
       "last_updated": "2026-09-26",
       "schema": "schemas/opportunity.schema.json",
       "source_ids": [
+        "src-os-master-prompt",
         "src-os-spec"
       ],
       "data_type": "DEMO",
       "relative_dates": true,
-      "sha256": "5150074d485a6b53"
+      "sha256": "59eb29067b7957ee"
     },
     {
       "id": "demo-pocs",
@@ -336,6 +337,42 @@
       "data_type": "DEMO",
       "relative_dates": true,
       "sha256": "cfc9c0e414715cc5"
+    },
+    {
+      "id": "domains",
+      "title": "Industry domains",
+      "path": "domains/domains.json",
+      "description": "The domain architecture of TEAL Intelligence (master prompt §04–§13). Data-driven: add a record to add a domain.",
+      "entity": "domain",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 6,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/domain.schema.json",
+      "source_ids": [
+        "src-os-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "90b26e7669fe21e9"
+    },
+    {
+      "id": "equipment",
+      "title": "Equipment intelligence",
+      "path": "domains/equipment.json",
+      "description": "Market equipment by domain (semiconductor, battery, EMS …). Empty until records are added from sourced datasheets — nothing is seeded.",
+      "entity": "equipment",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/equipment.schema.json",
+      "source_ids": [
+        "src-os-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "records",
+      "sha256": "ea57f2319b43eec4"
     },
     {
       "id": "handbook-evidence",
@@ -445,6 +482,24 @@
       "data_type": "TEAL_INTERNAL",
       "partition": "knowledge",
       "sha256": "c440cee092279ebd"
+    },
+    {
+      "id": "knowledge-articles",
+      "title": "Knowledge articles",
+      "path": "knowledge-articles.json",
+      "description": "User-authored engineering articles (title, category, summary, technical details, applications, design considerations, references). None seeded.",
+      "entity": "article",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/article.schema.json",
+      "source_ids": [
+        "src-os-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "knowledge",
+      "sha256": "a9c07444e9c95db0"
     },
     {
       "id": "laser-source-classes",
@@ -577,6 +632,24 @@
       "sha256": "a01b4ff46b56c51b"
     },
     {
+      "id": "roadmap-items",
+      "title": "Roadmap items",
+      "path": "roadmap-items.json",
+      "description": "Technology / product / capability roadmap 2026–2030+. None seeded — TEAL adds its own.",
+      "entity": "roadmap_item",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-26",
+      "schema": "schemas/roadmap_item.schema.json",
+      "source_ids": [
+        "src-os-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "records",
+      "sha256": "b502238a3344db61"
+    },
+    {
       "id": "semiconductor-value-chain",
       "title": "Semiconductor value chain (process steps)",
       "path": "semiconductor/value-chain.json",
@@ -603,12 +676,12 @@
       "entity": "source",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 8,
+      "record_count": 9,
       "last_updated": "2026-09-26",
       "schema": "schemas/source.schema.json",
       "source_ids": [],
       "data_type": "TEAL_INTERNAL",
-      "sha256": "c05d9bea18fc5dc1"
+      "sha256": "1704834f556b668b"
     },
     {
       "id": "suppliers",
@@ -632,19 +705,20 @@
       "id": "technologies",
       "title": "Technology radar topics",
       "path": "technology/technologies.json",
-      "description": "Radar topics from the OS specification. Radar status is deliberately unassessed until evidence is attached.",
+      "description": "Technology topics from the OS specification and the master prompt. TRL, maturity and radar ring are deliberately unassessed until evidence or a reasoned team decision is recorded.",
       "entity": "technology",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 16,
+      "record_count": 39,
       "last_updated": "2026-09-26",
       "schema": "schemas/technology.schema.json",
       "source_ids": [
+        "src-os-master-prompt",
         "src-os-spec"
       ],
       "data_type": "TEAL_INTERNAL",
       "partition": "research",
-      "sha256": "81d113d3d6af3924"
+      "sha256": "f46ec912277c2da9"
     }
   ]
 }

@@ -39,6 +39,7 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 
 | File | Covers |
 |---|---|
+| `intelligenceOs.test.ts` | trust labels, TRL maturity rule, domains as data, parametric search on the example query, cross-domain evidence, application engine (and no machine without an application), all 11 document templates, requirement capture, lifecycle, new calculators |
 | `masterData.test.ts` | every catalogued record validates; unique ids; no broken references; zero data-quality errors; DEMO labelling; no seeded results |
 | `inquiry.test.ts` | flagship workflow for final-demo Scenario 1: platform choice, full thread drafted, all records schema-valid, references resolve, nothing fabricated, atomic save, all-or-nothing rejection |
 | `thread.test.ts` | Product → BOM → Cost; Requirement → FAT/SAT → Traceability; Requirement → Module → BOM; Project → Gate |
@@ -50,11 +51,12 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 
 | File | Covers |
 |---|---|
-| `smoke.spec.ts` | all 73 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
+| `smoke.spec.ts` | all 95 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
 | `workflows.spec.ts` | create customer → LOCAL DRAFT → change-package download; inquiry → package → opportunity → traceability; configuration → BOM + cost; FAT generation (NOT RUN); search; configurator physics/compatibility; backup download |
 | `offline.spec.ts` | after one visit the app and data load offline and the shell says so |
 | `intelligence.spec.ts` | health + relationship bar, compare, table/cards/board, saved views, board quick edit, Ask Intelligence, supplier risk matrix, unit converter, duplicates, route aliases |
 | `rooms.spec.ts` | program room + pre-linked activity, rooms index, LeadConnect, business case, radar rings, multi-step forms, graph focus |
+| `os.spec.ts` | master-prompt IA and sub-groups, business flow, executive board, application engine, cross-domain cell, parametric search, architecture tree, requirement capture, execution views, PRD generation + download, trust labels, LOCAL DATA sync state, development / value / settings / use cases |
 | `shell.spec.ts` | navigation shell, command palette, search, shortcuts, quick create, drawers, tabs, pins, theme/density, workspaces, focus mode, help, onboarding, mobile, and **axe-core accessibility** (light + dark, 14 pages) |
 
 `tests/e2e/fixtures.ts` fails any test that logs a page error or console error.

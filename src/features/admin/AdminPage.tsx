@@ -7,7 +7,9 @@ import { Badge, Button, Card, Field, Input, Notice, PageHeader, Select, Stat, Ta
 import type { AnyRecord } from '../../domain';
 import { useData } from '../../hooks/useData';
 import { repo, validateRecord } from '../../repositories';
-import { workspaceBus, workspaceDb, type DraftRow } from '../../repositories/workspaceDb';
+import { type DraftRow } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
+import { providers } from '../../services/providers';
 import { exportWorkspace, importWorkspace } from '../../services/backup';
 import { buildChangePackage, parseChangePackage, type ParsedChangePackage } from '../../services/changePackage';
 import { mapCostPlatform, mapTrackerBackup, readCostFromBrowser, readTrackerFromBrowser, type LegacyImportResult } from '../../services/legacyImport';
@@ -23,12 +25,12 @@ export default function AdminPage() {
   const { drafts: draftCount, catalog, records } = useData();
   const [drafts, setDrafts] = useState<DraftRow[]>([]);
   useEffect(() => {
-    workspaceDb().drafts.orderBy('updated_at').reverse().toArray().then(setDrafts).catch(() => setDrafts([]));
+    void DatabaseService.drafts().then(setDrafts);
   }, [draftCount, records]);
 
   return (
     <div className="space-y-3">
-      <PageHeader eyebrow="Admin" title="Data & Workspace" subtitle="Local workspace, change packages, backups, legacy import and the local workspace lock." />
+      <PageHeader eyebrow="Data" title="Data Manager" subtitle="Local workspace, change packages, backups, legacy import and the local workspace lock." />
       <Notice tone="draft">
         <strong>Permanent repository update requires a GitHub commit.</strong> Records you create or edit here are LOCAL DRAFTS stored in this browser (IndexedDB). Export a change package and apply it with <code>scripts/data/applyChangePackage.ts</code> in a pull request to update master data.
       </Notice>
@@ -56,12 +58,7 @@ function DraftsCard({ drafts }: { drafts: DraftRow[] }) {
   const shown = drafts.filter((d) => !filter || d.entity === filter);
   const discardAll = async () => {
     if (!window.confirm(`Discard all ${drafts.length} local draft(s)? Master data is unaffected; unexported local work is lost.`)) return;
-    const db = workspaceDb();
-    await db.transaction('rw', db.drafts, db.changelog, async () => {
-      await db.drafts.clear();
-      await db.changelog.add({ record_id: '*', entity: '*', action: 'restore', at: new Date().toISOString(), summary: `Discarded all local drafts (${drafts.length})` });
-    });
-    workspaceBus.emit({ action: 'delete', summary: `All local drafts (${drafts.length})` });
+    await DatabaseService.discardAllDrafts();
   };
   return (
     <Card
@@ -105,16 +102,17 @@ function DraftsCard({ drafts }: { drafts: DraftRow[] }) {
   );
 }
 
-function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
+export function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
   const [by, setBy] = useState('');
   const [note, setNote] = useState('');
   const [preview, setPreview] = useState<ParsedChangePackage | null>(null);
   const [msg, setMsg] = useState<{ tone: 'info' | 'warn'; text: string } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const exportPkg = async () => {
-    const changelog = await workspaceDb().changelog.toArray();
+    const changelog = await DatabaseService.changelog();
     const { manifest, zip } = buildChangePackage(drafts, changelog, by, note);
     download(`teal-change-package-${stamp()}.zip`, zip, 'application/zip');
+    await providers.sync.markExported();
     setMsg({ tone: 'info', text: `Exported ${manifest.records.length} record(s). Apply with scripts/data/applyChangePackage.ts and open a pull request.` });
   };
   const openPkg = async (f: File) => {
@@ -190,7 +188,7 @@ function ChangePackageCard({ drafts }: { drafts: DraftRow[] }) {
   );
 }
 
-function BackupCard() {
+export function BackupCard() {
   const [mode, setMode] = useState<'merge' | 'replace'>('merge');
   const [msg, setMsg] = useState<{ tone: 'info' | 'warn'; text: string } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -238,7 +236,7 @@ function BackupCard() {
 
 type LegacySource = 'tracker' | 'cost';
 
-function LegacyImportCard() {
+export function LegacyImportCard() {
   const [result, setResult] = useState<(LegacyImportResult & { source: LegacySource; valid: AnyRecord[]; invalid: string[] }) | null>(null);
   const [msg, setMsg] = useState<{ tone: 'info' | 'warn'; text: string } | null>(null);
   const trackerFile = useRef<HTMLInputElement>(null);
@@ -352,7 +350,7 @@ function LegacyImportCard() {
   );
 }
 
-function LockCard() {
+export function LockCard() {
   const [locked, setLocked] = useState<boolean | null>(null);
   const [a, setA] = useState('');
   const [b, setB] = useState('');

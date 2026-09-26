@@ -8,14 +8,17 @@ import { useRecents } from '../../app/shell/recents';
 import { useShell } from '../../app/shell/ShellContext';
 import { useAttention } from '../../app/shell/StatusCenter';
 import { DataConfidence, StatusBadge } from '../../components/badges';
+import { BusinessStory } from '../../components/BusinessStory';
 import { recordPath } from '../../components/RecordLink';
+import { ExecutiveBoard } from './ExecutiveBoard';
 import { Button, buttonClass, Card, EmptyState, SectionHeader } from '../../components/ui';
 import type { Activity as Act, CostModel, Opportunity, Poc, Product, Project, Risk } from '../../domain/entities';
 import { OPPORTUNITY_STAGES } from '../../domain/entities';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { summarizeCostModel, useFx } from '../../hooks/useCost';
 import { useData } from '../../hooks/useData';
-import { workspaceDb, type ChangeLogRow } from '../../repositories/workspaceDb';
+import { type ChangeLogRow } from '../../repositories/workspaceDb';
+import { DatabaseService } from '../../services/database';
 import { attentionCounts, type AttentionItem } from '../../services/attention';
 import { runDataQuality } from '../../services/dataQuality';
 import { isActive } from '../../services/nextAction';
@@ -51,7 +54,7 @@ export default function CommandCenter() {
       .catch(() => setSections(null));
   }, []);
   useEffect(() => {
-    workspaceDb().changelog.orderBy('seq').reverse().limit(6).toArray().then(setChanges).catch(() => setChanges([]));
+    void DatabaseService.changelog({ limit: 6 }).then(setChanges);
   }, [records]);
 
   const d = useMemo(() => {
@@ -113,13 +116,17 @@ export default function CommandCenter() {
         <div className="max-w-3xl">
           <div className="mb-1 text-micro font-semibold uppercase tracking-[0.1em] text-accent-2">TEAL Intelligence · {ws.label}</div>
           <h1 className="text-title font-semibold tracking-[-0.02em]">{exec ? 'Executive View' : 'Mission Control'}</h1>
-          <p className="mt-1 text-lead text-ink-2">A connected view of products, customers, processes, projects, cost, suppliers and engineering knowledge.</p>
+          <p className="mt-1 text-lead text-ink-2">TEAL’s product development and technology intelligence platform — market opportunities, technology, applications, product architecture, suppliers, cost, localization and execution in one system.</p>
         </div>
         <div className="flex items-center gap-2 text-meta text-ink-3">
           <span className="signal signal-live text-ok" aria-hidden />
           Data {catalog?.generated_at ?? '—'} · {records.length} records{drafts ? ` · ${drafts} local draft${drafts === 1 ? '' : 's'}` : ''}
         </div>
       </div>
+
+      <nav aria-label="Business flow" className="surface rounded-card px-3 py-2">
+        <BusinessStory />
+      </nav>
 
       {/* priority strip */}
       <div role="group" aria-label="Priority" className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -144,6 +151,8 @@ export default function CommandCenter() {
           );
         })}
       </div>
+
+      {exec && <ExecutiveBoard />}
 
       {/* attention hero + side rail */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">

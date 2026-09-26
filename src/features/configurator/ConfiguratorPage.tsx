@@ -11,12 +11,11 @@ import { assetUrl } from '../../utils/paths';
 import { download, stamp } from '../../utils/export';
 import { todayIso } from '../../utils/dates';
 import type { ConfigState, ConfiguratorEngine } from './engine';
+import { stateFromConfiguration } from './state';
+export { stateFromConfiguration };
 
 const inr = (v: number | null | undefined) => (v == null ? '—' : `₹ ${Math.round(v).toLocaleString('en-IN')}`);
 
-export function stateFromConfiguration(c: Configuration): ConfigState {
-  return { productKey: c.product_id.replace(/^prd-/, ''), appKey: c.application_key, sourceKey: c.source_key, powerW: c.power_w, lensKey: c.lens_key, modules: c.modules, extras: c.extras, software: c.software, targetPerHour: c.target_per_hour };
-}
 
 export function configurationFromState(e: ConfiguratorEngine, s: ConfigState, base: Partial<Configuration> & { id: string; name: string }): Configuration {
   const price = e.price(s);

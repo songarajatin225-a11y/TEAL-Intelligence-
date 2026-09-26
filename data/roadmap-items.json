@@ -1,0 +1,16 @@
+{
+  "dataset": {
+    "id": "roadmap-items",
+    "title": "Roadmap items",
+    "description": "Technology / product / capability roadmap 2026–2030+. None seeded — TEAL adds its own.",
+    "entity": "roadmap_item",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-os-master-prompt"
+    ],
+    "partition": "records"
+  },
+  "records": []
+}

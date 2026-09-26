@@ -6,6 +6,8 @@ import { trackRecent } from '../../app/shell/recents';
 import { DataTypeBadge, StatusBadge } from '../../components/badges';
 import { EntityForm } from '../../components/EntityForm';
 import { HealthBadge, HealthCard, useHealth } from '../../components/Health';
+import { LifecycleCard } from '../../components/LifecycleCard';
+import { SevenQuestions } from '../../components/SevenQuestions';
 import { recordPath } from '../../components/RecordLink';
 import { RelationshipBar } from '../../components/RelationshipBar';
 import { NextActionLine } from '../../components/ThreadPanels';
@@ -152,6 +154,7 @@ export default function RoomPage() {
               <p className="text-meta text-ink-3">Nothing overdue, blocked or at risk in this room.</p>
             )}
           </Card>
+          {['opportunity', 'project', 'product'].includes(subject.entity) && <SevenQuestions record={subject} />}
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <Card title="Activities & meetings" icon={ListChecks} description={`${activities.length} activities · ${meetings.length} meetings`}>
               <RecordList
@@ -185,6 +188,7 @@ export default function RoomPage() {
           </Card>
         </div>
         <div className="min-w-0 space-y-4">
+          {['opportunity', 'project', 'product'].includes(subject.entity) && <LifecycleCard id={subject.id} />}
           <HealthCard record={subject} />
           {gaps.length > 0 && (
             <Card title="What is missing" icon={ListChecks}>

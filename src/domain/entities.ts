@@ -94,6 +94,18 @@ export const Opportunity = z.object({
   configuration_id: ref.optional(),
   inquiry_text: z.string().optional(),
   industry: z.string().optional(),
+  /* Opportunity matrix (final master prompt §28) — every field optional; blank = UNKNOWN, never scored automatically */
+  market: z.string().optional(),
+  domain_id: ref.optional(),
+  technology_ids: refs.optional(),
+  market_size: money.nullable().optional(),
+  market_size_source: z.string().optional(),
+  teal_capability: z.string().optional(),
+  partner_requirement: z.string().optional(),
+  investment: money.nullable().optional(),
+  development_time: z.string().optional(),
+  localization_potential: z.string().optional(),
+  strategic_relevance: z.string().optional(),
 });
 export type Opportunity = z.infer<typeof Opportunity>;
 
@@ -954,6 +966,22 @@ export const Technology = z.object({
   adoption: z.enum(TECH_ADOPTION).nullable().optional(),
   adoption_rationale: z.string().optional(),
   adoption_reviewed: IsoDate.optional(),
+  /* Technology intelligence record (final master prompt §17) */
+  category: z.string().optional(),
+  /** Technology Readiness Level 1–9; null = not assessed. Requires trl_basis. */
+  trl: z.number().int().min(1).max(9).nullable().optional(),
+  trl_basis: z.string().optional(),
+  performance: z.string().optional(),
+  supplier_ids: refs.optional(),
+  alternate_ids: refs.optional(),
+  cost_note: z.string().optional(),
+  lead_time: z.string().optional(),
+  localization: z.string().optional(),
+  risks: z.array(z.string()).optional(),
+  application_ids: refs.optional(),
+  domain_ids: refs.optional(),
+  laser_source_ids: refs.optional(),
+  references: z.array(z.string()).optional(),
   evidence_ids: refs.optional(),
   knowledge_refs: z.array(z.string()).optional(),
 });
@@ -1062,3 +1090,105 @@ export const ItemMaster = z.object({
   price_date: IsoDate.optional(),
 });
 export type ItemMaster = z.infer<typeof ItemMaster>;
+
+/* ============================================ domains (final master prompt §04–§13) */
+
+/** A titled list inside a domain: a process flow (ordered) or a catalogue list. */
+export const DomainSection = z.object({
+  title: z.string(),
+  kind: z.enum(['flow', 'list']),
+  items: z.array(z.string()),
+});
+export type DomainSection = z.infer<typeof DomainSection>;
+
+/**
+ * An industry domain (Laser & Photonics, Electronics & EMS, Semiconductor, Battery & New Energy,
+ * Industrial Automation, Advanced Manufacturing …). Data-driven: a new domain is a new record in
+ * /data/domains — no code change.
+ */
+export const Domain = z.object({
+  ...baseShape,
+  entity: z.literal('domain'),
+  code: z.string(),
+  order: z.number().int(),
+  summary: z.string(),
+  /** the domain's end-to-end manufacturing lifecycle (shown as a chain) */
+  lifecycle: z.array(z.string()),
+  sections: z.array(DomainSection),
+  /** laser applications in this domain — feed the cross-domain map */
+  laser_applications: z.array(z.string()),
+  /** fields the domain's equipment database tracks */
+  equipment_fields: z.array(z.string()),
+  /** parts / products the customer makes (application engine step "Product") */
+  customer_products: z.array(z.string()).optional(),
+  industry_ids: refs.optional(),
+  technology_ids: refs.optional(),
+  /** existing deep page for this domain, if any */
+  hub_route: z.string().optional(),
+  keywords: z.array(z.string()),
+});
+export type Domain = z.infer<typeof Domain>;
+
+/** Equipment intelligence (semiconductor §07, battery §12, EMS §06): market equipment, not TEAL machines. */
+export const Equipment = z.object({
+  ...baseShape,
+  entity: z.literal('equipment'),
+  domain_id: ref,
+  equipment_type: z.string(),
+  process: z.string().optional(),
+  wafer_size: z.string().optional(),
+  material: z.string().optional(),
+  throughput: z.string().optional(),
+  accuracy: z.string().optional(),
+  process_capability: z.string().optional(),
+  automation_level: z.string().optional(),
+  laser_requirement: z.string().optional(),
+  vision: z.string().optional(),
+  motion: z.string().optional(),
+  safety: z.string().optional(),
+  supplier_id: ref.optional(),
+  technology_ids: refs.optional(),
+  capex: money.nullable().optional(),
+  currency: Currency.optional(),
+  localization_potential: z.string().optional(),
+  qualification_requirements: z.string().optional(),
+  cleanroom_requirement: z.string().optional(),
+});
+export type Equipment = z.infer<typeof Equipment>;
+
+/** Knowledge article (§25): user-authored engineering knowledge, alongside the handbooks. */
+export const Article = z.object({
+  ...baseShape,
+  entity: z.literal('article'),
+  category: z.string(),
+  summary: z.string(),
+  technical_details: z.string().optional(),
+  applications: z.array(z.string()).optional(),
+  design_considerations: z.string().optional(),
+  references: z.array(z.string()).optional(),
+  source: z.string().optional(),
+  date: IsoDate.optional(),
+  domain_id: ref.optional(),
+  technology_ids: refs.optional(),
+});
+export type Article = z.infer<typeof Article>;
+
+export const ROADMAP_YEARS = ['2026', '2027', '2028', '2029', '2030+'] as const;
+/** Technology / product roadmap item (§29). */
+export const RoadmapItem = z.object({
+  ...baseShape,
+  entity: z.literal('roadmap_item'),
+  year: z.enum(ROADMAP_YEARS),
+  kind: z.enum(['Technology', 'Product', 'Capability']),
+  technology_id: ref.optional(),
+  product_id: ref.optional(),
+  capability: z.string().optional(),
+  trl_target: z.number().int().min(1).max(9).nullable().optional(),
+  supplier_ids: refs.optional(),
+  localization: z.string().optional(),
+  investment: money.nullable().optional(),
+  currency: Currency.optional(),
+  target_market: z.string().optional(),
+  milestone: z.string().optional(),
+});
+export type RoadmapItem = z.infer<typeof RoadmapItem>;

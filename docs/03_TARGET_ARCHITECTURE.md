@@ -14,7 +14,7 @@ the browser = the application · IndexedDB = local working database.
      /src          /data/**      /knowledge/handbooks/**
          └─────────────┼─────────────┘
                 GITHUB ACTIONS
-     validate.yml · data-quality.yml · test.yml · search-index.yml · build.yml · deploy.yml
+     validate.yml · data-quality.yml · test.yml · data-index.yml · build.yml · deploy.yml
                        │
             scripts/data/*  scripts/ingestion/*
      validate → catalog → publish(public/data) → graph → search-index → vite build

@@ -36,7 +36,7 @@ const cells = (line: string) =>
     .split(/(?<!\\)\|/)
     .map((c) => c.replace(/\\\|/g, '|').trim());
 
-export function Markdown({ source, highlight }: { source: string; highlight?: string }) {
+export function Markdown({ source, highlight, shift = 0 }: { source: string; highlight?: string; /** demote headings (1 → '#' renders as h2) so an embedded document never adds a second h1 */ shift?: number }) {
   const hl = highlight?.trim() ? new RegExp(`(${highlight.trim().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi') : null;
   const lines = source.split('\n');
   const blocks: ReactNode[] = [];
@@ -45,8 +45,8 @@ export function Markdown({ source, highlight }: { source: string; highlight?: st
     const l = lines[i];
     const h = /^(#{1,6}) (.*)$/.exec(l);
     if (h) {
-      const lvl = Math.min(3, h[1].length);
-      const Tag = `h${lvl}` as 'h1' | 'h2' | 'h3';
+      const lvl = Math.min(3 + shift, h[1].length + shift);
+      const Tag = `h${Math.min(6, lvl)}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
       blocks.push(
         <Tag key={i} id={anchorSlug(h[2])}>
           {inline(h[2], hl)}

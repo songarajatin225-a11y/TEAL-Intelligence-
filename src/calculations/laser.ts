@@ -250,3 +250,23 @@ export function processRegime(p: {
         : { name: 'Thermal processing', description: 'Conduction-limited melting or heating.', basis };
   }
 }
+
+/** L4 (rearranged) — average power P_avg = E_p · f_rep → W */
+export function averagePower(p: { pulse_energy_mj?: number | null; rep_khz?: number | null }): CalcResult {
+  return calc(
+    { id: 'average_power', label: 'Average power', formula: 'P_avg = E_p · f_rep', unit: 'W', source: { ...part54('L4', 'laser'), citation: `${part54('L4', 'laser').citation} (rearranged)` }, assumptions: ['All average power is in the pulses (no CW background)'] },
+    [input('E', 'Pulse energy', p.pulse_energy_mj, 'mJ'), input('f', 'Repetition rate', p.rep_khz, 'kHz')],
+    (v) => v.E * 1e-3 * v.f * 1e3,
+    positive('E', 'f'),
+  );
+}
+
+/** L8 (rearranged) — scan / line speed for a target pulse overlap v = f_rep · d₀ · (1 − O) → mm/s */
+export function lineSpeedForOverlap(p: { rep_khz?: number | null; spot_um?: number | null; overlap_pct?: number | null }): CalcResult {
+  return calc(
+    { id: 'line_speed', label: 'Line speed for target overlap', formula: 'v = f_rep · d₀ · (1 − O)', unit: 'mm/s', source: { ...part54('L8', 'laser'), citation: `${part54('L8', 'laser').citation} (rearranged)` }, assumptions: ['Spacing v/f compared with the 1/e² spot diameter', 'Galvo acceleration and jump delays not included'] },
+    [input('f', 'Repetition rate', p.rep_khz, 'kHz'), input('d0', 'Spot diameter', p.spot_um, 'µm'), input('O', 'Target overlap', p.overlap_pct, '%')],
+    (v) => v.f * 1e3 * v.d0 * 1e-3 * (1 - v.O / 100),
+    (v) => (v.f > 0 && v.d0 > 0 ? (v.O < 100 ? null : 'Overlap must be < 100 %') : 'Must be > 0: f, d0'),
+  );
+}

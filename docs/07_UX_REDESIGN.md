@@ -26,6 +26,8 @@ vs *Missing* (three digital-thread questions, now grouped under Knowledge → Th
 
 ## 2. Information architecture
 
+> Superseded by the master-prompt IA (docs/08 §3, §33): Command Center · Intelligence · Domains · Product · Ecosystem · Execution · Roadmap · Data · Settings. The table below is the first redesign, kept for history.
+
 Domain → object → context → action. Ten domains in the sidebar, each collapsible:
 
 | Domain | Pages (route) |

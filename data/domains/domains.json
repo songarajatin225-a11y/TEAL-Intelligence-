@@ -1,0 +1,825 @@
+{
+  "dataset": {
+    "id": "domains",
+    "title": "Industry domains",
+    "description": "The domain architecture of TEAL Intelligence (master prompt §04–§13). Data-driven: add a record to add a domain.",
+    "entity": "domain",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-os-master-prompt"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "dom-laser",
+      "entity": "domain",
+      "code": "A",
+      "order": 1,
+      "name": "Laser & Photonics",
+      "summary": "Laser sources, beam delivery and optics, and the processes they enable — TEAL’s core capability and the first domain of the platform.",
+      "lifecycle": [
+        "Application",
+        "Material",
+        "Process regime",
+        "Laser source",
+        "Beam delivery",
+        "Optics",
+        "Motion / scanning",
+        "Vision",
+        "Controls & software",
+        "Safety",
+        "Validation"
+      ],
+      "sections": [
+        {
+          "title": "Laser technologies",
+          "kind": "list",
+          "items": [
+            "Fiber Laser",
+            "CO₂ Laser",
+            "UV Laser",
+            "Green Laser",
+            "IR Laser",
+            "Blue Laser",
+            "DPSS",
+            "Nd:YAG",
+            "Q-switched",
+            "MOPA",
+            "CW",
+            "Nanosecond",
+            "Picosecond",
+            "Femtosecond",
+            "Excimer"
+          ]
+        },
+        {
+          "title": "Laser applications",
+          "kind": "list",
+          "items": [
+            "Marking",
+            "Engraving",
+            "Etching",
+            "Welding",
+            "Cutting",
+            "Drilling",
+            "Cleaning",
+            "Ablation",
+            "Scribing",
+            "Depaneling",
+            "Texturing",
+            "Surface treatment",
+            "Micromachining"
+          ]
+        },
+        {
+          "title": "Laser subsystems",
+          "kind": "list",
+          "items": [
+            "Laser source",
+            "Diode",
+            "Pump source",
+            "Fiber",
+            "Beam expander",
+            "Beam delivery",
+            "AOM",
+            "EOM",
+            "Galvo",
+            "Scanner",
+            "F-theta lens",
+            "Optics",
+            "Motion",
+            "Vision",
+            "Chiller",
+            "Fume extraction",
+            "Safety",
+            "Controls",
+            "HMI",
+            "PLC",
+            "Software"
+          ]
+        }
+      ],
+      "laser_applications": [
+        "Marking",
+        "Engraving",
+        "Etching",
+        "Welding",
+        "Cutting",
+        "Drilling",
+        "Cleaning",
+        "Ablation",
+        "Scribing",
+        "Depaneling",
+        "Texturing",
+        "Surface treatment",
+        "Micromachining"
+      ],
+      "equipment_fields": [
+        "equipment type",
+        "process",
+        "laser source",
+        "power",
+        "wavelength",
+        "scan field",
+        "throughput",
+        "accuracy",
+        "supplier",
+        "CAPEX",
+        "localization potential"
+      ],
+      "customer_products": [
+        "Metal part",
+        "Plastic part",
+        "Glass part",
+        "Ceramic part",
+        "Label / nameplate"
+      ],
+      "industry_ids": [
+        "ind-genengg",
+        "ind-auto",
+        "ind-medical",
+        "ind-aero",
+        "ind-consumer"
+      ],
+      "technology_ids": [
+        "tec-laser",
+        "tec-photonics",
+        "tec-fiber-laser",
+        "tec-co2-laser",
+        "tec-uv",
+        "tec-green",
+        "tec-ir-laser",
+        "tec-blue-laser",
+        "tec-dpss",
+        "tec-nd-yag",
+        "tec-q-switched",
+        "tec-mopa",
+        "tec-cw",
+        "tec-nanosecond",
+        "tec-picosecond",
+        "tec-femtosecond",
+        "tec-excimer",
+        "tec-ultrafast",
+        "tec-galvo",
+        "tec-beam-shaping"
+      ],
+      "hub_route": "/laser",
+      "keywords": [
+        "laser",
+        "photonics",
+        "optics",
+        "beam",
+        "galvo",
+        "scanner",
+        "f-theta"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§05",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    },
+    {
+      "id": "dom-electronics",
+      "entity": "domain",
+      "code": "B",
+      "order": 2,
+      "name": "Electronics & EMS",
+      "summary": "Electronics manufacturing services: PCB assembly, inspection, test and the laser processes used on boards and components.",
+      "lifecycle": [
+        "Stencil processing",
+        "Solder paste printing",
+        "SPI",
+        "Pick and place",
+        "Reflow",
+        "AOI",
+        "THT / selective or wave soldering",
+        "AXI",
+        "ICT",
+        "Functional testing",
+        "Depaneling",
+        "Conformal coating",
+        "Assembly",
+        "Marking & traceability"
+      ],
+      "sections": [
+        {
+          "title": "Electronics manufacturing processes",
+          "kind": "list",
+          "items": [
+            "SMT",
+            "THT",
+            "PCB assembly",
+            "PCB inspection",
+            "PCB testing",
+            "PCB depaneling",
+            "Stencil processing",
+            "Solder paste printing",
+            "Pick and place",
+            "Reflow",
+            "Selective soldering",
+            "Wave soldering",
+            "AOI",
+            "SPI",
+            "AXI",
+            "ICT",
+            "Functional testing",
+            "Conformal coating",
+            "Dispensing",
+            "Potting",
+            "Assembly",
+            "Traceability",
+            "Marking"
+          ]
+        },
+        {
+          "title": "Electronics laser applications",
+          "kind": "list",
+          "items": [
+            "PCB laser marking",
+            "PCB depaneling",
+            "PCB cutting",
+            "Stencil cleaning",
+            "Laser soldering",
+            "Laser welding",
+            "Laser stripping",
+            "Laser ablation",
+            "Laser drilling",
+            "Laser trimming",
+            "Laser engraving"
+          ]
+        },
+        {
+          "title": "Electronics component categories",
+          "kind": "list",
+          "items": [
+            "PCB",
+            "IC",
+            "MCU",
+            "Semiconductor packages",
+            "Connectors",
+            "Sensors",
+            "Resistors",
+            "Capacitors",
+            "Inductors",
+            "Power modules",
+            "MOSFET",
+            "IGBT",
+            "Relays",
+            "Switches",
+            "Displays",
+            "Flex PCB",
+            "Rigid PCB",
+            "Rigid-flex PCB"
+          ]
+        },
+        {
+          "title": "EMS equipment",
+          "kind": "list",
+          "items": [
+            "SMT lines",
+            "Printers",
+            "Pick-and-place",
+            "Reflow",
+            "AOI",
+            "SPI",
+            "AXI",
+            "Depaneling",
+            "Laser systems",
+            "Inspection systems",
+            "Test systems"
+          ]
+        }
+      ],
+      "laser_applications": [
+        "PCB laser marking",
+        "PCB depaneling",
+        "PCB cutting",
+        "Stencil cleaning",
+        "Laser soldering",
+        "Laser welding",
+        "Laser stripping",
+        "Laser ablation",
+        "Laser drilling",
+        "Laser trimming",
+        "Laser engraving"
+      ],
+      "equipment_fields": [
+        "equipment type",
+        "process",
+        "board size",
+        "throughput",
+        "accuracy",
+        "automation level",
+        "supplier",
+        "CAPEX",
+        "localization potential"
+      ],
+      "customer_products": [
+        "PCB",
+        "PCB panel",
+        "PCB assembly",
+        "Flex circuit",
+        "Connector",
+        "Housing"
+      ],
+      "industry_ids": [
+        "ind-ems",
+        "ind-consumer",
+        "ind-auto"
+      ],
+      "technology_ids": [
+        "tec-uv",
+        "tec-green",
+        "tec-co2-laser",
+        "tec-fiber-laser",
+        "tec-vision",
+        "tec-aoi",
+        "tec-robotics",
+        "tec-plc"
+      ],
+      "keywords": [
+        "pcb",
+        "ems",
+        "smt",
+        "electronics",
+        "depaneling",
+        "aoi",
+        "spi",
+        "axi",
+        "reflow",
+        "solder"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§06",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    },
+    {
+      "id": "dom-semiconductor",
+      "entity": "domain",
+      "code": "C",
+      "order": 3,
+      "name": "Semiconductor",
+      "summary": "Semiconductor manufacturing and equipment intelligence from design to final packing, with front-end, back-end/ATMP and laser applications.",
+      "lifecycle": [
+        "Design",
+        "Wafer Manufacturing",
+        "Wafer Processing",
+        "Dicing",
+        "Die Preparation",
+        "Packaging",
+        "Assembly",
+        "Testing",
+        "Marking",
+        "Inspection",
+        "Final Packing"
+      ],
+      "sections": [
+        {
+          "title": "Front-end",
+          "kind": "list",
+          "items": [
+            "Wafer manufacturing",
+            "Cleaning",
+            "Oxidation",
+            "Lithography",
+            "Deposition",
+            "CVD",
+            "PVD",
+            "ALD",
+            "Etching",
+            "Plasma processing",
+            "Ion implantation",
+            "Diffusion",
+            "CMP",
+            "Metallization",
+            "Inspection",
+            "Metrology"
+          ]
+        },
+        {
+          "title": "Back-end / ATMP",
+          "kind": "flow",
+          "items": [
+            "Wafer thinning",
+            "Wafer mounting",
+            "Dicing",
+            "Die sorting",
+            "Die attach",
+            "Flip chip",
+            "Wire bonding",
+            "Molding",
+            "Encapsulation",
+            "Singulation",
+            "Marking",
+            "Inspection",
+            "Testing",
+            "Packing"
+          ]
+        },
+        {
+          "title": "Semiconductor laser applications",
+          "kind": "list",
+          "items": [
+            "Wafer marking",
+            "Wafer identification",
+            "Package marking",
+            "Laser ablation",
+            "Laser drilling",
+            "Laser dicing",
+            "Stealth dicing",
+            "Laser lift-off",
+            "Laser trimming",
+            "Laser cleaning",
+            "Surface modification",
+            "Micromachining",
+            "Defect removal",
+            "Thin-film processing",
+            "Semiconductor packaging applications"
+          ]
+        }
+      ],
+      "laser_applications": [
+        "Wafer marking",
+        "Wafer identification",
+        "Package marking",
+        "Laser ablation",
+        "Laser drilling",
+        "Laser dicing",
+        "Stealth dicing",
+        "Laser lift-off",
+        "Laser trimming",
+        "Laser cleaning",
+        "Surface modification",
+        "Micromachining",
+        "Defect removal",
+        "Thin-film processing"
+      ],
+      "equipment_fields": [
+        "equipment type",
+        "process",
+        "wafer size",
+        "material",
+        "throughput",
+        "accuracy",
+        "process capability",
+        "supplier",
+        "technology",
+        "CAPEX",
+        "localization potential",
+        "qualification requirements",
+        "cleanroom requirement"
+      ],
+      "customer_products": [
+        "Wafer",
+        "Die",
+        "Package",
+        "Lead frame",
+        "Substrate",
+        "Module"
+      ],
+      "industry_ids": [
+        "ind-semi"
+      ],
+      "technology_ids": [
+        "tec-semiconductor",
+        "tec-uv",
+        "tec-green",
+        "tec-picosecond",
+        "tec-femtosecond",
+        "tec-ultrafast",
+        "tec-vision",
+        "tec-excimer"
+      ],
+      "hub_route": "/semiconductor",
+      "keywords": [
+        "semiconductor",
+        "wafer",
+        "die",
+        "package",
+        "atmp",
+        "dicing",
+        "osat",
+        "fab"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§07",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    },
+    {
+      "id": "dom-battery",
+      "entity": "domain",
+      "code": "D",
+      "order": 4,
+      "name": "Battery & New Energy",
+      "summary": "Battery cell, module and pack manufacturing across chemistries and form factors, with the laser processes used from electrode to pack.",
+      "lifecycle": [
+        "Raw Materials",
+        "Electrode Preparation",
+        "Mixing",
+        "Coating",
+        "Drying",
+        "Calendering",
+        "Slitting",
+        "Notching",
+        "Stacking / Winding",
+        "Tab Formation",
+        "Tab Welding",
+        "Cell Assembly",
+        "Electrolyte Filling",
+        "Sealing",
+        "Formation",
+        "Aging",
+        "Testing",
+        "Inspection",
+        "Packing"
+      ],
+      "sections": [
+        {
+          "title": "Chemistries",
+          "kind": "list",
+          "items": [
+            "Lithium-ion",
+            "LFP",
+            "NMC",
+            "NCA",
+            "Sodium-ion",
+            "Solid-state",
+            "Emerging battery technologies"
+          ]
+        },
+        {
+          "title": "Cell form factors",
+          "kind": "list",
+          "items": [
+            "Cylindrical",
+            "Pouch",
+            "Prismatic",
+            "Coin cell",
+            "Button cell"
+          ]
+        },
+        {
+          "title": "Battery laser applications",
+          "kind": "list",
+          "items": [
+            "Tab welding",
+            "Busbar welding",
+            "Can welding",
+            "Pouch sealing",
+            "Foil cutting",
+            "Electrode cutting",
+            "Tab cutting",
+            "Marking",
+            "Cleaning",
+            "Ablation",
+            "Drilling",
+            "Vent processing",
+            "Battery traceability",
+            "Pack welding"
+          ]
+        }
+      ],
+      "laser_applications": [
+        "Tab welding",
+        "Busbar welding",
+        "Can welding",
+        "Pouch sealing",
+        "Foil cutting",
+        "Electrode cutting",
+        "Tab cutting",
+        "Marking",
+        "Cleaning",
+        "Ablation",
+        "Drilling",
+        "Vent processing",
+        "Battery traceability",
+        "Pack welding"
+      ],
+      "equipment_fields": [
+        "equipment",
+        "process",
+        "throughput",
+        "accuracy",
+        "automation level",
+        "laser requirement",
+        "vision",
+        "motion",
+        "safety",
+        "supplier",
+        "CAPEX",
+        "localization"
+      ],
+      "customer_products": [
+        "Cylindrical cell",
+        "Pouch cell",
+        "Prismatic cell",
+        "Electrode foil",
+        "Tab",
+        "Busbar",
+        "Module",
+        "Pack"
+      ],
+      "industry_ids": [
+        "ind-battery",
+        "ind-auto"
+      ],
+      "technology_ids": [
+        "tec-lithium-ion",
+        "tec-lfp",
+        "tec-nmc",
+        "tec-nca",
+        "tec-sodium-ion",
+        "tec-solid-state",
+        "tec-fiber-laser",
+        "tec-blue-laser",
+        "tec-green",
+        "tec-vision",
+        "tec-motion"
+      ],
+      "keywords": [
+        "battery",
+        "cell",
+        "tab",
+        "busbar",
+        "electrode",
+        "pouch",
+        "prismatic",
+        "cylindrical",
+        "pack",
+        "ev"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§08–§12",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    },
+    {
+      "id": "dom-automation",
+      "entity": "domain",
+      "code": "E",
+      "order": 5,
+      "name": "Industrial Automation",
+      "summary": "A generic automation-equipment architecture — mechanical, electrical, controls, motion, robotics, vision, software, safety, pneumatics, process and data — reused by every domain.",
+      "lifecycle": [
+        "Mechanical",
+        "Electrical",
+        "Controls",
+        "Motion",
+        "Robotics",
+        "Vision",
+        "Software",
+        "Safety",
+        "Pneumatics",
+        "Process",
+        "Data"
+      ],
+      "sections": [
+        {
+          "title": "Architecture layers",
+          "kind": "list",
+          "items": [
+            "Mechanical",
+            "Electrical",
+            "Controls",
+            "Motion",
+            "Robotics",
+            "Vision",
+            "Software",
+            "Safety",
+            "Pneumatics",
+            "Process",
+            "Data"
+          ]
+        },
+        {
+          "title": "Tracked building blocks",
+          "kind": "list",
+          "items": [
+            "Robots",
+            "Gantries",
+            "Conveyors",
+            "Fixtures",
+            "PLC",
+            "Servo",
+            "Drives",
+            "Sensors",
+            "Vision",
+            "Safety systems",
+            "MES",
+            "SCADA",
+            "HMI",
+            "Industrial communication"
+          ]
+        }
+      ],
+      "laser_applications": [],
+      "equipment_fields": [
+        "equipment type",
+        "process",
+        "cycle time",
+        "accuracy",
+        "automation level",
+        "supplier",
+        "CAPEX",
+        "localization potential"
+      ],
+      "customer_products": [
+        "Part",
+        "Sub-assembly",
+        "Assembly"
+      ],
+      "industry_ids": [],
+      "technology_ids": [
+        "tec-automation",
+        "tec-robotics",
+        "tec-vision",
+        "tec-plc",
+        "tec-motion",
+        "tec-mes",
+        "tec-closed-loop-control",
+        "tec-industry-4-0",
+        "tec-digital-twin"
+      ],
+      "hub_route": "/architecture",
+      "keywords": [
+        "automation",
+        "robot",
+        "plc",
+        "servo",
+        "conveyor",
+        "fixture",
+        "hmi",
+        "scada",
+        "mes",
+        "gantry"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§13",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    },
+    {
+      "id": "dom-advanced-manufacturing",
+      "entity": "domain",
+      "code": "F",
+      "order": 6,
+      "name": "Advanced Manufacturing",
+      "summary": "Reserved domain. The master prompt names it but does not define its taxonomy yet — add sections to this record when TEAL defines them; no code change is needed.",
+      "lifecycle": [],
+      "sections": [],
+      "laser_applications": [],
+      "equipment_fields": [],
+      "customer_products": [],
+      "industry_ids": [],
+      "technology_ids": [],
+      "keywords": [
+        "advanced manufacturing"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "section": "§04",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "confidence": "HIGH",
+        "note": "Domain taxonomy (names of processes, applications, categories) from TEAL's own master prompt. Not a market or capability claim."
+      }
+    }
+  ]
+}

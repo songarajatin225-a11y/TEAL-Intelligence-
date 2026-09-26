@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as A from '../../calculations/automation';
 import * as C from '../../calculations/cost';
 import * as L from '../../calculations/laser';
+import * as PJ from '../../calculations/project';
 import * as Q from '../../calculations/quality';
 import type { CalcResult } from '../../calculations/types';
 import { convert, knownUnits, dimensionOf, UnitError } from '../../calculations/units';
@@ -21,10 +22,12 @@ const GROUPS: Record<string, Spec[]> = {
     { title: 'Spot diameter (L1)', fields: [{ key: 'wl', label: 'λ nm', def: '1064' }, { key: 'm2', label: 'M²', def: '1.3' }, { key: 'D', label: 'Beam Ø mm', def: '7' }, { key: 'f', label: 'f mm', def: '160' }], run: (v) => L.spotDiameter({ wavelength_nm: v.wl, m2: v.m2, beam_mm: v.D, focal_mm: v.f }) },
     { title: 'Depth of focus 2·z_R (L2)', fields: [{ key: 'd', label: 'Spot µm', def: '40' }, { key: 'wl', label: 'λ nm', def: '1064' }, { key: 'm2', label: 'M²', def: '1.3' }], run: (v) => L.depthOfFocus({ spot_um: v.d, wavelength_nm: v.wl, m2: v.m2 }) },
     { title: 'Pulse energy (L4)', fields: [{ key: 'p', label: 'P avg W', def: '50' }, { key: 'f', label: 'f kHz', def: '100' }], run: (v) => L.pulseEnergy({ power_w: v.p, rep_khz: v.f }) },
+    { title: 'Average power (L4)', fields: [{ key: 'e', label: 'E mJ', def: '0.5' }, { key: 'f', label: 'f kHz', def: '100' }], run: (v) => L.averagePower({ pulse_energy_mj: v.e, rep_khz: v.f }) },
     { title: 'Peak power (L5)', fields: [{ key: 'e', label: 'E mJ', def: '0.5' }, { key: 't', label: 'τ ns', def: '100' }], run: (v) => L.peakPower({ pulse_energy_mj: v.e, pulse_ns: v.t }) },
     { title: 'Fluence (L6)', fields: [{ key: 'e', label: 'E mJ', def: '0.5' }, { key: 'd', label: 'Spot µm', def: '45' }], run: (v) => L.fluence({ pulse_energy_mj: v.e, spot_um: v.d }) },
     { title: 'Intensity (L7)', fields: [{ key: 'p', label: 'P W', def: '1000' }, { key: 'd', label: 'Spot µm', def: '100' }], run: (v) => L.intensity({ power_w: v.p, spot_um: v.d }) },
     { title: 'Pulse overlap (L8)', fields: [{ key: 'v', label: 'v mm/s', def: '1000' }, { key: 'f', label: 'f kHz', def: '100' }, { key: 'd', label: 'Spot µm', def: '30' }], run: (v) => L.pulseOverlap({ speed_mm_s: v.v, rep_khz: v.f, spot_um: v.d }) },
+    { title: 'Line speed for overlap (L8)', fields: [{ key: 'f', label: 'f kHz', def: '100' }, { key: 'd', label: 'Spot µm', def: '30' }, { key: 'o', label: 'Overlap %', def: '50' }], run: (v) => L.lineSpeedForOverlap({ rep_khz: v.f, spot_um: v.d, overlap_pct: v.o }) },
     { title: 'Line energy (L9)', fields: [{ key: 'p', label: 'P W', def: '3000' }, { key: 'v', label: 'v mm/s', def: '100' }], run: (v) => L.lineEnergy({ power_w: v.p, speed_mm_s: v.v }) },
     { title: 'Areal energy density', fields: [{ key: 'p', label: 'P W', def: '20' }, { key: 'v', label: 'v mm/s', def: '1000' }, { key: 'h', label: 'Hatch µm', def: '20' }], run: (v) => L.energyDensity({ power_w: v.p, speed_mm_s: v.v, hatch_um: v.h }) },
     { title: 'Chiller capacity (L11)', fields: [{ key: 'el', label: 'P el kW', def: '6' }, { key: 'op', label: 'P opt kW', def: '2' }, { key: 'x', label: 'Optics heat kW', def: '0.2' }], run: (v) => L.chillerCapacity({ electrical_kw: v.el, optical_kw: v.op, optics_heat_kw: v.x }) },
@@ -48,11 +51,17 @@ const GROUPS: Record<string, Spec[]> = {
   ],
   Commercial: [
     { title: 'Price from margin (C1)', fields: [{ key: 'c', label: 'Cost', def: '6210000' }, { key: 'gm', label: 'GM', def: '0.30' }, { key: 'w', label: 'Warranty', def: '0.03' }], run: (v) => C.priceFromMargin({ cost: v.c, gross_margin: v.gm, warranty: v.w }) },
+    { title: 'Gross margin', fields: [{ key: 'p', label: 'Price', def: '9000000' }, { key: 'c', label: 'Cost', def: '6210000' }], run: (v) => C.grossMargin({ price: v.p, cost: v.c }) },
+    { title: 'Local content / import dependency', fields: [{ key: 'l', label: 'Local cost', def: '2500000' }, { key: 'i', label: 'Imported (landed)', def: '3700000' }], run: (v) => C.localContent({ local_cost: v.l, imported_cost: v.i }) },
     { title: 'Payback (C6)', fields: [{ key: 'c', label: 'Capex', def: '9270000' }, { key: 's', label: 'Saving/yr', def: '5460000' }, { key: 'o', label: 'Opex/yr', def: '0' }], run: (v) => C.payback({ capex: v.c, annual_saving: v.s, annual_operating_cost: v.o }) },
     { title: 'ROI over life', fields: [{ key: 'c', label: 'Capex', def: '9270000' }, { key: 's', label: 'Saving/yr', def: '5460000' }, { key: 'o', label: 'Opex/yr', def: '0' }, { key: 'l', label: 'Life yr', def: '8' }], run: (v) => C.roi({ capex: v.c, annual_saving: v.s, annual_operating_cost: v.o, life_years: v.l }) },
     { title: 'Landed cost (C4)', fields: [{ key: 'p', label: 'Base (USD)', def: '10000' }, { key: 'fx', label: 'FX INR/USD', def: '' }, { key: 'f', label: 'Freight %', def: '2' }, { key: 'd', label: 'Duty %', def: '7.5' }, { key: 'i', label: 'Insurance %', def: '0.5' }], run: (v) => C.landedCost({ base_cost: v.p, currency: 'USD', fx: v.fx != null ? { code: 'USD', rate_to_inr: v.fx, as_of: null, source: 'entered by user' } : null, freight_pct: v.f ?? 0, duty_pct: v.d ?? 0, insurance_pct: v.i ?? 0 }) },
     { title: 'Localization payback (C9)', fields: [{ key: 'q', label: 'Qualification', def: '110000' }, { key: 'i', label: 'Import cost', def: '20000' }, { key: 'l', label: 'Local cost', def: '10000' }, { key: 'n', label: 'Units/yr', def: '100' }], run: (v) => C.localizationPayback({ qualification_cost: v.q, import_cost: v.i, local_cost: v.l, annual_volume: v.n }) },
     { title: 'Learning curve (C2)', fields: [{ key: 'c', label: 'Unit-1 hours', def: '500' }, { key: 'n', label: 'Unit n', def: '4' }, { key: 'b', label: 'b', def: '0.85' }], run: (v) => C.learningCurve({ first_unit: v.c, n: v.n, b: v.b }) },
+  ],
+  Project: [
+    { title: 'Project progress', fields: [{ key: 'd', label: 'Done days', def: '45' }, { key: 'a', label: 'All days', def: '179' }], run: (v) => PJ.projectProgress({ completed_days: v.d, total_days: v.a }) },
+    { title: 'Schedule variance', fields: [{ key: 'p', label: 'Planned finish day', def: '179' }, { key: 'f', label: 'Forecast finish day', def: '193' }], run: (v) => PJ.scheduleVariance({ planned_finish_day: v.p, forecast_finish_day: v.f }) },
   ],
   Quality: [
     { title: 'Cp from statistics (Q1)', fields: [{ key: 'u', label: 'USL', def: '5' }, { key: 'l', label: 'LSL', def: '-5' }, { key: 's', label: 'σ', def: '1' }], run: (v) => Q.capabilityFromStats({ usl: v.u, lsl: v.l, sigma: v.s }).cp },

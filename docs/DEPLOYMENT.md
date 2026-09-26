@@ -24,7 +24,7 @@ lint), unit/integration tests and E2E tests pass.
 | `test.yml` | push to main, PRs | vitest (unit + integration); Playwright E2E on the production build (report uploaded on failure) |
 | `build.yml` | PRs | full build, `dist/` as an artifact for review |
 | `data-quality.yml` | data changes, weekly (Mon 03:17 UTC), manual | quality report in the job summary + artifact; errors fail |
-| `search-index.yml` | data / knowledge changes, manual | rebuild indexes + graph, partition sizes in the summary |
+| `data-index.yml` | data / knowledge changes, manual | rebuild indexes + graph, partition sizes in the summary |
 | `ingestion.yml` | manual only | runs enabled sources, uploads review candidates; cannot commit |
 
 ## Local

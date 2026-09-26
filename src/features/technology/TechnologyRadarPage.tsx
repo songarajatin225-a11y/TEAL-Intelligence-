@@ -10,6 +10,7 @@ import { TECH_ADOPTION, TECH_STATUSES, type Technology } from '../../domain/enti
 import { useRecords, type Rec } from '../../hooks/useData';
 import { repo, ValidationFailure } from '../../repositories';
 import { todayIso } from '../../utils/dates';
+import { MATURITY_LANES, MATURITY_RULE, maturityLane } from '../../services/maturity';
 
 type Tech = Technology & Rec;
 const RING_FILL = ['#1b7f5a', '#2a6fb0', '#6b7d87', '#00838a', '#b3261e'];
@@ -158,6 +159,41 @@ export default function TechnologyRadarPage() {
         </Card>
       </div>
 
+      <Card
+        title="Maturity by TRL"
+        description="Transparent method: the lane follows only from the Technology Readiness Level and its written basis"
+        actions={
+          <Link to="/compare?entity=technology" className="text-meta text-accent-2 hover:underline">
+            Compare technologies
+          </Link>
+        }
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-6">
+          {[...MATURITY_LANES, 'Not assessed' as const].map((lane) => {
+            const list = techs.filter((t) => maturityLane(t) === lane);
+            return (
+              <section key={lane} aria-label={`${lane}: ${list.length}`} className="rounded-control border border-line p-2.5">
+                <h3 className="text-meta font-semibold">{lane}</h3>
+                <p className="text-micro text-ink-3">{lane === 'Not assessed' ? 'No TRL recorded' : MATURITY_RULE[lane]}</p>
+                <ul className="mt-1.5 space-y-0.5 text-meta">
+                  {list.slice(0, lane === 'Not assessed' ? 6 : 50).map((t) => (
+                    <li key={t.id}>
+                      <Link to={recordPath(t.id)} className="inline-flex min-h-6 items-center text-accent-2 hover:underline" title={t.trl_basis ?? undefined}>
+                        {t.name}
+                      </Link>
+                      {t.trl != null && <span className="num text-micro text-ink-3"> · TRL {t.trl}</span>}
+                    </li>
+                  ))}
+                  {lane === 'Not assessed' && list.length > 6 && <li className="text-micro text-ink-3">+{list.length - 6} more</li>}
+                  {!list.length && <li className="text-ink-3">—</li>}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
+        <p className="mt-2 text-micro text-ink-3">Set a TRL (1–9) and its basis on the technology record. No lane is assigned without one; Commodity also needs at least three suppliers recorded.</p>
+      </Card>
+
       <Card title="Market maturity (evidence required)">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
           {TECH_STATUSES.map((s) => {
@@ -168,7 +204,7 @@ export default function TechnologyRadarPage() {
                 <ul className="space-y-0.5 text-meta">
                   {list.map((t) => (
                     <li key={t.id}>
-                      <Link className="text-accent-2 hover:underline" to={recordPath(t.id)}>
+                      <Link className="inline-flex min-h-6 items-center text-accent-2 hover:underline" to={recordPath(t.id)}>
                         {t.name}
                       </Link>{' '}
                       <Badge>{(t.evidence_ids ?? []).length} evidence</Badge>
@@ -195,7 +231,7 @@ export default function TechnologyRadarPage() {
               <ul className="mt-1 space-y-0.5 text-meta">
                 {(t.knowledge_refs ?? []).slice(0, 3).map((r) => (
                   <li key={r}>
-                    <Link to={link(r)} className="text-ink-2 hover:text-accent-2">
+                    <Link to={link(r)} className="inline-flex min-h-6 items-center text-ink-2 hover:text-accent-2">
                       {decodeURIComponent(r.split('#')[1] ?? r).replace(/-/g, ' ')}
                     </Link>
                   </li>

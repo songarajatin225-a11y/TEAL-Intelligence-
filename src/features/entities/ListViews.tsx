@@ -1,6 +1,7 @@
 import { useMemo, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { DataTypeBadge, OriginBadge, StatusBadge } from '../../components/badges';
+import { OriginBadge, StatusBadge } from '../../components/badges';
+import { TrustBadge } from '../../components/TrustBadge';
 import { HealthBadge } from '../../components/Health';
 import { recordPath } from '../../components/RecordLink';
 import { toast } from '../../components/toast';
@@ -59,7 +60,7 @@ export function RecordCards({ entity, rows, onOpen }: { entity: string; rows: Re
                 )}
                 <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-1">
                   <HealthBadge health={entityHealth(r, graph, today)} />
-                  <DataTypeBadge t={r.data_type} />
+                  <TrustBadge record={r} />
                   <OriginBadge o={r.__origin} />
                   <button type="button" onClick={() => onOpen(r)} className="ml-auto text-meta font-medium text-accent-2 hover:underline">
                     Inspect
@@ -126,7 +127,7 @@ export function RecordBoard({ entity, rows, onOpen, readOnly }: { entity: string
                     {r.name}
                   </button>
                   <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                    <DataTypeBadge t={r.data_type} />
+                    <TrustBadge record={r} />
                     <OriginBadge o={r.__origin} />
                     {!readOnly && bk.options && (
                       <select aria-label={`Move ${r.name}`} value={col === '—' ? '' : col} onChange={(e) => e.target.value && void move(r, e.target.value)} className="ml-auto max-w-[8.5rem] rounded-md border border-line bg-transparent px-1 py-0.5 text-micro">

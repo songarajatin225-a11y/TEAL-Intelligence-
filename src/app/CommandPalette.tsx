@@ -88,6 +88,14 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       ['tour', 'Show the welcome tour', shell.openOnboarding],
       ['backup', 'Export workspace backup (JSON)', () => void exportWorkspace().then((b) => download(`teal-workspace-backup-${stamp()}.json`, JSON.stringify(b, null, 2)))],
       ['admin', 'Export change package / manage drafts', () => nav('/admin')],
+      ['cost', 'Open cost engine', () => nav('/cost')],
+      ['configurator', 'Open configurator', () => nav('/configurator')],
+      ['engine', 'Open application engine', () => nav('/solution')],
+      ['compare-tech', 'Compare technologies', () => nav('/compare?entity=technology')],
+      ['knowledge', 'Open knowledge', () => nav('/knowledge')],
+      ['import', 'Import data', () => nav('/import-export')],
+      ['export', 'Export data', () => nav('/import-export')],
+      ['document', 'Generate a document (PRD, RFQ, spec, POC plan…)', () => nav('/documents')],
     ];
     for (const [id, label, f] of actions) out.push({ id: `act:${id}`, group: 'Actions', label, icon: Settings2, run: done(f) });
     for (const w of WORKSPACES) out.push({ id: `ws:${w.id}`, group: 'Actions', label: `Switch to ${w.label} workspace`, hint: w.desc, icon: w.icon, keywords: 'workspace mode view', run: done(() => setPrefs({ workspace: w.id, openSections: {} })) });

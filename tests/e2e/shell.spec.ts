@@ -5,8 +5,8 @@ test.describe('navigation shell', () => {
   test('sidebar groups pages into domains and collapses to an icon rail (remembered)', async ({ page }) => {
     await go(page, '');
     const nav = page.getByRole('navigation', { name: 'Primary' });
-    await expect(nav.getByRole('button', { name: /Supply Chain/ })).toBeVisible();
-    await nav.getByRole('button', { name: /Supply Chain/ }).click();
+    await expect(nav.getByRole('button', { name: /Ecosystem/ })).toBeVisible();
+    await nav.getByRole('button', { name: /Ecosystem/ }).click();
     await nav.getByRole('link', { name: 'RFQs' }).click();
     await expect(page.locator('main h1')).toHaveText('RFQs');
     await page.getByRole('button', { name: 'Collapse sidebar' }).click();
@@ -152,7 +152,9 @@ test.describe('mobile', () => {
     const bar = page.getByRole('navigation', { name: 'Quick navigation' });
     await expect(bar).toBeVisible();
     await bar.getByRole('button', { name: 'Menu' }).click();
-    await page.getByRole('dialog', { name: 'Navigation' }).getByRole('link', { name: 'Customers' }).click();
+    const drawer = page.getByRole('dialog', { name: 'Navigation' });
+    await drawer.getByRole('button', { name: /^Ecosystem/ }).click();
+    await drawer.getByRole('link', { name: 'Customers' }).click();
     await expect(page.locator('main h1')).toHaveText('Customers');
     await expect(page.locator('main table')).toHaveCount(0); // rows render as cards on phones
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

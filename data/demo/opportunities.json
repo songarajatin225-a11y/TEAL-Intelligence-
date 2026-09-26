@@ -8,6 +8,7 @@
     "last_updated": "2026-09-26",
     "data_type": "DEMO",
     "source_ids": [
+      "src-os-master-prompt",
       "src-os-spec"
     ],
     "relative_dates": true
@@ -36,7 +37,8 @@
         "action": "Run \"Create product from inquiry\" and review the draft package with the customer",
         "due": "@today+1",
         "owner": "Product Manager"
-      }
+      },
+      "domain_id": "dom-semiconductor"
     },
     {
       "data_type": "DEMO",
@@ -60,7 +62,8 @@
         "action": "Plan sample marking on customer boards (solder mask colours)",
         "due": "@today+4",
         "owner": "Application Engineering"
-      }
+      },
+      "domain_id": "dom-electronics"
     },
     {
       "data_type": "DEMO",
@@ -82,6 +85,89 @@
         "action": "Review Semiconductor Handbook Part XXXII against TEAL modules and list gaps",
         "due": "@today+7",
         "owner": "Product Manager"
+      },
+      "domain_id": "dom-semiconductor"
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "DEMO use-case record (master prompt §41, §56). Fictional customer; values intentionally UNKNOWN. Not real customer data."
+      },
+      "id": "opp-demo-battery-tab",
+      "entity": "opportunity",
+      "name": "Battery tab welding (Scenario 4)",
+      "stage": "Discovery",
+      "customer_id": "cus-demo-battery",
+      "industry": "Battery",
+      "domain_id": "dom-battery",
+      "product_id": "prd-weldb",
+      "application_id": "app-weldb.tab",
+      "technology_ids": [
+        "tec-fiber-laser"
+      ],
+      "value": null,
+      "probability": null,
+      "technical_status": "TEAL catalogue application exists (Weld B-Series, tab welding) — cell format and tab stack unknown",
+      "next_action": {
+        "action": "Confirm cell format, tab material and thickness with the customer",
+        "due": "@today+6",
+        "owner": "Application Engineering"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "DEMO use-case record (master prompt §41, §56). Fictional customer; values intentionally UNKNOWN. Not real customer data."
+      },
+      "id": "opp-demo-depaneling",
+      "entity": "opportunity",
+      "name": "PCB depaneling — laser vs mechanical (Scenario 5)",
+      "stage": "Lead",
+      "customer_id": "cus-demo-ems",
+      "industry": "EMS",
+      "domain_id": "dom-electronics",
+      "technology_ids": [
+        "tec-uv",
+        "tec-co2-laser"
+      ],
+      "value": null,
+      "probability": null,
+      "technical_status": "No catalogued TEAL application for laser depaneling of FR4 — needs a POC before a machine is proposed",
+      "next_action": {
+        "action": "Collect panel drawings, material stack and edge-quality requirement",
+        "due": "@today+9",
+        "owner": "Product Management"
+      }
+    },
+    {
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "DEMO use-case record (master prompt §41, §56). Fictional customer; values intentionally UNKNOWN. Not real customer data."
+      },
+      "id": "opp-demo-wafer-dicing",
+      "entity": "opportunity",
+      "name": "Wafer dicing study (Scenario 6)",
+      "stage": "Lead",
+      "customer_id": "cus-demo-osat",
+      "industry": "Semiconductor",
+      "domain_id": "dom-semiconductor",
+      "technology_ids": [
+        "tec-picosecond",
+        "tec-uv"
+      ],
+      "value": null,
+      "probability": null,
+      "technical_status": "No catalogued TEAL dicing application — laser vs blade comparison needed",
+      "next_action": {
+        "action": "Obtain wafer material, thickness and street width",
+        "due": "@today+12",
+        "owner": "Product Management"
       }
     }
   ]

@@ -2,12 +2,13 @@
   "dataset": {
     "id": "technologies",
     "title": "Technology radar topics",
-    "description": "Radar topics from the OS specification. Radar status is deliberately unassessed until evidence is attached.",
+    "description": "Technology topics from the OS specification and the master prompt. TRL, maturity and radar ring are deliberately unassessed until evidence or a reasoned team decision is recorded.",
     "entity": "technology",
     "version": "1.0.0",
     "last_updated": "2026-09-26",
     "data_type": "TEAL_INTERNAL",
     "source_ids": [
+      "src-os-master-prompt",
       "src-os-spec"
     ],
     "partition": "research"
@@ -201,7 +202,11 @@
         "source_id": "src-os-spec",
         "verification_status": "UNKNOWN",
         "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
-      }
+      },
+      "laser_source_ids": [
+        "las-pico",
+        "las-femto"
+      ]
     },
     {
       "id": "tec-uv",
@@ -219,7 +224,10 @@
         "source_id": "src-os-spec",
         "verification_status": "UNKNOWN",
         "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
-      }
+      },
+      "laser_source_ids": [
+        "las-uv"
+      ]
     },
     {
       "id": "tec-green",
@@ -235,7 +243,10 @@
         "source_id": "src-os-spec",
         "verification_status": "UNKNOWN",
         "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
-      }
+      },
+      "laser_source_ids": [
+        "las-green"
+      ]
     },
     {
       "id": "tec-beam-shaping",
@@ -318,6 +329,446 @@
         "source_id": "src-os-spec",
         "verification_status": "UNKNOWN",
         "note": "Radar status not assessed — requires evidence (spec §58). knowledge_refs are handbook sections whose headings mention this topic."
+      }
+    },
+    {
+      "id": "tec-fiber-laser",
+      "entity": "technology",
+      "name": "Fiber Laser",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-fiber",
+        "las-mopa",
+        "las-qcw",
+        "las-smcw"
+      ]
+    },
+    {
+      "id": "tec-co2-laser",
+      "entity": "technology",
+      "name": "CO₂ Laser",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-co2",
+        "las-co293"
+      ]
+    },
+    {
+      "id": "tec-ir-laser",
+      "entity": "technology",
+      "name": "IR Laser",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-fiber",
+        "las-mopa",
+        "las-qcw",
+        "las-smcw",
+        "las-diode"
+      ]
+    },
+    {
+      "id": "tec-blue-laser",
+      "entity": "technology",
+      "name": "Blue Laser",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-blue"
+      ]
+    },
+    {
+      "id": "tec-dpss",
+      "entity": "technology",
+      "name": "DPSS",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-uv",
+        "las-green"
+      ]
+    },
+    {
+      "id": "tec-nd-yag",
+      "entity": "technology",
+      "name": "Nd:YAG",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-q-switched",
+      "entity": "technology",
+      "name": "Q-switched",
+      "domain": "Laser",
+      "category": "Pulse regime",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-fiber"
+      ]
+    },
+    {
+      "id": "tec-mopa",
+      "entity": "technology",
+      "name": "MOPA",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-mopa"
+      ]
+    },
+    {
+      "id": "tec-cw",
+      "entity": "technology",
+      "name": "CW",
+      "domain": "Laser",
+      "category": "Pulse regime",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-smcw",
+        "las-co2",
+        "las-co293",
+        "las-blue",
+        "las-diode"
+      ]
+    },
+    {
+      "id": "tec-nanosecond",
+      "entity": "technology",
+      "name": "Nanosecond",
+      "domain": "Laser",
+      "category": "Pulse regime",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-fiber",
+        "las-mopa",
+        "las-uv",
+        "las-green"
+      ]
+    },
+    {
+      "id": "tec-picosecond",
+      "entity": "technology",
+      "name": "Picosecond",
+      "domain": "Laser",
+      "category": "Pulse regime",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-pico"
+      ]
+    },
+    {
+      "id": "tec-femtosecond",
+      "entity": "technology",
+      "name": "Femtosecond",
+      "domain": "Laser",
+      "category": "Pulse regime",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      },
+      "laser_source_ids": [
+        "las-femto"
+      ]
+    },
+    {
+      "id": "tec-excimer",
+      "entity": "technology",
+      "name": "Excimer",
+      "domain": "Laser",
+      "category": "Laser technology",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-galvo",
+      "entity": "technology",
+      "name": "Galvo scanning",
+      "domain": "Laser",
+      "category": "Beam delivery",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-plc",
+      "entity": "technology",
+      "name": "PLC",
+      "domain": "Automation",
+      "category": "Controls",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-motion",
+      "entity": "technology",
+      "name": "Motion control",
+      "domain": "Automation",
+      "category": "Motion",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-aoi",
+      "entity": "technology",
+      "name": "AOI (automated optical inspection)",
+      "domain": "Electronics",
+      "category": "Inspection",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-lithium-ion",
+      "entity": "technology",
+      "name": "Lithium-ion",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-lfp",
+      "entity": "technology",
+      "name": "LFP",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-nmc",
+      "entity": "technology",
+      "name": "NMC",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-nca",
+      "entity": "technology",
+      "name": "NCA",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-sodium-ion",
+      "entity": "technology",
+      "name": "Sodium-ion",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
+      }
+    },
+    {
+      "id": "tec-solid-state",
+      "entity": "technology",
+      "name": "Solid-state battery",
+      "domain": "Battery",
+      "category": "Battery chemistry",
+      "radar_status": null,
+      "trl": null,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-os-master-prompt",
+        "document": "TEAL_Intelligence_OS_Master_Prompt.pdf",
+        "retrieved_at": "2026-09-26",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Topic named in the master prompt. TRL, suppliers, cost and maturity are not assessed until evidence is attached."
       }
     }
   ]

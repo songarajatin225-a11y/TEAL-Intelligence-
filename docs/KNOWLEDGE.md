@@ -53,4 +53,4 @@ repair is noted in their provenance.
 
 Knowledge changes are Git changes: add Markdown under `knowledge/`, or records to `/data`
 (lessons, decisions, evidence) through the app's change packages. CI rebuilds the search index
-and graph (`search-index.yml`).
+and graph (`data-index.yml`).

@@ -1,0 +1,16 @@
+{
+  "dataset": {
+    "id": "knowledge-articles",
+    "title": "Knowledge articles",
+    "description": "User-authored engineering articles (title, category, summary, technical details, applications, design considerations, references). None seeded.",
+    "entity": "article",
+    "version": "1.0.0",
+    "last_updated": "2026-09-26",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-os-master-prompt"
+    ],
+    "partition": "knowledge"
+  },
+  "records": []
+}

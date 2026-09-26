@@ -1,7 +1,7 @@
 import { Lock } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
 import { Button, Field, Input, Notice } from '../components/ui';
-import { workspaceDb } from '../repositories/workspaceDb';
+import { DatabaseService } from '../services/database';
 
 /**
  * LOCAL WORKSPACE LOCK (spec §97). A convenience screen lock for a shared computer — NOT secure
@@ -25,16 +25,16 @@ async function derive(pass: string, salt: Uint8Array, iterations: number): Promi
 
 export async function setLock(pass: string | null): Promise<void> {
   if (!pass) {
-    await workspaceDb().prefs.delete('lock');
+    await DatabaseService.deleteSetting('lock');
     return;
   }
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const iterations = 210000;
-  await workspaceDb().prefs.put({ key: 'lock', value: { salt: b64(salt), hash: await derive(pass, salt, iterations), iterations } satisfies LockPref });
+  await DatabaseService.setSetting('lock', { salt: b64(salt), hash: await derive(pass, salt, iterations), iterations } satisfies LockPref);
 }
 
 export async function hasLock(): Promise<boolean> {
-  return !!(await workspaceDb().prefs.get('lock'));
+  return !!(await DatabaseService.getSetting('lock'));
 }
 
 export function WorkspaceLockGate({ children }: { children: ReactNode }) {
@@ -46,15 +46,12 @@ export function WorkspaceLockGate({ children }: { children: ReactNode }) {
       setState('open');
       return;
     }
-    workspaceDb()
-      .prefs.get('lock')
-      .then((p) => setState(p ? 'locked' : 'open'))
-      .catch(() => setState('open'));
+    void DatabaseService.getSetting('lock').then((p) => setState(p ? 'locked' : 'open'));
   }, []);
   if (state === 'open') return <>{children}</>;
   if (state === 'checking') return null;
   const unlock = async () => {
-    const p = (await workspaceDb().prefs.get('lock'))?.value as LockPref | undefined;
+    const p = await DatabaseService.getSetting<LockPref>('lock');
     if (!p) return setState('open');
     if ((await derive(pass, unb64(p.salt), p.iterations)) === p.hash) {
       try {
