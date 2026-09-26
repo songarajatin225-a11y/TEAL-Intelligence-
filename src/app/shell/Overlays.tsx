@@ -179,7 +179,7 @@ export function AppearanceSettings() {
       </div>
       <div>
         <div className="mb-1.5 text-micro font-medium text-ink-3">Visual effects</div>
-        <SegmentedControl<Effects> label="Visual effects" value={p.effects} onChange={(effects) => setPrefs({ effects })} options={[{ value: 'full', label: 'Glass' }, { value: 'reduced', label: 'Reduced (opaque, no motion)' }]} />
+        <SegmentedControl<Effects> label="Visual effects" value={p.effects} onChange={(effects) => setPrefs({ effects })} options={[{ value: 'full', label: 'Glass' }, { value: 'reduced', label: 'Low power (opaque, no motion)' }]} />
       </div>
       <p className="text-micro text-ink-3">Saved in this browser.</p>
     </div>

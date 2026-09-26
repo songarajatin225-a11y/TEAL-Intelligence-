@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { StatusBadge } from '../../components/badges';
 import { RecordLink } from '../../components/RecordLink';
 import { NextActionLine } from '../../components/ThreadPanels';
@@ -104,7 +104,9 @@ function QuickAdd() {
 /** PRODUCT MANAGER COMMAND CENTER (spec §10, §67, §112) — the tracker, on the shared entity model. */
 export default function PmWorkspace() {
   const { records } = useData();
-  const [tab, setTab] = useState<Tab>('today');
+  const [params] = useSearchParams();
+  const initial = params.get('tab') as Tab | null;
+  const [tab, setTab] = useState<Tab>(initial && ['today', 'week', 'overdue', 'followups', 'meetings', 'next'].includes(initial) ? initial : 'today');
   const today = todayIso();
   const weekEnd = addDays(today, 7);
   const acts = useMemo(() => records.filter((r) => r.entity === 'activity') as (Activity & Rec)[], [records]);

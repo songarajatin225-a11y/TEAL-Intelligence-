@@ -106,7 +106,26 @@ recoloured. Until the file is committed, a plain "TEAL" text label is shown.
 | Inspection drawer, enterprise table | `src/components/EntityDrawer.tsx`, `src/components/DataTable.tsx` |
 | Signature views | Mission Control, Laser Platform (beam path), Traceability chain, Product stage pipeline |
 
-## 8. Verification
+## 8. Intelligence layer (ultimate master prompt, round 2)
+
+Built on the existing entities — no new record types, no duplicated Product / Supplier / Project
+models, nothing fabricated.
+
+| Capability | Where | Rule that keeps it honest |
+|---|---|---|
+| **Entity health** — Healthy · Attention · At Risk · Incomplete | badge on record header, drawer, cards, compare; Health card with one bar per dimension | `src/services/health.ts`: completeness (UNKNOWN counts against), evidence (verification + evidence records), thread (gap engine), timeliness (next action / due), risk (open linked risks). Every dimension shows its reason. Checks raised for *every* record by V1 limitations (documents, certifications, optic datasheets) stay on *What Is Missing?* but do not lower one record's health |
+| **Relationship bar** | every record, above the tabs | uses / belongs to → this record → used by, from the digital-thread graph |
+| **Compare** `/compare?ids=a,b` | "Compare with…" in a record's More menu, the command palette, Duplicates | values exactly as stored; differing rows highlighted; "Only differences" |
+| **View modes** — table · cards · board | every entity list | board groups by the list's status column; moving a card is a schema-validated local-draft edit |
+| **Saved views** | "Views" on every list | name + layout + filter, stored in this browser; the filter is also in the URL (`?q=`) so a view can be shared as a link |
+| **Ask Intelligence** `/ask` | Knowledge; palette "Ask Intelligence: …" | local retrieval only (search + graph + gap engine). Structured answer: direct answer, key findings, handbooks, evidence, unknowns, risks, next steps, related, confidence (share of verified sources). Says UNKNOWN when nothing matches |
+| **Supplier Risk** `/supplier-risk` | Supply Chain | recorded risk × dependency on the component master; unassessed suppliers stay in the *Unknown* row |
+| **Duplicates** `/duplicates` | Admin | same normalised name / code / model / designation / serial, or ≥ 75 % shared name words; never auto-merged |
+| **Unit Converter** `/units` | Engineering | the calculators' unit engine; currency deliberately excluded (needs a dated FX rate) |
+| **Route aliases** | e.g. `/fmea`, `/risks`, `/ecr`, `/components`, `/radar`, `/follow-ups`, `/meetings`, `/settings` | redirect to the canonical page; every earlier URL still works |
+| **Full screen**, **low-power** | record More menu; Appearance → Visual effects "Low power" | presentation only |
+
+## 9. Verification
 
 `tests/e2e/shell.spec.ts` covers sidebar collapse/persistence, breadcrumbs, command palette
 (incl. context actions), grouped global search, `g`/`/`/`n`/`f` shortcuts, quick create with toast,
@@ -114,3 +133,6 @@ row → drawer inspection, record tabs, pinning, theme + density persistence, wo
 mode, contextual help, first-visit onboarding, mobile bottom bar + no horizontal overflow at
 390 px, and **axe-core WCAG 2.x A/AA checks (no serious or critical violations) in light and dark**
 on six key pages. `tests/e2e/smoke.spec.ts` asserts every route renders exactly one `h1`.
+`tests/e2e/intelligence.spec.ts` covers health, relationship bar, compare, view modes, saved views,
+board quick edit, Ask Intelligence, supplier risk, unit conversion, duplicates and aliases.
+A horizontal-overflow sweep of 30 key routes at 1440 / 1280 / 1024 / 768 / 480 / 390 px found none.

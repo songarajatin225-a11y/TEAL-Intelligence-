@@ -11,6 +11,7 @@ import { whatIsMissing } from '../services/gaps';
 import { neighbours } from '../services/graph';
 import { DataConfidence, OriginBadge, StatusBadge } from './badges';
 import { fieldLabel, renderValue } from './fieldValue';
+import { HealthBadge, useHealth } from './Health';
 import { recordPath } from './RecordLink';
 import { NextActionLine } from './ThreadPanels';
 import { buttonClass, Drawer, IconButton, KV } from './ui';
@@ -31,6 +32,7 @@ export function EntityDrawer({ record, onClose }: { record: (AnyRecord & { __ori
     for (const n of neighbours(graph, r.id)) m.set(n.record.entity, (m.get(n.record.entity) ?? 0) + 1);
     return [...m.entries()].sort((a, b) => b[1] - a[1]);
   }, [graph, r]);
+  const health = useHealth(r ?? undefined);
   const gaps = useMemo(() => (r ? whatIsMissing(graph, r.id).filter((g) => g.status !== 'present') : []), [graph, r]);
   if (!r) return null;
   const x = r as Record<string, unknown>;
@@ -46,6 +48,7 @@ export function EntityDrawer({ record, onClose }: { record: (AnyRecord & { __ori
         <span className="flex flex-wrap items-center gap-2">
           <span>{def?.label}</span>
           <StatusBadge s={status} />
+          {health && <HealthBadge health={health} />}
           <OriginBadge o={r.__origin} />
         </span>
       }

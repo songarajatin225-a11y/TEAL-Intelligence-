@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { EntityListPage } from '../features/entities/EntityListPage';
 import { DataProvider } from '../hooks/useData';
 import { Layout } from './Layout';
@@ -10,6 +10,42 @@ const L = (f: () => Promise<{ default: React.ComponentType }>) => {
   const C = lazy(f);
   return <C />;
 };
+/** Route aliases (ultimate spec §116): familiar names keep working and land on the canonical page. */
+const ALIASES: Record<string, string> = {
+  home: '/',
+  dashboard: '/dashboards',
+  workspace: '/pm',
+  'my-work': '/pm',
+  'follow-ups': '/pm?tab=followups',
+  followups: '/pm?tab=followups',
+  meetings: '/pm?tab=meetings',
+  pocs: '/poc',
+  does: '/doe',
+  risks: '/quality',
+  risk: '/quality',
+  fmea: '/quality',
+  ecr: '/changes',
+  ecn: '/changes',
+  'change-requests': '/changes',
+  components: '/items',
+  'item-master': '/items',
+  rfqs: '/rfq',
+  boms: '/bom',
+  'lessons-learned': '/lessons',
+  radar: '/technology',
+  'technology-radar': '/technology',
+  'knowledge-graph': '/graph',
+  fat: '/fat-sat',
+  sat: '/fat-sat',
+  'ai-context': '/ai',
+  intelligence: '/global',
+  'ask-intelligence': '/ask',
+  'product-from-inquiry': '/inquiry',
+  'unit-converter': '/units',
+  'data-management': '/admin',
+  settings: '/admin',
+};
+
 const list = (entity: string, props: Record<string, unknown> = {}) => <EntityListPage entity={entity} {...props} />;
 
 // HashRouter-style routing: GitHub Pages has no server-side rewrites, so deep links use #/…
@@ -86,6 +122,12 @@ const router = createHashRouter([
       { path: 'help', element: L(() => import('../features/admin/HelpPage')) },
       { path: 'legacy', element: L(() => import('../features/admin/LegacyAppsPage')) },
       { path: 'legacy/:app', element: L(() => import('../features/admin/LegacyAppsPage')) },
+      { path: 'compare', element: L(() => import('../features/entities/ComparePage')) },
+      { path: 'ask', element: L(() => import('../features/knowledge/AskPage')) },
+      { path: 'duplicates', element: L(() => import('../features/admin/DuplicatesPage')) },
+      { path: 'supplier-risk', element: L(() => import('../features/suppliers/SupplierRiskPage')) },
+      { path: 'units', element: L(() => import('../features/calculators/UnitsPage')) },
+      ...Object.entries(ALIASES).map(([path, to]) => ({ path, element: <Navigate to={to} replace /> })),
       { path: 'record/:id', element: L(() => import('../features/entities/RecordPage')) },
       { path: '*', element: L(() => import('../features/admin/NotFound')) },
         ],

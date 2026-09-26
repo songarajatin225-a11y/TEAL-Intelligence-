@@ -42,6 +42,10 @@ DOE, FAT and SAT results are never pre-filled.
 * **⌘K / Ctrl K** command palette · **/** search · **N** create · **G then H/W/P/L/K** go · **F** focus mode · **?** shortcuts.
 * Click a row to inspect it in a drawer; records open with essentials first — related records,
   intelligence, evidence, history and raw fields are one tab away.
+* Every record shows its **health** (Healthy · Attention · At Risk · Incomplete, with reasons) and a
+  **relationship bar**; lists switch between **table, cards and board** and keep **saved views**.
+* **Compare** up to four records side by side; **Ask Intelligence** answers questions from records
+  and handbooks with sources and a confidence — local retrieval, no AI model.
 * Light / dark / system theme, comfortable / compact / reading density, reduced effects — all saved in your browser.
 
 ## Run it

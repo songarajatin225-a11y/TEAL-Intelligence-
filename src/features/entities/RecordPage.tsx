@@ -1,10 +1,12 @@
-import { Copy, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
+import { Columns2, Copy, Maximize2, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
 import { lazy, Suspense, useEffect, useMemo, useState, type ComponentType } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { isFavorite, toggleFavorite, usePrefs } from '../../app/prefs';
 import { trackRecent } from '../../app/shell/recents';
 import { DataConfidence, DataTypeBadge, OriginBadge, StatusBadge, VerificationBadge } from '../../components/badges';
 import { EntityForm } from '../../components/EntityForm';
+import { HealthBadge, HealthCard, useHealth } from '../../components/Health';
+import { RelationshipBar } from '../../components/RelationshipBar';
 import { fieldLabel, renderValue } from '../../components/fieldValue';
 import { RecordLink } from '../../components/RecordLink';
 import { AiContextDrawer, GapsPanel, LinkedRecords, NextActionLine, SimilarPanel } from '../../components/ThreadPanels';
@@ -103,6 +105,7 @@ export default function RecordPage() {
     for (const n of neighbours(graph, r.id)) m.set(n.record.entity, (m.get(n.record.entity) ?? 0) + 1);
     return [...m.entries()].sort((a, b) => b[1] - a[1]);
   }, [graph, r]);
+  const health = useHealth(r);
   const gapsOpen = useMemo(() => (r ? whatIsMissing(graph, r.id).filter((g) => g.status !== 'present').length : 0), [graph, r]);
 
   if (!r)
@@ -143,6 +146,8 @@ export default function RecordPage() {
           .then(() => toast('Link copied'))
           .catch(() => toast('Could not copy the link', { tone: 'error' })),
     },
+    { icon: Columns2, label: 'Compare with…', run: () => nav(`/compare?ids=${encodeURIComponent(r.id)}`) },
+    { icon: Maximize2, label: 'Full screen', run: () => document.documentElement.requestFullscreen?.().catch(() => toast('Full screen is not available here', { tone: 'error' })) },
     { icon: Printer, label: 'Print', run: () => window.print() },
     ...(isDraft ? [{ icon: RotateCcw, label: 'Discard local draft', run: () => repo().workspace.discard(r.id) }] : []),
     ...(!ui?.readOnly
@@ -173,6 +178,7 @@ export default function RecordPage() {
           {r.description && <p className="mt-1 text-lead text-ink-2">{r.description}</p>}
           <div className="mt-2.5 flex flex-wrap items-center gap-2">
             <StatusBadge s={status} />
+            {health && <HealthBadge health={health} />}
             <OriginBadge o={r.__origin} />
             <DataConfidence dataType={r.data_type} verification={p?.verification_status} source={p?.document ?? p?.source_id} lastVerified={p?.last_verified} />
             {r.updated_at && <span className="text-micro text-ink-3">· updated {fmtDate(r.updated_at)}</span>}
@@ -220,16 +226,7 @@ export default function RecordPage() {
         </Notice>
       )}
 
-      {related.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2" aria-label="Related records">
-          <span className="text-meta text-ink-3">Related</span>
-          {related.map(([e, n]) => (
-            <button key={e} type="button" onClick={() => setTab('related')} className="rounded-full bg-ink/[0.06] px-2.5 py-1 text-meta hover:bg-accent-soft hover:text-accent-2">
-              <b className="num">{n}</b> {(n === 1 ? ENTITY_BY_TYPE[e]?.label : ENTITY_BY_TYPE[e]?.plural) ?? e}
-            </button>
-          ))}
-        </div>
-      )}
+      <RelationshipBar record={r} relatedHref={`/record/${encodeURIComponent(r.id)}?tab=related`} />
 
       <div>
         <Tabs<Tab>
@@ -266,6 +263,7 @@ export default function RecordPage() {
                   <NextActionLine record={r} />
                 </Card>
               )}
+              <HealthCard record={r} />
               <Card title="Trust" description="Where this came from and how far to rely on it">
                 <KV
                   items={[

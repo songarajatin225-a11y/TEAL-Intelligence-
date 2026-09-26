@@ -22,7 +22,7 @@ const useSmall = () =>
  * (remembered per table), keyboard row activation, virtualisation above 80 rows, and a card
  * layout on phones.
  */
-export function DataTable<T>({ data, columns, onRowClick, filterPlaceholder = 'Filter…', height = 620, toolbar, tableKey }: { data: T[]; columns: ColumnDef<T, unknown>[]; onRowClick?: (row: T) => void; filterPlaceholder?: string; height?: number; toolbar?: React.ReactNode; tableKey?: string }) {
+export function DataTable<T>({ data, columns, onRowClick, filterPlaceholder = 'Filter…', height = 620, toolbar, tableKey, filter: filterProp, onFilterChange }: { filter?: string; onFilterChange?: (v: string) => void; data: T[]; columns: ColumnDef<T, unknown>[]; onRowClick?: (row: T) => void; filterPlaceholder?: string; height?: number; toolbar?: React.ReactNode; tableKey?: string }) {
   const prefs = usePrefs();
   const small = useSmall();
   const density = (tableKey && prefs.tableDensity[tableKey]) || 'comfortable';
@@ -31,7 +31,9 @@ export function DataTable<T>({ data, columns, onRowClick, filterPlaceholder = 'F
   const hiddenCols = tableKey ? hidden : localHidden;
   const visibility: VisibilityState = useMemo(() => Object.fromEntries(hiddenCols.map((c) => [c, false])), [hiddenCols]);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [filter, setFilter] = useState('');
+  const [filterLocal, setFilterLocal] = useState('');
+  const filter = filterProp ?? filterLocal;
+  const setFilter = onFilterChange ?? setFilterLocal;
   const deferred = useDeferredValue(filter);
   const table = useReactTable({
     data,

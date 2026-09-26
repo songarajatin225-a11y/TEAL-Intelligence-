@@ -54,6 +54,15 @@ export const HELP: Record<string, HelpEntry> = {
     what: 'Your local workspace: drafts, change packages, backups, legacy import and the optional local workspace lock.',
     terms: [['Local draft', 'A record stored only in this browser.'], ['Change package', 'A ZIP of drafts to apply to the repository in a reviewed pull request.'], ['Local workspace lock', 'A convenience screen lock — not security.']],
   },
+  '/ask': {
+    what: 'Ask a question in plain language. The answer is assembled from records, handbook sections, the digital-thread graph and the gap engine — no AI model is connected, and nothing is written that is not in the data.',
+    terms: [['Confidence', 'Share of matched sources that are verified or source-documented. DEMO records never count as verified.']],
+    workflow: ['Ask the question.', 'Read the direct answer and confidence.', 'Open the findings and evidence; check the unknowns.', 'Act on the recommended next steps.'],
+  },
+  '/compare': { what: 'Up to four records of one type side by side. Rows that differ are highlighted; “Only differences” hides the rest. Unknown values stay unknown.', workflow: ['Pick a type, or use “Compare with…” on a record.', 'Add records.', 'Toggle “Only differences”.'] },
+  '/supplier-risk': { what: 'Recorded supplier risk against dependency (component-master items naming the supplier). Suppliers without an assessment stay UNKNOWN — the system never assigns risk.', terms: [['Single-source', 'The supplier is the only vendor for that component category.'], ['Long-lead', 'Lead time of 8 weeks or more.']] },
+  '/duplicates': { what: 'Likely duplicate records within each type, with the rule that matched. Nothing is merged automatically — compare the pair, then edit or delete one as a local draft.' },
+  '/units': { what: 'Engineering unit conversion using the same engine as the calculators. Currency is not converted here: it needs a dated FX rate.' },
   '/data-quality': { what: 'The health of master data and your drafts: broken references, missing sources, unknown units, duplicates, stale prices and conflicts.' },
 };
 
@@ -64,6 +73,7 @@ export function helpFor(pathname: string): HelpEntry | undefined {
 }
 
 export const GLOSSARY: [string, string][] = [
+  ['Health', 'Healthy · Attention · At Risk · Incomplete — computed from completeness, evidence, thread gaps, timeliness and open risks. Every dimension shows its reason.'],
   ['Digital thread', 'Every record links to the ones it came from and leads to: inquiry → requirement → product → BOM → cost → project → FAT/SAT → field → lesson.'],
   ['Local draft', 'Created or edited in this browser. Permanent repository update requires a GitHub commit (via a change package).'],
   ['Verified', 'Checked by a reviewer against a source.'],

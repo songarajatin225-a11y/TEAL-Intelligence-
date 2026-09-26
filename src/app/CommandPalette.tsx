@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ArrowRight, Clock, CornerDownLeft, FileText, Pin, Plus, Search, Settings2, Sparkles, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Clock, Columns2, MessageSquareText, CornerDownLeft, FileText, Pin, Plus, Search, Settings2, Sparkles, type LucideIcon } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -68,6 +68,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       const rel = new Map<string, number>();
       for (const n of neighbours(graph, rec.id)) rel.set(n.record.entity, (rel.get(n.record.entity) ?? 0) + 1);
       for (const [e, n] of rel) out.push({ id: `ctx:rel:${e}`, group: `This ${label.toLowerCase()}`, label: `View ${n} related ${(ENTITY_BY_TYPE[e]?.plural ?? e).toLowerCase()}`, icon: ArrowRight, run: go(`/record/${encodeURIComponent(rec.id)}?tab=related`) });
+      out.push({ id: 'ctx:compare', group: `This ${label.toLowerCase()}`, label: 'Compare with…', icon: Columns2, run: go(`/compare?ids=${encodeURIComponent(rec.id)}`) });
       out.push({ id: 'ctx:gaps', group: `This ${label.toLowerCase()}`, label: 'What is missing for this?', icon: ArrowRight, run: go(`/record/${encodeURIComponent(rec.id)}?tab=intelligence`) });
     }
 
@@ -110,7 +111,8 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             .map((r) => ({ id: `rec:${r.id}`, group: 'Records', label: r.name, hint: ENTITY_BY_TYPE[r.entity]?.label, icon: FileText, run: () => (onClose(), nav(`/record/${encodeURIComponent(r.id)}`)) }))
         : [];
     const searchAll: Cmd = { id: 'search', group: 'Search', label: `Search everything for “${q.trim()}”`, icon: Search, run: () => (onClose(), nav(`/search?q=${encodeURIComponent(q.trim())}`)) };
-    return [...cmds, ...recs, searchAll];
+    const ask: Cmd = { id: 'ask', group: 'Search', label: `Ask Intelligence: “${q.trim()}”`, icon: MessageSquareText, run: () => (onClose(), nav(`/ask?q=${encodeURIComponent(q.trim())}`)) };
+    return [...cmds, ...recs, searchAll, ask];
   }, [q, commands, records, nav, onClose]);
 
   useEffect(() => {

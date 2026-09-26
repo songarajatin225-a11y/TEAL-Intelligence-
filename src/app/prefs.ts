@@ -16,6 +16,15 @@ export interface Favorite {
   entity: string;
 }
 
+export type ListView = 'table' | 'cards' | 'board';
+export interface SavedView {
+  id: string;
+  name: string;
+  entity: string;
+  q: string;
+  view: ListView;
+}
+
 export interface Prefs {
   theme: Theme;
   density: Density;
@@ -27,6 +36,8 @@ export interface Prefs {
   onboarded: boolean;
   tableDensity: Record<string, 'comfortable' | 'compact'>;
   hiddenColumns: Record<string, string[]>;
+  listView: Record<string, ListView>;
+  savedViews: SavedView[];
 }
 
 const KEY = 'teal-os:prefs:v1';
@@ -41,6 +52,8 @@ export const DEFAULT_PREFS: Prefs = {
   onboarded: false,
   tableDensity: {},
   hiddenColumns: {},
+  listView: {},
+  savedViews: [],
 };
 
 function read(): Prefs {

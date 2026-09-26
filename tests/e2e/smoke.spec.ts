@@ -1,6 +1,6 @@
 import { expect, go, test } from './fixtures';
 
-/** Every module renders its page title with no runtime errors (all pre-redesign routes kept). */
+/** Every module renders its page title with no runtime errors (all pre-redesign routes kept, plus the intelligence pages). */
 const ROUTES: [string, RegExp][] = [
   ['', /Mission Control/],
   ['dashboards', /Dashboards/],
@@ -64,6 +64,11 @@ const ROUTES: [string, RegExp][] = [
   ['reports', /Reports/],
   ['help', /Help Center/],
   ['legacy', /Legacy Applications/],
+  ['compare', /Compare/],
+  ['ask', /Ask Intelligence/],
+  ['duplicates', /Duplicates/],
+  ['supplier-risk', /Supplier Risk/],
+  ['units', /Unit Converter/],
   ['record/prd-semispm', /Semi SPM/],
   ['record/gate-g3', /G3/],
 ];
