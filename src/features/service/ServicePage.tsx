@@ -32,7 +32,7 @@ export default function ServicePage() {
         </Field>
       </Card>
       <Tabs label="Service" value={tab} onChange={setTab} tabs={[{ key: 'tickets', label: 'Service tickets', count: tickets.length }, { key: 'machines', label: 'Installed base', count: machines.length }]} />
-      {tab === 'tickets' ? <EntityListPage entity="service_ticket" title="Service tickets" /> : <EntityListPage entity="machine" title="Installed base" />}
+      {tab === 'tickets' ? <EntityListPage embedded entity="service_ticket" title="Service tickets" /> : <EntityListPage embedded entity="machine" title="Installed base" />}
     </div>
   );
 }

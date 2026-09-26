@@ -14,15 +14,11 @@ export default function MachinesPage() {
           entity="configuration"
           title="Machine configurations"
           intro="Machines as configured in Configurator 2.0 — each opens its architecture, BOM and cost."
+          createTo="/configurator"
           extraActions={
-            <>
-              <Link to="/configurator">
-                <Button variant="primary">New configuration</Button>
-              </Link>
-              <Link to="/architecture">
-                <Button>Architecture canvas</Button>
-              </Link>
-            </>
+            <Link to="/architecture">
+              <Button>Architecture canvas</Button>
+            </Link>
           }
         />
       ) : (

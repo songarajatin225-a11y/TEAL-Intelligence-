@@ -56,7 +56,7 @@ export default function FatSatPage() {
           {p && <span className="text-[12px] text-ink-3">{n} linked requirement(s) + {ck ? ck.fat.items.length : '—'} FAT checklist items</span>}
         </div>
       </Card>
-      <EntityListPage entity="acceptance" title="Protocols" />
+      <EntityListPage embedded entity="acceptance" title="Protocols" />
     </div>
   );
 }

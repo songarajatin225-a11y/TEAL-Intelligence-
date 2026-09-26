@@ -45,7 +45,7 @@ export default function LocalizationPage() {
           </div>
         </div>
       </Card>
-      <EntityListPage entity="localization" title="Localization items" />
+      <EntityListPage embedded entity="localization" title="Localization items" />
     </div>
   );
 }

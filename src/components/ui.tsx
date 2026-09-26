@@ -37,12 +37,13 @@ export function Card({ title, actions, children, className, id }: { title?: Reac
   );
 }
 
-export function PageHeader({ title, subtitle, actions, eyebrow }: { title: ReactNode; subtitle?: ReactNode; actions?: ReactNode; eyebrow?: ReactNode }) {
+export function PageHeader({ title, subtitle, actions, eyebrow, level = 1 }: { title: ReactNode; subtitle?: ReactNode; actions?: ReactNode; eyebrow?: ReactNode; level?: 1 | 2 }) {
+  const H = level === 1 ? 'h1' : 'h2';
   return (
     <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
       <div className="min-w-0">
         {eyebrow && <div className="text-[11px] font-semibold uppercase tracking-wider text-accent">{eyebrow}</div>}
-        <h1 className="truncate text-xl font-semibold">{title}</h1>
+        <H className={clsx('truncate font-semibold', level === 1 ? 'text-xl' : 'text-base')}>{title}</H>
         {subtitle && <p className="mt-0.5 max-w-3xl text-ink-2">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-1.5 no-print">{actions}</div>}

@@ -1,11 +1,11 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 import { useMemo, useRef, useState, type ReactNode } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { DataTypeBadge, OriginBadge, StatusBadge, VerificationBadge } from '../../components/badges';
 import { DataTable } from '../../components/DataTable';
 import { EntityForm } from '../../components/EntityForm';
-import { RecordLink } from '../../components/RecordLink';
+import { RecordLink, recordPath } from '../../components/RecordLink';
 import { NextActionLine } from '../../components/ThreadPanels';
 import { Button, Drawer, EmptyState, Notice, PageHeader } from '../../components/ui';
 import type { AnyRecord } from '../../domain';
@@ -31,7 +31,11 @@ function cellValue(kind: string | undefined, v: unknown): ReactNode {
   return String(v);
 }
 
-export function EntityListPage({ entity, title, intro, filter, extraActions, eyebrow }: { entity: string; title?: string; intro?: ReactNode; filter?: (r: Rec) => boolean; extraActions?: ReactNode; eyebrow?: string }) {
+/**
+ * `embedded`: the list sits under another page's h1, so its header renders as h2.
+ * `createTo`: route of a dedicated editor that replaces the generic "New" form.
+ */
+export function EntityListPage({ entity, title, intro, filter, extraActions, eyebrow, embedded, createTo }: { entity: string; title?: string; intro?: ReactNode; filter?: (r: Rec) => boolean; extraActions?: ReactNode; eyebrow?: string; embedded?: boolean; createTo?: string }) {
   const def = ENTITY_BY_TYPE[entity];
   const ui = ENTITY_UI[entity];
   const { records } = useData();
@@ -50,7 +54,9 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
         accessorFn: (r) => r.name,
         cell: ({ row }) => (
           <div className="flex flex-wrap items-center gap-1">
-            <span className="font-medium text-accent-2">{row.original.name}</span>
+            <Link className="font-medium text-accent-2 hover:underline" to={recordPath(row.original.id)}>
+              {row.original.name}
+            </Link>
             <OriginBadge o={row.original.__origin} />
           </div>
         ),
@@ -118,6 +124,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
   return (
     <div>
       <PageHeader
+        level={embedded ? 2 : 1}
         eyebrow={eyebrow}
         title={title ?? def.plural}
         subtitle={intro ?? ui?.intro}
@@ -125,7 +132,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
           <>
             {extraActions}
             {!ui?.readOnly && (
-              <Button variant="primary" onClick={() => setParams({ new: '1' })}>
+              <Button variant="primary" onClick={() => (createTo ? nav(createTo) : setParams({ new: '1' }))}>
                 <Plus className="size-3.5" /> New {def.label.toLowerCase()}
               </Button>
             )}
@@ -166,7 +173,7 @@ export function EntityListPage({ entity, title, intro, filter, extraActions, eye
           actions={
             <>
               {!ui?.readOnly && (
-                <Button variant="primary" onClick={() => setParams({ new: '1' })}>
+                <Button variant="primary" onClick={() => (createTo ? nav(createTo) : setParams({ new: '1' }))}>
                   Create
                 </Button>
               )}
