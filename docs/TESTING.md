@@ -69,3 +69,10 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 * Fixtures never invent real-world facts. The ingestion fixture uses obviously fictional
   companies and models, test-only.
 * Demo records used by tests are in `data/demo/` and labelled DEMO.
+
+## 3D machine digital twin
+
+- `tests/integration/twin.test.ts` — motion profiles, axis model from stage records, motion inside the canonical cycle, scene graph ↔ records, FOV and working distance, bounding-box collisions (clear demo; detected when the camera is lowered), axis limits, sub-steps only where data allows, deterministic replay, design check.
+- `tests/integration/components.test.ts` — datasheets for every component, spec-text parsing (every token kept), vendor → supplier/company links, unknowns stay unknown.
+- `tests/e2e/twin.spec.ts` — renders, runs the cycle, jumps via events, component selection → datasheet, design check / motion / fault injection / assumptions, X-ray, camera modes, keyboard view, customer mode, component datasheets page.
+- Playwright launches Chromium with software WebGL (`--use-angle=swiftshader --enable-unsafe-swiftshader`) so the 3D scene renders on GPU-less CI runners.

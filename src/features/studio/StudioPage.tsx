@@ -1,4 +1,4 @@
-import { Boxes, Columns2, FlaskConical, GitBranch, Layers, Plus, Sparkles, Truck, Workflow } from 'lucide-react';
+import { Box, Boxes, Columns2, FlaskConical, GitBranch, Layers, Plus, Sparkles, Truck, Workflow } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
@@ -58,6 +58,10 @@ export default function StudioPage() {
         <p className="mt-2 text-micro text-ink-3">
           The simulator models cycle time, queues, blocking, variability, failures, cost and energy. It is not FEA, CFD, optical ray-tracing or servo-dynamics simulation, and results are not factory-validated until measured data is entered under Validation.
         </p>
+      </Card>
+      <Card edge title="3D Machine Digital Twin" icon={Box} description="From engineering requirements to a virtual machine you can configure, simulate, analyze and validate." actions={<Link to={`${studioPath('sim-demo-laser-marker')}?tab=machine3d`} className={buttonClass('primary', 'sm')}>Open the 3D laser marking machine</Link>}>
+        <Chain label="Digital thread" steps={['Requirement', 'Architecture', '3D machine', 'Simulation', 'BOM', 'Cost', 'Validation'].map((l) => ({ label: l, state: 'done' as const }))} />
+        <p className="mt-2 text-micro text-ink-3">Every scenario has a 3D machine tab generated from its stations and selected components — motion, sequence, laser and vision, collisions, BOM, cost and requirements on one model. Conceptual geometry, not CAD.</p>
       </Card>
       <Tabs<Tab>
         label="Studio"

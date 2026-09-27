@@ -1,0 +1,1041 @@
+import { Canvas } from '@react-three/fiber';
+import clsx from 'clsx';
+import { AlertTriangle, Box, Bug, Camera, ChevronDown, ChevronRight, Expand, Eye, EyeOff, Focus, Grid3x3, Info, Layers, LayoutGrid, ListTree, Maximize2, Palette, PanelLeft, Pause, Play, Ruler, Scan, ScanEye, Scissors, Search, Square, X } from 'lucide-react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { recordPath } from '../../components/RecordLink';
+import { toast } from '../../components/toast';
+import { Badge, Button, Card, Loading, Notice, Popover, SegmentedControl, Tabs, Unknown } from '../../components/ui';
+import type { AnyRecord } from '../../domain';
+import { productTypeLabel, type Part, type Recipe } from '../../domain/engineering';
+import { displaySpec, KEY_SPECS, readSpec } from '../../services/eng/specs';
+import { sheetFor } from '../../services/eng/componentDetail';
+import { alternativesFor, selectedParts } from '../../services/sim/supply';
+import { resolveScenario } from '../../services/sim/model';
+import { buildMachine, LAYERS, type Layer, type Machine3DObject } from '../../services/twin/machine';
+import type { SimulationState } from '../../services/twin/timeline';
+import { SheetBody } from '../engineering/ComponentSheet';
+import { big, money, num, pct } from '../studio/shared';
+import type { TabProps } from '../studio/ScenarioPage';
+import { NumInput, SmallSelect } from '../studio/tabs/edit';
+import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, IoPanel, MotionPanel, RunsPanel, SequencePanel, TimelinePanel } from './panels';
+import { MachineScene, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
+import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type RunOptions } from './useTwin';
+
+/*
+ * 3D MACHINE SIMULATOR + DIGITAL TWIN WORKBENCH (3D master prompt §5–§7, §38–§46, §55–§61, §83–§90).
+ * An extension of the Equipment Simulation Studio: the scene, timeline, KPIs, HMI and alarms all read
+ * one central simulation state; the scenario record stays the source of truth.
+ */
+
+const TwoD = lazy(() => import('../studio/tabs/TwinTab'));
+
+function hasWebGL(): boolean {
+  try {
+    const c = document.createElement('canvas');
+    return !!(c.getContext('webgl2') || c.getContext('webgl'));
+  } catch {
+    return false;
+  }
+}
+
+export default function MachineTab(p: TabProps) {
+  const [ok] = useState(hasWebGL);
+  if (!ok)
+    return (
+      <div className="space-y-3">
+        <Notice tone="warn">3D view unavailable on this device (WebGL is disabled or unsupported). Showing the 2D engineering simulator instead — architecture, material flow, sequence, cycle time, BOM and simulation remain available in the other tabs.</Notice>
+        <Suspense fallback={<Loading />}>
+          <TwoD {...p} />
+        </Suspense>
+      </div>
+    );
+  return <Workbench {...p} />;
+}
+
+type Overlay = 'none' | 'state' | 'localization' | 'cost' | 'requirement' | 'risk';
+type CamMode = 'engineering' | 'customer' | 'exploded' | 'xray' | 'process' | 'laser' | 'inspection' | 'maintenance';
+type Bottom = 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'faults' | 'runs' | 'compare' | 'assumptions';
+
+const reducedMotionQuery = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+const allLayers = () => Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<Layer, boolean>;
+
+function Workbench({ eng, sim, set, d, customer }: TabProps) {
+  const [, setParams] = useSearchParams();
+  const twin = useTwinModel(eng, sim, d);
+  const { model } = twin;
+  const [run, setRunState] = useState<RunOptions>({ seed: 11, horizon_s: 3600, failures: false, scenarioFaults: false, injected: [] });
+  const setRun = useCallback((f: (r: RunOptions) => RunOptions) => setRunState(f), []);
+  const { des, player, baseline, error } = useTwinRun(d, model, run);
+
+  /* ---------------- central simulation clock (§127: render loop decoupled from the simulation) */
+  const tRef = useRef(0);
+  const stateRef = useRef<SimulationState | null>(null);
+  const [t, setTState] = useState(0);
+  const [snap, setSnap] = useState<SimulationState | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const [collision, setCollision] = useState<{ text: string; t: number; a: string; b: string } | null>(null);
+  const ack = useRef(new Set<string>());
+  const setT = useCallback(
+    (x: number) => {
+      const v = Math.max(0, Math.min(player?.end ?? 0, x));
+      tRef.current = v;
+      stateRef.current = player ? player.at(v) : null;
+      setSnap(stateRef.current);
+      setTState(v);
+    },
+    [player],
+  );
+  useEffect(() => {
+    ack.current.clear();
+    setT(tRef.current);
+  }, [player, setT]);
+  useEffect(() => {
+    if (!playing || !player) return;
+    let raf = 0;
+    let last = performance.now();
+    let lastUi = 0;
+    const tick = (now: number) => {
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      tRef.current = Math.min(player.end, tRef.current + dt * speed);
+      const s = player.at(tRef.current);
+      stateRef.current = s;
+      // §21 never continue silently through a collision
+      for (const st of s.stations)
+        for (const sv of st.servers) {
+          if (sv.state !== 'busy' || sv.step?.kind !== 'move') continue;
+          const hit = twin.collisions.find((h) => h.stationKey === st.key && h.moveLabel === sv.step!.name);
+          const key = hit ? `${hit.a}|${hit.b}` : '';
+          if (hit && !ack.current.has(key)) {
+            ack.current.add(key);
+            setPlaying(false);
+            setCollision({ text: hit.text, t: tRef.current, a: hit.a, b: hit.b });
+            setSnap(s);
+            setTState(tRef.current);
+            return;
+          }
+        }
+      if (now - lastUi > 160) {
+        lastUi = now;
+        setSnap(s);
+        setTState(tRef.current);
+      }
+      if (tRef.current >= player.end) {
+        setPlaying(false);
+        setSnap(s);
+        setTState(tRef.current);
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [playing, player, speed, twin.collisions]);
+
+  /* ---------------- view state */
+  const [view, setView] = useState<SceneView>(() => ({
+    layers: allLayers(),
+    hidden: new Set(),
+    isolate: null,
+    selected: null,
+    hover: null,
+    xray: false,
+    explode: 0,
+    section: { axis: null, pos: 0 },
+    grid: true,
+    axes: true,
+    dims: false,
+    labels: !customer,
+    zones: true,
+    routes: false,
+    fov: true,
+    field: true,
+    trail: false,
+    beam: { on: true, intensity: 0.9, color: null, spot: 1.2 },
+    overlay: null,
+    collisionIds: new Set(),
+    quality: typeof window !== 'undefined' && window.devicePixelRatio > 2 ? 'balanced' : 'high',
+    ortho: false,
+    measure: false,
+    measurePts: [],
+    customer,
+    reducedMotion: reducedMotionQuery(),
+    zonesAll: false,
+    bottleneck: null,
+  }));
+  const patch = (p: Partial<SceneView>) => setView((v) => ({ ...v, ...p }));
+  const [overlay, setOverlay] = useState<Overlay>('none');
+  const [reqSel, setReqSel] = useState('');
+  const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
+  const [camMode, setCamMode] = useState<CamMode>(customer ? 'customer' : 'engineering');
+  const [bottom, setBottom] = useState<Bottom>('timeline');
+  const [other, setOther] = useState('');
+  const [ghostOn, setGhostOn] = useState(false);
+  const [perfNotice, setPerfNotice] = useState(false);
+  const [debug, setDebug] = useState(false);
+  const [treeQ, setTreeQ] = useState('');
+  const [open, setOpen] = useState<Set<string>>(new Set(['machine']));
+  const scene = useRef<SceneApi | null>(null);
+  const box = useRef<HTMLDivElement | null>(null);
+  const debugOut = useRef<HTMLDivElement | null>(null);
+  useEffect(() => patch({ customer, labels: !customer }), [customer]);
+
+  // §154 command-palette actions arrive as ?cmd=… on this tab
+  const [params] = useSearchParams();
+  const cmd = params.get('cmd');
+  useEffect(() => {
+    if (!cmd) return;
+    const run: Record<string, () => void> = {
+      run: () => player && setPlaying(true),
+      pause: () => setPlaying(false),
+      reset: () => (setPlaying(false), setT(0)),
+      laser: () => applyMode('laser'),
+      inspection: () => applyMode('inspection'),
+      xray: () => applyMode('xray'),
+      exploded: () => applyMode('exploded'),
+      dims: () => patch({ dims: true }),
+      motion: () => setBottom('motion'),
+      checks: () => setBottom('checks'),
+      compare: () => setBottom('compare'),
+      png: () => setTimeout(png, 400),
+      report: () => setBottom('assumptions'),
+    };
+    const id = setTimeout(() => run[cmd]?.(), 250);
+    setParams((p) => (p.delete('cmd'), p), { replace: true });
+    return () => clearTimeout(id);
+  }, [cmd]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const bottleneckKey = d.cycle?.bottleneck.rs.station.key ?? null;
+  useEffect(() => patch({ bottleneck: bottleneckKey }), [bottleneckKey]);
+
+  /* ---------------- overlays (§142–§145): colours come from records, never from a score */
+  const deps = d.deps;
+  const related = useCallback(
+    (reqId: string): Set<string> => {
+      const r = eng.byId.get(reqId) as (AnyRecord & { unit?: string; part_id?: string }) | undefined;
+      const ids = new Set<string>();
+      if (!r) return ids;
+      if (sim.twin?.process_area?.requirement_id === reqId) for (const l of model.lasers) [l.sourceId, l.expanderId, l.galvoId, l.fthetaId, 'fixture'].forEach((x) => x && ids.add(x));
+      if (/uph|parts?\/h/i.test(String(r.unit ?? '')) || /throughput/i.test(r.name)) for (const o of model.objects) if (o.stationKey && o.stationKey === bottleneckKey) ids.add(o.id);
+      if (r.part_id) for (const o of model.objects) if (o.partId === r.part_id) ids.add(o.id);
+      if (/verif|inspect|code/i.test(r.name)) for (const o of model.objects) if (o.stationKey && sim.stations.find((s) => s.key === o.stationKey)?.kind === 'inspect') ids.add(o.id);
+      return ids;
+    },
+    [eng.byId, sim, model, bottleneckKey],
+  );
+  const overlayMap = useMemo(() => {
+    if (overlay === 'none') return null;
+    const m = new Map<string, string>();
+    if (overlay === 'localization') return originColors(model, eng.byId);
+    if (overlay === 'cost') {
+      const cost = new Map<string, number>();
+      for (const b of d.bom.items) if (b.partId && b.extended != null) cost.set(b.partId, (cost.get(b.partId) ?? 0) + b.extended);
+      const max = Math.max(1, ...cost.values());
+      for (const o of model.objects) if (o.partId && cost.has(o.partId)) m.set(o.id, costColor(cost.get(o.partId)! / max));
+      return m;
+    }
+    if (overlay === 'requirement') {
+      for (const id of reqSel ? related(reqSel) : []) m.set(id, '#00e0cf');
+      return m;
+    }
+    if (overlay === 'risk') {
+      for (const o of model.objects) {
+        const dep = deps.find((x) => x.sp.part.id === o.partId);
+        if (dep && dep.risk.length) m.set(o.id, dep.singleSource ? '#e5484d' : '#f5a524');
+      }
+      return m;
+    }
+    if (overlay === 'state' && snap) {
+      for (const o of model.objects) {
+        if (!o.stationKey) continue;
+        const st = snap.stations.find((s) => s.key === o.stationKey);
+        const sv = st?.servers.some((x) => x.state === 'down') ? 'down' : st?.servers.some((x) => x.state === 'busy') ? 'busy' : st?.servers.some((x) => x.state === 'blocked') ? 'blocked' : 'idle';
+        if (sv !== 'idle') m.set(o.id, sv === 'down' ? '#e5484d' : sv === 'blocked' ? '#f5a524' : '#00a99d');
+      }
+      return m;
+    }
+    return m;
+  }, [overlay, model, eng.byId, d.bom, reqSel, related, deps, snap]);
+  const sceneView = useMemo(() => ({ ...view, overlay: overlayMap, collisionIds: collision ? new Set([collision.a, collision.b]) : view.collisionIds }), [view, overlayMap, collision]);
+
+  const live: LiveView = useMemo(() => {
+    const stationState: LiveView['stationState'] = {};
+    for (const s of snap?.stations ?? []) stationState[s.key] = s.servers.some((x) => x.state === 'down') ? 'down' : s.servers.some((x) => x.state === 'busy') ? 'busy' : s.servers.some((x) => x.state === 'blocked') ? 'blocked' : 'idle';
+    const doorOpen = model.carrier === 'axes' && snap ? (snap.stations.some((s) => ['load', 'unload'].includes(sim.stations.find((x) => x.key === s.key)?.kind ?? '') && s.servers.some((x) => x.state === 'busy' && x.step?.kind !== 'move')) ? 1 : 0) : 0;
+    const tower = !snap ? 'off' : snap.alarms.length ? 'red' : Object.values(stationState).some((x) => x === 'busy') ? 'green' : 'amber';
+    return { stationState, vision: snap?.visionActive ?? {}, laserOn: snap?.laserOn ?? [], doorOpen, tower };
+  }, [snap, model.carrier, sim.stations]);
+
+  /* ---------------- camera modes + shortcuts */
+  const applyMode = (m: CamMode) => {
+    setCamMode(m);
+    const base: Partial<SceneView> = { xray: false, explode: 0, zonesAll: false };
+    if (m === 'engineering') patch({ ...base, labels: true });
+    if (m === 'customer') patch({ ...base, labels: false, dims: false, routes: false, zones: false });
+    if (m === 'exploded') patch({ ...base, explode: 1 });
+    if (m === 'xray') patch({ ...base, xray: true, routes: true });
+    if (m === 'maintenance') patch({ ...base, zones: true, zonesAll: true, xray: true });
+    if (m === 'laser' || m === 'inspection') patch({ ...base, fov: true, field: true });
+    const preset: ViewPreset = m === 'laser' ? 'laser' : m === 'inspection' ? 'inspection' : m === 'maintenance' ? 'maintenance' : m === 'process' ? 'process' : 'iso';
+    setTimeout(() => scene.current?.view(preset), 0);
+  };
+  const select = (id: string | null) => {
+    patch({ selected: id });
+    if (id) {
+      const o = model.byId.get(id);
+      let p = o?.parentId;
+      const nx = new Set(open);
+      while (p) {
+        nx.add(p);
+        p = model.byId.get(p)?.parentId ?? null;
+      }
+      setOpen(nx);
+    }
+  };
+  const focusObj = (id: string) => {
+    select(id);
+    scene.current?.view('fit', id);
+  };
+  const onKey = (e: KeyboardEvent) => {
+    if ((e.target as HTMLElement).closest('input,select,textarea')) return;
+    const k = e.key.toLowerCase();
+    const act: Record<string, () => void> = {
+      f: () => scene.current?.view('fit', view.selected),
+      '1': () => scene.current?.view('front'),
+      '2': () => scene.current?.view('top'),
+      '3': () => scene.current?.view('side'),
+      '4': () => scene.current?.view('iso'),
+      h: () => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) }),
+      r: () => (patch({ hidden: new Set(), isolate: null, explode: 0, xray: false, section: { axis: null, pos: 0 } }), scene.current?.view('iso')),
+      ' ': () => setPlaying((p) => !p),
+      escape: () => (patch({ selected: null, measure: false, measurePts: [] }), setCollision(null)),
+    };
+    if (act[k]) {
+      e.preventDefault();
+      act[k]();
+    }
+  };
+  const png = () => {
+    const c = scene.current?.canvas();
+    if (!c) return;
+    const a = document.createElement('a');
+    a.href = c.toDataURL('image/png');
+    a.download = `${sim.id}-3d-${Math.round(tRef.current)}s.png`;
+    a.click();
+  };
+  const saveSnapshot = (name: string) => {
+    const cam = scene.current?.camera();
+    if (!cam) return;
+    set((s) => ({ ...s, twin: { ...s.twin, snapshots: [...(s.twin?.snapshots ?? []), { id: `snap-${Date.now().toString(36)}`, name, at: new Date().toISOString(), view: camMode, camera: { position: cam.position, target: cam.target, ortho: view.ortho }, layers: LAYERS.filter((l) => view.layers[l]), selected: view.selected ?? undefined, t_s: tRef.current }] } }));
+    toast('Snapshot added to the scenario', { tone: 'draft', detail: 'Save the scenario to keep it.' });
+  };
+  const restoreSnapshot = (id: string) => {
+    const s = sim.twin?.snapshots?.find((x) => x.id === id);
+    if (!s) return;
+    patch({ layers: Object.fromEntries(LAYERS.map((l) => [l, s.layers.includes(l)])) as Record<Layer, boolean>, selected: s.selected ?? null, ortho: !!s.camera.ortho });
+    setT(s.t_s);
+    setTimeout(() => scene.current?.setCamera(s.camera.position, s.camera.target), 30);
+  };
+  const ghost = useMemo(() => {
+    if (!ghostOn || !other) return null;
+    const o = eng.byId.get(other);
+    if (!o) return null;
+    // imported lazily to keep this memo cheap to read
+    return { id: other };
+  }, [ghostOn, other, eng.byId]);
+  const ghostModel = useGhost(eng, ghost?.id ?? null);
+  const factory = useMemo(() => (sim.twin?.factory ?? []).map((f, i) => ({ x: f.x_mm, z: f.z_mm, rot: f.rot_deg, label: `Machine ${i + 1}` })), [sim.twin?.factory]);
+
+  const sel = view.selected ? model.byId.get(view.selected) : undefined;
+  const hoverObj = hover ? model.byId.get(hover.id) : undefined;
+  const measure = view.measurePts.length === 2 ? view.measurePts : null;
+  const dist = measure ? { dx: (measure[1][0] - measure[0][0]) * 1000, dy: (measure[1][1] - measure[0][1]) * 1000, dz: (measure[1][2] - measure[0][2]) * 1000 } : null;
+  const bounds = model.bounds;
+  const secAxis = view.section.axis;
+  const secRange = secAxis ? [bounds.min[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2], bounds.max[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2]] : [0, 1];
+  const busyNames = snap ? snap.stations.flatMap((s) => s.servers.filter((x) => x.state === 'busy').map((x) => ({ st: sim.stations.find((y) => y.key === s.key)?.name ?? s.key, step: x.step?.name, part: x.part }))) : [];
+  const current = busyNames[0];
+  const machineStatus = !player ? 'NOT RUNNABLE' : playing ? (snap?.machineState ?? 'Idle').toUpperCase() : t > 0 ? 'PAUSED' : 'READY';
+  const recipe = sim.recipe_id ? (eng.byId.get(sim.recipe_id) as (Recipe & AnyRecord) | undefined) : undefined;
+  const downMin = des ? des.stations.reduce((n, s) => Math.max(n, s.down), 0) * (des.horizon_s / 60) : null;
+  const desBott = des ? [...des.stations].sort((a, b) => b.utilization - a.utilization)[0] : null;
+  const totalQueue = snap ? snap.stations.reduce((n, s) => n + s.queue, 0) : 0;
+
+  const bottomTabs: { key: Bottom; label: ReactNode; count?: number }[] = [
+    { key: 'timeline', label: 'Timeline & events' },
+    { key: 'sequence', label: 'Sequence (PLC)' },
+    { key: 'checks', label: 'Design check', count: twin.checks.filter((c) => c.severity === 'critical' || c.severity === 'major').length },
+    { key: 'io', label: 'I/O & sensors' },
+    { key: 'hmi', label: 'Alarms & HMI' },
+    { key: 'motion', label: 'Motion' },
+    { key: 'faults', label: 'Faults' },
+    { key: 'runs', label: 'Runs & snapshots' },
+    { key: 'compare', label: 'Scenarios & factory' },
+    { key: 'assumptions', label: 'Assumptions & export' },
+  ];
+
+  return (
+    <div className="space-y-3" ref={box}>
+      {/* ---------------- header: machine / scenario / version / status / simulation (§6, §39) */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-card border border-line bg-[#0b0f11] px-3 py-2 font-mono text-micro text-[#c9d3d3]" role="status" aria-label="Machine status">
+        <span className="text-[#8d9a9a]">MACHINE STATUS</span>
+        <span className={clsx('rounded px-1.5 py-0.5 font-semibold', machineStatus === 'FAULT' ? 'bg-bad/30 text-[#ff8a8a]' : playing ? 'bg-accent/25 text-[#35e0a1]' : 'bg-white/10')}>{machineStatus}</span>
+        <span>CYCLE {snap?.cycles ?? 0}</span>
+        <span>PART {current?.part != null && current.part >= 0 ? current.part : '—'}</span>
+        <span>UPH {snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'}</span>
+        <span className={clsx(snap?.alarms.length ? 'text-[#ff8a8a]' : '')}>ALARM {snap?.alarms.length ?? 0}</span>
+        <span className="text-[#8d9a9a]">t {fmtT(t)}</span>
+        <span className="ml-auto flex flex-wrap items-center gap-2 font-sans">
+          <Badge tone="warn">{model.label}</Badge>
+          <Badge>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
+          <Badge>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
+          {sim.data_type === 'DEMO' && <Badge tone="warn">DEMO</Badge>}
+        </span>
+      </div>
+      {!d.res.runnable && (
+        <Notice tone="warn">
+          <strong>Simulation input gaps:</strong> {d.res.blocking.join('; ')}. The 3D model is shown, but nothing moves until these are entered — nothing is assumed (§161, §162).{' '}
+          <button type="button" className="text-accent-2 underline" onClick={() => setParams((p) => (p.set('tab', 'architecture'), p), { replace: true })}>
+            Open Architecture
+          </button>
+        </Notice>
+      )}
+      {error && <Notice tone="warn">Simulation could not run: {error}</Notice>}
+
+      {/* ---------------- toolbar (glass, §87) */}
+      <div className="glass flex flex-wrap items-center gap-1 rounded-card px-2 py-1.5" role="toolbar" aria-label="3D viewport tools">
+        <Button size="sm" variant="primary" onClick={() => setPlaying((x) => !x)} disabled={!player} aria-label={playing ? 'Pause simulation' : 'Run simulation'}>
+          {playing ? <Pause className="size-4" aria-hidden /> : <Play className="size-4" aria-hidden />} {playing ? 'Pause' : 'Run cycle'}
+        </Button>
+        <Sep />
+        <Tool icon={Scan} label="Fit (F)" onClick={() => scene.current?.view('fit', view.selected)} />
+        <Tool icon={Square} label="Front (1)" onClick={() => scene.current?.view('front')} />
+        <Tool icon={LayoutGrid} label="Top (2)" onClick={() => scene.current?.view('top')} />
+        <Tool icon={PanelLeft} label="Side (3)" onClick={() => scene.current?.view('side')} />
+        <Tool icon={Box} label="Isometric (4)" onClick={() => scene.current?.view('iso')} />
+        <Tool icon={Grid3x3} label={view.ortho ? 'Orthographic (click for perspective)' : 'Perspective (click for orthographic)'} active={view.ortho} onClick={() => patch({ ortho: !view.ortho })} />
+        <Sep />
+        <Popover label="Section view" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Scissors} label="Section" active={!!secAxis || o} onClick={toggle} />}>
+          {() => (
+<div className="space-y-2 p-3 text-meta">
+            <SegmentedControl label="Section plane" size="sm" value={secAxis ?? 'off'} onChange={(a) => patch({ section: { axis: a === 'off' ? null : (a as 'x' | 'y' | 'z'), pos: a === 'off' ? 0 : (bounds.min[a === 'x' ? 0 : a === 'y' ? 1 : 2] + bounds.max[a === 'x' ? 0 : a === 'y' ? 1 : 2]) / 2 } })} options={[{ value: 'off', label: 'Off' }, { value: 'x', label: 'X' }, { value: 'y', label: 'Y' }, { value: 'z', label: 'Z' }]} />
+            {secAxis && <input type="range" aria-label="Section plane position" min={secRange[0]} max={secRange[1]} value={view.section.pos} onChange={(e) => patch({ section: { axis: secAxis, pos: Number(e.target.value) } })} className="w-full" />}
+            {secAxis && <div className="font-mono text-micro text-ink-3">{secAxis.toUpperCase()} = {Math.round(view.section.pos)} mm</div>}
+          </div>
+          )}
+        </Popover>
+        <Popover label="Exploded view" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Expand} label="Explode" active={view.explode > 0 || o} onClick={toggle} />}>
+          {() => (
+<div className="space-y-1 p-3 text-meta">
+            <div>Machine → system → subsystem → component</div>
+            <input type="range" aria-label="Explode amount" min={0} max={1} step={0.05} value={view.explode} onChange={(e) => patch({ explode: Number(e.target.value) })} className="w-full" />
+          </div>
+          )}
+        </Popover>
+        <Tool icon={ScanEye} label="Equipment X-ray" active={view.xray} onClick={() => patch({ xray: !view.xray, routes: !view.xray || view.routes })} />
+        <Popover label="Engineering layers" width="w-60" trigger={({ open: o, toggle }) => <Tool icon={Layers} label="Layers" active={o || LAYERS.some((l) => !view.layers[l])} onClick={toggle} />}>
+          {() => (
+<div className="grid grid-cols-2 gap-1 p-3 text-meta">
+            {LAYERS.map((l) => (
+              <label key={l} className="inline-flex items-center gap-1.5">
+                <input type="checkbox" checked={view.layers[l]} onChange={(e) => patch({ layers: { ...view.layers, [l]: e.target.checked } })} /> {l}
+              </label>
+            ))}
+            <button type="button" className="col-span-2 mt-1 text-left text-micro text-accent-2 hover:underline" onClick={() => patch({ layers: allLayers() })}>
+              Show all layers
+            </button>
+          </div>
+          )}
+        </Popover>
+        <Popover label="Display" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Eye} label="Display" active={o} onClick={toggle} />}>
+          {() => (
+<div className="space-y-1 p-3 text-meta">
+            {(
+              [
+                ['grid', 'Grid'],
+                ['axes', 'Axes gizmo'],
+                ['dims', 'Dimensions'],
+                ['labels', 'Labels'],
+                ['zones', 'Safety zones'],
+                ['routes', 'Cables · fiber · cooling'],
+                ['fov', 'Camera field of view'],
+                ['field', 'Marking field / process area'],
+                ['trail', 'Scan path preview'],
+              ] as const
+            ).map(([k, l]) => (
+              <label key={k} className="flex items-center gap-1.5">
+                <input type="checkbox" checked={view[k]} onChange={(e) => patch({ [k]: e.target.checked } as Partial<SceneView>)} /> {l}
+              </label>
+            ))}
+            <div className="mt-2 border-t border-line pt-2">
+              <label className="flex items-center gap-1.5">
+                <input type="checkbox" checked={view.beam.on} onChange={(e) => patch({ beam: { ...view.beam, on: e.target.checked } })} /> Laser beam
+              </label>
+              <label className="mt-1 block text-micro text-ink-3">
+                Beam intensity (visual)
+                <input type="range" min={0.15} max={1} step={0.05} value={view.beam.intensity} onChange={(e) => patch({ beam: { ...view.beam, intensity: Number(e.target.value) } })} className="w-full" />
+              </label>
+              <label className="mt-1 block text-micro text-ink-3">
+                Spot marker (visual, mm)
+                <input type="range" min={0.5} max={6} step={0.1} value={view.beam.spot} onChange={(e) => patch({ beam: { ...view.beam, spot: Number(e.target.value) } })} className="w-full" />
+              </label>
+              <label className="mt-1 flex items-center gap-1.5 text-micro text-ink-3">
+                Beam colour <input type="color" value={view.beam.color ?? '#ff4d3d'} onChange={(e) => patch({ beam: { ...view.beam, color: e.target.value } })} aria-label="Beam colour" />
+                <button type="button" className="text-accent-2 hover:underline" onClick={() => patch({ beam: { ...view.beam, color: null } })}>
+                  by wavelength
+                </button>
+              </label>
+              <p className="mt-1 text-micro text-ink-3">The rendered beam is symbolic (IR is invisible) — not an optical simulation.</p>
+            </div>
+          </div>
+          )}
+        </Popover>
+        <Popover label="Overlay" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
+          {() => (
+<div className="space-y-2 p-3 text-meta">
+            <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
+            {overlay === 'requirement' && (
+              <SmallSelect label="Requirement" value={reqSel} options={[{ value: '', label: 'Select a requirement…' }, ...(sim.requirement_ids ?? []).map((id) => ({ value: id, label: `${String(eng.byId.get(id)?.code ?? id)} — ${eng.byId.get(id)?.name ?? ''}` }))]} onChange={setReqSel} className="w-full" />
+            )}
+            <OverlayLegend kind={overlay} />
+          </div>
+          )}
+        </Popover>
+        <Tool icon={Ruler} label="Measure" active={view.measure} onClick={() => patch({ measure: !view.measure, measurePts: [] })} />
+        <Sep />
+        <Tool icon={EyeOff} label="Hide selected (H)" disabled={!view.selected} onClick={() => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) })} />
+        <Tool icon={Focus} label={view.isolate ? 'Exit isolate' : 'Isolate selected'} active={!!view.isolate} disabled={!view.selected && !view.isolate} onClick={() => patch({ isolate: view.isolate ? null : view.selected })} />
+        <Tool icon={Eye} label="Show all" disabled={!view.hidden.size && !view.isolate} onClick={() => patch({ hidden: new Set(), isolate: null })} />
+        <Sep />
+        <SmallSelect label="Camera mode" value={camMode} options={[{ value: 'engineering', label: 'Engineering' }, { value: 'customer', label: 'Customer demo' }, { value: 'exploded', label: 'Exploded' }, { value: 'xray', label: 'X-ray' }, { value: 'process', label: 'Process' }, ...(model.lasers.length ? [{ value: 'laser', label: 'Laser' }] : []), ...(model.vision.length ? [{ value: 'inspection', label: 'Inspection' }] : []), { value: 'maintenance', label: 'Maintenance' }]} onChange={(v) => applyMode(v as CamMode)} className="!w-auto" />
+        <SmallSelect label="Rendering quality" value={view.quality} options={[{ value: 'high', label: 'High quality' }, { value: 'balanced', label: 'Balanced' }, { value: 'performance', label: 'Performance' }]} onChange={(v) => patch({ quality: v as SceneView['quality'] })} className="!w-auto" />
+        <span className="ml-auto flex items-center gap-1">
+          <Tool icon={Camera} label="PNG snapshot" onClick={png} />
+          <Tool icon={Maximize2} label="Full screen" onClick={() => void box.current?.requestFullscreen?.()} />
+          {!customer && <Tool icon={Bug} label="Debug overlay" active={debug} onClick={() => setDebug((x) => !x)} />}
+        </span>
+      </div>
+
+      {/* ---------------- workspace: tree | viewport | properties (§6) */}
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[230px_minmax(0,1fr)] xl:grid-cols-[240px_minmax(0,1fr)_330px]">
+        <Card title="Component tree" icon={ListTree} className="order-2 lg:order-1" bodyClassName="p-2">
+          <div className="relative mb-2">
+            <Search className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-ink-3" aria-hidden />
+            <input aria-label="Filter components" value={treeQ} onChange={(e) => setTreeQ(e.target.value)} placeholder="Filter…" className="h-8 w-full rounded-control border border-line bg-panel pl-7 text-meta" />
+          </div>
+          <div className="scroll-thin max-h-[58vh] overflow-auto" role="tree" aria-label="Machine hierarchy">
+            <TreeNode id="machine" model={model} depth={0} open={open} setOpen={setOpen} q={treeQ.toLowerCase()} view={view} select={select} toggleHide={(id) => patch({ hidden: view.hidden.has(id) ? new Set([...view.hidden].filter((x) => x !== id)) : new Set([...view.hidden, id]) })} customer={customer} />
+          </div>
+        </Card>
+
+        <div className="order-1 space-y-2 lg:order-2">
+          <div className="twin-viewport relative h-[58vh] min-h-[360px] overflow-hidden rounded-card border border-line bg-[#0b0f11]" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
+            <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onPointerMissed={() => !view.measure && select(null)}>
+              <Suspense fallback={null}>
+                <MachineScene
+                  ref={scene}
+                  model={model}
+                  view={sceneView}
+                  live={live}
+                  stateRef={stateRef}
+                  paths={twin.paths}
+                  onPick={(id) => select(id)}
+                  onHover={(id, x, y) => (id ? setHover({ id, x: x ?? 0, y: y ?? 0 }) : setHover(null))}
+                  onMeasure={(p) => patch({ measurePts: view.measurePts.length >= 2 ? [p] : [...view.measurePts, p] })}
+                  onDecline={() => {
+                    if (view.quality !== 'performance') {
+                      patch({ quality: 'performance' });
+                      setPerfNotice(true);
+                    }
+                  }}
+                  ghost={ghostModel}
+                  factory={factory}
+                  debugRef={debug ? debugOut : undefined}
+                />
+              </Suspense>
+            </Canvas>
+            {/* overlays in the viewport */}
+            <div className="pointer-events-none absolute top-2 left-2 flex flex-col gap-1">
+              <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink">{model.label}</span>
+              {d.cycle && (
+                <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink" title="Bottleneck from the cycle model and DES utilization">
+                  BOTTLENECK {d.cycle.bottleneck.rs.station.name} · {d.cycle.bottleneck.mean.toFixed(2)} s
+                </span>
+              )}
+              {current && (
+                <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink">
+                  {current.st}: {current.step ?? 'working'}
+                </span>
+              )}
+              {perfNotice && <span className="glass rounded-control px-2 py-1 text-micro text-warn">Performance mode enabled (device was slow)</span>}
+            </div>
+            {collision && (
+              <div className="absolute inset-x-2 top-2 z-10 mx-auto flex max-w-xl flex-wrap items-center gap-2 rounded-control border border-bad/60 bg-[#2a0f11]/95 px-3 py-2 text-meta text-[#ffd0d0]" role="alert">
+                <AlertTriangle className="size-4 shrink-0 text-bad" aria-hidden />
+                <span className="flex-1">
+                  {collision.text} · t = {fmtT(collision.t)}. Simulation paused.
+                </span>
+                <Button size="sm" onClick={() => (setCollision(null), setPlaying(true))}>
+                  Resume
+                </Button>
+                <Button size="sm" onClick={() => (setCollision(null), setT(0))}>
+                  Reset
+                </Button>
+                <Button size="sm" onClick={() => (focusObj(collision.a), setBottom('checks'))}>
+                  Inspect
+                </Button>
+              </div>
+            )}
+            {hover && hoverObj && !view.measure && (
+              <div className="pointer-events-none absolute z-10 max-w-64 rounded-control border border-line bg-solid/95 px-2.5 py-1.5 text-micro shadow-lg" style={{ left: Math.min(hover.x + 14, 9999), top: hover.y + 14 }}>
+                <HoverCard o={hoverObj} eng={eng} customer={customer} />
+              </div>
+            )}
+            {(view.measure || dist) && (
+              <div className="glass absolute right-2 bottom-2 rounded-control px-2.5 py-1.5 font-mono text-micro">
+                {dist ? (
+                  <>
+                    Distance {Math.hypot(dist.dx, dist.dy, dist.dz).toFixed(1)} mm · X {dist.dx.toFixed(1)} · Y {dist.dy.toFixed(1)} · Z {dist.dz.toFixed(1)}
+                    <div className="font-sans text-ink-3">Geometry measurement on the conceptual model</div>
+                  </>
+                ) : (
+                  'Measure: click two points'
+                )}
+              </div>
+            )}
+            {debug && <div ref={debugOut} className="glass absolute bottom-2 left-2 rounded-control px-2 py-1 font-mono text-micro" aria-label="Render statistics" />}
+          </div>
+          <p className="sr-only" aria-live="polite">
+            {snap ? `Machine ${snap.machineState}. ${current ? `Part ${current.part} at ${current.st}.` : ''} Good ${snap.ok}, not good ${snap.ng}.` : ''}
+          </p>
+          <div className="flex flex-wrap items-center gap-2 text-micro text-ink-3">
+            <Info className="size-3.5" aria-hidden /> Drag to orbit · right-drag to pan · wheel to zoom · click a component for its engineering data. 3D conceptual digital twin — engineering simulation model, not a CAD manufacturing release.
+          </div>
+        </div>
+
+        <div className="order-3 lg:col-span-2 xl:col-span-1">
+          <Properties o={sel} eng={eng} sim={sim} set={set} d={d} twin={twin} snap={snap} customer={customer} onClose={() => select(null)} onFocus={focusObj} related={related} recipe={recipe} />
+        </div>
+      </div>
+
+      {/* ---------------- KPI bar (§70, §71) */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-8" aria-label="Live key figures">
+        <Kpi label="Cycle time" value={d.cycle ? `${d.cycle.cycle.toFixed(2)} s` : 'Not Available'} sub={d.cycle ? (d.cycle.layout === 'sequential' ? 'Σ station times' : 'slowest station') : 'input gaps'} />
+        <Kpi label="Practical UPH" value={d.cycle ? num(d.cycle.practicalUph, 4) : 'Not Available'} sub={sim.targets?.uph ? `target ${sim.targets.uph}` : 'no target'} tone={d.cycle && sim.targets?.uph ? (d.cycle.practicalUph >= sim.targets.uph ? 'ok' : 'bad') : undefined} />
+        <Kpi label="Parts processed" value={String((snap?.ok ?? 0) + (snap?.ng ?? 0))} sub={`good ${snap?.ok ?? 0} · rejects ${snap?.ng ?? 0}`} />
+        <Kpi label="Run UPH" value={snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'} sub={des ? `full run ${des.uph.toFixed(0)}` : '—'} />
+        <Kpi label="Queue (WIP)" value={String(totalQueue)} sub={`${snap?.inSystem ?? 0} in system`} />
+        <Kpi label="Bottleneck utilization" value={desBott ? pct(desBott.utilization) : 'Not Available'} sub={desBott ? desBott.name : '—'} />
+        <Kpi label="OEE" value={d.cycle ? pct(d.cycle.oee) : 'Not Available'} sub={d.cycle ? `A ${pct(d.cycle.availability.value)} · P ${pct(d.cycle.performance.value)} · Q ${pct(d.cycle.quality.value)}` : 'factors not defined'} />
+        <Kpi label="Downtime (run)" value={downMin != null ? `${downMin.toFixed(1)} min` : 'Not Available'} sub="longest station down time" tone={downMin ? 'warn' : undefined} />
+      </div>
+      {d.cycle && (
+        <p className="text-micro text-ink-3">
+          OEE factors: availability — {d.cycle.availability.basis}; performance — {d.cycle.performance.basis}; quality — {d.cycle.quality.basis}. {d.cap?.annualCapacity != null && `Annual capacity ${big(d.cap.annualCapacity)} parts.`} {!customer && d.bom.total != null && `Equipment cost ${money(d.bom.total, d.bom.currency)}.`}
+        </p>
+      )}
+
+      {/* ---------------- bottom workspace (§40, §42–§44, §72, §76, §92, §111–§116) */}
+      <Card padded={false} bodyClassName="p-3">
+        <Tabs<Bottom> label="Digital twin panels" value={bottom} onChange={setBottom} tabs={bottomTabs.filter((b) => !(customer && (b.key === 'io' || b.key === 'assumptions' || b.key === 'motion')))} />
+        <div className="pt-3">
+          {bottom === 'timeline' && <TimelinePanel player={player} t={t} setT={setT} playing={playing} setPlaying={setPlaying} speed={speed} setSpeed={setSpeed} d={d} twin={twin} />}
+          {bottom === 'sequence' && <SequencePanel sim={sim} snap={snap} />}
+          {bottom === 'checks' && <ChecksPanel twin={twin} onObject={focusObj} onTab={(k) => setParams((p) => (p.set('tab', k), p), { replace: true })} />}
+          {bottom === 'io' && <IoPanel model={model} snap={snap} faults={[...(run.scenarioFaults ? sim.faults ?? [] : []), ...run.injected]} onObject={focusObj} />}
+          {bottom === 'hmi' && <AlarmsHmiPanel player={player} snap={snap} playing={playing} setPlaying={setPlaying} setT={setT} recipe={recipe} />}
+          {bottom === 'motion' && <MotionPanel model={model} snap={snap} sim={sim} set={set} customer={customer} />}
+          {bottom === 'faults' && <FaultsPanel sim={sim} run={run} setRun={setRun} t={t} des={des} baseline={baseline} customer={customer} />}
+          {bottom === 'runs' && <RunsPanel sim={sim} set={set} run={run} setRun={setRun} des={des} onSnapshot={saveSnapshot} onRestore={restoreSnapshot} onPng={png} />}
+          {bottom === 'compare' && <ComparePanel eng={eng} sim={sim} d={d} twin={twin} other={other} setOther={setOther} ghost={ghostOn} setGhost={setGhostOn} set={set} customer={customer} />}
+          {bottom === 'assumptions' && <AssumptionsPanel eng={eng} sim={sim} set={set} d={d} twin={twin} player={player} customer={customer} />}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- small pieces */
+
+function useGhost(eng: TabProps['eng'], id: string | null) {
+  return useMemo(() => {
+    if (!id) return null;
+    const s = eng.byId.get(id);
+    if (!s) return null;
+    // same canonical generator as the main model (§178)
+    return buildGhost(eng, s as never);
+  }, [eng, id]);
+}
+function buildGhost(eng: TabProps['eng'], s: TabProps['sim']) {
+  return buildMachine(resolveScenario(s, eng.byId, eng.defs), eng.byId, eng.defs);
+}
+
+const Sep = () => <span className="mx-0.5 h-5 w-px bg-line" aria-hidden />;
+
+function Tool({ icon: Icon, label, onClick, active, disabled }: { icon: typeof Box; label: string; onClick: () => void; active?: boolean; disabled?: boolean }) {
+  return (
+    <button type="button" onClick={onClick} disabled={disabled} aria-label={label} title={label} aria-pressed={active} className={clsx('inline-flex size-8 items-center justify-center rounded-control text-ink-2 transition-colors hover:bg-panel-2 hover:text-ink disabled:opacity-35', active && 'bg-accent-soft text-accent-2')}>
+      <Icon className="size-4" aria-hidden />
+    </button>
+  );
+}
+
+function Kpi({ label, value, sub, tone }: { label: string; value: string; sub?: string; tone?: 'ok' | 'bad' | 'warn' }) {
+  return (
+    <div className="rounded-control border border-line bg-panel px-2.5 py-2">
+      <div className="text-micro uppercase tracking-wider text-ink-3">{label}</div>
+      <div className={clsx('font-mono text-body font-semibold', tone === 'ok' && 'text-ok', tone === 'bad' && 'text-bad', tone === 'warn' && 'text-warn')}>{value}</div>
+      {sub && <div className="truncate text-micro text-ink-3">{sub}</div>}
+    </div>
+  );
+}
+
+function OverlayLegend({ kind }: { kind: Overlay }) {
+  if (kind === 'localization')
+    return (
+      <ul className="space-y-0.5 text-micro">
+        {(Object.keys(ORIGIN_COLOR) as (keyof typeof ORIGIN_COLOR)[]).map((k) => (
+          <li key={k} className="flex items-center gap-1.5">
+            <span className="inline-block size-2.5 rounded-sm" style={{ background: ORIGIN_COLOR[k] }} /> {k === 'Local' ? 'Local (manufacturer country India)' : k === 'Imported' ? 'Imported' : 'Unknown origin'}
+          </li>
+        ))}
+        <li className="text-ink-3">From the manufacturer record — never implies local manufacturability.</li>
+      </ul>
+    );
+  if (kind === 'cost')
+    return (
+      <div className="text-micro">
+        <div className="h-2 rounded" style={{ background: `linear-gradient(90deg, ${costColor(0)}, ${costColor(1)})` }} />
+        <div className="flex justify-between text-ink-3">
+          <span>low share</span>
+          <span>highest line cost</span>
+        </div>
+        <p className="text-ink-3">From BOM lines with a price; unpriced components are not coloured.</p>
+      </div>
+    );
+  if (kind === 'risk') return <p className="text-micro text-ink-3">Red = single source; amber = other supply risk (lead time, imported, no alternative) from the supplier-dependency records.</p>;
+  if (kind === 'state') return <p className="text-micro text-ink-3">Teal = processing · amber = blocked · red = down, from the live simulation.</p>;
+  if (kind === 'requirement') return <p className="text-micro text-ink-3">Highlights components traced to the requirement: its process area (laser chain + fixture), throughput (bottleneck station), inspection or a linked part.</p>;
+  return null;
+}
+
+function HoverCard({ o, eng, customer }: { o: Machine3DObject; eng: TabProps['eng']; customer: boolean }) {
+  const part = o.partId ? (eng.byId.get(o.partId) as (Part & AnyRecord) | undefined) : undefined;
+  const keys = part ? (KEY_SPECS[part.product_type] ?? []).slice(0, 2) : [];
+  return (
+    <>
+      <div className="font-semibold">{customer && part ? productTypeLabel(part.product_type) : o.name}</div>
+      {part && (
+        <div className="text-ink-2">
+          {keys
+            .map((k) => readSpec(part, k, eng.defs))
+            .filter(Boolean)
+            .map((s) => displaySpec(s))
+            .join(' · ') || productTypeLabel(part.product_type)}
+        </div>
+      )}
+      <div className="text-ink-3">
+        {o.layer}
+        {o.stationKey ? ` · ${o.stationKey}` : ''}
+      </div>
+    </>
+  );
+}
+
+function TreeNode({ id, model, depth, open, setOpen, q, view, select, toggleHide, customer }: { id: string; model: TabModel; depth: number; open: Set<string>; setOpen: (s: Set<string>) => void; q: string; view: SceneView; select: (id: string) => void; toggleHide: (id: string) => void; customer: boolean }) {
+  const o = model.byId.get(id);
+  const kids = model.objects.filter((x) => x.parentId === id);
+  if (!o) return null;
+  const match = (x: Machine3DObject): boolean => !q || x.name.toLowerCase().includes(q) || model.objects.some((c) => c.parentId === x.id && match(c));
+  if (!match(o)) return null;
+  const isOpen = open.has(id) || !!q;
+  const label = customer && o.partId ? o.name.split(' — ')[0] : o.name;
+  return (
+    <div role="treeitem" aria-expanded={kids.length ? isOpen : undefined} aria-selected={view.selected === id}>
+      <div className={clsx('group flex items-center gap-1 rounded-md pr-1 text-meta', view.selected === id ? 'bg-accent-soft text-ink' : 'hover:bg-panel-2', (view.hidden.has(id) || !view.layers[o.layer]) && 'opacity-45')} style={{ paddingLeft: depth * 12 }}>
+        {kids.length ? (
+          <button type="button" className="grid size-5 place-items-center text-ink-3" aria-label={isOpen ? `Collapse ${label}` : `Expand ${label}`} onClick={() => setOpen(new Set(isOpen ? [...open].filter((x) => x !== id) : [...open, id]))}>
+            {isOpen ? <ChevronDown className="size-3.5" /> : <ChevronRight className="size-3.5" />}
+          </button>
+        ) : (
+          <span className="size-5" />
+        )}
+        <button type="button" className="min-w-0 flex-1 truncate py-1 text-left" onClick={() => select(id)} title={label}>
+          {label}
+        </button>
+        {o.level !== 'machine' && (
+          <button type="button" className="invisible grid size-5 place-items-center text-ink-3 group-hover:visible" aria-label={view.hidden.has(id) ? `Show ${label}` : `Hide ${label}`} onClick={() => toggleHide(id)}>
+            {view.hidden.has(id) ? <EyeOff className="size-3.5" /> : <Eye className="size-3.5" />}
+          </button>
+        )}
+      </div>
+      {isOpen && kids.map((k) => <TreeNode key={k.id} id={k.id} model={model} depth={depth + 1} open={open} setOpen={setOpen} q={q} view={view} select={select} toggleHide={toggleHide} customer={customer} />)}
+    </div>
+  );
+}
+type TabModel = ReturnType<typeof buildMachine>;
+
+/* ---------------------------------------------------------------- properties (§58–§61, §75, §83, §100, §140, §141, §146) */
+
+function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocus, related, recipe }: { o?: Machine3DObject; eng: TabProps['eng']; sim: TabProps['sim']; set: TabProps['set']; d: TabProps['d']; twin: ReturnType<typeof useTwinModel>; snap: SimulationState | null; customer: boolean; onClose: () => void; onFocus: (id: string) => void; related: (reqId: string) => Set<string>; recipe?: Recipe & AnyRecord }) {
+  const model = twin.model;
+  if (!o)
+    return (
+      <Card title="Properties" icon={Info}>
+        <p className="text-meta text-ink-2">Select a component in the viewport or the tree to see its engineering data — manufacturer, part number, specifications, supplier, cost, lead time, compatibility, requirements, BOM and documents.</p>
+        <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-meta">
+          <dt className="text-ink-3">Machine (W × D × H)</dt>
+          <dd className="font-mono">
+            {Math.round(model.dims.width)} × {Math.round(model.dims.depth)} × {Math.round(model.dims.height)} mm
+          </dd>
+          <dt className="text-ink-3">Components</dt>
+          <dd>{model.objects.filter((x) => x.partId).length} linked · {model.objects.filter((x) => x.kind !== 'group' && x.kind !== 'station' && !x.partId).length} conceptual</dd>
+          <dt className="text-ink-3">Workpiece</dt>
+          <dd>
+            {model.workpiece.template.replace('_', ' ')} {model.workpiece.length} × {model.workpiece.width} × {model.workpiece.thickness} mm <Badge>{model.workpiece.basis}</Badge>
+          </dd>
+          {model.lasers[0] && (
+            <>
+              <dt className="text-ink-3">Marking field</dt>
+              <dd>{model.lasers[0].field != null ? `${model.lasers[0].field} × ${model.lasers[0].field} mm` : <Unknown label="Not stated" />}</dd>
+            </>
+          )}
+        </dl>
+        {model.notes.map((n) => (
+          <p key={n} className="mt-2 text-micro text-warn">
+            {n}
+          </p>
+        ))}
+      </Card>
+    );
+  const part = o.partId ? (eng.byId.get(o.partId) as (Part & AnyRecord) | undefined) : undefined;
+  const sheet = part ? sheetFor(part.id, eng.records, eng.byId) : undefined;
+  const st = o.stationKey ? d.res.stations.find((s) => s.station.key === o.stationKey) : undefined;
+  const load = st && d.cycle ? d.cycle.loads.find((l) => l.rs.station.key === st.station.key) : undefined;
+  const live = st && snap ? snap.stations.find((s) => s.key === st.station.key) : undefined;
+  const bomLines = part ? d.bom.items.filter((b) => b.partId === part.id) : [];
+  const sp = part ? selectedParts(d.res).find((x) => x.part.id === part.id && (x.stationKey === o.stationKey || x.stationKey === '_machine' || !o.stationKey)) : undefined;
+  const alts = sp ? alternativesFor(sp, eng.parts, d.res, eng.ctx, eng.byId) : [];
+  const dep = part ? d.deps.find((x) => x.sp.part.id === part.id) : undefined;
+  const reqs = (sim.requirement_ids ?? []).filter((id) => related(id).has(o.id));
+  const vers = eng.records.filter((r) => r.entity === 'verification' && reqs.includes(String((r as AnyRecord & { requirement_id?: string }).requirement_id)));
+  const vis = model.vision.find((v) => v.cameraId === o.id);
+  const laser = model.lasers.find((l) => [l.sourceId, l.galvoId, l.fthetaId, l.expanderId].includes(o.id));
+  const swap = (newId: string) => {
+    if (!sp) return;
+    set((s) => ({ ...s, selections: (s.selections ?? []).map((x) => (x.station_key === sp.stationKey && x.role === sp.role && x.part_id === sp.part.id ? { ...x, part_id: newId } : x)) }));
+    toast(`Component changed — 3D model, BOM, cost, compatibility and simulation updated`, { tone: 'draft', detail: 'Save the scenario to keep the change.' });
+  };
+  const applyRecipe = () => {
+    if (!recipe || !st) return;
+    const n = (name: RegExp) => {
+      const p = recipe.parameters.find((x) => name.test(x.name));
+      const v = p ? Number(p.value) : NaN;
+      return Number.isFinite(v) ? v : undefined;
+    };
+    const patchL = { power_w: n(/^power/i), speed_mm_s: n(/speed/i), frequency_khz: n(/freq/i), hatch_mm: n(/hatch/i), passes: n(/pass/i) };
+    set((s) => ({ ...s, stations: s.stations.map((x) => (x.key === st.station.key ? { ...x, laser: { ...x.laser, ...Object.fromEntries(Object.entries(patchL).filter(([, v]) => v != null)) } } : x)) }));
+    toast('Recipe applied to the laser station', { tone: 'draft', detail: 'Process time, simulation and 3D timeline recalculated.' });
+  };
+  const ov = sim.twin?.overrides?.[o.id];
+  const setOv = (p: { x_mm?: number; z_mm?: number } | null) => set((s) => {
+    const all = { ...(s.twin?.overrides ?? {}) };
+    if (p) all[o.id] = { ...all[o.id], ...p };
+    else delete all[o.id];
+    return { ...s, twin: { ...s.twin, overrides: all } };
+  });
+  return (
+    <Card
+      title={customer && part ? productTypeLabel(part.product_type) : o.name}
+      icon={Info}
+      actions={
+        <button type="button" onClick={onClose} aria-label="Close properties" className="grid size-7 place-items-center rounded-md text-ink-3 hover:bg-panel-2">
+          <X className="size-4" />
+        </button>
+      }
+    >
+      <div className="scroll-thin max-h-[70vh] space-y-3 overflow-auto pr-1">
+        <div className="flex flex-wrap gap-1.5">
+          <Badge>{o.layer}</Badge>
+          <Badge>{o.level}</Badge>
+          {o.carriedBy?.length ? <Badge tone="info">moves with {o.carriedBy.join(' + ').toUpperCase()}</Badge> : null}
+          {part ? <Badge tone="accent">engineering record</Badge> : <Badge tone="warn">conceptual object (no component record)</Badge>}
+          {live && <Badge tone={live.servers.some((x) => x.state === 'down') ? 'bad' : live.servers.some((x) => x.state === 'busy') ? 'ok' : 'neutral'}>{live.servers.map((x) => x.state).join(' / ')}</Badge>}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm" onClick={() => onFocus(o.id)}>
+            <Focus className="size-3.5" aria-hidden /> Focus
+          </Button>
+          {part && !customer && (
+            <Link to={recordPath(part.id)} className="inline-flex h-8 items-center rounded-control border border-line px-2.5 text-meta hover:bg-panel-2">
+              Open record
+            </Link>
+          )}
+          {part && (
+            <Link to={`/graph?id=${encodeURIComponent(part.id)}`} className="inline-flex h-8 items-center rounded-control border border-line px-2.5 text-meta hover:bg-panel-2">
+              Knowledge graph
+            </Link>
+          )}
+        </div>
+        {st && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Station · simulation</h4>
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-meta">
+              <dt className="text-ink-3">Station</dt>
+              <dd>{st.station.name}</dd>
+              <dt className="text-ink-3">Time per part</dt>
+              <dd>
+                {st.time != null ? `${st.time.toFixed(3)} s` : <Unknown label="Not defined" />} <Badge>{st.basis}</Badge>
+              </dd>
+              <dt className="text-ink-3">Utilization</dt>
+              <dd>{load ? pct(load.utilization) : '—'}</dd>
+              {live?.servers[0]?.step && (
+                <>
+                  <dt className="text-ink-3">Now</dt>
+                  <dd>
+                    {live.servers[0].step.name} ({Math.round(live.servers[0].stepProgress * 100)} %)
+                  </dd>
+                </>
+              )}
+              <dt className="text-ink-3">MTBF / MTTR</dt>
+              <dd>{st.station.mtbf_min != null ? `${st.station.mtbf_min} / ${st.station.mttr_min ?? '—'} min` : <Unknown label="Not stated" />}</dd>
+            </dl>
+          </section>
+        )}
+        {laser && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Laser process (from configuration)</h4>
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5 font-mono text-micro">
+              {(
+                [
+                  ['POWER', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.power_w, 'W'],
+                  ['SPEED', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.speed_mm_s, 'mm/s'],
+                  ['FREQUENCY', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.frequency_khz, 'kHz'],
+                  ['PULSE WIDTH', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.pulse_width_ns, 'ns'],
+                  ['HATCH', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.hatch_mm, 'mm'],
+                  ['PASSES', sim.stations.find((x) => x.key === laser.stationKey)?.laser?.passes, ''],
+                  ['FIELD', laser.field, 'mm'],
+                  ['WORKING DIST.', laser.wd, 'mm'],
+                ] as const
+              ).map(([k, v, u]) => (
+                <div key={k} className="contents">
+                  <dt className="text-ink-3">{k}</dt>
+                  <dd>{v != null ? `${v} ${u}` : '—'}</dd>
+                </div>
+              ))}
+            </dl>
+            {recipe && !customer && (
+              <Button size="sm" className="mt-2" onClick={applyRecipe}>
+                Apply recipe {recipe.name.split(' — ')[0]} ({recipe.recipe_version})
+              </Button>
+            )}
+          </section>
+        )}
+        {vis && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Camera field of view</h4>
+            <p className="text-meta">{vis.fovX != null ? `${vis.fovX.toFixed(1)} × ${vis.fovY!.toFixed(1)} mm (${vis.basis})` : `Not computable — missing ${vis.missing.join(', ')}`}</p>
+            {vis.target && <p className="text-micro text-ink-3">Target area {vis.target.x} × {vis.target.y} mm</p>}
+            {!customer && (
+              <label className="mt-1 flex items-center gap-2 text-meta">
+                Working distance (mm)
+                <NumInput label="Camera working distance" value={sim.twin?.vision?.[vis.stationKey]?.wd_mm ?? null} min={1} onChange={(v) => set((s) => ({ ...s, twin: { ...s.twin, vision: { ...s.twin?.vision, [vis.stationKey]: { ...s.twin?.vision?.[vis.stationKey], wd_mm: v } } } }))} />
+              </label>
+            )}
+          </section>
+        )}
+        {sheet && <SheetBody sheet={sheet} compact />}
+        {part && !customer && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">BOM · cost</h4>
+            {bomLines.length ? (
+              <ul className="space-y-0.5 text-meta">
+                {bomLines.map((b) => (
+                  <li key={b.id}>
+                    {b.quantity} × {b.name} · {b.unitCost != null ? `${b.currency} ${b.unitCost.toLocaleString('en-IN')}` : 'no price'} {b.basis ? <Badge>{b.basis}</Badge> : null} {b.leadTimeWeeks != null ? `· ${b.leadTimeWeeks} wk` : ''}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-meta text-ink-3">Not in the BOM.</p>
+            )}
+            {dep && dep.risk.length > 0 && <p className="mt-1 text-micro text-warn">Supply risk: {dep.risk.join('; ')}</p>}
+          </section>
+        )}
+        {sp && !customer && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Change component (live)</h4>
+            {alts.length ? (
+              <SmallSelect label="Replace with" value="" options={[{ value: '', label: `Replace ${part!.model_number} with…` }, ...alts.map((a) => ({ value: a.part.id, label: `${a.part.model_number} — ${a.relationship} · ${a.origin}` }))]} onChange={(v) => v && swap(v)} className="w-full" />
+            ) : (
+              <p className="text-meta text-ink-3">No compatible alternative of the same type in the database.</p>
+            )}
+            <p className="mt-1 text-micro text-ink-3">Changing it updates the 3D model, specifications, BOM, cost, compatibility and simulation together — one connected record.</p>
+          </section>
+        )}
+        <section>
+          <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Requirements · tests</h4>
+          {reqs.length ? (
+            <ul className="space-y-1 text-meta">
+              {reqs.map((id) => {
+                const r = eng.byId.get(id) as (AnyRecord & { code?: string; value?: string; unit?: string; verification_method?: string; status?: string }) | undefined;
+                return (
+                  <li key={id}>
+                    <Link to={recordPath(id)} className="text-accent-2 hover:underline">
+                      {r?.code ?? id}
+                    </Link>{' '}
+                    {r?.name}
+                    <div className="text-micro text-ink-3">
+                      Target {r?.value ? `${r.value} ${r.unit ?? ''}` : 'not stated'} · verification {r?.verification_method ?? '—'} · status {r?.status ?? '—'}
+                    </div>
+                  </li>
+                );
+              })}
+              {vers.map((v) => (
+                <li key={v.id} className="text-micro">
+                  Test: {v.name} — <Badge tone={(v as AnyRecord & { result?: string }).result === 'PASS' ? 'ok' : (v as AnyRecord & { result?: string }).result === 'FAIL' ? 'bad' : 'neutral'}>{String((v as AnyRecord & { result?: string }).result)}</Badge>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-meta text-ink-3">No requirement is traced to this component.</p>
+          )}
+        </section>
+        {st && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Service</h4>
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-meta">
+              <dt className="text-ink-3">Maintenance interval</dt>
+              <dd>{sim.maintenance?.pm_interval_h != null ? `${sim.maintenance.pm_interval_h} h (machine PM)` : <Unknown label="Not stated" />}</dd>
+              <dt className="text-ink-3">Spares · service history</dt>
+              <dd>
+                <Unknown label="No installed-base record" />
+              </dd>
+            </dl>
+          </section>
+        )}
+        {!customer && (
+          <section>
+            <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Geometry (conceptual)</h4>
+            <p className="font-mono text-micro">
+              position {o.position.map((v) => Math.round(v)).join(', ')} mm · size {o.size.map((v) => Math.round(v)).join(' × ')} mm
+            </p>
+            <div className="mt-1 flex flex-wrap items-center gap-2 text-meta">
+              Manual layout override
+              <NumInput label="Override X" value={ov?.x_mm ?? null} placeholder="X mm" onChange={(v) => setOv(v == null ? { x_mm: undefined } : { x_mm: v })} />
+              <NumInput label="Override Z" value={ov?.z_mm ?? null} placeholder="Z mm" onChange={(v) => setOv(v == null ? { z_mm: undefined } : { z_mm: v })} />
+              {ov && (
+                <Button size="sm" onClick={() => setOv(null)}>
+                  Auto
+                </Button>
+              )}
+            </div>
+            <p className="mt-1 text-micro text-ink-3">Automatic placement is a layout aid, never manufacturing-ready design (§13).</p>
+          </section>
+        )}
+      </div>
+    </Card>
+  );
+}

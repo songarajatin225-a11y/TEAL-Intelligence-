@@ -44,6 +44,7 @@ export interface TabProps {
 
 const TABS = {
   overview: { label: 'Overview', C: lazy(() => import('./tabs/OverviewTab')) },
+  machine3d: { label: '3D machine', C: lazy(() => import('../twin/MachineTab')) },
   architecture: { label: 'Architecture', C: lazy(() => import('./tabs/ArchitectureTab')) },
   components: { label: 'Components', C: lazy(() => import('./tabs/ComponentsTab')) },
   laser: { label: 'Laser & optics', C: lazy(() => import('./tabs/LaserTab')) },
@@ -52,7 +53,7 @@ const TABS = {
   variability: { label: 'Monte Carlo', C: lazy(() => import('./tabs/VariabilityTab')) },
   whatif: { label: 'What-if', C: lazy(() => import('./tabs/WhatIfTab')) },
   optimize: { label: 'Optimize', C: lazy(() => import('./tabs/OptimizeTab')) },
-  twin: { label: 'Digital twin', C: lazy(() => import('./tabs/TwinTab')) },
+  twin: { label: '2D twin', C: lazy(() => import('./tabs/TwinTab')) },
   sequence: { label: 'Sequence', C: lazy(() => import('./tabs/SequenceTab')) },
   reliability: { label: 'Faults · maintenance · energy', C: lazy(() => import('./tabs/ReliabilityTab')) },
   cost: { label: 'BOM · cost · suppliers', C: lazy(() => import('./tabs/CostTab')) },
@@ -196,6 +197,7 @@ function Workspace({ eng, rec, work, setWork, dirty, setDirty }: { eng: Eng; rec
             { label: 'Requirements', sub: String((work.requirement_ids ?? []).length), state: (work.requirement_ids ?? []).length ? 'done' : 'gap', to: `${studioPath(work.id)}?tab=validation` },
             { label: 'Application', sub: eng.byId.get(work.application_id ?? '')?.name ?? '—', state: work.application_id ? 'done' : 'todo' },
             { label: 'Architecture', sub: `${work.stations.length} stations`, state: 'done', to: `${studioPath(work.id)}?tab=architecture` },
+            { label: '3D machine', sub: 'conceptual', state: 'done', to: `${studioPath(work.id)}?tab=machine3d` },
             { label: 'Components', sub: String(d.deps.length), state: d.deps.length ? 'done' : 'gap', to: `${studioPath(work.id)}?tab=components` },
             { label: 'Simulation', sub: d.cycle ? `${num(d.cycle.practicalUph, 4)} UPH` : 'inputs missing', state: d.cycle ? 'done' : 'gap', to: `${studioPath(work.id)}?tab=capacity` },
             { label: 'BOM · cost', sub: String(d.bom.items.filter((i) => i.level === 'Component').length), state: d.bom.total != null ? 'done' : 'todo', to: customer ? undefined : `${studioPath(work.id)}?tab=cost` },

@@ -623,6 +623,102 @@ const shift = { hours_per_shift: 8, shifts_per_day: 3, days_per_year: 300, plann
 const simProv = { ...demoProv(), note: `${DEMO_NOTE} Station times are DEMO assumptions — not measured.` };
 const sims = [
   {
+    id: 'sim-demo-laser-marker',
+    entity: 'simulation',
+    name: 'Semi-automatic laser marking machine — digital twin (DEMO)',
+    description: 'Flagship 3D digital-twin demo: operator loading behind an interlocked door, XY stage, CCD positioning, fiber MOPA marking through galvo + f-theta, post-CCD code inspection, OK / NG and unloading.',
+    scenario_label: 'A',
+    config_level: 'Base Product',
+    sim_status: 'Draft',
+    product_id: 'prd-markf',
+    recipe_id: 'rcp-demo-plate-mark',
+    requirement_ids: ['req-demo-twin-01', 'req-demo-twin-02', 'req-demo-twin-03'],
+    layout: 'sequential',
+    stations: [
+      st('load', 'Operator load & door close', 'load', d({ time_s: 4, dist: { type: 'triangular', min: 3.2, mode: 4, max: 5.5 }, operator: true, capex: 90000, footprint_m2: 0.3 })),
+      st('fixture', 'Pneumatic clamp', 'fixture', d({ time_s: 0.6, dist: { type: 'uniform', min: 0.5, max: 0.8 }, slots: [slot('Fixture', 'fixture')], capex: 60000 })),
+      st('align', 'CCD positioning', 'align', d({ time_s: 0.5, dist: { type: 'uniform', min: 0.4, max: 0.9 }, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens'), slot('Lighting', 'lighting', false)], capex: 70000, mtbf_min: 6000, mttr_min: 8 })),
+      st('laser', 'Laser marking', 'laser', {
+        time_s: null,
+        time_basis: 'CALCULATED',
+        laser: { area_mm2: 150, hatch_mm: 0.03, speed_mm_s: 2000, passes: 1, jump_overhead_s: 0.4, power_w: 20, frequency_khz: 60 },
+        dist: { type: 'normal', sd: 0.15 },
+        mtbf_min: 4800,
+        mttr_min: 30,
+        capex: 260000,
+        footprint_m2: 0.9,
+        power_kw: 0.35,
+        slots: [slot('Laser source', 'laser_source'), slot('Beam expander', 'beam_expander', false), slot('Galvo scanner', 'galvo'), slot('F-theta lens', 'f_theta'), slot('Galvo controller', 'galvo_controller', false), slot('Fume extraction', 'fume_extraction', false)],
+      },
+      ),
+      st('inspect', 'Post-CCD code inspection', 'inspect', d({ time_s: 0.6, dist: { type: 'uniform', min: 0.5, max: 0.9 }, reject_rate: 0.01, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens')], capex: 70000 })),
+      st('sort', 'OK / NG decision', 'sort', d({ time_s: 0.3, capex: 20000 })),
+      st('unload', 'Door open & operator unload', 'unload', d({ time_s: 3, dist: { type: 'triangular', min: 2.4, mode: 3, max: 4.5 }, operator: true, capex: 30000 })),
+    ].map((x) => (x as St)),
+    selections: [
+      { station_key: 'fixture', role: 'Fixture', part_id: 'prt-demo-fixture-pcb' },
+      { station_key: 'align', role: 'Camera', part_id: 'prt-demo-cam-5mp' },
+      { station_key: 'align', role: 'Lens', part_id: 'prt-demo-lens-16' },
+      { station_key: 'align', role: 'Lighting', part_id: 'prt-demo-ring-red' },
+      { station_key: 'laser', role: 'Laser source', part_id: 'prt-demo-mopa-20' },
+      { station_key: 'laser', role: 'Beam expander', part_id: 'prt-demo-bex-15x' },
+      { station_key: 'laser', role: 'Galvo scanner', part_id: 'prt-demo-galvo-10' },
+      { station_key: 'laser', role: 'F-theta lens', part_id: 'prt-demo-ft-160' },
+      { station_key: 'laser', role: 'Galvo controller', part_id: 'prt-demo-galvo-ctrl' },
+      { station_key: 'laser', role: 'Fume extraction', part_id: 'prt-demo-fume-200' },
+      { station_key: 'inspect', role: 'Camera', part_id: 'prt-demo-cam-5mp' },
+      { station_key: 'inspect', role: 'Lens', part_id: 'prt-demo-lens-16' },
+      ...MACHINE([
+        ['X axis stage', 'prt-demo-stage-500', '_machine'],
+        ['Y axis stage', 'prt-demo-stage-500', '_machine'],
+        ['Servo motor', 'prt-demo-servo-400', '_machine'],
+        ['Servo drive', 'prt-demo-drive-400', '_machine'],
+        ['PLC', 'prt-demo-plc-ecat', '_machine'],
+        ['HMI', 'prt-demo-hmi-10', '_machine'],
+        ['Industrial PC', 'prt-demo-ipc', '_machine'],
+        ['Safety controller', 'prt-demo-safety-plc', '_machine'],
+        ['Door interlock', 'prt-demo-door-switch', '_machine'],
+        ['Power supply', 'prt-demo-smps-24', '_machine'],
+        ['Enclosure', 'prt-demo-enclosure', '_machine'],
+      ]).map((x) => (x.role === 'Servo motor' || x.role === 'Servo drive' ? { ...x, quantity: 2 } : x)),
+    ],
+    targets: { uph: 240, footprint_m2: 3, capex_budget: 2500000, localization_pct: 40 },
+    shift: { hours_per_shift: 8, shifts_per_day: 2, days_per_year: 300, planned_downtime_min_per_shift: 20 },
+    oee: { performance: 0.95, quality: 0.99 },
+    currency: 'INR',
+    required_protocols: ['EtherCAT'],
+    faults: [{ key: 'vision', name: 'Vision failure (CCD timeout)', station_key: 'align', at_min: 20, duration_min: 3 }],
+    maintenance: { pm_interval_h: 160, pm_duration_min: 60 },
+    energy: { tariff_per_kwh: 9, compressed_air_kw: 0.4, idle_fraction: 0.3 },
+    sequence: SEQ.map((x) => (x.key === 'present' ? { ...x, sensor: 'Part-present sensor on the fixture' } : x.key === 'unload' ? { ...x, actuator: 'Door opens — operator unloads' } : x)),
+    twin: {
+      model_maturity: 'Procedural',
+      sim_maturity: 'Configured',
+      workpiece: { template: 'plate', length_mm: 80, width_mm: 50, thickness_mm: 1.5, material: 'Anodised aluminium nameplate (DEMO)', basis: 'DEMO' },
+      process_area: { x_mm: 40, y_mm: 20, requirement_id: 'req-demo-twin-02' },
+      axes: [
+        { key: 'x', name: 'X axis', type: 'linear', station_key: '_machine', part_id: 'prt-demo-stage-500', home_mm: 0 },
+        { key: 'y', name: 'Y axis', type: 'linear', station_key: '_machine', part_id: 'prt-demo-stage-500', home_mm: 0 },
+      ],
+      moves: [
+        { station_key: 'align', label: 'Move to CCD positioning', targets: { x: 140, y: 0 } },
+        { station_key: 'laser', label: 'Move to marking position', targets: { x: 300, y: 20 } },
+        { station_key: 'inspect', label: 'Move to post-CCD inspection', targets: { x: 440, y: 0 } },
+        { station_key: 'unload', label: 'Return to load position', targets: { x: 0, y: 0 } },
+      ],
+      vision: { align: { wd_mm: 150, target_x_mm: 60, target_y_mm: 40 }, inspect: { wd_mm: 150, target_x_mm: 40, target_y_mm: 20 } },
+      zones: [
+        { key: 'operator', name: 'Operator zone', type: 'operator', enabled: true },
+        { key: 'laser', name: 'Laser hazard zone', type: 'laser', enabled: true },
+        { key: 'restricted', name: 'Axis travel envelope', type: 'restricted', enabled: true },
+      ],
+    },
+    version: 1,
+    data_type: 'DEMO',
+    provenance: { ...simProv, note: `${simProv.note} Axis speed and acceleration are read from the DEMO linear stage record; camera working distances and the workpiece are DEMO inputs.` },
+    tags: ['demo', 'flagship-3d'],
+  },
+  {
     id: 'sim-demo-pcb-a',
     entity: 'simulation',
     name: 'PCB laser marking — Scenario A (single laser station)',
@@ -638,6 +734,7 @@ const sims = [
     recipe_id: 'rcp-demo-pcb-mark',
     stations: pcbStations(1, 1500, 2),
     selections: pcbSel(1),
+    twin: { model_maturity: 'Procedural', sim_maturity: 'Configured', workpiece: { template: 'pcb', length_mm: 160, width_mm: 100, thickness_mm: 1.6, basis: 'DEMO' }, vision: { align: { wd_mm: 120 }, inspect: { wd_mm: 120 } } },
     targets: { uph: 500, capex_budget: 4500000, footprint_m2: 6, localization_pct: 50 },
     shift,
     oee: { performance: 0.95, quality: 0.99 },
@@ -761,6 +858,7 @@ const sims = [
       ]),
     ],
     targets: { uph: 150, capex_budget: 9000000 },
+    twin: { model_maturity: 'Procedural', sim_maturity: 'Conceptual', workpiece: { template: 'battery_tab', length_mm: 120, width_mm: 40, thickness_mm: 0.3, material: 'Aluminium / copper tab (DEMO)', basis: 'DEMO' }, vision: { align: { wd_mm: 200 }, inspect: { wd_mm: 180 } } },
     shift: { hours_per_shift: 8, shifts_per_day: 2, days_per_year: 300 },
     oee: { performance: 0.9, quality: 0.98 },
     currency: 'INR',
@@ -793,6 +891,7 @@ const sims = [
       st('unload', 'Strip unloading', 'unload', d({ time_s: 4 })),
     ],
     targets: { uph: null },
+    twin: { model_maturity: 'Procedural', sim_maturity: 'Conceptual', workpiece: { template: 'wafer', length_mm: 240, width_mm: 70, thickness_mm: 0.5, material: 'Leadframe strip with moulded packages (DEMO)', basis: 'DEMO' } },
     currency: 'INR',
     data_type: 'DEMO',
     provenance: { ...simProv, note: `${simProv.note} Incomplete on purpose: clamp time, marked area and target UPH are UNKNOWN until the customer confirms them — the Studio says what is missing.` },
@@ -800,7 +899,7 @@ const sims = [
   },
 ];
 
-const recipes = [
+const recipes: Record<string, unknown>[] = [
   {
     id: 'rcp-demo-pcb-mark',
     entity: 'recipe',
@@ -826,6 +925,50 @@ const recipes = [
   },
 ];
 
+recipes.push({
+  id: 'rcp-demo-plate-mark',
+  entity: 'recipe',
+  name: 'Nameplate 2D code + text marking — v0.1 (DEMO)',
+  simulation_id: 'sim-demo-laser-marker',
+  product_id: 'prd-markf',
+  recipe_version: '0.1',
+  parameters: [
+    { name: 'Power', value: '20', unit: 'W' },
+    { name: 'Speed', value: '2000', unit: 'mm/s' },
+    { name: 'Frequency', value: '60', unit: 'kHz' },
+    { name: 'Hatch', value: '0.03', unit: 'mm' },
+    { name: 'Passes', value: '1', unit: '' },
+  ],
+  quality_criteria: ['Code grade — target to be agreed'],
+  acceptance_criteria: ['To be defined — nothing pre-filled'],
+  recipe_status: 'Draft',
+  data_type: 'DEMO',
+  provenance: demoProv(DS, { note: `${DEMO_NOTE} Parameters are DEMO starting values, not validated.` }),
+  tags: ['demo'],
+});
+
+const twinReqs = [
+  ['req-demo-twin-01', 'TWIN-001', 'Throughput ≥ 240 parts per hour', 'Performance', '240', 'UPH', 'Test', 'Practical UPH ≥ 240 over a 1 h run'],
+  ['req-demo-twin-02', 'TWIN-002', 'Marking area ≥ 40 × 20 mm on the part', 'Process', '40 × 20', 'mm', 'Inspection', 'F-theta field covers the marking area'],
+  ['req-demo-twin-03', 'TWIN-003', 'Every code verified before unloading', 'Quality', '', '', 'Demonstration', 'Post-CCD inspection result recorded for every part'],
+].map(([id, code, name, category, value, unit, method, acc]) => ({
+  id,
+  entity: 'requirement',
+  code,
+  name,
+  level: 'SRS',
+  category,
+  priority: 'Must',
+  ...(value ? { value, unit } : {}),
+  verification_method: method,
+  acceptance_criterion: acc,
+  simulation_id: 'sim-demo-laser-marker',
+  status: 'Draft',
+  data_type: 'DEMO',
+  provenance: demoProv(DS, { note: `${DEMO_NOTE} Fictional requirement for the 3D digital-twin demo.` }),
+  tags: ['demo'],
+}));
+
 const verifications = [
   { id: 'ver-demo-s1-01', entity: 'verification', name: 'Verify 2D code marking on package (DEMO)', kind: 'Verification', requirement_id: 'req-demo-s1-01', method: 'Test', expected: 'Readable 2D code on every package (grade to be agreed)', result: 'NOT RUN', simulation_id: 'sim-demo-semi-marking', data_type: 'DEMO', provenance: demoProv(DS, { note: `${DEMO_NOTE} Planned verification — no result recorded.` }), tags: ['demo'] },
   { id: 'ver-demo-s1-04', entity: 'verification', name: 'Verify mark inspection function (DEMO)', kind: 'Verification', requirement_id: 'req-demo-s1-04', method: 'Demonstration', result: 'NOT RUN', simulation_id: 'sim-demo-semi-marking', data_type: 'DEMO', provenance: demoProv(DS, { note: `${DEMO_NOTE} Planned verification — no result recorded.` }), tags: ['demo'] },
@@ -847,6 +990,7 @@ writeJson(join(D, 'engineering-compatibility.json'), { dataset: demoHdr('demo-co
 writeJson(join(D, 'engineering-conflicts.json'), { dataset: demoHdr('demo-data-conflicts', 'DEMO data conflicts', 'data_conflict', 'A fictional source disagreement for the Data Review Center.'), records: conflicts });
 writeJson(join(D, 'simulations.json'), { dataset: demoHdr('demo-simulations', 'DEMO simulation scenarios', 'simulation', 'Fictional equipment scenarios for the Equipment Simulation Studio. Station times are DEMO assumptions, not measurements.'), records: sims });
 writeJson(join(D, 'recipes.json'), { dataset: demoHdr('demo-recipes', 'DEMO process recipes', 'recipe', 'Fictional starting recipe — not validated.', 'records'), records: recipes });
+writeJson(join(D, 'twin-requirements.json'), { dataset: demoHdr('demo-twin-requirements', 'DEMO requirements — 3D digital-twin demo', 'requirement', 'Fictional requirements traced to the semi-automatic laser marking machine digital twin.', 'records'), records: twinReqs });
 writeJson(join(D, 'verifications.json'), { dataset: demoHdr('demo-verifications', 'DEMO verifications', 'verification', 'Planned verifications with no results recorded.', 'records'), records: verifications });
 
 console.log(`spec definitions ${specs.length} · rules ${rules.length} · templates ${templates.length} · parts ${parts.length} · manufacturers ${manufacturers.length} · simulations ${sims.length}`);
