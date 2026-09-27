@@ -1,0 +1,70 @@
+{
+  "dataset": {
+    "id": "demo-recipes",
+    "title": "DEMO process recipes",
+    "entity": "recipe",
+    "description": "Fictional starting recipe — not validated.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "records"
+  },
+  "records": [
+    {
+      "id": "rcp-demo-pcb-mark",
+      "entity": "recipe",
+      "name": "PCB 2D-code marking on solder mask — v0.1 (DEMO)",
+      "simulation_id": "sim-demo-pcb-a",
+      "product_id": "prd-markc2i",
+      "application_id": "app-markc2i.dual",
+      "material_id": "mat-soldermask",
+      "recipe_version": "0.1",
+      "parameters": [
+        {
+          "name": "Power",
+          "value": "20",
+          "unit": "W"
+        },
+        {
+          "name": "Speed",
+          "value": "1500",
+          "unit": "mm/s"
+        },
+        {
+          "name": "Frequency",
+          "value": "60",
+          "unit": "kHz"
+        },
+        {
+          "name": "Hatch",
+          "value": "0.03",
+          "unit": "mm"
+        },
+        {
+          "name": "Passes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "quality_criteria": [
+        "Code grade (ISO/IEC 29158) — target to be agreed with the customer"
+      ],
+      "acceptance_criteria": [
+        "To be defined with the customer — nothing pre-filled"
+      ],
+      "recipe_status": "Draft",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Parameters are DEMO starting values, not validated."
+      },
+      "tags": [
+        "demo"
+      ]
+    }
+  ]
+}

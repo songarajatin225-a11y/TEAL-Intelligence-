@@ -1,0 +1,1741 @@
+{
+  "dataset": {
+    "id": "demo-simulations",
+    "title": "DEMO simulation scenarios",
+    "entity": "simulation",
+    "description": "Fictional equipment scenarios for the Equipment Simulation Studio. Station times are DEMO assumptions, not measurements.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "sim-demo-pcb-a",
+      "entity": "simulation",
+      "name": "PCB laser marking — Scenario A (single laser station)",
+      "scenario_label": "A",
+      "template_id": "eqt-pcb-laser-marking",
+      "config_level": "Customer Configuration",
+      "sim_status": "Draft",
+      "customer_id": "cus-demo-ems",
+      "project_id": "prj-demo-c2i",
+      "product_id": "prd-markc2i",
+      "application_id": "app-markc2i.dual",
+      "material_id": "mat-soldermask",
+      "recipe_id": "rcp-demo-pcb-mark",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in (conveyor)",
+          "kind": "load",
+          "time_s": 2.5,
+          "parallel": 1,
+          "buffer_after": 2,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 2,
+            "mode": 2.5,
+            "max": 3.5
+          },
+          "power_kw": 0.09,
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ],
+          "mtbf_min": 2400,
+          "mttr_min": 10,
+          "capex": 150000,
+          "footprint_m2": 0.6
+        },
+        {
+          "key": "fixture",
+          "name": "Board stop & clamp",
+          "kind": "fixture",
+          "time_s": 1.5,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 1.2,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            }
+          ],
+          "capex": 80000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "align",
+          "name": "Fiducial alignment",
+          "kind": "align",
+          "time_s": 1.2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.9,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 2,
+          "time_basis": "CALCULATED",
+          "laser": {
+            "area_mm2": 300,
+            "hatch_mm": 0.03,
+            "speed_mm_s": 1500,
+            "passes": 1,
+            "jump_overhead_s": 0.8,
+            "power_w": 20,
+            "frequency_khz": 60
+          },
+          "dist": {
+            "type": "normal",
+            "sd": 0.25
+          },
+          "mtbf_min": 4800,
+          "mttr_min": 30,
+          "capex": 220000,
+          "footprint_m2": 1.2,
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code verification (grade)",
+          "kind": "inspect",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.8,
+            "max": 1.4
+          },
+          "reject_rate": 0.01,
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "capex": 70000,
+          "footprint_m2": 0.5
+        },
+        {
+          "key": "unload",
+          "name": "Board out (conveyor)",
+          "kind": "unload",
+          "time_s": 2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 1.6,
+            "mode": 2,
+            "max": 2.8
+          },
+          "power_kw": 0.09,
+          "capex": 120000,
+          "footprint_m2": 0.6
+        }
+      ],
+      "selections": [
+        {
+          "station_key": "load",
+          "role": "Conveyor",
+          "part_id": "prt-demo-conveyor-pcb"
+        },
+        {
+          "station_key": "fixture",
+          "role": "Fixture",
+          "part_id": "prt-demo-fixture-pcb"
+        },
+        {
+          "station_key": "align",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "align",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "align",
+          "role": "Lighting",
+          "part_id": "prt-demo-ring-red"
+        },
+        {
+          "station_key": "laser",
+          "role": "Laser source",
+          "part_id": "prt-demo-mopa-20",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Beam expander",
+          "part_id": "prt-demo-bex-15x",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo scanner",
+          "part_id": "prt-demo-galvo-10",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "F-theta lens",
+          "part_id": "prt-demo-ft-160",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo controller",
+          "part_id": "prt-demo-galvo-ctrl",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Fume extraction",
+          "part_id": "prt-demo-fume-200"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "_machine",
+          "role": "PLC",
+          "part_id": "prt-demo-plc-ecat"
+        },
+        {
+          "station_key": "_machine",
+          "role": "HMI",
+          "part_id": "prt-demo-hmi-10"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Safety controller",
+          "part_id": "prt-demo-safety-plc"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Door interlock",
+          "part_id": "prt-demo-door-switch"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Power supply",
+          "part_id": "prt-demo-smps-24"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Enclosure",
+          "part_id": "prt-demo-enclosure"
+        }
+      ],
+      "targets": {
+        "uph": 500,
+        "capex_budget": 4500000,
+        "footprint_m2": 6,
+        "localization_pct": 50
+      },
+      "shift": {
+        "hours_per_shift": 8,
+        "shifts_per_day": 3,
+        "days_per_year": 300,
+        "planned_downtime_min_per_shift": 30
+      },
+      "oee": {
+        "performance": 0.95,
+        "quality": 0.99
+      },
+      "currency": "INR",
+      "required_protocols": [
+        "EtherCAT"
+      ],
+      "faults": [
+        {
+          "key": "vision",
+          "name": "Vision failure",
+          "station_key": "align",
+          "at_min": 90,
+          "duration_min": 12
+        },
+        {
+          "key": "laser",
+          "name": "Laser unavailable",
+          "station_key": "laser",
+          "at_min": 200,
+          "duration_min": 25
+        }
+      ],
+      "maintenance": {
+        "pm_interval_h": 160,
+        "pm_duration_min": 90,
+        "calibration_interval_h": 720,
+        "calibration_duration_min": 60
+      },
+      "energy": {
+        "tariff_per_kwh": 9,
+        "compressed_air_kw": 0.75,
+        "idle_fraction": 0.35
+      },
+      "sequence": [
+        {
+          "key": "start",
+          "name": "START",
+          "kind": "start"
+        },
+        {
+          "key": "safety",
+          "name": "Safety check",
+          "kind": "check",
+          "interlock": "Doors closed, E-stop healthy",
+          "alarm": "Safety circuit open"
+        },
+        {
+          "key": "present",
+          "name": "Part present",
+          "kind": "check",
+          "sensor": "Board-present photoelectric sensor",
+          "timer_s": 5,
+          "alarm": "Part missing (timeout)"
+        },
+        {
+          "key": "clamp",
+          "name": "Clamp",
+          "kind": "action",
+          "actuator": "Stopper + clamp cylinder",
+          "sensor": "Clamp reed switch",
+          "timer_s": 1,
+          "alarm": "Clamp not confirmed"
+        },
+        {
+          "key": "vision",
+          "name": "Vision",
+          "kind": "action",
+          "actuator": "Alignment camera trigger",
+          "condition": "Fiducials found",
+          "alarm": "Vision failure"
+        },
+        {
+          "key": "position",
+          "name": "Position",
+          "kind": "action",
+          "condition": "Offsets applied to the marking job"
+        },
+        {
+          "key": "enable",
+          "name": "Laser enable",
+          "kind": "action",
+          "interlock": "Enclosure interlock closed, extraction running",
+          "alarm": "Laser not ready"
+        },
+        {
+          "key": "process",
+          "name": "Process",
+          "kind": "action",
+          "actuator": "Laser + scanner job"
+        },
+        {
+          "key": "disable",
+          "name": "Laser disable",
+          "kind": "action"
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "action",
+          "actuator": "Verification camera",
+          "condition": "Code grade ≥ target"
+        },
+        {
+          "key": "decide",
+          "name": "Decision",
+          "kind": "decision",
+          "condition": "Grade OK → OK lane; else NG lane"
+        },
+        {
+          "key": "unclamp",
+          "name": "Unclamp",
+          "kind": "action",
+          "actuator": "Clamp cylinder",
+          "sensor": "Clamp reed switch"
+        },
+        {
+          "key": "unload",
+          "name": "Unload",
+          "kind": "action",
+          "actuator": "Out-conveyor"
+        },
+        {
+          "key": "done",
+          "name": "Complete",
+          "kind": "end"
+        }
+      ],
+      "version": 1,
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Station times are DEMO assumptions — not measured."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "sim-demo-pcb-b",
+      "entity": "simulation",
+      "name": "PCB laser marking — Scenario B (two laser stations)",
+      "scenario_label": "B",
+      "parent_id": "sim-demo-pcb-a",
+      "change_reason": "Scenario A misses 500 UPH; add a second laser station in parallel",
+      "template_id": "eqt-pcb-laser-marking",
+      "config_level": "Customer Configuration",
+      "sim_status": "Draft",
+      "customer_id": "cus-demo-ems",
+      "project_id": "prj-demo-c2i",
+      "product_id": "prd-markc2i",
+      "application_id": "app-markc2i.dual",
+      "material_id": "mat-soldermask",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in (conveyor)",
+          "kind": "load",
+          "time_s": 2.5,
+          "parallel": 1,
+          "buffer_after": 2,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 2,
+            "mode": 2.5,
+            "max": 3.5
+          },
+          "power_kw": 0.09,
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ],
+          "mtbf_min": 2400,
+          "mttr_min": 10,
+          "capex": 150000,
+          "footprint_m2": 0.6
+        },
+        {
+          "key": "fixture",
+          "name": "Board stop & clamp",
+          "kind": "fixture",
+          "time_s": 1.5,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 1.2,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            }
+          ],
+          "capex": 80000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "align",
+          "name": "Fiducial alignment",
+          "kind": "align",
+          "time_s": 1.2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.9,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 2,
+          "buffer_after": 3,
+          "time_basis": "CALCULATED",
+          "laser": {
+            "area_mm2": 300,
+            "hatch_mm": 0.03,
+            "speed_mm_s": 1500,
+            "passes": 1,
+            "jump_overhead_s": 0.8,
+            "power_w": 20,
+            "frequency_khz": 60
+          },
+          "dist": {
+            "type": "normal",
+            "sd": 0.25
+          },
+          "mtbf_min": 4800,
+          "mttr_min": 30,
+          "capex": 220000,
+          "footprint_m2": 1.2,
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code verification (grade)",
+          "kind": "inspect",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.8,
+            "max": 1.4
+          },
+          "reject_rate": 0.01,
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "capex": 70000,
+          "footprint_m2": 0.5
+        },
+        {
+          "key": "unload",
+          "name": "Board out (conveyor)",
+          "kind": "unload",
+          "time_s": 2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 1.6,
+            "mode": 2,
+            "max": 2.8
+          },
+          "power_kw": 0.09,
+          "capex": 120000,
+          "footprint_m2": 0.6
+        }
+      ],
+      "selections": [
+        {
+          "station_key": "load",
+          "role": "Conveyor",
+          "part_id": "prt-demo-conveyor-pcb"
+        },
+        {
+          "station_key": "fixture",
+          "role": "Fixture",
+          "part_id": "prt-demo-fixture-pcb"
+        },
+        {
+          "station_key": "align",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "align",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "align",
+          "role": "Lighting",
+          "part_id": "prt-demo-ring-red"
+        },
+        {
+          "station_key": "laser",
+          "role": "Laser source",
+          "part_id": "prt-demo-mopa-20",
+          "quantity": 2
+        },
+        {
+          "station_key": "laser",
+          "role": "Beam expander",
+          "part_id": "prt-demo-bex-15x",
+          "quantity": 2
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo scanner",
+          "part_id": "prt-demo-galvo-10",
+          "quantity": 2
+        },
+        {
+          "station_key": "laser",
+          "role": "F-theta lens",
+          "part_id": "prt-demo-ft-160",
+          "quantity": 2
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo controller",
+          "part_id": "prt-demo-galvo-ctrl",
+          "quantity": 2
+        },
+        {
+          "station_key": "laser",
+          "role": "Fume extraction",
+          "part_id": "prt-demo-fume-200"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "_machine",
+          "role": "PLC",
+          "part_id": "prt-demo-plc-ecat"
+        },
+        {
+          "station_key": "_machine",
+          "role": "HMI",
+          "part_id": "prt-demo-hmi-10"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Safety controller",
+          "part_id": "prt-demo-safety-plc"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Door interlock",
+          "part_id": "prt-demo-door-switch"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Power supply",
+          "part_id": "prt-demo-smps-24"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Enclosure",
+          "part_id": "prt-demo-enclosure"
+        }
+      ],
+      "targets": {
+        "uph": 500,
+        "capex_budget": 4500000,
+        "footprint_m2": 6,
+        "localization_pct": 50
+      },
+      "shift": {
+        "hours_per_shift": 8,
+        "shifts_per_day": 3,
+        "days_per_year": 300,
+        "planned_downtime_min_per_shift": 30
+      },
+      "oee": {
+        "performance": 0.95,
+        "quality": 0.99
+      },
+      "currency": "INR",
+      "required_protocols": [
+        "EtherCAT"
+      ],
+      "maintenance": {
+        "pm_interval_h": 160,
+        "pm_duration_min": 90
+      },
+      "energy": {
+        "tariff_per_kwh": 9,
+        "compressed_air_kw": 0.75,
+        "idle_fraction": 0.35
+      },
+      "sequence": [
+        {
+          "key": "start",
+          "name": "START",
+          "kind": "start"
+        },
+        {
+          "key": "safety",
+          "name": "Safety check",
+          "kind": "check",
+          "interlock": "Doors closed, E-stop healthy",
+          "alarm": "Safety circuit open"
+        },
+        {
+          "key": "present",
+          "name": "Part present",
+          "kind": "check",
+          "sensor": "Board-present photoelectric sensor",
+          "timer_s": 5,
+          "alarm": "Part missing (timeout)"
+        },
+        {
+          "key": "clamp",
+          "name": "Clamp",
+          "kind": "action",
+          "actuator": "Stopper + clamp cylinder",
+          "sensor": "Clamp reed switch",
+          "timer_s": 1,
+          "alarm": "Clamp not confirmed"
+        },
+        {
+          "key": "vision",
+          "name": "Vision",
+          "kind": "action",
+          "actuator": "Alignment camera trigger",
+          "condition": "Fiducials found",
+          "alarm": "Vision failure"
+        },
+        {
+          "key": "position",
+          "name": "Position",
+          "kind": "action",
+          "condition": "Offsets applied to the marking job"
+        },
+        {
+          "key": "enable",
+          "name": "Laser enable",
+          "kind": "action",
+          "interlock": "Enclosure interlock closed, extraction running",
+          "alarm": "Laser not ready"
+        },
+        {
+          "key": "process",
+          "name": "Process",
+          "kind": "action",
+          "actuator": "Laser + scanner job"
+        },
+        {
+          "key": "disable",
+          "name": "Laser disable",
+          "kind": "action"
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "action",
+          "actuator": "Verification camera",
+          "condition": "Code grade ≥ target"
+        },
+        {
+          "key": "decide",
+          "name": "Decision",
+          "kind": "decision",
+          "condition": "Grade OK → OK lane; else NG lane"
+        },
+        {
+          "key": "unclamp",
+          "name": "Unclamp",
+          "kind": "action",
+          "actuator": "Clamp cylinder",
+          "sensor": "Clamp reed switch"
+        },
+        {
+          "key": "unload",
+          "name": "Unload",
+          "kind": "action",
+          "actuator": "Out-conveyor"
+        },
+        {
+          "key": "done",
+          "name": "Complete",
+          "kind": "end"
+        }
+      ],
+      "version": 2,
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Station times are DEMO assumptions — not measured."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "sim-demo-pcb-c",
+      "entity": "simulation",
+      "name": "PCB laser marking — Scenario C (faster marking, 30 W source)",
+      "scenario_label": "C",
+      "parent_id": "sim-demo-pcb-a",
+      "change_reason": "Keep one station; raise marking speed with a 30 W source and larger scanner",
+      "template_id": "eqt-pcb-laser-marking",
+      "config_level": "Customer Configuration",
+      "sim_status": "Draft",
+      "customer_id": "cus-demo-ems",
+      "project_id": "prj-demo-c2i",
+      "product_id": "prd-markc2i",
+      "application_id": "app-markc2i.dual",
+      "material_id": "mat-soldermask",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in (conveyor)",
+          "kind": "load",
+          "time_s": 2.5,
+          "parallel": 1,
+          "buffer_after": 2,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 2,
+            "mode": 2.5,
+            "max": 3.5
+          },
+          "power_kw": 0.09,
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ],
+          "mtbf_min": 2400,
+          "mttr_min": 10,
+          "capex": 150000,
+          "footprint_m2": 0.6
+        },
+        {
+          "key": "fixture",
+          "name": "Board stop & clamp",
+          "kind": "fixture",
+          "time_s": 1.5,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 1.2,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            }
+          ],
+          "capex": 80000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "align",
+          "name": "Fiducial alignment",
+          "kind": "align",
+          "time_s": 1.2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.9,
+            "max": 1.8
+          },
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 2,
+          "time_basis": "CALCULATED",
+          "laser": {
+            "area_mm2": 300,
+            "hatch_mm": 0.03,
+            "speed_mm_s": 2500,
+            "passes": 1,
+            "jump_overhead_s": 0.8,
+            "power_w": 20,
+            "frequency_khz": 60
+          },
+          "dist": {
+            "type": "normal",
+            "sd": 0.25
+          },
+          "mtbf_min": 4800,
+          "mttr_min": 30,
+          "capex": 220000,
+          "footprint_m2": 1.2,
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code verification (grade)",
+          "kind": "inspect",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "uniform",
+            "min": 0.8,
+            "max": 1.4
+          },
+          "reject_rate": 0.01,
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            }
+          ],
+          "capex": 60000,
+          "footprint_m2": 0.4
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "capex": 70000,
+          "footprint_m2": 0.5
+        },
+        {
+          "key": "unload",
+          "name": "Board out (conveyor)",
+          "kind": "unload",
+          "time_s": 2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 1.6,
+            "mode": 2,
+            "max": 2.8
+          },
+          "power_kw": 0.09,
+          "capex": 120000,
+          "footprint_m2": 0.6
+        }
+      ],
+      "selections": [
+        {
+          "station_key": "load",
+          "role": "Conveyor",
+          "part_id": "prt-demo-conveyor-pcb"
+        },
+        {
+          "station_key": "fixture",
+          "role": "Fixture",
+          "part_id": "prt-demo-fixture-pcb"
+        },
+        {
+          "station_key": "align",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "align",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "align",
+          "role": "Lighting",
+          "part_id": "prt-demo-ring-red"
+        },
+        {
+          "station_key": "laser",
+          "role": "Laser source",
+          "part_id": "prt-demo-mopa-30",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Beam expander",
+          "part_id": "prt-demo-bex-15x",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo scanner",
+          "part_id": "prt-demo-galvo-14",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "F-theta lens",
+          "part_id": "prt-demo-ft-160",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Galvo controller",
+          "part_id": "prt-demo-galvo-ctrl",
+          "quantity": 1
+        },
+        {
+          "station_key": "laser",
+          "role": "Fume extraction",
+          "part_id": "prt-demo-fume-200"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "_machine",
+          "role": "PLC",
+          "part_id": "prt-demo-plc-ecat"
+        },
+        {
+          "station_key": "_machine",
+          "role": "HMI",
+          "part_id": "prt-demo-hmi-10"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Safety controller",
+          "part_id": "prt-demo-safety-plc"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Door interlock",
+          "part_id": "prt-demo-door-switch"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Power supply",
+          "part_id": "prt-demo-smps-24"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Enclosure",
+          "part_id": "prt-demo-enclosure"
+        }
+      ],
+      "targets": {
+        "uph": 500,
+        "capex_budget": 4500000,
+        "footprint_m2": 6,
+        "localization_pct": 50
+      },
+      "shift": {
+        "hours_per_shift": 8,
+        "shifts_per_day": 3,
+        "days_per_year": 300,
+        "planned_downtime_min_per_shift": 30
+      },
+      "oee": {
+        "performance": 0.95,
+        "quality": 0.99
+      },
+      "currency": "INR",
+      "required_protocols": [
+        "EtherCAT"
+      ],
+      "maintenance": {
+        "pm_interval_h": 160,
+        "pm_duration_min": 90
+      },
+      "energy": {
+        "tariff_per_kwh": 9,
+        "compressed_air_kw": 0.75,
+        "idle_fraction": 0.35
+      },
+      "sequence": [
+        {
+          "key": "start",
+          "name": "START",
+          "kind": "start"
+        },
+        {
+          "key": "safety",
+          "name": "Safety check",
+          "kind": "check",
+          "interlock": "Doors closed, E-stop healthy",
+          "alarm": "Safety circuit open"
+        },
+        {
+          "key": "present",
+          "name": "Part present",
+          "kind": "check",
+          "sensor": "Board-present photoelectric sensor",
+          "timer_s": 5,
+          "alarm": "Part missing (timeout)"
+        },
+        {
+          "key": "clamp",
+          "name": "Clamp",
+          "kind": "action",
+          "actuator": "Stopper + clamp cylinder",
+          "sensor": "Clamp reed switch",
+          "timer_s": 1,
+          "alarm": "Clamp not confirmed"
+        },
+        {
+          "key": "vision",
+          "name": "Vision",
+          "kind": "action",
+          "actuator": "Alignment camera trigger",
+          "condition": "Fiducials found",
+          "alarm": "Vision failure"
+        },
+        {
+          "key": "position",
+          "name": "Position",
+          "kind": "action",
+          "condition": "Offsets applied to the marking job"
+        },
+        {
+          "key": "enable",
+          "name": "Laser enable",
+          "kind": "action",
+          "interlock": "Enclosure interlock closed, extraction running",
+          "alarm": "Laser not ready"
+        },
+        {
+          "key": "process",
+          "name": "Process",
+          "kind": "action",
+          "actuator": "Laser + scanner job"
+        },
+        {
+          "key": "disable",
+          "name": "Laser disable",
+          "kind": "action"
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "action",
+          "actuator": "Verification camera",
+          "condition": "Code grade ≥ target"
+        },
+        {
+          "key": "decide",
+          "name": "Decision",
+          "kind": "decision",
+          "condition": "Grade OK → OK lane; else NG lane"
+        },
+        {
+          "key": "unclamp",
+          "name": "Unclamp",
+          "kind": "action",
+          "actuator": "Clamp cylinder",
+          "sensor": "Clamp reed switch"
+        },
+        {
+          "key": "unload",
+          "name": "Unload",
+          "kind": "action",
+          "actuator": "Out-conveyor"
+        },
+        {
+          "key": "done",
+          "name": "Complete",
+          "kind": "end"
+        }
+      ],
+      "version": 2,
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Station times are DEMO assumptions — not measured."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "sim-demo-battery-tab",
+      "entity": "simulation",
+      "name": "Battery tab welding — module line (DEMO)",
+      "scenario_label": "A",
+      "template_id": "eqt-battery-tab-welding",
+      "config_level": "Equipment Variant",
+      "sim_status": "Draft",
+      "customer_id": "cus-demo-battery",
+      "opportunity_id": "opp-demo-battery-tab",
+      "product_id": "prd-weldb",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Module / cell load",
+          "kind": "load",
+          "time_s": 6,
+          "parallel": 1,
+          "buffer_after": 1,
+          "time_basis": "DEMO",
+          "dist": {
+            "type": "triangular",
+            "min": 5,
+            "mode": 6,
+            "max": 8
+          },
+          "capex": 350000
+        },
+        {
+          "key": "fixture",
+          "name": "Clamp & tab pressing",
+          "kind": "fixture",
+          "time_s": 3,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            }
+          ],
+          "capex": 400000
+        },
+        {
+          "key": "align",
+          "name": "Tab position vision",
+          "kind": "align",
+          "time_s": 2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            }
+          ],
+          "capex": 60000
+        },
+        {
+          "key": "laser",
+          "name": "Laser tab welding",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "CALCULATED",
+          "laser": {
+            "path_mm": 240,
+            "speed_mm_s": 100,
+            "passes": 1,
+            "jump_overhead_s": 4.8,
+            "power_w": 1500
+          },
+          "dist": {
+            "type": "normal",
+            "sd": 0.4
+          },
+          "mtbf_min": 3000,
+          "mttr_min": 45,
+          "capex": 600000,
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": true
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Weld seam inspection",
+          "kind": "inspect",
+          "time_s": 3,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "reject_rate": 0.02,
+          "rework_rate": 0.5,
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            }
+          ],
+          "capex": 90000
+        },
+        {
+          "key": "unload",
+          "name": "Unload",
+          "kind": "unload",
+          "time_s": 5,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO",
+          "capex": 250000
+        }
+      ],
+      "selections": [
+        {
+          "station_key": "align",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-12mp"
+        },
+        {
+          "station_key": "align",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "laser",
+          "role": "Laser source",
+          "part_id": "prt-demo-cw-1500"
+        },
+        {
+          "station_key": "laser",
+          "role": "Processing head",
+          "part_id": "prt-demo-weld-head"
+        },
+        {
+          "station_key": "laser",
+          "role": "Motion axis",
+          "part_id": "prt-demo-stage-500"
+        },
+        {
+          "station_key": "laser",
+          "role": "Chiller",
+          "part_id": "prt-demo-chiller-1k"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Camera",
+          "part_id": "prt-demo-cam-5mp"
+        },
+        {
+          "station_key": "inspect",
+          "role": "Lens",
+          "part_id": "prt-demo-lens-16"
+        },
+        {
+          "station_key": "_machine",
+          "role": "PLC",
+          "part_id": "prt-demo-plc-pn"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Servo drive",
+          "part_id": "prt-demo-drive-200"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Servo motor",
+          "part_id": "prt-demo-servo-400"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Safety controller",
+          "part_id": "prt-demo-safety-plc"
+        },
+        {
+          "station_key": "_machine",
+          "role": "Light curtain",
+          "part_id": "prt-demo-light-curtain"
+        }
+      ],
+      "targets": {
+        "uph": 150,
+        "capex_budget": 9000000
+      },
+      "shift": {
+        "hours_per_shift": 8,
+        "shifts_per_day": 2,
+        "days_per_year": 300
+      },
+      "oee": {
+        "performance": 0.9,
+        "quality": 0.98
+      },
+      "currency": "INR",
+      "required_protocols": [
+        "EtherCAT"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Station times are DEMO assumptions — not measured. Contains deliberate issues (chiller undersized, drive/motor mismatch, PLC without EtherCAT) for the design review to find."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "sim-demo-semi-marking",
+      "entity": "simulation",
+      "name": "Semiconductor package marking — strip line (DEMO)",
+      "scenario_label": "A",
+      "template_id": "eqt-semiconductor-marking",
+      "config_level": "Customer Configuration",
+      "sim_status": "Draft",
+      "customer_id": "cus-demo-osat",
+      "opportunity_id": "opp-demo-pkg-marking",
+      "product_id": "prd-semispm",
+      "application_id": "app-semispm.mould",
+      "material_id": "mat-emc",
+      "requirement_ids": [
+        "req-demo-s1-01",
+        "req-demo-s1-02",
+        "req-demo-s1-03",
+        "req-demo-s1-04",
+        "req-demo-s1-05",
+        "req-demo-s1-06"
+      ],
+      "stations": [
+        {
+          "key": "load",
+          "name": "Magazine / strip loading",
+          "kind": "load",
+          "time_s": 4,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        },
+        {
+          "key": "fixture",
+          "name": "Strip clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        },
+        {
+          "key": "align",
+          "name": "Strip alignment",
+          "kind": "align",
+          "time_s": 1.5,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "laser": {
+            "area_mm2": null,
+            "hatch_mm": 0.05,
+            "speed_mm_s": 2000,
+            "passes": 1
+          }
+        },
+        {
+          "key": "inspect",
+          "name": "Mark inspection (OCR / 2D)",
+          "kind": "inspect",
+          "time_s": 2,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        },
+        {
+          "key": "sort",
+          "name": "Reject mapping",
+          "kind": "sort",
+          "time_s": 1,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        },
+        {
+          "key": "unload",
+          "name": "Strip unloading",
+          "kind": "unload",
+          "time_s": 4,
+          "parallel": 1,
+          "buffer_after": 0,
+          "time_basis": "DEMO"
+        }
+      ],
+      "targets": {
+        "uph": null
+      },
+      "currency": "INR",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Station times are DEMO assumptions — not measured. Incomplete on purpose: clamp time, marked area and target UPH are UNKNOWN until the customer confirms them — the Studio says what is missing."
+      },
+      "tags": [
+        "demo"
+      ]
+    }
+  ]
+}

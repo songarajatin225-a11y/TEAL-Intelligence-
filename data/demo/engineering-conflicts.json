@@ -1,0 +1,35 @@
+{
+  "dataset": {
+    "id": "demo-data-conflicts",
+    "title": "DEMO data conflicts",
+    "entity": "data_conflict",
+    "description": "A fictional source disagreement for the Data Review Center.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "dcf-demo-mopa50-power",
+      "entity": "data_conflict",
+      "name": "DL-MOPA-50 average power: 50 W vs 48 W",
+      "part_id": "prt-demo-mopa-50",
+      "parameter": "average_power",
+      "source_a_id": "src-demo-datasheets",
+      "value_a": "50 W",
+      "source_b_id": "src-demo-distributor",
+      "value_b": "48 W",
+      "conflict_status": "Open",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { Columns2, Copy, DoorOpen, Maximize2, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
+import { Archive, ArchiveRestore, Columns2, Copy, CopyPlus, DoorOpen, Download, Maximize2, MoreHorizontal, PencilLine, Pin, PinOff, Printer, RotateCcw, Sparkles, Trash2 } from 'lucide-react';
 import { lazy, Suspense, useEffect, useMemo, useState, type ComponentType } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { isFavorite, toggleFavorite, usePrefs } from '../../app/prefs';
@@ -17,7 +17,8 @@ import { WhyButton } from '../../components/why';
 import type { AnyRecord } from '../../domain';
 import { ENTITY_BY_TYPE } from '../../domain/registry';
 import { useData, type Rec } from '../../hooks/useData';
-import { repo } from '../../repositories';
+import { newLocalId, repo } from '../../repositories';
+import { download } from '../../utils/export';
 import { type ChangeLogRow } from '../../repositories/workspaceDb';
 import { DatabaseService } from '../../services/database';
 import { whatIsMissing } from '../../services/gaps';
@@ -26,6 +27,23 @@ import { whyForRecord } from '../../services/why';
 import { fmtDate } from '../../utils/dates';
 import { ENTITY_UI } from './entityUi';
 import { isRoomEntity, ROOM_LABEL, roomPath } from '../rooms/rooms';
+
+/** A record without the repository's bookkeeping fields (__origin, __dataset). */
+function stripMeta(r: Rec): Record<string, unknown> {
+  const { __origin: _o, __dataset: _d, ...rest } = r as Rec & { __dataset?: string };
+  void _o;
+  void _d;
+  return rest;
+}
+
+/** Save a status change and say what happened — including why it was refused (e.g. an enum status). */
+const saveNote = (rec: Record<string, unknown>, summary: string) =>
+  repo()
+    .workspace.save(rec, summary)
+    .then(
+      () => toast(summary, { tone: 'draft' }),
+      (e: unknown) => toast('Not changed', { tone: 'error', detail: e instanceof Error ? e.message : String(e) }),
+    );
 
 /* Entity-specific main panels, code-split. Each receives the record. */
 type Main = ComponentType<{ record: Rec }>;
@@ -44,6 +62,9 @@ const MAIN: Record<string, Main> = {
   gate_definition: lazy(() => import('../gates/GateDefinitionView')),
   risk: lazy(() => import('../quality/RiskView')),
   opportunity: lazy(() => import('../opportunities/OpportunityView')),
+  part: lazy(() => import('../engineering/PartView')),
+  equipment_template: lazy(() => import('../engineering/TemplateView')),
+  simulation: lazy(() => import('../engineering/SimulationRecordView')),
 };
 
 const BASE = new Set(['id', 'entity', 'name', 'description', 'data_type', 'provenance', 'tags', 'links', 'next_action', 'created_at', 'updated_at', 'version', 'notes', '__origin', '__dataset']);
@@ -152,6 +173,31 @@ export default function RecordPage() {
     { icon: Columns2, label: 'Compare with…', run: () => nav(`/compare?ids=${encodeURIComponent(r.id)}`) },
     { icon: Maximize2, label: 'Full screen', run: () => document.documentElement.requestFullscreen?.().catch(() => toast('Full screen is not available here', { tone: 'error' })) },
     { icon: Printer, label: 'Print', run: () => window.print() },
+    { icon: Download, label: 'Export JSON', run: () => download(`${r.id}.json`, JSON.stringify(stripMeta(r), null, 2)) },
+    ...(!ui?.readOnly
+      ? [
+          {
+            icon: CopyPlus,
+            label: 'Duplicate',
+            run: async () => {
+              const copy = { ...stripMeta(r), id: newLocalId(r.entity), name: `${r.name} (copy)`, data_type: 'USER_CREATED', provenance: { verification_status: 'DRAFT', note: `Duplicated from ${r.id}${r.data_type === 'DEMO' ? ' (a DEMO record — its values are DEMO values)' : ''}` }, version: 1 };
+              try {
+                await repo().workspace.save(copy, `Duplicated ${r.name}`);
+                nav(`/record/${encodeURIComponent(String(copy.id))}`);
+              } catch (e) {
+                toast('Could not duplicate', { tone: 'error', detail: e instanceof Error ? e.message : String(e) });
+              }
+            },
+          },
+          'record_status' in x
+            ? x.record_status === 'Archived'
+              ? { icon: ArchiveRestore, label: 'Restore from archive', run: () => saveNote({ ...stripMeta(r), record_status: 'Reviewed' }, `Restored ${r.name}`) }
+              : { icon: Archive, label: 'Archive', run: () => saveNote({ ...stripMeta(r), record_status: 'Archived' }, `Archived ${r.name}`) }
+            : x.status === 'Archived'
+              ? { icon: ArchiveRestore, label: 'Restore from archive', run: () => saveNote({ ...stripMeta(r), status: undefined }, `Restored ${r.name}`) }
+              : { icon: Archive, label: 'Archive', run: () => saveNote({ ...stripMeta(r), status: 'Archived' }, `Archived ${r.name}`) },
+        ]
+      : []),
     ...(isDraft ? [{ icon: RotateCcw, label: 'Discard local draft', run: () => repo().workspace.discard(r.id) }] : []),
     ...(!ui?.readOnly
       ? [

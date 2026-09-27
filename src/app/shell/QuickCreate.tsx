@@ -1,4 +1,24 @@
-import { Briefcase, ClipboardCheck, FileSearch, FlaskConical, GitBranch, Hammer, Layers, Lightbulb, ListChecks, Package, Plus, ShieldAlert, Sparkles, Truck, Users, Zap, type LucideIcon, UserPlus } from 'lucide-react';
+import {
+  Briefcase,
+  ClipboardCheck,
+  Cpu,
+  FileSearch,
+  FlaskConical,
+  GitBranch,
+  Hammer,
+  Layers,
+  Lightbulb,
+  ListChecks,
+  Package,
+  Plus,
+  ShieldAlert,
+  Sparkles,
+  Truck,
+  UserPlus,
+  Users,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { EntityForm } from '../../components/EntityForm';
 import { recordPath } from '../../components/RecordLink';
@@ -8,6 +28,8 @@ import { ENTITY_BY_TYPE } from '../../domain/registry';
 /** Quick Create (spec §26): creation from anywhere, in a drawer, without leaving the page. */
 export const CREATE_OPTIONS: { entity: string; label: string; icon: LucideIcon; to?: string; hint?: string }[] = [
   { entity: 'product', label: 'Product (from inquiry)', icon: Sparkles, to: '/inquiry', hint: 'Draft a full product package from a customer inquiry' },
+  { entity: 'simulation', label: 'Equipment (simulation scenario)', icon: FlaskConical, to: '/studio?new=1', hint: 'From an equipment template, in the Simulation Studio' },
+  { entity: 'part', label: 'Component (engineering database)', icon: Cpu },
   { entity: 'configuration', label: 'Machine configuration', icon: Layers, to: '/configurator' },
   { entity: 'project', label: 'Project', icon: Briefcase },
   { entity: 'opportunity', label: 'Opportunity', icon: Zap },
@@ -21,7 +43,9 @@ export const CREATE_OPTIONS: { entity: string; label: string; icon: LucideIcon; 
   { entity: 'rfq', label: 'RFQ', icon: FileSearch },
   { entity: 'risk', label: 'Risk', icon: ShieldAlert },
   { entity: 'decision', label: 'Decision', icon: GitBranch },
-  { entity: 'change_request', label: 'Change request', icon: Hammer },
+  { entity: 'change_request', label: 'Change request (ECR / ECO)', icon: Hammer },
+  { entity: 'verification', label: 'Verification / validation', icon: ClipboardCheck },
+  { entity: 'quality_record', label: 'NCR / CAPA / 8D', icon: ShieldAlert },
   { entity: 'lesson', label: 'Lesson learned', icon: Lightbulb },
 ];
 

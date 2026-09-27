@@ -38,6 +38,8 @@ export interface Prefs {
   hiddenColumns: Record<string, string[]>;
   listView: Record<string, ListView>;
   savedViews: SavedView[];
+  /** §122/§159 — customer demo mode hides internal cost, suppliers, risks and notes */
+  viewMode: 'engineering' | 'customer';
 }
 
 const KEY = 'teal-os:prefs:v1';
@@ -54,6 +56,7 @@ export const DEFAULT_PREFS: Prefs = {
   hiddenColumns: {},
   listView: {},
   savedViews: [],
+  viewMode: 'engineering',
 };
 
 function read(): Prefs {

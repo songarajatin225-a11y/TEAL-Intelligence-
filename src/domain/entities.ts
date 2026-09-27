@@ -47,6 +47,19 @@ export const Company = z.object({
   application_ids: refs.optional(),
   india_presence: z.string().optional(),
   website: z.string().optional(),
+  /* §10 manufacturer registry fields — all optional; unknown stays unknown */
+  display_name: z.string().optional(),
+  region: z.string().optional(),
+  city: z.string().optional(),
+  brands: z.array(z.string()).optional(),
+  /** §55 registry categories: Laser, Optics, Galvo, Vision, Motion, Automation, Robotics, PLC … */
+  registry_categories: z.array(z.string()).optional(),
+  product_categories: z.array(z.string()).optional(),
+  manufacturing_locations: z.array(z.string()).optional(),
+  rd_locations: z.array(z.string()).optional(),
+  service_locations: z.array(z.string()).optional(),
+  certifications: z.array(z.string()).optional(),
+  last_verified: IsoDate.optional(),
 });
 export type Company = z.infer<typeof Company>;
 
@@ -167,6 +180,19 @@ export const Requirement = z.object({
   opportunity_id: ref.optional(),
   project_id: ref.optional(),
   product_id: ref.optional(),
+  /* §85 requirements engineering — optional so existing records stay valid */
+  req_type: z.enum(['Market', 'Customer', 'Product', 'System', 'Subsystem', 'Component', 'Performance', 'Safety', 'Software', 'Interface', 'Manufacturing', 'Service', 'Regulatory']).optional(),
+  criticality: z.enum(['Critical', 'High', 'Medium', 'Low']).optional(),
+  customer_id: ref.optional(),
+  simulation_id: ref.optional(),
+  part_id: ref.optional(),
+  system: z.string().optional(),
+  subsystem: z.string().optional(),
+  baseline: z.string().optional(),
+  target_date: IsoDate.optional(),
+  validation_method: z.string().optional(),
+  evidence: z.string().optional(),
+  dependencies: refs.optional(),
   trace: z
     .object({
       design_features: z.array(z.string()).optional(),
@@ -914,6 +940,24 @@ export const Source = z.object({
   published: z.string().optional(),
   retrieved_at: IsoDate.optional(),
   terms_note: z.string().optional(),
+  /* §45 provenance + §52 controlled source registry — optional, filled when known */
+  source_type: z.enum(['Manufacturer', 'Distributor', 'Technical Paper', 'Research', 'Standard', 'Government', 'Industry Report', 'User Provided', 'TEAL Internal', 'Derived']).optional(),
+  organization: z.string().optional(),
+  document_url: z.string().optional(),
+  last_verified: IsoDate.optional(),
+  next_review: IsoDate.optional(),
+  license: z.string().optional(),
+  manufacturer_id: z.string().optional(),
+  crawl: z
+    .object({
+      domain: z.string(),
+      category: z.string().optional(),
+      priority: z.number().int().min(1).max(9).optional(),
+      approved: z.boolean(),
+      last_crawl: IsoDate.optional(),
+      crawl_status: z.enum(['Not crawled', 'OK', 'Blocked by robots.txt', 'Terms prohibit', 'Login required', 'Error']).optional(),
+    })
+    .optional(),
 });
 export type Source = z.infer<typeof Source>;
 
@@ -1016,11 +1060,19 @@ export type DecisionRecord = z.infer<typeof DecisionRecord>;
 export const ChangeRequest = z.object({
   ...baseShape,
   entity: z.literal('change_request'),
-  change_type: z.enum(['ECR', 'ECN']),
+  change_type: z.enum(['ECR', 'ECN', 'ECO']),
   reason: z.string(),
   impact: z.string().optional(),
   affected_ids: refs.optional(),
   cr_status: z.enum(['Draft', 'Submitted', 'Approved', 'Rejected', 'Implemented', 'Verified']),
+  /* §90 — what changes, from → to, and who approved it */
+  field: z.string().optional(),
+  old_value: z.string().optional(),
+  new_value: z.string().optional(),
+  ecr_id: ref.optional(),
+  approved_by: z.string().optional(),
+  approved_at: IsoDate.optional(),
+  implementation: z.string().optional(),
 });
 export type ChangeRequest = z.infer<typeof ChangeRequest>;
 

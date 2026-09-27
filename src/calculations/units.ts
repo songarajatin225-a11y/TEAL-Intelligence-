@@ -20,7 +20,20 @@ export type Dimension =
   | 'thermal_conductivity'
   | 'density'
   | 'specific_heat'
-  | 'flow';
+  | 'flow'
+  | 'voltage'
+  | 'current'
+  | 'angle'
+  | 'force'
+  | 'torque'
+  | 'acceleration'
+  | 'inertia'
+  | 'data'
+  | 'count'
+  | 'volume'
+  | 'illuminance'
+  | 'sound'
+  | 'intensity';
 
 interface UnitDef {
   dim: Dimension;
@@ -94,6 +107,69 @@ const U: Record<string, UnitDef> = {
   // flow (m³/s)
   'L/min': { dim: 'flow', factor: 1e-3 / 60, symbol: 'L/min' },
   'm³/h': { dim: 'flow', factor: 1 / 3600, symbol: 'm³/h' },
+  'L/s': { dim: 'flow', factor: 1e-3, symbol: 'L/s' },
+  'm³/min': { dim: 'flow', factor: 1 / 60, symbol: 'm³/min' },
+  // electrical
+  V: { dim: 'voltage', factor: 1, symbol: 'V' },
+  mV: { dim: 'voltage', factor: 1e-3, symbol: 'mV' },
+  kV: { dim: 'voltage', factor: 1e3, symbol: 'kV' },
+  A: { dim: 'current', factor: 1, symbol: 'A' },
+  mA: { dim: 'current', factor: 1e-3, symbol: 'mA' },
+  kA: { dim: 'current', factor: 1e3, symbol: 'kA' },
+  VA: { dim: 'power', factor: 1, symbol: 'VA' },
+  kVA: { dim: 'power', factor: 1e3, symbol: 'kVA' },
+  // angle (rad)
+  rad: { dim: 'angle', factor: 1, symbol: 'rad' },
+  mrad: { dim: 'angle', factor: 1e-3, symbol: 'mrad' },
+  'µrad': { dim: 'angle', factor: 1e-6, symbol: 'µrad' },
+  urad: { dim: 'angle', factor: 1e-6, symbol: 'µrad' },
+  '°': { dim: 'angle', factor: Math.PI / 180, symbol: '°' },
+  deg: { dim: 'angle', factor: Math.PI / 180, symbol: '°' },
+  arcmin: { dim: 'angle', factor: Math.PI / 10800, symbol: 'arcmin' },
+  arcsec: { dim: 'angle', factor: Math.PI / 648000, symbol: 'arcsec' },
+  // force (N), torque (N·m), acceleration (m/s²), inertia (kg·m²)
+  N: { dim: 'force', factor: 1, symbol: 'N' },
+  kN: { dim: 'force', factor: 1e3, symbol: 'kN' },
+  'N·m': { dim: 'torque', factor: 1, symbol: 'N·m' },
+  Nm: { dim: 'torque', factor: 1, symbol: 'N·m' },
+  'mm/s²': { dim: 'acceleration', factor: 1e-3, symbol: 'mm/s²' },
+  'm/s²': { dim: 'acceleration', factor: 1, symbol: 'm/s²' },
+  'kg·m²': { dim: 'inertia', factor: 1, symbol: 'kg·m²' },
+  'kg·cm²': { dim: 'inertia', factor: 1e-4, symbol: 'kg·cm²' },
+  // speed extras
+  'mm/min': { dim: 'speed', factor: 1e-3 / 60, symbol: 'mm/min' },
+  // frequency extras
+  fps: { dim: 'frequency', factor: 1, symbol: 'fps' },
+  rpm: { dim: 'frequency', factor: 1 / 60, symbol: 'rpm' },
+  GHz: { dim: 'frequency', factor: 1e9, symbol: 'GHz' },
+  // data (bytes)
+  B: { dim: 'data', factor: 1, symbol: 'B' },
+  KB: { dim: 'data', factor: 1e3, symbol: 'KB' },
+  kB: { dim: 'data', factor: 1e3, symbol: 'kB' },
+  MB: { dim: 'data', factor: 1e6, symbol: 'MB' },
+  GB: { dim: 'data', factor: 1e9, symbol: 'GB' },
+  TB: { dim: 'data', factor: 1e12, symbol: 'TB' },
+  // counts (pixels, megapixels)
+  px: { dim: 'count', factor: 1, symbol: 'px' },
+  MP: { dim: 'count', factor: 1e6, symbol: 'MP' },
+  // volume (m³)
+  L: { dim: 'volume', factor: 1e-3, symbol: 'L' },
+  mL: { dim: 'volume', factor: 1e-6, symbol: 'mL' },
+  // illuminance, sound, intensity
+  lx: { dim: 'illuminance', factor: 1, symbol: 'lx' },
+  dB: { dim: 'sound', factor: 1, symbol: 'dB' },
+  dBA: { dim: 'sound', factor: 1, symbol: 'dB(A)' },
+  'dB(A)': { dim: 'sound', factor: 1, symbol: 'dB(A)' },
+  'W/cm²': { dim: 'intensity', factor: 1e4, symbol: 'W/cm²' },
+  'W/m²': { dim: 'intensity', factor: 1, symbol: 'W/m²' },
+  'MW/cm²': { dim: 'intensity', factor: 1e10, symbol: 'MW/cm²' },
+  // length extras
+  inch: { dim: 'length', factor: 0.0254, symbol: 'in' },
+  km: { dim: 'length', factor: 1e3, symbol: 'km' },
+  // mass extras
+  mg: { dim: 'mass', factor: 1e-6, symbol: 'mg' },
+  // time extras
+  d: { dim: 'time', factor: 86400, symbol: 'd' },
   // dimensionless
   '%': { dim: 'dimensionless', factor: 0.01, symbol: '%' },
   '': { dim: 'dimensionless', factor: 1, symbol: '' },
@@ -120,6 +196,37 @@ export function dimensionOf(unit: string): Dimension | undefined {
 
 export function knownUnits(): string[] {
   return Object.keys(U).filter(Boolean);
+}
+
+/** Units that measure a dimension (for allowed-unit pickers). */
+export function unitsOf(dim: Dimension): string[] {
+  return Object.entries(U)
+    .filter(([k, d]) => k && d.dim === dim)
+    .map(([k]) => k);
+}
+
+export interface Normalized {
+  /** as published — never destroyed */
+  original: { value: number; unit: string };
+  /** in the spec definition's canonical unit, for search, filters and rules */
+  normalized: { value: number; unit: string } | null;
+  error?: string;
+}
+
+/**
+ * Normalise a value to a canonical unit while keeping the original (spec §13: 50 W → 0.05 kW,
+ * 1064 nm → 1.064 µm, 100 mm → 0.1 m). A unit that cannot be converted returns normalized = null
+ * with the reason — the original value survives either way.
+ */
+export function normalize(value: number, unit: string, canonical: string): Normalized {
+  const original = { value, unit };
+  if (!Number.isFinite(value)) return { original, normalized: null, error: 'Value is not a finite number' };
+  if (unit === canonical) return { original, normalized: { value, unit: canonical } };
+  try {
+    return { original, normalized: { value: convert(value, unit, canonical), unit: canonical } };
+  } catch (e) {
+    return { original, normalized: null, error: (e as Error).message };
+  }
 }
 
 /** Convert between two units of the same (non-currency) dimension. */

@@ -248,6 +248,67 @@
     "product_id": {
       "type": "string"
     },
+    "req_type": {
+      "type": "string",
+      "enum": [
+        "Market",
+        "Customer",
+        "Product",
+        "System",
+        "Subsystem",
+        "Component",
+        "Performance",
+        "Safety",
+        "Software",
+        "Interface",
+        "Manufacturing",
+        "Service",
+        "Regulatory"
+      ]
+    },
+    "criticality": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ]
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "simulation_id": {
+      "type": "string"
+    },
+    "part_id": {
+      "type": "string"
+    },
+    "system": {
+      "type": "string"
+    },
+    "subsystem": {
+      "type": "string"
+    },
+    "baseline": {
+      "type": "string"
+    },
+    "target_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+    },
+    "validation_method": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "trace": {
       "type": "object",
       "properties": {

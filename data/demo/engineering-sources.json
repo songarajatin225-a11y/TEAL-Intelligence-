@@ -1,0 +1,73 @@
+{
+  "dataset": {
+    "id": "demo-engineering-sources",
+    "title": "DEMO engineering sources",
+    "entity": "source",
+    "description": "Fictional datasheet, application-note and distributor sources for the DEMO engineering database.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "knowledge"
+  },
+  "records": [
+    {
+      "id": "src-demo-datasheets",
+      "entity": "source",
+      "name": "DEMO manufacturer datasheets (fictional)",
+      "kind": "datasheet",
+      "source_type": "Manufacturer",
+      "organization": "DEMO manufacturers",
+      "retrieved_at": "2026-09-27",
+      "last_verified": "2026-09-27",
+      "next_review": "2027-09-27",
+      "data_type": "DEMO",
+      "provenance": {
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "src-demo-appnote",
+      "entity": "source",
+      "name": "DEMO application note — scanner / laser pairing (fictional)",
+      "kind": "datasheet",
+      "source_type": "Manufacturer",
+      "organization": "DEMO Scan Systems",
+      "retrieved_at": "2026-09-27",
+      "last_verified": "2026-09-27",
+      "data_type": "DEMO",
+      "provenance": {
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "src-demo-distributor",
+      "entity": "source",
+      "name": "DEMO distributor catalogue (fictional)",
+      "kind": "web",
+      "source_type": "Distributor",
+      "organization": "DEMO Distribution",
+      "retrieved_at": "2025-01-15",
+      "last_verified": "2025-01-15",
+      "next_review": "2026-01-15",
+      "data_type": "DEMO",
+      "provenance": {
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Deliberately stale (last verified 2025-01-15) to exercise freshness checks."
+      },
+      "tags": [
+        "demo"
+      ]
+    }
+  ]
+}

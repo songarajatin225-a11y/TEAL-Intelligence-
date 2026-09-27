@@ -181,7 +181,8 @@
       "type": "string",
       "enum": [
         "ECR",
-        "ECN"
+        "ECN",
+        "ECO"
       ]
     },
     "reason": {
@@ -206,6 +207,28 @@
         "Implemented",
         "Verified"
       ]
+    },
+    "field": {
+      "type": "string"
+    },
+    "old_value": {
+      "type": "string"
+    },
+    "new_value": {
+      "type": "string"
+    },
+    "ecr_id": {
+      "type": "string"
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "approved_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+    },
+    "implementation": {
+      "type": "string"
     }
   },
   "required": [

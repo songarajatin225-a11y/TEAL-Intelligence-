@@ -5,8 +5,8 @@ test.describe('navigation shell', () => {
   test('sidebar groups pages into domains and collapses to an icon rail (remembered)', async ({ page }) => {
     await go(page, '');
     const nav = page.getByRole('navigation', { name: 'Primary' });
-    await expect(nav.getByRole('button', { name: /Ecosystem/ })).toBeVisible();
-    await nav.getByRole('button', { name: /Ecosystem/ }).click();
+    await expect(nav.getByRole('button', { name: /^Suppliers/ })).toBeVisible();
+    await nav.getByRole('button', { name: /^Suppliers/ }).click();
     await nav.getByRole('link', { name: 'RFQs' }).click();
     await expect(page.locator('main h1')).toHaveText('RFQs');
     await page.getByRole('button', { name: 'Collapse sidebar' }).click();
@@ -128,7 +128,7 @@ test.describe('navigation shell', () => {
   test('contextual help opens for the current page', async ({ page }) => {
     await go(page, 'cost');
     await page.getByRole('button', { name: 'Help for this page' }).click();
-    await expect(page.getByRole('dialog', { name: /Help — Cost/ })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: /Help — .*Cost/ })).toBeVisible();
   });
 });
 
@@ -153,8 +153,8 @@ test.describe('mobile', () => {
     await expect(bar).toBeVisible();
     await bar.getByRole('button', { name: 'Menu' }).click();
     const drawer = page.getByRole('dialog', { name: 'Navigation' });
-    await drawer.getByRole('button', { name: /^Ecosystem/ }).click();
-    await drawer.getByRole('link', { name: 'Customers' }).click();
+    // Intelligence is open by default (second primary section)
+    await drawer.getByRole('link', { name: 'Customer Intelligence' }).click();
     await expect(page.locator('main h1')).toHaveText('Customers');
     await expect(page.locator('main table')).toHaveCount(0); // rows render as cards on phones
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -163,7 +163,7 @@ test.describe('mobile', () => {
 });
 
 test.describe('accessibility (axe, WCAG 2.2 A/AA rules)', () => {
-  for (const route of ['', 'products', 'record/prd-semispm', 'laser', 'cost', 'admin', 'room/prj-demo-c2i', 'leads', 'business-case', 'technology', 'ask?q=takt', 'supplier-risk', 'activities', 'graph']) {
+  for (const route of ['', 'products', 'record/prd-semispm', 'laser', 'cost', 'admin', 'room/prj-demo-c2i', 'leads', 'business-case', 'technology', 'ask?q=takt', 'supplier-risk', 'activities', 'graph', 'studio', 'studio/sim-demo-pcb-a', 'studio/sim-demo-pcb-a?tab=twin', 'engineering-db', 'record/prt-demo-mopa-50', 'data-review', 'requirements-quality']) {
     for (const theme of ['light', 'dark'] as const) {
       test(`/${route} — ${theme}`, async ({ page }) => {
         await page.emulateMedia({ colorScheme: theme });

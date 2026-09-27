@@ -209,6 +209,79 @@
     },
     "terms_note": {
       "type": "string"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "Manufacturer",
+        "Distributor",
+        "Technical Paper",
+        "Research",
+        "Standard",
+        "Government",
+        "Industry Report",
+        "User Provided",
+        "TEAL Internal",
+        "Derived"
+      ]
+    },
+    "organization": {
+      "type": "string"
+    },
+    "document_url": {
+      "type": "string"
+    },
+    "last_verified": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+    },
+    "next_review": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+    },
+    "license": {
+      "type": "string"
+    },
+    "manufacturer_id": {
+      "type": "string"
+    },
+    "crawl": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "approved": {
+          "type": "boolean"
+        },
+        "last_crawl": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+        },
+        "crawl_status": {
+          "type": "string",
+          "enum": [
+            "Not crawled",
+            "OK",
+            "Blocked by robots.txt",
+            "Terms prohibit",
+            "Login required",
+            "Error"
+          ]
+        }
+      },
+      "required": [
+        "domain",
+        "approved"
+      ]
     }
   },
   "required": [

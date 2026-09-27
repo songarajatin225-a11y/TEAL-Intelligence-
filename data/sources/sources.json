@@ -1,7 +1,7 @@
 {
   "dataset": {
     "version": "1.0.0",
-    "last_updated": "2026-09-26",
+    "last_updated": "2026-09-27",
     "id": "sources",
     "title": "Sources",
     "description": "Registry of every source the OS cites. Evidence and provenance reference these ids.",
@@ -150,6 +150,22 @@
       "name": "TEAL Intelligence OS — Final Master Prompt (Digital Product & Technology Intelligence Platform)",
       "description": "TEAL’s product definition for the platform (65 sections): domains, business flow, engines, IA, trust labels, acceptance checklist. Source of the domain taxonomies.",
       "kind": "internal",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "verification_status": "SOURCE_DOCUMENTED"
+      },
+      "tags": [
+        "specification"
+      ]
+    },
+    {
+      "id": "src-sim-master-prompt",
+      "entity": "source",
+      "name": "TEAL Intelligence — Industrial Intelligence + Engineering Knowledge Graph + Equipment Simulation OS master prompt",
+      "description": "TEAL’s definition of the global engineering database, specification engine, compatibility engine, equipment templates, Equipment Simulation Studio and requirements engineering (180 sections). Source of the specification-definition catalogue, the equipment template structures and the compatibility rule examples.",
+      "kind": "internal",
+      "source_type": "TEAL Internal",
+      "published": "2026-09-27",
       "data_type": "TEAL_INTERNAL",
       "provenance": {
         "verification_status": "SOURCE_DOCUMENTED"

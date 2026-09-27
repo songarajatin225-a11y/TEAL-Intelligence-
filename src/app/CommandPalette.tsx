@@ -96,6 +96,15 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       ['import', 'Import data', () => nav('/import-export')],
       ['export', 'Export data', () => nav('/import-export')],
       ['document', 'Generate a document (PRD, RFQ, spec, POC plan…)', () => nav('/documents')],
+      ['new-equipment', 'New equipment (simulation scenario)', () => nav('/studio?new=1')],
+      ['new-simulation', 'New simulation', () => nav('/studio?new=1')],
+      ['draft-equipment', 'Draft equipment architecture from text', () => nav('/studio?draft=1')],
+      ['run-sim', 'Run simulation', () => nav('/studio?focus=simulate')],
+      ['compare-scenarios', 'Compare scenarios', () => nav('/studio?tab=compare')],
+      ['eng-search', 'Search the engineering database (e.g. 1064 nm 50 W MOPA)', () => nav('/engineering-db')],
+      ['review-data', 'Review data (conflicts, duplicates, stale)', () => nav('/data-review')],
+      ['open-project', 'Open project', () => nav('/projects')],
+      ['customer-mode', prefs.viewMode === 'customer' ? 'Switch to engineering mode' : 'Switch to customer demo mode', () => setPrefs((p) => ({ viewMode: p.viewMode === 'customer' ? 'engineering' : 'customer' }))],
     ];
     for (const [id, label, f] of actions) out.push({ id: `act:${id}`, group: 'Actions', label, icon: Settings2, run: done(f) });
     for (const w of WORKSPACES) out.push({ id: `ws:${w.id}`, group: 'Actions', label: `Switch to ${w.label} workspace`, hint: w.desc, icon: w.icon, keywords: 'workspace mode view', run: done(() => setPrefs({ workspace: w.id, openSections: {} })) });

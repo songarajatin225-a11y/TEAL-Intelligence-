@@ -1,0 +1,49 @@
+{
+  "dataset": {
+    "id": "demo-compatibility",
+    "title": "DEMO compatibility relationships",
+    "entity": "compatibility",
+    "description": "Fictional recorded relationships with evidence.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "cmp-demo-mopa50-galvo14",
+      "entity": "compatibility",
+      "name": "DL-MOPA-50 ↔ SC-14",
+      "a_id": "prt-demo-mopa-50",
+      "b_id": "prt-demo-galvo-14",
+      "relationship": "ManufacturerRecommended",
+      "conditions": "With 1.5× expander (DEMO application note)",
+      "evidence": "DEMO application note §2, table 3",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-appnote",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      }
+    },
+    {
+      "id": "cmp-demo-cam5-tele",
+      "entity": "compatibility",
+      "name": "CV-5G ↔ TL-05X-110",
+      "a_id": "prt-demo-cam-5mp",
+      "b_id": "prt-demo-tele-05x",
+      "relationship": "ConditionallyCompatible",
+      "conditions": "Full-field sharpness only at the nominal 110 mm working distance (DEMO)",
+      "evidence": "DEMO lens datasheet, MTF note",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      }
+    }
+  ]
+}
