@@ -1,0 +1,56 @@
+{
+  "dataset": {
+    "id": "demo-verifications",
+    "title": "DEMO verifications",
+    "entity": "verification",
+    "description": "Planned verifications with no results recorded.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "records"
+  },
+  "records": [
+    {
+      "id": "ver-demo-s1-01",
+      "entity": "verification",
+      "name": "Verify 2D code marking on package (DEMO)",
+      "kind": "Verification",
+      "requirement_id": "req-demo-s1-01",
+      "method": "Test",
+      "expected": "Readable 2D code on every package (grade to be agreed)",
+      "result": "NOT RUN",
+      "simulation_id": "sim-demo-semi-marking",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Planned verification — no result recorded."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "ver-demo-s1-04",
+      "entity": "verification",
+      "name": "Verify mark inspection function (DEMO)",
+      "kind": "Verification",
+      "requirement_id": "req-demo-s1-04",
+      "method": "Demonstration",
+      "result": "NOT RUN",
+      "simulation_id": "sim-demo-semi-marking",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Planned verification — no result recorded."
+      },
+      "tags": [
+        "demo"
+      ]
+    }
+  ]
+}

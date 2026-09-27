@@ -1,0 +1,3661 @@
+{
+  "dataset": {
+    "id": "equipment-templates",
+    "title": "Equipment templates",
+    "entity": "equipment_template",
+    "description": "Equipment structures (master prompt §60, §61): stations, component slots and flow. Station times, capacities and costs are empty — they are entered per scenario with their basis.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-sim-master-prompt"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "eqt-laser-marking",
+      "entity": "equipment_template",
+      "name": "Laser Marking",
+      "code": "LASER-MARKING",
+      "group": "Laser",
+      "application": "Laser marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Mark verification",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Marking",
+      "has_laser_chain": true,
+      "product_id": "prd-markf"
+    },
+    {
+      "id": "eqt-laser-etching",
+      "entity": "equipment_template",
+      "name": "Laser Etching",
+      "code": "LASER-ETCHING",
+      "group": "Laser",
+      "application": "Laser etching / deep engraving",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser etching (multi-pass)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Depth / appearance check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Engraving",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-laser-welding",
+      "entity": "equipment_template",
+      "name": "Laser Welding",
+      "code": "LASER-WELDING",
+      "group": "Laser",
+      "application": "Laser welding",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Clamp / joint fit-up",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Seam finding",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser welding",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Weld inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Welding",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-laser-cutting",
+      "entity": "equipment_template",
+      "name": "Laser Cutting",
+      "code": "LASER-CUTTING",
+      "group": "Laser",
+      "application": "Laser cutting",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Nest / hold-down",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cutting",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Kerf / edge check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Part and skeleton removal",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-laser-cleaning",
+      "entity": "equipment_template",
+      "name": "Laser Cleaning",
+      "code": "LASER-CLEANING",
+      "group": "Laser",
+      "application": "Laser cleaning / surface preparation",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cleaning",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Surface check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Cleaning",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-laser-drilling",
+      "entity": "equipment_template",
+      "name": "Laser Drilling",
+      "code": "LASER-DRILLING",
+      "group": "Laser",
+      "application": "Laser drilling",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser drilling",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Hole inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Drilling",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-laser-scribing",
+      "entity": "equipment_template",
+      "name": "Laser Scribing",
+      "code": "LASER-SCRIBING",
+      "group": "Laser",
+      "application": "Laser scribing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Vacuum chuck",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser scribing",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Scribe inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-laser",
+      "process": "Scribing",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-pcb-laser-marking",
+      "entity": "equipment_template",
+      "name": "PCB Laser Marking (inline)",
+      "code": "PCB-LASER-MARKING",
+      "group": "Laser",
+      "application": "PCB 2D code / serial marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in (conveyor)",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine",
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "fixture",
+          "name": "Board stop & clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Fiducial alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code verification (grade)",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Board out (conveyor)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Marking",
+      "has_laser_chain": true,
+      "product_id": "prd-markc2i"
+    },
+    {
+      "id": "eqt-battery-tab-welding",
+      "entity": "equipment_template",
+      "name": "Battery Tab Welding",
+      "code": "BATTERY-TAB-WELDING",
+      "group": "Laser",
+      "application": "Battery tab / busbar laser welding",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Module / cell load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Clamp & tab pressing",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Tab position vision",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser tab welding",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Weld seam inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Welding",
+      "has_laser_chain": true,
+      "product_id": "prd-weldb"
+    },
+    {
+      "id": "eqt-semiconductor-marking",
+      "entity": "equipment_template",
+      "name": "Semiconductor Package Marking",
+      "code": "SEMICONDUCTOR-MARKING",
+      "group": "Laser",
+      "application": "Package / strip marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Magazine / strip loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Strip clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Strip alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Mark inspection (OCR / 2D)",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "Reject mapping",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Strip unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Marking",
+      "has_laser_chain": true,
+      "product_id": "prd-semispm"
+    },
+    {
+      "id": "eqt-pcb-marking",
+      "entity": "equipment_template",
+      "name": "PCB Marking",
+      "code": "PCB-MARKING",
+      "group": "Electronics",
+      "application": "PCB identification marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine",
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "fixture",
+          "name": "Board stop",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code read-back",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Board out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Marking",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-pcb-inspection",
+      "entity": "equipment_template",
+      "name": "PCB Inspection",
+      "code": "PCB-INSPECTION",
+      "group": "Electronics",
+      "application": "PCB optical inspection",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "inspect",
+          "name": "Optical inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Board out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Inspection"
+    },
+    {
+      "id": "eqt-electronics-assembly",
+      "entity": "equipment_template",
+      "name": "Electronics Assembly",
+      "code": "ELECTRONICS-ASSEMBLY",
+      "group": "Electronics",
+      "application": "Component / sub-assembly",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "assembly",
+          "name": "Pick & place / press-fit",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Robot",
+              "product_type": "robot",
+              "required": false
+            },
+            {
+              "role": "Gripper",
+              "product_type": "gripper",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-electronics-testing",
+      "entity": "equipment_template",
+      "name": "Electronics Testing",
+      "code": "ELECTRONICS-TESTING",
+      "group": "Electronics",
+      "application": "Functional / ICT test",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Test fixture (bed of nails)",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "test",
+          "name": "Functional test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Testing"
+    },
+    {
+      "id": "eqt-traceability",
+      "entity": "equipment_template",
+      "name": "Traceability Station",
+      "code": "TRACEABILITY",
+      "group": "Electronics",
+      "application": "Serialisation, read-back and MES booking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "read",
+          "name": "Code read / mark",
+          "kind": "vision",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "mes",
+          "name": "MES booking",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-electronics",
+      "process": "Traceability"
+    },
+    {
+      "id": "eqt-wafer-handling",
+      "entity": "equipment_template",
+      "name": "Wafer Handling",
+      "code": "WAFER-HANDLING",
+      "group": "Semiconductor",
+      "application": "Wafer transfer (load port → aligner → station)",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Load port",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "prealign",
+          "name": "Pre-aligner",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "transfer",
+          "name": "Wafer transfer robot",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Wafer robot",
+              "product_type": "robot",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Load port (out)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Handling"
+    },
+    {
+      "id": "eqt-wafer-marking",
+      "entity": "equipment_template",
+      "name": "Wafer Marking",
+      "code": "WAFER-MARKING",
+      "group": "Semiconductor",
+      "application": "Wafer ID marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Load port",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "prealign",
+          "name": "Pre-align / notch find",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "laser",
+          "name": "Wafer ID marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "ID read-back",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Load port (out)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Marking",
+      "has_laser_chain": true,
+      "product_id": "prd-semiwm"
+    },
+    {
+      "id": "eqt-wafer-inspection",
+      "entity": "equipment_template",
+      "name": "Wafer Inspection",
+      "code": "WAFER-INSPECTION",
+      "group": "Semiconductor",
+      "application": "Wafer / die inspection",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Load port",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "prealign",
+          "name": "Pre-align",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Optical inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Load port (out)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Inspection"
+    },
+    {
+      "id": "eqt-dicing",
+      "entity": "equipment_template",
+      "name": "Dicing",
+      "code": "DICING",
+      "group": "Semiconductor",
+      "application": "Wafer dicing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Frame load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "align",
+          "name": "Street alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Dicing (laser)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "clean",
+          "name": "Clean / dry",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Kerf inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Frame unload",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Dicing",
+      "has_laser_chain": true,
+      "product_id": "prd-semidc"
+    },
+    {
+      "id": "eqt-die-attach",
+      "entity": "equipment_template",
+      "name": "Die Attach",
+      "code": "DIE-ATTACH",
+      "group": "Semiconductor",
+      "application": "Die attach",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Substrate load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "dispense",
+          "name": "Adhesive dispense",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "pick",
+          "name": "Die pick",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "bond",
+          "name": "Die bond / place",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Placement inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Die attach"
+    },
+    {
+      "id": "eqt-packaging",
+      "entity": "equipment_template",
+      "name": "Packaging (back-end)",
+      "code": "PACKAGING",
+      "group": "Semiconductor",
+      "application": "Package assembly step",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "process",
+          "name": "Packaging process",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Packaging"
+    },
+    {
+      "id": "eqt-metrology",
+      "entity": "equipment_template",
+      "name": "Metrology",
+      "code": "METROLOGY",
+      "group": "Semiconductor",
+      "application": "Dimensional / film metrology",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Load port",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "measure",
+          "name": "Measurement",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Load port (out)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-semiconductor",
+      "process": "Metrology"
+    },
+    {
+      "id": "eqt-cell-inspection",
+      "entity": "equipment_template",
+      "name": "Cell Inspection",
+      "code": "CELL-INSPECTION",
+      "group": "Battery",
+      "application": "Cell dimensional / visual inspection",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Cell infeed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "inspect",
+          "name": "Dimensional & visual inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "ocv",
+          "name": "OCV / IR check",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Inspection"
+    },
+    {
+      "id": "eqt-battery-laser-cleaning",
+      "entity": "equipment_template",
+      "name": "Battery Laser Cleaning",
+      "code": "BATTERY-LASER-CLEANING",
+      "group": "Battery",
+      "application": "Pre-bond surface cleaning",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cleaning",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Surface check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Cleaning",
+      "has_laser_chain": true,
+      "product_id": "prd-cleana"
+    },
+    {
+      "id": "eqt-busbar-welding",
+      "entity": "equipment_template",
+      "name": "Busbar Welding",
+      "code": "BUSBAR-WELDING",
+      "group": "Battery",
+      "application": "Busbar laser welding",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Module load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Busbar clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Busbar welding",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Weld inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Welding",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-can-marking",
+      "entity": "equipment_template",
+      "name": "Can Marking",
+      "code": "CAN-MARKING",
+      "group": "Battery",
+      "application": "Cell can / cap marking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Cell infeed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "laser",
+          "name": "Laser marking",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Code read-back",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Marking",
+      "has_laser_chain": true
+    },
+    {
+      "id": "eqt-module-assembly",
+      "entity": "equipment_template",
+      "name": "Module Assembly",
+      "code": "MODULE-ASSEMBLY",
+      "group": "Battery",
+      "application": "Cell-to-module assembly",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Cell stacking",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "compress",
+          "name": "Stack compression",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "frame",
+          "name": "Frame / end-plate assembly",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-pack-assembly",
+      "entity": "equipment_template",
+      "name": "Pack Assembly",
+      "code": "PACK-ASSEMBLY",
+      "group": "Battery",
+      "application": "Module-to-pack assembly",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "place",
+          "name": "Module placement",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "fasten",
+          "name": "Fastening / connection",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "leak",
+          "name": "Leak test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "eol",
+          "name": "End-of-line test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-battery",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-pick-place",
+      "entity": "equipment_template",
+      "name": "Pick & Place",
+      "code": "PICK-PLACE",
+      "group": "General Automation",
+      "application": "Pick and place",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "pick",
+          "name": "Robot pick & place",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Robot",
+              "product_type": "robot",
+              "required": true
+            },
+            {
+              "role": "Gripper",
+              "product_type": "gripper",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Handling"
+    },
+    {
+      "id": "eqt-assembly",
+      "entity": "equipment_template",
+      "name": "Assembly",
+      "code": "ASSEMBLY",
+      "group": "General Automation",
+      "application": "Mechanical assembly",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "assembly",
+          "name": "Assembly operation",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-screwdriving",
+      "entity": "equipment_template",
+      "name": "Screwdriving",
+      "code": "SCREWDRIVING",
+      "group": "General Automation",
+      "application": "Automatic screwdriving",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "screw",
+          "name": "Screwdriving (torque/angle)",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-dispensing",
+      "entity": "equipment_template",
+      "name": "Dispensing",
+      "code": "DISPENSING",
+      "group": "General Automation",
+      "application": "Adhesive / sealant dispensing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "dispense",
+          "name": "Dispensing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Bead inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Dispensing"
+    },
+    {
+      "id": "eqt-pressing",
+      "entity": "equipment_template",
+      "name": "Pressing",
+      "code": "PRESSING",
+      "group": "General Automation",
+      "application": "Press-fit with force monitoring",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "press",
+          "name": "Press-fit",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-testing",
+      "entity": "equipment_template",
+      "name": "Testing",
+      "code": "TESTING",
+      "group": "General Automation",
+      "application": "Functional test",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Test fixture",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "test",
+          "name": "Test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Testing"
+    },
+    {
+      "id": "eqt-packaging-line",
+      "entity": "equipment_template",
+      "name": "Packaging",
+      "code": "PACKAGING-LINE",
+      "group": "General Automation",
+      "application": "Packing / cartoning",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "pack",
+          "name": "Pack",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "label",
+          "name": "Label & verify",
+          "kind": "vision",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Equipment structure from the master prompt (§60, §61). Station times, capacities and costs are deliberately empty — enter them per scenario with their basis."
+      },
+      "domain_id": "dom-automation",
+      "process": "Packaging"
+    }
+  ]
+}

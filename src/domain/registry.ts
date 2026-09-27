@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import * as E from './entities';
+import * as G from './engineering';
 
 /**
  * Entity registry — the one place that maps an entity type to its schema, id prefix,
@@ -31,6 +32,7 @@ export const SEARCH_PARTITIONS = [
   'research',
   'patents',
   'records',
+  'engineering',
 ] as const;
 export type SearchPartition = (typeof SEARCH_PARTITIONS)[number];
 
@@ -82,6 +84,15 @@ export const ENTITY_DEFS = [
   d({ entity: 'equipment', schema: E.Equipment, prefix: 'eqp', label: 'Equipment', plural: 'Equipment', route: '/equipment', partition: 'records', searchFields: ['equipment_type', 'process', 'material'] }),
   d({ entity: 'article', schema: E.Article, prefix: 'kb', label: 'Knowledge article', plural: 'Knowledge articles', route: '/articles', partition: 'knowledge', searchFields: ['category', 'summary', 'technical_details', 'design_considerations'] }),
   d({ entity: 'roadmap_item', schema: E.RoadmapItem, prefix: 'rdm', label: 'Roadmap item', plural: 'Roadmap items', route: '/roadmap', partition: 'records', searchFields: ['kind', 'capability', 'target_market', 'milestone'] }),
+  d({ entity: 'part', schema: G.Part, prefix: 'prt', label: 'Engineering product', plural: 'Engineering products', route: '/engineering-db', partition: 'engineering', searchFields: ['model_number', 'brand', 'family', 'series', 'product_type', 'category', 'technologies', 'processes'] }),
+  d({ entity: 'spec_definition', schema: G.SpecDefinition, prefix: 'spd', label: 'Specification definition', plural: 'Specification definitions', route: '/engineering-db', partition: 'engineering', searchFields: ['key', 'category', 'aliases', 'applies_to'] }),
+  d({ entity: 'compatibility_rule', schema: G.CompatibilityRule, prefix: 'cpr', label: 'Compatibility rule', plural: 'Compatibility rules', route: '/engineering-db', partition: 'engineering', searchFields: ['explanation', 'a_types', 'b_types'] }),
+  d({ entity: 'compatibility', schema: G.Compatibility, prefix: 'cmp', label: 'Compatibility relationship', plural: 'Compatibility relationships', route: '/engineering-db', partition: 'engineering', searchFields: ['relationship', 'conditions', 'evidence'] }),
+  d({ entity: 'data_conflict', schema: G.DataConflict, prefix: 'dcf', label: 'Data conflict', plural: 'Data conflicts', route: '/data-review', partition: 'engineering', searchFields: ['parameter', 'value_a', 'value_b', 'resolution'] }),
+  d({ entity: 'equipment_template', schema: G.EquipmentTemplate, prefix: 'eqt', label: 'Equipment template', plural: 'Equipment templates', route: '/studio', partition: 'engineering', searchFields: ['code', 'group', 'application', 'process'] }),
+  d({ entity: 'simulation', schema: G.Simulation, prefix: 'sim', label: 'Simulation scenario', plural: 'Simulation scenarios', route: '/studio', partition: 'engineering', searchFields: ['scenario_label', 'change_reason', 'config_level', 'sim_status'] }),
+  d({ entity: 'recipe', schema: G.Recipe, prefix: 'rcp', label: 'Process recipe', plural: 'Process recipes', route: '/recipes', partition: 'records', searchFields: ['recipe_version', 'recipe_status', 'quality_criteria', 'acceptance_criteria'] }),
+  d({ entity: 'verification', schema: G.Verification, prefix: 'ver', label: 'Verification / validation', plural: 'Verifications & validations', route: '/verification', partition: 'records', searchFields: ['kind', 'method', 'expected', 'actual', 'result', 'evidence'] }),
   d({ entity: 'reference', schema: E.ReferenceRow, prefix: 'ref', label: 'Reference row', plural: 'Reference data', route: '/admin', partition: 'records', searchFields: ['table'] }),
 ] as const;
 

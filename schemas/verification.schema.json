@@ -1,7 +1,7 @@
 {
-  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/source.schema.json",
-  "title": "Source",
-  "description": "TEAL Engineering Intelligence OS — Source record (id prefix \"src-\"). Generated from src/domain; do not edit.",
+  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/verification.schema.json",
+  "title": "Verification / validation",
+  "description": "TEAL Engineering Intelligence OS — Verification / validation record (id prefix \"ver-\"). Generated from src/domain; do not edit.",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -175,113 +175,88 @@
     },
     "entity": {
       "type": "string",
-      "const": "source"
+      "const": "verification"
     },
     "kind": {
       "type": "string",
       "enum": [
-        "handbook",
-        "legacy_app",
-        "datasheet",
-        "web",
-        "standard",
-        "internal",
-        "paper",
-        "patent",
-        "dataset"
+        "Verification",
+        "Validation"
       ]
     },
-    "url": {
+    "requirement_id": {
       "type": "string"
     },
-    "publisher": {
-      "type": "string"
-    },
-    "author": {
-      "type": "string"
-    },
-    "published": {
-      "type": "string"
-    },
-    "retrieved_at": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "terms_note": {
-      "type": "string"
-    },
-    "source_type": {
+    "method": {
       "type": "string",
       "enum": [
-        "Manufacturer",
-        "Distributor",
-        "Technical Paper",
-        "Research",
-        "Standard",
-        "Government",
-        "Industry Report",
-        "User Provided",
-        "TEAL Internal",
-        "Derived"
+        "Inspection",
+        "Analysis",
+        "Demonstration",
+        "Test"
       ]
     },
-    "organization": {
+    "expected": {
       "type": "string"
     },
-    "document_url": {
+    "actual": {
       "type": "string"
     },
-    "last_verified": {
+    "unit": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "NOT RUN",
+        "PASS",
+        "FAIL",
+        "PASS WITH DEVIATION"
+      ]
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "simulation_id": {
+      "type": "string"
+    },
+    "machine_id": {
+      "type": "string"
+    },
+    "poc_id": {
+      "type": "string"
+    },
+    "recipe_id": {
+      "type": "string"
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "application_id": {
+      "type": "string"
+    },
+    "material_id": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string"
+    },
+    "tester": {
+      "type": "string"
+    },
+    "date": {
       "type": "string",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
     },
-    "next_review": {
+    "calibration": {
+      "type": "string"
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "approved_at": {
       "type": "string",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "license": {
-      "type": "string"
-    },
-    "manufacturer_id": {
-      "type": "string"
-    },
-    "crawl": {
-      "type": "object",
-      "properties": {
-        "domain": {
-          "type": "string"
-        },
-        "category": {
-          "type": "string"
-        },
-        "priority": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 9
-        },
-        "approved": {
-          "type": "boolean"
-        },
-        "last_crawl": {
-          "type": "string",
-          "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-        },
-        "crawl_status": {
-          "type": "string",
-          "enum": [
-            "Not crawled",
-            "OK",
-            "Blocked by robots.txt",
-            "Terms prohibit",
-            "Login required",
-            "Error"
-          ]
-        }
-      },
-      "required": [
-        "domain",
-        "approved"
-      ]
     }
   },
   "required": [
@@ -290,6 +265,9 @@
     "data_type",
     "provenance",
     "entity",
-    "kind"
+    "kind",
+    "requirement_id",
+    "method",
+    "result"
   ]
 }

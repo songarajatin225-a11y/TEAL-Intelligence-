@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26",
+  "generated_at": "2026-09-27",
   "datasets": [
     {
       "id": "applications",
@@ -248,6 +248,96 @@
       "sha256": "aca2fba24d468d37"
     },
     {
+      "id": "demo-compatibility",
+      "title": "DEMO compatibility relationships",
+      "path": "demo/engineering-compatibility.json",
+      "description": "Fictional recorded relationships with evidence.",
+      "entity": "compatibility",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 2,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/compatibility.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "engineering",
+      "sha256": "fe6176f76a9d5ac2"
+    },
+    {
+      "id": "demo-data-conflicts",
+      "title": "DEMO data conflicts",
+      "path": "demo/engineering-conflicts.json",
+      "description": "A fictional source disagreement for the Data Review Center.",
+      "entity": "data_conflict",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/data_conflict.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "engineering",
+      "sha256": "53adf2e1a41b40b9"
+    },
+    {
+      "id": "demo-manufacturers",
+      "title": "DEMO manufacturers",
+      "path": "demo/engineering-manufacturers.json",
+      "description": "Fictional manufacturers for the DEMO engineering database. Not real companies.",
+      "entity": "company",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 11,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/company.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "companies",
+      "sha256": "04cf6bbdb7e7f8f4"
+    },
+    {
+      "id": "demo-parts",
+      "title": "DEMO engineering products",
+      "path": "demo/engineering-parts.json",
+      "description": "Fictional lasers, scanners, optics, vision, motion, controls, safety, robotics and periphery with DEMO specifications and DEMO prices — for demonstrating search, compatibility, simulation and cost. Not real products.",
+      "entity": "part",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 51,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/part.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "engineering",
+      "sha256": "01245f5e41b72583"
+    },
+    {
+      "id": "demo-engineering-sources",
+      "title": "DEMO engineering sources",
+      "path": "demo/engineering-sources.json",
+      "description": "Fictional datasheet, application-note and distributor sources for the DEMO engineering database.",
+      "entity": "source",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 3,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/source.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "knowledge",
+      "sha256": "9cde6625073bfbcf"
+    },
+    {
       "id": "demo-opportunities",
       "title": "DEMO opportunities",
       "path": "demo/opportunities.json",
@@ -303,6 +393,24 @@
       "sha256": "425070caf562447a"
     },
     {
+      "id": "demo-recipes",
+      "title": "DEMO process recipes",
+      "path": "demo/recipes.json",
+      "description": "Fictional starting recipe — not validated.",
+      "entity": "recipe",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/recipe.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "records",
+      "sha256": "ee6ee525ef014f66"
+    },
+    {
       "id": "demo-requirements",
       "title": "DEMO requirements (Scenario 1)",
       "path": "demo/requirements.json",
@@ -339,6 +447,42 @@
       "sha256": "cfc9c0e414715cc5"
     },
     {
+      "id": "demo-simulations",
+      "title": "DEMO simulation scenarios",
+      "path": "demo/simulations.json",
+      "description": "Fictional equipment scenarios for the Equipment Simulation Studio. Station times are DEMO assumptions, not measurements.",
+      "entity": "simulation",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 5,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/simulation.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "engineering",
+      "sha256": "35554dc396277f07"
+    },
+    {
+      "id": "demo-verifications",
+      "title": "DEMO verifications",
+      "path": "demo/verifications.json",
+      "description": "Planned verifications with no results recorded.",
+      "entity": "verification",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 2,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/verification.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "records",
+      "sha256": "77b1d8092eeb3ee2"
+    },
+    {
       "id": "domains",
       "title": "Industry domains",
       "path": "domains/domains.json",
@@ -373,6 +517,60 @@
       "data_type": "TEAL_INTERNAL",
       "partition": "records",
       "sha256": "ea57f2319b43eec4"
+    },
+    {
+      "id": "compatibility-rules",
+      "title": "Compatibility rules",
+      "path": "engineering/compatibility-rules.json",
+      "description": "Engineering compatibility rules (master prompt §44). Editable, versioned, source-tagged; DRAFT until TEAL reviews them. A rule result is an engineering inference, never a manufacturer confirmation.",
+      "entity": "compatibility_rule",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 19,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/compatibility_rule.schema.json",
+      "source_ids": [
+        "src-sim-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "engineering",
+      "sha256": "3597ce40f8ef3ed2"
+    },
+    {
+      "id": "equipment-templates",
+      "title": "Equipment templates",
+      "path": "engineering/equipment-templates.json",
+      "description": "Equipment structures (master prompt §60, §61): stations, component slots and flow. Station times, capacities and costs are empty — they are entered per scenario with their basis.",
+      "entity": "equipment_template",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 35,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/equipment_template.schema.json",
+      "source_ids": [
+        "src-sim-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "engineering",
+      "sha256": "3da466623aa410f8"
+    },
+    {
+      "id": "spec-definitions",
+      "title": "Specification definitions",
+      "path": "engineering/spec-definitions.json",
+      "description": "Dynamic specification catalogue (master prompt §12, §15–§35): parameter names, data types, canonical units and the product types they apply to. Holds no values.",
+      "entity": "spec_definition",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 189,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/spec_definition.schema.json",
+      "source_ids": [
+        "src-sim-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "engineering",
+      "sha256": "2d46dcfeead69397"
     },
     {
       "id": "handbook-evidence",
@@ -676,12 +874,12 @@
       "entity": "source",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 9,
-      "last_updated": "2026-09-26",
+      "record_count": 10,
+      "last_updated": "2026-09-27",
       "schema": "schemas/source.schema.json",
       "source_ids": [],
       "data_type": "TEAL_INTERNAL",
-      "sha256": "1704834f556b668b"
+      "sha256": "ba2adc254e7c564c"
     },
     {
       "id": "suppliers",

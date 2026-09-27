@@ -1,7 +1,7 @@
 {
-  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/source.schema.json",
-  "title": "Source",
-  "description": "TEAL Engineering Intelligence OS — Source record (id prefix \"src-\"). Generated from src/domain; do not edit.",
+  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/data_conflict.schema.json",
+  "title": "Data conflict",
+  "description": "TEAL Engineering Intelligence OS — Data conflict record (id prefix \"dcf-\"). Generated from src/domain; do not edit.",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -175,113 +175,42 @@
     },
     "entity": {
       "type": "string",
-      "const": "source"
+      "const": "data_conflict"
     },
-    "kind": {
+    "part_id": {
+      "type": "string"
+    },
+    "parameter": {
+      "type": "string"
+    },
+    "source_a_id": {
+      "type": "string"
+    },
+    "value_a": {
+      "type": "string"
+    },
+    "source_b_id": {
+      "type": "string"
+    },
+    "value_b": {
+      "type": "string"
+    },
+    "conflict_status": {
       "type": "string",
       "enum": [
-        "handbook",
-        "legacy_app",
-        "datasheet",
-        "web",
-        "standard",
-        "internal",
-        "paper",
-        "patent",
-        "dataset"
+        "Open",
+        "Resolved",
+        "Dismissed"
       ]
     },
-    "url": {
+    "reviewer": {
       "type": "string"
     },
-    "publisher": {
+    "resolution": {
       "type": "string"
     },
-    "author": {
+    "resolution_source_id": {
       "type": "string"
-    },
-    "published": {
-      "type": "string"
-    },
-    "retrieved_at": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "terms_note": {
-      "type": "string"
-    },
-    "source_type": {
-      "type": "string",
-      "enum": [
-        "Manufacturer",
-        "Distributor",
-        "Technical Paper",
-        "Research",
-        "Standard",
-        "Government",
-        "Industry Report",
-        "User Provided",
-        "TEAL Internal",
-        "Derived"
-      ]
-    },
-    "organization": {
-      "type": "string"
-    },
-    "document_url": {
-      "type": "string"
-    },
-    "last_verified": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "next_review": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "license": {
-      "type": "string"
-    },
-    "manufacturer_id": {
-      "type": "string"
-    },
-    "crawl": {
-      "type": "object",
-      "properties": {
-        "domain": {
-          "type": "string"
-        },
-        "category": {
-          "type": "string"
-        },
-        "priority": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 9
-        },
-        "approved": {
-          "type": "boolean"
-        },
-        "last_crawl": {
-          "type": "string",
-          "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-        },
-        "crawl_status": {
-          "type": "string",
-          "enum": [
-            "Not crawled",
-            "OK",
-            "Blocked by robots.txt",
-            "Terms prohibit",
-            "Login required",
-            "Error"
-          ]
-        }
-      },
-      "required": [
-        "domain",
-        "approved"
-      ]
     }
   },
   "required": [
@@ -290,6 +219,10 @@
     "data_type",
     "provenance",
     "entity",
-    "kind"
+    "part_id",
+    "parameter",
+    "value_a",
+    "value_b",
+    "conflict_status"
   ]
 }

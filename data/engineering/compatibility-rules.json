@@ -1,0 +1,514 @@
+{
+  "dataset": {
+    "id": "compatibility-rules",
+    "title": "Compatibility rules",
+    "entity": "compatibility_rule",
+    "description": "Engineering compatibility rules (master prompt §44). Editable, versioned, source-tagged; DRAFT until TEAL reviews them. A rule result is an engineering inference, never a manufacturer confirmation.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-sim-master-prompt"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "cpr-laser-galvo-wavelength",
+      "entity": "compatibility_rule",
+      "name": "Laser wavelength within galvo mirror coating range",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "galvo"
+      ],
+      "check": "range_contains",
+      "a_spec": "wavelength",
+      "b_spec": "wavelength_range",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser wavelength = X THEN the scanner mirror coating range must contain X (reflectivity and damage threshold are specified only inside the coating band)."
+    },
+    {
+      "id": "cpr-laser-ftheta-wavelength",
+      "entity": "compatibility_rule",
+      "name": "Laser wavelength within f-theta design range",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "f_theta"
+      ],
+      "check": "range_contains",
+      "a_spec": "wavelength",
+      "b_spec": "wavelength_range",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser wavelength = X THEN the f-theta design / coating range must contain X (focus position, field distortion and transmission are specified only inside it)."
+    },
+    {
+      "id": "cpr-laser-expander-wavelength",
+      "entity": "compatibility_rule",
+      "name": "Laser wavelength within beam-expander range",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "beam_expander"
+      ],
+      "check": "range_contains",
+      "a_spec": "wavelength",
+      "b_spec": "wavelength_range",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser wavelength = X THEN the beam-expander coating range must contain X."
+    },
+    {
+      "id": "cpr-laser-optic-wavelength",
+      "entity": "compatibility_rule",
+      "name": "Laser wavelength within optic coating range",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head"
+      ],
+      "check": "range_contains",
+      "a_spec": "wavelength",
+      "b_spec": "wavelength_range",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser wavelength = X THEN the optic coating range must contain X."
+    },
+    {
+      "id": "cpr-laser-galvo-power",
+      "entity": "compatibility_rule",
+      "name": "Laser power within galvo rating",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "galvo"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "average_power",
+      "b_spec": "max_power",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser power > scanner rated power THEN incompatible (mirror heating and coating damage)."
+    },
+    {
+      "id": "cpr-laser-ftheta-power",
+      "entity": "compatibility_rule",
+      "name": "Laser power within f-theta rating",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "f_theta"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "average_power",
+      "b_spec": "max_power",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser power > lens rated power THEN incompatible (thermal lensing, coating damage)."
+    },
+    {
+      "id": "cpr-laser-head-power",
+      "entity": "compatibility_rule",
+      "name": "Laser power within head rating",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "laser_head",
+        "beam_delivery",
+        "fiber"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "average_power",
+      "b_spec": "max_power",
+      "on_fail": "Incompatible",
+      "explanation": "IF laser power > head / delivery rated power THEN incompatible."
+    },
+    {
+      "id": "cpr-expander-galvo-aperture",
+      "entity": "compatibility_rule",
+      "name": "Expanded beam fits the galvo aperture (10 % margin)",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "beam_expander"
+      ],
+      "b_types": [
+        "galvo"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "output_beam_diameter",
+      "b_spec": "aperture",
+      "factor": 1.1,
+      "on_fail": "ConditionallyCompatible",
+      "explanation": "Output beam × 1.1 ≤ scanner aperture, otherwise the beam clips on the mirrors. Check with the 1/e² diameter at your laser’s actual beam size."
+    },
+    {
+      "id": "cpr-laser-galvo-aperture",
+      "entity": "compatibility_rule",
+      "name": "Raw beam fits the galvo aperture (10 % margin)",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "galvo"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "beam_diameter",
+      "b_spec": "aperture",
+      "factor": 1.1,
+      "on_fail": "ConditionallyCompatible",
+      "explanation": "Without an expander, raw beam × 1.1 ≤ scanner aperture."
+    },
+    {
+      "id": "cpr-galvo-ftheta-aperture",
+      "entity": "compatibility_rule",
+      "name": "Galvo aperture matches f-theta entrance beam",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "galvo"
+      ],
+      "b_types": [
+        "f_theta"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "aperture",
+      "b_spec": "entrance_beam_diameter",
+      "on_fail": "ConditionallyCompatible",
+      "explanation": "A scanner aperture larger than the lens entrance beam specification can pass a beam the lens is not designed for. Confirm the actual beam diameter at the lens."
+    },
+    {
+      "id": "cpr-laser-chiller-capacity",
+      "entity": "compatibility_rule",
+      "name": "Chiller capacity covers the laser heat load",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "laser_head"
+      ],
+      "b_types": [
+        "chiller"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "heat_load",
+      "b_spec": "cooling_capacity",
+      "on_fail": "Incompatible",
+      "explanation": "IF heat load > chiller cooling capacity THEN incompatible. Add margin for ambient and set-point."
+    },
+    {
+      "id": "cpr-camera-lens-sensor",
+      "entity": "compatibility_rule",
+      "name": "Lens image circle covers the camera sensor",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "camera"
+      ],
+      "b_types": [
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "sensor_diagonal",
+      "b_spec": "max_sensor_diagonal",
+      "on_fail": "Incompatible",
+      "explanation": "IF camera sensor size > lens supported sensor size THEN incompatible (vignetting at the corners)."
+    },
+    {
+      "id": "cpr-camera-lens-mount",
+      "entity": "compatibility_rule",
+      "name": "Camera and lens mount match",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "camera"
+      ],
+      "b_types": [
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "check": "text_equals",
+      "a_spec": "lens_mount",
+      "b_spec": "lens_mount",
+      "on_fail": "Incompatible",
+      "explanation": "Camera and lens mounts must match. Some combinations (C lens on CS camera) work with an adapter ring — record that as a conditional relationship with evidence."
+    },
+    {
+      "id": "cpr-camera-controller-protocol",
+      "entity": "compatibility_rule",
+      "name": "Camera and vision controller share an interface",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "camera"
+      ],
+      "b_types": [
+        "vision_controller",
+        "ipc"
+      ],
+      "check": "shared_protocol",
+      "a_spec": "communication",
+      "b_spec": "communication",
+      "on_fail": "Incompatible",
+      "explanation": "The camera interface (GigE Vision, USB3 Vision, CoaXPress …) must be supported by the controller."
+    },
+    {
+      "id": "cpr-plc-drive-protocol",
+      "entity": "compatibility_rule",
+      "name": "Controller and servo drive share a fieldbus",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "plc",
+        "motion_controller"
+      ],
+      "b_types": [
+        "servo_drive"
+      ],
+      "check": "shared_protocol",
+      "a_spec": "communication",
+      "b_spec": "communication",
+      "on_fail": "Incompatible",
+      "explanation": "IF the drive needs EtherCAT / PROFINET / EtherNet-IP THEN the selected controller must support it."
+    },
+    {
+      "id": "cpr-drive-motor-power",
+      "entity": "compatibility_rule",
+      "name": "Servo drive rating covers the motor",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "servo_drive"
+      ],
+      "b_types": [
+        "servo_motor"
+      ],
+      "check": "a_gte_b",
+      "a_spec": "rated_power",
+      "b_spec": "rated_power",
+      "on_fail": "Incompatible",
+      "explanation": "IF motor rated power > drive rated power THEN incompatible. Confirm the manufacturer’s drive/motor pairing table as well."
+    },
+    {
+      "id": "cpr-galvo-controller-protocol",
+      "entity": "compatibility_rule",
+      "name": "Scanner and controller share a command protocol",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "galvo"
+      ],
+      "b_types": [
+        "galvo_controller"
+      ],
+      "check": "shared_protocol",
+      "a_spec": "communication",
+      "b_spec": "communication",
+      "on_fail": "Incompatible",
+      "explanation": "Scanner command protocol (XY2-100, SL2-100 …) must be supported by the controller."
+    },
+    {
+      "id": "cpr-laser-controller-protocol",
+      "entity": "compatibility_rule",
+      "name": "Laser and controller share a control interface",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "b_types": [
+        "galvo_controller",
+        "laser_controller"
+      ],
+      "check": "shared_protocol",
+      "a_spec": "communication",
+      "b_spec": "communication",
+      "on_fail": "Incompatible",
+      "explanation": "The laser control interface (DB25, RS232, Ethernet …) must be supported by the controller."
+    },
+    {
+      "id": "cpr-robot-gripper-payload",
+      "entity": "compatibility_rule",
+      "name": "Gripper weight within robot payload",
+      "rule_version": 1,
+      "rule_status": "Active",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "DRAFT",
+        "note": "Engineering rule written from the master prompt §44 examples. A rule result is an engineering inference, never a manufacturer confirmation. Review before relying on it."
+      },
+      "a_types": [
+        "gripper",
+        "end_effector"
+      ],
+      "b_types": [
+        "robot"
+      ],
+      "check": "a_lte_b",
+      "a_spec": "weight",
+      "b_spec": "payload",
+      "on_fail": "Incompatible",
+      "explanation": "Tool weight (plus part weight) must stay within the robot payload at the tool’s centre of gravity."
+    }
+  ]
+}

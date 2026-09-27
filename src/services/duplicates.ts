@@ -26,9 +26,9 @@ export const normaliseName = (s: string) =>
     .trim();
 
 const toks = (s: string) => new Set(normaliseName(s).split(' ').filter((t) => t.length > 1));
-const IDENT_FIELDS = ['code', 'model', 'designation', 'serial'] as const;
+const IDENT_FIELDS = ['code', 'model', 'model_number', 'designation', 'serial'] as const;
 /** entities whose members are distinct by design (reference data, generated structure) */
-const SKIP = new Set(['source', 'evidence', 'vocabulary', 'gate_definition', 'module_conflict', 'rule', 'formula', 'semi_step']);
+const SKIP = new Set(['source', 'evidence', 'vocabulary', 'gate_definition', 'module_conflict', 'rule', 'formula', 'semi_step', 'spec_definition', 'compatibility_rule', 'compatibility', 'equipment_template', 'simulation']);
 
 export function findDuplicates(records: AnyRecord[], opts: { min?: number; entity?: string } = {}): DuplicatePair[] {
   const min = opts.min ?? 0.75;

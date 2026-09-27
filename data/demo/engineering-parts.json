@@ -1,0 +1,5295 @@
+{
+  "dataset": {
+    "id": "demo-parts",
+    "title": "DEMO engineering products",
+    "entity": "part",
+    "description": "Fictional lasers, scanners, optics, vision, motion, controls, safety, robotics and periphery with DEMO specifications and DEMO prices — for demonstrating search, compatibility, simulation and cost. Not real products.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "prt-demo-mopa-20",
+      "entity": "part",
+      "name": "DEMO fiber MOPA laser 20 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-MOPA-20",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1064,
+          "unit": "nm",
+          "original": "1064 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_width_range",
+          "min": 2,
+          "max": 350,
+          "unit": "ns",
+          "original": "2–350 ns",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "repetition_rate_range",
+          "min": 1,
+          "max": 4000,
+          "unit": "kHz",
+          "original": "1–4000 kHz",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_energy",
+          "value": 0.8,
+          "unit": "mJ",
+          "original": "0.8 mJ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.4,
+          "unit": "",
+          "original": "1.4 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 7,
+          "unit": "mm",
+          "original": "7 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Air",
+          "original": "Air",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 150,
+          "unit": "W",
+          "original": "150 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 200,
+          "unit": "W",
+          "original": "200 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 24,
+          "unit": "V",
+          "original": "24 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "weight",
+          "value": 9,
+          "unit": "kg",
+          "original": "9 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "dimensions",
+          "text": "330 × 240 × 90 mm",
+          "original": "330 × 240 × 90 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-MOPA-20 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "MOPA",
+        "Nanosecond"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25",
+          "RS232"
+        ]
+      },
+      "prices": [
+        {
+          "price": 3200,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ],
+      "processes": [
+        "Marking"
+      ]
+    },
+    {
+      "id": "prt-demo-mopa-30",
+      "entity": "part",
+      "name": "DEMO fiber MOPA laser 30 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-MOPA-30",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1064,
+          "unit": "nm",
+          "original": "1064 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 30,
+          "unit": "W",
+          "original": "30 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_width_range",
+          "min": 2,
+          "max": 350,
+          "unit": "ns",
+          "original": "2–350 ns",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "repetition_rate_range",
+          "min": 1,
+          "max": 4000,
+          "unit": "kHz",
+          "original": "1–4000 kHz",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_energy",
+          "value": 1,
+          "unit": "mJ",
+          "original": "1 mJ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.4,
+          "unit": "",
+          "original": "1.4 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 7,
+          "unit": "mm",
+          "original": "7 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Air",
+          "original": "Air",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 220,
+          "unit": "W",
+          "original": "220 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 280,
+          "unit": "W",
+          "original": "280 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 24,
+          "unit": "V",
+          "original": "24 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "weight",
+          "value": 9,
+          "unit": "kg",
+          "original": "9 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "dimensions",
+          "text": "330 × 240 × 90 mm",
+          "original": "330 × 240 × 90 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-MOPA-30 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "MOPA",
+        "Nanosecond"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25",
+          "RS232"
+        ]
+      },
+      "prices": [
+        {
+          "price": 4100,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ],
+      "processes": [
+        "Marking",
+        "Engraving"
+      ]
+    },
+    {
+      "id": "prt-demo-mopa-50",
+      "entity": "part",
+      "name": "DEMO fiber MOPA laser 50 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-MOPA-50",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1064,
+          "unit": "nm",
+          "original": "1064 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_width_range",
+          "min": 2,
+          "max": 350,
+          "unit": "ns",
+          "original": "2–350 ns",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "repetition_rate_range",
+          "min": 1,
+          "max": 4000,
+          "unit": "kHz",
+          "original": "1–4000 kHz",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_energy",
+          "value": 1.5,
+          "unit": "mJ",
+          "original": "1.5 mJ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.6,
+          "unit": "",
+          "original": "1.6 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 7,
+          "unit": "mm",
+          "original": "7 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Air",
+          "original": "Air",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 350,
+          "unit": "W",
+          "original": "350 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 450,
+          "unit": "W",
+          "original": "450 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 24,
+          "unit": "V",
+          "original": "24 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "weight",
+          "value": 9,
+          "unit": "kg",
+          "original": "9 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "dimensions",
+          "text": "330 × 240 × 90 mm",
+          "original": "330 × 240 × 90 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 50,
+          "unit": "W",
+          "original": "50 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, table 1",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 48,
+          "unit": "W",
+          "original": "48 W",
+          "source_id": "src-demo-distributor",
+          "evidence": "DEMO distributor catalogue listing",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2025-01-15"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-MOPA-50 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "MOPA",
+        "Nanosecond"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25",
+          "RS232",
+          "Ethernet"
+        ]
+      },
+      "prices": [
+        {
+          "price": 6900,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 8
+        }
+      ],
+      "processes": [
+        "Marking",
+        "Engraving",
+        "Cleaning"
+      ]
+    },
+    {
+      "id": "prt-demo-mopa-50-dist",
+      "entity": "part",
+      "name": "DEMO fiber MOPA laser 50 W (distributor listing)",
+      "scope": "GLOBAL",
+      "record_status": "Imported",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL MOPA 50",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1064,
+          "unit": "nm",
+          "original": "1064 nm",
+          "source_id": "src-demo-distributor",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2025-01-15"
+        },
+        {
+          "spec": "average_power",
+          "value": 50,
+          "unit": "W",
+          "original": "50 W",
+          "source_id": "src-demo-distributor",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2025-01-15"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Product Page",
+          "title": "DEMO distributor listing",
+          "source_id": "src-demo-distributor"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-distributor",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Imported from a distributor listing — a possible duplicate of DL-MOPA-50 for the review queue."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "MOPA"
+      ]
+    },
+    {
+      "id": "prt-demo-qs-20-in",
+      "entity": "part",
+      "name": "DEMO Q-switched fiber laser 20 W (local)",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-laser-india",
+      "model_number": "LI-QS-20",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1064,
+          "unit": "nm",
+          "original": "1064 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_width",
+          "value": 100,
+          "unit": "ns",
+          "original": "100 ns",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "repetition_rate_range",
+          "min": 20,
+          "max": 80,
+          "unit": "kHz",
+          "original": "20–80 kHz",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_energy",
+          "value": 1,
+          "unit": "mJ",
+          "original": "1 mJ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.5,
+          "unit": "",
+          "original": "1.5 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 7,
+          "unit": "mm",
+          "original": "7 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Air",
+          "original": "Air",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 160,
+          "unit": "W",
+          "original": "160 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 220,
+          "unit": "W",
+          "original": "220 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "LI-QS-20 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "Q-switched",
+        "Nanosecond"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25"
+        ]
+      },
+      "prices": [
+        {
+          "price": 190000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ],
+      "processes": [
+        "Marking"
+      ]
+    },
+    {
+      "id": "prt-demo-uv-5",
+      "entity": "part",
+      "name": "DEMO UV DPSS laser 5 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-UV-5",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 355,
+          "unit": "nm",
+          "original": "355 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 5,
+          "unit": "W",
+          "original": "5 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pulse_width",
+          "value": 20,
+          "unit": "ns",
+          "original": "20 ns",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "repetition_rate_range",
+          "min": 20,
+          "max": 150,
+          "unit": "kHz",
+          "original": "20–150 kHz",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.2,
+          "unit": "",
+          "original": "1.2 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 0.8,
+          "unit": "mm",
+          "original": "0.8 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Water",
+          "original": "Water",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 400,
+          "unit": "W",
+          "original": "400 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 600,
+          "unit": "W",
+          "original": "600 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-UV-5 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "UV",
+        "DPSS",
+        "Nanosecond"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25",
+          "RS232"
+        ]
+      },
+      "prices": [
+        {
+          "price": 9800,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 10
+        }
+      ],
+      "processes": [
+        "Marking"
+      ]
+    },
+    {
+      "id": "prt-demo-co2-30",
+      "entity": "part",
+      "name": "DEMO CO₂ laser 30 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-CO2-30",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 10.6,
+          "unit": "µm",
+          "original": "10.6 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 30,
+          "unit": "W",
+          "original": "30 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "beam_diameter",
+          "value": 2.5,
+          "unit": "mm",
+          "original": "2.5 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Air",
+          "original": "Air",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 250,
+          "unit": "W",
+          "original": "250 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 400,
+          "unit": "W",
+          "original": "400 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-CO2-30 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "CO2"
+      ],
+      "interfaces": {
+        "communication": [
+          "DB25"
+        ]
+      },
+      "prices": [
+        {
+          "price": 2500,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ],
+      "processes": [
+        "Marking",
+        "Cutting"
+      ]
+    },
+    {
+      "id": "prt-demo-cw-1500",
+      "entity": "part",
+      "name": "DEMO CW fiber laser 1.5 kW",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "DL-CW-1500",
+      "product_type": "laser_source",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "wavelength",
+          "value": 1070,
+          "unit": "nm",
+          "original": "1070 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "average_power",
+          "value": 1500,
+          "unit": "W",
+          "original": "1500 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "m2",
+          "value": 1.1,
+          "unit": "",
+          "original": "1.1 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Water",
+          "original": "Water",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 3000,
+          "unit": "W",
+          "original": "3000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 5000,
+          "unit": "W",
+          "original": "5000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 415,
+          "unit": "V",
+          "original": "415 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DL-CW-1500 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "technologies": [
+        "Fiber",
+        "CW"
+      ],
+      "interfaces": {
+        "communication": [
+          "EtherNet/IP",
+          "Modbus TCP",
+          "DB25"
+        ]
+      },
+      "prices": [
+        {
+          "price": 14000,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 10
+        }
+      ],
+      "processes": [
+        "Welding",
+        "Cutting"
+      ]
+    },
+    {
+      "id": "prt-demo-galvo-10",
+      "entity": "part",
+      "name": "DEMO galvo scanner 10 mm",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-scan",
+      "model_number": "SC-10",
+      "product_type": "galvo",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "aperture",
+          "value": 10,
+          "unit": "mm",
+          "original": "10 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 100,
+          "unit": "W",
+          "original": "100 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "marking_speed",
+          "value": 3000,
+          "unit": "mm/s",
+          "original": "3000 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 160 mm"
+        },
+        {
+          "spec": "jump_speed",
+          "value": 8000,
+          "unit": "mm/s",
+          "original": "8000 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 160 mm"
+        },
+        {
+          "spec": "angular_repeatability",
+          "value": 8,
+          "unit": "µrad",
+          "original": "8 µrad",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "settling_time",
+          "value": 0.3,
+          "unit": "ms",
+          "original": "0.3 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 60,
+          "unit": "W",
+          "original": "60 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SC-10 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "XY2-100"
+        ]
+      },
+      "prices": [
+        {
+          "price": 1100,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-galvo-14",
+      "entity": "part",
+      "name": "DEMO galvo scanner 14 mm",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-scan",
+      "model_number": "SC-14",
+      "product_type": "galvo",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "aperture",
+          "value": 14,
+          "unit": "mm",
+          "original": "14 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 200,
+          "unit": "W",
+          "original": "200 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "marking_speed",
+          "value": 2500,
+          "unit": "mm/s",
+          "original": "2500 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 160 mm"
+        },
+        {
+          "spec": "jump_speed",
+          "value": 7000,
+          "unit": "mm/s",
+          "original": "7000 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 160 mm"
+        },
+        {
+          "spec": "angular_repeatability",
+          "value": 8,
+          "unit": "µrad",
+          "original": "8 µrad",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "settling_time",
+          "value": 0.35,
+          "unit": "ms",
+          "original": "0.35 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 80,
+          "unit": "W",
+          "original": "80 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SC-14 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "XY2-100"
+        ]
+      },
+      "prices": [
+        {
+          "price": 1600,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-galvo-30",
+      "entity": "part",
+      "name": "DEMO galvo scanner 30 mm (high power)",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-scan",
+      "model_number": "SC-30HP",
+      "product_type": "galvo",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "aperture",
+          "value": 30,
+          "unit": "mm",
+          "original": "30 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 2000,
+          "unit": "W",
+          "original": "2000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "marking_speed",
+          "value": 1500,
+          "unit": "mm/s",
+          "original": "1500 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 430 mm"
+        },
+        {
+          "spec": "angular_repeatability",
+          "value": 12,
+          "unit": "µrad",
+          "original": "12 µrad",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Water",
+          "original": "Water",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 150,
+          "unit": "W",
+          "original": "150 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 150,
+          "unit": "W",
+          "original": "150 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SC-30HP datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "SL2-100",
+          "XY2-100"
+        ]
+      },
+      "prices": [
+        {
+          "price": 5200,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 8
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-galvo-10-uv",
+      "entity": "part",
+      "name": "DEMO UV galvo scanner 10 mm",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-scan",
+      "model_number": "SC-10-UV",
+      "product_type": "galvo",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "aperture",
+          "value": 10,
+          "unit": "mm",
+          "original": "10 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 343,
+          "max": 355,
+          "unit": "nm",
+          "original": "343–355 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "marking_speed",
+          "value": 2500,
+          "unit": "mm/s",
+          "original": "2500 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "with f = 160 mm"
+        },
+        {
+          "spec": "angular_repeatability",
+          "value": 8,
+          "unit": "µrad",
+          "original": "8 µrad",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SC-10-UV datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "XY2-100"
+        ]
+      },
+      "prices": [
+        {
+          "price": 1900,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-galvo-ctrl",
+      "entity": "part",
+      "name": "DEMO scan controller card",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-scan",
+      "model_number": "SCC-2",
+      "product_type": "galvo_controller",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "power_consumption",
+          "value": 15,
+          "unit": "W",
+          "original": "15 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SCC-2 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "XY2-100",
+          "DB25",
+          "Ethernet",
+          "USB"
+        ]
+      },
+      "prices": [
+        {
+          "price": 60000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ft-100",
+      "entity": "part",
+      "name": "DEMO f-theta lens f100",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "FT-1064-100",
+      "product_type": "f_theta",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 100,
+          "unit": "mm",
+          "original": "100 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_x",
+          "value": 70,
+          "unit": "mm",
+          "original": "70 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_y",
+          "value": 70,
+          "unit": "mm",
+          "original": "70 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "entrance_beam_diameter",
+          "value": 10,
+          "unit": "mm",
+          "original": "10 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 115,
+          "unit": "mm",
+          "original": "115 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 100,
+          "unit": "W",
+          "original": "100 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FT-1064-100 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 36000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ft-160",
+      "entity": "part",
+      "name": "DEMO f-theta lens f160",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "FT-1064-160",
+      "product_type": "f_theta",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 160,
+          "unit": "mm",
+          "original": "160 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_x",
+          "value": 110,
+          "unit": "mm",
+          "original": "110 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_y",
+          "value": 110,
+          "unit": "mm",
+          "original": "110 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "entrance_beam_diameter",
+          "value": 10,
+          "unit": "mm",
+          "original": "10 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 180,
+          "unit": "mm",
+          "original": "180 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 100,
+          "unit": "W",
+          "original": "100 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "transmission",
+          "value": 98,
+          "unit": "%",
+          "original": "98 %",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FT-1064-160 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 42000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ft-254",
+      "entity": "part",
+      "name": "DEMO f-theta lens f254",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "FT-1064-254",
+      "product_type": "f_theta",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 254,
+          "unit": "mm",
+          "original": "254 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_x",
+          "value": 175,
+          "unit": "mm",
+          "original": "175 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_y",
+          "value": 175,
+          "unit": "mm",
+          "original": "175 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "entrance_beam_diameter",
+          "value": 14,
+          "unit": "mm",
+          "original": "14 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 290,
+          "unit": "mm",
+          "original": "290 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 200,
+          "unit": "W",
+          "original": "200 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FT-1064-254 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 58000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ft-uv-160",
+      "entity": "part",
+      "name": "DEMO UV f-theta lens f160",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "FT-355-160",
+      "product_type": "f_theta",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 160,
+          "unit": "mm",
+          "original": "160 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_x",
+          "value": 110,
+          "unit": "mm",
+          "original": "110 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_y",
+          "value": 110,
+          "unit": "mm",
+          "original": "110 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 343,
+          "max": 355,
+          "unit": "nm",
+          "original": "343–355 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "entrance_beam_diameter",
+          "value": 10,
+          "unit": "mm",
+          "original": "10 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 185,
+          "unit": "mm",
+          "original": "185 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FT-355-160 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 96000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 5
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ft-430-hp",
+      "entity": "part",
+      "name": "DEMO high-power f-theta lens f430",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "FT-1064-430HP",
+      "product_type": "f_theta",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 430,
+          "unit": "mm",
+          "original": "430 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_x",
+          "value": 300,
+          "unit": "mm",
+          "original": "300 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_field_y",
+          "value": 300,
+          "unit": "mm",
+          "original": "300 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "entrance_beam_diameter",
+          "value": 30,
+          "unit": "mm",
+          "original": "30 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 500,
+          "unit": "mm",
+          "original": "500 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 2000,
+          "unit": "W",
+          "original": "2000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FT-1064-430HP datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 240000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 8
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-bex-15x",
+      "entity": "part",
+      "name": "DEMO beam expander 1.5×",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "BE-1064-1.5X",
+      "product_type": "beam_expander",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "magnification",
+          "value": 1.5,
+          "unit": "",
+          "original": "1.5 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_beam_diameter",
+          "value": 8,
+          "unit": "mm",
+          "original": "8 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "output_beam_diameter",
+          "value": 10.5,
+          "unit": "mm",
+          "original": "10.5 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "at 7 mm input"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 100,
+          "unit": "W",
+          "original": "100 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "BE-1064-1.5X datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 14000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-bex-2x",
+      "entity": "part",
+      "name": "DEMO beam expander 2×",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "BE-1064-2X",
+      "product_type": "beam_expander",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "magnification",
+          "value": 2,
+          "unit": "",
+          "original": "2 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_beam_diameter",
+          "value": 8,
+          "unit": "mm",
+          "original": "8 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "output_beam_diameter",
+          "value": 14,
+          "unit": "mm",
+          "original": "14 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "at 7 mm input"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 100,
+          "unit": "W",
+          "original": "100 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "BE-1064-2X datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 16000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-bex-uv-3x",
+      "entity": "part",
+      "name": "DEMO UV beam expander 3×",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-optics",
+      "model_number": "BE-355-3X",
+      "product_type": "beam_expander",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "magnification",
+          "value": 3,
+          "unit": "",
+          "original": "3 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_beam_diameter",
+          "value": 2,
+          "unit": "mm",
+          "original": "2 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "output_beam_diameter",
+          "value": 2.4,
+          "unit": "mm",
+          "original": "2.4 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "at 0.8 mm input"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 343,
+          "max": 355,
+          "unit": "nm",
+          "original": "343–355 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_power",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "BE-355-3X datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 38000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 5
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-cam-5mp",
+      "entity": "part",
+      "name": "DEMO 5 MP global-shutter camera",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "CV-5G",
+      "product_type": "camera",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "megapixel",
+          "value": 5,
+          "unit": "MP",
+          "original": "5 MP",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_x",
+          "value": 2448,
+          "unit": "px",
+          "original": "2448 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_y",
+          "value": 2048,
+          "unit": "px",
+          "original": "2048 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pixel_size",
+          "value": 3.45,
+          "unit": "µm",
+          "original": "3.45 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_format",
+          "text": "2/3\"",
+          "original": "2/3\"",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_diagonal",
+          "value": 11.1,
+          "unit": "mm",
+          "original": "11.1 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "frame_rate",
+          "value": 24,
+          "unit": "fps",
+          "original": "24 fps",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "shutter",
+          "text": "Global",
+          "original": "Global",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 4,
+          "unit": "W",
+          "original": "4 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CV-5G datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "GigE Vision",
+          "Ethernet"
+        ]
+      },
+      "prices": [
+        {
+          "price": 68000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-cam-12mp",
+      "entity": "part",
+      "name": "DEMO 12 MP global-shutter camera",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "CV-12G",
+      "product_type": "camera",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "megapixel",
+          "value": 12,
+          "unit": "MP",
+          "original": "12 MP",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_x",
+          "value": 4096,
+          "unit": "px",
+          "original": "4096 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_y",
+          "value": 3000,
+          "unit": "px",
+          "original": "3000 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pixel_size",
+          "value": 3.45,
+          "unit": "µm",
+          "original": "3.45 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_format",
+          "text": "1.1\"",
+          "original": "1.1\"",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_diagonal",
+          "value": 17.6,
+          "unit": "mm",
+          "original": "17.6 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "frame_rate",
+          "value": 9,
+          "unit": "fps",
+          "original": "9 fps",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "shutter",
+          "text": "Global",
+          "original": "Global",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 5,
+          "unit": "W",
+          "original": "5 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CV-12G datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "GigE Vision",
+          "Ethernet"
+        ]
+      },
+      "prices": [
+        {
+          "price": 145000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-cam-20mp-rs",
+      "entity": "part",
+      "name": "DEMO 20 MP rolling-shutter camera",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "CV-20R",
+      "product_type": "camera",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "megapixel",
+          "value": 20,
+          "unit": "MP",
+          "original": "20 MP",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_x",
+          "value": 5472,
+          "unit": "px",
+          "original": "5472 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "resolution_y",
+          "value": 3648,
+          "unit": "px",
+          "original": "3648 px",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "pixel_size",
+          "value": 2.4,
+          "unit": "µm",
+          "original": "2.4 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_format",
+          "text": "1\"",
+          "original": "1\"",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_diagonal",
+          "value": 15.9,
+          "unit": "mm",
+          "original": "15.9 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "frame_rate",
+          "value": 18,
+          "unit": "fps",
+          "original": "18 fps",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "shutter",
+          "text": "Rolling",
+          "original": "Rolling",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CV-20R datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "USB3 Vision",
+          "USB"
+        ]
+      },
+      "prices": [
+        {
+          "price": 52000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-lens-16",
+      "entity": "part",
+      "name": "DEMO machine-vision lens 16 mm (2/3\")",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "VL-16-23",
+      "product_type": "vision_lens",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 16,
+          "unit": "mm",
+          "original": "16 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_sensor_diagonal",
+          "value": 11,
+          "unit": "mm",
+          "original": "11 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_format",
+          "text": "2/3\"",
+          "original": "2/3\"",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "f_number",
+          "text": "f/1.4–f/16",
+          "original": "f/1.4–f/16",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "VL-16-23 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 18000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-lens-25-11",
+      "entity": "part",
+      "name": "DEMO machine-vision lens 25 mm (1.1\")",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "VL-25-11",
+      "product_type": "vision_lens",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "focal_length",
+          "value": 25,
+          "unit": "mm",
+          "original": "25 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_sensor_diagonal",
+          "value": 17.6,
+          "unit": "mm",
+          "original": "17.6 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sensor_format",
+          "text": "1.1\"",
+          "original": "1.1\"",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "f_number",
+          "text": "f/2.0–f/16",
+          "original": "f/2.0–f/16",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "VL-25-11 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 32000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-tele-05x",
+      "entity": "part",
+      "name": "DEMO telecentric lens 0.5×",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "TL-05X-110",
+      "product_type": "telecentric_lens",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "magnification",
+          "value": 0.5,
+          "unit": "",
+          "original": "0.5 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_sensor_diagonal",
+          "value": 11,
+          "unit": "mm",
+          "original": "11 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "working_distance",
+          "value": 110,
+          "unit": "mm",
+          "original": "110 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "lens_mount",
+          "text": "C",
+          "original": "C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "telecentric",
+          "text": "true",
+          "original": "true",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "distortion",
+          "value": 0.08,
+          "unit": "%",
+          "original": "0.08 %",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "TL-05X-110 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 76000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ring-red",
+      "entity": "part",
+      "name": "DEMO red ring light",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "RL-630-70",
+      "product_type": "lighting",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "light_type",
+          "text": "Ring",
+          "original": "Ring",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength",
+          "value": 630,
+          "unit": "nm",
+          "original": "630 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 24,
+          "unit": "V",
+          "original": "24 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "strobe",
+          "text": "true",
+          "original": "true",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 8,
+          "unit": "W",
+          "original": "8 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "RL-630-70 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 12000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 2
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-vision-ctrl",
+      "entity": "part",
+      "name": "DEMO vision controller",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-vision",
+      "model_number": "VC-4",
+      "product_type": "vision_controller",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "cpu",
+          "text": "Quad-core (DEMO)",
+          "original": "Quad-core (DEMO)",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "ram",
+          "value": 8,
+          "unit": "GB",
+          "original": "8 GB",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 45,
+          "unit": "W",
+          "original": "45 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "VC-4 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "GigE Vision",
+          "Ethernet",
+          "PROFINET",
+          "EtherNet/IP",
+          "Modbus TCP"
+        ]
+      },
+      "prices": [
+        {
+          "price": 160000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-stage-500",
+      "entity": "part",
+      "name": "DEMO linear stage 500 mm",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-motion",
+      "model_number": "LS-500",
+      "product_type": "linear_stage",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "travel",
+          "value": 500,
+          "unit": "mm",
+          "original": "500 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "payload",
+          "value": 30,
+          "unit": "kg",
+          "original": "30 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_speed",
+          "value": 1000,
+          "unit": "mm/s",
+          "original": "1000 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "acceleration",
+          "value": 10,
+          "unit": "m/s²",
+          "original": "10 m/s²",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "positioning_repeatability",
+          "value": 5,
+          "unit": "µm",
+          "original": "5 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "positioning_accuracy",
+          "value": 20,
+          "unit": "µm",
+          "original": "20 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "LS-500 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 210000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 5
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-servo-400",
+      "entity": "part",
+      "name": "DEMO servo motor 400 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-motion",
+      "model_number": "SM-400",
+      "product_type": "servo_motor",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "rated_power",
+          "value": 400,
+          "unit": "W",
+          "original": "400 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "rated_torque",
+          "value": 1.27,
+          "unit": "N·m",
+          "original": "1.27 N·m",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "rated_speed",
+          "value": 3000,
+          "unit": "rpm",
+          "original": "3000 rpm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "rotor_inertia",
+          "value": 0.34,
+          "unit": "kg·cm²",
+          "original": "0.34 kg·cm²",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SM-400 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 22000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-drive-400",
+      "entity": "part",
+      "name": "DEMO servo drive 400 W (EtherCAT)",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-motion",
+      "model_number": "SD-400E",
+      "product_type": "servo_drive",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "rated_power",
+          "value": 400,
+          "unit": "W",
+          "original": "400 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 230,
+          "unit": "V",
+          "original": "230 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SD-400E datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "EtherCAT"
+        ]
+      },
+      "prices": [
+        {
+          "price": 28000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-drive-200",
+      "entity": "part",
+      "name": "DEMO servo drive 200 W (EtherCAT)",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-motion",
+      "model_number": "SD-200E",
+      "product_type": "servo_drive",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "rated_power",
+          "value": 200,
+          "unit": "W",
+          "original": "200 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "input_voltage",
+          "value": 230,
+          "unit": "V",
+          "original": "230 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SD-200E datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "EtherCAT"
+        ]
+      },
+      "prices": [
+        {
+          "price": 21000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-plc-ecat",
+      "entity": "part",
+      "name": "DEMO PLC with EtherCAT master",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-controls",
+      "model_number": "PC-100E",
+      "product_type": "plc",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "digital_inputs",
+          "value": 16,
+          "unit": "",
+          "original": "16 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "digital_outputs",
+          "value": 16,
+          "unit": "",
+          "original": "16 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "motion_axes",
+          "value": 8,
+          "unit": "",
+          "original": "8 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_time",
+          "value": 1,
+          "unit": "ms",
+          "original": "1 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 20,
+          "unit": "W",
+          "original": "20 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "PC-100E datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "EtherCAT",
+          "Ethernet",
+          "Modbus TCP",
+          "OPC UA"
+        ]
+      },
+      "prices": [
+        {
+          "price": 95000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-plc-pn",
+      "entity": "part",
+      "name": "DEMO PLC with PROFINET",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-controls",
+      "model_number": "PC-200P",
+      "product_type": "plc",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "digital_inputs",
+          "value": 32,
+          "unit": "",
+          "original": "32 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "digital_outputs",
+          "value": 32,
+          "unit": "",
+          "original": "32 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "scan_time",
+          "value": 0.5,
+          "unit": "ms",
+          "original": "0.5 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 25,
+          "unit": "W",
+          "original": "25 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "PC-200P datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "PROFINET",
+          "Ethernet",
+          "OPC UA"
+        ]
+      },
+      "prices": [
+        {
+          "price": 120000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-hmi-10",
+      "entity": "part",
+      "name": "DEMO HMI 10.1\"",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-controls",
+      "model_number": "HM-10",
+      "product_type": "hmi",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "screen_size",
+          "value": 10.1,
+          "unit": "inch",
+          "original": "10.1 inch",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "display_resolution",
+          "text": "1280 × 800",
+          "original": "1280 × 800",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 12,
+          "unit": "W",
+          "original": "12 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "HM-10 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "Ethernet"
+        ]
+      },
+      "prices": [
+        {
+          "price": 38000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-ipc",
+      "entity": "part",
+      "name": "DEMO industrial PC",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-controls",
+      "model_number": "IP-7",
+      "product_type": "ipc",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "cpu",
+          "text": "8-core (DEMO)",
+          "original": "8-core (DEMO)",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "ram",
+          "value": 16,
+          "unit": "GB",
+          "original": "16 GB",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "storage",
+          "value": 512,
+          "unit": "GB",
+          "original": "512 GB",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 90,
+          "unit": "W",
+          "original": "90 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "IP-7 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "Ethernet",
+          "USB",
+          "GigE Vision"
+        ]
+      },
+      "prices": [
+        {
+          "price": 140000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-safety-plc",
+      "entity": "part",
+      "name": "DEMO safety PLC",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-safety",
+      "model_number": "SP-8",
+      "product_type": "safety_plc",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "performance_level",
+          "text": "e",
+          "original": "e",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "sil",
+          "text": "3",
+          "original": "3",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "response_time",
+          "value": 10,
+          "unit": "ms",
+          "original": "10 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "digital_inputs",
+          "value": 8,
+          "unit": "",
+          "original": "8 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "SP-8 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "EtherCAT",
+          "PROFINET"
+        ]
+      },
+      "prices": [
+        {
+          "price": 85000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ],
+      "certifications": [
+        {
+          "name": "DEMO certification claim (fictional)",
+          "source_id": "src-demo-datasheets",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-light-curtain",
+      "entity": "part",
+      "name": "DEMO safety light curtain",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-safety",
+      "model_number": "LC-14-600",
+      "product_type": "light_curtain",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "detection_resolution",
+          "value": 14,
+          "unit": "mm",
+          "original": "14 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "protective_range",
+          "value": 600,
+          "unit": "mm",
+          "original": "600 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "response_time",
+          "value": 12,
+          "unit": "ms",
+          "original": "12 ms",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "performance_level",
+          "text": "e",
+          "original": "e",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "LC-14-600 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 64000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 5
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-door-switch",
+      "entity": "part",
+      "name": "DEMO coded safety door switch",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-safety",
+      "model_number": "DS-C",
+      "product_type": "door_switch",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "monitoring",
+          "text": "Coded RFID actuator",
+          "original": "Coded RFID actuator",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "DS-C datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 9000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 2
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-scara-6",
+      "entity": "part",
+      "name": "DEMO SCARA robot 6 kg",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-robotics",
+      "model_number": "RB-S6",
+      "product_type": "robot",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "payload",
+          "value": 6,
+          "unit": "kg",
+          "original": "6 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "reach",
+          "value": 600,
+          "unit": "mm",
+          "original": "600 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "axes",
+          "value": 4,
+          "unit": "",
+          "original": "4 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "positioning_repeatability",
+          "value": 20,
+          "unit": "µm",
+          "original": "20 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 600,
+          "unit": "W",
+          "original": "600 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "RB-S6 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "Ethernet",
+          "EtherCAT"
+        ]
+      },
+      "prices": [
+        {
+          "price": 9000,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 10
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-gripper",
+      "entity": "part",
+      "name": "DEMO electric 2-jaw gripper",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-robotics",
+      "model_number": "GR-2E",
+      "product_type": "gripper",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "weight",
+          "value": 0.8,
+          "unit": "kg",
+          "original": "0.8 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "force",
+          "value": 140,
+          "unit": "N",
+          "original": "140 N",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "GR-2E datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 45000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-chiller-1k",
+      "entity": "part",
+      "name": "DEMO chiller 1 kW",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-thermal",
+      "model_number": "CH-1000",
+      "product_type": "chiller",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "cooling_capacity",
+          "value": 1000,
+          "unit": "W",
+          "original": "1000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "temperature_stability",
+          "value": 0.5,
+          "unit": "°C",
+          "original": "0.5 °C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "flow_rate",
+          "value": 8,
+          "unit": "L/min",
+          "original": "8 L/min",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 800,
+          "unit": "W",
+          "original": "800 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CH-1000 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 110000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-chiller-4k",
+      "entity": "part",
+      "name": "DEMO chiller 4 kW",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-thermal",
+      "model_number": "CH-4000",
+      "product_type": "chiller",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "cooling_capacity",
+          "value": 4000,
+          "unit": "W",
+          "original": "4000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "temperature_stability",
+          "value": 0.5,
+          "unit": "°C",
+          "original": "0.5 °C",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "flow_rate",
+          "value": 25,
+          "unit": "L/min",
+          "original": "25 L/min",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 2600,
+          "unit": "W",
+          "original": "2600 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CH-4000 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 260000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-fume-200",
+      "entity": "part",
+      "name": "DEMO fume extractor 200 m³/h",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-thermal",
+      "model_number": "FX-200",
+      "product_type": "fume_extraction",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "airflow",
+          "value": 200,
+          "unit": "m³/h",
+          "original": "200 m³/h",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "filter_efficiency",
+          "value": 99.97,
+          "unit": "%",
+          "original": "99.97 %",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27",
+          "condition": "at 0.3 µm"
+        },
+        {
+          "spec": "noise",
+          "value": 60,
+          "unit": "dB(A)",
+          "original": "60 dB(A)",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 400,
+          "unit": "W",
+          "original": "400 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FX-200 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 95000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-weld-head",
+      "entity": "part",
+      "name": "DEMO laser welding head 3 kW",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-photonics",
+      "model_number": "WH-3000",
+      "product_type": "laser_head",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "max_power",
+          "value": 3000,
+          "unit": "W",
+          "original": "3000 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "wavelength_range",
+          "min": 1030,
+          "max": 1090,
+          "unit": "nm",
+          "original": "1030–1090 nm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "focal_length",
+          "value": 200,
+          "unit": "mm",
+          "original": "200 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "spot_size",
+          "value": 200,
+          "unit": "µm",
+          "original": "200 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "cooling_method",
+          "text": "Water",
+          "original": "Water",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "heat_load",
+          "value": 200,
+          "unit": "W",
+          "original": "200 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "WH-3000 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 7500,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 8
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-conveyor-pcb",
+      "entity": "part",
+      "name": "DEMO PCB edge conveyor",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-fab",
+      "model_number": "CNV-PCB-450",
+      "product_type": "conveyor",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "width_range",
+          "min": 50,
+          "max": 450,
+          "unit": "mm",
+          "original": "50–450 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "max_speed",
+          "value": 150,
+          "unit": "mm/s",
+          "original": "150 mm/s",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 90,
+          "unit": "W",
+          "original": "90 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "CNV-PCB-450 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 180000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 4
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-fixture-pcb",
+      "entity": "part",
+      "name": "DEMO PCB stop & clamp fixture",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-fab",
+      "model_number": "FX-PCB",
+      "product_type": "fixture",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "material",
+          "text": "Aluminium, anodised",
+          "original": "Aluminium, anodised",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "FX-PCB datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 60000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 3
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-enclosure",
+      "entity": "part",
+      "name": "DEMO laser enclosure (Class 1 design intent)",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-fab",
+      "model_number": "ENC-L1",
+      "product_type": "enclosure",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "laser_class",
+          "text": "Design intent only — not certified (DEMO)",
+          "original": "Design intent only — not certified (DEMO)",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "ENC-L1 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 250000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 6
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-smps-24",
+      "entity": "part",
+      "name": "DEMO 24 V power supply 240 W",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-fab",
+      "model_number": "PS-24-240",
+      "product_type": "smps",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "rated_voltage",
+          "value": 24,
+          "unit": "V",
+          "original": "24 V",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "output_power",
+          "value": 240,
+          "unit": "W",
+          "original": "240 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "PS-24-240 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "prices": [
+        {
+          "price": 6000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 1
+        }
+      ]
+    },
+    {
+      "id": "prt-demo-teal-controller",
+      "entity": "part",
+      "name": "TEAL LaserSuite controller (DEMO overlay)",
+      "scope": "TEAL",
+      "record_status": "Draft",
+      "model_number": "TEAL-LSC-1",
+      "product_type": "galvo_controller",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "power_consumption",
+          "value": 15,
+          "unit": "W",
+          "original": "15 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "TEAL-LSC-1 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "brand": "TEAL",
+      "compare_to_ids": [
+        "prt-demo-galvo-ctrl"
+      ],
+      "interfaces": {
+        "communication": [
+          "XY2-100",
+          "DB25",
+          "Ethernet"
+        ]
+      },
+      "prices": [
+        {
+          "price": 45000,
+          "currency": "INR",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 2
+        }
+      ],
+      "description": "TEAL-side record for the TEAL overlay (§116). DEMO — maturity, cost and validation are illustrative."
+    }
+  ]
+}

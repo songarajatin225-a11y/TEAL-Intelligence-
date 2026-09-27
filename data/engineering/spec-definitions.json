@@ -1,0 +1,4710 @@
+{
+  "dataset": {
+    "id": "spec-definitions",
+    "title": "Specification definitions",
+    "entity": "spec_definition",
+    "description": "Dynamic specification catalogue (master prompt §12, §15–§35): parameter names, data types, canonical units and the product types they apply to. Holds no values.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-sim-master-prompt"
+    ],
+    "partition": "engineering"
+  },
+  "records": [
+    {
+      "id": "spd-wavelength",
+      "entity": "spec_definition",
+      "name": "Wavelength",
+      "key": "wavelength",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "nm",
+      "allowed_units": [
+        "nm",
+        "µm"
+      ],
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "lighting",
+        "laser_head"
+      ],
+      "validation": {
+        "min": 100,
+        "max": 20000
+      },
+      "aliases": [
+        "wavelength",
+        "lambda",
+        "λ"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-wavelength-range",
+      "entity": "spec_definition",
+      "name": "Wavelength range",
+      "key": "wavelength_range",
+      "category": "Optical",
+      "spec_type": "range",
+      "unit_type": "length",
+      "canonical_unit": "nm",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "aliases": [
+        "wavelength range",
+        "coating range",
+        "design wavelength"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-average-power",
+      "entity": "spec_definition",
+      "name": "Average power",
+      "key": "average_power",
+      "category": "Power",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "power",
+        "average power",
+        "output power"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-maximum-power",
+      "entity": "spec_definition",
+      "name": "Maximum power",
+      "key": "maximum_power",
+      "category": "Power",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-minimum-power",
+      "entity": "spec_definition",
+      "name": "Minimum power",
+      "key": "minimum_power",
+      "category": "Power",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-peak-power",
+      "entity": "spec_definition",
+      "name": "Peak power",
+      "key": "peak_power",
+      "category": "Power",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "kW",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pulse-energy",
+      "entity": "spec_definition",
+      "name": "Pulse energy",
+      "key": "pulse_energy",
+      "category": "Pulse",
+      "spec_type": "number",
+      "unit_type": "energy",
+      "canonical_unit": "mJ",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "pulse energy"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pulse-width",
+      "entity": "spec_definition",
+      "name": "Pulse width",
+      "key": "pulse_width",
+      "category": "Pulse",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "ns",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "pulse width",
+        "pulse duration"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pulse-width-range",
+      "entity": "spec_definition",
+      "name": "Pulse width range",
+      "key": "pulse_width_range",
+      "category": "Pulse",
+      "spec_type": "range",
+      "unit_type": "time",
+      "canonical_unit": "ns",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-repetition-rate",
+      "entity": "spec_definition",
+      "name": "Repetition rate",
+      "key": "repetition_rate",
+      "category": "Pulse",
+      "spec_type": "number",
+      "unit_type": "frequency",
+      "canonical_unit": "kHz",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "aliases": [
+        "frequency",
+        "repetition rate",
+        "rep rate",
+        "prf"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-repetition-rate-range",
+      "entity": "spec_definition",
+      "name": "Repetition rate range",
+      "key": "repetition_rate_range",
+      "category": "Pulse",
+      "spec_type": "range",
+      "unit_type": "frequency",
+      "canonical_unit": "kHz",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "aliases": [
+        "frequency range"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pulse-shape",
+      "entity": "spec_definition",
+      "name": "Pulse shape",
+      "key": "pulse_shape",
+      "category": "Pulse",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-beam-diameter",
+      "entity": "spec_definition",
+      "name": "Beam diameter (output)",
+      "key": "beam_diameter",
+      "category": "Beam",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "collimator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "beam diameter"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-beam-divergence",
+      "entity": "spec_definition",
+      "name": "Beam divergence",
+      "key": "beam_divergence",
+      "category": "Beam",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "mrad",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "beam_expander"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-m2",
+      "entity": "spec_definition",
+      "name": "M² (beam quality factor)",
+      "key": "m2",
+      "category": "Beam",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 1
+      },
+      "aliases": [
+        "m2",
+        "m²",
+        "beam quality"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-beam-quality",
+      "entity": "spec_definition",
+      "name": "Beam quality (as published)",
+      "key": "beam_quality",
+      "category": "Beam",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-polarization",
+      "entity": "spec_definition",
+      "name": "Polarization",
+      "key": "polarization",
+      "category": "Beam",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "polarizer",
+        "waveplate"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-power-stability",
+      "entity": "spec_definition",
+      "name": "Power stability",
+      "key": "power_stability",
+      "category": "Stability",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pointing-stability",
+      "entity": "spec_definition",
+      "name": "Pointing stability",
+      "key": "pointing_stability",
+      "category": "Stability",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "µrad",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-cooling-method",
+      "entity": "spec_definition",
+      "name": "Cooling method",
+      "key": "cooling_method",
+      "category": "Thermal",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "galvo",
+        "laser_head",
+        "f_theta"
+      ],
+      "enum_values": [
+        "Air",
+        "Water",
+        "Conduction",
+        "Passive"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-coolant",
+      "entity": "spec_definition",
+      "name": "Coolant",
+      "key": "coolant",
+      "category": "Thermal",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "chiller"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-heat-load",
+      "entity": "spec_definition",
+      "name": "Heat load to remove",
+      "key": "heat_load",
+      "category": "Thermal",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "laser_head",
+        "galvo"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "heat load",
+        "cooling requirement"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-operating-temperature",
+      "entity": "spec_definition",
+      "name": "Operating temperature",
+      "key": "operating_temperature",
+      "category": "Environment",
+      "spec_type": "range",
+      "unit_type": "temperature",
+      "canonical_unit": "°C",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-storage-temperature",
+      "entity": "spec_definition",
+      "name": "Storage temperature",
+      "key": "storage_temperature",
+      "category": "Environment",
+      "spec_type": "range",
+      "unit_type": "temperature",
+      "canonical_unit": "°C",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-humidity",
+      "entity": "spec_definition",
+      "name": "Humidity (non-condensing)",
+      "key": "humidity",
+      "category": "Environment",
+      "spec_type": "range",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-altitude",
+      "entity": "spec_definition",
+      "name": "Altitude",
+      "key": "altitude",
+      "category": "Environment",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "m",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-dimensions",
+      "entity": "spec_definition",
+      "name": "Dimensions",
+      "key": "dimensions",
+      "category": "Physical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-weight",
+      "entity": "spec_definition",
+      "name": "Weight",
+      "key": "weight",
+      "category": "Physical",
+      "spec_type": "number",
+      "unit_type": "mass",
+      "canonical_unit": "kg",
+      "applies_to": [
+        "*"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "weight",
+        "mass"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-input-voltage",
+      "entity": "spec_definition",
+      "name": "Input voltage",
+      "key": "input_voltage",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "voltage",
+      "canonical_unit": "V",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "laser_controller",
+        "laser_driver",
+        "chiller",
+        "fume_extraction",
+        "galvo",
+        "galvo_controller",
+        "camera",
+        "lighting",
+        "vision_controller",
+        "servo_motor",
+        "servo_drive",
+        "linear_motor",
+        "motion_controller",
+        "plc",
+        "hmi",
+        "ipc",
+        "sensor",
+        "robot",
+        "robot_controller",
+        "safety_plc",
+        "safety_relay",
+        "light_curtain",
+        "safety_scanner",
+        "smps",
+        "conveyor",
+        "vacuum_generator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "voltage",
+        "supply voltage"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-input-power",
+      "entity": "spec_definition",
+      "name": "Input power (rated)",
+      "key": "input_power",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "laser_controller",
+        "laser_driver",
+        "chiller",
+        "fume_extraction",
+        "galvo",
+        "galvo_controller",
+        "camera",
+        "lighting",
+        "vision_controller",
+        "servo_motor",
+        "servo_drive",
+        "linear_motor",
+        "motion_controller",
+        "plc",
+        "hmi",
+        "ipc",
+        "sensor",
+        "robot",
+        "robot_controller",
+        "safety_plc",
+        "safety_relay",
+        "light_curtain",
+        "safety_scanner",
+        "smps",
+        "conveyor",
+        "vacuum_generator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-power-consumption",
+      "entity": "spec_definition",
+      "name": "Power consumption (typical)",
+      "key": "power_consumption",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "laser_controller",
+        "laser_driver",
+        "chiller",
+        "fume_extraction",
+        "galvo",
+        "galvo_controller",
+        "camera",
+        "lighting",
+        "vision_controller",
+        "servo_motor",
+        "servo_drive",
+        "linear_motor",
+        "motion_controller",
+        "plc",
+        "hmi",
+        "ipc",
+        "sensor",
+        "robot",
+        "robot_controller",
+        "safety_plc",
+        "safety_relay",
+        "light_curtain",
+        "safety_scanner",
+        "smps",
+        "conveyor",
+        "vacuum_generator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "power consumption",
+        "consumption"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-trigger-input",
+      "entity": "spec_definition",
+      "name": "Trigger input",
+      "key": "trigger_input",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "camera",
+        "lighting"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-trigger-output",
+      "entity": "spec_definition",
+      "name": "Trigger output",
+      "key": "trigger_output",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "camera"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-analog-input",
+      "entity": "spec_definition",
+      "name": "Analog input",
+      "key": "analog_input",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "plc",
+        "servo_drive"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-digital-input",
+      "entity": "spec_definition",
+      "name": "Digital input",
+      "key": "digital_input",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "plc"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-connector",
+      "entity": "spec_definition",
+      "name": "Connector",
+      "key": "connector",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-lifetime",
+      "entity": "spec_definition",
+      "name": "Lifetime (as published)",
+      "key": "lifetime",
+      "category": "Life",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "h",
+      "applies_to": [
+        "laser_source",
+        "laser_module",
+        "laser_engine",
+        "lighting",
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-warranty",
+      "entity": "spec_definition",
+      "name": "Warranty",
+      "key": "warranty",
+      "category": "Commercial",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-module-type",
+      "entity": "spec_definition",
+      "name": "Module type",
+      "key": "module_type",
+      "category": "Module",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-modulation",
+      "entity": "spec_definition",
+      "name": "Modulation",
+      "key": "modulation",
+      "category": "Module",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module",
+        "laser_driver",
+        "aom",
+        "eom"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-ttl-control",
+      "entity": "spec_definition",
+      "name": "TTL control",
+      "key": "ttl_control",
+      "category": "Module",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module",
+        "laser_driver"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-analog-control",
+      "entity": "spec_definition",
+      "name": "Analog control",
+      "key": "analog_control",
+      "category": "Module",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module",
+        "laser_driver"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-tec",
+      "entity": "spec_definition",
+      "name": "TEC",
+      "key": "tec",
+      "category": "Module",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-photodiode",
+      "entity": "spec_definition",
+      "name": "Monitor photodiode",
+      "key": "photodiode",
+      "category": "Module",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-supply-current",
+      "entity": "spec_definition",
+      "name": "Supply current",
+      "key": "supply_current",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "current",
+      "canonical_unit": "A",
+      "applies_to": [
+        "laser_module",
+        "laser_driver",
+        "lighting",
+        "smps"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-package",
+      "entity": "spec_definition",
+      "name": "Package",
+      "key": "package",
+      "category": "Module",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_module"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-aperture",
+      "entity": "spec_definition",
+      "name": "Aperture",
+      "key": "aperture",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "galvo",
+        "beam_delivery",
+        "laser_head"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "aperture",
+        "clear aperture",
+        "input aperture"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-scan-angle",
+      "entity": "spec_definition",
+      "name": "Scan angle (optical)",
+      "key": "scan_angle",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "°",
+      "applies_to": [
+        "galvo"
+      ],
+      "aliases": [
+        "scan angle",
+        "optical angle"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-mechanical-angle",
+      "entity": "spec_definition",
+      "name": "Mechanical angle",
+      "key": "mechanical_angle",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "°",
+      "applies_to": [
+        "galvo"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-marking-speed",
+      "entity": "spec_definition",
+      "name": "Marking speed",
+      "key": "marking_speed",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "speed",
+      "canonical_unit": "mm/s",
+      "applies_to": [
+        "galvo"
+      ],
+      "aliases": [
+        "marking speed"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-jump-speed",
+      "entity": "spec_definition",
+      "name": "Jump / positioning speed",
+      "key": "jump_speed",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "speed",
+      "canonical_unit": "mm/s",
+      "applies_to": [
+        "galvo"
+      ],
+      "aliases": [
+        "jump speed",
+        "positioning speed"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-settling-time",
+      "entity": "spec_definition",
+      "name": "Settling time",
+      "key": "settling_time",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "ms",
+      "applies_to": [
+        "galvo",
+        "linear_stage"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-step-response",
+      "entity": "spec_definition",
+      "name": "Step response (1 % of full scale)",
+      "key": "step_response",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "ms",
+      "applies_to": [
+        "galvo"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-angular-repeatability",
+      "entity": "spec_definition",
+      "name": "Repeatability (angular)",
+      "key": "angular_repeatability",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "µrad",
+      "applies_to": [
+        "galvo",
+        "rotary_stage"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-drift",
+      "entity": "spec_definition",
+      "name": "Drift",
+      "key": "drift",
+      "category": "Scan",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-long-term-drift",
+      "entity": "spec_definition",
+      "name": "Long-term drift",
+      "key": "long_term_drift",
+      "category": "Scan",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "µrad",
+      "applies_to": [
+        "galvo"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-mirror-material",
+      "entity": "spec_definition",
+      "name": "Mirror material",
+      "key": "mirror_material",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "mirror"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-mirror-coating",
+      "entity": "spec_definition",
+      "name": "Mirror coating",
+      "key": "mirror_coating",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "mirror"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-max-power",
+      "entity": "spec_definition",
+      "name": "Maximum laser power (rated)",
+      "key": "max_power",
+      "category": "Power",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom",
+        "fiber"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "max power",
+        "rated power",
+        "power rating"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-encoder-type",
+      "entity": "spec_definition",
+      "name": "Encoder / position detector",
+      "key": "encoder_type",
+      "category": "Scan",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "servo_motor",
+        "linear_stage",
+        "encoder"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-focal-length",
+      "entity": "spec_definition",
+      "name": "Focal length",
+      "key": "focal_length",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta",
+        "lens",
+        "vision_lens",
+        "laser_head",
+        "collimator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "focal length",
+        "f"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-scan-field-x",
+      "entity": "spec_definition",
+      "name": "Scan field X",
+      "key": "scan_field_x",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "field",
+        "scan field",
+        "marking field"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-scan-field-y",
+      "entity": "spec_definition",
+      "name": "Scan field Y",
+      "key": "scan_field_y",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-scan-field-diameter",
+      "entity": "spec_definition",
+      "name": "Scan field diameter",
+      "key": "scan_field_diameter",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-working-distance",
+      "entity": "spec_definition",
+      "name": "Working distance",
+      "key": "working_distance",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta",
+        "vision_lens",
+        "telecentric_lens",
+        "laser_head",
+        "lighting"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "working distance",
+        "wd"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-back-focal-distance",
+      "entity": "spec_definition",
+      "name": "Back focal distance",
+      "key": "back_focal_distance",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-entrance-beam-diameter",
+      "entity": "spec_definition",
+      "name": "Entrance beam diameter (max)",
+      "key": "entrance_beam_diameter",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta",
+        "laser_head"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "entrance beam",
+        "input beam"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-exit-beam-diameter",
+      "entity": "spec_definition",
+      "name": "Exit beam diameter",
+      "key": "exit_beam_diameter",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-clear-aperture",
+      "entity": "spec_definition",
+      "name": "Clear aperture",
+      "key": "clear_aperture",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "filter",
+        "dichroic"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-telecentric",
+      "entity": "spec_definition",
+      "name": "Telecentric",
+      "key": "telecentric",
+      "category": "Optical",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "f_theta",
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-distortion",
+      "entity": "spec_definition",
+      "name": "Distortion",
+      "key": "distortion",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "f_theta",
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-transmission",
+      "entity": "spec_definition",
+      "name": "Transmission",
+      "key": "transmission",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "validation": {
+        "min": 0,
+        "max": 100
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-coating",
+      "entity": "spec_definition",
+      "name": "Coating",
+      "key": "coating",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-damage-threshold",
+      "entity": "spec_definition",
+      "name": "Damage threshold",
+      "key": "damage_threshold",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "fluence",
+      "canonical_unit": "J/cm²",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-surface-quality",
+      "entity": "spec_definition",
+      "name": "Surface quality (scratch-dig)",
+      "key": "surface_quality",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-flatness",
+      "entity": "spec_definition",
+      "name": "Flatness",
+      "key": "flatness",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "mirror",
+        "window",
+        "f_theta"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-mount-type",
+      "entity": "spec_definition",
+      "name": "Mount type",
+      "key": "mount_type",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-thread",
+      "entity": "spec_definition",
+      "name": "Thread",
+      "key": "thread",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "galvo",
+        "f_theta",
+        "beam_expander",
+        "mirror",
+        "lens",
+        "window",
+        "collimator",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic",
+        "isolator",
+        "beam_delivery",
+        "laser_head",
+        "fiber",
+        "aom",
+        "eom",
+        "vision_lens"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-magnification",
+      "entity": "spec_definition",
+      "name": "Magnification",
+      "key": "magnification",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "beam_expander",
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "magnification",
+        "expansion"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-input-beam-diameter",
+      "entity": "spec_definition",
+      "name": "Input beam diameter (max)",
+      "key": "input_beam_diameter",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "beam_expander"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-output-beam-diameter",
+      "entity": "spec_definition",
+      "name": "Output beam diameter",
+      "key": "output_beam_diameter",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "beam_expander",
+        "collimator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-adjustment",
+      "entity": "spec_definition",
+      "name": "Adjustment",
+      "key": "adjustment",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "beam_expander"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-material",
+      "entity": "spec_definition",
+      "name": "Material",
+      "key": "material",
+      "category": "Physical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-diameter",
+      "entity": "spec_definition",
+      "name": "Diameter",
+      "key": "diameter",
+      "category": "Physical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "mirror",
+        "lens",
+        "window",
+        "polarizer",
+        "waveplate",
+        "filter",
+        "dichroic"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-thickness",
+      "entity": "spec_definition",
+      "name": "Thickness",
+      "key": "thickness",
+      "category": "Physical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "mirror",
+        "lens",
+        "window",
+        "filter"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-reflectivity",
+      "entity": "spec_definition",
+      "name": "Reflectivity",
+      "key": "reflectivity",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "mirror",
+        "galvo",
+        "dichroic"
+      ],
+      "validation": {
+        "min": 0,
+        "max": 100
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-spot-size",
+      "entity": "spec_definition",
+      "name": "Spot size",
+      "key": "spot_size",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "laser_head",
+        "f_theta"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "spot size",
+        "spot"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-nozzle",
+      "entity": "spec_definition",
+      "name": "Nozzle",
+      "key": "nozzle",
+      "category": "Process",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_head"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-gas",
+      "entity": "spec_definition",
+      "name": "Process gas",
+      "key": "gas",
+      "category": "Process",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_head"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensors",
+      "entity": "spec_definition",
+      "name": "Integrated sensors",
+      "key": "sensors",
+      "category": "Process",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_head"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-camera-port",
+      "entity": "spec_definition",
+      "name": "Camera port",
+      "key": "camera_port",
+      "category": "Process",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "laser_head",
+        "galvo"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-cooling-capacity",
+      "entity": "spec_definition",
+      "name": "Cooling capacity",
+      "key": "cooling_capacity",
+      "category": "Thermal",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "chiller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "cooling capacity",
+        "capacity"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-setpoint-range",
+      "entity": "spec_definition",
+      "name": "Temperature set-point range",
+      "key": "setpoint_range",
+      "category": "Thermal",
+      "spec_type": "range",
+      "unit_type": "temperature",
+      "canonical_unit": "°C",
+      "applies_to": [
+        "chiller"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-temperature-stability",
+      "entity": "spec_definition",
+      "name": "Temperature stability (±)",
+      "key": "temperature_stability",
+      "category": "Thermal",
+      "spec_type": "number",
+      "unit_type": "temperature",
+      "canonical_unit": "°C",
+      "applies_to": [
+        "chiller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-flow-rate",
+      "entity": "spec_definition",
+      "name": "Flow rate",
+      "key": "flow_rate",
+      "category": "Fluid",
+      "spec_type": "number",
+      "unit_type": "flow",
+      "canonical_unit": "L/min",
+      "applies_to": [
+        "chiller",
+        "valve",
+        "vacuum_generator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pressure",
+      "entity": "spec_definition",
+      "name": "Pressure",
+      "key": "pressure",
+      "category": "Fluid",
+      "spec_type": "number",
+      "unit_type": "pressure",
+      "canonical_unit": "bar",
+      "applies_to": [
+        "chiller",
+        "valve",
+        "regulator",
+        "cylinder"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-reservoir",
+      "entity": "spec_definition",
+      "name": "Reservoir volume",
+      "key": "reservoir",
+      "category": "Fluid",
+      "spec_type": "number",
+      "unit_type": "volume",
+      "canonical_unit": "L",
+      "applies_to": [
+        "chiller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-alarm",
+      "entity": "spec_definition",
+      "name": "Alarm outputs",
+      "key": "alarm",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "chiller",
+        "fume_extraction"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-airflow",
+      "entity": "spec_definition",
+      "name": "Airflow",
+      "key": "airflow",
+      "category": "Fluid",
+      "spec_type": "number",
+      "unit_type": "flow",
+      "canonical_unit": "m³/h",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "airflow"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-vacuum",
+      "entity": "spec_definition",
+      "name": "Vacuum / static pressure",
+      "key": "vacuum",
+      "category": "Fluid",
+      "spec_type": "number",
+      "unit_type": "pressure",
+      "canonical_unit": "Pa",
+      "applies_to": [
+        "fume_extraction",
+        "vacuum_generator"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-filter-type",
+      "entity": "spec_definition",
+      "name": "Filter type",
+      "key": "filter_type",
+      "category": "Filtration",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-filter-efficiency",
+      "entity": "spec_definition",
+      "name": "Filter efficiency",
+      "key": "filter_efficiency",
+      "category": "Filtration",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0,
+        "max": 100
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-particle-size",
+      "entity": "spec_definition",
+      "name": "Particle size (rated)",
+      "key": "particle_size",
+      "category": "Filtration",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-motor-power",
+      "entity": "spec_definition",
+      "name": "Motor power",
+      "key": "motor_power",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "fume_extraction",
+        "conveyor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-noise",
+      "entity": "spec_definition",
+      "name": "Noise",
+      "key": "noise",
+      "category": "Environment",
+      "spec_type": "number",
+      "unit_type": "sound",
+      "canonical_unit": "dB(A)",
+      "applies_to": [
+        "fume_extraction",
+        "chiller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-duct-diameter",
+      "entity": "spec_definition",
+      "name": "Duct diameter",
+      "key": "duct_diameter",
+      "category": "Mechanical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-filter-life",
+      "entity": "spec_definition",
+      "name": "Filter life",
+      "key": "filter_life",
+      "category": "Life",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "h",
+      "applies_to": [
+        "fume_extraction"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensor-type",
+      "entity": "spec_definition",
+      "name": "Sensor type",
+      "key": "sensor_type",
+      "category": "Sensor",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "camera"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensor-format",
+      "entity": "spec_definition",
+      "name": "Sensor format (as published)",
+      "key": "sensor_format",
+      "category": "Sensor",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "camera",
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensor-diagonal",
+      "entity": "spec_definition",
+      "name": "Sensor diagonal",
+      "key": "sensor_diagonal",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "sensor size",
+        "sensor diagonal"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-resolution-x",
+      "entity": "spec_definition",
+      "name": "Resolution X",
+      "key": "resolution_x",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "count",
+      "canonical_unit": "px",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-resolution-y",
+      "entity": "spec_definition",
+      "name": "Resolution Y",
+      "key": "resolution_y",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "count",
+      "canonical_unit": "px",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-megapixel",
+      "entity": "spec_definition",
+      "name": "Resolution (MP)",
+      "key": "megapixel",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "count",
+      "canonical_unit": "MP",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "mp",
+        "megapixel",
+        "resolution"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-pixel-size",
+      "entity": "spec_definition",
+      "name": "Pixel size",
+      "key": "pixel_size",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "pixel size"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-frame-rate",
+      "entity": "spec_definition",
+      "name": "Frame rate",
+      "key": "frame_rate",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "frequency",
+      "canonical_unit": "fps",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "fps",
+        "frame rate"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-shutter",
+      "entity": "spec_definition",
+      "name": "Shutter",
+      "key": "shutter",
+      "category": "Sensor",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "camera"
+      ],
+      "enum_values": [
+        "Global",
+        "Rolling"
+      ],
+      "aliases": [
+        "global shutter",
+        "rolling shutter",
+        "shutter"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-dynamic-range",
+      "entity": "spec_definition",
+      "name": "Dynamic range",
+      "key": "dynamic_range",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "sound",
+      "canonical_unit": "dB",
+      "applies_to": [
+        "camera"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-bit-depth",
+      "entity": "spec_definition",
+      "name": "Bit depth",
+      "key": "bit_depth",
+      "category": "Sensor",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "camera"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-lens-mount",
+      "entity": "spec_definition",
+      "name": "Lens mount",
+      "key": "lens_mount",
+      "category": "Mechanical",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "camera",
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "enum_values": [
+        "C",
+        "CS",
+        "F",
+        "M42",
+        "M58",
+        "S (M12)",
+        "Other"
+      ],
+      "aliases": [
+        "mount"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-gpio",
+      "entity": "spec_definition",
+      "name": "GPIO",
+      "key": "gpio",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "camera",
+        "vision_controller"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-f-number",
+      "entity": "spec_definition",
+      "name": "Aperture (f-number)",
+      "key": "f_number",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-max-sensor-diagonal",
+      "entity": "spec_definition",
+      "name": "Maximum sensor diagonal (image circle)",
+      "key": "max_sensor_diagonal",
+      "category": "Optical",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "image circle",
+        "max sensor"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-field-of-view",
+      "entity": "spec_definition",
+      "name": "Field of view",
+      "key": "field_of_view",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "vision_lens",
+        "telecentric_lens",
+        "camera"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-optical-resolution",
+      "entity": "spec_definition",
+      "name": "Optical resolution",
+      "key": "optical_resolution",
+      "category": "Optical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "vision_lens",
+        "telecentric_lens"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-coaxial",
+      "entity": "spec_definition",
+      "name": "Coaxial illumination port",
+      "key": "coaxial",
+      "category": "Optical",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "telecentric_lens",
+        "vision_lens"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-light-type",
+      "entity": "spec_definition",
+      "name": "Light type",
+      "key": "light_type",
+      "category": "Lighting",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "lighting"
+      ],
+      "enum_values": [
+        "Ring",
+        "Bar",
+        "Backlight",
+        "Dome",
+        "Coaxial",
+        "Line",
+        "Spot",
+        "UV",
+        "IR"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-color",
+      "entity": "spec_definition",
+      "name": "Colour",
+      "key": "color",
+      "category": "Lighting",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "lighting"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-intensity",
+      "entity": "spec_definition",
+      "name": "Intensity",
+      "key": "intensity",
+      "category": "Lighting",
+      "spec_type": "number",
+      "unit_type": "illuminance",
+      "canonical_unit": "lx",
+      "applies_to": [
+        "lighting"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-strobe",
+      "entity": "spec_definition",
+      "name": "Strobe capable",
+      "key": "strobe",
+      "category": "Lighting",
+      "spec_type": "boolean",
+      "unit_type": "none",
+      "applies_to": [
+        "lighting"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-travel",
+      "entity": "spec_definition",
+      "name": "Travel / stroke",
+      "key": "travel",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "cylinder"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "travel",
+        "stroke"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-payload",
+      "entity": "spec_definition",
+      "name": "Payload",
+      "key": "payload",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "mass",
+      "canonical_unit": "kg",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "rotary_stage",
+        "robot",
+        "gripper"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "payload",
+        "load"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-max-speed",
+      "entity": "spec_definition",
+      "name": "Maximum speed",
+      "key": "max_speed",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "speed",
+      "canonical_unit": "mm/s",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "robot",
+        "conveyor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "speed",
+        "velocity"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-acceleration",
+      "entity": "spec_definition",
+      "name": "Acceleration",
+      "key": "acceleration",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "acceleration",
+      "canonical_unit": "m/s²",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "robot"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-positioning-accuracy",
+      "entity": "spec_definition",
+      "name": "Accuracy",
+      "key": "positioning_accuracy",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "robot",
+        "rotary_stage"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "accuracy"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-positioning-repeatability",
+      "entity": "spec_definition",
+      "name": "Repeatability",
+      "key": "positioning_repeatability",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "robot",
+        "rotary_stage"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "repeatability"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-resolution",
+      "entity": "spec_definition",
+      "name": "Resolution",
+      "key": "resolution",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "µm",
+      "applies_to": [
+        "linear_stage",
+        "ball_screw_stage",
+        "linear_motor",
+        "encoder"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-backlash",
+      "entity": "spec_definition",
+      "name": "Backlash",
+      "key": "backlash",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "angle",
+      "canonical_unit": "arcmin",
+      "applies_to": [
+        "gearbox",
+        "rotary_stage"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rated-power",
+      "entity": "spec_definition",
+      "name": "Rated power",
+      "key": "rated_power",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "servo_motor",
+        "servo_drive",
+        "linear_motor",
+        "smps"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "motor power",
+        "rated power"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rated-torque",
+      "entity": "spec_definition",
+      "name": "Rated torque",
+      "key": "rated_torque",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "torque",
+      "canonical_unit": "N·m",
+      "applies_to": [
+        "servo_motor",
+        "gearbox"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-peak-torque",
+      "entity": "spec_definition",
+      "name": "Peak torque",
+      "key": "peak_torque",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "torque",
+      "canonical_unit": "N·m",
+      "applies_to": [
+        "servo_motor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rated-speed",
+      "entity": "spec_definition",
+      "name": "Rated speed",
+      "key": "rated_speed",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "frequency",
+      "canonical_unit": "rpm",
+      "applies_to": [
+        "servo_motor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rotor-inertia",
+      "entity": "spec_definition",
+      "name": "Rotor inertia",
+      "key": "rotor_inertia",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "inertia",
+      "canonical_unit": "kg·cm²",
+      "applies_to": [
+        "servo_motor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rated-current",
+      "entity": "spec_definition",
+      "name": "Rated current",
+      "key": "rated_current",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "current",
+      "canonical_unit": "A",
+      "applies_to": [
+        "servo_motor",
+        "servo_drive",
+        "contactor",
+        "circuit_breaker"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-duty-cycle",
+      "entity": "spec_definition",
+      "name": "Duty cycle",
+      "key": "duty_cycle",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "dimensionless",
+      "canonical_unit": "%",
+      "applies_to": [
+        "servo_motor",
+        "linear_motor"
+      ],
+      "validation": {
+        "min": 0,
+        "max": 100
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-gear-ratio",
+      "entity": "spec_definition",
+      "name": "Gear ratio",
+      "key": "gear_ratio",
+      "category": "Motion",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "gearbox"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-reach",
+      "entity": "spec_definition",
+      "name": "Reach",
+      "key": "reach",
+      "category": "Robot",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "robot"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "aliases": [
+        "reach"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-axes",
+      "entity": "spec_definition",
+      "name": "Axes",
+      "key": "axes",
+      "category": "Robot",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "robot",
+        "motion_controller",
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-workspace",
+      "entity": "spec_definition",
+      "name": "Workspace",
+      "key": "workspace",
+      "category": "Robot",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "robot"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-mounting",
+      "entity": "spec_definition",
+      "name": "Mounting",
+      "key": "mounting",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-ip-rating",
+      "entity": "spec_definition",
+      "name": "IP rating",
+      "key": "ip_rating",
+      "category": "Environment",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "*"
+      ],
+      "aliases": [
+        "ip rating",
+        "ip"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-cpu",
+      "entity": "spec_definition",
+      "name": "CPU",
+      "key": "cpu",
+      "category": "Compute",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "plc",
+        "hmi",
+        "ipc",
+        "vision_controller"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-scan-time",
+      "entity": "spec_definition",
+      "name": "Scan time (1 k instructions)",
+      "key": "scan_time",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "ms",
+      "applies_to": [
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-program-memory",
+      "entity": "spec_definition",
+      "name": "Program memory",
+      "key": "program_memory",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "data",
+      "canonical_unit": "MB",
+      "applies_to": [
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-data-memory",
+      "entity": "spec_definition",
+      "name": "Data memory",
+      "key": "data_memory",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "data",
+      "canonical_unit": "MB",
+      "applies_to": [
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-digital-inputs",
+      "entity": "spec_definition",
+      "name": "Digital inputs",
+      "key": "digital_inputs",
+      "category": "I/O",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "plc",
+        "safety_plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-digital-outputs",
+      "entity": "spec_definition",
+      "name": "Digital outputs",
+      "key": "digital_outputs",
+      "category": "I/O",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "plc",
+        "safety_plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-analog-inputs",
+      "entity": "spec_definition",
+      "name": "Analog inputs",
+      "key": "analog_inputs",
+      "category": "I/O",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-analog-outputs",
+      "entity": "spec_definition",
+      "name": "Analog outputs",
+      "key": "analog_outputs",
+      "category": "I/O",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "plc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-motion-axes",
+      "entity": "spec_definition",
+      "name": "Motion axes",
+      "key": "motion_axes",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "none",
+      "applies_to": [
+        "plc",
+        "motion_controller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-expansion",
+      "entity": "spec_definition",
+      "name": "Expansion",
+      "key": "expansion",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "plc"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-screen-size",
+      "entity": "spec_definition",
+      "name": "Screen size",
+      "key": "screen_size",
+      "category": "Display",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "inch",
+      "applies_to": [
+        "hmi",
+        "ipc"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-display-resolution",
+      "entity": "spec_definition",
+      "name": "Display resolution",
+      "key": "display_resolution",
+      "category": "Display",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "hmi",
+        "ipc"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-touch",
+      "entity": "spec_definition",
+      "name": "Touch",
+      "key": "touch",
+      "category": "Display",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "hmi"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-ram",
+      "entity": "spec_definition",
+      "name": "RAM",
+      "key": "ram",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "data",
+      "canonical_unit": "GB",
+      "applies_to": [
+        "hmi",
+        "ipc",
+        "vision_controller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-storage",
+      "entity": "spec_definition",
+      "name": "Storage",
+      "key": "storage",
+      "category": "Compute",
+      "spec_type": "number",
+      "unit_type": "data",
+      "canonical_unit": "GB",
+      "applies_to": [
+        "hmi",
+        "ipc",
+        "vision_controller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-os",
+      "entity": "spec_definition",
+      "name": "Operating system",
+      "key": "os",
+      "category": "Compute",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "hmi",
+        "ipc",
+        "vision_controller"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-gpu",
+      "entity": "spec_definition",
+      "name": "GPU",
+      "key": "gpu",
+      "category": "Compute",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "ipc",
+        "vision_controller"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensor-category",
+      "entity": "spec_definition",
+      "name": "Sensor category",
+      "key": "sensor_category",
+      "category": "Sensor",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "sensor"
+      ],
+      "enum_values": [
+        "Proximity",
+        "Photoelectric",
+        "Laser displacement",
+        "Pressure",
+        "Temperature",
+        "Flow",
+        "Force",
+        "Torque",
+        "Encoder",
+        "Vibration",
+        "Safety"
+      ],
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sensing-range",
+      "entity": "spec_definition",
+      "name": "Sensing range",
+      "key": "sensing_range",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "sensor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-response-time",
+      "entity": "spec_definition",
+      "name": "Response time",
+      "key": "response_time",
+      "category": "Sensor",
+      "spec_type": "number",
+      "unit_type": "time",
+      "canonical_unit": "ms",
+      "applies_to": [
+        "sensor",
+        "light_curtain",
+        "safety_scanner",
+        "safety_relay",
+        "safety_plc",
+        "valve"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-output-type",
+      "entity": "spec_definition",
+      "name": "Output type",
+      "key": "output_type",
+      "category": "I/O",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "sensor"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-performance-level",
+      "entity": "spec_definition",
+      "name": "Performance level (ISO 13849)",
+      "key": "performance_level",
+      "category": "Safety",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "safety_plc",
+        "safety_relay",
+        "light_curtain",
+        "safety_scanner",
+        "door_switch",
+        "safety_controller",
+        "emergency_stop"
+      ],
+      "enum_values": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "filterable": true,
+      "description": "Only from the manufacturer’s declaration — never inferred.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-sil",
+      "entity": "spec_definition",
+      "name": "SIL (IEC 62061)",
+      "key": "sil",
+      "category": "Safety",
+      "spec_type": "enum",
+      "unit_type": "none",
+      "applies_to": [
+        "safety_plc",
+        "safety_relay",
+        "light_curtain",
+        "safety_scanner",
+        "safety_controller"
+      ],
+      "enum_values": [
+        "1",
+        "2",
+        "3"
+      ],
+      "filterable": true,
+      "description": "Only from the manufacturer’s declaration — never inferred.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-protective-range",
+      "entity": "spec_definition",
+      "name": "Protective range / height",
+      "key": "protective_range",
+      "category": "Safety",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "light_curtain",
+        "safety_scanner"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-detection-resolution",
+      "entity": "spec_definition",
+      "name": "Detection resolution",
+      "key": "detection_resolution",
+      "category": "Safety",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "light_curtain",
+        "safety_scanner"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-monitoring",
+      "entity": "spec_definition",
+      "name": "Monitoring",
+      "key": "monitoring",
+      "category": "Safety",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "safety_relay",
+        "safety_plc",
+        "door_switch"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-bore",
+      "entity": "spec_definition",
+      "name": "Bore",
+      "key": "bore",
+      "category": "Pneumatic",
+      "spec_type": "number",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "cylinder"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-force",
+      "entity": "spec_definition",
+      "name": "Force",
+      "key": "force",
+      "category": "Pneumatic",
+      "spec_type": "number",
+      "unit_type": "force",
+      "canonical_unit": "N",
+      "applies_to": [
+        "cylinder",
+        "gripper"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-port",
+      "entity": "spec_definition",
+      "name": "Port",
+      "key": "port",
+      "category": "Pneumatic",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "cylinder",
+        "valve",
+        "regulator"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-rated-voltage",
+      "entity": "spec_definition",
+      "name": "Rated voltage",
+      "key": "rated_voltage",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "voltage",
+      "canonical_unit": "V",
+      "applies_to": [
+        "smps",
+        "circuit_breaker",
+        "contactor",
+        "ups",
+        "cable"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-output-power",
+      "entity": "spec_definition",
+      "name": "Output power",
+      "key": "output_power",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "power",
+      "canonical_unit": "W",
+      "applies_to": [
+        "smps",
+        "ups"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-supply-frequency",
+      "entity": "spec_definition",
+      "name": "Supply frequency",
+      "key": "supply_frequency",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "frequency",
+      "canonical_unit": "Hz",
+      "applies_to": [
+        "smps",
+        "ups",
+        "chiller"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-breaking-capacity",
+      "entity": "spec_definition",
+      "name": "Breaking capacity",
+      "key": "breaking_capacity",
+      "category": "Electrical",
+      "spec_type": "number",
+      "unit_type": "current",
+      "canonical_unit": "kA",
+      "applies_to": [
+        "circuit_breaker"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-load-capacity",
+      "entity": "spec_definition",
+      "name": "Load capacity",
+      "key": "load_capacity",
+      "category": "Mechanical",
+      "spec_type": "number",
+      "unit_type": "force",
+      "canonical_unit": "N",
+      "applies_to": [
+        "frame",
+        "guide_rail",
+        "fixture",
+        "conveyor"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-tolerance",
+      "entity": "spec_definition",
+      "name": "Tolerance",
+      "key": "tolerance",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "frame",
+        "fixture",
+        "guide_rail"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-surface-finish",
+      "entity": "spec_definition",
+      "name": "Surface finish",
+      "key": "surface_finish",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "frame",
+        "fixture",
+        "enclosure"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-manufacturing-process",
+      "entity": "spec_definition",
+      "name": "Manufacturing process",
+      "key": "manufacturing_process",
+      "category": "Mechanical",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "frame",
+        "fixture",
+        "enclosure"
+      ],
+      "filterable": false,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-width-range",
+      "entity": "spec_definition",
+      "name": "Width range",
+      "key": "width_range",
+      "category": "Mechanical",
+      "spec_type": "range",
+      "unit_type": "length",
+      "canonical_unit": "mm",
+      "applies_to": [
+        "conveyor",
+        "fixture"
+      ],
+      "validation": {
+        "min": 0
+      },
+      "filterable": true,
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    },
+    {
+      "id": "spd-laser-class",
+      "entity": "spec_definition",
+      "name": "Laser safety class of the enclosure (declared)",
+      "key": "laser_class",
+      "category": "Safety",
+      "spec_type": "text",
+      "unit_type": "none",
+      "applies_to": [
+        "enclosure"
+      ],
+      "filterable": false,
+      "description": "Only a declared class — never inferred.",
+      "data_type": "TEAL_INTERNAL",
+      "provenance": {
+        "source_id": "src-sim-master-prompt",
+        "verification_status": "SOURCE_DOCUMENTED",
+        "note": "Parameter name from the master prompt specification catalogue; holds no value."
+      }
+    }
+  ]
+}

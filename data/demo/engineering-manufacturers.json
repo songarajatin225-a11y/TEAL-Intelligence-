@@ -1,0 +1,313 @@
+{
+  "dataset": {
+    "id": "demo-manufacturers",
+    "title": "DEMO manufacturers",
+    "entity": "company",
+    "description": "Fictional manufacturers for the DEMO engineering database. Not real companies.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "DEMO",
+    "source_ids": [
+      "src-demo-datasheets"
+    ],
+    "partition": "companies"
+  },
+  "records": [
+    {
+      "id": "co-demo-photonics",
+      "entity": "company",
+      "name": "DEMO Photonics Co.",
+      "display_name": "DEMO Photonics Co.",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "Germany (DEMO)",
+      "registry_categories": [
+        "Laser"
+      ],
+      "technologies": [
+        "Pulsed fiber (MOPA)",
+        "UV DPSS",
+        "CW fiber",
+        "CO₂"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-laser-india",
+      "entity": "company",
+      "name": "DEMO Laser India",
+      "display_name": "DEMO Laser India",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "Laser"
+      ],
+      "technologies": [
+        "Q-switched fiber"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-scan",
+      "entity": "company",
+      "name": "DEMO Scan Systems",
+      "display_name": "DEMO Scan Systems",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "Germany (DEMO)",
+      "registry_categories": [
+        "Galvo",
+        "Optics"
+      ],
+      "technologies": [
+        "Galvanometer scanners",
+        "Scan controllers"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-optics",
+      "entity": "company",
+      "name": "DEMO Optics Works",
+      "display_name": "DEMO Optics Works",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "Optics"
+      ],
+      "technologies": [
+        "F-theta lenses",
+        "Beam expanders"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-vision",
+      "entity": "company",
+      "name": "DEMO Vision Labs",
+      "display_name": "DEMO Vision Labs",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "Japan (DEMO)",
+      "registry_categories": [
+        "Vision"
+      ],
+      "technologies": [
+        "Area-scan cameras",
+        "Machine-vision lenses",
+        "Lighting",
+        "Vision controllers"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-motion",
+      "entity": "company",
+      "name": "DEMO Motion Drives",
+      "display_name": "DEMO Motion Drives",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "Motion"
+      ],
+      "technologies": [
+        "Servo motors",
+        "Servo drives",
+        "Linear stages"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-controls",
+      "entity": "company",
+      "name": "DEMO Controls Ltd",
+      "display_name": "DEMO Controls Ltd",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "PLC",
+        "Automation"
+      ],
+      "technologies": [
+        "PLC",
+        "HMI",
+        "Industrial PC"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-safety",
+      "entity": "company",
+      "name": "DEMO Safety Systems",
+      "display_name": "DEMO Safety Systems",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "Germany (DEMO)",
+      "registry_categories": [
+        "Safety"
+      ],
+      "technologies": [
+        "Safety PLC",
+        "Light curtains",
+        "Interlocks"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-robotics",
+      "entity": "company",
+      "name": "DEMO Robotics Inc.",
+      "display_name": "DEMO Robotics Inc.",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "Japan (DEMO)",
+      "registry_categories": [
+        "Robotics"
+      ],
+      "technologies": [
+        "SCARA robots",
+        "Grippers"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-thermal",
+      "entity": "company",
+      "name": "DEMO Thermal Systems",
+      "display_name": "DEMO Thermal Systems",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "Laser"
+      ],
+      "technologies": [
+        "Chillers",
+        "Fume extraction"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    },
+    {
+      "id": "co-demo-fab",
+      "entity": "company",
+      "name": "DEMO Fabrication (local)",
+      "display_name": "DEMO Fabrication (local)",
+      "roles": [
+        "manufacturer"
+      ],
+      "country": "India (DEMO)",
+      "registry_categories": [
+        "Automation"
+      ],
+      "technologies": [
+        "Conveyors",
+        "Fixtures",
+        "Enclosures",
+        "Panels"
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ]
+    }
+  ]
+}

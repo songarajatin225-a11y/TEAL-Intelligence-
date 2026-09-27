@@ -1,7 +1,7 @@
 {
-  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/source.schema.json",
-  "title": "Source",
-  "description": "TEAL Engineering Intelligence OS — Source record (id prefix \"src-\"). Generated from src/domain; do not edit.",
+  "$id": "https://songarajatin225-a11y.github.io/TEAL-Intelligence-/schemas/spec_definition.schema.json",
+  "title": "Specification definition",
+  "description": "TEAL Engineering Intelligence OS — Specification definition record (id prefix \"spd-\"). Generated from src/domain; do not edit.",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -175,113 +175,68 @@
     },
     "entity": {
       "type": "string",
-      "const": "source"
+      "const": "spec_definition"
     },
-    "kind": {
+    "key": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "category": {
+      "type": "string"
+    },
+    "spec_type": {
       "type": "string",
       "enum": [
-        "handbook",
-        "legacy_app",
-        "datasheet",
-        "web",
-        "standard",
-        "internal",
-        "paper",
-        "patent",
-        "dataset"
+        "number",
+        "range",
+        "text",
+        "enum",
+        "boolean"
       ]
     },
-    "url": {
+    "unit_type": {
       "type": "string"
     },
-    "publisher": {
+    "canonical_unit": {
       "type": "string"
     },
-    "author": {
-      "type": "string"
+    "allowed_units": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "published": {
-      "type": "string"
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "retrieved_at": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
+    "enum_values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "terms_note": {
-      "type": "string"
-    },
-    "source_type": {
-      "type": "string",
-      "enum": [
-        "Manufacturer",
-        "Distributor",
-        "Technical Paper",
-        "Research",
-        "Standard",
-        "Government",
-        "Industry Report",
-        "User Provided",
-        "TEAL Internal",
-        "Derived"
-      ]
-    },
-    "organization": {
-      "type": "string"
-    },
-    "document_url": {
-      "type": "string"
-    },
-    "last_verified": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "next_review": {
-      "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-    },
-    "license": {
-      "type": "string"
-    },
-    "manufacturer_id": {
-      "type": "string"
-    },
-    "crawl": {
+    "validation": {
       "type": "object",
       "properties": {
-        "domain": {
-          "type": "string"
+        "min": {
+          "type": "number"
         },
-        "category": {
-          "type": "string"
-        },
-        "priority": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 9
-        },
-        "approved": {
-          "type": "boolean"
-        },
-        "last_crawl": {
-          "type": "string",
-          "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ][\\d:.]+Z?([+-]\\d{2}:?\\d{2})?)?$"
-        },
-        "crawl_status": {
-          "type": "string",
-          "enum": [
-            "Not crawled",
-            "OK",
-            "Blocked by robots.txt",
-            "Terms prohibit",
-            "Login required",
-            "Error"
-          ]
+        "max": {
+          "type": "number"
         }
-      },
-      "required": [
-        "domain",
-        "approved"
-      ]
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "filterable": {
+      "type": "boolean"
     }
   },
   "required": [
@@ -290,6 +245,10 @@
     "data_type",
     "provenance",
     "entity",
-    "kind"
+    "key",
+    "category",
+    "spec_type",
+    "unit_type",
+    "applies_to"
   ]
 }

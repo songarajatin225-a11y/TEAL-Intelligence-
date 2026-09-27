@@ -1,4 +1,5 @@
 import * as E from '../../domain/entities';
+import * as G from '../../domain/engineering';
 
 /*
  * Schema-driven UI definitions (the pattern the legacy PM Tracker used in schema.js):
@@ -59,7 +60,7 @@ export const ENTITY_UI: Record<string, EntityUi> = {
   },
   requirement: {
     columns: [{ key: 'code', label: 'Code' }, { key: 'level', label: 'Level' }, { key: 'category', label: 'Category' }, { key: 'priority', label: 'Priority', kind: 'status' }, { key: 'verification_method', label: 'Verify by' }, { key: 'acceptance_criterion', label: 'Acceptance' }],
-    fields: [t('code', 'ID / code', { required: true }), sel('level', 'Level', E.REQUIREMENT_LEVELS), sel('category', 'Type', E.REQUIREMENT_CATEGORIES), t('value', 'Value'), t('unit', 'Unit'), t('condition', 'Condition'), sel('priority', 'Priority', ['Must', 'Should', 'Could']), sel('verification_method', 'Verification method', E.VERIFICATION_METHODS), t('acceptance_criterion', 'Acceptance criterion', { span: 2 }), t('status', 'Status'), ref('parent_id', 'Parent requirement', 'requirement'), ref('opportunity_id', 'Opportunity', 'opportunity'), ref('project_id', 'Project', 'project'), ref('product_id', 'Product', 'product'), ta('source', 'Source (customer statement)')],
+    fields: [t('code', 'ID / code', { required: true }), sel('level', 'Level', E.REQUIREMENT_LEVELS), sel('category', 'Type', E.REQUIREMENT_CATEGORIES), t('value', 'Value'), t('unit', 'Unit'), t('condition', 'Condition'), sel('priority', 'Priority', ['Must', 'Should', 'Could']), sel('verification_method', 'Verification method', E.VERIFICATION_METHODS), t('acceptance_criterion', 'Acceptance criterion', { span: 2 }), t('status', 'Status'), ref('parent_id', 'Parent requirement', 'requirement'), ref('opportunity_id', 'Opportunity', 'opportunity'), ref('project_id', 'Project', 'project'), ref('product_id', 'Product', 'product'), sel('req_type', 'Requirement type', ['Market', 'Customer', 'Product', 'System', 'Subsystem', 'Component', 'Performance', 'Safety', 'Software', 'Interface', 'Manufacturing', 'Service', 'Regulatory']), sel('criticality', 'Criticality', ['Critical', 'High', 'Medium', 'Low']), t('owner', 'Owner'), ref('customer_id', 'Customer', 'customer'), ref('simulation_id', 'Equipment scenario', 'simulation'), ref('part_id', 'Component', 'part'), t('system', 'System'), t('subsystem', 'Subsystem'), t('baseline', 'Baseline'), date('target_date', 'Target date'), t('validation_method', 'Validation method'), refs('dependencies', 'Depends on', 'requirement'), ta('evidence', 'Evidence'), ta('source', 'Source (customer statement)')],
     defaults: { level: 'URS', category: 'Functional', priority: 'Must', code: 'URS-' },
   },
   application: {
@@ -148,7 +149,7 @@ export const ENTITY_UI: Record<string, EntityUi> = {
   },
   technology: { columns: [{ key: 'domain', label: 'Domain' }, { key: 'adoption', label: 'Ring', kind: 'status' }, { key: 'radar_status', label: 'Maturity' }], fields: [t('domain', 'Domain'), sel('adoption', 'TEAL radar ring (team decision)', E.TECH_ADOPTION), ta('adoption_rationale', 'Why this ring? (required when a ring is set)'), date('adoption_reviewed', 'Ring reviewed on'), sel('radar_status', 'Market maturity (requires evidence)', ['', ...E.TECH_STATUSES]), t('category', 'Category'), num('trl', 'TRL (1–9)', 'Leave empty if not assessed'), ta('trl_basis', 'TRL basis (required with a TRL)'), t('performance', 'Performance'), refs('supplier_ids', 'Suppliers', 'supplier'), refs('alternate_ids', 'Alternative technologies', 'technology'), t('cost_note', 'Cost'), t('lead_time', 'Lead time'), t('localization', 'Localization'), lines('risks', 'Risks'), refs('application_ids', 'Applications', 'application'), refs('domain_ids', 'Domains', 'domain'), lines('references', 'References'), refs('evidence_ids', 'Evidence', 'evidence')], defaults: { domain: 'Laser', radar_status: null, trl: null } },
   decision: { columns: [{ key: 'decided_on', label: 'Decided', kind: 'date' }, { key: 'approver', label: 'Approver' }], fields: [ta('question', 'Question'), ta('context', 'Context'), lines('options', 'Options'), lines('criteria', 'Criteria'), lines('constraints', 'Constraints'), refs('evidence_ids', 'Evidence', 'evidence'), ta('decision', 'Decision'), t('approver', 'Approver'), date('decided_on', 'Date'), num('revision', 'Revision')], defaults: { question: '', options: [] } },
-  change_request: { columns: [{ key: 'change_type', label: 'Type' }, { key: 'cr_status', label: 'Status', kind: 'status' }], fields: [sel('change_type', 'Type', ['ECR', 'ECN']), sel('cr_status', 'Status', ['Draft', 'Submitted', 'Approved', 'Rejected', 'Implemented', 'Verified']), ta('reason', 'Reason'), ta('impact', 'Impact analysis (BOM, documents, software, requirements, tests)'), refs('affected_ids', 'Affected records', '*')], defaults: { change_type: 'ECR', cr_status: 'Draft', reason: '' } },
+  change_request: { columns: [{ key: 'change_type', label: 'Type' }, { key: 'cr_status', label: 'Status', kind: 'status' }], fields: [sel('change_type', 'Type', ['ECR', 'ECN', 'ECO']), sel('cr_status', 'Status', ['Draft', 'Submitted', 'Approved', 'Rejected', 'Implemented', 'Verified']), ta('reason', 'Reason'), t('field', 'What changes (parameter / component)'), t('old_value', 'Old value'), t('new_value', 'New value'), ref('ecr_id', 'Originating ECR (for an ECO)', 'change_request'), ta('impact', 'Impact analysis (BOM, documents, software, requirements, tests)'), refs('affected_ids', 'Affected records (components, requirements, BOM, suppliers, tests, documents)', '*'), t('approved_by', 'Approved by'), date('approved_at', 'Approved on'), ta('implementation', 'Implementation')], defaults: { change_type: 'ECR', cr_status: 'Draft', reason: '' } },
   localization: { columns: [{ key: 'imported_component', label: 'Imported component' }, { key: 'indian_alternative', label: 'Indian alternative' }, { key: 'classification', label: 'Class', kind: 'status' }, { key: 'current_cost', label: 'Current', kind: 'money' }, { key: 'localized_cost', label: 'Localized', kind: 'money' }], fields: [t('imported_component', 'Imported component', { required: true }), t('indian_alternative', 'Indian alternative'), ref('supplier_id', 'Supplier', 'supplier'), num('current_cost', 'Current (landed) cost'), num('localized_cost', 'Localized cost'), sel('currency', 'Currency', E.Currency.options), t('lead_time', 'Lead time'), t('technology_gap', 'Technology gap', { span: 2 }), sel('classification', 'Classification', ['LOCALIZE', 'PARTNER', 'BUY', 'DEVELOP', 'IMPORT', 'UNDECIDED']), t('stage', 'Stage')], defaults: { classification: 'UNDECIDED', imported_component: '' } },
   evidence: { columns: [{ key: 'entity_id', label: 'About', kind: 'ref' }, { key: 'source_id', label: 'Source', kind: 'ref' }, { key: 'confidence', label: 'Confidence' }], fields: [ta('claim', 'Claim'), ref('entity_id', 'About record', '*'), ref('source_id', 'Source', 'source'), t('source_url', 'Source URL'), t('document', 'Document'), t('page', 'Page'), t('section', 'Section'), ta('excerpt', 'Excerpt (if permitted)'), sel('verification_status', 'Verification', ['VERIFIED', 'SOURCE_DOCUMENTED', 'DRAFT', 'UNKNOWN', 'CONFLICTED', 'STALE']), sel('confidence', 'Confidence', ['HIGH', 'MEDIUM', 'LOW', 'UNKNOWN']), t('reviewer', 'Reviewer'), date('verification_date', 'Verification date')], defaults: { verification_status: 'DRAFT', confidence: 'UNKNOWN', claim: '' } },
   source: { columns: [{ key: 'kind', label: 'Kind' }, { key: 'publisher', label: 'Publisher' }, { key: 'published', label: 'Published' }], fields: [sel('kind', 'Kind', ['handbook', 'legacy_app', 'datasheet', 'web', 'standard', 'internal', 'paper', 'patent', 'dataset']), t('url', 'URL'), t('publisher', 'Publisher'), t('author', 'Author'), t('published', 'Published'), date('retrieved_at', 'Retrieved'), t('terms_note', 'Terms / licence note', { span: 2 })], defaults: { kind: 'datasheet' } },
@@ -162,4 +163,76 @@ export const ENTITY_UI: Record<string, EntityUi> = {
   vocabulary: { columns: [{ key: 'key', label: 'Key' }, { key: 'values', label: 'Values', kind: 'list' }], fields: [], readOnly: true },
   product_family: { columns: [{ key: 'segment', label: 'Segment' }, { key: 'chapter', label: 'Chapter' }], fields: [], readOnly: true },
   module_conflict: { columns: [{ key: 'reason', label: 'Reason' }], fields: [], readOnly: true },
+  part: {
+    columns: [{ key: 'manufacturer_id', label: 'Manufacturer', kind: 'ref' }, { key: 'model_number', label: 'Model' }, { key: 'product_type', label: 'Type' }, { key: 'lifecycle_status', label: 'Lifecycle', kind: 'status' }, { key: 'record_status', label: 'Record', kind: 'status' }],
+    fields: [
+      t('model_number', 'Model / part number', { required: true }),
+      sel('product_type', 'Product type', Object.keys(G.PRODUCT_TYPES), { required: true }),
+      sel('scope', 'Scope', G.DATA_SCOPES, { required: true, hint: 'GLOBAL = public engineering data; TEAL = internal product/capability' }),
+      sel('record_status', 'Record status', G.RECORD_STATUSES),
+      sel('lifecycle_status', 'Lifecycle', G.LIFECYCLE_STATUSES),
+      ref('manufacturer_id', 'Manufacturer', 'company'),
+      t('brand', 'Brand'),
+      t('family', 'Family'),
+      t('series', 'Series'),
+      t('category', 'Category'),
+      t('subcategory', 'Subcategory'),
+      t('country_of_origin', 'Country of origin'),
+      t('manufacturing_location', 'Manufacturing location'),
+      date('release_date', 'Release date'),
+      date('discontinued_date', 'Discontinued date'),
+      ref('successor_id', 'Successor', 'part'),
+      refs('application_ids', 'Applications', 'application'),
+      refs('supplier_ids', 'Suppliers / distributors', 'supplier'),
+      lines('technologies', 'Technologies'),
+      lines('processes', 'Processes'),
+      ta('description', 'Description'),
+    ],
+    defaults: { scope: 'GLOBAL', record_status: 'Draft', lifecycle_status: 'Unknown', product_type: 'laser_source', specs: [] },
+    intro: 'Global engineering database. One canonical record per component; specifications carry their own source and evidence. Values you do not have stay Not Available — never estimate a manufacturer specification.',
+  },
+  spec_definition: {
+    columns: [{ key: 'key', label: 'Key' }, { key: 'category', label: 'Category' }, { key: 'spec_type', label: 'Type' }, { key: 'canonical_unit', label: 'Unit' }, { key: 'applies_to', label: 'Applies to', kind: 'list' }],
+    fields: [t('key', 'Key (snake_case)', { required: true }), t('category', 'Category', { required: true }), sel('spec_type', 'Data type', G.SPEC_DATA_TYPES, { required: true }), t('unit_type', 'Unit dimension', { hint: 'power, length, frequency, time, energy, speed, angle, voltage … or none' }), t('canonical_unit', 'Canonical unit'), { key: 'allowed_units', label: 'Allowed units', type: 'tags' }, { key: 'applies_to', label: 'Applies to product types', type: 'tags' }, { key: 'enum_values', label: 'Enum values', type: 'tags' }, { key: 'aliases', label: 'Query aliases', type: 'tags' }, { key: 'filterable', label: 'Filterable', type: 'bool' }, ta('description', 'Description')],
+    defaults: { spec_type: 'number', unit_type: 'none', applies_to: [], category: 'General' },
+  },
+  compatibility_rule: {
+    columns: [{ key: 'a_types', label: 'A', kind: 'list' }, { key: 'b_types', label: 'B', kind: 'list' }, { key: 'check', label: 'Check' }, { key: 'on_fail', label: 'On fail', kind: 'status' }, { key: 'rule_version', label: 'v', kind: 'num' }, { key: 'rule_status', label: 'Status', kind: 'status' }],
+    fields: [{ key: 'a_types', label: 'A product types', type: 'tags', required: true }, { key: 'b_types', label: 'B product types', type: 'tags', required: true }, sel('check', 'Check', G.RULE_CHECKS, { required: true }), t('a_spec', 'A specification key', { required: true }), t('b_spec', 'B specification key', { required: true }), num('factor', 'Factor (a × factor vs b)'), sel('on_fail', 'Result when violated', ['Incompatible', 'ConditionallyCompatible']), num('rule_version', 'Rule version'), sel('rule_status', 'Status', ['Draft', 'Active', 'Retired']), t('reviewed_by', 'Reviewed by'), date('reviewed_at', 'Reviewed on'), ta('explanation', 'Explanation (shown with every result)')],
+    defaults: { check: 'range_contains', on_fail: 'Incompatible', rule_version: 1, rule_status: 'Draft', a_types: [], b_types: [], explanation: '' },
+  },
+  compatibility: {
+    columns: [{ key: 'a_id', label: 'A', kind: 'ref' }, { key: 'b_id', label: 'B', kind: 'ref' }, { key: 'relationship', label: 'Relationship', kind: 'status' }],
+    fields: [ref('a_id', 'Component A', 'part'), ref('b_id', 'Component B', 'part'), sel('relationship', 'Relationship', G.COMPAT_TYPES, { required: true, hint: 'ManufacturerRecommended needs a manufacturer source' }), t('conditions', 'Conditions', { span: 2 }), ta('evidence', 'Evidence (document, page, excerpt)')],
+    defaults: { relationship: 'Unknown' },
+  },
+  data_conflict: {
+    columns: [{ key: 'part_id', label: 'Record', kind: 'ref' }, { key: 'parameter', label: 'Parameter' }, { key: 'value_a', label: 'Value A' }, { key: 'value_b', label: 'Value B' }, { key: 'conflict_status', label: 'Status', kind: 'status' }],
+    fields: [ref('part_id', 'Record', 'part'), t('parameter', 'Parameter', { required: true }), ref('source_a_id', 'Source A', 'source'), t('value_a', 'Value A', { required: true }), ref('source_b_id', 'Source B', 'source'), t('value_b', 'Value B', { required: true }), sel('conflict_status', 'Status', ['Open', 'Resolved', 'Dismissed']), t('reviewer', 'Reviewer'), ref('resolution_source_id', 'Resolution source', 'source'), ta('resolution', 'Resolution')],
+    defaults: { conflict_status: 'Open', value_a: '', value_b: '' },
+  },
+  equipment_template: {
+    columns: [{ key: 'group', label: 'Group' }, { key: 'application', label: 'Application' }, { key: 'process', label: 'Process' }],
+    fields: [],
+    readOnly: true,
+    intro: 'Equipment templates are structure only (stations, slots). Station times are entered per simulation scenario with their basis.',
+  },
+  simulation: {
+    columns: [{ key: 'scenario_label', label: 'Label' }, { key: 'template_id', label: 'Template', kind: 'ref' }, { key: 'customer_id', label: 'Customer', kind: 'ref' }, { key: 'sim_status', label: 'Status', kind: 'status' }, { key: 'version', label: 'v', kind: 'num' }],
+    fields: [t('scenario_label', 'Scenario label'), sel('sim_status', 'Status', ['Draft', 'In Review', 'Baselined', 'Archived']), sel('config_level', 'Configuration level', ['Base Product', 'Product Variant', 'Equipment Variant', 'Customer Configuration', 'Project Configuration']), ref('customer_id', 'Customer', 'customer'), ref('opportunity_id', 'Opportunity', 'opportunity'), ref('project_id', 'Project', 'project'), ref('application_id', 'Application', 'application'), ref('material_id', 'Material', 'material'), refs('requirement_ids', 'Requirements', 'requirement'), ta('change_reason', 'Change reason')],
+    defaults: { sim_status: 'Draft' },
+    intro: 'Simulation scenarios are edited in the Equipment Simulation Studio.',
+  },
+  recipe: {
+    columns: [{ key: 'recipe_version', label: 'Version' }, { key: 'application_id', label: 'Application', kind: 'ref' }, { key: 'material_id', label: 'Material', kind: 'ref' }, { key: 'recipe_status', label: 'Status', kind: 'status' }],
+    fields: [t('recipe_version', 'Version', { required: true }), sel('recipe_status', 'Status', ['Draft', 'Trial', 'Validated', 'Released', 'Obsolete'], { required: true }), ref('simulation_id', 'Equipment scenario', 'simulation'), ref('product_id', 'Product', 'product'), ref('application_id', 'Application', 'application'), ref('material_id', 'Material', 'material'), ref('poc_id', 'POC', 'poc'), lines('quality_criteria', 'Quality criteria'), lines('acceptance_criteria', 'Acceptance criteria')],
+    defaults: { recipe_version: '0.1', recipe_status: 'Draft', parameters: [] },
+    intro: 'Process recipes: parameters, quality and acceptance criteria. A recipe is Validated only with a POC or verification record behind it.',
+  },
+  verification: {
+    columns: [{ key: 'kind', label: 'Kind' }, { key: 'requirement_id', label: 'Requirement', kind: 'ref' }, { key: 'method', label: 'Method' }, { key: 'expected', label: 'Expected' }, { key: 'actual', label: 'Actual' }, { key: 'result', label: 'Result', kind: 'status' }, { key: 'date', label: 'Date', kind: 'date' }],
+    fields: [sel('kind', 'Kind', ['Verification', 'Validation'], { required: true }), ref('requirement_id', 'Requirement', 'requirement'), sel('method', 'Method', E.VERIFICATION_METHODS, { required: true }), t('expected', 'Expected'), t('actual', 'Actual (measured)'), t('unit', 'Unit'), sel('result', 'Result', ['NOT RUN', 'PASS', 'FAIL', 'PASS WITH DEVIATION'], { required: true }), ref('simulation_id', 'Equipment scenario', 'simulation'), ref('machine_id', 'Machine', 'machine'), ref('poc_id', 'POC', 'poc'), ref('recipe_id', 'Recipe', 'recipe'), ref('customer_id', 'Customer', 'customer'), ref('material_id', 'Material', 'material'), t('environment', 'Environment'), t('tester', 'Tester'), date('date', 'Date'), t('calibration', 'Instrument calibration'), t('approved_by', 'Approved by'), date('approved_at', 'Approved on'), ta('evidence', 'Evidence')],
+    defaults: { kind: 'Verification', method: 'Test', result: 'NOT RUN' },
+    intro: 'Verification (did we build it right — inspection, analysis, demonstration, test) and validation (did we build the right thing — customer, application, material, recipe). Results are recorded, never pre-filled.',
+  },
 };
