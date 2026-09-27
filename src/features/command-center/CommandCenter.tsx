@@ -10,6 +10,7 @@ import { useAttention } from '../../app/shell/StatusCenter';
 import { DataConfidence, StatusBadge } from '../../components/badges';
 import { BusinessStory } from '../../components/BusinessStory';
 import { recordPath } from '../../components/RecordLink';
+import { EngineeringKpis } from './EngineeringKpis';
 import { ExecutiveBoard } from './ExecutiveBoard';
 import { Button, buttonClass, Card, EmptyState, SectionHeader } from '../../components/ui';
 import type { Activity as Act, CostModel, Opportunity, Poc, Product, Project, Risk } from '../../domain/entities';
@@ -116,7 +117,8 @@ export default function CommandCenter() {
         <div className="max-w-3xl">
           <div className="mb-1 text-micro font-semibold uppercase tracking-[0.1em] text-accent-2">TEAL Intelligence · {ws.label}</div>
           <h1 className="text-title font-semibold tracking-[-0.02em]">{exec ? 'Executive View' : 'Mission Control'}</h1>
-          <p className="mt-1 text-lead text-ink-2">TEAL’s product development and technology intelligence platform — market opportunities, technology, applications, product architecture, suppliers, cost, localization and execution in one system.</p>
+          <p className="mt-1 text-lead text-ink-2">Industrial Intelligence + Product Development + Equipment Simulation Operating System — from a market or customer requirement to a defensible equipment architecture, simulated, costed, validated and remembered.</p>
+          <p className="mt-1 text-micro font-semibold tracking-[0.12em] text-ink-3">UNDERSTAND → CONFIGURE → ENGINEER → SIMULATE → OPTIMIZE → VALIDATE → BUILD → SCALE</p>
         </div>
         <div className="flex items-center gap-2 text-meta text-ink-3">
           <span className="signal signal-live text-ok" aria-hidden />
@@ -127,6 +129,8 @@ export default function CommandCenter() {
       <nav aria-label="Business flow" className="surface rounded-card px-3 py-2">
         <BusinessStory />
       </nav>
+
+      <EngineeringKpis />
 
       {/* priority strip */}
       <div role="group" aria-label="Priority" className="grid grid-cols-2 gap-3 md:grid-cols-4">

@@ -39,6 +39,8 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 
 | File | Covers |
 |---|---|
+| `engineering.test.ts` | unit normalisation (original kept), specification rows with per-field evidence and source priority, spec validation, derived confidence (DEMO = Unverified), freshness, natural-language technical search (all six example queries), compatibility (rule vs recorded, rules never hidden by records, missing data = Unknown, protocol requirements), conflict detection, duplicate suggestion, change diffs, review queues, requirement quality and traceability |
+| `simulation.test.ts` | laser process time, “cannot run because …”, cycle time / UPH / OEE / capacity / machine count, sequential vs inline, data lineage, discrete-event simulation (agrees with the capacity engine without variability, seeded repeatability, blocking/starvation, faults, replay), Monte Carlo percentiles, what-if, multi-level BOM and cost (currencies never mixed, missing FX → no total), scenario comparison, Pareto frontier, energy / maintenance / faults / calibration, supplier dependency, localization layers and disruption, design review, completeness, build and POC readiness, templates → scenarios, versions, sequence validation, twin layout, version diff, customer-mode report, rule-based drafts |
 | `intelligenceOs.test.ts` | trust labels, TRL maturity rule, domains as data, parametric search on the example query, cross-domain evidence, application engine (and no machine without an application), all 11 document templates, requirement capture, lifecycle, new calculators |
 | `masterData.test.ts` | every catalogued record validates; unique ids; no broken references; zero data-quality errors; DEMO labelling; no seeded results |
 | `inquiry.test.ts` | flagship workflow for final-demo Scenario 1: platform choice, full thread drafted, all records schema-valid, references resolve, nothing fabricated, atomic save, all-or-nothing rejection |
@@ -51,13 +53,14 @@ loader), IndexedDB via `fake-indexeddb`, a fresh workspace per test.
 
 | File | Covers |
 |---|---|
-| `smoke.spec.ts` | all 95 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
+| `studio.spec.ts` | **the §170 vertical slice**: scenario from a template with customer and requirement → “cannot run because …” → station times and laser inputs → laser, vision and PLC selection with live compatibility → save → cycle & capacity → discrete-event run with Play / Pause / Step → Monte Carlo → what-if → BOM and cost → design review → planned verification + result → measured value → report → derived scenario → version diff → customer mode; every Studio tab renders; Pareto frontier; digital-twin object data and fault state; engineering database search, compatibility, evidence and conflict resolution; specification editing; no page-level horizontal scroll at 320 / 390 / 768 / 1024 px |
+| `smoke.spec.ts` | all 135 routes render with the right heading, exactly one `h1`, and **no runtime or console errors**; not-found page; demo labels visible |
 | `workflows.spec.ts` | create customer → LOCAL DRAFT → change-package download; inquiry → package → opportunity → traceability; configuration → BOM + cost; FAT generation (NOT RUN); search; configurator physics/compatibility; backup download |
 | `offline.spec.ts` | after one visit the app and data load offline and the shell says so |
 | `intelligence.spec.ts` | health + relationship bar, compare, table/cards/board, saved views, board quick edit, Ask Intelligence, supplier risk matrix, unit converter, duplicates, route aliases |
 | `rooms.spec.ts` | program room + pre-linked activity, rooms index, LeadConnect, business case, radar rings, multi-step forms, graph focus |
 | `os.spec.ts` | master-prompt IA and sub-groups, business flow, executive board, application engine, cross-domain cell, parametric search, architecture tree, requirement capture, execution views, PRD generation + download, trust labels, LOCAL DATA sync state, development / value / settings / use cases |
-| `shell.spec.ts` | navigation shell, command palette, search, shortcuts, quick create, drawers, tabs, pins, theme/density, workspaces, focus mode, help, onboarding, mobile, and **axe-core accessibility** (light + dark, 14 pages) |
+| `shell.spec.ts` | navigation shell, command palette, search, shortcuts, quick create, drawers, tabs, pins, theme/density, workspaces, focus mode, help, onboarding, mobile, and **axe-core accessibility** (light + dark, 21 pages) |
 
 `tests/e2e/fixtures.ts` fails any test that logs a page error or console error.
 

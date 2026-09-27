@@ -135,8 +135,8 @@ export function specText(part: Pick<Part, 'specs'>, key: string): string | null 
 export function displaySpec(s: NormalizedSpec | undefined): string {
   if (!s) return 'Not Available';
   if (s.text != null) return s.text;
-  if (s.min != null && s.max != null) return `${fmtNum(s.min)}–${fmtNum(s.max)} ${s.unit}`.trim();
-  if (s.value != null) return `${fmtNum(s.value)} ${s.unit}`.trim();
+  if (s.min != null && s.max != null) return `${fmtNum(s.min, 6)}–${fmtNum(s.max, 6)} ${s.unit}`.trim();
+  if (s.value != null) return `${fmtNum(s.value, 6)} ${s.unit}`.trim();
   return s.original;
 }
 
@@ -171,8 +171,8 @@ export function validateSpecs(part: Pick<Part, 'specs' | 'product_type'>, defs: 
     const n = normalizeEntry(e, def);
     for (const x of [n.value, n.min, n.max]) {
       if (x == null) continue;
-      if (def.validation?.min != null && x < def.validation.min) out.push({ key: e.spec, severity: 'warning', message: `${def.name}: ${fmtNum(x)} ${n.unit} is below the plausible minimum ${def.validation.min} — check the source` });
-      if (def.validation?.max != null && x > def.validation.max) out.push({ key: e.spec, severity: 'warning', message: `${def.name}: ${fmtNum(x)} ${n.unit} is above the plausible maximum ${def.validation.max} — check the source` });
+      if (def.validation?.min != null && x < def.validation.min) out.push({ key: e.spec, severity: 'warning', message: `${def.name}: ${fmtNum(x, 6)} ${n.unit} is below the plausible minimum ${def.validation.min} — check the source` });
+      if (def.validation?.max != null && x > def.validation.max) out.push({ key: e.spec, severity: 'warning', message: `${def.name}: ${fmtNum(x, 6)} ${n.unit} is above the plausible maximum ${def.validation.max} — check the source` });
     }
     if (n.min != null && n.max != null && n.min > n.max) out.push({ key: e.spec, severity: 'error', message: `${def.name}: range minimum exceeds maximum` });
     if (def.spec_type === 'enum' && def.enum_values?.length && e.text && !def.enum_values.map((x) => x.toLowerCase()).includes(e.text.toLowerCase())) out.push({ key: e.spec, severity: 'warning', message: `${def.name}: “${e.text}” is not one of ${def.enum_values.join(', ')}` });

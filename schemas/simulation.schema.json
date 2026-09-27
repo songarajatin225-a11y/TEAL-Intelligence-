@@ -238,6 +238,13 @@
     "recipe_id": {
       "type": "string"
     },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "inline",
+        "sequential"
+      ]
+    },
     "stations": {
       "minItems": 1,
       "type": "array",
@@ -525,6 +532,24 @@
           },
           "operator": {
             "type": "boolean"
+          },
+          "intervention": {
+            "type": "object",
+            "properties": {
+              "probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "time_s": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "probability",
+              "time_s"
+            ]
           },
           "slots": {
             "type": "array",
@@ -963,6 +988,111 @@
           "date"
         ]
       }
+    },
+    "cost": {
+      "type": "object",
+      "properties": {
+        "integration_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "testing_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shipping_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "duty_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "installation": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "life_years": {
+          "anyOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "Not Started",
+          "Concept",
+          "Development",
+          "Prototype",
+          "POC",
+          "Validated",
+          "Production Ready"
+        ]
+      }
+    },
+    "trl": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "customer_visible_notes": {
       "type": "string"

@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Card, PageHeader, Tabs } from '../../components/ui';
 import { INDUSTRIES, PROCESSES, type Application } from '../../domain/entities';
 import { useRecords } from '../../hooks/useData';
@@ -8,7 +8,11 @@ import { EntityListPage } from '../entities/EntityListPage';
 /** APPLICATION LIBRARY (spec §32): industry × process matrix + list. */
 export default function ApplicationsPage() {
   const apps = useRecords<Application>('application');
-  const [tab, setTab] = useState<'matrix' | 'list'>('matrix');
+  const [params, setParams] = useSearchParams();
+  const process = params.get('process') ?? '';
+  const tab = (params.get('tab') as 'matrix' | 'list' | null) ?? (process ? 'list' : 'matrix');
+  const setTab = (t: 'matrix' | 'list') => setParams((p) => (p.set('tab', t), t === 'matrix' && p.delete('process'), p), { replace: true });
+  const byProcess = useCallback((r: Record<string, unknown>) => r.process === process, [process]);
   const industries = useMemo(() => INDUSTRIES.filter((i) => apps.some((a) => a.industries.includes(i))).concat(INDUSTRIES.filter((i) => !apps.some((a) => a.industries.includes(i)))), [apps]);
   const cell = (ind: string, proc: string) => apps.filter((a) => a.industries.includes(ind) && a.process === proc);
   return (
@@ -16,7 +20,7 @@ export default function ApplicationsPage() {
       <PageHeader title="Applications" subtitle="Where each TEAL application sits by industry and process. Empty cells are gaps in the portfolio — not evidence that no market exists." />
       <Tabs label="View" value={tab} onChange={setTab} tabs={[{ key: 'matrix', label: 'Industry × process' }, { key: 'list', label: 'All applications', count: apps.length }]} />
       {tab === 'list' ? (
-        <EntityListPage embedded entity="application" title="All applications" />
+        <EntityListPage embedded entity="application" title={process ? `${process} applications` : 'All applications'} filter={process ? byProcess : undefined} />
       ) : (
         <div>
           <Card>

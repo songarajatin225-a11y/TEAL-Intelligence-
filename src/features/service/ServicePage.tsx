@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Card, Field, Input, PageHeader, Stat, Tabs, Unknown } from '../../components/ui';
 import type { Machine, ServiceTicket } from '../../domain/entities';
 import { useRecords } from '../../hooks/useData';
@@ -9,7 +10,9 @@ import { EntityListPage } from '../entities/EntityListPage';
 export default function ServicePage() {
   const machines = useRecords<Machine>('machine');
   const tickets = useRecords<ServiceTicket>('service_ticket');
-  const [tab, setTab] = useState<'tickets' | 'machines'>('tickets');
+  const [params, setParams] = useSearchParams();
+  const tab = params.get('tab') === 'machines' ? 'machines' : 'tickets';
+  const setTab = (t: 'tickets' | 'machines') => setParams((p) => (p.set('tab', t), p), { replace: true });
   const [hours, setHours] = useState('');
   const today = todayIso();
   const failures = tickets.filter((t) => t.downtime_h != null && t.downtime_h > 0);

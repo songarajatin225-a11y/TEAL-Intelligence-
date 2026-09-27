@@ -52,7 +52,8 @@
           ],
           "mtbf_min": 2400,
           "mttr_min": 10,
-          "capex": 150000
+          "capex": 150000,
+          "footprint_m2": 0.6
         },
         {
           "key": "fixture",
@@ -74,7 +75,8 @@
               "required": true
             }
           ],
-          "capex": 80000
+          "capex": 80000,
+          "footprint_m2": 0.4
         },
         {
           "key": "align",
@@ -106,7 +108,8 @@
               "required": false
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "laser",
@@ -132,6 +135,7 @@
           "mtbf_min": 4800,
           "mttr_min": 30,
           "capex": 220000,
+          "footprint_m2": 1.2,
           "slots": [
             {
               "role": "Laser source",
@@ -191,7 +195,8 @@
               "required": true
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "sort",
@@ -201,7 +206,8 @@
           "parallel": 1,
           "buffer_after": 0,
           "time_basis": "DEMO",
-          "capex": 70000
+          "capex": 70000,
+          "footprint_m2": 0.5
         },
         {
           "key": "unload",
@@ -218,7 +224,8 @@
             "max": 2.8
           },
           "power_kw": 0.09,
-          "capex": 120000
+          "capex": 120000,
+          "footprint_m2": 0.6
         }
       ],
       "selections": [
@@ -515,7 +522,8 @@
           ],
           "mtbf_min": 2400,
           "mttr_min": 10,
-          "capex": 150000
+          "capex": 150000,
+          "footprint_m2": 0.6
         },
         {
           "key": "fixture",
@@ -537,7 +545,8 @@
               "required": true
             }
           ],
-          "capex": 80000
+          "capex": 80000,
+          "footprint_m2": 0.4
         },
         {
           "key": "align",
@@ -569,7 +578,8 @@
               "required": false
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "laser",
@@ -595,6 +605,7 @@
           "mtbf_min": 4800,
           "mttr_min": 30,
           "capex": 220000,
+          "footprint_m2": 1.2,
           "slots": [
             {
               "role": "Laser source",
@@ -654,7 +665,8 @@
               "required": true
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "sort",
@@ -664,7 +676,8 @@
           "parallel": 1,
           "buffer_after": 0,
           "time_basis": "DEMO",
-          "capex": 70000
+          "capex": 70000,
+          "footprint_m2": 0.5
         },
         {
           "key": "unload",
@@ -681,7 +694,8 @@
             "max": 2.8
           },
           "power_kw": 0.09,
-          "capex": 120000
+          "capex": 120000,
+          "footprint_m2": 0.6
         }
       ],
       "selections": [
@@ -960,7 +974,8 @@
           ],
           "mtbf_min": 2400,
           "mttr_min": 10,
-          "capex": 150000
+          "capex": 150000,
+          "footprint_m2": 0.6
         },
         {
           "key": "fixture",
@@ -982,7 +997,8 @@
               "required": true
             }
           ],
-          "capex": 80000
+          "capex": 80000,
+          "footprint_m2": 0.4
         },
         {
           "key": "align",
@@ -1014,7 +1030,8 @@
               "required": false
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "laser",
@@ -1040,6 +1057,7 @@
           "mtbf_min": 4800,
           "mttr_min": 30,
           "capex": 220000,
+          "footprint_m2": 1.2,
           "slots": [
             {
               "role": "Laser source",
@@ -1099,7 +1117,8 @@
               "required": true
             }
           ],
-          "capex": 60000
+          "capex": 60000,
+          "footprint_m2": 0.4
         },
         {
           "key": "sort",
@@ -1109,7 +1128,8 @@
           "parallel": 1,
           "buffer_after": 0,
           "time_basis": "DEMO",
-          "capex": 70000
+          "capex": 70000,
+          "footprint_m2": 0.5
         },
         {
           "key": "unload",
@@ -1126,7 +1146,8 @@
             "max": 2.8
           },
           "power_kw": 0.09,
-          "capex": 120000
+          "capex": 120000,
+          "footprint_m2": 0.6
         }
       ],
       "selections": [

@@ -462,7 +462,7 @@
       ],
       "data_type": "DEMO",
       "partition": "engineering",
-      "sha256": "35554dc396277f07"
+      "sha256": "ed2fa9b537852460"
     },
     {
       "id": "demo-verifications",
@@ -553,6 +553,24 @@
       "data_type": "TEAL_INTERNAL",
       "partition": "engineering",
       "sha256": "3da466623aa410f8"
+    },
+    {
+      "id": "quality-records",
+      "title": "Quality records",
+      "path": "engineering/quality-records.json",
+      "description": "NCR, CAPA, 8D, control plans and inspection plans. Empty until real quality work is recorded — nothing is seeded.",
+      "entity": "quality_record",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 0,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/quality_record.schema.json",
+      "source_ids": [
+        "src-sim-master-prompt"
+      ],
+      "data_type": "TEAL_INTERNAL",
+      "partition": "records",
+      "sha256": "8fe385bbbbfa7ef9"
     },
     {
       "id": "spec-definitions",

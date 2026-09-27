@@ -531,3 +531,32 @@ export const Verification = z.object({
   approved_at: IsoDate.optional(),
 });
 export type Verification = z.infer<typeof Verification>;
+
+/* ================================================================ quality (§99) */
+
+export const QUALITY_KINDS = ['NCR', 'CAPA', '8D', 'Control Plan', 'Inspection Plan'] as const;
+export const QUALITY_STATUSES = ['Open', 'Containment', 'Root cause', 'Corrective action', 'Verification', 'Closed'] as const;
+
+/** NCR, CAPA, 8D, control plan and inspection plan — linked to equipment, components and requirements. */
+export const QualityRecord = z.object({
+  ...baseShape,
+  entity: z.literal('quality_record'),
+  kind: z.enum(QUALITY_KINDS),
+  qr_status: z.enum(QUALITY_STATUSES),
+  simulation_id: ref.optional(),
+  machine_id: ref.optional(),
+  part_id: ref.optional(),
+  project_id: ref.optional(),
+  customer_id: ref.optional(),
+  requirement_ids: refs.optional(),
+  problem: z.string().optional(),
+  containment: z.string().optional(),
+  root_cause: z.string().optional(),
+  corrective_action: z.string().optional(),
+  preventive_action: z.string().optional(),
+  verification: z.string().optional(),
+  /** control / inspection plan: characteristic — method — frequency — reaction, one per line */
+  characteristics: z.array(z.string()).optional(),
+  due: IsoDate.optional(),
+});
+export type QualityRecord = z.infer<typeof QualityRecord>;

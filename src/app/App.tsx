@@ -67,7 +67,38 @@ const ALIASES: Record<string, string> = {
   competitors: '/business-case',
   programs: '/rooms?type=project',
   room: '/rooms',
+  simulation: '/studio',
+  simulations: '/studio',
+  'simulation-studio': '/studio',
+  'equipment-simulation': '/studio',
+  'equipment-library': '/studio?tab=library',
+  'digital-twin': '/studio?focus=twin',
+  'engineering-database': '/engineering-db',
+  'global-database': '/engineering-db',
+  'global-engineering-database': '/engineering-db',
+  manufacturers: '/engineering-db?tab=manufacturers',
+  compatibility: '/engineering-db?tab=compatibility',
+  specifications: '/engineering-db?tab=specs',
+  'data-governance': '/data-review',
+  'review-center': '/data-review',
+  eco: '/changes',
+  baselines: '/requirements-quality?tab=baselines',
+  validation: '/verification',
+  'action-center': '/actions',
+  'installed-base': '/service?tab=machines',
+  'risk-cockpit': '/execution?view=risks',
+  'technical-documents': '/document-library',
+  datasheets: '/document-library?kind=Datasheet',
 };
+
+const isKind = (k: string) => (r: { kind?: unknown }) => r.kind === k;
+const DFMEA = isKind('DFMEA');
+const PFMEA = isKind('PFMEA');
+const NCR = isKind('NCR');
+const CAPA = isKind('CAPA');
+const D8 = isKind('8D');
+const CONTROL = isKind('Control Plan');
+const INSPECTION = isKind('Inspection Plan');
 
 const isPartner = (r: { roles?: unknown }) => Array.isArray(r.roles) && r.roles.some((x) => x === 'partner' || x === 'research');
 
@@ -173,6 +204,23 @@ const router = createHashRouter([
       { path: 'duplicates', element: L(() => import('../features/admin/DuplicatesPage')) },
       { path: 'supplier-risk', element: L(() => import('../features/suppliers/SupplierRiskPage')) },
       { path: 'units', element: L(() => import('../features/calculators/UnitsPage')) },
+      { path: 'studio', element: L(() => import('../features/studio/StudioPage')) },
+      { path: 'studio/:id', element: L(() => import('../features/studio/ScenarioPage')) },
+      { path: 'engineering-db', element: L(() => import('../features/engineering/EngineeringDbPage')) },
+      { path: 'data-review', element: L(() => import('../features/engineering/DataReviewPage')) },
+      { path: 'requirements-quality', element: L(() => import('../features/requirements/RequirementQualityPage')) },
+      { path: 'document-library', element: L(() => import('../features/documents/DocumentLibraryPage')) },
+      { path: 'actions', element: L(() => import('../features/command-center/ActionCenterPage')) },
+      { path: 'recipes', element: list('recipe', { title: 'Process Recipes' }) },
+      { path: 'verification', element: list('verification', { title: 'Verification & Validation' }) },
+      { path: 'quality-records', element: list('quality_record', { title: 'Quality Records' }) },
+      { path: 'dfmea', element: list('risk', { title: 'DFMEA', filter: DFMEA, intro: 'Design FMEA entries from the risk register (kind DFMEA). RPN = S·O·D only when all three are scored.' }) },
+      { path: 'pfmea', element: list('risk', { title: 'PFMEA', filter: PFMEA, intro: 'Process FMEA entries from the risk register (kind PFMEA).' }) },
+      { path: 'ncr', element: list('quality_record', { title: 'NCR — Nonconformance Reports', filter: NCR }) },
+      { path: 'capa', element: list('quality_record', { title: 'CAPA — Corrective & Preventive Actions', filter: CAPA }) },
+      { path: '8d', element: list('quality_record', { title: '8D Problem Solving', filter: D8 }) },
+      { path: 'control-plan', element: list('quality_record', { title: 'Control Plans', filter: CONTROL }) },
+      { path: 'inspection-plan', element: list('quality_record', { title: 'Inspection Plans', filter: INSPECTION }) },
       ...Object.entries(ALIASES).map(([path, to]) => ({ path, element: <Navigate to={to} replace /> })),
       { path: 'record/:id', element: L(() => import('../features/entities/RecordPage')) },
       { path: '*', element: L(() => import('../features/admin/NotFound')) },

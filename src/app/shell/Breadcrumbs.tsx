@@ -21,6 +21,11 @@ export function useCrumbs(): Crumb[] {
     const page = def?.route ? pageFor(def.route) : undefined;
     return [...(page ? [{ label: page.section.label, to: page.section.pages[0].to }, { label: page.label, to: page.to }] : def ? [{ label: def.plural, to: def.route }] : []), { label: r?.name ?? 'Record' }];
   }
+  const studio = /^\/studio\/(.+)$/.exec(pathname);
+  if (studio) {
+    const r = byId.get(decodeURIComponent(studio[1]));
+    return [{ label: 'Equipment Simulation', to: '/studio' }, { label: 'Simulation Studio', to: '/studio' }, { label: r?.name ?? 'Scenario' }];
+  }
   const room = /^\/room\/(.+)$/.exec(pathname);
   if (room) {
     const r = byId.get(decodeURIComponent(room[1]));

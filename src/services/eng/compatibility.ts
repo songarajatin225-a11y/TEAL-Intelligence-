@@ -85,7 +85,7 @@ export function evaluateRule(rule: CompatibilityRule & AnyRecord, a: Part & AnyR
     const hi = sa.max ?? sa.value!;
     const ok = lo >= sb.min && hi <= sb.max;
     const u = unitOf(defs, rule.b_spec);
-    return verdict(ok, `${a.model_number} ${lo === hi ? fmtNum(lo) : `${fmtNum(lo)}–${fmtNum(hi)}`} ${u} ${ok ? 'within' : 'outside'} ${b.model_number} ${fmtNum(sb.min)}–${fmtNum(sb.max)} ${u}`);
+    return verdict(ok, `${a.model_number} ${lo === hi ? fmtNum(lo, 6) : `${fmtNum(lo, 6)}–${fmtNum(hi, 6)}`} ${u} ${ok ? 'within' : 'outside'} ${b.model_number} ${fmtNum(sb.min, 6)}–${fmtNum(sb.max, 6)} ${u}`);
   }
   // a_lte_b / a_gte_b
   const va = readSpec(a, rule.a_spec, defs)?.value ?? null;
@@ -96,7 +96,7 @@ export function evaluateRule(rule: CompatibilityRule & AnyRecord, a: Part & AnyR
   const ok = rule.check === 'a_lte_b' ? lhs <= vb : lhs >= vb;
   const ua = unitOf(defs, rule.a_spec);
   const ub = unitOf(defs, rule.b_spec);
-  return verdict(ok, `${a.model_number} ${defs.get(rule.a_spec)?.name ?? rule.a_spec} ${fmtNum(va)} ${ua}${f !== 1 ? ` × ${f}` : ''} ${rule.check === 'a_lte_b' ? '≤' : '≥'} ${b.model_number} ${defs.get(rule.b_spec)?.name ?? rule.b_spec} ${fmtNum(vb)} ${ub} → ${ok ? 'OK' : 'violated'}`);
+  return verdict(ok, `${a.model_number} ${defs.get(rule.a_spec)?.name ?? rule.a_spec} ${fmtNum(va, 6)} ${ua}${f !== 1 ? ` × ${f}` : ''} ${rule.check === 'a_lte_b' ? '≤' : '≥'} ${b.model_number} ${defs.get(rule.b_spec)?.name ?? rule.b_spec} ${fmtNum(vb, 6)} ${ub} → ${ok ? 'OK' : 'violated'}`);
 }
 
 /** Rules that apply to a pair (in either orientation), each evaluated with the right orientation. */

@@ -5,8 +5,8 @@ test.describe('TEAL Intelligence OS', () => {
   test('navigation follows the master-prompt IA with sub-groups', async ({ page }) => {
     await go(page, '');
     const nav = page.getByRole('navigation', { name: 'Primary' });
-    for (const s of ['Command Center', 'Intelligence', 'Domains', 'Product', 'Ecosystem', 'Execution', 'Roadmap', 'Data', 'Settings']) await expect(nav.getByRole('button', { name: new RegExp(`^${s}`) })).toBeVisible();
-    await nav.getByRole('button', { name: /^Domains/ }).click();
+    for (const s of ['Home', 'Intelligence', 'Industries', 'Applications', 'Requirements', 'Products', 'Equipment Simulation', 'Engineering', 'BOM & Cost', 'Suppliers', 'Projects', 'Quality', 'Service', 'Knowledge', 'Documents', 'Risks', 'Business Case', 'Admin']) await expect(nav.getByRole('button', { name: new RegExp(`^${s}`) }).first()).toBeVisible();
+    await nav.getByRole('button', { name: /^Industries/ }).click();
     await nav.getByRole('link', { name: 'Battery & New Energy' }).click();
     await expect(page.locator('main h1')).toHaveText('Battery & New Energy');
     await expect(page.getByRole('list', { name: 'Battery & New Energy lifecycle' })).toContainText('Tab Welding');

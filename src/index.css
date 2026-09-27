@@ -9,7 +9,8 @@
 
 @theme {
   --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Space Grotesk', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 
   /* type scale — rem based so density (root size) scales the whole UI */
   --text-micro: 0.75rem; /* 12px metadata */
@@ -122,37 +123,39 @@
 
 /* ------------------------------------------------------------------ dark */
 :root[data-theme-resolved='dark'] {
-  --c-bg: #071317;
-  --c-panel: rgb(17 33 40 / 0.72);
-  --c-panel-2: #0e1e25;
-  --c-solid: #0f2028;
-  --c-line: rgb(160 214 222 / 0.11);
-  --c-line-strong: rgb(160 214 222 / 0.2);
-  --c-ink: #e5eff1;
-  --c-ink-2: #b2c5cb;
-  --c-ink-3: #8aa1a9;
-  --c-accent: #1fb3b8;
-  --c-accent-2: #62d6da;
-  --c-accent-soft: rgb(31 179 184 / 0.15);
-  --c-navy: #e5eff1;
+  /* industrial palette (industrial intelligence master prompt §128):
+     background #080B0D · surface #101518 · elevated #151D21 · accent #00A99D · text #F2F5F5 · secondary #8D9A9A */
+  --c-bg: #080b0d;
+  --c-panel: rgb(16 21 24 / 0.78);
+  --c-panel-2: #151d21;
+  --c-solid: #101518;
+  --c-line: rgb(141 154 154 / 0.14);
+  --c-line-strong: rgb(141 154 154 / 0.26);
+  --c-ink: #f2f5f5;
+  --c-ink-2: #bcc6c6;
+  --c-ink-3: #8d9a9a;
+  --c-accent: #00a99d;
+  --c-accent-2: #2fc4b8;
+  --c-accent-soft: rgb(0 169 157 / 0.14);
+  --c-navy: #f2f5f5;
   --c-ok: #4fc592;
   --c-warn: #e5aa45;
   --c-bad: #f07167;
   --c-info: #82aaf0;
   --c-demo: #b99be4;
   --c-draft: #e6ba55;
-  --c-unknown: #93a5ad;
+  --c-unknown: #93a0a0;
 
-  --glass-bg: rgb(15 30 37 / 0.62);
-  --glass-bg-strong: rgb(11 25 31 / 0.9);
-  --glass-border: rgb(160 214 222 / 0.1);
-  --glass-highlight: rgb(255 255 255 / 0.06);
-  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 36px -14px rgb(0 0 0 / 0.55);
-  --glass-shadow-lg: 0 2px 8px rgb(0 0 0 / 0.35), 0 30px 70px -20px rgb(0 0 0 / 0.7);
-  --surface-bg: linear-gradient(180deg, rgb(20 38 46 / 0.82), rgb(14 29 36 / 0.74));
-  --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.25), 0 8px 22px -12px rgb(0 0 0 / 0.5);
-  --glow: rgb(31 179 184 / 0.18);
-  --grid-line: rgb(160 214 222 / 0.04);
+  --glass-bg: rgb(16 21 24 / 0.66);
+  --glass-bg-strong: rgb(12 16 18 / 0.92);
+  --glass-border: rgb(141 154 154 / 0.12);
+  --glass-highlight: rgb(255 255 255 / 0.05);
+  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 14px 36px -14px rgb(0 0 0 / 0.6);
+  --glass-shadow-lg: 0 2px 8px rgb(0 0 0 / 0.4), 0 30px 70px -20px rgb(0 0 0 / 0.75);
+  --surface-bg: linear-gradient(180deg, rgb(21 29 33 / 0.9), rgb(16 21 24 / 0.82));
+  --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 22px -12px rgb(0 0 0 / 0.55);
+  --glow: rgb(0 169 157 / 0.14);
+  --grid-line: rgb(141 154 154 / 0.04);
   color-scheme: dark;
 }
 
@@ -437,4 +440,30 @@ body {
     box-shadow: none !important;
     backdrop-filter: none !important;
   }
+}
+
+/* Display face for page and section titles (Space Grotesk); body stays Inter, numbers JetBrains Mono */
+h1,
+h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+/* Laser beam in the Studio beam path: a slow dash drift that shows direction; static with reduced motion */
+.beam-line {
+  stroke-dasharray: 10 6;
+  animation: beam-flow 1.6s linear infinite;
+}
+@keyframes beam-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .beam-line {
+    animation: none;
+  }
+}
+:root[data-effects='reduced'] .beam-line {
+  animation: none;
 }

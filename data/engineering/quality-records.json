@@ -1,0 +1,16 @@
+{
+  "dataset": {
+    "id": "quality-records",
+    "title": "Quality records",
+    "description": "NCR, CAPA, 8D, control plans and inspection plans. Empty until real quality work is recorded \u2014 nothing is seeded.",
+    "entity": "quality_record",
+    "version": "1.0.0",
+    "last_updated": "2026-09-27",
+    "data_type": "TEAL_INTERNAL",
+    "source_ids": [
+      "src-sim-master-prompt"
+    ],
+    "partition": "records"
+  },
+  "records": []
+}

@@ -230,7 +230,7 @@ function evaluate(part: Part & AnyRecord, p: ParsedPartQuery, defs: SpecDefs): C
     const hi = s.max ?? s.value!;
     // a range spec (e.g. wavelength range) matches when it overlaps the requested window
     const ok = s.min != null && s.max != null ? lo <= c.hi && hi >= c.lo : s.value! >= c.lo && s.value! <= c.hi;
-    checks.push({ label: c.text, state: ok ? 'match' : 'fail', detail: `${fmtNum(lo)}${lo !== hi ? `–${fmtNum(hi)}` : ''} ${s.unit}` });
+    checks.push({ label: c.text, state: ok ? 'match' : 'fail', detail: `${fmtNum(lo, 6)}${lo !== hi ? `–${fmtNum(hi, 6)}` : ''} ${s.unit}` });
   }
   for (const t of p.texts) {
     const v = specText(part, t.spec);

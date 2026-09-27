@@ -560,9 +560,9 @@ const d = (o: St): St => ({ time_basis: 'DEMO', ...o });
 const MACHINE = (sel: [string, string, string][]) => sel.map(([role, id, key = '_machine']) => ({ station_key: key, role, part_id: id }));
 
 const pcbStations = (laserParallel: number, speed: number, buffer: number): St[] => [
-  st('load', 'Board in (conveyor)', 'load', d({ time_s: 2.5, dist: { type: 'triangular', min: 2, mode: 2.5, max: 3.5 }, buffer_after: 2, power_kw: 0.09, slots: [slot('Conveyor', 'conveyor')], mtbf_min: 2400, mttr_min: 10, capex: 150000 })),
-  st('fixture', 'Board stop & clamp', 'fixture', d({ time_s: 1.5, dist: { type: 'uniform', min: 1.2, max: 1.8 }, slots: [slot('Fixture', 'fixture')], capex: 80000 })),
-  st('align', 'Fiducial alignment', 'align', d({ time_s: 1.2, dist: { type: 'uniform', min: 0.9, max: 1.8 }, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens'), slot('Lighting', 'lighting', false)], capex: 60000 })),
+  st('load', 'Board in (conveyor)', 'load', d({ time_s: 2.5, dist: { type: 'triangular', min: 2, mode: 2.5, max: 3.5 }, buffer_after: 2, power_kw: 0.09, slots: [slot('Conveyor', 'conveyor')], mtbf_min: 2400, mttr_min: 10, capex: 150000, footprint_m2: 0.6 })),
+  st('fixture', 'Board stop & clamp', 'fixture', d({ time_s: 1.5, dist: { type: 'uniform', min: 1.2, max: 1.8 }, slots: [slot('Fixture', 'fixture')], capex: 80000, footprint_m2: 0.4 })),
+  st('align', 'Fiducial alignment', 'align', d({ time_s: 1.2, dist: { type: 'uniform', min: 0.9, max: 1.8 }, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens'), slot('Lighting', 'lighting', false)], capex: 60000, footprint_m2: 0.4 })),
   st('laser', 'Laser marking', 'laser', {
     time_s: null,
     time_basis: 'CALCULATED',
@@ -573,11 +573,12 @@ const pcbStations = (laserParallel: number, speed: number, buffer: number): St[]
     mtbf_min: 4800,
     mttr_min: 30,
     capex: 220000,
+    footprint_m2: 1.2,
     slots: [slot('Laser source', 'laser_source'), slot('Beam expander', 'beam_expander', false), slot('Galvo scanner', 'galvo'), slot('F-theta lens', 'f_theta'), slot('Galvo controller', 'galvo_controller', false), slot('Fume extraction', 'fume_extraction', false)],
   }),
-  st('inspect', 'Code verification (grade)', 'inspect', d({ time_s: 1.0, dist: { type: 'uniform', min: 0.8, max: 1.4 }, reject_rate: 0.01, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens')], capex: 60000 })),
-  st('sort', 'OK / NG sorting', 'sort', d({ time_s: 1.0, capex: 70000 })),
-  st('unload', 'Board out (conveyor)', 'unload', d({ time_s: 2.0, dist: { type: 'triangular', min: 1.6, mode: 2, max: 2.8 }, power_kw: 0.09, capex: 120000 })),
+  st('inspect', 'Code verification (grade)', 'inspect', d({ time_s: 1.0, dist: { type: 'uniform', min: 0.8, max: 1.4 }, reject_rate: 0.01, slots: [slot('Camera', 'camera'), slot('Lens', 'vision_lens')], capex: 60000, footprint_m2: 0.4 })),
+  st('sort', 'OK / NG sorting', 'sort', d({ time_s: 1.0, capex: 70000, footprint_m2: 0.5 })),
+  st('unload', 'Board out (conveyor)', 'unload', d({ time_s: 2.0, dist: { type: 'triangular', min: 1.6, mode: 2, max: 2.8 }, power_kw: 0.09, capex: 120000, footprint_m2: 0.6 })),
 ];
 const pcbSel = (parallel: number, laser = 'prt-demo-mopa-20', galvo = 'prt-demo-galvo-10') => [
   { station_key: 'load', role: 'Conveyor', part_id: 'prt-demo-conveyor-pcb' },

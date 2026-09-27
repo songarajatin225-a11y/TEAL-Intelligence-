@@ -7,6 +7,7 @@ import { AppearanceSettings } from '../../app/shell/Overlays';
 import { Card, KV, Notice, PageHeader, SegmentedControl } from '../../components/ui';
 import { providers, type SyncStatus } from '../../services/providers';
 import { LockCard } from './AdminPage';
+import { ModeToggle } from '../studio/shared';
 
 /** SETTINGS (final master prompt §33, §38, §51): appearance, workspace, lock, providers and honest security limits. */
 export default function SettingsPage() {
@@ -25,6 +26,11 @@ export default function SettingsPage() {
         <Card title="Workspace" description="Changes emphasis and navigation order — never data">
           <SegmentedControl label="Workspace" value={prefs.workspace} onChange={(workspace) => setPrefs({ workspace, openSections: {} })} options={WORKSPACES.map((w) => ({ value: w.id, label: w.label }))} />
           <p className="mt-2 text-meta text-ink-3">{WORKSPACES.find((w) => w.id === prefs.workspace)?.desc}</p>
+          <div className="mt-4 border-t border-line pt-3">
+            <div className="mb-1 text-meta font-medium">View mode</div>
+            <ModeToggle />
+            <p className="mt-2 text-meta text-ink-3">Customer mode hides internal cost, supplier identities, internal risks and notes in the Studio, the engineering database and reports — for presenting to a customer on this screen. It is a presentation setting, not access control.</p>
+          </div>
         </Card>
       </div>
       <Card title="Providers" icon={Plug} description="The seams where a future backend can plug in without rebuilding the frontend">

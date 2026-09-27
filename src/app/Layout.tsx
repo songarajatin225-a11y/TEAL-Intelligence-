@@ -111,7 +111,7 @@ export function Layout() {
             <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4 no-print">
               <div className="glass flex h-14 items-center gap-2 rounded-panel px-2 sm:gap-3 sm:px-3">
                 {!focusMode && <IconButton className="lg:hidden" label="Open navigation" icon={Menu} onClick={() => setMobileNav(true)} />}
-                <Link to="/" className="shrink-0 lg:hidden" aria-label="TEAL Intelligence — Mission Control">
+                <Link to="/" className="hidden shrink-0 min-[360px]:block lg:hidden" aria-label="TEAL Intelligence — Mission Control">
                   <TealMark className="size-8" />
                 </Link>
                 <div className="hidden min-w-0 flex-1 md:block">

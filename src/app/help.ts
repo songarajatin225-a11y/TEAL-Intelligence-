@@ -10,6 +10,31 @@ export interface HelpEntry {
 }
 
 export const HELP: Record<string, HelpEntry> = {
+  '/studio': {
+    what: 'The Equipment Simulation Studio is the flagship: pick an equipment template, select real (or DEMO) components, enter station times with their basis, then simulate cycle time, capacity, bottleneck, material flow, variability, faults, energy, cost and readiness — and compare scenarios.',
+    terms: [
+      ['Scenario', 'An equipment configuration plus its simulation inputs. Versions and variants point to their parent; nothing is overwritten.'],
+      ['Basis', 'Where a number comes from: calculated, empirical, user input, manufacturer data, validated, assumption or DEMO.'],
+      ['Decision-support simulator', 'Cycle time, queues, variability, cost. Not FEA, CFD, optical ray-tracing or servo dynamics.'],
+    ],
+    workflow: ['New scenario from a template (or Draft from text).', 'Architecture: enter station times and variability.', 'Components: select parts — compatibility is checked live.', 'Cycle & capacity, Material flow, Monte Carlo.', 'What-if / Optimize, then save a new scenario.', 'BOM · cost, Design review, Validation (enter measured values), Report.'],
+    next: 'Enter measured POC / FAT values under Validation to calibrate the model.',
+  },
+  '/engineering-db': {
+    what: 'The global engineering database: manufacturers, products and their specifications — each value with its original unit, condition, source and evidence. Search it in words (“1064 nm 50 W MOPA”), filter it by technical parameters, check compatibility and compare products without ranking.',
+    terms: [
+      ['Specification definition', 'A parameter (name, type, canonical unit). New parameters are new records, not new columns.'],
+      ['Confidence', 'Derived from source quality, recency, completeness, verification and consistency — never typed in.'],
+      ['Scope', 'GLOBAL = public engineering data; TEAL = TEAL’s own products and capabilities. They stay separate.'],
+    ],
+    workflow: ['Search or filter.', 'Open a product for its specifications, evidence, compatibility and where it is used.', 'Edit specifications with a source for each value.', 'Resolve conflicts and duplicates in the Data Review Center.'],
+  },
+  '/data-review': { what: 'Data governance: new, changed, conflicting, duplicate, missing, stale and unverified engineering data. Approve, reject, merge, edit or archive — nothing changes without a person deciding, and conflicts keep both values as history.' },
+  '/requirements-quality': { what: 'Requirement quality (vague wording, missing units, acceptance criteria, owners, sources, verification and validation) and traceability coverage from customer requirement to customer acceptance, plus baselines.' },
+  '/verification': { what: 'Verification (inspection, analysis, demonstration, test) and validation (customer, application, material, recipe) records. Planned records show NOT RUN; results are entered, never pre-filled.' },
+  '/recipes': { what: 'Process recipes: equipment, application, material, parameters, quality and acceptance criteria. A recipe is Validated only with POC or verification evidence.' },
+  '/actions': { what: 'Everything that needs a person, derived from records: assigned requirements, pending approvals, engineering changes, failed tests, supplier and customer actions, overdue milestones and high risks.' },
+  '/document-library': { what: 'Documents referenced by the engineering database — datasheets, manuals, drawings, CAD, application notes, test reports, specifications. They are referenced with their source, never reproduced.' },
   '/': {
     what: 'Mission Control is your starting point: what needs attention now, what you are working on, and what is changing across the engineering system.',
     workflow: ['Clear the attention list top-down (critical first).', 'Open My Work to continue projects, POCs and opportunities.', 'Use Quick actions or press N to create something new.'],

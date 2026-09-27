@@ -93,6 +93,7 @@ export const ENTITY_DEFS = [
   d({ entity: 'simulation', schema: G.Simulation, prefix: 'sim', label: 'Simulation scenario', plural: 'Simulation scenarios', route: '/studio', partition: 'engineering', searchFields: ['scenario_label', 'change_reason', 'config_level', 'sim_status'] }),
   d({ entity: 'recipe', schema: G.Recipe, prefix: 'rcp', label: 'Process recipe', plural: 'Process recipes', route: '/recipes', partition: 'records', searchFields: ['recipe_version', 'recipe_status', 'quality_criteria', 'acceptance_criteria'] }),
   d({ entity: 'verification', schema: G.Verification, prefix: 'ver', label: 'Verification / validation', plural: 'Verifications & validations', route: '/verification', partition: 'records', searchFields: ['kind', 'method', 'expected', 'actual', 'result', 'evidence'] }),
+  d({ entity: 'quality_record', schema: G.QualityRecord, prefix: 'qr', label: 'Quality record', plural: 'Quality records', route: '/quality-records', partition: 'records', searchFields: ['kind', 'problem', 'root_cause', 'corrective_action', 'characteristics'] }),
   d({ entity: 'reference', schema: E.ReferenceRow, prefix: 'ref', label: 'Reference row', plural: 'Reference data', route: '/admin', partition: 'records', searchFields: ['table'] }),
 ] as const;
 

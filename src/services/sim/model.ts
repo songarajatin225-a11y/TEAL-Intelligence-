@@ -107,11 +107,11 @@ export function resolveStation(st: Station, index: number, sim: Simulation, byId
     const galvo = parts.find((p) => p.part.product_type === 'galvo')?.part;
     const src = parts.find((p) => p.part.product_type === 'laser_source')?.part;
     const gs = galvo ? readSpec(galvo, 'marking_speed', defs) : undefined;
-    if (gs?.value != null && st.laser?.speed_mm_s != null && st.laser.speed_mm_s > gs.value) warnings.push(`${st.name}: marking speed ${fmtNum(st.laser.speed_mm_s)} mm/s exceeds ${galvo!.model_number}'s stated marking speed ${fmtNum(gs.value)} mm/s${gs.entry.condition ? ` (${gs.entry.condition})` : ''}`);
+    if (gs?.value != null && st.laser?.speed_mm_s != null && st.laser.speed_mm_s > gs.value) warnings.push(`${st.name}: marking speed ${fmtNum(st.laser.speed_mm_s, 6)} mm/s exceeds ${galvo!.model_number}'s stated marking speed ${fmtNum(gs.value, 6)} mm/s${gs.entry.condition ? ` (${gs.entry.condition})` : ''}`);
     const sp = src ? readSpec(src, 'average_power', defs) : undefined;
-    if (sp?.value != null && st.laser?.power_w != null && st.laser.power_w > sp.value) warnings.push(`${st.name}: process power ${st.laser.power_w} W exceeds ${src!.model_number}'s average power ${fmtNum(sp.value)} W`);
+    if (sp?.value != null && st.laser?.power_w != null && st.laser.power_w > sp.value) warnings.push(`${st.name}: process power ${st.laser.power_w} W exceeds ${src!.model_number}'s average power ${fmtNum(sp.value, 6)} W`);
     const rr = src ? readSpec(src, 'repetition_rate_range', defs) : undefined;
-    if (rr?.min != null && rr.max != null && st.laser?.frequency_khz != null && (st.laser.frequency_khz < rr.min || st.laser.frequency_khz > rr.max)) warnings.push(`${st.name}: ${st.laser.frequency_khz} kHz is outside ${src!.model_number}'s ${fmtNum(rr.min)}–${fmtNum(rr.max)} kHz`);
+    if (rr?.min != null && rr.max != null && st.laser?.frequency_khz != null && (st.laser.frequency_khz < rr.min || st.laser.frequency_khz > rr.max)) warnings.push(`${st.name}: ${st.laser.frequency_khz} kHz is outside ${src!.model_number}'s ${fmtNum(rr.min, 6)}–${fmtNum(rr.max, 6)} kHz`);
   } else if (st.time_s != null) {
     time = st.time_s;
     lineage = { label: st.name, value: st.time_s, unit: 's', basis, source: basisLabel(basis) };
