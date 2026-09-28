@@ -95,7 +95,7 @@ export default function RoadmapPage() {
       <PageHeader eyebrow="Roadmap" title="Roadmap" subtitle="Idea → opportunity → research → feasibility → POC → concept → prototype → pilot → product → platform → scale. “Most equipment companies stall between pilot and productization.” (Automation Handbook §59.3). Track owner, investment, revenue signal, technology gap, customer signal, dependencies, risk and milestones on each item." />
       <Tabs<'years' | 'stages'> label="Roadmap views" value={tab} onChange={(t) => setParams(t === 'years' ? {} : { view: t })} tabs={[{ key: 'years', label: '2026 → 2030+' }, { key: 'stages', label: 'Idea → Scale' }]} />
       {tab === 'years' ? <YearRoadmap /> : (<>
-      <div className="flex gap-2 overflow-x-auto pb-2">
+      <div className="flex gap-2 overflow-x-auto pb-2" tabIndex={0}>
         {ROADMAP_STAGES.map((s) => {
           const items = place(s);
           return (

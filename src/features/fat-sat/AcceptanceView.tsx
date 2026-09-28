@@ -66,7 +66,7 @@ export default function AcceptanceView({ record }: { record: Rec }) {
       {sections.map((sec) => (
         <div key={sec} className="mb-3">
           <div className="mb-1 text-micro font-semibold uppercase text-ink-3">{sec}</div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0}>
             <table className="w-full text-meta">
               <thead>
                 <tr className="text-left text-micro uppercase text-ink-3">

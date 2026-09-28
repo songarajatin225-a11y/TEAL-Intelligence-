@@ -102,7 +102,7 @@ export default function RfqView({ record }: { record: Rec }) {
       {!r.supplier_ids.length ? (
         <p className="text-ink-3">Add suppliers to record quotations.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0}>
           <table className="w-full text-meta">
             <thead>
               <tr className="text-left text-micro uppercase text-ink-3">

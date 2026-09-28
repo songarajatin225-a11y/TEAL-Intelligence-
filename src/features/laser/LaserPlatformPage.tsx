@@ -188,7 +188,7 @@ export default function LaserPlatformPage() {
         />
         {cmp.length > 1 && (
           <Card title={`Compare (${cmp.length})`} className="mb-4" actions={<button type="button" className="text-meta text-accent-2 hover:underline" onClick={() => setCompare([])}>Clear</button>}>
-            <div className="scroll-thin overflow-x-auto">
+            <div className="scroll-thin overflow-x-auto" tabIndex={0}>
               <table className="w-full text-left text-meta">
                 <thead>
                   <tr className="text-ink-3">

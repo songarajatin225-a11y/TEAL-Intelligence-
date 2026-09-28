@@ -121,7 +121,7 @@ export default function CostModelView({ record }: { record: Rec }) {
               ))}
             </div>
             <p className="mb-1 text-meta text-ink-3">Line formula: {COST_MODULE_META[mod].formula}</p>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0}>
               <table className="w-full text-body">
                 <thead>
                   <tr className="text-left text-micro uppercase text-ink-3">

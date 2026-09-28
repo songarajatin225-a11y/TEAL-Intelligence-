@@ -184,7 +184,7 @@ export default function DomainPage() {
           }
         >
           {view.equipment.length ? (
-            <div className="scroll-thin overflow-x-auto">
+            <div className="scroll-thin overflow-x-auto" tabIndex={0}>
               <Table head={['Equipment', 'Process', 'Throughput', 'Accuracy', 'Supplier', 'CAPEX', 'Trust']} dense>
                 {view.equipment.map((e) => (
                   <tr key={e.id} className="border-t border-line/60">

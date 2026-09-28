@@ -105,7 +105,7 @@ export default function TwinTab({ eng, sim, d, customer }: TabProps) {
             </div>
           }
         >
-          <div className="scroll-thin overflow-x-auto">
+          <div className="scroll-thin overflow-x-auto" tabIndex={0}>
             <svg viewBox={`0 0 ${layout.width} ${layout.height}`} className="h-auto w-full min-w-[720px]" role="group" aria-label={`Digital twin, machine state ${state}`}>
               {layout.objects.map((o) => {
                 const isSel = o.id === sel;
