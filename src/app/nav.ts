@@ -120,7 +120,6 @@ export const SECTIONS: NavSection[] = [
     label: 'Intelligence',
     icon: Compass,
     pages: [
-      { label: 'Component Datasheets', to: '/component-datasheets', icon: Boxes, desc: 'Technical specification and supplier details for every component in the platform', keywords: 'components datasheet specifications supplier vendor lead time item master technical details' },
       { label: 'Global Engineering Database', to: '/engineering-db', icon: Database, desc: 'Manufacturers, products, specifications with evidence, technical search, compatibility', keywords: 'engineering database products components specifications parametric search manufacturers 1064 nm galvo camera' },
       { label: 'Market Intelligence', to: '/business-case', icon: Landmark, desc: 'Competitors, sourced TAM/SAM/SOM, NPV and payback with sensitivity', keywords: 'market business case npv competitor tam' },
       { label: 'Industry Intelligence', to: '/domains', icon: Network, desc: 'Laser, Electronics, Semiconductor, Battery, Automation, Advanced Manufacturing', keywords: 'domain industries' },
@@ -211,7 +210,6 @@ export const SECTIONS: NavSection[] = [
     label: 'Equipment Simulation',
     icon: FlaskConical,
     pages: [
-      { label: '3D Machine Digital Twin', to: '/studio/sim-demo-laser-marker?tab=machine3d', icon: Box, desc: 'Flagship: interactive 3D laser marking machine — motion, sequence, laser, vision, collisions, BOM and requirements on one digital thread', keywords: '3d machine simulator digital twin three.js laser marking machine gantry galvo collision exploded x-ray' },
       { label: 'Simulation Studio', to: '/studio', icon: FlaskConical, desc: 'Flagship: architecture, components, cycle time, capacity, bottleneck, Monte Carlo, twin, cost, review', keywords: 'simulation studio equipment digital twin des monte carlo uph cycle time' },
       { label: 'Equipment Library', to: '/studio?tab=library', icon: Boxes, desc: 'Equipment templates: laser, electronics, semiconductor, battery, automation', keywords: 'templates library' },
       { label: 'Architecture Builder', to: '/studio?focus=architecture', icon: Network, desc: 'Stations, flow, buffers and parallel servers of a scenario' },

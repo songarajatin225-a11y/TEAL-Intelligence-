@@ -467,28 +467,3 @@ h2 {
 :root[data-effects='reduced'] .beam-line {
   animation: none;
 }
-
-/* 3D machine digital twin — in-scene labels (DOM overlays; always legible, never the only carrier of information) */
-.twin-label {
-  white-space: nowrap;
-  font: 500 11px/1.3 var(--font-mono, ui-monospace, monospace);
-  color: #e8eeee;
-  background: rgb(11 15 17 / 0.82);
-  border: 1px solid rgb(0 169 157 / 0.55);
-  border-radius: 6px;
-  padding: 2px 6px;
-  transform: translate(6px, -50%);
-}
-.twin-abs {
-  position: absolute;
-}
-.twin-center {
-  transform: translate(-50%, -50%);
-}
-.twin-dim {
-  border-color: rgb(141 154 154 / 0.6);
-}
-.twin-viewport:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: -2px;
-}

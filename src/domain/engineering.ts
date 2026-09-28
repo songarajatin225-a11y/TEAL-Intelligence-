@@ -414,89 +414,6 @@ export const Actual = z.object({
 });
 export type Actual = z.infer<typeof Actual>;
 
-/* ============================================================ 3D digital twin inputs (3D master prompt) */
-
-/*
- * The 3D machine is a REPRESENTATION of the scenario (§176): these fields hold only the engineering
- * inputs the 3D model and motion need that a station does not already carry. Geometry is generated
- * from stations + selected components; nothing important lives only in the scene.
- */
-export const WORKPIECE_TEMPLATES = ['pcb', 'plate', 'battery_tab', 'battery_can', 'wafer', 'metal_part'] as const;
-export const TWIN_MODEL_MATURITY = ['Procedural', 'Imported', 'Engineering Reviewed', 'CAD Linked', 'Released'] as const;
-export const TWIN_SIM_MATURITY = ['Conceptual', 'Configured', 'Engineering Reviewed', 'POC Calibrated', 'Validated'] as const;
-export const SAFETY_ZONE_TYPES = ['operator', 'robot', 'laser', 'maintenance', 'restricted'] as const;
-
-/** §17 Axis model inputs. Speed / acceleration come from the linked part's specification when not entered. */
-export const TwinAxis = z.object({
-  key: z.string().regex(/^[a-z0-9_-]+$/),
-  name: z.string(),
-  type: z.enum(['linear', 'rotary']),
-  station_key: z.string(),
-  /** the stage / motor this axis is (speed, acceleration and travel are read from it when not entered) */
-  part_id: ref.optional(),
-  stroke_mm: z.number().positive().nullable().optional(),
-  home_mm: z.number().optional(),
-  speed_mm_s: z.number().positive().nullable().optional(),
-  accel_mm_s2: z.number().positive().nullable().optional(),
-  decel_mm_s2: z.number().positive().nullable().optional(),
-  basis: z.enum(BASES).optional(),
-});
-export type TwinAxis = z.infer<typeof TwinAxis>;
-
-/** A move executed once per part at a station: simultaneous axis targets (absolute positions, mm). */
-export const TwinMove = z.object({ station_key: z.string(), label: z.string().optional(), targets: z.record(z.string(), z.number()) });
-export type TwinMove = z.infer<typeof TwinMove>;
-
-export const TwinSnapshot = z.object({
-  id: z.string(),
-  name: z.string(),
-  at: z.string(),
-  view: z.string(),
-  camera: z.object({ position: z.array(z.number()).length(3), target: z.array(z.number()).length(3), ortho: z.boolean().optional() }),
-  layers: z.array(z.string()),
-  selected: z.string().optional(),
-  t_s: z.number().nonnegative(),
-});
-export type TwinSnapshot = z.infer<typeof TwinSnapshot>;
-
-/** §77 / §165 recorded run — inputs + summary; events are regenerated deterministically from the seed. */
-export const TwinRun = z.object({
-  id: z.string(),
-  at: z.string(),
-  seed: z.number().int(),
-  horizon_s: z.number().positive(),
-  model_version: z.string(),
-  twin_version: z.string(),
-  equipment_version: z.number().int().optional(),
-  faults: z.array(z.string()),
-  results: z.object({ ok: z.number(), ng: z.number(), uph: z.number(), collisions: z.number(), alarms: z.number() }),
-  assumptions: z.array(z.object({ name: z.string(), value: z.string(), unit: z.string().optional(), basis: z.string() })),
-  note: z.string().optional(),
-});
-export type TwinRun = z.infer<typeof TwinRun>;
-
-export const TwinInputs = z.object({
-  model_maturity: z.enum(TWIN_MODEL_MATURITY).optional(),
-  sim_maturity: z.enum(TWIN_SIM_MATURITY).optional(),
-  workpiece: z
-    .object({ template: z.enum(WORKPIECE_TEMPLATES), length_mm: z.number().positive(), width_mm: z.number().positive(), thickness_mm: z.number().positive(), material: z.string().optional(), basis: z.enum(BASES).optional() })
-    .optional(),
-  /** required process area on the part (marking field / weld path extent) */
-  process_area: z.object({ x_mm: z.number().positive(), y_mm: z.number().positive(), requirement_id: ref.optional() }).optional(),
-  axes: z.array(TwinAxis).optional(),
-  moves: z.array(TwinMove).optional(),
-  /** per vision station: working distance and the target area the camera must see */
-  vision: z.record(z.string(), z.object({ wd_mm: z.number().positive().nullable().optional(), target_x_mm: z.number().positive().nullable().optional(), target_y_mm: z.number().positive().nullable().optional() })).optional(),
-  /** manual layout overrides for auto-placed objects (§13) */
-  overrides: z.record(z.string(), z.object({ x_mm: z.number().optional(), z_mm: z.number().optional(), hidden: z.boolean().optional() })).optional(),
-  zones: z.array(z.object({ key: z.string(), name: z.string(), type: z.enum(SAFETY_ZONE_TYPES), enabled: z.boolean(), rule: z.string().optional() })).optional(),
-  snapshots: z.array(TwinSnapshot).optional(),
-  runs: z.array(TwinRun).optional(),
-  /** §107 conceptual factory placement of machines (this and other scenarios) */
-  factory: z.array(z.object({ id: z.string(), sim_id: ref, x_mm: z.number(), z_mm: z.number(), rot_deg: z.number() })).optional(),
-});
-export type TwinInputs = z.infer<typeof TwinInputs>;
-
 /**
  * §59 Simulation scenario = an equipment configuration + its simulation inputs. A customer or
  * project configuration is its own record (parent_id → the base), so it never overwrites the base
@@ -566,7 +483,6 @@ export const Simulation = z.object({
   readiness: z.record(z.string(), z.enum(READINESS_STATUSES)).optional(),
   trl: z.number().int().min(1).max(9).nullable().optional(),
   customer_visible_notes: z.string().optional(),
-  twin: TwinInputs.optional(),
 });
 export type Simulation = z.infer<typeof Simulation>;
 

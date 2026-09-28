@@ -1,4 +1,4 @@
-import { Box, Boxes, Columns2, FlaskConical, GitBranch, Layers, Plus, Sparkles, Truck, Workflow } from 'lucide-react';
+import { Boxes, Columns2, FlaskConical, GitBranch, Layers, Plus, Sparkles, Truck, Workflow } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
@@ -58,10 +58,6 @@ export default function StudioPage() {
         <p className="mt-2 text-micro text-ink-3">
           The simulator models cycle time, queues, blocking, variability, failures, cost and energy. It is not FEA, CFD, optical ray-tracing or servo-dynamics simulation, and results are not factory-validated until measured data is entered under Validation.
         </p>
-      </Card>
-      <Card edge title="3D Machine Digital Twin" icon={Box} description="From engineering requirements to a virtual machine you can configure, simulate, analyze and validate." actions={<Link to={`${studioPath('sim-demo-laser-marker')}?tab=machine3d`} className={buttonClass('primary', 'sm')}>Open the 3D laser marking machine</Link>}>
-        <Chain label="Digital thread" steps={['Requirement', 'Architecture', '3D machine', 'Simulation', 'BOM', 'Cost', 'Validation'].map((l) => ({ label: l, state: 'done' as const }))} />
-        <p className="mt-2 text-micro text-ink-3">Every scenario has a 3D machine tab generated from its stations and selected components — motion, sequence, laser and vision, collisions, BOM, cost and requirements on one model. Conceptual geometry, not CAD.</p>
       </Card>
       <Tabs<Tab>
         label="Studio"
@@ -331,7 +327,7 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
   const tId = template || state?.template || eng.templates[0]?.id || '';
   const customers = eng.records.filter((r) => r.entity === 'customer');
   const requirements = eng.records.filter((r) => r.entity === 'requirement');
-  const save = async (open3d = false) => {
+  const save = async () => {
     const t = eng.byId.get(tId) as (EquipmentTemplate & AnyRecord) | undefined;
     if (!t) return setError('Choose an equipment template');
     const sim = scenarioFromTemplate(t, { newId: newLocalId, today: todayIso(), name: name.trim() || undefined, customer_id: customer || undefined, requirement_ids: reqs, uph: uph ? Number(uph) : null });
@@ -339,7 +335,7 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
       await repo().workspace.save(sim as unknown as Record<string, unknown>, `New scenario: ${sim.name}`);
       toast('Scenario created as a local draft', { tone: 'draft', detail: 'Enter station times, select components, then run the simulation.' });
       onClose();
-      nav(open3d ? `${studioPath(sim.id)}?tab=machine3d` : studioPath(sim.id));
+      nav(studioPath(sim.id));
     } catch (e) {
       setError(e instanceof ValidationFailure ? e.message : String(e));
     }
@@ -389,11 +385,8 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
         </Field>
         {error && <Notice tone="warn">{error}</Notice>}
         <div className="flex gap-2">
-          <Button variant="primary" onClick={() => void save()}>
+          <Button variant="primary" onClick={save}>
             <Workflow className="size-4" aria-hidden /> Create scenario
-          </Button>
-          <Button onClick={() => void save(true)}>
-            <Box className="size-4" aria-hidden /> Create and open in 3D
           </Button>
           <Button onClick={onClose}>Cancel</Button>
         </div>
