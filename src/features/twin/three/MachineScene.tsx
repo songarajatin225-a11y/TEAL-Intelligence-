@@ -4,7 +4,8 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, type Mutab
 import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { workpieceObject } from '../../../services/twin/collision';
-import { carriedOffset, type Layer, type Machine3DObject, type MachineModel } from '../../../services/twin/machine';
+import { pickPlacePose, toolStroke } from '../../../services/twin/kinematics';
+import { carriedOffset, laneZ, PUSH_SHARE, type Layer, type Machine3DObject, type MachineModel } from '../../../services/twin/machine';
 import { pointAt, type ScanPath } from '../../../services/twin/process';
 import type { SimulationState } from '../../../services/twin/timeline';
 import { MM, ObjectBody, RuntimeCtx, WorkpieceMesh, type EnclosureMode, type TwinRuntime, type Visual } from './procedural';
@@ -156,7 +157,7 @@ function CameraRig({ model, api, ortho, reduced }: { model: MachineModel; api: M
           case 'laser':
             if (laser) {
               const f = new THREE.Vector3(...W(laser.focus));
-              return go(f.clone().add(new THREE.Vector3(0.35, 0.3, 0.45)), f.clone().add(new THREE.Vector3(0, 0.12, 0)));
+              return go(f.clone().add(model.carrier === 'flow' ? new THREE.Vector3(0.55, 0.5, 0.95) : new THREE.Vector3(0.35, 0.3, 0.45)), f.clone().add(new THREE.Vector3(0, 0.12, 0)));
             }
             break;
           case 'inspection':
@@ -206,41 +207,112 @@ function Section({ view }: { view: SceneView }) {
   return null;
 }
 
-/** Parts moving through an inline line: a small pool positioned from the DES state each frame (§35–§37). */
-function FlowParts({ model, stateRef }: { model: MachineModel; stateRef: MutableRefObject<SimulationState | null> }) {
-  const pool = 28;
+/**
+ * Parts moving through an inline line (§35–§37): every part id is tracked and glides to its target —
+ * the station anchor, or the gripper of the robot / gantry that is carrying it — so transfers are
+ * continuous rather than jumps. Queued parts line up behind the station.
+ */
+function FlowParts({ model, stateRef, reduced }: { model: MachineModel; stateRef: MutableRefObject<SimulationState | null>; reduced: boolean }) {
+  const pool = 32;
+  const qpool = 24;
   const refs = useRef<(THREE.Group | null)[]>([]);
+  const qrefs = useRef<(THREE.Group | null)[]>([]);
+  const track = useRef(new Map<number, { slot: number; pos: THREE.Vector3 }>());
   const keys = Object.keys(model.anchors);
-  useFrame(() => {
+  const tmp = useMemo(() => new THREE.Vector3(), []);
+  const thk = model.workpiece.thickness;
+  // diverter geometry per sort station: rod-plate start (z), stroke and the NG bin opening
+  const pushers = useMemo(() => {
+    const m = new Map<string, { z0: number; stroke: number; bin: [number, number, number] }>();
+    for (const o of model.objects) {
+      if (o.kind !== 'pusher' || !o.stationKey) continue;
+      const ng = model.byId.get(`st-${o.stationKey}-ng`);
+      const bin: [number, number, number] = ng ? [ng.position[0], ng.position[1] + ng.size[1] - 20, ng.position[2]] : [o.position[0], model.tableTop - 200, o.position[2] + 600];
+      m.set(o.stationKey, { z0: o.position[2] + o.size[2] / 2 + 64, stroke: Number(o.params.stroke ?? 150), bin });
+    }
+    return m;
+  }, [model]);
+  useFrame((_, dt) => {
     const s = stateRef.current;
-    let n = 0;
-    const place = (x: number, y: number, z: number, state: 'raw' | 'processing') => {
-      const g = refs.current[n++];
+    const targets = new Map<number, [number, number, number]>();
+    let q = 0;
+    const queued = (x: number, y: number, z: number) => {
+      const g = qrefs.current[q++];
       if (!g) return;
       g.visible = true;
       g.position.set(x * MM, y * MM, z * MM);
-      g.userData.state = state;
     };
     if (s)
       s.stations.forEach((st, i) => {
         const a = model.anchors[keys[i]];
         if (!a) return;
+        const hd = model.handlers[st.key];
         st.servers.forEach((sv, j) => {
-          if (sv.state === 'busy' || sv.state === 'blocked') place(a[0], a[1] - model.workpiece.thickness, a[2] + (st.servers.length > 1 ? (j - (st.servers.length - 1) / 2) * 220 : 0), sv.state === 'busy' ? 'processing' : 'raw');
+          if ((sv.state !== 'busy' && sv.state !== 'blocked') || sv.part < 0) return;
+          let t: [number, number, number] = [a[0], a[1] - thk, a[2] + laneZ(j, st.servers.length)];
+          if (hd && hd.carries === 'part') {
+            const u = sv.state === 'blocked' ? 1 : sv.step && sv.step.kind !== 'move' ? sv.stepProgress : 0;
+            const pose = pickPlacePose(hd.pp, u);
+            const at = pose.holding ? pose.tcp : u < 0.35 ? hd.pp.pick : hd.pp.place;
+            t = [at[0], at[1] - thk, at[2]];
+          }
+          // a rejected part is pushed off the belt by the diverter and drops into the NG bin
+          const pu = pushers.get(st.key);
+          if (pu && sv.ng && sv.state === 'busy') {
+            const u = sv.step && sv.step.kind !== 'move' ? sv.stepProgress : 0;
+            const plateZ = pu.z0 + pu.stroke * PUSH_SHARE * (u >= 0.2 ? 1 : toolStroke(u));
+            const z = Math.max(t[2], plateZ + model.workpiece.width / 2 + 4);
+            const k = u <= 0.55 ? 0 : Math.min(1, (u - 0.55) / 0.4);
+            t = [t[0] + (pu.bin[0] - t[0]) * k, t[1] + (pu.bin[1] - t[1]) * k * k, z + (pu.bin[2] - z) * k];
+          }
+          targets.set(sv.part, t);
         });
-        const next = model.anchors[keys[i + 1]];
-        for (let q = 0; q < Math.min(st.queue, 6) && n < pool; q++) {
-          const x = next ? a[0] + ((q + 1) * (next[0] - a[0])) / (Math.min(st.queue, 6) + 1) : a[0] + (q + 1) * (model.workpiece.length + 20);
-          place(x, model.tableTop + 60, 0, 'raw');
-        }
+        // parts waiting for this station queue on the belt in front of it, one part pitch apart
+        // (the first station's backlog is the infeed magazine, so it is not drawn on the belt)
+        const prev = model.anchors[keys[i - 1]];
+        if (!prev) return;
+        const pitch = model.workpiece.length + 30;
+        const fit = Math.max(0, Math.floor((Math.abs(a[0] - prev[0]) - pitch / 2) / pitch));
+        for (let k = 0; k < Math.min(st.queue, fit, 6); k++) queued(a[0] - (k + 1) * pitch, model.tableTop + 60, 0);
       });
-    for (; n < pool; n++) if (refs.current[n]) refs.current[n]!.visible = false;
+    for (; q < qpool; q++) if (qrefs.current[q]) qrefs.current[q]!.visible = false;
+    const used = new Set<number>();
+    for (const [id, tr] of track.current) {
+      if (targets.has(id)) used.add(tr.slot);
+      else track.current.delete(id);
+    }
+    for (const [id, t] of targets) {
+      let tr = track.current.get(id);
+      if (!tr) {
+        let slot = 0;
+        while (used.has(slot) && slot < pool) slot++;
+        if (slot >= pool) continue;
+        used.add(slot);
+        tr = { slot, pos: new THREE.Vector3(t[0] - (keys.length && t[0] === model.anchors[keys[0]]?.[0] ? 160 : 0), t[1], t[2]) };
+        track.current.set(id, tr);
+      }
+      tmp.set(t[0], t[1], t[2]);
+      if (reduced) tr.pos.copy(tmp);
+      else tr.pos.lerp(tmp, Math.min(1, dt * 9));
+      const g = refs.current[tr.slot];
+      if (g) {
+        g.visible = true;
+        g.position.set(tr.pos.x * MM, tr.pos.y * MM, tr.pos.z * MM);
+      }
+    }
+    for (let k = 0; k < pool; k++) if (!used.has(k) && refs.current[k]) refs.current[k]!.visible = false;
   });
+  const wpm = <WorkpieceMesh template={model.workpiece.template} l={model.workpiece.length} w={model.workpiece.width} t={model.workpiece.thickness} />;
   return (
     <group>
       {Array.from({ length: pool }, (_, i) => (
-        <group key={i} ref={(g) => (refs.current[i] = g)} visible={false}>
-          <WorkpieceMesh template={model.workpiece.template} l={model.workpiece.length} w={model.workpiece.width} t={model.workpiece.thickness} />
+        <group key={`p${i}`} ref={(g) => (refs.current[i] = g)} visible={false}>
+          {wpm}
+        </group>
+      ))}
+      {Array.from({ length: qpool }, (_, i) => (
+        <group key={`q${i}`} ref={(g) => (qrefs.current[i] = g)} visible={false}>
+          {wpm}
         </group>
       ))}
     </group>
@@ -295,7 +367,7 @@ function OneBeam({ i, model, stateRef, view, path, offset }: { i: number; model:
     }
     if (last.current) {
       const arr = last.current.attributes.position as THREE.BufferAttribute;
-      const ft = l.points[l.points.length - 2];
+      const ft = l.mode === 'head' ? [x, l.points[1][1], z] : l.points[l.points.length - 2];
       arr.setXYZ(0, ft[0] * MM, ft[1] * MM, ft[2] * MM);
       arr.setXYZ(1, x * MM, f[1] * MM, z * MM);
       arr.needsUpdate = true;
@@ -313,7 +385,7 @@ function OneBeam({ i, model, stateRef, view, path, offset }: { i: number; model:
   return (
     <group>
       <group ref={beamRef} visible={false}>
-        <Line points={pts} color={color} lineWidth={2} transparent opacity={op} />
+        {l.mode !== 'head' && <Line points={pts} color={color} lineWidth={2} transparent opacity={op} />}
         <lineSegments>
           <bufferGeometry ref={last}>
             <bufferAttribute attach="attributes-position" args={[new Float32Array(6), 3]} />
@@ -516,7 +588,7 @@ function ScreenLabels({ items }: { items: ScreenLabel[] }) {
   return null;
 }
 
-const CALLOUT_KINDS = new Set(['laser_source', 'collimator', 'beam_expander', 'galvo', 'f_theta', 'laser_head', 'camera', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chiller', 'estop', 'tower', 'door', 'nozzle', 'z_slide', 'frl', 'valve', 'robot', 'conveyor', 'bin']);
+const CALLOUT_KINDS = new Set(['tool', 'test_head', 'gantry_pp', 'magazine', 'pusher', 'laser_source', 'collimator', 'beam_expander', 'galvo', 'f_theta', 'laser_head', 'camera', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chiller', 'estop', 'tower', 'door', 'nozzle', 'z_slide', 'frl', 'valve', 'robot']);
 
 const ROUTE_STYLE: Record<string, { color: string; r: number; rough: number }> = {
   fiber: { color: '#e8b500', r: 5, rough: 0.5 },
@@ -546,6 +618,31 @@ function SelBox({ o, color }: { o: Machine3DObject; color: string }) {
     <lineSegments geometry={geo} position={[o.position[0] * MM, (o.position[1] + o.size[1] / 2) * MM, o.position[2] * MM]}>
       <lineBasicMaterial color={color} />
     </lineSegments>
+  );
+}
+
+/** Evidenced bottleneck (§71): a dashed amber outline on the table around the station — the machinery keeps its own colours. */
+function BottleneckMarker({ model, stationKey }: { model: MachineModel; stationKey: string }) {
+  const st = model.byId.get(`st-${stationKey}`);
+  if (!st) return null;
+  const w = Math.max(st.size[0] - 16, 120);
+  const d = st.size[2] - 60;
+  const y = model.tableTop + 3;
+  const pts = [
+    [-w / 2, 0, -d / 2],
+    [w / 2, 0, -d / 2],
+    [w / 2, 0, d / 2],
+    [-w / 2, 0, d / 2],
+    [-w / 2, 0, -d / 2],
+  ].map(([x, yy, z]) => new THREE.Vector3(x * MM, yy, z * MM));
+  return (
+    <group position={[st.position[0] * MM, y * MM, st.position[2] * MM]}>
+      <Line points={pts} color="#f5a524" lineWidth={2} dashed dashSize={0.03} gapSize={0.015} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[w * MM, d * MM]} />
+        <meshBasicMaterial color="#f5a524" transparent opacity={0.06} depthWrite={false} />
+      </mesh>
+    </group>
   );
 }
 
@@ -611,7 +708,6 @@ export const MachineScene = forwardRef<
     if (view.hover === o.id) return 'hover';
     if (stateOf(o) === 'down') return 'fault';
     if (view.highlight?.has(o.id)) return 'active';
-    if (view.bottleneck && o.stationKey === view.bottleneck && o.kind !== 'generic') return 'warning';
     return 'normal';
   };
   const render = (o: Machine3DObject) => {
@@ -722,11 +818,12 @@ export const MachineScene = forwardRef<
           <CarriedPart wp={wp} model={model} stateRef={stateRef} />
         </Carried>
       )}
-      {model.carrier === 'flow' && view.layers.Material && <FlowParts model={model} stateRef={stateRef} />}
+      {model.carrier === 'flow' && view.layers.Material && <FlowParts model={model} stateRef={stateRef} reduced={view.reducedMotion} />}
       {view.layers.Laser && <LaserFx model={model} stateRef={stateRef} view={view} paths={paths} partOffset={partOffset} />}
       {view.fov && view.layers.Vision && <Fov model={model} live={live} />}
       {view.field && view.layers.Laser && <Field model={model} />}
       {view.dims && <Dims model={model} />}
+      {view.bottleneck && <BottleneckMarker model={model} stationKey={view.bottleneck} />}
       {view.zones &&
         model.zones
           .filter((z) => z.enabled || view.zonesAll)

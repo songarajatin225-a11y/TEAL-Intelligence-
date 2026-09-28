@@ -454,7 +454,7 @@
       "entity": "simulation",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 6,
+      "record_count": 9,
       "last_updated": "2026-09-27",
       "schema": "schemas/simulation.schema.json",
       "source_ids": [
@@ -462,7 +462,7 @@
       ],
       "data_type": "DEMO",
       "partition": "engineering",
-      "sha256": "3968b0bba4bd37be"
+      "sha256": "3d4cd25e6f446d04"
     },
     {
       "id": "demo-twin-requirements",

@@ -5,6 +5,7 @@ import { runDes, type DesResult } from '../../services/sim/des';
 import { originOf } from '../../services/sim/supply';
 import { twinChecks } from '../../services/twin/checks';
 import { checkCollisions } from '../../services/twin/collision';
+import { previewResolved } from '../../services/twin/preview';
 import { buildMachine, type MachineModel } from '../../services/twin/machine';
 import { scanPath, type ScanPath } from '../../services/twin/process';
 import { TwinPlayer } from '../../services/twin/timeline';
@@ -37,17 +38,25 @@ export interface RunOptions {
 }
 
 /** The ONE simulation run the 3D view, events, KPIs, HMI and alarms all read (§45). */
-export function useTwinRun(d: Derived, model: MachineModel, o: RunOptions): { des: DesResult | null; player: TwinPlayer | null; baseline: DesResult | null; error: string | null } {
+export function useTwinRun(d: Derived, model: MachineModel, o: RunOptions): { des: DesResult | null; player: TwinPlayer | null; baseline: DesResult | null; error: string | null; preview: boolean } {
   return useMemo(() => {
-    if (!d.res.runnable) return { des: null, player: null, baseline: null, error: null };
+    if (!d.res.runnable) {
+      try {
+        const pr = previewResolved(d.res);
+        const des = runDes(pr, { horizon_s: Math.min(o.horizon_s, 1800), seed: o.seed, traceUntil_s: Math.min(o.horizon_s, 1800), failures: false, maintenance: false, variability: false });
+        return { des, player: new TwinPlayer(pr, des, model), baseline: null, error: null, preview: true };
+      } catch (e) {
+        return { des: null, player: null, baseline: null, error: String(e), preview: true };
+      }
+    }
     try {
       const faults = [...(o.scenarioFaults ? d.res.sim.faults ?? [] : []), ...o.injected];
       const des = runDes(d.res, { horizon_s: o.horizon_s, seed: o.seed, traceUntil_s: o.horizon_s, failures: o.failures, maintenance: false, faults, variability: true });
       const baseline = o.injected.length ? runDes(d.res, { horizon_s: o.horizon_s, seed: o.seed, failures: o.failures, maintenance: false, faults: o.scenarioFaults ? d.res.sim.faults ?? [] : [], variability: true }) : null;
       const names = Object.fromEntries(faults.map((f) => [f.station_key, f.name]));
-      return { des, player: new TwinPlayer(d.res, des, model, names), baseline, error: null };
+      return { des, player: new TwinPlayer(d.res, des, model, names), baseline, error: null, preview: false };
     } catch (e) {
-      return { des: null, player: null, baseline: null, error: String(e) };
+      return { des: null, player: null, baseline: null, error: String(e), preview: false };
     }
   }, [d.res, model, o.seed, o.horizon_s, o.failures, o.scenarioFaults, o.injected]);
 }

@@ -8,7 +8,7 @@ engineering knowledge for the next product.
 
 `UNDERSTAND → CONFIGURE → ENGINEER → SIMULATE → OPTIMIZE → VALIDATE → BUILD → SCALE`
 
-Flagship module: **Equipment Simulation Studio** (see [docs/09](docs/09_ENGINEERING_SIMULATION_OS.md)) with the **3D Machine Digital Twin** — an interactive Three.js laser marking machine driven by the same simulation, BOM and requirements (see [docs/10](docs/10_3D_MACHINE_DIGITAL_TWIN.md), open `#/3d`). Every component has a technical + supplier datasheet at `#/component-datasheets`.
+Flagship module: **Equipment Simulation Studio** (see [docs/09](docs/09_ENGINEERING_SIMULATION_OS.md)) with the **3D Machine Digital Twin** — an interactive Three.js machine for every equipment template (laser marking and welding, assembly, test, handling, dispensing …) driven by the same simulation, BOM and requirements (see [docs/10](docs/10_3D_MACHINE_DIGITAL_TWIN.md), open `#/3d`). Every component has a technical + supplier datasheet at `#/component-datasheets`.
 
 It begins with Laser, where TEAL is strongest, and is built so the same intelligence system extends
 across Electronics & EMS, Semiconductor, Battery & New Energy, Industrial Automation and Advanced

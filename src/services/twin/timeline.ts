@@ -75,7 +75,8 @@ export type MachineState = 'Idle' | 'Loading' | 'Ready' | 'Aligning' | 'Processi
 
 export interface StationNow {
   key: string;
-  servers: { state: ServerState; part: number; progress: number; step: SubStep | null; stepProgress: number; since: number; end: number }[];
+  /** ng = the part on this server is rejected at this station in this run (drives the NG diverter) */
+  servers: { state: ServerState; part: number; progress: number; step: SubStep | null; stepProgress: number; since: number; end: number; ng: boolean }[];
   queue: number;
 }
 
@@ -120,6 +121,8 @@ export class TwinPlayer {
   readonly steps: SubStep[][];
   readonly events: TwinEvent[];
   readonly end: number;
+  /** part id → index of the station that rejected it (from the run's trace, never invented) */
+  readonly rejectAt = new Map<number, number>();
   private shape: number[];
   constructor(
     readonly res: Resolved,
@@ -172,7 +175,12 @@ export class TwinPlayer {
         if (x.endEvent) events.push({ t: t + x.dur * k, type: x.endEvent, station: stKey, part: s.part, text: `${x.endEvent === 'MOVE_COMPLETE' ? 'Move complete' : x.endEvent === 'VISION_COMPLETE' ? 'Vision complete' : 'Laser process complete'} — part ${s.part}` });
       }
     }
-    for (const e of tr) if (e.type === 'exit') events.push({ t: e.t, type: 'UNLOAD', station: res.stations[res.stations.length - 1].station.key, part: e.part, text: `Part ${e.part ?? ''} out — ${e.ok ? 'PASS' : 'FAIL (NG)'}`, severity: e.ok ? 'info' : 'warn' });
+    for (const e of tr)
+      if (e.type === 'exit') {
+        const at = res.stations[e.st] ?? res.stations[res.stations.length - 1];
+        if (!e.ok && e.part != null) this.rejectAt.set(e.part, e.st);
+        events.push({ t: e.t, type: e.ok ? 'UNLOAD' : 'SORT', station: at.station.key, part: e.part, text: e.ok ? `Part ${e.part ?? ''} out — PASS` : `Part ${e.part ?? ''} rejected at ${at.station.name} — FAIL (NG)`, severity: e.ok ? 'info' : 'warn' });
+      }
     events.sort((a, b) => a.t - b.t);
     this.events = events;
   }
@@ -180,7 +188,7 @@ export class TwinPlayer {
   /** Central simulation state at time t (§46). */
   at(t: number): SimulationState {
     const res = this.res;
-    const stations: StationNow[] = res.stations.map((rs, i) => ({ key: rs.station.key, servers: Array.from({ length: this.shape[i] }, () => ({ state: 'idle' as ServerState, part: -1, progress: 0, step: null, stepProgress: 0, since: 0, end: 0 })), queue: 0 }));
+    const stations: StationNow[] = res.stations.map((rs, i) => ({ key: rs.station.key, servers: Array.from({ length: this.shape[i] }, () => ({ state: 'idle' as ServerState, part: -1, progress: 0, step: null, stepProgress: 0, since: 0, end: 0, ng: false })), queue: 0 }));
     let ok = 0;
     let ng = 0;
     let inSystem = 0;
@@ -195,6 +203,7 @@ export class TwinPlayer {
         else ng++;
       }
     }
+    stations.forEach((s, i) => s.servers.forEach((sv) => (sv.ng = sv.part >= 0 && this.rejectAt.get(sv.part) === i)));
     for (const s of stations) for (const [j, sv] of s.servers.entries()) if (sv.state === 'down') alarms.push({ t: sv.since, station: s.key, text: `${res.stations.find((r) => r.station.key === s.key)?.station.name} down (server ${j + 1})` });
     // busy progress + sub-step from the spans
     const axes: Record<string, number> = Object.fromEntries(this.model.axes.map((a) => [a.key, a.home]));

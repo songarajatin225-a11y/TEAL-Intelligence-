@@ -779,3 +779,76 @@ function machineReport(sim: Sim, d: TabProps['d'], twin: TwinModel, player: Twin
   L.push('## Assumptions', '- Station times carry their basis (DEMO / user input / calculated).', '- Scan path is symbolic; cycle time uses the station process inputs.', '- Collision is bounding-box only; safety zones are visual aids, not certified safety validation.', '');
   return L.join('\n');
 }
+
+/* ------------------------------------------------------------------ simulation inputs (§161–§163) */
+
+const BASIS_OPTS = [
+  { value: 'USER_INPUT', label: 'User input' },
+  { value: 'EMPIRICAL', label: 'Measured / empirical' },
+  { value: 'MANUFACTURER_DATA', label: 'Manufacturer data' },
+  { value: 'ASSUMPTION', label: 'Assumption' },
+] as const;
+
+/**
+ * Every input the simulation needs, grouped by station, editable in place. Empty = not defined:
+ * the station is shown in the sequence preview with a visual placeholder and reported as a gap.
+ */
+export function InputsPanel({ sim, set, d, preview }: { sim: Sim; set: TabProps['set']; d: TabProps['d']; preview: boolean }) {
+  const patch = (key: string, p: Partial<Sim['stations'][number]>) => set((s) => ({ ...s, stations: s.stations.map((x) => (x.key === key ? { ...x, ...p } : x)) }));
+  const patchLaser = (key: string, p: Record<string, number | null>) => set((s) => ({ ...s, stations: s.stations.map((x) => (x.key === key ? { ...x, laser: { ...x.laser, ...p } } : x)) }));
+  return (
+    <div className="space-y-3">
+      {preview ? (
+        <p className="rounded-control border border-warn/40 bg-warn/10 px-3 py-2 text-meta">
+          <strong>Sequence preview.</strong> {d.res.blocking.length} input{d.res.blocking.length === 1 ? ' is' : 's are'} not defined, so the 3D machine walks through its sequence with a visual placeholder for those stations and shows <em>no</em> results. Enter the values below (with their basis) to run the real simulation.
+        </p>
+      ) : (
+        <p className="text-meta text-ink-3">All simulation inputs are defined. Changing a value re-runs the simulation, the 3D timeline, cycle time and capacity together.</p>
+      )}
+      <Table head={['Station', 'Kind', 'Time per part (s)', 'Basis', 'Laser process inputs', 'Status']} dense>
+        {sim.stations.map((st) => {
+          const rs = d.res.stations.find((r) => r.station.key === st.key);
+          const gaps = rs?.missing ?? [];
+          const lz = st.laser ?? {};
+          const byPath = lz.path_mm != null || /weld|cut|scrib/i.test(`${st.name} ${sim.name}`);
+          return (
+            <tr key={st.key}>
+              <td className="font-medium">{st.name}</td>
+              <td className="text-micro">{st.kind}</td>
+              <td>
+                {st.kind === 'laser' && rs?.basis === 'CALCULATED' ? (
+                  <span className="text-micro text-ink-3">calculated: {rs.time?.toFixed(3)} s</span>
+                ) : (
+                  <NumInput label={`${st.name} time per part`} value={st.time_s} min={0} onChange={(v) => patch(st.key, { time_s: v, time_basis: v == null ? st.time_basis : st.time_basis ?? 'USER_INPUT' })} />
+                )}
+              </td>
+              <td>
+                <SmallSelect label={`${st.name} basis`} value={(st.time_basis ?? 'USER_INPUT') as (typeof BASIS_OPTS)[number]['value']} options={BASIS_OPTS} onChange={(v) => patch(st.key, { time_basis: v })} className="!w-auto" />
+              </td>
+              <td>
+                {st.kind === 'laser' ? (
+                  <div className="flex flex-wrap items-center gap-1 text-micro">
+                    {byPath ? (
+                      <>
+                        path <NumInput label={`${st.name} path length mm`} value={lz.path_mm ?? null} min={0} width="w-16" onChange={(v) => patchLaser(st.key, { path_mm: v })} /> mm
+                      </>
+                    ) : (
+                      <>
+                        area <NumInput label={`${st.name} area mm2`} value={lz.area_mm2 ?? null} min={0} width="w-16" onChange={(v) => patchLaser(st.key, { area_mm2: v })} /> mm² · hatch <NumInput label={`${st.name} hatch mm`} value={lz.hatch_mm ?? null} min={0} width="w-14" onChange={(v) => patchLaser(st.key, { hatch_mm: v })} />
+                      </>
+                    )}
+                    · speed <NumInput label={`${st.name} speed mm/s`} value={lz.speed_mm_s ?? null} min={0} width="w-16" onChange={(v) => patchLaser(st.key, { speed_mm_s: v })} /> · passes <NumInput label={`${st.name} passes`} value={lz.passes ?? null} min={1} width="w-12" onChange={(v) => patchLaser(st.key, { passes: v })} /> · overhead <NumInput label={`${st.name} overhead s`} value={lz.jump_overhead_s ?? null} min={0} width="w-12" onChange={(v) => patchLaser(st.key, { jump_overhead_s: v })} /> s
+                  </div>
+                ) : (
+                  <span className="text-micro text-ink-3">—</span>
+                )}
+              </td>
+              <td>{gaps.length ? <Badge tone="warn">{gaps.map((g) => g.replace(`${st.name}: `, '')).join('; ')}</Badge> : <Badge tone="ok">defined</Badge>}</td>
+            </tr>
+          );
+        })}
+      </Table>
+      <p className="text-micro text-ink-3">Nothing is estimated for you: a laser station is calculated from area ÷ (hatch × speed) × passes + overhead (or path ÷ speed × passes + overhead) once those inputs exist; otherwise enter its measured time. Axis speeds come from the stage records (Motion panel).</p>
+    </div>
+  );
+}

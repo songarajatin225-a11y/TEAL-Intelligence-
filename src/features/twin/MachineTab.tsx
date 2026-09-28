@@ -13,13 +13,14 @@ import { sheetFor } from '../../services/eng/componentDetail';
 import { alternativesFor, selectedParts } from '../../services/sim/supply';
 import { resolveScenario } from '../../services/sim/model';
 import { buildMachine, LAYERS, type Layer, type Machine3DObject } from '../../services/twin/machine';
+import { PREVIEW_STATION_S } from '../../services/twin/preview';
 import type { SimulationState } from '../../services/twin/timeline';
 import { explainObject, machineTour, narrate, type ExplainCtx, type TourStep } from '../../services/twin/explain';
 import { SheetBody } from '../engineering/ComponentSheet';
 import { big, money, num, pct } from '../studio/shared';
 import type { TabProps } from '../studio/ScenarioPage';
 import { NumInput, SmallSelect } from '../studio/tabs/edit';
-import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, IoPanel, MotionPanel, RunsPanel, SequencePanel, TimelinePanel } from './panels';
+import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, InputsPanel, IoPanel, MotionPanel, RunsPanel, SequencePanel, TimelinePanel } from './panels';
 import { MachineScene, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
 import type { EnclosureMode } from './three/procedural';
 import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type RunOptions } from './useTwin';
@@ -57,7 +58,7 @@ export default function MachineTab(p: TabProps) {
 
 type Overlay = 'none' | 'state' | 'localization' | 'cost' | 'requirement' | 'risk';
 type CamMode = 'engineering' | 'customer' | 'exploded' | 'xray' | 'process' | 'laser' | 'inspection' | 'maintenance';
-type Bottom = 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'faults' | 'runs' | 'compare' | 'assumptions';
+type Bottom = 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'faults' | 'runs' | 'compare' | 'assumptions';
 
 const reducedMotionQuery = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const allLayers = () => Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<Layer, boolean>;
@@ -68,7 +69,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const { model } = twin;
   const [run, setRunState] = useState<RunOptions>({ seed: 11, horizon_s: 3600, failures: false, scenarioFaults: false, injected: [] });
   const setRun = useCallback((f: (r: RunOptions) => RunOptions) => setRunState(f), []);
-  const { des, player, baseline, error } = useTwinRun(d, model, run);
+  const { des, player, baseline, error, preview } = useTwinRun(d, model, run);
 
   /* ---------------- central simulation clock (§127: render loop decoupled from the simulation) */
   const tRef = useRef(0);
@@ -176,7 +177,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const [reqSel, setReqSel] = useState('');
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
   const [camMode, setCamMode] = useState<CamMode>(customer ? 'customer' : 'engineering');
-  const [bottom, setBottom] = useState<Bottom>('timeline');
+  const [bottom, setBottom] = useState<Bottom>(d.res.runnable ? 'timeline' : 'inputs');
   const [other, setOther] = useState('');
   const [ghostOn, setGhostOn] = useState(false);
   const [perfNotice, setPerfNotice] = useState(false);
@@ -389,13 +390,15 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const bounds = model.bounds;
   const secAxis = view.section.axis;
   const secRange = secAxis ? [bounds.min[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2], bounds.max[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2]] : [0, 1];
-  const busyNames = snap ? snap.stations.flatMap((s) => s.servers.filter((x) => x.state === 'busy').map((x) => ({ st: sim.stations.find((y) => y.key === s.key)?.name ?? s.key, step: x.step?.name, part: x.part }))) : [];
+  const STEP_PRI: Record<string, number> = { laser: 0, laser_prep: 1, process: 2, inspect: 3, vision: 3, move: 4, clamp: 5, sort: 6, load: 7, unload: 8 };
+  const busyNames = snap ? snap.stations.flatMap((s) => s.servers.filter((x) => x.state === 'busy').map((x) => ({ st: sim.stations.find((y) => y.key === s.key)?.name ?? s.key, step: x.step?.name, part: x.part, pri: STEP_PRI[x.step?.kind ?? ''] ?? 9 }))).sort((a, b) => a.pri - b.pri) : [];
   const current = busyNames[0];
   const narration = useMemo(() => {
     if (!snap) return '';
-    for (const st of snap.stations)
-      for (const sv of st.servers)
-        if (sv.state === 'busy' && sv.step) return narrate(sv.step, sim.stations.find((x) => x.key === st.key)?.name ?? st.key, sv.stepProgress, xctx);
+    // several stations work at once on a line: explain the most significant step
+    const PRI: Record<string, number> = { laser: 0, laser_prep: 1, process: 2, inspect: 3, vision: 3, move: 4, clamp: 5, sort: 6, load: 7, unload: 8 };
+    const busy = snap.stations.flatMap((st) => st.servers.filter((sv) => sv.state === 'busy' && sv.step).map((sv) => ({ st, sv }))).sort((a, b) => (PRI[a.sv.step!.kind] ?? 9) - (PRI[b.sv.step!.kind] ?? 9));
+    if (busy[0]) return narrate(busy[0].sv.step!, sim.stations.find((x) => x.key === busy[0].st.key)?.name ?? busy[0].st.key, busy[0].sv.stepProgress, xctx);
     if (snap.alarms.length) return `Fault: ${snap.alarms[0].text} — upstream stations block and downstream stations starve until it is cleared.`;
     return '';
   }, [snap, sim.stations, xctx]);
@@ -406,6 +409,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const totalQueue = snap ? snap.stations.reduce((n, s) => n + s.queue, 0) : 0;
 
   const bottomTabs: { key: Bottom; label: ReactNode; count?: number }[] = [
+    { key: 'inputs', label: 'Simulation inputs', count: d.res.blocking.length || undefined },
     { key: 'timeline', label: 'Timeline & events' },
     { key: 'sequence', label: 'Sequence (PLC)' },
     { key: 'checks', label: 'Design check', count: twin.checks.filter((c) => c.severity === 'critical' || c.severity === 'major').length },
@@ -434,13 +438,14 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
           <Badge>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
           <Badge>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
           {sim.data_type === 'DEMO' && <Badge tone="warn">DEMO</Badge>}
+          {preview && <Badge tone="warn">SEQUENCE PREVIEW — not a result</Badge>}
         </span>
       </div>
       {!d.res.runnable && (
         <Notice tone="warn">
-          <strong>Simulation input gaps:</strong> {d.res.blocking.join('; ')}. The 3D model is shown, but nothing moves until these are entered — nothing is assumed (§161, §162).{' '}
-          <button type="button" className="text-accent-2 underline" onClick={() => setParams((p) => (p.set('tab', 'architecture'), p), { replace: true })}>
-            Open Architecture
+          <strong>Simulation input gaps:</strong> {d.res.blocking.join('; ')}. The machine runs as a <strong>sequence preview</strong> ({PREVIEW_STATION_S} s visual placeholder per undefined station, no variability) — it shows how the equipment works but produces no results; nothing is assumed (§161, §162).{' '}
+          <button type="button" className="text-accent-2 underline" onClick={() => setBottom('inputs')}>
+            Enter the missing inputs
           </button>
         </Notice>
       )}
@@ -506,14 +511,18 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
                 ['zones', 'Safety zones'],
                 ['routes', 'Control cables (conceptual routing)'],
                 ['fov', 'Camera field of view'],
-                ['field', 'Marking field / process area'],
+                ['field', model.lasers.length ? 'Marking field / process area' : 'Process area'],
                 ['trail', 'Scan path preview'],
               ] as const
-            ).map(([k, l]) => (
+            )
+              // only offer overlays this machine actually has
+              .filter(([k]) => (k === 'fov' ? model.vision.length > 0 : k === 'trail' ? model.lasers.length > 0 : k === 'field' ? model.lasers.length > 0 || !!model.processArea : true))
+              .map(([k, l]) => (
               <label key={k} className="flex items-center gap-1.5">
                 <input type="checkbox" checked={view[k]} onChange={(e) => patch({ [k]: e.target.checked } as Partial<SceneView>)} /> {l}
               </label>
             ))}
+            {model.lasers.length > 0 && (
             <div className="mt-2 border-t border-line pt-2">
               <label className="flex items-center gap-1.5">
                 <input type="checkbox" checked={view.beam.on} onChange={(e) => patch({ beam: { ...view.beam, on: e.target.checked } })} /> Laser beam
@@ -534,6 +543,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
               </label>
               <p className="mt-1 text-micro text-ink-3">The rendered beam is symbolic (IR is invisible) — not an optical simulation.</p>
             </div>
+            )}
           </div>
           )}
         </Popover>
@@ -707,12 +717,12 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-8" aria-label="Live key figures">
         <Kpi label="Cycle time" value={d.cycle ? `${d.cycle.cycle.toFixed(2)} s` : 'Not Available'} sub={d.cycle ? (d.cycle.layout === 'sequential' ? 'Σ station times' : 'slowest station') : 'input gaps'} />
         <Kpi label="Practical UPH" value={d.cycle ? num(d.cycle.practicalUph, 4) : 'Not Available'} sub={sim.targets?.uph ? `target ${sim.targets.uph}` : 'no target'} tone={d.cycle && sim.targets?.uph ? (d.cycle.practicalUph >= sim.targets.uph ? 'ok' : 'bad') : undefined} />
-        <Kpi label="Parts processed" value={String((snap?.ok ?? 0) + (snap?.ng ?? 0))} sub={`good ${snap?.ok ?? 0} · rejects ${snap?.ng ?? 0}`} />
-        <Kpi label="Run UPH" value={snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'} sub={des ? `full run ${des.uph.toFixed(0)}` : '—'} />
+        <Kpi label="Parts processed" value={preview ? '—' : String((snap?.ok ?? 0) + (snap?.ng ?? 0))} sub={preview ? 'preview — not counted' : `good ${snap?.ok ?? 0} · rejects ${snap?.ng ?? 0}`} />
+        <Kpi label="Run UPH" value={preview ? '—' : snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'} sub={preview ? 'preview — not a result' : des ? `full run ${des.uph.toFixed(0)}` : '—'} />
         <Kpi label="Queue (WIP)" value={String(totalQueue)} sub={`${snap?.inSystem ?? 0} in system`} />
-        <Kpi label="Bottleneck utilization" value={desBott ? pct(desBott.utilization) : 'Not Available'} sub={desBott ? desBott.name : '—'} />
+        <Kpi label="Bottleneck utilization" value={desBott && !preview ? pct(desBott.utilization) : 'Not Available'} sub={desBott && !preview ? desBott.name : preview ? 'preview' : '—'} />
         <Kpi label="OEE" value={d.cycle ? pct(d.cycle.oee) : 'Not Available'} sub={d.cycle ? `A ${pct(d.cycle.availability.value)} · P ${pct(d.cycle.performance.value)} · Q ${pct(d.cycle.quality.value)}` : 'factors not defined'} />
-        <Kpi label="Downtime (run)" value={downMin != null ? `${downMin.toFixed(1)} min` : 'Not Available'} sub="longest station down time" tone={downMin ? 'warn' : undefined} />
+        <Kpi label="Downtime (run)" value={downMin != null && !preview ? `${downMin.toFixed(1)} min` : 'Not Available'} sub="longest station down time" tone={downMin ? 'warn' : undefined} />
       </div>
       {d.cycle && (
         <p className="text-micro text-ink-3">
@@ -724,14 +734,15 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
       <Card padded={false} bodyClassName="p-3">
         <Tabs<Bottom> label="Digital twin panels" value={bottom} onChange={setBottom} tabs={bottomTabs.filter((b) => !(customer && (b.key === 'io' || b.key === 'assumptions' || b.key === 'motion')))} />
         <div className="pt-3">
+          {bottom === 'inputs' && <InputsPanel sim={sim} set={set} d={d} preview={preview} />}
           {bottom === 'timeline' && <TimelinePanel player={player} t={t} setT={setT} playing={playing} setPlaying={setPlaying} speed={speed} setSpeed={setSpeed} d={d} twin={twin} />}
           {bottom === 'sequence' && <SequencePanel sim={sim} snap={snap} />}
           {bottom === 'checks' && <ChecksPanel twin={twin} onObject={focusObj} onTab={(k) => setParams((p) => (p.set('tab', k), p), { replace: true })} />}
           {bottom === 'io' && <IoPanel model={model} snap={snap} faults={[...(run.scenarioFaults ? sim.faults ?? [] : []), ...run.injected]} onObject={focusObj} />}
           {bottom === 'hmi' && <AlarmsHmiPanel player={player} snap={snap} playing={playing} setPlaying={setPlaying} setT={setT} recipe={recipe} />}
           {bottom === 'motion' && <MotionPanel model={model} snap={snap} sim={sim} set={set} customer={customer} />}
-          {bottom === 'faults' && <FaultsPanel sim={sim} run={run} setRun={setRun} t={t} des={des} baseline={baseline} customer={customer} />}
-          {bottom === 'runs' && <RunsPanel sim={sim} set={set} run={run} setRun={setRun} des={des} onSnapshot={saveSnapshot} onRestore={restoreSnapshot} onPng={png} />}
+          {bottom === 'faults' && (preview ? <p className="text-meta text-ink-3">Fault injection needs a real simulation — enter the missing inputs first.</p> : <FaultsPanel sim={sim} run={run} setRun={setRun} t={t} des={des} baseline={baseline} customer={customer} />)}
+          {bottom === 'runs' && <RunsPanel sim={sim} set={set} run={run} setRun={setRun} des={preview ? null : des} onSnapshot={saveSnapshot} onRestore={restoreSnapshot} onPng={png} />}
           {bottom === 'compare' && <ComparePanel eng={eng} sim={sim} d={d} twin={twin} other={other} setOther={setOther} ghost={ghostOn} setGhost={setGhostOn} set={set} customer={customer} />}
           {bottom === 'assumptions' && <AssumptionsPanel eng={eng} sim={sim} set={set} d={d} twin={twin} player={player} customer={customer} />}
         </div>
@@ -874,8 +885,8 @@ function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocu
         <div className="mt-3 text-micro font-semibold uppercase tracking-wider text-ink-3">Explain a component</div>
         <div className="mt-1 flex flex-wrap gap-1.5">
           {model.objects
-            .filter((x) => ['enclosure', 'laser_source', 'beam_expander', 'galvo', 'f_theta', 'camera', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chain', 'estop'].includes(x.kind))
-            .slice(0, 16)
+            .filter((x) => ['enclosure', 'laser_source', 'beam_expander', 'galvo', 'f_theta', 'laser_head', 'camera', 'robot', 'gantry_pp', 'tool', 'test_head', 'pusher', 'magazine', 'conveyor', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chain', 'estop'].includes(x.kind))
+            .slice(0, 20)
             .map((x) => (
               <button key={x.id} type="button" onClick={() => onFocus(x.id)} className="rounded-full border border-line px-2 py-0.5 text-micro hover:border-accent hover:text-accent-2">
                 {x.name.split(' — ')[0].replace(/ \(.*\)$/, '')}

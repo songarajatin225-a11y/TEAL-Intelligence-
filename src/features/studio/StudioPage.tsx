@@ -331,7 +331,7 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
   const tId = template || state?.template || eng.templates[0]?.id || '';
   const customers = eng.records.filter((r) => r.entity === 'customer');
   const requirements = eng.records.filter((r) => r.entity === 'requirement');
-  const save = async () => {
+  const save = async (open3d = false) => {
     const t = eng.byId.get(tId) as (EquipmentTemplate & AnyRecord) | undefined;
     if (!t) return setError('Choose an equipment template');
     const sim = scenarioFromTemplate(t, { newId: newLocalId, today: todayIso(), name: name.trim() || undefined, customer_id: customer || undefined, requirement_ids: reqs, uph: uph ? Number(uph) : null });
@@ -339,7 +339,7 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
       await repo().workspace.save(sim as unknown as Record<string, unknown>, `New scenario: ${sim.name}`);
       toast('Scenario created as a local draft', { tone: 'draft', detail: 'Enter station times, select components, then run the simulation.' });
       onClose();
-      nav(studioPath(sim.id));
+      nav(open3d ? `${studioPath(sim.id)}?tab=machine3d` : studioPath(sim.id));
     } catch (e) {
       setError(e instanceof ValidationFailure ? e.message : String(e));
     }
@@ -389,8 +389,11 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
         </Field>
         {error && <Notice tone="warn">{error}</Notice>}
         <div className="flex gap-2">
-          <Button variant="primary" onClick={save}>
+          <Button variant="primary" onClick={() => void save()}>
             <Workflow className="size-4" aria-hidden /> Create scenario
+          </Button>
+          <Button onClick={() => void save(true)}>
+            <Box className="size-4" aria-hidden /> Create and open in 3D
           </Button>
           <Button onClick={onClose}>Cancel</Button>
         </div>

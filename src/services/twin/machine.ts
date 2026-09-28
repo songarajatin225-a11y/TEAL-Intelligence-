@@ -3,6 +3,7 @@ import type { Part, Simulation, StationKind } from '../../domain/engineering';
 import type { SpecDefs } from '../eng/specs';
 import type { CostResult } from '../sim/bom';
 import type { Resolved, ResolvedStation } from '../sim/model';
+import type { PickPlace } from './kinematics';
 import { type AxisModel, type PlannedMove, scenarioMotion, specIn } from './motion';
 
 /*
@@ -54,6 +55,14 @@ export type GenKind =
   | 'operator'
   | 'frl'
   | 'valve'
+  | 'bridge'
+  | 'tool'
+  | 'test_head'
+  | 'pusher'
+  | 'magazine'
+  | 'gantry_pp'
+  | 'tray'
+  | 'bench'
   | 'generic'
   | 'station'
   | 'group';
@@ -109,6 +118,23 @@ export interface LaserPath {
   /** processing point on the part surface (field centre), mm */
   focus: [number, number, number];
   process: string;
+  /** galvo scanner (beam steered by mirrors) or a processing head moved over the seam by a gantry */
+  mode: 'galvo' | 'head';
+  headId?: string;
+}
+
+/** A robot or gantry that moves parts / components during its station's time (§33, §65). */
+export interface Handler {
+  objectId: string;
+  stationKey: string;
+  kind: 'robot' | 'gantry';
+  pp: PickPlace;
+  /** 'part' = the workpiece travels with the gripper; 'component' = a component is placed onto the part */
+  carries: 'part' | 'component';
+  /** SCARA link lengths (robot) */
+  L1?: number;
+  L2?: number;
+  reachable: boolean;
 }
 
 export interface SafetyZone {
@@ -157,6 +183,8 @@ export interface MachineModel {
   tableTop: number;
   /** per-station anchor (where the part sits while that station works on it), mm */
   anchors: Record<string, [number, number, number]>;
+  /** robots / gantries per station */
+  handlers: Record<string, Handler>;
   /** part carried on axes (sequential machine) or moved between anchors (inline) */
   carrier: 'axes' | 'flow';
   workpiece: { template: string; length: number; width: number; thickness: number; material: string | null; basis: string };
@@ -284,6 +312,13 @@ function readNum(p: Pick<Part, 'specs'>, key: string) {
   return s?.value ?? null;
 }
 
+/** Lateral pitch between parallel lanes / nests of one station (inline lines), mm. */
+export const LANE_PITCH = 220;
+/** Share of the conveyor depth the NG diverter rod travels (the part motion uses the same value). */
+export const PUSH_SHARE = 0.6;
+/** Z offset of lane k of n (0 when the station has a single server). */
+export const laneZ = (k: number, n: number) => (n > 1 ? (k - (n - 1) / 2) * LANE_PITCH : 0);
+
 export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: SpecDefs, bom?: CostResult): MachineModel {
   const sim = res.sim;
   const c: Ctx = { sim, byId, defs, objs: [] };
@@ -300,6 +335,8 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
   // the part rides on fixture → (Y carriage) → X carriage in the sequential machine
   const partTop = carrier === 'axes' ? TABLE + (hasY ? 110 : 60) + fixH + wt : TABLE + 60 + wt;
   const anchors: Record<string, [number, number, number]> = {};
+  const handlers: Record<string, Handler> = {};
+  const extraZones: SafetyZone[] = [];
   const lasers: LaserPath[] = [];
   const vision: VisionFov[] = [];
   const io: IoPoint[] = [];
@@ -369,7 +406,7 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     // flow hardware (inline) — conveyor segment per station
     if (carrier === 'flow') {
       const cv = selected('conveyor');
-      add(c, { id: `${sid}-conveyor`, name: cv ? `Conveyor — ${partName(cv)}` : st.kind === 'buffer' || st.buffer_after ? 'Conveyor / buffer segment' : 'Transfer conveyor', kind: st.buffer_after ? 'buffer' : 'conveyor', layer: 'Mechanical', parentId: sid, stationKey: st.key, partId: cv?.part.id, role: cv?.role, position: [x, TABLE, 0], size: [CELL[st.kind] - 10, 60, Math.max(ww + 60, 200)], params: { slots: st.buffer_after ?? 0 }, collision: false, explode: [0, -0.3, 0] });
+      add(c, { id: `${sid}-conveyor`, name: cv ? `Conveyor — ${partName(cv)}` : st.kind === 'buffer' || st.buffer_after ? 'Conveyor / buffer segment' : 'Transfer conveyor', kind: st.buffer_after ? 'buffer' : 'conveyor', layer: 'Mechanical', parentId: sid, stationKey: st.key, partId: cv?.part.id, role: cv?.role, position: [x, TABLE, 0], size: [CELL[st.kind] - 10, 60, Math.max(ww + 60, 200) + (par - 1) * LANE_PITCH], params: { slots: st.buffer_after ?? 0, lanes: par }, collision: false, explode: [0, -0.3, 0] });
     }
     if (st.kind === 'load' || st.kind === 'unload') {
       if (carrier === 'axes') add(c, { id: `${sid}-zone`, name: `${st.name} position`, kind: 'generic', layer: 'Material', parentId: sid, stationKey: st.key, position: [x, TABLE, 250], size: [Math.max(wl + 40, 120), 4, Math.max(ww + 40, 80)], collision: false, params: { marker: true } });
@@ -405,32 +442,44 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
       const src = selected('laser_source');
       const ft = selected('f_theta');
       const head = selected('laser_head');
-      const field = specIn(ft?.part, 'scan_field_x', 'mm', defs);
-      const wdLens = specIn(ft?.part, 'working_distance', 'mm', defs) ?? specIn(head?.part, 'focal_length', 'mm', defs);
+      // a processing head without a galvo is moved over the seam by a gantry (welding / cutting / scribing)
+      const slotTypes = new Set((st.slots ?? []).map((q) => q.product_type));
+      const headMode = (!!head && !selected('galvo')) || (!selected('galvo') && !selected('f_theta') && slotTypes.has('laser_head') && !slotTypes.has('galvo'));
+      const field = headMode ? null : specIn(ft?.part, 'scan_field_x', 'mm', defs);
+      const wdLens = headMode ? specIn(head?.part, 'focal_length', 'mm', defs) : specIn(ft?.part, 'working_distance', 'mm', defs) ?? specIn(head?.part, 'focal_length', 'mm', defs);
       const wl0 = specIn(src?.part, 'wavelength', 'nm', defs);
       const wd = wdLens ?? 250;
-      if (wdLens == null) notes.push(`${st.name}: f-theta working distance not stated — the head height is drawn with a placeholder.`);
+      if (wdLens == null) notes.push(`${st.name}: ${headMode ? 'processing-head focal length' : 'f-theta working distance'} not stated — the head height is drawn with a placeholder.`);
       const surf = partTop;
       const headY = surf + wd;
+      const process = /weld/i.test(`${st.name} ${sim.name}`) ? 'welding' : /clean/i.test(`${st.name} ${sim.name}`) ? 'cleaning' : /cut|dic/i.test(`${st.name} ${sim.name}`) ? 'cutting' : /scrib/i.test(`${st.name} ${sim.name}`) ? 'scribing' : /drill/i.test(`${st.name} ${sim.name}`) ? 'drilling' : 'marking';
       for (let k = 0; k < par; k++) {
-        const dz = par > 1 ? (k - (par - 1) / 2) * 220 : 0;
+        const dz = laneZ(k, par);
         const kk = par > 1 ? `-${k + 1}` : '';
+        const sId = `${sid}-source${kk}`;
+        const colZ = backZ + (par > 1 ? k * 90 : 0);
+        partIn('laser_source', sId, 'Laser source', 'laser_source', [x - 60, 120, -D / 2 + 180 + (par > 1 ? k * 20 : 0)], [300, 150, 260], { params: { wavelength: wl0 ?? null }, explode: [0, -1, -1] });
+        const focus: [number, number, number] = [x, surf, dz];
+        if (headMode) {
+          const hId = `${sid}-head${kk}`;
+          add(c, { id: `${sid}-gantry${kk}`, name: 'Head gantry (X / Z bridge)', kind: 'bridge', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, TABLE, dz], size: [Math.max(wl + 200, 360), headY + 260 - TABLE, Math.max(ww + 240, 360)], params: { beam: 'x' }, collision: false, explode: [0, 0.4, 0] });
+          partIn('laser_head', hId, 'Processing head', 'laser_head', [x, headY, dz], [110, 180, 110], { params: { stroke: 0 }, collision: false });
+          const stage = selected('linear_stage');
+          if (stage) add(c, { id: `${sid}-headaxis${kk}`, name: `Head axis — ${stage.part.model_number}`, kind: 'xy_stage', layer: 'Motion', parentId: sid, stationKey: st.key, partId: stage.part.id, role: stage.role, position: [x, headY + 200, dz - Math.max(ww + 240, 360) / 2 + 40], size: [Math.max(wl + 160, 320), 50, 90], params: { axis: 'head' }, collision: false, explode: [0, 0.6, 0] });
+          lasers.push({ stationKey: st.key, sourceId: sId, headId: hId, field: null, wd: wdLens, wavelength: wl0, points: [[x, headY + 180, dz], [x, headY, dz], focus], focus, process, mode: 'head' });
+          routes.push({ id: `fiber-${sId}`, kind: 'fiber', from: sId, to: hId, points: [] });
+          continue;
+        }
         const ftId = `${sid}-ftheta${kk}`;
         partIn('f_theta', ftId, 'F-theta lens', 'f_theta', [x, headY, dz], [90, 70, 90], { params: { field: field ?? null } });
         const gId = `${sid}-galvo${kk}`;
         partIn('galvo', gId, 'Galvo scanner', 'galvo', [x, headY + 70, dz], [130, 110, 120]);
         const bId = `${sid}-bex${kk}`;
-        const colZ = backZ + (par > 1 ? k * 90 : 0);
         if (selected('beam_expander')) partIn('beam_expander', bId, 'Beam expander', 'beam_expander', [x, headY + 105, (colZ + dz) / 2], [45, 45, 160], { collision: false });
-        const sId = `${sid}-source${kk}`;
-        const srcY = carrier === 'axes' ? 120 : 120;
-        partIn('laser_source', sId, 'Laser source', 'laser_source', [x - 60, srcY, -D / 2 + 180 + (par > 1 ? k * 20 : 0)], [300, 150, 260], { params: { wavelength: wl0 ?? null }, explode: [0, -1, -1] });
-        if (head) partIn('laser_head', `${sid}-head${kk}`, 'Laser head', 'laser_head', [x, headY, dz], [100, 160, 100]);
         add(c, { id: `${sid}-column${kk}`, name: 'Z column (scan head mount)', kind: 'z_column', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, colZ], size: [80, headY + 180 - TABLE, 80], collision: true, explode: [0, 0, -1] });
         add(c, { id: `${sid}-rail${kk}`, name: 'Optical rail', kind: 'generic', layer: 'Laser', parentId: sid, stationKey: st.key, position: [x, headY + 150, (colZ + dz) / 2], size: [60, 20, Math.abs(dz - colZ) + 60], collision: false, explode: [0, 0.5, 0] });
         add(c, { id: `${sid}-collimator${kk}`, name: 'Fibre collimator / isolator (part of the laser source)', kind: 'collimator', layer: 'Laser', parentId: sid, stationKey: st.key, partId: src?.part.id, role: src ? `${src.role} — output optics` : undefined, position: [x, headY + 104, colZ + 70], size: [48, 48, 110], collision: false, explode: [0, 0.6, -0.4] });
         add(c, { id: `${sid}-zslide${kk}`, name: 'Focus (Z) slide', kind: 'z_slide', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, headY - 60, colZ + 52], size: [100, 300, 26], collision: false, explode: [0, 0, -0.6] });
-        const focus: [number, number, number] = [x, surf, dz];
         lasers.push({
           stationKey: st.key,
           sourceId: sId,
@@ -448,14 +497,15 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
             focus,
           ],
           focus,
-          process: /weld/i.test(sim.name) ? 'welding' : /clean/i.test(sim.name) ? 'cleaning' : /cut/i.test(sim.name) ? 'cutting' : /scrib/i.test(sim.name) ? 'scribing' : /drill/i.test(sim.name) ? 'drilling' : 'marking',
+          process,
+          mode: 'galvo',
         });
         routes.push({ id: `fiber-${sId}`, kind: 'fiber', from: sId, to: `${sid}-collimator${kk}`, points: [] });
       }
       const fx = selected('fume_extraction');
       if (fx) {
         partIn('fume_extraction', `${sid}-fume`, 'Fume extraction', 'fume', [minX - 280, 0, -D / 2 + 220], [360, 700, 360], { explode: [-1, 0, 0] });
-        add(c, { id: `${sid}-nozzle`, name: 'Extraction nozzle', kind: 'nozzle', layer: 'Safety', parentId: sid, stationKey: st.key, position: [x + 95, surf + 55, -70], size: [44, 34, 70], collision: true, explode: [0.4, 0.3, 0] });
+        add(c, { id: `${sid}-nozzle`, name: 'Extraction nozzle', kind: 'nozzle', layer: 'Safety', parentId: sid, stationKey: st.key, position: [x + (headMode ? 180 : 95), surf + 55, -70], size: [44, 34, 70], collision: true, explode: [0.4, 0.3, 0] });
         routes.push({ id: `fume-${sid}`, kind: 'fume', from: `${sid}-nozzle`, to: `${sid}-fume`, points: [] });
       }
       const ch = selected('chiller') ?? res.machineParts.find((p) => p.part.product_type === 'chiller');
@@ -465,20 +515,104 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
       }
       DI('Laser ready', src ? `${src.part.model_number}` : 'Laser source', 'enable', `${sid}-source`);
       DO('Laser enable', src ? `${src.part.model_number}` : 'Laser source', 'enable', `${sid}-source`);
-      DO('Scanner job start', 'Galvo controller', 'process', `${sid}-galvo`);
-      DI('Job complete', 'Galvo controller', 'process', `${sid}-galvo`);
+      DO(headMode ? 'Head path start' : 'Scanner job start', headMode ? 'Motion controller' : 'Galvo controller', 'process', headMode ? `${sid}-head` : `${sid}-galvo`);
+      DI('Job complete', headMode ? 'Motion controller' : 'Galvo controller', 'process', headMode ? `${sid}-head` : `${sid}-galvo`);
       if (fx) DI('Extraction running', fx.part.model_number, 'enable', `${sid}-fume`);
       anchors[st.key] = [x, surf, 0];
+    }
+    /* ---------- tooling for handling, assembly, process and test stations (every template kind) ---------- */
+    const convD = Math.max(ww + 60, 200) + (par - 1) * LANE_PITCH;
+    const cellW = carrier === 'flow' ? CELL[st.kind] : 400;
+    const toolKind = (() => {
+      const t = `${st.name} ${sim.name}`.toLowerCase();
+      if (/dispens|glue|adhesive|pott|seal/.test(t)) return 'dispense';
+      if (/screw/.test(t)) return 'screw';
+      if (/press|crimp|rivet|insert/.test(t)) return 'press';
+      if (/dic|saw/.test(t)) return 'saw';
+      if (/pack|box|carton|tape|wrap/.test(t)) return 'pack';
+      if (/bond|attach|solder/.test(t)) return 'bond';
+      if (/label|print|trace|code/.test(t)) return 'print';
+      return 'generic';
+    })();
+    // parallel servers (inline lines) get one nest + head per lane, each driven by its own server state
+    const lanes: [number, string][] = Array.from({ length: par }, (_, k) => [k, par > 1 ? `-${k + 1}` : '']);
+    const laneName = (k: number) => (par > 1 ? ` · lane ${k + 1}` : '');
+    const laneParam = (k: number): Record<string, number> => (par > 1 ? { server: k } : {});
+    const robot = selected('robot');
+    const robotSlot = !robot && (st.slots ?? []).some((q) => q.product_type === 'robot');
+    const gripper = selected('gripper');
+    const makeHandler = (carries: 'part' | 'component', pick: [number, number, number], place: [number, number, number], label: string) => {
+      const home: [number, number, number] = [x, partTop + 180, carries === 'part' ? -convD / 2 - 40 : -convD / 2 - 60];
+      if (robot || robotSlot) {
+        const reach = robot ? specIn(robot.part, 'reach', 'mm', defs) : null;
+        const L = (reach ?? 500) / 2;
+        const base: [number, number, number] = [x, TABLE, -convD / 2 - Math.min(170, L * 0.55)];
+        const oid = `${sid}-robot`;
+        add(c, { id: oid, name: robot ? `${label} robot — ${robot.part.model_number}` : `${label} robot (not selected)`, kind: 'robot', layer: 'Motion', parentId: sid, stationKey: st.key, partId: robot?.part.id, role: robot?.role ?? 'Robot', position: base, size: [180, 420, 180], params: { reach: reach ?? null, axes: robot ? specIn(robot.part, 'axes', '', defs) ?? readNum(robot.part, 'axes') : null, L1: L, L2: L, placeholderReach: reach == null }, collision: false, explode: [0, 0, -1] });
+        if (reach == null) notes.push(`${st.name}: robot ${robot ? 'reach not stated' : 'not selected'} — arm lengths are a visual placeholder.`);
+        const far = (p: [number, number, number]) => Math.hypot(p[0] - base[0], p[2] - base[2]);
+        const reachable = far(pick) <= 2 * L && far(place) <= 2 * L;
+        handlers[st.key] = { objectId: oid, stationKey: st.key, kind: 'robot', pp: { home, pick, place, clearance: 60 }, carries, L1: L, L2: L, reachable };
+        if (gripper && robot) add(c, { id: `${sid}-gripper`, name: `Gripper — ${gripper.part.model_number}`, kind: 'generic', layer: 'Motion', parentId: oid, stationKey: st.key, partId: gripper.part.id, role: gripper.role, position: [base[0], partTop + 400, base[2]], size: [0.1, 0.1, 0.1], collision: false });
+        extraZones.push({ key: `robot-${st.key}`, name: `${st.name}: robot reach (conceptual)`, type: 'robot', enabled: true, position: [base[0], TABLE, base[2]], size: [4 * L, 20, 4 * L], rule: `Reach ${reach ?? 'not stated'} mm — conceptual workspace, not a validated envelope` });
+      } else {
+        const oid = `${sid}-gantry`;
+        add(c, { id: oid, name: `${label} gantry (pick & place, conceptual)`, kind: 'gantry_pp', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, TABLE, 0], size: [Math.max(cellW - 40, 360), partTop + 330 - TABLE, convD + 120], collision: false, explode: [0, 0.5, 0] });
+        handlers[st.key] = { objectId: oid, stationKey: st.key, kind: 'gantry', pp: { home: [x, partTop + 200, 0], pick: [pick[0], pick[1], 0], place: [place[0], place[1], 0], clearance: 80 }, carries, reachable: true };
+      }
+      DO(`${label}: grip`, robot ? `${robot.part.model_number} gripper` : robotSlot ? 'Robot gripper' : 'Gantry gripper', 'process', handlers[st.key].objectId);
+      DI(`${label}: gripped`, 'Gripper sensor', 'process', handlers[st.key].objectId);
+    };
+    if (st.kind === 'transfer') makeHandler('part', [x - cellW / 2 + 70, partTop, 0], [x + cellW / 2 - 70, partTop, 0], 'Transfer');
+    if (st.kind === 'assembly' || (st.kind === 'load' && (robot || robotSlot))) {
+      if (robot || robotSlot || st.kind === 'load') {
+        const trayZ = -convD / 2 - 90;
+        add(c, { id: `${sid}-tray`, name: st.kind === 'load' ? 'Part supply tray' : 'Component feeder / tray', kind: 'tray', layer: 'Material', parentId: sid, stationKey: st.key, position: [x + 160, TABLE, trayZ - (robot ? 0 : 0)], size: [180, 40, 140], collision: false });
+        makeHandler(st.kind === 'load' ? 'part' : 'component', [x + 160, TABLE + 40, trayZ], [x, partTop, 0], st.kind === 'load' ? 'Load' : 'Assembly');
+      } else {
+        add(c, { id: `${sid}-bridge`, name: 'Tool bridge', kind: 'bridge', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, 0], size: [Math.max(cellW - 120, 260), partTop + 330 - TABLE, convD + 120], collision: false, explode: [0, 0.3, 0] });
+        const tk = toolKind === 'generic' ? 'press' : toolKind;
+        for (const [k, kk] of lanes) {
+          add(c, { id: `${sid}-tool${kk}`, name: `${tk === 'screw' ? 'Screwdriver spindle' : tk === 'press' ? 'Press ram' : tk === 'dispense' ? 'Dispense valve' : 'Assembly tool'}${laneName(k)} (conceptual)`, kind: 'tool', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, partTop + 50, laneZ(k, par)], size: [80, 230, 80], params: { tool: tk, stroke: 45, ...laneParam(k) }, collision: false, explode: [0, 0.6, 0] });
+          DO(`${st.name}${laneName(k)}: tool down`, 'Tool valve / drive', 'process', `${sid}-tool${kk}`);
+          DI(`${st.name}${laneName(k)}: tool at work`, 'Tool position sensor', 'process', `${sid}-tool${kk}`);
+        }
+      }
+    }
+    if (st.kind === 'process') {
+      add(c, { id: `${sid}-bridge`, name: 'Process bridge', kind: 'bridge', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, 0], size: [Math.max(cellW - 120, 260), partTop + 330 - TABLE, convD + 120], collision: false, explode: [0, 0.3, 0] });
+      for (const [k, kk] of lanes) {
+        add(c, { id: `${sid}-tool${kk}`, name: `${toolKind === 'dispense' ? 'Dispense valve' : toolKind === 'saw' ? 'Dicing spindle' : toolKind === 'print' ? 'Print / code head' : toolKind === 'bond' ? 'Bond head' : toolKind === 'pack' ? 'Packing head' : 'Process head'}${laneName(k)} (conceptual)`, kind: 'tool', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, partTop + 40, laneZ(k, par)], size: [80, 230, 80], params: { tool: toolKind, stroke: toolKind === 'dispense' || toolKind === 'print' ? 25 : 40, traverse: toolKind === 'dispense' || toolKind === 'saw' || toolKind === 'print' ? Math.min(wl, 120) : 0, ...laneParam(k) }, collision: false, explode: [0, 0.6, 0] });
+        DO(`${st.name}${laneName(k)}: start`, 'Process controller', 'process', `${sid}-tool${kk}`);
+      }
+    }
+    if (st.kind === 'test') {
+      add(c, { id: `${sid}-bridge`, name: 'Test press frame', kind: 'bridge', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, 0], size: [Math.max(cellW - 120, 260), partTop + 300 - TABLE, convD + 120], params: { rods: true }, collision: false, explode: [0, 0.3, 0] });
+      for (const [k, kk] of lanes) {
+        add(c, { id: `${sid}-testhead${kk}`, name: `Test head${laneName(k)} (contact probes, conceptual)`, kind: 'test_head', layer: 'Electrical', parentId: sid, stationKey: st.key, position: [x, partTop + 70, laneZ(k, par)], size: [Math.max(wl + 40, 150), 60, Math.min(Math.max(ww + 40, 110), LANE_PITCH - 20)], params: { stroke: 60, ...laneParam(k) }, collision: false, explode: [0, 0.8, 0] });
+        DO(`${st.name}${laneName(k)}: contact`, 'Test press valve', 'process', `${sid}-testhead${kk}`);
+        DI(`${st.name}${laneName(k)}: result PASS`, 'Tester', 'process', `${sid}-testhead${kk}`);
+      }
+    }
+    if (st.kind === 'manual' || (carrier === 'flow' && (st.kind === 'load' || st.kind === 'unload') && st.operator && !robot)) {
+      add(c, { id: `${sid}-bench`, name: 'Operator bench', kind: 'bench', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, 0, convD / 2 + 330], size: [Math.max(cellW - 80, 400), 850, 500], collision: false, explode: [0, 0, 1] });
+      if (st.kind === 'manual') add(c, { id: `${sid}-operator`, name: 'Operator (conceptual)', kind: 'operator', layer: 'Safety', parentId: sid, stationKey: st.key, position: [x, 0, convD / 2 + 780], size: [460, 1700, 280], collision: false });
+    }
+    if (carrier === 'flow' && (st.kind === 'load' || st.kind === 'unload') && !st.operator && !robot)
+      add(c, { id: `${sid}-magazine`, name: st.kind === 'load' ? 'Infeed magazine / stack' : 'Outfeed magazine / stack', kind: 'magazine', layer: 'Material', parentId: sid, stationKey: st.key, position: [st.kind === 'load' ? x - cellW / 2 + 90 : x + cellW / 2 - 90, TABLE + 60, 0], size: [Math.max(wl + 30, 120), 260, Math.max(ww + 30, 90)], params: { role: st.kind === 'load' ? 'in' : 'out' }, collision: false, explode: [0, 0.4, 0] });
+    if (st.kind === 'motion') add(c, { id: `${sid}-axis`, name: 'Linear axis module', kind: 'xy_stage', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, TABLE, -convD / 2 - 60], size: [Math.max(cellW - 80, 300), 60, 120], params: { axis: 'module' }, collision: false });
+    if (st.kind === 'sort' && carrier === 'flow') {
+      add(c, { id: `${sid}-pusher`, name: 'NG diverter (pneumatic pusher)', kind: 'pusher', layer: 'Pneumatic', parentId: sid, stationKey: st.key, position: [x, TABLE + 60, -convD / 2 - 70], size: [70, 60, 140], params: { stroke: convD }, collision: false, explode: [0, 0, -0.6] });
     }
     if (st.kind === 'sort') {
       add(c, { id: `${sid}-ok`, name: 'OK lane / bin', kind: 'bin', layer: 'Material', parentId: sid, stationKey: st.key, position: [x - 90, TABLE - 300, D / 2 + 160], size: [160, 280, 220], params: { ok: true }, explode: [0, 0, 1] });
       add(c, { id: `${sid}-ng`, name: 'NG (reject) bin', kind: 'bin', layer: 'Material', parentId: sid, stationKey: st.key, position: [x + 90, TABLE - 300, D / 2 + 160], size: [160, 280, 220], params: { ok: false }, explode: [0, 0, 1] });
       DO('Divert to NG', 'Sort diverter', 'decide', `${sid}-ng`);
     }
-    const rb = selected('robot');
-    if (rb) {
-      const reach = specIn(rb.part, 'reach', 'mm', defs);
-      partIn('robot', `${sid}-robot`, 'Robot', 'robot', [x, TABLE, -D / 2 + 150], [200, 500, 200], { params: { reach: reach ?? null, axes: specIn(rb.part, 'axes', '', defs) ?? readNum(rb.part, 'axes') } });
+    // a robot selected on a station without a handling role is shown idle next to it
+    if (robot && !handlers[st.key] && !c.objs.some((o) => o.id === `${sid}-robot`)) {
+      const reach = specIn(robot.part, 'reach', 'mm', defs);
+      partIn('robot', `${sid}-robot`, 'Robot', 'robot', [x, TABLE, -convD / 2 - 170], [180, 420, 180], { params: { reach: reach ?? null, axes: specIn(robot.part, 'axes', '', defs) ?? readNum(robot.part, 'axes'), L1: (reach ?? 500) / 2, L2: (reach ?? 500) / 2 } });
     }
     for (const p of rs.parts) {
       if (c.objs.some((o) => o.partId === p.part.id && o.stationKey === st.key)) continue;
@@ -568,11 +702,8 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     zones.push({ key: 'laser', name: 'Laser hazard zone (inside enclosure)', type: 'laser', enabled: en('laser'), position: [enc.position[0], TABLE, 0], size: [enc.size[0] - 20, enc.size[1] - 10, D - 20], rule: 'Beam permitted only with doors closed and interlocks healthy' });
   }
   if (carrier === 'axes') zones.push({ key: 'restricted', name: 'Axis travel envelope', type: 'restricted', enabled: en('restricted', false), position: [c.objs.find((o) => o.id === 'axis-x')!.position[0], TABLE + 60, 0], size: [c.objs.find((o) => o.id === 'axis-x')!.size[0], 150, 260], rule: 'Moving stage — no hands during motion' });
-  const robot = c.objs.find((o) => o.kind === 'robot');
-  if (robot) {
-    const r = (robot.params.reach as number | null) ?? 600;
-    zones.push({ key: 'robot', name: 'Robot reach (conceptual)', type: 'robot', enabled: en('robot'), position: [robot.position[0], TABLE, robot.position[2]], size: [r * 2, 20, r * 2], rule: `Reach ${robot.params.reach ?? 'not stated'} mm — conceptual workspace, not a validated envelope` });
-  }
+  zones.push(...extraZones);
+
 
   /* ---------- bounds ---------- */
   const mn: [number, number, number] = [Infinity, Infinity, Infinity];
@@ -607,6 +738,7 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     dims: { width: mx[0] - mn[0], depth: mx[2] - mn[2], height: mx[1] - mn[1] },
     tableTop: TABLE,
     anchors,
+    handlers,
     carrier,
     workpiece: { template: tmpl, length: wl, width: ww, thickness: wt, material: wpIn?.material ?? (byId.get(sim.material_id ?? '')?.name as string | undefined) ?? null, basis: wpIn ? wpIn.basis ?? 'USER_INPUT' : 'ASSUMPTION' },
     processArea: sim.twin?.process_area ? { x: sim.twin.process_area.x_mm, y: sim.twin.process_area.y_mm } : null,

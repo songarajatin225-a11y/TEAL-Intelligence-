@@ -379,6 +379,70 @@ const G: Record<string, Guide> = {
     care: ['Keep cooling paths clear', 'Log power checks'],
     safety: 'The beam is hazardous to eyes and skin; the enclosure and interlocks provide protection.',
   },
+  bridge: {
+    title: 'Portal / bridge frame',
+    what: 'A rigid frame spanning the conveyor that carries a tool, test head or processing head over the part.',
+    how: 'Two or four posts and a beam; the tool slides vertically (and for a head gantry, along the beam) while the part is held below.',
+    checks: ['Stiffness at the tool (deflection under process force)', 'Clearance to the conveyor and parts', 'Access for tool change'],
+    interfaces: ['Conveyor frame', 'Tool slide / head carriage'],
+    care: ['Check fasteners and guide wear'],
+  },
+  tool: {
+    title: 'Process / assembly tool (Z stroke)',
+    what: 'The working tool of the station — press ram, screwdriver spindle, dispense valve, dicing spindle, print, bond or pack head.',
+    how: 'A Z slide lowers the tool onto the part, it performs its operation (press, screw, dispense a bead, cut, print) and retracts; dispensing, sawing and printing also traverse along the part. The stroke shown follows the station’s work step in the simulation.',
+    checks: ['Process force / torque / flow against the part specification', 'Stroke and approach speed', 'Process monitoring (force–displacement, torque–angle, bead inspection)'],
+    interfaces: ['Tool controller', 'PLC start / done / OK signals', 'Utilities (air, fluid, power)'],
+    care: ['Calibrate force / torque sensors', 'Replace wear parts (bits, nozzles, blades)'],
+  },
+  test_head: {
+    title: 'Test head (contact probes)',
+    what: 'Makes electrical (or pneumatic) contact with the part to test it.',
+    how: 'A press lowers a platen of spring-loaded probes onto test pads; the tester runs its sequence and returns PASS / FAIL, which routes the part at the sort station.',
+    checks: ['Probe count and pitch against the test pads', 'Contact force', 'Test time (drives the station time)', 'Guard against false passes'],
+    interfaces: ['Tester / instruments', 'PLC result', 'MES test record'],
+    care: ['Replace probes by contact count', 'Golden-part check each shift'],
+  },
+  pusher: {
+    title: 'NG diverter (pusher)',
+    what: 'Removes rejected parts from the conveyor.',
+    how: 'A pneumatic cylinder extends across the belt and pushes the part into the NG lane or bin; a sensor confirms the reject left the line.',
+    checks: ['Stroke and speed against part size / mass', 'Reject confirmation sensor'],
+    interfaces: ['Valve terminal', 'PLC decision output'],
+    care: ['Check rod seal and cushioning'],
+  },
+  magazine: {
+    title: 'Magazine / stacker',
+    what: 'Buffers parts or carriers at the start or end of the line so the line can run while the operator is away.',
+    how: 'An elevator indexes the stack one pitch per part: at the infeed it presents the next part, at the outfeed it accepts the finished one.',
+    checks: ['Autonomy (parts per load) against operator intervals', 'Pitch and part variation'],
+    interfaces: ['Conveyor', 'PLC'],
+    care: ['Clean guides'],
+  },
+  gantry_pp: {
+    title: 'Pick-and-place gantry',
+    what: 'Moves parts between positions with linear axes.',
+    how: 'An X carriage on a portal and a Z quill with a gripper: move above the pick, descend, grip, lift, move, lower, release, return. Each phase is part of the station time.',
+    checks: ['Travel and cycle of the pick-place path', 'Gripper suited to the part', 'Payload'],
+    interfaces: ['Motion controller', 'Gripper valve / sensor'],
+    care: ['Lubricate axes', 'Check gripper pads'],
+  },
+  tray: {
+    title: 'Part / component tray',
+    what: 'Presents parts or components to the robot at known positions.',
+    how: 'Pockets hold items at fixed pitch; the robot picks them in sequence and the operator (or a feeder) refills the tray.',
+    checks: ['Pocket pitch and tolerance', 'Refill interval'],
+    interfaces: ['Robot pick positions'],
+    care: ['Keep pockets clean'],
+  },
+  bench: {
+    title: 'Operator bench',
+    what: 'Manual workplace next to the line.',
+    how: 'A work surface with lighting at the manual or load / unload station; manual times are station inputs, not an ergonomic model.',
+    checks: ['Working height and reach (ergonomics not validated here)', 'Lighting'],
+    interfaces: ['Line conveyor', 'Operator'],
+    care: [],
+  },
   generic: {
     title: 'Component',
     what: 'A part of the machine.',
@@ -626,18 +690,31 @@ export function machineTour(x: ExplainCtx): TourStep[] {
     steps.push({
       key: 'source',
       title: 'Laser source and beam delivery',
-      lines: [explainObject(model.byId.get(laser.sourceId!)!, x).guide.how, ...explainObject(model.byId.get(laser.sourceId!)!, x).inThisMachine, 'The armoured fibre carries the beam up to the collimator on the column; the beam expander enlarges it before the scanner.'],
+      lines: [explainObject(model.byId.get(laser.sourceId!)!, x).guide.how, ...explainObject(model.byId.get(laser.sourceId!)!, x).inThisMachine, laser.mode === 'head' ? 'The armoured fibre carries the beam to the processing head on the gantry.' : 'The armoured fibre carries the beam up to the collimator on the column; the beam expander enlarges it before the scanner.'],
       focus: laser.sourceId ?? null,
       highlight: ids((o) => o.layer === 'Laser' && (o.kind === 'laser_source' || o.kind === 'collimator' || o.kind === 'beam_expander')),
     });
-    steps.push({
-      key: 'scan',
-      title: 'Scan head: galvo + f-theta',
-      lines: [G.galvo.how, ...explainObject(model.byId.get(laser.fthetaId!)!, x).inThisMachine],
-      focus: laser.galvoId ?? null,
-      highlight: ids((o) => o.id === laser.galvoId || o.id === laser.fthetaId),
-      preset: 'laser',
-    });
+    const ftObj = laser.fthetaId ? model.byId.get(laser.fthetaId) : undefined;
+    const headObj = laser.headId ? model.byId.get(laser.headId) : undefined;
+    steps.push(
+      laser.mode === 'head'
+        ? {
+            key: 'scan',
+            title: 'Processing head on a gantry',
+            lines: [G.laser_head.how, 'The gantry moves the head along the seam while the laser fires; the path length ÷ speed × passes sets the process time.', ...(headObj ? explainObject(headObj, x).inThisMachine : [])],
+            focus: laser.headId ?? null,
+            highlight: ids((o) => o.id === laser.headId || (o.stationKey === laser.stationKey && (o.kind === 'bridge' || o.kind === 'xy_stage'))),
+            preset: 'laser',
+          }
+        : {
+            key: 'scan',
+            title: 'Scan head: galvo + f-theta',
+            lines: [G.galvo.how, ...(ftObj ? explainObject(ftObj, x).inThisMachine : [])],
+            focus: laser.galvoId ?? null,
+            highlight: ids((o) => o.id === laser.galvoId || o.id === laser.fthetaId),
+            preset: 'laser',
+          },
+    );
     const ls = res.stations.find((s) => s.station.key === laser.stationKey);
     steps.push({
       key: 'process',
@@ -678,6 +755,10 @@ export function machineTour(x: ExplainCtx): TourStep[] {
 
 /* ------------------------------------------------------------------ live narration (§98, §164) */
 
+const pickPhase = (u: number) => (u < 0.2 ? 'moves to the pick' : u < 0.35 ? 'descends and grips' : u < 0.45 ? 'lifts' : u < 0.7 ? 'moves to the place' : u < 0.85 ? 'lowers and releases' : 'returns home');
+
+const TOOL_NAME: Record<string, string> = { press: 'press ram', screw: 'screwdriver spindle', dispense: 'dispense valve', saw: 'dicing spindle', print: 'print / code head', bond: 'bond head', pack: 'packing head', generic: 'process head' };
+
 export function narrate(step: SubStep | null, stationName: string, progress: number, x: ExplainCtx): string {
   if (!step) return '';
   const pct = `${Math.round(progress * 100)} %`;
@@ -688,24 +769,55 @@ export function narrate(step: SubStep | null, stationName: string, progress: num
       return `${m.label}: ${parts.join(', ') || 'no travel'} in ${n(m.time, 3)} s — trapezoidal profile from the stage speed and acceleration (${pct}).`;
     }
     case 'load':
-      return `${stationName}: the door is open; the operator places the part and closes the door (${n(step.dur, 3)} s, ${step.basis}).`;
+      return x.model.carrier === 'axes'
+        ? `${stationName}: the door is open; the operator places the part and closes the door (${n(step.dur, 3)} s, ${step.basis}).`
+        : `${stationName}: the next part enters the line${x.model.objects.some((o) => o.kind === 'magazine') ? ' from the infeed magazine' : ''} and is indexed to the first station (${n(step.dur, 3)} s, ${step.basis}).`;
     case 'clamp':
       return `${stationName}: clamps close and the reed switch confirms (${n(step.dur, 3)} s, ${step.basis}).`;
     case 'vision':
-      return `${stationName}: camera triggered with the ring light; the image is processed and the position offset is sent to the scanner (${n(step.dur, 3)} s).`;
+      return `${stationName}: camera triggered with the ring light; the image is processed and the position offset is sent to the ${x.model.lasers.length ? 'scanner' : 'controller'} (${n(step.dur, 3)} s).`;
     case 'laser_prep':
       return `${stationName}: laser enabled — interlocks and extraction confirmed; jump / overhead time ${n(step.dur, 3)} s.`;
     case 'laser': {
-      const lst = x.res.stations.find((s) => s.station.name === stationName)?.station.laser;
-      return `${stationName}: galvo mirrors steer the beam through the f-theta lens${lst?.power_w != null ? ` at ${lst.power_w} W, ${lst.speed_mm_s ?? '—'} mm/s, ${lst.frequency_khz ?? '—'} kHz` : ''} — ${pct} of ${n(step.dur, 3)} s (${step.basis}).`;
+      const st = x.res.stations.find((s) => s.station.name === stationName);
+      const lst = st?.station.laser;
+      const lp = x.model.lasers.find((l) => l.stationKey === st?.station.key);
+      const params = [lst?.power_w != null ? `${lst.power_w} W` : null, lst?.speed_mm_s != null ? `${lst.speed_mm_s} mm/s` : null, lst?.frequency_khz != null ? `${lst.frequency_khz} kHz` : null].filter(Boolean).join(', ');
+      const how = lp?.mode === 'head' ? `the gantry moves the processing head along the ${lp.process === 'welding' ? 'weld seam' : 'path'}` : 'galvo mirrors steer the beam through the f-theta lens';
+      return `${stationName}: ${how}${params ? ` at ${params}` : ''} — ${pct} of ${n(step.dur, 3)} s (${step.basis}).`;
     }
-    case 'inspect':
-      return `${stationName}: the verification camera reads and grades the mark → OK / NG (${n(step.dur, 3)} s).`;
-    case 'sort':
-      return `${stationName}: result routed — NG parts go to the NG bin (${n(step.dur, 3)} s).`;
+    case 'inspect': {
+      const st = x.res.stations.find((s) => s.station.name === stationName);
+      const rej = st?.station.reject_rate != null ? `; entered reject rate ${n(st.station.reject_rate * 100, 3)} %` : '';
+      if (st?.station.kind === 'test') {
+        const phase = progress < 0.2 ? 'the test head descends onto the part' : progress <= 0.8 ? 'contact probes are made and the tester runs the test program' : 'the test head retracts with the PASS / FAIL result';
+        const lanes = (st.station.parallel ?? 1) > 1 && x.res.layout !== 'sequential' ? ` (${st.station.parallel} parallel nests, each testing its own part)` : '';
+        return `${stationName}: ${phase}${lanes} — ${pct} of ${n(step.dur, 3)} s (${step.basis}${rej}).`;
+      }
+      return `${stationName}: the verification camera ${x.model.lasers.length ? 'reads and grades the mark' : 'checks the part'} → OK / NG (${n(step.dur, 3)} s${rej}).`;
+    }
+    case 'sort': {
+      const st = x.res.stations.find((s) => s.station.name === stationName);
+      const pusher = st && x.model.objects.some((o) => o.kind === 'pusher' && o.stationKey === st.station.key);
+      return pusher
+        ? `${stationName}: PASS parts ride through; a part the run rejects is pushed off the belt by the pneumatic diverter into the NG bin (${n(step.dur, 3)} s).`
+        : `${stationName}: result routed — NG parts go to the NG bin (${n(step.dur, 3)} s).`;
+    }
     case 'unload':
-      return `${stationName}: door opens, operator removes the part (${n(step.dur, 3)} s, ${step.basis}).`;
-    default:
+      return x.model.carrier === 'axes' ? `${stationName}: door opens, operator removes the part (${n(step.dur, 3)} s, ${step.basis}).` : `${stationName}: the finished part leaves the line to the outfeed (${n(step.dur, 3)} s, ${step.basis}).`;
+    default: {
+      const st = x.res.stations.find((s) => s.station.name === stationName);
+      const hd = st ? x.model.handlers[st.station.key] : undefined;
+      if (hd) {
+        const ph = pickPhase(progress);
+        return `${stationName}: ${hd.kind === 'robot' ? 'robot' : 'gantry'} ${ph} — ${hd.carries === 'part' ? 'moving the part downstream' : 'placing a component onto the part'} (${n(step.dur, 3)} s, ${step.basis}).`;
+      }
+      const tool = st ? x.model.objects.find((o) => o.stationKey === st.station.key && (o.kind === 'tool' || o.kind === 'test_head')) : undefined;
+      if (tool) {
+        const phase = progress < 0.2 ? 'lowers to the part' : progress <= 0.8 ? 'is working' : 'retracts';
+        return `${stationName}: ${tool.kind === 'test_head' ? `test head ${phase}` : `${TOOL_NAME[String(tool.params.tool)] ?? 'tool'} ${phase}`} — ${pct} of ${n(step.dur, 3)} s (${step.basis}).`;
+      }
       return `${stationName}: ${step.name} (${n(step.dur, 3)} s).`;
+    }
   }
 }

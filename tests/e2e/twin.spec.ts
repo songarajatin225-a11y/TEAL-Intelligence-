@@ -104,3 +104,60 @@ test.describe('3D machine digital twin', () => {
     await expect(page.getByRole('dialog')).toContainText('Not Available — key specifications not yet stated');
   });
 });
+
+/* The 3D simulation works for every machine type, not only the laser flagship. */
+const setTime = (page: import('@playwright/test').Page, t: number) =>
+  page.getByLabel('Simulation time').evaluate((el, v) => {
+    const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!;
+    set.call(el, String(v));
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }, t);
+
+test.describe('3D simulation for every machine type', () => {
+  test('test line: parallel test heads, NG diverter and a contact-test narration', async ({ page }) => {
+    await page.goto('/#/studio/sim-demo-test-line?tab=machine3d');
+    await expect(page.getByRole('status', { name: 'Machine status' })).toContainText('READY');
+    const tree = page.getByRole('tree', { name: 'Machine hierarchy' });
+    await tree.getByRole('button', { name: 'Expand Functional test' }).click();
+    await expect(tree.getByRole('button', { name: /^Test head · lane 1/ })).toBeVisible();
+    await expect(tree.getByRole('button', { name: /^Test head · lane 2/ })).toBeVisible();
+    await tree.getByRole('button', { name: 'Expand OK / NG diverter' }).click();
+    await expect(tree.getByRole('button', { name: /^NG diverter \(pneumatic pusher\)/ })).toBeVisible();
+    await setTime(page, 66);
+    await expect(page.getByText(/tester runs the test program \(2 parallel nests/)).toBeVisible();
+  });
+
+  test('assembly cell: the SCARA robot is a linked component with an explanation', async ({ page }) => {
+    await page.goto('/#/studio/sim-demo-assembly-cell?tab=machine3d');
+    const tree = page.getByRole('tree', { name: 'Machine hierarchy' });
+    await tree.getByRole('button', { name: 'Expand SCARA pick & place (connector)' }).click();
+    await tree.getByRole('button', { name: 'Assembly robot — RB-S6', exact: true }).click();
+    await expect(page.getByText('Technical specification').first()).toBeVisible();
+    await expect(page.getByLabel(/^Explanation:/)).toContainText('In this machine');
+    await setTime(page, 41);
+    await expect(page.getByText(/placing a component onto the part/)).toBeVisible();
+  });
+
+  test('a new machine from a template runs as a labelled sequence preview until its inputs exist', async ({ page }) => {
+    await page.goto('/#/studio?new=1');
+    const drawer = page.getByRole('dialog', { name: 'New simulation scenario' });
+    await drawer.getByLabel('Equipment template').selectOption('eqt-screwdriving');
+    await drawer.getByLabel('Scenario name').fill('E2E screwdriving cell');
+    await drawer.getByRole('button', { name: 'Create and open in 3D' }).click();
+    await expect(page.locator('main h1')).toHaveText('E2E screwdriving cell');
+    await expect(page.getByText('SEQUENCE PREVIEW — not a result')).toBeVisible();
+    await expect(page.getByRole('tab', { name: /Simulation inputs/ })).toHaveAttribute('aria-selected', 'true');
+    const tree = page.getByRole('tree', { name: 'Machine hierarchy' });
+    await tree.getByRole('button', { name: 'Expand Screwdriving (torque/angle)' }).click();
+    await expect(tree.getByRole('button', { name: /^Screwdriver spindle/ }).last()).toBeVisible();
+    // entering every station time turns the preview into a real (DEMO-free, user-input) simulation
+    for (const name of ['Loading', 'Fixture / clamp', 'Screwdriving (torque/angle)', 'Unloading']) {
+      await page.getByLabel(`${name} time per part`, { exact: true }).fill('3');
+      await page.keyboard.press('Tab');
+    }
+    await expect(page.getByText('SEQUENCE PREVIEW — not a result')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Run simulation' }).first().click();
+    await expect(page.getByRole('status', { name: 'Machine status' })).not.toContainText('READY', { timeout: 15_000 });
+  });
+});
+

@@ -12,6 +12,8 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 | Motion engine | `src/services/twin/motion.ts` | Axis model (§17). Travel, speed and acceleration come from the linked stage record unless you enter them. Moves use a trapezoidal or triangular profile (§18). |
 | Canonical cycle | `src/services/sim/model.ts` (`addMotion`) | Axis move time is **calculated** and added to the station time. The 3D cycle is therefore the simulated cycle (§69). A missing axis speed blocks the run with an input gap and is never assumed. |
 | Machine generator | `src/services/twin/machine.ts` | Builds the conceptual scene graph from stations and selected components (§8–§13, §118–§120). Every object carries `partId`, `stationKey`, layer and BOM level, and links to its BOM line. It also computes camera FOV (§31), laser beam path and field, safety zones, cable routes and the conceptual I/O list. |
+| Kinematics | `src/services/twin/kinematics.ts` | SCARA two-link inverse/forward kinematics, pick-and-place phases (to pick → descend → grip → lift → to place → lower → release → retract) and tool strokes. Poses are a function of the station's progress, so the same central state drives robots, gantries and tool heads. Geometry only; no dynamics (§16). |
+| Sequence preview | `src/services/twin/preview.ts` | When station inputs are missing, the machine still runs as a **sequence preview**: every undefined station gets the same 2 s visual placeholder, with no variability or failures. Nothing from a preview is reported as a result (§161, §162). |
 | Collision | `src/services/twin/collision.ts` | Axis-aligned bounding boxes, sampled along every planned move (§20). Exposes the `PhysicsProvider` interface: bounding-box collision is active; rigid-body, robotics, optical and thermal/FEA are future extension points. |
 | Sequence + central state | `src/services/twin/timeline.ts` | `TwinPlayer` wraps **one** seeded DES run (`services/sim/des`). Its `at(t)` is the single `SimulationState` read by the scene, event log, KPIs, HMI, alarms and I/O (§45, §46). Station time is split into sub-steps only where the data allows (axis moves, entered laser jump overhead); the remainder keeps the station's basis. |
 | Design check | `src/services/twin/checks.ts` | Rules for f-theta field vs process area, camera FOV vs target, axis travel, collisions, throughput vs target, footprint and enclosure. It reuses the Studio design review (§114, §178). |
@@ -38,6 +40,42 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 | Operator | Conceptual figure, hidden by default (tree eye icon); position only |
 
 Performance mode drops small details automatically (LOD). Labels are de-cluttered by priority, and a label that would overlap another is nudged or hidden.
+
+## Every machine type
+
+The generator builds a working machine for **all 35 equipment templates** and every DEMO scenario, not only laser markers. Each station kind gets its own mechanism, driven by the station's live server state:
+
+| Station kind | Mechanism in 3D | What moves |
+|---|---|---|
+| Load / unload (inline) | Infeed and outfeed magazines, an operator bench for manual stations, and a robot or gantry when one is selected | The infeed stack indexes a part out, and the outfeed stack grows with the run's good parts |
+| Transfer | SCARA robot (selected robot, or a placeholder when none is selected) or a pick-and-place gantry | Inverse kinematics follows the pick → place path, and the part travels in the gripper |
+| Assembly | Robot and component tray, or a tool bridge with a press ram, screwdriver spindle or dispense valve | The robot places a component onto the part, or the tool lowers, works and retracts |
+| Process | Process bridge with a dispense, dicing, print, bond or packing head | The tool strokes and traverses; a saw blade spins |
+| Test | Test press frame with a contact-probe head | The head descends, holds while the tester runs, then retracts |
+| Laser (galvo) | Source, fibre, collimator, expander, galvo and f-theta | The mirrors follow the scan path |
+| Laser (head) | Head gantry and processing head for welding, cutting and scribing (no galvo) | The head follows the seam |
+| Vision / inspect / align | Camera, lens, ring light and bracket; the FOV is computed | The light turns on when triggered |
+| Sort | NG diverter (pneumatic pusher) and OK / NG bins | The pusher fires **only for parts the run rejects at that station**, pushing them off the belt into the NG bin. PASS parts ride through |
+
+- **Parallel stations** (inline lines): each parallel server gets its own lane, nest and head, driven by that server's state. The conveyor widens and shows lane guides.
+- **Queues**: parts waiting for a station line up on the belt in front of it, one part pitch apart.
+- **Rejects** are traced to the station that rejected them. The event log reads *Part 12 rejected at OK / NG diverter — FAIL (NG)*.
+- **Bottleneck**: a dashed amber outline on the table around the station. The machinery keeps its own colours.
+- **Narration** is station-aware. Examples: *Functional test: contact probes are made and the tester runs the test program (2 parallel nests…)*, *SCARA pick & place: robot lowers and releases — placing a component onto the part*, *…a part the run rejects is pushed off the belt by the pneumatic diverter*.
+- **Overlays** only offer what the machine has. Laser-beam controls and scan paths appear only on laser machines, and the camera FOV only on machines with vision.
+
+### DEMO scenarios
+
+| Scenario | Machine | Shows |
+|---|---|---|
+| `sim-demo-laser-marker` | Semi-automatic laser marking machine (flagship, `#/3d`) | X/Y axes, galvo marking, alignment and inspection cameras, Class-1 enclosure and door |
+| `sim-demo-battery-tab` | Battery tab laser welder | Head-mode laser: the gantry moves the welding head along the seam |
+| `sim-demo-pcb-a/b/c`, `sim-demo-semi-marking` | Inline laser marking lines | Conveyors, parallel lasers, sort. `semi-marking` is incomplete on purpose, so it runs as a preview |
+| `sim-demo-assembly-cell` | Electronics assembly cell | SCARA robot placing a connector from a tray |
+| `sim-demo-test-line` | Functional test line | Two parallel test nests, NG diverter, buffer |
+| `sim-demo-robot-transfer` | Robot pick-and-place transfer | The robot carries the part itself |
+
+A new machine from any template opens straight in 3D (**Create and open in 3D** in the Studio). It runs as a labelled **SEQUENCE PREVIEW — not a result** until you enter its station times in the **Simulation inputs** tab.
 
 ## Explanations
 
