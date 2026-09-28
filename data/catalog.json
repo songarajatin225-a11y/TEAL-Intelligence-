@@ -400,7 +400,7 @@
       "entity": "recipe",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 1,
+      "record_count": 2,
       "last_updated": "2026-09-27",
       "schema": "schemas/recipe.schema.json",
       "source_ids": [
@@ -408,7 +408,7 @@
       ],
       "data_type": "DEMO",
       "partition": "records",
-      "sha256": "ee6ee525ef014f66"
+      "sha256": "2b10459a6a191b8c"
     },
     {
       "id": "demo-requirements",
@@ -454,7 +454,7 @@
       "entity": "simulation",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 5,
+      "record_count": 9,
       "last_updated": "2026-09-27",
       "schema": "schemas/simulation.schema.json",
       "source_ids": [
@@ -462,7 +462,25 @@
       ],
       "data_type": "DEMO",
       "partition": "engineering",
-      "sha256": "ed2fa9b537852460"
+      "sha256": "3d4cd25e6f446d04"
+    },
+    {
+      "id": "demo-twin-requirements",
+      "title": "DEMO requirements — 3D digital-twin demo",
+      "path": "demo/twin-requirements.json",
+      "description": "Fictional requirements traced to the semi-automatic laser marking machine digital twin.",
+      "entity": "requirement",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 3,
+      "last_updated": "2026-09-27",
+      "schema": "schemas/requirement.schema.json",
+      "source_ids": [
+        "src-demo-datasheets"
+      ],
+      "data_type": "DEMO",
+      "partition": "records",
+      "sha256": "1511bb28192ffa36"
     },
     {
       "id": "demo-verifications",
@@ -907,15 +925,15 @@
       "entity": "supplier",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 10,
-      "last_updated": "2026-09-26",
+      "record_count": 11,
+      "last_updated": "2026-09-27",
       "schema": "schemas/supplier.schema.json",
       "source_ids": [
         "src-legacy-cost-platform"
       ],
       "data_type": "DEMO",
       "partition": "suppliers",
-      "sha256": "5b80c4abac9cd378"
+      "sha256": "11f26fb8089ee409"
     },
     {
       "id": "technologies",
