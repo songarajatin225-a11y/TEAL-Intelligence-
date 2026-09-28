@@ -101,30 +101,6 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       ['draft-equipment', 'Draft equipment architecture from text', () => nav('/studio?draft=1')],
       ['run-sim', 'Run simulation', () => nav('/studio?focus=simulate')],
       ['compare-scenarios', 'Compare scenarios', () => nav('/studio?tab=compare')],
-      ...(() => {
-        const sid = pathname.match(/^\/studio\/([^/?]+)/)?.[1] ?? 'sim-demo-laser-marker';
-        const tw = (cmd?: string, tab = 'machine3d') => () => nav(`/studio/${sid}?tab=${tab}${cmd ? `&cmd=${cmd}` : ''}`);
-        return [
-          ['3d-open', 'Open 3D machine', tw()],
-          ['3d-generate', 'Generate machine (new equipment scenario → 3D)', () => nav('/studio?new=1')],
-          ['3d-run', 'Run simulation (3D)', tw('run')],
-          ['3d-pause', 'Pause simulation (3D)', tw('pause')],
-          ['3d-reset', 'Reset simulation (3D)', tw('reset')],
-          ['3d-bom', 'Show BOM', tw(undefined, 'cost')],
-          ['3d-req', 'Show requirements', tw(undefined, 'validation')],
-          ['3d-laser', 'Show laser (3D)', tw('laser')],
-          ['3d-vision', 'Show vision (3D)', tw('inspection')],
-          ['3d-motion', 'Show motion (3D)', tw('motion')],
-          ['3d-collision', 'Show collision / design check (3D)', tw('checks')],
-          ['3d-xray', 'Show X-ray (3D)', tw('xray')],
-          ['3d-exploded', 'Show exploded view (3D)', tw('exploded')],
-          ['3d-dims', 'Show dimensions (3D)', tw('dims')],
-          ['3d-scenario', 'Show scenario comparison (3D)', tw('compare')],
-          ['3d-versions', 'Compare versions', tw(undefined, 'versions')],
-          ['3d-snapshot', 'Take snapshot (3D PNG)', tw('png')],
-          ['3d-report', 'Export 3D machine report', tw('report')],
-        ] as [string, string, () => void][];
-      })(),
       ['eng-search', 'Search the engineering database (e.g. 1064 nm 50 W MOPA)', () => nav('/engineering-db')],
       ['review-data', 'Review data (conflicts, duplicates, stale)', () => nav('/data-review')],
       ['open-project', 'Open project', () => nav('/projects')],

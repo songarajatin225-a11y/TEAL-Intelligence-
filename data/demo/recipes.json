@@ -65,57 +65,6 @@
       "tags": [
         "demo"
       ]
-    },
-    {
-      "id": "rcp-demo-plate-mark",
-      "entity": "recipe",
-      "name": "Nameplate 2D code + text marking — v0.1 (DEMO)",
-      "simulation_id": "sim-demo-laser-marker",
-      "product_id": "prd-markf",
-      "recipe_version": "0.1",
-      "parameters": [
-        {
-          "name": "Power",
-          "value": "20",
-          "unit": "W"
-        },
-        {
-          "name": "Speed",
-          "value": "2000",
-          "unit": "mm/s"
-        },
-        {
-          "name": "Frequency",
-          "value": "60",
-          "unit": "kHz"
-        },
-        {
-          "name": "Hatch",
-          "value": "0.03",
-          "unit": "mm"
-        },
-        {
-          "name": "Passes",
-          "value": "1",
-          "unit": ""
-        }
-      ],
-      "quality_criteria": [
-        "Code grade — target to be agreed"
-      ],
-      "acceptance_criteria": [
-        "To be defined — nothing pre-filled"
-      ],
-      "recipe_status": "Draft",
-      "data_type": "DEMO",
-      "provenance": {
-        "source_id": "src-demo-datasheets",
-        "verification_status": "DRAFT",
-        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price. Parameters are DEMO starting values, not validated."
-      },
-      "tags": [
-        "demo"
-      ]
     }
   ]
 }

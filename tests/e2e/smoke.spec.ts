@@ -103,8 +103,6 @@ const ROUTES: [string, RegExp][] = [
   ['studio?tab=disruption', /Equipment Simulation Studio/],
   ['studio/sim-demo-pcb-a', /PCB laser marking — Scenario A/],
   ['studio/sim-demo-semi-marking', /Semiconductor package marking/],
-  ['component-datasheets', /Component Datasheets/],
-  ['studio/sim-demo-laser-marker?tab=machine3d', /Semi-automatic laser marking machine/],
   ['engineering-db', /Global Engineering Database/],
   ['engineering-db?tab=manufacturers', /Global Engineering Database/],
   ['engineering-db?tab=specs', /Global Engineering Database/],

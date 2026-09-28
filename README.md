@@ -8,7 +8,7 @@ engineering knowledge for the next product.
 
 `UNDERSTAND → CONFIGURE → ENGINEER → SIMULATE → OPTIMIZE → VALIDATE → BUILD → SCALE`
 
-Flagship module: **Equipment Simulation Studio** (see [docs/09](docs/09_ENGINEERING_SIMULATION_OS.md)) with the **3D Machine Digital Twin** — an interactive Three.js machine for every equipment template (laser marking and welding, assembly, test, handling, dispensing …) driven by the same simulation, BOM and requirements (see [docs/10](docs/10_3D_MACHINE_DIGITAL_TWIN.md), open `#/3d`). Every component has a technical + supplier datasheet at `#/component-datasheets`.
+Flagship module: **Equipment Simulation Studio** (see [docs/09](docs/09_ENGINEERING_SIMULATION_OS.md)).
 
 It begins with Laser, where TEAL is strongest, and is built so the same intelligence system extends
 across Electronics & EMS, Semiconductor, Battery & New Energy, Industrial Automation and Advanced
@@ -179,4 +179,4 @@ datasets through the reviewed ingestion pipeline; the Advanced Manufacturing tax
 | [02 Legacy feature map](docs/02_LEGACY_FEATURE_MAP.md) | [Product engine](docs/PRODUCT_ENGINE.md) · [Cost engine](docs/COST_ENGINE.md) · [Gates](docs/GATES.md) |
 | [03 Target architecture](docs/03_TARGET_ARCHITECTURE.md) | [Knowledge](docs/KNOWLEDGE.md) · [Ingestion](docs/INGESTION.md) · [Global intelligence](docs/GLOBAL_INTELLIGENCE.md) |
 | [04 Data model](docs/04_DATA_MODEL.md) · [05 Migration](docs/05_MIGRATION_PLAN.md) · [06 Roadmap](docs/06_IMPLEMENTATION_ROADMAP.md) | [Security](docs/SECURITY.md) · [Deployment](docs/DEPLOYMENT.md) · [Testing](docs/TESTING.md) |
-| [07 UX redesign](docs/07_UX_REDESIGN.md) · [08 Intelligence OS](docs/08_INTELLIGENCE_OS.md) · [09 Engineering & Simulation OS](docs/09_ENGINEERING_SIMULATION_OS.md) · [10 3D Machine Digital Twin](docs/10_3D_MACHINE_DIGITAL_TWIN.md) | [Migration](docs/MIGRATION.md) |
+| [07 UX redesign](docs/07_UX_REDESIGN.md) · [08 Intelligence OS](docs/08_INTELLIGENCE_OS.md) · [09 Engineering & Simulation OS](docs/09_ENGINEERING_SIMULATION_OS.md) | [Migration](docs/MIGRATION.md) |
