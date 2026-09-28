@@ -74,6 +74,27 @@ test.describe('3D machine digital twin', () => {
     await page.getByRole('radio', { name: 'Engineering' }).click();
   });
 
+  test('explains the machine: guided tour, component explanations, enclosure modes (§139, §164)', async ({ page }) => {
+    await page.goto(TWIN);
+    await page.getByRole('button', { name: 'Explain the machine (guided tour)' }).click();
+    const tour = page.getByRole('dialog', { name: 'Guided machine tour' });
+    await expect(tour).toContainText('The machine');
+    await expect(tour).toContainText('1 / 12');
+    for (let i = 0; i < 5; i++) await tour.getByRole('button', { name: /Next/ }).click();
+    await expect(tour).toContainText('Laser source and beam delivery');
+    await expect(page.getByLabel('Explanation: Pulsed fibre laser (MOPA)')).toContainText('In this machine (from the records)');
+    await tour.getByRole('button', { name: 'Close' }).click();
+    await expect(tour).toHaveCount(0);
+    const tree = page.getByRole('tree', { name: 'Machine hierarchy' });
+    await tree.getByRole('button', { name: 'Expand Laser marking' }).click();
+    await tree.getByRole('button', { name: /Beam expander — BE-1064-1.5X/ }).click();
+    await expect(page.getByLabel('Explanation: Beam expander')).toContainText('larger than the SC-10 aperture 10 mm');
+    await page.getByLabel('Enclosure', { exact: true }).selectOption('closed');
+    await page.getByLabel('Enclosure', { exact: true }).selectOption('hidden');
+    await page.getByRole('button', { name: 'Component call-outs' }).click();
+    await expect(page.getByRole('button', { name: 'Component call-outs' })).toHaveAttribute('aria-pressed', 'false');
+  });
+
   test('component datasheets page covers every component', async ({ page }) => {
     await page.goto('/#/component-datasheets');
     await expect(page.getByRole('heading', { name: 'Component Datasheets' })).toBeVisible();

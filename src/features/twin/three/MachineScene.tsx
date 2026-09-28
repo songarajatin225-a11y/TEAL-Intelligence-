@@ -7,7 +7,7 @@ import { workpieceObject } from '../../../services/twin/collision';
 import { carriedOffset, type Layer, type Machine3DObject, type MachineModel } from '../../../services/twin/machine';
 import { pointAt, type ScanPath } from '../../../services/twin/process';
 import type { SimulationState } from '../../../services/twin/timeline';
-import { MM, ObjectBody, WorkpieceMesh, type Visual } from './procedural';
+import { MM, ObjectBody, RuntimeCtx, WorkpieceMesh, type EnclosureMode, type TwinRuntime, type Visual } from './procedural';
 
 export type ViewPreset = 'fit' | 'front' | 'top' | 'side' | 'iso' | 'laser' | 'inspection' | 'maintenance' | 'process';
 
@@ -42,6 +42,12 @@ export interface SceneView {
   zonesAll: boolean;
   /** station key of the evidenced bottleneck (subtle emphasis, §71) */
   bottleneck: string | null;
+  /** closed / cutaway (right side + half roof removed) / hidden panels */
+  enclosure: EnclosureMode;
+  /** component name call-outs in the viewport */
+  callouts: boolean;
+  /** objects highlighted by the guided tour / explanation */
+  highlight: Set<string> | null;
 }
 
 /** Live values refreshed a few times per second (smooth motion itself runs in useFrame). */
@@ -477,18 +483,70 @@ function ScreenLabels({ items }: { items: ScreenLabel[] }) {
     }
   }, [items, host]);
   const v = useMemo(() => new THREE.Vector3(), []);
+  // de-clutter: labels are placed in priority order; one that would overlap a placed label is
+  // nudged up / down, or hidden (it reappears when the view changes)
+  const placed = useMemo<[number, number, number, number][]>(() => [], []);
   useFrame(() => {
+    placed.length = 0;
     for (const it of items) {
       const el = els.current.get(it.key);
       if (!el) continue;
       v.set(it.pos[0], it.pos[1], it.pos[2]).project(camera);
-      const visible = v.z > -1 && v.z < 1 && Math.abs(v.x) < 1.2 && Math.abs(v.y) < 1.2;
+      let visible = v.z > -1 && v.z < 1 && Math.abs(v.x) < 1.2 && Math.abs(v.y) < 1.2;
+      const wpx = it.text.length * 6.6 + 14;
+      const hpx = 19;
+      const x = (v.x * 0.5 + 0.5) * size.width;
+      let y = (-v.y * 0.5 + 0.5) * size.height;
+      if (visible) {
+        const left = it.center ? x - wpx / 2 : x + 6;
+        const hit = (yy: number) => placed.some(([a, b, c, d]) => left < c && left + wpx > a && yy - hpx / 2 < d && yy + hpx / 2 > b);
+        const tries = [0, -21, 21, -42, 42];
+        const dy = tries.find((t) => !hit(y + t));
+        if (dy == null) visible = false;
+        else {
+          y += dy;
+          placed.push([left, y - hpx / 2, left + wpx, y + hpx / 2]);
+        }
+      }
       el.style.display = visible ? '' : 'none';
-      el.style.left = `${(v.x * 0.5 + 0.5) * size.width}px`;
-      el.style.top = `${(-v.y * 0.5 + 0.5) * size.height}px`;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
     }
   });
   return null;
+}
+
+const CALLOUT_KINDS = new Set(['laser_source', 'collimator', 'beam_expander', 'galvo', 'f_theta', 'laser_head', 'camera', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chiller', 'estop', 'tower', 'door', 'nozzle', 'z_slide', 'frl', 'valve', 'robot', 'conveyor', 'bin']);
+
+const ROUTE_STYLE: Record<string, { color: string; r: number; rough: number }> = {
+  fiber: { color: '#e8b500', r: 5, rough: 0.5 },
+  fume: { color: '#8f989c', r: 24, rough: 0.85 },
+  pneumatic: { color: '#2f6fd6', r: 3.5, rough: 0.5 },
+  cooling: { color: '#3b82f6', r: 6, rough: 0.5 },
+  cable: { color: '#262c30', r: 5, rough: 0.8 },
+};
+
+/** Physical hoses / fibre / cables as tubes along a conceptual spline (§91). */
+function Tube({ points, kind }: { points: [number, number, number][]; kind: string }) {
+  const st = ROUTE_STYLE[kind] ?? ROUTE_STYLE.cable;
+  const geo = useMemo(() => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(p[0] * MM, p[1] * MM, p[2] * MM)), false, 'centripetal'), 80, st.r * MM, kind === 'fume' ? 14 : 8, false), [points, st.r, kind]);
+  useEffect(() => () => geo.dispose(), [geo]);
+  return (
+    <mesh geometry={geo} castShadow>
+      <meshStandardMaterial color={st.color} roughness={st.rough} metalness={kind === 'fume' ? 0.3 : 0.1} />
+    </mesh>
+  );
+}
+
+/** Thin accent box around the selected / highlighted object (cheaper than per-mesh outlines). */
+function SelBox({ o, color }: { o: Machine3DObject; color: string }) {
+  const geo = useMemo(() => new THREE.EdgesGeometry(new THREE.BoxGeometry((o.size[0] + 16) * MM, (o.size[1] + 16) * MM, (o.size[2] + 16) * MM)), [o.size]);
+  useEffect(() => () => geo.dispose(), [geo]);
+  return (
+    <lineSegments geometry={geo} position={[o.position[0] * MM, (o.position[1] + o.size[1] / 2) * MM, o.position[2] * MM]}>
+      <lineBasicMaterial color={color} />
+    </lineSegments>
+  );
 }
 
 const ZONE_COLOR = { operator: '#3b82f6', robot: '#f5a524', laser: '#e5484d', maintenance: '#a78bfa', restricted: '#f97316' } as const;
@@ -508,8 +566,9 @@ export const MachineScene = forwardRef<
     ghost?: MachineModel | null;
     factory?: { x: number; z: number; rot: number; label: string }[];
     debugRef?: MutableRefObject<HTMLDivElement | null>;
+    hmi?: { title: string; recipe: string };
   }
->(function MachineScene({ model, view, live, stateRef, paths, onPick, onHover, onMeasure, onDecline, ghost, factory, debugRef }, ref) {
+>(function MachineScene({ model, view, live, stateRef, paths, onPick, onHover, onMeasure, onDecline, ghost, factory, debugRef, hmi }, ref) {
   const api = useRef<SceneApi | null>(null);
   useImperativeHandle(ref, () => ({
     view: (p, id) => api.current?.view(p, id),
@@ -551,6 +610,7 @@ export const MachineScene = forwardRef<
     if (view.selected === o.id) return 'selected';
     if (view.hover === o.id) return 'hover';
     if (stateOf(o) === 'down') return 'fault';
+    if (view.highlight?.has(o.id)) return 'active';
     if (view.bottleneck && o.stationKey === view.bottleneck && o.kind !== 'generic') return 'warning';
     return 'normal';
   };
@@ -578,7 +638,8 @@ export const MachineScene = forwardRef<
         }}
         onPointerOut={() => onHover(null)}
       >
-        <ObjectBody o={o} visual={v} xray={xr} live={{ active: act, open: o.kind === 'door' ? live.doorOpen : 0, tower: live.tower }} />
+        <ObjectBody o={o} visual={v} xray={xr} live={{ active: act, tower: live.tower }} />
+        {(view.selected === o.id || view.highlight?.has(o.id)) && <SelBox o={o} color={view.selected === o.id ? '#00e0cf' : '#4fd1c5'} />}
         {ov && (
           <mesh position={[o.position[0] * MM, (o.position[1] + o.size[1] / 2) * MM, o.position[2] * MM]}>
             <boxGeometry args={[(o.size[0] + 12) * MM, (o.size[1] + 12) * MM, (o.size[2] + 12) * MM]} />
@@ -620,17 +681,25 @@ export const MachineScene = forwardRef<
       out.push({ key: 'dim-d', pos: W([b.max[0] + 120, 2, (b.min[2] + b.max[2]) / 2]), text: `D ${Math.round(model.dims.depth)} mm`, dim: true, center: true });
       out.push({ key: 'dim-h', pos: W([b.min[0] - 120, b.max[1] / 2, b.max[2]]), text: `H ${Math.round(model.dims.height)} mm`, dim: true, center: true });
     }
+    if (view.callouts)
+      for (const o of model.objects) {
+        if (!CALLOUT_KINDS.has(o.kind) || !view.layers[o.layer] || view.hidden.has(o.id)) continue;
+        if (o.carriedBy?.length && o.kind !== 'fixture') continue;
+        const name = view.customer ? (o.name.split(' — ')[0] ?? o.name) : o.name.replace(/ \(part of the laser source\)/, '');
+        out.push({ key: `co-${o.id}`, pos: W([o.position[0], o.position[1] + o.size[1] + 25, o.position[2]]), text: name.length > 38 ? `${name.slice(0, 36)}…` : name, center: true });
+      }
     if (ghost) out.push({ key: 'ghost', pos: [ghost.bounds.min[0] * MM, (ghost.bounds.max[1] + 80) * MM, -(model.dims.depth + ghost.dims.depth / 2 + 900) * MM], text: 'Comparison scenario (outline)', color: '#a78bfa' });
     factory?.forEach((f, i) => out.push({ key: `fac-${i}`, pos: [f.x * MM + ((model.bounds.min[0] + model.bounds.max[0]) / 2) * MM, (model.dims.height + 120) * MM, f.z * MM], text: f.label, center: true }));
     return out;
-  }, [view.labels, view.fov, view.field, view.zones, view.zonesAll, view.dims, view.layers, view.customer, model, ghost, factory]);
+  }, [view.labels, view.fov, view.field, view.zones, view.zonesAll, view.dims, view.layers, view.customer, view.callouts, view.hidden, model, ghost, factory]);
+  const rt: TwinRuntime = useMemo(() => ({ stateRef, model, paths, detail: view.quality === 'performance' ? 'low' : 'high', enclosure: view.enclosure, hmi: hmi ?? { title: model.label, recipe: '—' }, reduced: view.reducedMotion }), [stateRef, model, paths, view.quality, view.enclosure, hmi, view.reducedMotion]);
   const shadows = view.quality === 'high';
   const b = model.bounds;
   const cx = ((b.min[0] + b.max[0]) / 2) * MM;
   const cz = ((b.min[2] + b.max[2]) / 2) * MM;
   const span = Math.max(b.max[0] - b.min[0], b.max[2] - b.min[2]) * MM;
   return (
-    <>
+    <RuntimeCtx.Provider value={rt}>
       {view.ortho ? <OrthographicCamera makeDefault position={[cx + 2.2, 2.2, cz + 2.6]} near={-50} far={100} /> : <PerspectiveCamera makeDefault fov={35} position={[cx + 2.4, 2.1, cz + 2.9]} near={0.01} far={200} />}
       <OrbitControls makeDefault target={[cx, 0.9, cz]} enableDamping={!view.reducedMotion} dampingFactor={0.12} maxPolarAngle={Math.PI * 0.495} />
       <CameraRig model={model} api={api} ortho={view.ortho} reduced={view.reducedMotion} />
@@ -670,10 +739,11 @@ export const MachineScene = forwardRef<
               </mesh>
             </group>
           ))}
-      {view.routes &&
-        model.routes
-          .filter((r) => r.points.length > 1 && (r.kind === 'fiber' ? view.layers.Laser : r.kind === 'cooling' ? view.layers.Laser : view.layers.Electrical))
-          .map((r) => <Line key={r.id} points={r.points.map((p) => W(p))} color={r.kind === 'fiber' ? '#f5a524' : r.kind === 'cooling' ? '#4fc3f7' : r.kind === 'pneumatic' ? '#60a5fa' : '#7b8f95'} lineWidth={1.2} dashed={r.kind === 'cooling'} dashSize={0.02} gapSize={0.012} />)}
+      {model.routes
+        .filter((r) => r.points.length > 1 && (r.kind === 'cable' ? view.routes && view.layers.Electrical : r.kind === 'pneumatic' ? view.layers.Pneumatic : r.kind === 'fume' ? view.layers.Safety : view.layers.Laser))
+        .map((r) => (
+          <Tube key={r.id} points={r.points} kind={r.kind} />
+        ))}
       {view.measurePts.length > 0 && (
         <group>
           {view.measurePts.map((p, i) => (
@@ -712,7 +782,7 @@ export const MachineScene = forwardRef<
           <GizmoViewport axisColors={['#e5484d', '#2fbf71', '#3b82f6']} labelColor="#0b0f11" />
         </GizmoHelper>
       )}
-    </>
+    </RuntimeCtx.Provider>
   );
 });
 

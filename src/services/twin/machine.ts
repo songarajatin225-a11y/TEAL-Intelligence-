@@ -47,6 +47,13 @@ export type GenKind =
   | 'bin'
   | 'chiller'
   | 'fume'
+  | 'collimator'
+  | 'z_slide'
+  | 'nozzle'
+  | 'chain'
+  | 'operator'
+  | 'frl'
+  | 'valve'
   | 'generic'
   | 'station'
   | 'group';
@@ -117,7 +124,7 @@ export interface SafetyZone {
 
 export interface Route {
   id: string;
-  kind: 'cable' | 'pneumatic' | 'cooling' | 'fiber';
+  kind: 'cable' | 'pneumatic' | 'cooling' | 'fiber' | 'fume';
   from: string;
   to: string;
   points: [number, number, number][];
@@ -154,6 +161,8 @@ export interface MachineModel {
   carrier: 'axes' | 'flow';
   workpiece: { template: string; length: number; width: number; thickness: number; material: string | null; basis: string };
   processArea: { x: number; y: number } | null;
+  /** station key → kind (drives mechanism animation: clamps, door) */
+  stationKinds: Record<string, StationKind>;
   notes: string[];
 }
 
@@ -383,7 +392,7 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
       // working distance is lens front → part surface: lens just above WD, camera body above the lens
       const lensLen = selected('telecentric_lens') ? 140 : 60;
       const cam = partIn('camera', `${sid}-camera`, st.kind === 'inspect' ? 'Inspection camera' : 'Alignment camera', 'camera', [x, baseY + wd + lensLen, 0], [60, 80, 60], { params: { wd, placeholderWd: fov.wd == null } });
-      partIn(selected('telecentric_lens') ? 'telecentric_lens' : 'vision_lens', `${sid}-lens`, 'Lens', 'generic', [x, baseY + wd, 0], [40, lensLen, 40], { params: { shape: 'cylinder' } });
+      partIn(selected('telecentric_lens') ? 'telecentric_lens' : 'vision_lens', `${sid}-lens`, 'Lens', 'generic', [x, baseY + wd, 0], [40, lensLen, 40], { params: { shape: 'lens', telecentric: !!selected('telecentric_lens') } });
       if (selected('lighting') && wd > 60) partIn('lighting', `${sid}-light`, 'Lighting', 'light', [x, baseY + Math.min(wd * 0.5, 90), 0], [110, 16, 110], { collision: wd * 0.5 > 40 });
       add(c, { id: `${sid}-bracket`, name: 'Camera bracket', kind: 'z_column', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, backZ], size: [50, baseY + wd + lensLen + 90 - TABLE, 50], collision: true, explode: [0, 0, -1] });
       add(c, { id: `${sid}-arm`, name: 'Camera arm', kind: 'generic', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, baseY + wd + lensLen + 40, (backZ + 0) / 2], size: [30, 30, Math.abs(backZ)], collision: false, explode: [0, 0, -1] });
@@ -419,6 +428,8 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
         if (head) partIn('laser_head', `${sid}-head${kk}`, 'Laser head', 'laser_head', [x, headY, dz], [100, 160, 100]);
         add(c, { id: `${sid}-column${kk}`, name: 'Z column (scan head mount)', kind: 'z_column', layer: 'Mechanical', parentId: sid, stationKey: st.key, position: [x, TABLE, colZ], size: [80, headY + 180 - TABLE, 80], collision: true, explode: [0, 0, -1] });
         add(c, { id: `${sid}-rail${kk}`, name: 'Optical rail', kind: 'generic', layer: 'Laser', parentId: sid, stationKey: st.key, position: [x, headY + 150, (colZ + dz) / 2], size: [60, 20, Math.abs(dz - colZ) + 60], collision: false, explode: [0, 0.5, 0] });
+        add(c, { id: `${sid}-collimator${kk}`, name: 'Fibre collimator / isolator (part of the laser source)', kind: 'collimator', layer: 'Laser', parentId: sid, stationKey: st.key, partId: src?.part.id, role: src ? `${src.role} — output optics` : undefined, position: [x, headY + 104, colZ + 70], size: [48, 48, 110], collision: false, explode: [0, 0.6, -0.4] });
+        add(c, { id: `${sid}-zslide${kk}`, name: 'Focus (Z) slide', kind: 'z_slide', layer: 'Motion', parentId: sid, stationKey: st.key, position: [x, headY - 60, colZ + 52], size: [100, 300, 26], collision: false, explode: [0, 0, -0.6] });
         const focus: [number, number, number] = [x, surf, dz];
         lasers.push({
           stationKey: st.key,
@@ -439,10 +450,14 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
           focus,
           process: /weld/i.test(sim.name) ? 'welding' : /clean/i.test(sim.name) ? 'cleaning' : /cut/i.test(sim.name) ? 'cutting' : /scrib/i.test(sim.name) ? 'scribing' : /drill/i.test(sim.name) ? 'drilling' : 'marking',
         });
-        routes.push({ id: `fiber-${sId}`, kind: 'fiber', from: sId, to: gId, points: [] });
+        routes.push({ id: `fiber-${sId}`, kind: 'fiber', from: sId, to: `${sid}-collimator${kk}`, points: [] });
       }
       const fx = selected('fume_extraction');
-      if (fx) partIn('fume_extraction', `${sid}-fume`, 'Fume extraction', 'fume', [minX - 280, 0, -D / 2 + 220], [360, 700, 360], { explode: [-1, 0, 0] });
+      if (fx) {
+        partIn('fume_extraction', `${sid}-fume`, 'Fume extraction', 'fume', [minX - 280, 0, -D / 2 + 220], [360, 700, 360], { explode: [-1, 0, 0] });
+        add(c, { id: `${sid}-nozzle`, name: 'Extraction nozzle', kind: 'nozzle', layer: 'Safety', parentId: sid, stationKey: st.key, position: [x + 95, surf + 55, -70], size: [44, 34, 70], collision: true, explode: [0.4, 0.3, 0] });
+        routes.push({ id: `fume-${sid}`, kind: 'fume', from: `${sid}-nozzle`, to: `${sid}-fume`, points: [] });
+      }
       const ch = selected('chiller') ?? res.machineParts.find((p) => p.part.product_type === 'chiller');
       if (ch) {
         add(c, { id: `${sid}-chiller`, name: `Chiller — ${ch.part.model_number}`, kind: 'chiller', layer: 'Laser', parentId: sid, stationKey: st.key, partId: ch.part.id, role: ch.role, position: [minX - 300, 0, D / 2 - 260], size: [420, 800, 420], explode: [-1, 0, 0] });
@@ -488,9 +503,13 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     DI('Clamp closed', 'Clamp reed switch', 'clamp', 'fixture');
     for (const a of axes) {
       const motor = res.stations.flatMap((s) => s.parts).find((p) => p.part.product_type === 'servo_motor');
-      add(c, { id: `motor-${a.key}`, name: `${a.name} servo motor${motor ? ` — ${motor.part.model_number}` : ''}`, kind: 'generic', layer: 'Motion', parentId: 'sys-motion', partId: motor?.part.id, role: motor?.role, carriedBy: a.key === ya?.key && xa ? [xa.key] : undefined, position: a.key === ya?.key ? [xa?.home ?? 0, TABLE + 60, -((ya?.stroke ?? 300) + 120) / 2 - 40] : [(xa?.home ?? 0) - 160 - 0, TABLE, 0], size: [80, 80, 80], params: { shape: 'cylinder' }, explode: [-1, 0, 0] });
+      add(c, { id: `motor-${a.key}`, name: `${a.name} servo motor${motor ? ` — ${motor.part.model_number}` : ''}`, kind: 'generic', layer: 'Motion', parentId: 'sys-motion', partId: motor?.part.id, role: motor?.role, carriedBy: a.key === ya?.key && xa ? [xa.key] : undefined, position: a.key === ya?.key ? [xa?.home ?? 0, TABLE + 60, -((ya?.stroke ?? 300) + 120) / 2 - 40] : [(xa?.home ?? 0) - 240, TABLE, 0], size: a.key === ya?.key ? [80, 80, 150] : [150, 80, 80], params: { shape: 'servo', along: a.key === ya?.key ? 'z' : 'x' }, explode: [-1, 0, 0] });
       DI(`${a.name} in position`, `${a.name} drive`, 'position', `motor-${a.key}`);
       routes.push({ id: `cable-motor-${a.key}`, kind: 'cable', from: 'cabinet', to: `motor-${a.key}`, points: [] });
+    }
+    if (xa) {
+      const ax = c.objs.find((o) => o.id === 'axis-x')!;
+      add(c, { id: 'chain-x', name: 'Cable carrier (X axis)', kind: 'chain', layer: 'Motion', parentId: 'sys-motion', position: [ax.position[0], TABLE, 125], size: [ax.size[0], 90, 36], params: { axis: xa.key, home: xa.home, stroke: xa.stroke ?? null, x0: ax.position[0] - ax.size[0] / 2 + 60 }, collision: false, explode: [0, 0, 0.8] });
     }
     if (!stage) notes.push('The motion axes are not linked to a stage record — speed and acceleration must be entered.');
     const partY = TABLE + (ya ? 110 : 60) + fixH + wt;
@@ -512,7 +531,7 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
   inCab.forEach((p) => {
     if (seen.has(p.part.id)) return;
     seen.add(p.part.id);
-    add(c, { id: `cab-${p.part.id}`, name: `${p.role} — ${p.part.model_number}`, kind: 'generic', layer: LAYER_OF[p.part.product_type] ?? 'Controls', parentId: 'cabinet', partId: p.part.id, role: p.role, position: [cabX - 200 + ((seen.size - 1) % 3) * 200, 1250 - Math.floor((seen.size - 1) / 3) * 300, cabZ], size: [150, 220, 120], explode: [0, 0, -1.8], collision: false });
+    add(c, { id: `cab-${p.part.id}`, name: `${p.role} — ${p.part.model_number}`, kind: 'generic', layer: LAYER_OF[p.part.product_type] ?? 'Controls', parentId: 'cabinet', partId: p.part.id, role: p.role, position: [cabX - 200 + ((seen.size - 1) % 3) * 200, 1250 - Math.floor((seen.size - 1) / 3) * 300, cabZ], size: [150, 220, 120], params: { module: p.part.product_type }, explode: [0, 0, -1.8], collision: false });
   });
   const hmi = res.machineParts.find((p) => p.part.product_type === 'hmi');
   add(c, { id: 'hmi', name: hmi ? `HMI — ${hmi.part.model_number}` : 'HMI (not selected)', kind: 'hmi', layer: 'Controls', parentId: 'sys-controls', partId: hmi?.part.id, role: hmi?.role, position: [maxX - 120, TABLE + 380, D / 2 + 60], size: [300, 220, 40], explode: [0.5, 0, 1] });
@@ -525,6 +544,16 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     add(c, { id: 'curtain', name: `Light curtain — ${lc.part.model_number}`, kind: 'sensor', layer: 'Safety', parentId: 'sys-controls', partId: lc.part.id, role: lc.role, position: [minX + 20, TABLE, D / 2 + 20], size: [30, specIn(lc.part, 'protective_range', 'mm', defs) ?? 600, 30], explode: [-1, 0, 1] });
     DI('Light curtain clear', lc.part.model_number, 'safety', 'curtain');
   }
+  // pneumatics (conceptual: the scenario has clamps, so it needs air preparation and a valve)
+  if (c.objs.some((o) => o.kind === 'fixture')) {
+    add(c, { id: 'frl', name: 'Pneumatic service unit (filter-regulator, pressure switch)', kind: 'frl', layer: 'Pneumatic', parentId: 'sys-frame', position: [minX - 45, 380, D / 2 - 160], size: [70, 240, 90], collision: false, explode: [-1, 0, 0] });
+    add(c, { id: 'valves', name: 'Valve terminal (clamp valves)', kind: 'valve', layer: 'Pneumatic', parentId: 'sys-frame', position: [minX + 220, 260, 60], size: [240, 70, 90], collision: false, explode: [0, -0.5, 0] });
+    const fxo = c.objs.find((o) => o.kind === 'fixture');
+    if (fxo) routes.push({ id: 'pneu-clamp', kind: 'pneumatic', from: 'valves', to: fxo.id, points: [] });
+    const air = io.find((i) => i.name === 'Air pressure OK');
+    if (air) air.objectId = 'frl';
+  }
+  if (sim.stations.some((s) => s.kind === 'load' && s.operator)) add(c, { id: 'operator', name: 'Operator (conceptual)', kind: 'operator', layer: 'Safety', parentId: 'machine', position: [minX + 330, 0, D / 2 + 420], size: [460, 1700, 280], collision: false, explode: [0, 0, 1] });
   for (const r of routes) r.points = routePoints(c.objs, r);
 
   /* ---------- zones ---------- */
@@ -581,23 +610,55 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     carrier,
     workpiece: { template: tmpl, length: wl, width: ww, thickness: wt, material: wpIn?.material ?? (byId.get(sim.material_id ?? '')?.name as string | undefined) ?? null, basis: wpIn ? wpIn.basis ?? 'USER_INPUT' : 'ASSUMPTION' },
     processArea: sim.twin?.process_area ? { x: sim.twin.process_area.x_mm, y: sim.twin.process_area.y_mm } : null,
+    stationKinds: Object.fromEntries(sim.stations.map((s) => [s.key, s.kind])) as Record<string, StationKind>,
     notes,
   };
 }
 
-/** Conceptual routing: up from the source, along a cable duct above the frame, down to the target (§91). */
+/** Conceptual routing (§91): spline control points per medium. Not a harness / hose design. */
 function routePoints(objs: Machine3DObject[], r: Route): [number, number, number][] {
   const a = objs.find((o) => o.id === r.from);
   const b = objs.find((o) => o.id === r.to);
   if (!a || !b) return [];
-  const top = (o: Machine3DObject) => o.position[1] + o.size[1] / 2;
-  const duct = r.kind === 'cooling' ? 150 : r.kind === 'fiber' ? 700 : 860;
+  const top = (o: Machine3DObject) => o.position[1] + o.size[1];
+  const mid = (o: Machine3DObject) => o.position[1] + o.size[1] / 2;
+  if (r.kind === 'fiber') {
+    // armoured delivery fibre: out of the source front, up the back of the enclosure, into the collimator
+    const back = b.position[2] - b.size[2] / 2;
+    return [
+      [a.position[0] + a.size[0] / 2 - 40, mid(a), a.position[2] + a.size[2] / 2],
+      [a.position[0] + a.size[0] / 2 + 20, top(a) + 60, a.position[2] + a.size[2] / 2 - 40],
+      [b.position[0] + 60, top(a) + 260, back - 60],
+      [b.position[0] + 40, mid(b), back - 50],
+      [b.position[0], mid(b), back],
+    ];
+  }
+  if (r.kind === 'fume') {
+    const roof = 1720;
+    return [
+      [a.position[0], top(a), a.position[2]],
+      [a.position[0], roof - 120, a.position[2] - 60],
+      [a.position[0] - 120, roof, a.position[2] - 260],
+      [b.position[0] + 60, roof - 60, b.position[2]],
+      [b.position[0], top(b) + 80, b.position[2]],
+      [b.position[0], top(b), b.position[2]],
+    ];
+  }
+  if (r.kind === 'pneumatic') {
+    return [
+      [a.position[0], top(a), a.position[2]],
+      [a.position[0] + 60, b.position[1] - 60, a.position[2] + 60],
+      [b.position[0] - b.size[0] / 2 - 40, b.position[1] + 10, b.position[2] + b.size[2] / 2],
+      [b.position[0] - b.size[0] / 2, b.position[1] + 15, b.position[2]],
+    ];
+  }
+  const duct = r.kind === 'cooling' ? 150 : 860;
   const zBack = Math.min(a.position[2], b.position[2]) - 40;
   return [
-    [a.position[0], top(a), a.position[2]],
+    [a.position[0], mid(a), a.position[2]],
     [a.position[0], duct, zBack],
     [b.position[0], duct, zBack],
-    [b.position[0], top(b), b.position[2]],
+    [b.position[0], mid(b), b.position[2]],
   ];
 }
 

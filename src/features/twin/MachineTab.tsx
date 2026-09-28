@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import clsx from 'clsx';
-import { AlertTriangle, Box, Bug, Camera, ChevronDown, ChevronRight, Expand, Eye, EyeOff, Focus, Grid3x3, Info, Layers, LayoutGrid, ListTree, Maximize2, Palette, PanelLeft, Pause, Play, Ruler, Scan, ScanEye, Scissors, Search, Square, X } from 'lucide-react';
+import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, Expand, Eye, EyeOff, Focus, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, ListTree, Maximize2, Palette, PanelLeft, Pause, Play, Ruler, Scan, ScanEye, Scissors, Search, Square, Tag, X } from 'lucide-react';
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
@@ -14,12 +14,14 @@ import { alternativesFor, selectedParts } from '../../services/sim/supply';
 import { resolveScenario } from '../../services/sim/model';
 import { buildMachine, LAYERS, type Layer, type Machine3DObject } from '../../services/twin/machine';
 import type { SimulationState } from '../../services/twin/timeline';
+import { explainObject, machineTour, narrate, type ExplainCtx, type TourStep } from '../../services/twin/explain';
 import { SheetBody } from '../engineering/ComponentSheet';
 import { big, money, num, pct } from '../studio/shared';
 import type { TabProps } from '../studio/ScenarioPage';
 import { NumInput, SmallSelect } from '../studio/tabs/edit';
 import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, IoPanel, MotionPanel, RunsPanel, SequencePanel, TimelinePanel } from './panels';
 import { MachineScene, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
+import type { EnclosureMode } from './three/procedural';
 import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type RunOptions } from './useTwin';
 
 /*
@@ -137,7 +139,8 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   /* ---------------- view state */
   const [view, setView] = useState<SceneView>(() => ({
     layers: allLayers(),
-    hidden: new Set(),
+    // the conceptual operator figure is available from the tree (eye icon) but hidden by default
+    hidden: new Set(['operator']),
     isolate: null,
     selected: null,
     hover: null,
@@ -150,6 +153,9 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
     labels: !customer,
     zones: true,
     routes: false,
+    enclosure: customer ? 'closed' : 'cutaway',
+    callouts: !customer,
+    highlight: null,
     fov: true,
     field: true,
     trail: false,
@@ -180,7 +186,35 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const scene = useRef<SceneApi | null>(null);
   const box = useRef<HTMLDivElement | null>(null);
   const debugOut = useRef<HTMLDivElement | null>(null);
-  useEffect(() => patch({ customer, labels: !customer }), [customer]);
+  useEffect(() => patch({ customer, labels: !customer, callouts: !customer, enclosure: customer ? 'closed' : 'cutaway' }), [customer]);
+
+  /* ---------------- explanation: per-component, guided tour, live narration (§139, §153, §164) */
+  const xctx: ExplainCtx = useMemo(() => ({ model, res: d.res, cycle: d.cycle, byId: eng.byId, defs: eng.defs }), [model, d.res, d.cycle, eng.byId, eng.defs]);
+  const tour = useMemo(() => machineTour(xctx), [xctx]);
+  const [tourIdx, setTourIdx] = useState<number | null>(null);
+  const [tourAuto, setTourAuto] = useState(false);
+  const [narrOn, setNarrOn] = useState(true);
+  const goTour = (i: number | null) => {
+    setTourIdx(i);
+    if (i == null || !tour[i]) {
+      setTourIdx(null);
+      setTourAuto(false);
+      patch({ highlight: null });
+      return;
+    }
+    const st: TourStep = tour[i];
+    patch({ highlight: new Set(st.highlight), selected: st.focus });
+    setTimeout(() => {
+      if (st.preset === 'laser' || st.preset === 'inspection' || st.preset === 'maintenance') scene.current?.view(st.preset);
+      else if (st.focus) scene.current?.view('fit', st.focus);
+      else scene.current?.view(st.preset ?? 'iso');
+    }, 0);
+  };
+  useEffect(() => {
+    if (!tourAuto || tourIdx == null) return;
+    const id = setTimeout(() => goTour(tourIdx + 1 < tour.length ? tourIdx + 1 : null), 9000);
+    return () => clearTimeout(id);
+  }, [tourAuto, tourIdx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // §154 command-palette actions arrive as ?cmd=… on this tab
   const [params] = useSearchParams();
@@ -271,12 +305,12 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   /* ---------------- camera modes + shortcuts */
   const applyMode = (m: CamMode) => {
     setCamMode(m);
-    const base: Partial<SceneView> = { xray: false, explode: 0, zonesAll: false };
+    const base: Partial<SceneView> = { xray: false, explode: 0, zonesAll: false, enclosure: 'cutaway' };
     if (m === 'engineering') patch({ ...base, labels: true });
-    if (m === 'customer') patch({ ...base, labels: false, dims: false, routes: false, zones: false });
+    if (m === 'customer') patch({ ...base, labels: false, dims: false, routes: false, zones: false, enclosure: 'closed', callouts: false });
     if (m === 'exploded') patch({ ...base, explode: 1 });
     if (m === 'xray') patch({ ...base, xray: true, routes: true });
-    if (m === 'maintenance') patch({ ...base, zones: true, zonesAll: true, xray: true });
+    if (m === 'maintenance') patch({ ...base, zones: true, zonesAll: true, xray: true, routes: true });
     if (m === 'laser' || m === 'inspection') patch({ ...base, fov: true, field: true });
     const preset: ViewPreset = m === 'laser' ? 'laser' : m === 'inspection' ? 'inspection' : m === 'maintenance' ? 'maintenance' : m === 'process' ? 'process' : 'iso';
     setTimeout(() => scene.current?.view(preset), 0);
@@ -357,6 +391,14 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
   const secRange = secAxis ? [bounds.min[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2], bounds.max[secAxis === 'x' ? 0 : secAxis === 'y' ? 1 : 2]] : [0, 1];
   const busyNames = snap ? snap.stations.flatMap((s) => s.servers.filter((x) => x.state === 'busy').map((x) => ({ st: sim.stations.find((y) => y.key === s.key)?.name ?? s.key, step: x.step?.name, part: x.part }))) : [];
   const current = busyNames[0];
+  const narration = useMemo(() => {
+    if (!snap) return '';
+    for (const st of snap.stations)
+      for (const sv of st.servers)
+        if (sv.state === 'busy' && sv.step) return narrate(sv.step, sim.stations.find((x) => x.key === st.key)?.name ?? st.key, sv.stepProgress, xctx);
+    if (snap.alarms.length) return `Fault: ${snap.alarms[0].text} — upstream stations block and downstream stations starve until it is cleared.`;
+    return '';
+  }, [snap, sim.stations, xctx]);
   const machineStatus = !player ? 'NOT RUNNABLE' : playing ? (snap?.machineState ?? 'Idle').toUpperCase() : t > 0 ? 'PAUSED' : 'READY';
   const recipe = sim.recipe_id ? (eng.byId.get(sim.recipe_id) as (Recipe & AnyRecord) | undefined) : undefined;
   const downMin = des ? des.stations.reduce((n, s) => Math.max(n, s.down), 0) * (des.horizon_s / 60) : null;
@@ -409,6 +451,9 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
         <Button size="sm" variant="primary" onClick={() => setPlaying((x) => !x)} disabled={!player} aria-label={playing ? 'Pause simulation' : 'Run simulation'}>
           {playing ? <Pause className="size-4" aria-hidden /> : <Play className="size-4" aria-hidden />} {playing ? 'Pause' : 'Run cycle'}
         </Button>
+        <Button size="sm" onClick={() => goTour(tourIdx == null ? 0 : null)} aria-pressed={tourIdx != null} aria-label={tourIdx == null ? 'Explain the machine (guided tour)' : 'End the guided tour'}>
+          <GraduationCap className="size-4" aria-hidden /> {tourIdx == null ? 'Explain machine' : 'End tour'}
+        </Button>
         <Sep />
         <Tool icon={Scan} label="Fit (F)" onClick={() => scene.current?.view('fit', view.selected)} />
         <Tool icon={Square} label="Front (1)" onClick={() => scene.current?.view('front')} />
@@ -459,7 +504,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
                 ['dims', 'Dimensions'],
                 ['labels', 'Labels'],
                 ['zones', 'Safety zones'],
-                ['routes', 'Cables · fiber · cooling'],
+                ['routes', 'Control cables (conceptual routing)'],
                 ['fov', 'Camera field of view'],
                 ['field', 'Marking field / process area'],
                 ['trail', 'Scan path preview'],
@@ -504,6 +549,9 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
           )}
         </Popover>
         <Tool icon={Ruler} label="Measure" active={view.measure} onClick={() => patch({ measure: !view.measure, measurePts: [] })} />
+        <Tool icon={Tag} label="Component call-outs" active={view.callouts} onClick={() => patch({ callouts: !view.callouts })} />
+        <Tool icon={Captions} label="Live explanation of each step" active={narrOn} onClick={() => setNarrOn((x) => !x)} />
+        <SmallSelect label="Enclosure" value={view.enclosure} options={[{ value: 'closed', label: 'Enclosure: closed' }, { value: 'cutaway', label: 'Enclosure: cutaway' }, { value: 'hidden', label: 'Enclosure: frame only' }]} onChange={(v) => patch({ enclosure: v as EnclosureMode })} className="!w-auto" />
         <Sep />
         <Tool icon={EyeOff} label="Hide selected (H)" disabled={!view.selected} onClick={() => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) })} />
         <Tool icon={Focus} label={view.isolate ? 'Exit isolate' : 'Isolate selected'} active={!!view.isolate} disabled={!view.selected && !view.isolate} onClick={() => patch({ isolate: view.isolate ? null : view.selected })} />
@@ -531,7 +579,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
         </Card>
 
         <div className="order-1 space-y-2 lg:order-2">
-          <div className="twin-viewport relative h-[58vh] min-h-[360px] overflow-hidden rounded-card border border-line bg-[#0b0f11]" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
+          <div className="twin-viewport relative h-[68vh] min-h-[380px] overflow-hidden rounded-card border border-line bg-[#0b0f11]" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
             <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onPointerMissed={() => !view.measure && select(null)}>
               <Suspense fallback={null}>
                 <MachineScene
@@ -571,6 +619,41 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
               )}
               {perfNotice && <span className="glass rounded-control px-2 py-1 text-micro text-warn">Performance mode enabled (device was slow)</span>}
             </div>
+            {tourIdx != null && tour[tourIdx] && (
+              <div className="glass-strong absolute bottom-2 left-2 z-10 w-[min(28rem,calc(100%-1rem))] rounded-card p-3 text-meta" role="dialog" aria-label="Guided machine tour">
+                <div className="mb-1 flex items-center gap-2">
+                  <BookOpen className="size-4 text-accent-2" aria-hidden />
+                  <strong className="flex-1">{tour[tourIdx].title}</strong>
+                  <span className="font-mono text-micro text-ink-3">
+                    {tourIdx + 1} / {tour.length}
+                  </span>
+                </div>
+                <div className="scroll-thin max-h-44 space-y-1 overflow-auto text-ink-2">
+                  {tour[tourIdx].lines.map((l, i) => (
+                    <p key={i}>{l}</p>
+                  ))}
+                </div>
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                  <Button size="sm" onClick={() => goTour(tourIdx - 1)} disabled={tourIdx === 0} aria-label="Previous tour step">
+                    <ChevronLeft className="size-4" aria-hidden />
+                  </Button>
+                  <Button size="sm" variant="primary" onClick={() => goTour(tourIdx + 1 < tour.length ? tourIdx + 1 : null)}>
+                    {tourIdx + 1 < tour.length ? 'Next' : 'Finish'} <ChevronRight className="size-4" aria-hidden />
+                  </Button>
+                  <label className="ml-1 inline-flex items-center gap-1 text-micro">
+                    <input type="checkbox" checked={tourAuto} onChange={(e) => setTourAuto(e.target.checked)} /> Auto-advance
+                  </label>
+                  <button type="button" className="ml-auto text-micro text-ink-3 hover:text-ink" onClick={() => goTour(null)}>
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+            {narrOn && tourIdx == null && narration && (
+              <div className="glass pointer-events-none absolute bottom-2 left-1/2 z-10 w-[min(44rem,calc(100%-1rem))] -translate-x-1/2 rounded-control px-3 py-1.5 text-center text-meta text-ink" aria-hidden>
+                {narration}
+              </div>
+            )}
             {collision && (
               <div className="absolute inset-x-2 top-2 z-10 mx-auto flex max-w-xl flex-wrap items-center gap-2 rounded-control border border-bad/60 bg-[#2a0f11]/95 px-3 py-2 text-meta text-[#ffd0d0]" role="alert">
                 <AlertTriangle className="size-4 shrink-0 text-bad" aria-hidden />
@@ -616,7 +699,7 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
         </div>
 
         <div className="order-3 lg:col-span-2 xl:col-span-1">
-          <Properties o={sel} eng={eng} sim={sim} set={set} d={d} twin={twin} snap={snap} customer={customer} onClose={() => select(null)} onFocus={focusObj} related={related} recipe={recipe} />
+          <Properties o={sel} eng={eng} sim={sim} set={set} d={d} twin={twin} snap={snap} customer={customer} onClose={() => select(null)} onFocus={focusObj} related={related} recipe={recipe} xctx={xctx} onTour={() => goTour(0)} />
         </div>
       </div>
 
@@ -779,12 +862,26 @@ type TabModel = ReturnType<typeof buildMachine>;
 
 /* ---------------------------------------------------------------- properties (§58–§61, §75, §83, §100, §140, §141, §146) */
 
-function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocus, related, recipe }: { o?: Machine3DObject; eng: TabProps['eng']; sim: TabProps['sim']; set: TabProps['set']; d: TabProps['d']; twin: ReturnType<typeof useTwinModel>; snap: SimulationState | null; customer: boolean; onClose: () => void; onFocus: (id: string) => void; related: (reqId: string) => Set<string>; recipe?: Recipe & AnyRecord }) {
+function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocus, related, recipe, xctx, onTour }: { o?: Machine3DObject; eng: TabProps['eng']; sim: TabProps['sim']; set: TabProps['set']; d: TabProps['d']; twin: ReturnType<typeof useTwinModel>; snap: SimulationState | null; customer: boolean; onClose: () => void; onFocus: (id: string) => void; related: (reqId: string) => Set<string>; recipe?: Recipe & AnyRecord; xctx: ExplainCtx; onTour: () => void }) {
   const model = twin.model;
   if (!o)
     return (
       <Card title="Properties" icon={Info}>
-        <p className="text-meta text-ink-2">Select a component in the viewport or the tree to see its engineering data — manufacturer, part number, specifications, supplier, cost, lead time, compatibility, requirements, BOM and documents.</p>
+        <p className="text-meta text-ink-2">Select a component in the viewport or the tree for its explanation (what it is, how it works, what it does in this machine) and its engineering data — part number, specifications, supplier, cost, requirements and BOM.</p>
+        <Button size="sm" variant="primary" className="mt-2" onClick={onTour}>
+          <GraduationCap className="size-4" aria-hidden /> Explain the machine step by step
+        </Button>
+        <div className="mt-3 text-micro font-semibold uppercase tracking-wider text-ink-3">Explain a component</div>
+        <div className="mt-1 flex flex-wrap gap-1.5">
+          {model.objects
+            .filter((x) => ['enclosure', 'laser_source', 'beam_expander', 'galvo', 'f_theta', 'camera', 'xy_stage', 'fixture', 'cabinet', 'hmi', 'fume', 'chain', 'estop'].includes(x.kind))
+            .slice(0, 16)
+            .map((x) => (
+              <button key={x.id} type="button" onClick={() => onFocus(x.id)} className="rounded-full border border-line px-2 py-0.5 text-micro hover:border-accent hover:text-accent-2">
+                {x.name.split(' — ')[0].replace(/ \(.*\)$/, '')}
+              </button>
+            ))}
+        </div>
         <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-meta">
           <dt className="text-ink-3">Machine (W × D × H)</dt>
           <dd className="font-mono">
@@ -879,6 +976,7 @@ function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocu
             </Link>
           )}
         </div>
+        {o.kind !== 'group' && o.kind !== 'station' && <ExplainBlock o={o} xctx={xctx} customer={customer} />}
         {st && (
           <section>
             <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Station · simulation</h4>
@@ -1037,5 +1135,89 @@ function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocu
         )}
       </div>
     </Card>
+  );
+}
+
+/* ---------------------------------------------------------------- explanation block */
+
+function ExplainBlock({ o, xctx, customer }: { o: Machine3DObject; xctx: ExplainCtx; customer: boolean }) {
+  const ex = useMemo(() => explainObject(o, xctx), [o, xctx]);
+  const lines = customer || !ex.identity ? ex.inThisMachine : [`${ex.identity}.`, ...ex.inThisMachine];
+  return (
+    <section className="rounded-control border border-accent/30 bg-accent-soft/30 p-2.5" aria-label={`Explanation: ${ex.title}`}>
+      <h4 className="mb-1 flex items-center gap-1.5 text-meta font-semibold">
+        <Lightbulb className="size-4 text-accent-2" aria-hidden /> {ex.title}
+      </h4>
+      <p className="text-meta">
+        <span className="font-medium">What it is — </span>
+        {ex.guide.what}
+      </p>
+      <p className="mt-1 text-meta">
+        <span className="font-medium">How it works — </span>
+        {ex.guide.how}
+      </p>
+      {lines.length > 0 && (
+        <div className="mt-2">
+          <div className="text-micro font-semibold uppercase tracking-wider text-ink-3">In this machine (from the records)</div>
+          <ul className="mt-0.5 list-disc space-y-0.5 pl-4 text-meta">
+            {lines.map((l) => (
+              <li key={l}>{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {ex.warnings.map((w) => (
+        <p key={w} className="mt-1 flex items-start gap-1 text-meta text-warn">
+          <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {w}
+        </p>
+      ))}
+      {ex.inCycle.length > 0 && (
+        <div className="mt-2">
+          <div className="text-micro font-semibold uppercase tracking-wider text-ink-3">In the cycle</div>
+          <ul className="mt-0.5 list-disc space-y-0.5 pl-4 text-meta">
+            {ex.inCycle.map((l) => (
+              <li key={l}>{l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {(ex.guide.checks.length > 0 || ex.guide.interfaces.length > 0) && (
+        <details className="mt-2 text-meta">
+          <summary className="cursor-pointer text-micro font-semibold uppercase tracking-wider text-ink-3">What to check · interfaces · care</summary>
+          {ex.guide.checks.length > 0 && (
+            <>
+              <div className="mt-1 font-medium">Engineering checks</div>
+              <ul className="list-disc pl-4">
+                {ex.guide.checks.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {ex.guide.interfaces.length > 0 && (
+            <>
+              <div className="mt-1 font-medium">Interfaces</div>
+              <ul className="list-disc pl-4">
+                {ex.guide.interfaces.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {ex.guide.care.length > 0 && (
+            <>
+              <div className="mt-1 font-medium">Maintenance</div>
+              <ul className="list-disc pl-4">
+                {ex.guide.care.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </details>
+      )}
+      {ex.guide.safety && <p className="mt-1 text-micro text-ink-2">Safety: {ex.guide.safety}</p>}
+      <p className="mt-1 text-micro text-ink-3">General description of this component type; every number above comes from this scenario’s records or is calculated from them.</p>
+    </section>
   );
 }

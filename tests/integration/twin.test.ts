@@ -157,3 +157,58 @@ describe('3D machine digital twin engines', async () => {
     expect(buildMachine(resolveScenario(sim('sim-demo-battery-tab'), byId, defs), byId, defs).lasers[0].process).toBe('welding');
   });
 });
+
+describe('3D twin — detailed machine and engineering explanations', async () => {
+  const { explainObject, machineTour, narrate } = await import('../../src/services/twin/explain');
+  const { stationSteps } = await import('../../src/services/twin/timeline');
+  const records = await masterRecords();
+  const byId = new Map(records.map((r) => [r.id, r]));
+  const defs = specDefs(records);
+  const fx = fxFromRecords(records);
+  const sim = byId.get('sim-demo-laser-marker') as S;
+  const res = resolveScenario(sim, byId, defs);
+  const model = buildMachine(res, byId, defs, buildBom(res, byId, fx));
+  const ctx = { model, res, cycle: cycleTime(res), byId, defs };
+
+  it('adds the real-machine elements and keeps the moves collision-free', () => {
+    for (const id of ['st-laser-collimator', 'st-laser-zslide', 'st-laser-nozzle', 'chain-x', 'frl', 'valves', 'operator']) expect(model.byId.has(id), id).toBe(true);
+    expect(model.routes.map((r) => r.kind)).toEqual(expect.arrayContaining(['fiber', 'fume', 'pneumatic']));
+    expect(model.routes.every((r) => r.points.length >= 4)).toBe(true);
+    expect(model.stationKinds.laser).toBe('laser');
+    expect(checkCollisions(model)).toEqual([]);
+    expect(model.io.find((i) => i.name === 'Air pressure OK')?.objectId).toBe('frl');
+  });
+
+  it('explains a component with general guidance + values from the records', () => {
+    const src = explainObject(model.byId.get('st-laser-source')!, ctx);
+    expect(src.title).toBe('Pulsed fibre laser (MOPA)');
+    expect(src.identity).toMatch(/DL-MOPA-20/);
+    expect(src.inThisMachine.join(' ')).toMatch(/Wavelength 1,064 nm · average power 20 W/);
+    expect(src.inThisMachine.join(' ')).toMatch(/pulse energy ≈ 0\.333 mJ/);
+    expect(src.inCycle[0]).toMatch(/Works in “Laser marking”/);
+    const ft = explainObject(model.byId.get('st-laser-ftheta')!, ctx);
+    expect(ft.inThisMachine.join(' ')).toMatch(/working distance 180 mm/);
+    expect(ft.inThisMachine.join(' ')).toMatch(/Estimated focused spot ≈ \d/);
+    expect(ft.inThisMachine.join(' ')).toMatch(/uses 36 % of the field width/);
+    // the 1.5× expander makes a 10.5 mm beam — larger than the 10 mm galvo aperture: surfaced, not hidden
+    const bex = explainObject(model.byId.get('st-laser-bex')!, ctx);
+    expect(bex.warnings.join(' ')).toMatch(/larger than the SC-10 aperture 10 mm/);
+    const cam = explainObject(model.byId.get('st-align-camera')!, ctx);
+    expect(cam.title).toMatch(/Alignment camera/);
+    expect(cam.inThisMachine.join(' ')).toMatch(/µm per pixel/);
+    const conceptual = explainObject(model.byId.get('chain-x')!, ctx);
+    expect(conceptual.identity).toBeNull();
+    expect(conceptual.inThisMachine[0]).toMatch(/Conceptual object/);
+  });
+
+  it('builds a guided tour in process order and narrates each step with its basis', () => {
+    const tour = machineTour(ctx);
+    expect(tour.map((s) => s.key)).toEqual(['overview', 'safety', 'load', 'motion', 'align', 'source', 'scan', 'process', 'inspect', 'unload', 'controls', 'performance']);
+    expect(tour.every((s) => s.lines.length > 0)).toBe(true);
+    expect(tour.find((s) => s.key === 'performance')!.lines[0]).toMatch(/Cycle = Σ station times/);
+    const li = res.stations.findIndex((s) => s.station.key === 'laser');
+    const [move, , mark] = stationSteps(res, li, model);
+    expect(narrate(move, 'Laser marking', 0.5, ctx)).toMatch(/Move to marking position: X \+160 mm, Y \+20 mm in 0\.26/);
+    expect(narrate(mark, 'Laser marking', 0.5, ctx)).toMatch(/at 20 W, 2000 mm\/s, 60 kHz — 50 %/);
+  });
+});

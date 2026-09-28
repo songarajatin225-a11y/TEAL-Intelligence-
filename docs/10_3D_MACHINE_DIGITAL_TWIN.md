@@ -22,6 +22,34 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 
 `three`, `@react-three/fiber` and `@react-three/drei` load only with the 3D tab, in a separate lazy chunk. If WebGL is unavailable, the tab shows the 2D engineering simulator instead (§82).
 
+## Detailed machine and live mechanisms
+
+| Area | What is modelled |
+|---|---|
+| Base cabinet | Black aluminium profile skeleton, RAL 7035 panels, lockable front doors with handles and hinges, louvres, rear gland plate, levelling feet |
+| Class-1 enclosure | Profile frame, sheet-metal back and sides, laser-protective windows (tinted by wavelength class), roof with extraction flange and LED strip (brighter while a part is inside), laser warning label, vertical-lift door with window, handle, seal and guide rails |
+| Enclosure modes | **Closed** (customer view), **Cutaway** (right side and half roof removed, galvo housing see-through; engineering default) and **Frame only** |
+| Motion | Stages with profile rails, ball screw, end blocks, slot cover and scale; servo motors with flange, body, encoder cap and connector; an **animated cable carrier** that follows the X carriage |
+| Fixture | Plate, nest, locating pins, two pneumatic toggle clamps that **close during the clamp step and open at unload**, and a part-present sensor |
+| Laser chain | Fibre laser module (front panel, handles, status LEDs, emission lamp lit while marking, fibre outlet), armoured **delivery fibre** routed to the collimator/isolator, focus (Z) slide with handwheel, beam expander, galvo head with **mirrors that follow the scan path**, f-theta barrel with rings and protective window, and an extraction nozzle with its **hose** to the fume unit |
+| Vision | Camera body with fins and connectors, lens barrels with focus and aperture rings, LED ring lights that light up on trigger |
+| Controls | Cabinet with plinth, door, main switch, filter fans, warning label, mounting plate, DIN rails and ducts. PLC, safety controller, drives, power supply and IPC are drawn as typed modules. The swing-arm HMI's screen is a **live canvas** showing state, counters, current step, recipe and alarms. E-stop and signal tower are included |
+| Pneumatics | Filter-regulator service unit and valve terminal, with a tube to the clamps |
+| Operator | Conceptual figure, hidden by default (tree eye icon); position only |
+
+Performance mode drops small details automatically (LOD). Labels are de-cluttered by priority, and a label that would overlap another is nudged or hidden.
+
+## Explanations
+
+- **Per component** (Properties → explanation card; `src/services/twin/explain.ts`):
+  - *What it is* and *How it works* — a general description of the component type.
+  - **In this machine** — sentences computed from the scenario's records. Examples: pulse energy from power ÷ repetition rate; beam size after the expander compared with the galvo aperture; estimated focused spot and depth of focus; field-width usage; camera µm per pixel; move distances and times.
+  - Warnings, the component's role in the cycle with timing and basis, engineering checks, interfaces, maintenance and safety.
+- **Guided tour** ("Explain machine"): 12 steps in process order — machine, safety, loading, motion, alignment, laser source, scan head, marking, inspection, unloading, controls and how the cycle time is built. Each step moves the camera and highlights the components involved; it can auto-advance.
+- **Live narration**: while the simulation plays, a caption explains the current step with its duration and basis. Example: *Move to marking position: X +160 mm, Y +20 mm in 0.26 s — trapezoidal profile…*.
+
+The explanations have already surfaced one real design finding in the DEMO data. The 7 mm source beam × the 1.5× expander gives 10.5 mm, which is larger than the SC-10 galvo's 10 mm aperture.
+
 ## What the flagship demo shows
 
 The cycle runs: operator load and door close → pneumatic clamp → move to CCD positioning → alignment → move to marking position → laser enable and jumps → marking → move to post-CCD → code inspection → OK/NG → return and unload.
