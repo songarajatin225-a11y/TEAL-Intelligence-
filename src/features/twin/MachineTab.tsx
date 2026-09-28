@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import clsx from 'clsx';
 import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, Expand, Eye, EyeOff, Focus, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, ListTree, Maximize2, Palette, PanelLeft, Pause, Play, Ruler, Scan, ScanEye, Scissors, Search, Square, Tag, X } from 'lucide-react';
-import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
 import { toast } from '../../components/toast';
@@ -33,17 +33,34 @@ import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type R
 
 const TwoD = lazy(() => import('../studio/tabs/TwinTab'));
 
-function hasWebGL(): boolean {
-  try {
-    const c = document.createElement('canvas');
-    return !!(c.getContext('webgl2') || c.getContext('webgl'));
-  } catch {
-    return false;
+/** Cheap capability check. Creating a throwaway WebGL context only to test support costs as much as
+ * the real one (seconds on software GL), so a context that then fails is caught by GLBoundary instead. */
+function webglLikely(): boolean {
+  return typeof window !== 'undefined' && ('WebGL2RenderingContext' in window || 'WebGLRenderingContext' in window);
+}
+
+const isGLError = (e: unknown) => /webgl|context/i.test(String((e as Error)?.message ?? e));
+
+/** Falls back to the 2D simulator when the WebGL context cannot be created; any other error is rethrown. */
+class GLBoundary extends Component<{ onFail: () => void; children: ReactNode }, { error: unknown }> {
+  override state = { error: null as unknown };
+  static getDerivedStateFromError(error: unknown) {
+    return { error };
+  }
+  override componentDidCatch(error: unknown) {
+    if (isGLError(error)) this.props.onFail();
+  }
+  override render() {
+    if (this.state.error != null) {
+      if (isGLError(this.state.error)) return null;
+      throw this.state.error;
+    }
+    return this.props.children;
   }
 }
 
 export default function MachineTab(p: TabProps) {
-  const [ok] = useState(hasWebGL);
+  const [ok, setOk] = useState(webglLikely);
   if (!ok)
     return (
       <div className="space-y-3">
@@ -53,7 +70,7 @@ export default function MachineTab(p: TabProps) {
         </Suspense>
       </div>
     );
-  return <Workbench {...p} />;
+  return <Workbench {...p} onGLFail={() => setOk(false)} />;
 }
 
 type Overlay = 'none' | 'state' | 'localization' | 'cost' | 'requirement' | 'risk';
@@ -63,7 +80,18 @@ type Bottom = 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'mo
 const reducedMotionQuery = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const allLayers = () => Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<Layer, boolean>;
 
-function Workbench({ eng, sim, set, d, customer }: TabProps) {
+function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFail: () => void }) {
+  // mount the WebGL canvas after the page has painted: context creation and shader compilation are
+  // synchronous, so the header, status, toolbar and panels appear first instead of waiting on the GPU
+  const [glReady, setGlReady] = useState(false);
+  useEffect(() => {
+    let to = 0;
+    const raf = requestAnimationFrame(() => (to = window.setTimeout(() => setGlReady(true), 0)));
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(to);
+    };
+  }, []);
   const [, setParams] = useSearchParams();
   const twin = useTwinModel(eng, sim, d);
   const { model } = twin;
@@ -590,7 +618,13 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
 
         <div className="order-1 space-y-2 lg:order-2">
           <div className="twin-viewport relative h-[68vh] min-h-[380px] overflow-hidden rounded-card border border-line bg-[#0b0f11]" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
-            <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onPointerMissed={() => !view.measure && select(null)}>
+            {!glReady ? (
+              <div className="grid h-full place-items-center text-meta text-ink-3" aria-live="polite">
+                Preparing 3D view…
+              </div>
+            ) : (
+            <GLBoundary onFail={onGLFail}>
+            <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onCreated={({ gl }) => (gl.debug.checkShaderErrors = import.meta.env.DEV)} onPointerMissed={() => !view.measure && select(null)}>
               <Suspense fallback={null}>
                 <MachineScene
                   ref={scene}
@@ -614,6 +648,8 @@ function Workbench({ eng, sim, set, d, customer }: TabProps) {
                 />
               </Suspense>
             </Canvas>
+            </GLBoundary>
+            )}
             {/* overlays in the viewport */}
             <div className="pointer-events-none absolute top-2 left-2 flex flex-col gap-1">
               <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink">{model.label}</span>
