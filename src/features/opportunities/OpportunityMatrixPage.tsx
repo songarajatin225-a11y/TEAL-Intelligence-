@@ -59,7 +59,7 @@ export default function OpportunityMatrixPage() {
         <EmptyState icon={Grid3x3} title="No opportunities" explain="Create an opportunity or capture a lead." compact />
       ) : (
         <Card title={`${rows.length} opportunities`} icon={Grid3x3}>
-          <div className="scroll-thin overflow-x-auto">
+          <div className="scroll-thin overflow-x-auto" tabIndex={0}>
             <table className="w-full min-w-[70rem] text-meta">
               <thead>
                 <tr className="border-b border-line text-left text-micro text-ink-3">

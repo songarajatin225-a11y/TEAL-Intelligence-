@@ -136,7 +136,7 @@ export default function ExecutionPage() {
           })}
         </div>
       ) : tab === 'table' ? (
-        <div className="surface scroll-thin overflow-x-auto rounded-card p-2">
+        <div className="surface scroll-thin overflow-x-auto rounded-card p-2" tabIndex={0}>
           <Table head={['Item', 'Kind', 'Project / context', 'Owner', 'Start', 'Due', 'Dependencies', 'Status']} dense>
             {items.map((i) => (
               <tr key={i.key} className="border-t border-line/60">
@@ -196,7 +196,7 @@ export default function ExecutionPage() {
         </Card>
       ) : (
         <Card title="Risk matrix — severity × occurrence" description={`${scored.length} of ${openRisks.length} open risks scored; unscored risks are listed below`}>
-          <div className="scroll-thin overflow-x-auto">
+          <div className="scroll-thin overflow-x-auto" tabIndex={0}>
             <table className="border-separate border-spacing-1 text-micro" aria-label="Risk matrix">
               <thead>
                 <tr>

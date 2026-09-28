@@ -113,7 +113,7 @@ function Projects() {
   const codes = [...defs].sort((a, b) => a.order - b.order).map((d) => d.code);
   return (
     <Card title={`Projects (${projects.length})`}>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" tabIndex={0}>
         <Table head={['Project', 'Status', ...codes, 'Next gate']} dense>
           {projects.map((p) => (
             <tr key={p.id}>

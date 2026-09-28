@@ -143,7 +143,7 @@ export default function BomView({ record }: { record: Rec }) {
           Revision <Input aria-label="Revision" value={b.revision} onChange={(e) => (setB({ ...b, revision: e.target.value }), setDirty(true))} className="inline w-20" />
         </label>
       </div>
-      <div className="mt-2 overflow-x-auto">
+      <div className="mt-2 overflow-x-auto" tabIndex={0}>
         <table className="w-full text-meta">
           <thead>
             <tr className="text-left text-micro uppercase text-ink-3">

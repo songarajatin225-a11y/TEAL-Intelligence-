@@ -20,7 +20,7 @@ export default function CrossDomainPage() {
       <PageHeader title="Cross-Domain Map" subtitle="One technology, many industries. Each cell shows the evidence: TEAL application records (real TEAL data) and the domain’s own taxonomy." />
       <Notice tone="info">A filled cell means TEAL has application records for that technology in the domain’s industries (number), or the domain’s taxonomy names it (●). An empty cell means no record says so — not that it is impossible.</Notice>
       <Card title="Technology × domain" icon={Network} description={`${rows.length} technologies across ${domains.length} domains`}>
-        <div className="scroll-thin overflow-x-auto">
+        <div className="scroll-thin overflow-x-auto" tabIndex={0}>
           <table className="w-full min-w-[40rem] border-separate border-spacing-1 text-meta">
             <thead>
               <tr>

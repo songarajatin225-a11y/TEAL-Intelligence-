@@ -24,7 +24,7 @@ export default function ApplicationsPage() {
       ) : (
         <div>
           <Card>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" tabIndex={0}>
               <table className="w-full border-collapse text-meta">
                 <thead>
                   <tr>

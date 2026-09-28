@@ -116,7 +116,7 @@ export default function ComparePage() {
       {recs.length === 0 ? (
         <EmptyState title="Nothing to compare yet" explain="Choose a type and add two or more records, or use “Compare with…” from any record’s More menu." icon={Columns2} compact />
       ) : (
-        <div className="surface scroll-thin overflow-x-auto rounded-card">
+        <div className="surface scroll-thin overflow-x-auto rounded-card" tabIndex={0}>
           <table className="w-full min-w-[40rem] border-collapse text-body">
             <thead>
               <tr className="border-b border-line">

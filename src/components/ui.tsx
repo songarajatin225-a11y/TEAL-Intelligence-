@@ -325,7 +325,7 @@ export function Tabs<T extends string>({ tabs, value, onChange, label }: { tabs:
           )}
         >
           {t.label}
-          {t.count != null && <span className={clsx('ml-1.5 rounded-full px-1.5 text-micro', value === t.key ? 'bg-accent-soft' : 'bg-ink/5')}>{t.count}</span>}
+          {t.count != null && <span className={clsx('ml-1.5 rounded-full px-1.5 text-micro', value === t.key ? 'bg-accent-soft' : 'bg-ink/5 text-ink-2')}>{t.count}</span>}
         </button>
       ))}
     </div>
@@ -346,7 +346,7 @@ export function SegmentedControl<T extends string>({ options, value, onChange, l
           className={clsx(
             'inline-flex items-center gap-1.5 rounded-[10px] font-medium transition-all duration-150',
             size === 'sm' ? 'px-2 py-1 text-micro' : 'px-3 py-1.5 text-meta',
-            value === o.value ? 'bg-solid text-ink shadow-sm' : 'text-ink-3 hover:text-ink',
+            value === o.value ? 'bg-solid text-ink shadow-sm' : 'text-ink-2 hover:text-ink',
           )}
         >
           {o.icon && <o.icon className="size-3.5" aria-hidden />}
@@ -575,7 +575,7 @@ export function Notice({ tone = 'info', children }: { tone?: 'info' | 'warn' | '
 
 export function Table({ head, children, dense }: { head: ReactNode[]; children: ReactNode; dense?: boolean }) {
   return (
-    <div className="scroll-thin overflow-x-auto">
+    <div className="scroll-thin overflow-x-auto" tabIndex={0}>
       <table className={clsx('w-full border-collapse text-left', dense ? 'text-meta' : 'text-body')}>
         <thead>
           <tr className="border-b border-line text-micro font-medium text-ink-3">
@@ -595,7 +595,7 @@ export function Table({ head, children, dense }: { head: ReactNode[]; children: 
 /** Horizontal chain with Traceability Line connectors (signature motif). */
 export function Chain({ steps, label }: { steps: { label: ReactNode; sub?: ReactNode; to?: string; state?: 'done' | 'current' | 'todo' | 'gap' }[]; label: string }) {
   return (
-    <ol aria-label={label} className="scroll-thin flex items-stretch gap-0 overflow-x-auto pb-1">
+    <ol aria-label={label} tabIndex={0} className="scroll-thin flex items-stretch gap-0 overflow-x-auto pb-1">
       {steps.map((s, i) => {
         const inner = (
           <div

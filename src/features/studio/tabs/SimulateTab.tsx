@@ -203,7 +203,7 @@ function Replay({ run, d, until }: { run: DesResult; d: TabProps['d']; until: nu
         <Badge>In machine {state.inSystem}</Badge>
         <input type="range" aria-label="Replay time" min={0} max={until} step={1} value={Math.round(t)} onChange={(e) => (setPlaying(false), setT(Number(e.target.value)))} className="min-w-40 flex-1 accent-[var(--c-accent)]" />
       </div>
-      <div className="scroll-thin overflow-x-auto">
+      <div className="scroll-thin overflow-x-auto" tabIndex={0}>
         <svg viewBox={`0 0 ${width} 150`} width={width} height={150} role="img" aria-label={`Material flow at ${mm} min ${ss} s: ${state.ok} good parts out`}>
           <line x1={0} y1={112} x2={width} y2={112} className="stroke-line-strong" strokeWidth={6} strokeLinecap="round" />
           {d.res.stations.map((rs, i) => {

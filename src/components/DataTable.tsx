@@ -108,13 +108,9 @@ export function DataTable<T>({ data, columns, onRowClick, filterPlaceholder = 'F
             const cells = visibleCells(row);
             return (
               <li key={row.id}>
-                <div
-                  role={onRowClick ? 'button' : undefined}
-                  tabIndex={onRowClick ? 0 : undefined}
-                  onClick={onRowClick ? () => onRowClick(row.original) : undefined}
-                  onKeyDown={onRowClick ? (e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), onRowClick(row.original)) : undefined}
-                  className="surface rounded-card p-3.5"
-                >
+                {/* the card is clickable with a pointer; keyboard / screen-reader users get a real button below —
+                    the card itself is not a button, so links and chips inside it are never nested controls */}
+                <div onClick={onRowClick ? () => onRowClick(row.original) : undefined} className={clsx('surface rounded-card p-3.5', onRowClick && 'cursor-pointer')}>
                   <div className="font-medium">{flexRender(cells[0].column.columnDef.cell, cells[0].getContext())}</div>
                   <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-meta">
                     {cells.slice(1, 5).map((c) => (
@@ -124,6 +120,18 @@ export function DataTable<T>({ data, columns, onRowClick, filterPlaceholder = 'F
                       </div>
                     ))}
                   </dl>
+                  {onRowClick && (
+                    <button
+                      type="button"
+                      className="mt-2 text-meta font-medium text-accent-2 hover:underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onRowClick(row.original);
+                      }}
+                    >
+                      Open details<span className="sr-only"> for {String(cells[0].getValue() ?? row.id)}</span>
+                    </button>
+                  )}
                 </div>
               </li>
             );

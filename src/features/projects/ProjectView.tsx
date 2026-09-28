@@ -25,7 +25,7 @@ export function Gantt({ tasks, onSelect }: { tasks: ProjectTask[]; onSelect?: (i
   const months: string[] = [];
   for (let d = start.slice(0, 7) + '-01'; d <= end; d = addDays(d, 32).slice(0, 7) + '-01') if (d >= start) months.push(d);
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" tabIndex={0}>
       {cpm.cycle && <Notice tone="warn">Dependency cycle detected — critical path is incomplete.</Notice>}
       <svg role="img" aria-label={`Gantt chart, critical path ${cpm.length} days`} viewBox={`0 0 ${W} ${tasks.length * rowH + 30}`} className="min-w-[700px]">
         {months.map((m) => (
@@ -228,7 +228,7 @@ export default function ProjectView({ record }: { record: Rec }) {
       />
       {tab === 'gantt' && <Gantt tasks={p.tasks} onSelect={() => setTab('tasks')} />}
       {tab === 'tasks' && (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0}>
           <table className="w-full text-meta">
             <thead>
               <tr className="text-left text-micro uppercase text-ink-3">

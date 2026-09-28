@@ -69,7 +69,7 @@ export default function LaserTab({ eng, sim, customer }: TabProps) {
         return (
           <div key={st.key} className="space-y-4">
             <Card title={`${st.name} — beam path`} icon={Crosshair} description="Source → beam expander → galvo → f-theta → workpiece. The link colour is the compatibility result between neighbours.">
-              <div className="scroll-thin overflow-x-auto pb-2">
+              <div className="scroll-thin overflow-x-auto pb-2" tabIndex={0}>
                 <div className="flex min-w-[760px] items-stretch gap-0">
                   {chain.map((c, i) => (
                     <div key={c.role} className="flex min-w-0 flex-1 items-center">

@@ -64,7 +64,7 @@ export default function TraceabilityPage() {
         <EmptyState title="No requirements" explain="Create requirements, or run Create product from inquiry." />
       ) : (
         <Card>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0}>
             <table className="w-full text-meta">
               <thead>
                 <tr className="text-left text-micro uppercase text-ink-3">

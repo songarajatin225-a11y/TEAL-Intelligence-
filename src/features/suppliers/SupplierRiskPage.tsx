@@ -83,7 +83,7 @@ export default function SupplierRiskPage() {
       </div>
 
       <Card title="Risk × exposure" icon={ShieldAlert} description="Rows: recorded risk · Columns: component-master items naming the supplier as vendor">
-        <div className="scroll-thin overflow-x-auto">
+        <div className="scroll-thin overflow-x-auto" tabIndex={0}>
           <table className="w-full min-w-[34rem] table-fixed border-separate border-spacing-1.5 text-body">
             <thead>
               <tr>

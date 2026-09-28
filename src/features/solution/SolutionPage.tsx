@@ -234,7 +234,7 @@ export default function SolutionPage() {
 
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
             <Card title="Indicative BOM" icon={Boxes} description="Configurator rules — list-price ESTIMATES and UNKNOWN costs, not quotations">
-              <div className="scroll-thin overflow-x-auto">
+              <div className="scroll-thin overflow-x-auto" tabIndex={0}>
                 <Table head={['Line', 'Description', 'Make/Buy', 'Basis', 'Unit cost']} dense>
                   {result.bom.map((l) => (
                     <tr key={l.line_id} className="border-t border-line/60">

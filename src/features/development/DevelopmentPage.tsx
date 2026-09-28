@@ -91,7 +91,7 @@ export default function DevelopmentPage() {
           })}
         </div>
       ) : (
-        <div className="surface scroll-thin overflow-x-auto rounded-card p-2">
+        <div className="surface scroll-thin overflow-x-auto rounded-card p-2" tabIndex={0}>
           <Table head={['Item', 'Stage', 'Owner', 'Timeline', 'Budget', 'Customer', 'Suppliers', 'Technology (TRL)', 'Open risks', 'Dependencies', 'Milestones', 'Deliverables']} dense>
             {items.map((i) => (
               <tr key={i.r.id} className="border-t border-line/60">

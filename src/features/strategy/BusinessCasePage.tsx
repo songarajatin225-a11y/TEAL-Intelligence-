@@ -226,7 +226,7 @@ export default function BusinessCasePage() {
                 ))}
               </div>
               <Card title="Cash flow by year">
-                <div className="scroll-thin overflow-x-auto">
+                <div className="scroll-thin overflow-x-auto" tabIndex={0}>
                   <Table head={['Year', 'Units', 'Revenue', 'Gross margin', 'Cash flow', 'Cumulative']} dense>
                     {result.rows.map((r) => (
                       <tr key={r.year} className="num border-t border-line/60">

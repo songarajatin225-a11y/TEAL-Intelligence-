@@ -14,7 +14,7 @@ export function FlowDiagram({ stations, bottleneck, times, selected, onSelect }:
   const G = 40;
   const width = 20 + stations.length * (W + G);
   return (
-    <div className="scroll-thin overflow-x-auto">
+    <div className="scroll-thin overflow-x-auto" tabIndex={0}>
       <svg viewBox={`0 0 ${width} 132`} width={width} height={132} role="img" aria-label={`Process flow: ${stations.map((s) => s.name).join(' → ')}`} className="min-w-full">
         <defs>
           <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
