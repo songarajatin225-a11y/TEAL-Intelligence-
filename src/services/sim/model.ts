@@ -1,6 +1,7 @@
 import { fmtNum } from '../../calculations/units';
 import type { AnyRecord } from '../../domain';
 import type { Basis, Distribution, Part, Selection, Simulation, Station } from '../../domain/engineering';
+import { scenarioMotion, type AxisModel, type PlannedMove } from '../twin/motion';
 import { readSpec, type SpecDefs } from '../eng/specs';
 
 /*
@@ -130,8 +131,29 @@ export function resolveStation(st: Station, index: number, sim: Simulation, byId
   return { station: st, index, time, basis, lineage, parts, missing, warnings };
 }
 
+/**
+ * Axis moves defined for the 3D twin are part of the station time (§69: the 3D cycle IS the simulated
+ * cycle). Station `time_s` is then the non-motion time; motion time is CALCULATED from the axis model.
+ */
+function addMotion(rs: ResolvedStation, moves: PlannedMove[], axes: AxisModel[]): ResolvedStation {
+  if (!moves.length) return rs;
+  const missing = [...new Set(moves.flatMap((m) => m.perAxis.filter((p) => p.time == null).map((p) => axes.find((a) => a.key === p.axis)?.missing.join(', ') || `axis ${p.axis}: speed / acceleration`)))];
+  const warnings = [...rs.warnings, ...moves.flatMap((m) => m.limitViolations)];
+  if (missing.length) return { ...rs, missing: [...rs.missing, ...missing], warnings };
+  if (rs.time == null) return { ...rs, warnings };
+  const motion = moves.reduce((n, m) => n + (m.time ?? 0), 0);
+  const children: Lineage[] = moves.map((m) => ({ label: m.label, value: m.time, unit: 's', basis: 'CALCULATED', formula: 'slowest axis of the move · trapezoidal profile (distance, speed, acceleration)', children: m.perAxis.map((p) => { const ax = axes.find((a) => a.key === p.axis); return { label: `${ax?.name ?? p.axis}: ${fmtNum(Math.abs(p.dist), 6)} mm`, value: p.time, unit: 's', basis: ax?.basis ?? 'ASSUMPTION', source: ax ? `${ax.sources.speed}; ${ax.sources.accel}` : undefined }; }) }));
+  return {
+    ...rs,
+    time: rs.time + motion,
+    warnings,
+    lineage: { label: `${rs.station.name} incl. axis motion`, value: rs.time + motion, unit: 's', formula: 'station time + Σ axis moves', basis: 'MIXED', children: [rs.lineage, { label: 'Axis motion', value: motion, unit: 's', basis: 'CALCULATED', children }] },
+  };
+}
+
 export function resolveScenario(sim: Simulation & AnyRecord, byId: Map<string, AnyRecord>, defs: SpecDefs): Resolved {
-  const stations = sim.stations.map((s, i) => resolveStation(s, i, sim, byId, defs));
+  const motion = scenarioMotion(sim, byId, defs);
+  const stations = sim.stations.map((s, i) => addMotion(resolveStation(s, i, sim, byId, defs), motion.plan.filter((m) => m.stationKey === s.key), motion.axes));
   const machineParts = (sim.selections ?? [])
     .filter((s: Selection) => s.station_key === '_machine')
     .map((s) => ({ role: s.role, part: byId.get(s.part_id) as Part & AnyRecord, qty: s.quantity ?? 1 }))

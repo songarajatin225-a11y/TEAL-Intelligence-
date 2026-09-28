@@ -1,7 +1,7 @@
 {
   "dataset": {
     "version": "1.0.0",
-    "last_updated": "2026-09-26",
+    "last_updated": "2026-09-27",
     "id": "suppliers",
     "title": "Suppliers (legacy vendor master — DEMO)",
     "description": "Vendor list from the legacy cost platform. Relationship data is seed/DEMO until TEAL Procurement confirms it.",
@@ -91,7 +91,8 @@
         "verification_status": "UNKNOWN",
         "confidence": "LOW",
         "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
-      }
+      },
+      "company_id": "co-keyence"
     },
     {
       "id": "sup-ipg-photonics",
@@ -110,7 +111,8 @@
         "verification_status": "UNKNOWN",
         "confidence": "LOW",
         "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
-      }
+      },
+      "company_id": "co-ipg-photonics"
     },
     {
       "id": "sup-scanlab-gmbh",
@@ -208,6 +210,23 @@
         "verification_status": "UNKNOWN",
         "confidence": "LOW",
         "note": "Company name is real; category, lead time and terms are legacy seed values (DEMO). Seed \"rating\" intentionally not migrated."
+      }
+    },
+    {
+      "id": "sup-synrad",
+      "entity": "supplier",
+      "name": "Synrad",
+      "category": "Laser Sources",
+      "supplier_risk": "Unknown",
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-legacy-cost-platform",
+        "document": "TEAL-COST-DEMO-7-8/data/masters.json",
+        "section": "item (vendor field of TL-LSR-0060)",
+        "retrieved_at": "2026-09-27",
+        "verification_status": "UNKNOWN",
+        "confidence": "LOW",
+        "note": "Vendor named on an item-master row but missing from the legacy vendor master. Country, lead time, terms and risk are UNKNOWN until TEAL Procurement records them."
       }
     }
   ]

@@ -63,6 +63,9 @@ const MAIN: Record<string, Main> = {
   risk: lazy(() => import('../quality/RiskView')),
   opportunity: lazy(() => import('../opportunities/OpportunityView')),
   part: lazy(() => import('../engineering/PartView')),
+  component: lazy(() => import('../engineering/ComponentSheet')),
+  optic: lazy(() => import('../engineering/ComponentSheet')),
+  module: lazy(() => import('../engineering/ComponentSheet')),
   equipment_template: lazy(() => import('../engineering/TemplateView')),
   simulation: lazy(() => import('../engineering/SimulationRecordView')),
 };
