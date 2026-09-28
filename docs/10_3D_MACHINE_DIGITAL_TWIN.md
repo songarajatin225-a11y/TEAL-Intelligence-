@@ -9,20 +9,53 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 | Layer | File | What it does |
 |---|---|---|
 | Twin inputs (schema) | `src/domain/engineering.ts` → `Simulation.twin` | Holds only what the model needs beyond the stations: workpiece, process area, axes, per-part moves, camera working distance, layout overrides, zones, snapshots, recorded runs and factory placement. |
-| Motion engine | `src/services/twin/motion.ts` | Axis model (§17). Travel, speed and acceleration come from the linked stage record unless you enter them. Moves use a trapezoidal or triangular profile (§18). |
-| Canonical cycle | `src/services/sim/model.ts` (`addMotion`) | Axis move time is **calculated** and added to the station time. The 3D cycle is therefore the simulated cycle (§69). A missing axis speed blocks the run with an input gap and is never assumed. |
+| Motion engine | `src/services/twin/motion.ts` | Axis model (§17). Travel, speed and acceleration come from the linked stage record unless you enter them. Moves use a trapezoidal or triangular profile, or a **jerk-limited S-curve** when a jerk limit is entered. An in-position **settling time** is added when it is entered; when it is not, it is left out and the scenario says so (§18). |
+| Canonical cycle | `src/services/sim/model.ts` (`addMotion`, `transferModel`) | Axis move time is **calculated** and added to the station time. The 3D cycle is therefore the simulated cycle (§69). A missing axis speed blocks the run with an input gap and is never assumed. On an inline line the **part transfer** to the next station is added too. The distance is entered; the speed is entered or read from the selected conveyor's max speed. Without a distance the transfer is not included, and the Studio says so. |
 | Machine generator | `src/services/twin/machine.ts` | Builds the conceptual scene graph from stations and selected components (§8–§13, §118–§120). Every object carries `partId`, `stationKey`, layer and BOM level, and links to its BOM line. It also computes camera FOV (§31), laser beam path and field, safety zones, cable routes and the conceptual I/O list. |
-| Kinematics | `src/services/twin/kinematics.ts` | SCARA two-link inverse/forward kinematics, pick-and-place phases (to pick → descend → grip → lift → to place → lower → release → retract) and tool strokes. Poses are a function of the station's progress, so the same central state drives robots, gantries and tool heads. Geometry only; no dynamics (§16). |
+| Kinematics | `src/services/twin/kinematics.ts` | SCARA two-link and **6-axis articulated** inverse/forward kinematics (the robot record's number of axes picks the type), pick-and-place phases (to pick → descend → grip → lift → to place → lower → release → retract) and tool strokes. Poses are a function of the station's progress, so the same central state drives robots, gantries and tool heads. Geometry only; no dynamics (§16). |
 | Sequence preview | `src/services/twin/preview.ts` | When station inputs are missing, the machine still runs as a **sequence preview**: every undefined station gets the same 2 s visual placeholder, with no variability or failures. Nothing from a preview is reported as a result (§161, §162). |
-| Collision | `src/services/twin/collision.ts` | Axis-aligned bounding boxes, sampled along every planned move (§20). Exposes the `PhysicsProvider` interface: bounding-box collision is active; rigid-body, robotics, optical and thermal/FEA are future extension points. |
+| Utilities | `src/services/twin/utilities.ts` | Electrical power and extraction airflow read only from the selected components' records. It gives live power for the stations working now and energy per part. Components without a value are listed; nothing is estimated (§97). |
+| Collision | `src/services/twin/collision.ts` | Axis-aligned bounding boxes, sampled along every planned move and along every **robot / gantry gripper path**, including the part it carries (§20). Exposes the `PhysicsProvider` interface: bounding-box collision is active; rigid-body, robotics, optical and thermal/FEA are future extension points. |
 | Sequence + central state | `src/services/twin/timeline.ts` | `TwinPlayer` wraps **one** seeded DES run (`services/sim/des`). Its `at(t)` is the single `SimulationState` read by the scene, event log, KPIs, HMI, alarms and I/O (§45, §46). Station time is split into sub-steps only where the data allows (axis moves, entered laser jump overhead); the remainder keeps the station's basis. |
 | Design check | `src/services/twin/checks.ts` | Rules for f-theta field vs process area, camera FOV vs target, axis travel, collisions, throughput vs target, footprint and enclosure. It reuses the Studio design review (§114, §178). |
 | Process paths | `src/services/twin/process.ts` | Symbolic marking, welding, cutting, cleaning, drilling and scribing paths inside the process area. Visual only; they are never used for cycle time. |
 | 3D library | `src/features/twin/three/procedural.tsx` | Parametric procedural components registered by generator key (§119, §120) and the restrained industrial material set (§121). |
 | Scene | `src/features/twin/three/MachineScene.tsx` | React Three Fiber scene. Covers views, orthographic/perspective, section, explode, X-ray, layers, overlays, measure, beam and scan, FOV, zones, dimensions, comparison ghost, factory boxes, performance monitor, debug stats and screen-space labels. |
-| Workbench | `src/features/twin/MachineTab.tsx`, `panels.tsx` | Header status, toolbar, component tree, properties (component datasheet, BOM, live component swap, requirements, service, laser and camera parameters, layout override), KPI bar and ten panels. |
+| Workbench | `src/features/twin/MachineTab.tsx`, `panels.tsx` | Status bar, grouped toolbar, full-width viewport with drawers for the component tree and properties, one transport bar, KPI strip and 13 panels. Properties include the component datasheet, design-check findings, BOM, live component swap, requirements, service, laser and camera parameters and layout override. |
 
-`three`, `@react-three/fiber` and `@react-three/drei` load only with the 3D tab, in a separate lazy chunk. If WebGL is unavailable, the tab shows the 2D engineering simulator instead (§82).
+`three`, `@react-three/fiber` and `@react-three/drei` load only with the 3D tab, in a separate lazy chunk. The canvas mounts after the page has painted, so the status, toolbar and panels appear first. If WebGL is unavailable, the tab shows the 2D engineering simulator instead (§82).
+
+## Workspace
+
+- **The machine comes first.** The viewport takes the full content width and most of the screen height. When the tab opens on a short screen, the page scrolls so the status, toolbar and viewport fit together. **Studio mode** (toolbar, or Esc to leave) turns the workbench into a full-window workspace.
+- **Drawers instead of columns.** **Components** opens the tree over the left of the viewport. **Details** opens the properties over the right; selecting a component opens it automatically. Choosing a component in the tree frames it. Clicking in the viewport only selects.
+- **One transport bar** under the viewport: run / pause, step to the next event, reset, the time scrubber and the playback speed. It is the only playback control.
+- **Toolbar in labelled groups:**
+  - **Explain:** guided tour, live narration.
+  - **View:** fit, front, top, side, isometric, orthographic, camera mode.
+  - **Inspect:** section, explode, X-ray, isolate, hide, show all, measure.
+  - **Show:** name tags, design-check badges, layers, display and quality, overlay, enclosure, camera view.
+  - **Export:** PNG, video of a cycle, view link.
+- **Name tags: No tags / Working / All.** *Working* (the default) tags only the stations busy now, plus the selection and highlights. Measurement labels (FOV, field, zones) are a separate Display setting.
+- **Design-check badges.** A component with an open finding carries a red or amber warning badge in 3D and a warning icon in the tree, and its findings are listed at the top of its properties. The Design check panel orders engineering physics before commercial findings. Repeated single-source findings collapse into one expandable row.
+- **Status bar.** It adds the bottleneck. *UPH* reads *warming up* until the first minute of the run. A single line explains a sequence preview, and the performance-mode notice is a small icon.
+- **Phones** get a simple viewer: essential tools only, no name tags or gizmo by default, and full-width drawers.
+
+## Simulation depth
+
+- **Inline part transfer.** Distance ÷ speed, with acceleration ramps when an acceleration is entered. The time is added to every station except the last (a station is occupied until its part has left), and the lineage shows distance, speed and source. The assembly cell and the test line use a DEMO 200 mm transfer at the PCB conveyor's stated 150 mm/s. The robot cell has no conveyor selected, so its transfer is *not included*, and the Studio says so.
+- **S-curve and settling.** A jerk limit gives a jerk-limited profile (time = s/v + v/a + a/j for a full profile). A settling time is added after every move of that axis. Both are entered in the Motion panel. An axis without a settling time does not include one, and the scenario says so.
+- **Robot type from the record.** A robot stating 5 or more axes is drawn and moved as an articulated arm: base yaw, shoulder, elbow, wrist keeping the tool vertical. Otherwise it is a SCARA. The robot transfer demo uses a DEMO 6-axis RB-A7.
+- **Gripper sweeps.** The gripper envelope, plus the carried part, is checked along the whole pick-and-place path against fixed tooling. The simulation pauses at a hit, as it does for axis moves. The arm links are not included (a conceptual TCP envelope, not a reach study).
+- **Part tracing.** On inline lines, click a part in 3D (or pick it in **Part trace**). The camera follows it, and the panel lists its events from the run, with *Go to* for each. A part the run rejects is ringed red at the station that rejects it.
+- **Camera's-eye view.** **Camera view** renders the scene from the lens position with the FOV computed from the camera and lens records, as an inset. It shows what the camera frames, not a simulated image (no exposure, lighting or distortion).
+- **Utilities.** Stated power and live power (components at working stations), energy per part as stated power × working time, and extraction airflow. Values come from the records only. Missing values are listed and compressed air is *Not Available*.
+
+## Sharing and export
+
+- **Copy view link**: the URL carries the camera, time, selection and camera view (`?cam=…&t=…&sel=…&pov=…`). Opening it restores them.
+- **Record a cycle**: a WebM video of one representative cycle at the current playback speed (at most 60 s), made in the browser. Nothing is uploaded.
+- **Performance**: frames, tables, cabinets, bridges and other components with no moving parts are merged into one mesh per material after they mount. This cuts draw calls without changing picking or selection.
 
 ## Detailed machine and live mechanisms
 

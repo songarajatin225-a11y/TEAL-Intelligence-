@@ -21,6 +21,8 @@ export interface TwinCheck {
   recordId?: string;
   objectId?: string;
   rule: string;
+  /** repeated findings of one kind are shown as one group (e.g. single-source components) */
+  group?: string;
 }
 
 const areaOf = (section: string): CheckArea => (/compat|interface|optic|laser|controls|electrical/i.test(section) ? 'Compatibility' : /cost|bom/i.test(section) ? 'BOM' : /supplier|supply|local/i.test(section) ? 'Supplier' : /requirement/i.test(section) ? 'Requirement' : /safety/i.test(section) ? 'Safety' : /service|maint/i.test(section) ? 'Service' : /mechanical|footprint/i.test(section) ? 'Geometry' : 'Simulation');
@@ -65,8 +67,36 @@ export function twinChecks(res: Resolved, model: MachineModel, cycle: CycleResul
   if (sim.targets?.footprint_m2 && fp > sim.targets.footprint_m2) out.push({ area: 'Geometry', severity: 'major', text: `Conceptual footprint ${fp.toFixed(2)} m² exceeds the ${sim.targets.footprint_m2} m² limit`, rule: 'footprint ≤ limit' });
   // safety: laser station without enclosure / door interlock
   if (model.lasers.length && !model.objects.some((o) => o.id === 'enclosure' && o.partId)) out.push({ area: 'Safety', severity: 'major', text: 'No enclosure component is selected for a laser machine — the enclosure is drawn conceptually only', tab: 'components', rule: 'laser machine has an enclosure record' });
-  // reuse the simulation design review (compatibility, BOM, supplier, requirements …)
-  for (const r of review) out.push({ area: areaOf(r.section), severity: r.severity === 'blocker' ? 'critical' : r.severity, text: r.message, recordId: r.recordId, tab: 'review', rule: `Design review — ${r.section}${r.potential ? ' (potential)' : ''}` });
+  // reuse the simulation design review (compatibility, BOM, supplier, requirements …); a finding about a
+  // component is linked to that component in the 3D scene
+  for (const r of review) {
+    const area = areaOf(r.section);
+    out.push({
+      area,
+      severity: r.severity === 'blocker' ? 'critical' : r.severity,
+      text: r.message,
+      recordId: r.recordId,
+      objectId: r.recordId ? model.objects.find((o) => o.partId === r.recordId)?.id : undefined,
+      tab: 'review',
+      rule: `Design review — ${r.section}${r.potential ? ' (potential)' : ''}`,
+      group: area === 'Supplier' && /single source/i.test(r.message) ? 'Single-source components' : undefined,
+    });
+  }
   const order = { critical: 0, major: 1, minor: 2, ok: 3 };
-  return out.sort((a, b) => order[a.severity] - order[b.severity]);
+  // within a severity, engineering physics before commercial findings
+  const areaOrder: CheckArea[] = ['Input gap', 'Collision', 'Geometry', 'Motion', 'Compatibility', 'Safety', 'Simulation', 'Requirement', 'BOM', 'Service', 'Supplier'];
+  return out.sort((a, b) => order[a.severity] - order[b.severity] || areaOrder.indexOf(a.area) - areaOrder.indexOf(b.area));
+}
+
+/** Worst open finding per 3D object (drives the warning badges in the scene). */
+export function findingsByObject(checks: TwinCheck[]): Map<string, { severity: 'critical' | 'major' | 'minor'; count: number; first: string }> {
+  const m = new Map<string, { severity: 'critical' | 'major' | 'minor'; count: number; first: string }>();
+  const rank = { critical: 0, major: 1, minor: 2 };
+  for (const c of checks) {
+    if (!c.objectId || c.severity === 'ok' || c.group) continue;
+    const cur = m.get(c.objectId);
+    if (!cur) m.set(c.objectId, { severity: c.severity, count: 1, first: c.text });
+    else m.set(c.objectId, { severity: rank[c.severity] < rank[cur.severity] ? c.severity : cur.severity, count: cur.count + 1, first: rank[c.severity] < rank[cur.severity] ? c.text : cur.first });
+  }
+  return m;
 }

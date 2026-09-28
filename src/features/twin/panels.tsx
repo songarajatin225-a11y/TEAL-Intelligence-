@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AlertOctagon, ArrowRight, CheckCircle2, CircleDot, Download, Pause, Play, RotateCcw, SkipForward, Trash2 } from 'lucide-react';
+import { AlertOctagon, ArrowRight, CheckCircle2, ChevronDown, ChevronRight, CircleDot, Download, Pause, Play, RotateCcw, SkipForward, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
@@ -9,6 +9,8 @@ import { TWIN_MODEL_MATURITY, TWIN_SIM_MATURITY, type FaultCase, type Recipe, ty
 import { FAULT_LIBRARY, scenarioMetrics } from '../../services/sim/analysis';
 import { defaultSequence } from '../../services/sim/build';
 import { MODEL_VERSION, resolveScenario } from '../../services/sim/model';
+import type { TwinCheck } from '../../services/twin/checks';
+import type { UtilitySummary } from '../../services/twin/utilities';
 import { buildMachine, TWIN_MODEL_VERSION, type MachineModel } from '../../services/twin/machine';
 import { meanCycleTimeline, type SimulationState, type StepKind, type TwinPlayer } from '../../services/twin/timeline';
 import { num, pct } from '../studio/shared';
@@ -31,7 +33,7 @@ const csv = (rows: (string | number | null | undefined)[][]) => rows.map((r) => 
 
 /* ------------------------------------------------------------------ timeline + events (§40–§42) */
 
-export function TimelinePanel({ player, t, setT, playing, setPlaying, speed, setSpeed, d, twin }: { player: TwinPlayer | null; t: number; setT: (t: number) => void; playing: boolean; setPlaying: (b: boolean) => void; speed: number; setSpeed: (n: number) => void; d: TabProps['d']; twin: TwinModel }) {
+export function TimelinePanel({ player, t, setT, playing, setPlaying, speed, setSpeed, d, twin, transport = true }: { player: TwinPlayer | null; t: number; setT: (t: number) => void; playing: boolean; setPlaying: (b: boolean) => void; speed: number; setSpeed: (n: number) => void; d: TabProps['d']; twin: TwinModel; transport?: boolean }) {
   const [filter, setFilter] = useState<'all' | 'faults' | 'laser' | 'vision' | 'moves'>('all');
   const cyc = useMemo(() => meanCycleTimeline(d.res, twin.model), [d.res, twin.model]);
   const total = d.res.stations.reduce((n, s) => n + (s.time ?? 0), 0);
@@ -44,6 +46,8 @@ export function TimelinePanel({ player, t, setT, playing, setPlaying, speed, set
   return (
     <div className="grid grid-cols-1 gap-4 xl:grid-cols-5">
       <div className="space-y-3 xl:col-span-3">
+        {transport && (
+        <>
         <div className="flex flex-wrap items-center gap-2">
           <Button size="sm" variant="primary" onClick={() => setPlaying(!playing)} aria-label={playing ? 'Pause simulation' : 'Play simulation'}>
             {playing ? <Pause className="size-4" aria-hidden /> : <Play className="size-4" aria-hidden />} {playing ? 'Pause' : 'Play'}
@@ -60,6 +64,8 @@ export function TimelinePanel({ player, t, setT, playing, setPlaying, speed, set
           </span>
         </div>
         <input type="range" aria-label="Simulation time" min={0} max={player.end} step={0.05} value={t} onChange={(e) => (setPlaying(false), setT(Number(e.target.value)))} className="w-full accent-[var(--c-accent)]" />
+        </>
+        )}
         <p className="text-micro text-ink-3">Playback speed changes only how fast you watch — the simulated cycle times do not change (§69).</p>
         <div>
           <div className="mb-1 text-meta font-medium text-ink-2">Representative cycle (mean times) — how the cycle time is built</div>
@@ -153,8 +159,43 @@ export function SequencePanel({ sim, snap }: { sim: Sim; snap: SimulationState |
 
 export function ChecksPanel({ twin, onObject, onTab }: { twin: TwinModel; onObject: (id: string) => void; onTab: (tab: string) => void }) {
   const [showOk, setShowOk] = useState(false);
-  const rows = twin.checks.filter((c) => showOk || c.severity !== 'ok');
+  const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
+  const visible = twin.checks.filter((c) => showOk || c.severity !== 'ok');
+  // repeated findings of one kind collapse into a single row (the first occurrence keeps its place)
+  const rows: (TwinCheck | { group: string; items: TwinCheck[] })[] = [];
+  const groups = new Map<string, TwinCheck[]>();
+  for (const c of visible) {
+    if (!c.group) {
+      rows.push(c);
+      continue;
+    }
+    if (!groups.has(c.group)) {
+      groups.set(c.group, []);
+      rows.push({ group: c.group, items: groups.get(c.group)! });
+    }
+    groups.get(c.group)!.push(c);
+  }
   const counts = { critical: twin.checks.filter((c) => c.severity === 'critical').length, major: twin.checks.filter((c) => c.severity === 'major').length, minor: twin.checks.filter((c) => c.severity === 'minor').length, ok: twin.checks.filter((c) => c.severity === 'ok').length };
+  const icon = (c: TwinCheck) => (c.severity === 'ok' ? <CheckCircle2 className="size-4 text-ok" aria-label="passed" /> : <AlertOctagon className={clsx('size-4', c.severity === 'critical' ? 'text-bad' : c.severity === 'major' ? 'text-warn' : 'text-ink-3')} aria-label={c.severity} />);
+  const fix = (c: TwinCheck) => (
+    <>
+      {c.objectId && (
+        <Button size="sm" onClick={() => onObject(c.objectId!)}>
+          Show in 3D
+        </Button>
+      )}
+      {c.recordId && (
+        <Link to={recordPath(c.recordId)} className="ml-1 text-micro text-accent-2 hover:underline">
+          Record
+        </Link>
+      )}
+      {c.tab && c.tab !== 'machine3d' && (
+        <button type="button" className="ml-1 text-micro text-accent-2 hover:underline" onClick={() => onTab(c.tab!)}>
+          Open {c.tab}
+        </button>
+      )}
+    </>
+  );
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -167,31 +208,44 @@ export function ChecksPanel({ twin, onObject, onTab }: { twin: TwinModel; onObje
         </label>
       </div>
       <Table head={['', 'Area', 'Finding', 'Rule', 'Fix']} dense>
-        {rows.map((c, i) => (
-          <tr key={i}>
-            <td>{c.severity === 'ok' ? <CheckCircle2 className="size-4 text-ok" aria-label="passed" /> : <AlertOctagon className={clsx('size-4', c.severity === 'critical' ? 'text-bad' : c.severity === 'major' ? 'text-warn' : 'text-ink-3')} aria-label={c.severity} />}</td>
-            <td className="text-micro">{c.area}</td>
-            <td>{c.text}</td>
-            <td className="text-micro text-ink-3">{c.rule}</td>
-            <td className="whitespace-nowrap">
-              {c.objectId && (
-                <Button size="sm" onClick={() => onObject(c.objectId!)}>
-                  Show in 3D
-                </Button>
-              )}
-              {c.recordId && (
-                <Link to={recordPath(c.recordId)} className="ml-1 text-micro text-accent-2 hover:underline">
-                  Record
-                </Link>
-              )}
-              {c.tab && c.tab !== 'machine3d' && (
-                <button type="button" className="ml-1 text-micro text-accent-2 hover:underline" onClick={() => onTab(c.tab!)}>
-                  Open {c.tab}
+        {rows.flatMap((r, i) => {
+          if (!('items' in r))
+            return [
+              <tr key={i}>
+                <td>{icon(r)}</td>
+                <td className="text-micro">{r.area}</td>
+                <td>{r.text}</td>
+                <td className="text-micro text-ink-3">{r.rule}</td>
+                <td className="whitespace-nowrap">{fix(r)}</td>
+              </tr>,
+            ];
+          const isOpen = openGroups.has(r.group);
+          return [
+            <tr key={i}>
+              <td>{icon(r.items[0])}</td>
+              <td className="text-micro">{r.items[0].area}</td>
+              <td>
+                <button type="button" aria-expanded={isOpen} className="inline-flex items-center gap-1 text-left hover:text-accent-2" onClick={() => setOpenGroups((s) => new Set(isOpen ? [...s].filter((x) => x !== r.group) : [...s, r.group]))}>
+                  {isOpen ? <ChevronDown className="size-3.5" aria-hidden /> : <ChevronRight className="size-3.5" aria-hidden />}
+                  {r.group}: {r.items.length} component{r.items.length === 1 ? '' : 's'} with one known supplier
                 </button>
-              )}
-            </td>
-          </tr>
-        ))}
+              </td>
+              <td className="text-micro text-ink-3">{r.items[0].rule}</td>
+              <td />
+            </tr>,
+            ...(isOpen
+              ? r.items.map((c, k) => (
+                  <tr key={`${i}-${k}`} className="bg-panel-2/40">
+                    <td />
+                    <td />
+                    <td className="pl-5 text-meta">{c.text}</td>
+                    <td />
+                    <td className="whitespace-nowrap">{fix(c)}</td>
+                  </tr>
+                ))
+              : []),
+          ];
+        })}
       </Table>
     </div>
   );
@@ -329,7 +383,7 @@ export function MotionPanel({ model, snap, sim, set, customer }: { model: Machin
   const patchMove = (i: number, ax: string, v: number | null) => set((s) => ({ ...s, twin: { ...s.twin, moves: (s.twin?.moves ?? []).map((m, j) => (j === i ? { ...m, targets: { ...m.targets, ...(v == null ? {} : { [ax]: v }) } } : m)) } }));
   return (
     <div className="space-y-4">
-      <Table head={['Axis', 'Position', 'Velocity', 'Travel', 'Speed', 'Acceleration', 'Source']} dense>
+      <Table head={['Axis', 'Position', 'Velocity', 'Travel', 'Speed', 'Acceleration', 'Jerk (S-curve)', 'Settling', 'Source']} dense>
         {model.axes.map((a) => (
           <tr key={a.key}>
             <td className="font-medium">{a.name}</td>
@@ -338,6 +392,8 @@ export function MotionPanel({ model, snap, sim, set, customer }: { model: Machin
             <td className="num">{a.stroke != null ? `0 – ${a.stroke} mm` : <Unknown label="Not defined" />}</td>
             <td>{customer ? num(a.speed) : <NumInput label={`${a.name} speed override`} value={sim.twin?.axes?.find((x) => x.key === a.key)?.speed_mm_s ?? null} placeholder={a.speed != null ? String(a.speed) : 'mm/s'} onChange={(v) => patchAxis(a.key, { speed_mm_s: v })} />}</td>
             <td>{customer ? num(a.accel) : <NumInput label={`${a.name} acceleration override`} value={sim.twin?.axes?.find((x) => x.key === a.key)?.accel_mm_s2 ?? null} placeholder={a.accel != null ? String(a.accel) : 'mm/s²'} onChange={(v) => patchAxis(a.key, { accel_mm_s2: v })} />}</td>
+            <td>{customer ? (a.jerk != null ? `${num(a.jerk)} mm/s³` : 'trapezoidal') : <NumInput label={`${a.name} jerk limit`} value={sim.twin?.axes?.find((x) => x.key === a.key)?.jerk_mm_s3 ?? null} placeholder="mm/s³" min={0} onChange={(v) => patchAxis(a.key, { jerk_mm_s3: v })} />}</td>
+            <td>{customer ? (a.settle != null ? `${Math.round(a.settle * 1000)} ms` : 'not included') : <NumInput label={`${a.name} settling time ms`} value={sim.twin?.axes?.find((x) => x.key === a.key)?.settle_ms ?? null} placeholder="ms" min={0} onChange={(v) => patchAxis(a.key, { settle_ms: v })} />}</td>
             <td className="text-micro text-ink-3">
               speed: {a.sources.speed}; accel: {a.sources.accel}; travel: {a.sources.stroke}
             </td>
@@ -345,7 +401,7 @@ export function MotionPanel({ model, snap, sim, set, customer }: { model: Machin
         ))}
       </Table>
       <div>
-        <div className="mb-1 text-meta font-medium text-ink-2">Per-part moves (absolute targets) — time CALCULATED with a trapezoidal profile and included in the station time</div>
+        <div className="mb-1 text-meta font-medium text-ink-2">Per-part moves (absolute targets) — time CALCULATED (trapezoidal, or S-curve where a jerk limit is entered, plus settling where entered) and included in the station time</div>
         <Table head={['Station', 'Move', ...model.axes.map((a) => `${a.name} target (mm)`), 'Move time', 'Limits']} dense>
           {model.plan.map((m, i) => (
             <tr key={i}>
@@ -359,7 +415,7 @@ export function MotionPanel({ model, snap, sim, set, customer }: { model: Machin
             </tr>
           ))}
         </Table>
-        <p className="mt-1 text-micro text-ink-3">Conceptual kinematics: distance, speed, acceleration and deceleration only — no jerk, following error, load inertia or servo tuning (§18).</p>
+        <p className="mt-1 text-micro text-ink-3">Conceptual kinematics: distance, speed, acceleration, deceleration and — only when entered — jerk limit and in-position settling time. An axis without a settling time does not include one (it is not assumed). No following error, load inertia or servo tuning (§18).</p>
       </div>
     </div>
   );
@@ -849,6 +905,122 @@ export function InputsPanel({ sim, set, d, preview }: { sim: Sim; set: TabProps[
         })}
       </Table>
       <p className="text-micro text-ink-3">Nothing is estimated for you: a laser station is calculated from area ÷ (hatch × speed) × passes + overhead (or path ÷ speed × passes + overhead) once those inputs exist; otherwise enter its measured time. Axis speeds come from the stage records (Motion panel).</p>
+      {d.res.transfer && <TransferInputs sim={sim} set={set} tm={d.res.transfer} />}
+    </div>
+  );
+}
+
+/** Inline part transfer between stations: distance (entered) ÷ speed (entered or the conveyor's stated max speed). */
+function TransferInputs({ sim, set, tm }: { sim: Sim; set: TabProps['set']; tm: NonNullable<TabProps['d']['res']['transfer']> }) {
+  const patch = (p: Record<string, number | null>) => set((s) => ({ ...s, twin: { ...s.twin, transfer: { ...s.twin?.transfer, ...p } } }));
+  return (
+    <section className="rounded-control border border-line p-3" aria-label="Part transfer between stations">
+      <h4 className="text-meta font-semibold">Part transfer between stations (inline line)</h4>
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-meta">
+        distance <NumInput label="Transfer distance mm" value={sim.twin?.transfer?.distance_mm ?? null} min={0} width="w-20" onChange={(v) => patch({ distance_mm: v })} /> mm · speed <NumInput label="Transfer speed mm/s" value={sim.twin?.transfer?.speed_mm_s ?? null} placeholder={tm.speed != null ? String(tm.speed) : 'mm/s'} min={0} width="w-20" onChange={(v) => patch({ speed_mm_s: v })} /> mm/s · acceleration <NumInput label="Transfer acceleration mm/s2" value={sim.twin?.transfer?.accel_mm_s2 ?? null} placeholder="optional" min={0} width="w-20" onChange={(v) => patch({ accel_mm_s2: v })} /> mm/s²
+        <span className="ml-auto">{tm.time != null ? <Badge tone="ok">{tm.time.toFixed(3)} s per transfer — included</Badge> : <Badge tone="warn">not included</Badge>}</span>
+      </div>
+      <p className="mt-1 text-micro text-ink-3">
+        Speed: {tm.sources.speed}. A station stays occupied until its part has moved on, so the transfer time is added to every station except the last. The distance is never taken from the conceptual 3D layout — enter the real pitch.
+      </p>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ utilities (§97) */
+
+export function UtilitiesPanel({ u, live, customer }: { u: UtilitySummary; live: number | null; customer: boolean }) {
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+        <Stat label="Stated power (Σ components)" value={u.statedPower > 0 ? `${(u.statedPower / 1000).toFixed(2)} kW` : 'Not Available'} />
+        <Stat label="Live power (working stations)" value={live != null ? `${(live / 1000).toFixed(2)} kW` : '—'} />
+        <Stat label="Energy per part" value={u.energyPerPart != null ? `${u.energyPerPart.toFixed(2)} Wh` : 'Not Available'} />
+        <Stat label="Extraction airflow" value={u.airflow != null ? `${u.airflow.toFixed(0)} m³/h` : 'Not Available'} />
+      </div>
+      <p className="text-micro text-ink-3">
+        From the selected components’ records only (typical consumption, else rated input power) — not a metered value. Energy per part = stated power × working time per part; components without a value are left out, so it is a lower bound. Compressed air is not stated in any selected record.
+      </p>
+      {!customer && (
+        <Table head={['Component', 'Station', 'Power', 'Basis', 'Airflow']} dense>
+          {u.items.map((i) => (
+            <tr key={`${i.partId}-${i.stationKey}`}>
+              <td>
+                <Link to={recordPath(i.partId)} className="text-accent-2 hover:underline">
+                  {i.name}
+                </Link>
+                {i.qty > 1 ? ` × ${i.qty}` : ''}
+              </td>
+              <td className="text-micro">{i.stationKey === '_machine' ? 'machine' : i.stationKey}</td>
+              <td className="num">{i.power != null ? `${i.power} W` : <Unknown label="Not stated" />}</td>
+              <td className="text-micro text-ink-3">{i.powerBasis ?? '—'}</td>
+              <td className="num">{i.airflow != null ? `${i.airflow} m³/h` : '—'}</td>
+            </tr>
+          ))}
+        </Table>
+      )}
+      {u.missingPower.length > 0 && <p className="text-micro text-warn">No power value in the record: {u.missingPower.map((i) => i.name).join(', ')}.</p>}
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-control border border-line bg-panel px-2.5 py-2">
+      <div className="text-micro uppercase tracking-wider text-ink-3">{label}</div>
+      <div className="font-mono text-body font-semibold">{value}</div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ part trace (§35, §37) */
+
+export function PartTracePanel({ player, snap, part, setPart, t, setT }: { player: TwinPlayer | null; snap: SimulationState | null; part: number | null; setPart: (p: number | null) => void; t: number; setT: (t: number) => void }) {
+  if (!player) return <p className="text-meta text-ink-3">No simulation run.</p>;
+  const inSystem = [...new Set((snap?.stations ?? []).flatMap((s) => s.servers.filter((x) => x.part >= 0).map((x) => x.part)))].sort((a, b) => a - b);
+  const ev = part != null ? player.events.filter((e) => e.part === part) : [];
+  const rejectedAt = part != null ? player.rejectAt.get(part) : undefined;
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-2 text-meta">
+        <span className="text-ink-2">Follow a part:</span>
+        {inSystem.length ? (
+          inSystem.map((p) => (
+            <button key={p} type="button" onClick={() => setPart(p === part ? null : p)} aria-pressed={p === part} className={clsx('rounded-full border px-2 py-0.5 font-mono text-micro', p === part ? 'border-accent bg-accent-soft text-accent-2' : 'border-line hover:border-accent')}>
+              #{p}
+            </button>
+          ))
+        ) : (
+          <span className="text-ink-3">no part in the machine at t = {fmtT(t)}</span>
+        )}
+        {part != null && (
+          <Button size="sm" onClick={() => setPart(null)}>
+            Stop following
+          </Button>
+        )}
+      </div>
+      <p className="text-micro text-ink-3">Click a part in the 3D view (inline lines) or pick it here: the camera follows it and its history comes from the same simulation run. A part that the run rejects is ringed red at the station that rejects it.</p>
+      {part != null && (
+        <>
+          <p className="text-meta">
+            Part <strong>#{part}</strong> — {ev.length} events in this run · outcome in this run: {rejectedAt != null ? <Badge tone="bad">rejected at {player.res.stations[rejectedAt]?.station.name}</Badge> : ev.some((e) => e.type === 'UNLOAD') ? <Badge tone="ok">PASS</Badge> : <Badge>still in the machine at the end of the run</Badge>}
+          </p>
+          <Table head={['t', 'Event', 'Station', '']} dense>
+            {ev.map((e, i) => (
+              <tr key={i} className={clsx(e.t <= t && 'text-ink', e.t > t && 'text-ink-3')}>
+                <td className="num font-mono">{fmtT(e.t)}</td>
+                <td className="text-micro">{e.type}</td>
+                <td>{player.res.stations.find((s) => s.station.key === e.station)?.station.name ?? e.station}</td>
+                <td>
+                  <button type="button" className="text-micro text-accent-2 hover:underline" onClick={() => setT(e.t + 1e-6)}>
+                    Go to
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </Table>
+        </>
+      )}
     </div>
   );
 }

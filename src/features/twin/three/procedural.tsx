@@ -1,8 +1,9 @@
 import { useFrame } from '@react-three/fiber';
-import { createContext, forwardRef, useContext, useMemo, useRef, type MutableRefObject, type ReactNode } from 'react';
+import { createContext, forwardRef, useContext, useLayoutEffect, useMemo, useRef, type MutableRefObject, type ReactNode } from 'react';
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { LANE_PITCH, PUSH_SHARE, type GenKind, type Machine3DObject, type MachineModel } from '../../../services/twin/machine';
-import { pickPlacePose, scaraIK, toolStroke } from '../../../services/twin/kinematics';
+import { ARM_SHOULDER, ARM_TOOL, articulatedIK, pickPlacePose, scaraIK, toolStroke } from '../../../services/twin/kinematics';
 import { pointAt, type ScanPath } from '../../../services/twin/process';
 import type { SimulationState } from '../../../services/twin/timeline';
 
@@ -1327,6 +1328,76 @@ function Robot({ o, visual: v, xray }: GenProps) {
   );
 }
 
+/**
+ * Six-axis articulated robot (conceptual): base, turret (J1), upper arm (J2), forearm (J3), wrist (J4–J6
+ * drawn as one pitch joint keeping the tool vertical), flange and gripper. Follows the pick-and-place
+ * cycle with articulated IK. Chosen when the robot record states 5 or more axes.
+ */
+function ArticulatedRobot({ o, visual: v, xray }: GenProps) {
+  const rt = useRt();
+  const [w] = o.size;
+  const L1 = Number(o.params.L1 ?? 300);
+  const L2 = Number(o.params.L2 ?? 300);
+  const turret = useRef<THREE.Group>(null);
+  const upper = useRef<THREE.Group>(null);
+  const fore = useRef<THREE.Group>(null);
+  const wrist = useRef<THREE.Group>(null);
+  const fingers = useRef<(THREE.Mesh | null)[]>([]);
+  const comp = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    const hd = rt?.model.handlers[o.stationKey ?? ''];
+    let j = { yaw: Math.PI / 2, shoulder: 1.1, elbow: -1.9, wrist: -(1.1 - 1.9) - Math.PI / 2 };
+    let holding = false;
+    if (hd && hd.objectId === o.id) {
+      const pose = pickPlacePose(hd.pp, workProgress(rt, o));
+      const ik = articulatedIK(pose.tcp[0] - o.position[0], pose.tcp[1] - (o.position[1] + ARM_SHOULDER), pose.tcp[2] - o.position[2], L1, L2, ARM_TOOL);
+      j = ik;
+      holding = pose.holding;
+    }
+    if (turret.current) turret.current.rotation.y = -j.yaw;
+    if (upper.current) upper.current.rotation.z = j.shoulder;
+    if (fore.current) fore.current.rotation.z = j.elbow;
+    if (wrist.current) wrist.current.rotation.z = j.wrist;
+    fingers.current.forEach((f, i) => f && (f.position.z = (i ? 1 : -1) * (holding ? 9 : 16) * MM));
+    if (comp.current) comp.current.visible = holding && hd?.carries === 'component';
+  });
+  return (
+    <group>
+      <Cy p={[0, 25, 0]} rad={w / 2} len={50} m="laser" v={v} x={xray} />
+      <group ref={turret} position={s3([0, 50, 0])}>
+        <Cy p={[0, 60, 0]} rad={w / 2.6} len={120} m="laser" v={v} x={xray} />
+        <Bx p={[0, 170, 0]} s={[110, 140, 120]} m="laser" v={v} x={xray} cast />
+        <group ref={upper} position={s3([0, ARM_SHOULDER - 50, 0])}>
+          <Cy p={[0, 0, 0]} rad={52} len={140} m="black" v={v} x={xray} axis="z" />
+          <Bx p={[L1 / 2, 0, 0]} s={[L1 + 40, 70, 90]} m="laser" v={v} x={xray} cast />
+          <group ref={fore} position={s3([L1, 0, 0])}>
+            <Cy p={[0, 0, 0]} rad={42} len={120} m="black" v={v} x={xray} axis="z" />
+            <Bx p={[L2 / 2, 0, 0]} s={[L2 + 30, 54, 70]} m="laser" v={v} x={xray} cast />
+            <group ref={wrist} position={s3([L2, 0, 0])}>
+              <Cy p={[0, 0, 0]} rad={30} len={90} m="black" v={v} x={xray} axis="z" />
+              <Bx p={[ARM_TOOL * 0.35, 0, 0]} s={[ARM_TOOL * 0.5, 40, 40]} m="aluminium" v={v} x={xray} />
+              <Bx p={[ARM_TOOL * 0.72, 0, 0]} s={[16, 50, 36]} m="black" v={v} x={xray} />
+              {[0, 1].map((i) => (
+                <mesh key={i} ref={(m) => (fingers.current[i] = m)} position={s3([ARM_TOOL * 0.9, 0, i ? 16 : -16])} material={mat('steel', v, xray)}>
+                  <boxGeometry args={s3([30, 18, 6])} />
+                </mesh>
+              ))}
+              <mesh ref={comp} position={s3([ARM_TOOL + 4, 0, 0])} material={mat('copper', 'normal')} visible={false}>
+                <boxGeometry args={s3([10, 22, 16])} />
+              </mesh>
+            </group>
+          </group>
+        </group>
+      </group>
+    </group>
+  );
+}
+
+/** Robot generator: articulated arm when the record states ≥ 5 axes, SCARA otherwise. */
+function RobotAny(p: GenProps) {
+  return Number(p.o.params.axes ?? 0) >= 5 ? <ArticulatedRobot {...p} /> : <Robot {...p} />;
+}
+
 /** Pick-and-place gantry: portal, X carriage, Z quill and gripper; the part it carries is drawn by the material flow. */
 function GantryPP({ o, visual: v, xray }: GenProps) {
   const rt = useRt();
@@ -1425,7 +1496,7 @@ export const REGISTRY: Record<GenKind, ((p: GenProps) => ReactNode) | null> = {
   estop: EStop,
   tower: Tower,
   sensor: Sensor,
-  robot: Robot,
+  robot: RobotAny,
   bin: Bin,
   chiller: Chiller,
   fume: Chiller,
@@ -1438,13 +1509,76 @@ export const REGISTRY: Record<GenKind, ((p: GenProps) => ReactNode) | null> = {
   group: null,
 };
 
+/** Generators with no animated parts: their meshes are merged per material (one draw call per material). */
+const STATIC_KINDS = new Set<GenKind>(['frame', 'table', 'bench', 'bin', 'cabinet', 'chiller', 'fume', 'bridge', 'frl', 'valve', 'z_column']);
+
+/**
+ * Merges the static meshes of one component into one mesh per shared material after they mount (the
+ * originals are hidden, not removed, so picking and React updates keep working). Re-merged whenever the
+ * visual state, x-ray or detail level changes.
+ */
+function MergeStatic({ deps, children }: { deps: unknown[]; children: ReactNode }) {
+  const g = useRef<THREE.Group>(null);
+  useLayoutEffect(() => {
+    const root = g.current;
+    if (!root) return;
+    root.updateMatrixWorld(true);
+    const inv = new THREE.Matrix4().copy(root.matrixWorld).invert();
+    const byMat = new Map<THREE.Material, THREE.BufferGeometry[]>();
+    const hidden: THREE.Mesh[] = [];
+    root.traverse((node) => {
+      const m = node as THREE.Mesh;
+      if (!m.isMesh || m.userData.merged || Array.isArray(m.material) || !m.visible) return;
+      const geo = m.geometry.index ? m.geometry.toNonIndexed() : m.geometry.clone();
+      for (const k of Object.keys(geo.attributes)) if (!['position', 'normal', 'uv'].includes(k)) geo.deleteAttribute(k);
+      geo.applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, m.matrixWorld));
+      const list = byMat.get(m.material) ?? [];
+      list.push(geo);
+      byMat.set(m.material, list);
+      hidden.push(m);
+    });
+    if (hidden.length < 4) {
+      byMat.forEach((l) => l.forEach((x) => x.dispose()));
+      return;
+    }
+    const merged: THREE.Mesh[] = [];
+    for (const [material, geos] of byMat) {
+      const mg = mergeGeometries(geos, false);
+      geos.forEach((x) => x.dispose());
+      if (!mg) continue;
+      const mesh = new THREE.Mesh(mg, material);
+      mesh.userData.merged = true;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      root.add(mesh);
+      merged.push(mesh);
+    }
+    hidden.forEach((m) => (m.visible = false));
+    return () => {
+      merged.forEach((m) => {
+        root.remove(m);
+        m.geometry.dispose();
+      });
+      hidden.forEach((m) => (m.visible = true));
+    };
+  }, deps); // eslint-disable-line react-hooks/exhaustive-deps
+  return <group ref={g}>{children}</group>;
+}
+
 export const ObjectBody = forwardRef<THREE.Group, GenProps>(function ObjectBody(p, ref) {
+  const rt = useRt();
   const C = REGISTRY[p.o.kind];
   const pos = useMemo(() => [p.o.position[0] * MM, p.o.position[1] * MM, p.o.position[2] * MM] as [number, number, number], [p.o.position]);
   if (!C) return null;
   return (
     <group ref={ref} position={pos} rotation={[0, ((p.o.rotationY ?? 0) * Math.PI) / 180, 0]} userData={{ id: p.o.id }}>
-      <C {...p} />
+      {STATIC_KINDS.has(p.o.kind) ? (
+        <MergeStatic deps={[p.visual, p.xray, p.o, rt?.detail, rt?.enclosure]}>
+          <C {...p} />
+        </MergeStatic>
+      ) : (
+        <C {...p} />
+      )}
     </group>
   );
 });

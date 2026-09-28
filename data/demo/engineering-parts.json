@@ -4583,6 +4583,106 @@
       ]
     },
     {
+      "id": "prt-demo-robot-6ax",
+      "entity": "part",
+      "name": "DEMO 6-axis articulated robot 7 kg",
+      "scope": "GLOBAL",
+      "record_status": "Reviewed",
+      "manufacturer_id": "co-demo-robotics",
+      "model_number": "RB-A7",
+      "product_type": "robot",
+      "lifecycle_status": "Active",
+      "specs": [
+        {
+          "spec": "payload",
+          "value": 7,
+          "unit": "kg",
+          "original": "7 kg",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "reach",
+          "value": 700,
+          "unit": "mm",
+          "original": "700 mm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "axes",
+          "value": 6,
+          "unit": "",
+          "original": "6 ",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "positioning_repeatability",
+          "value": 30,
+          "unit": "µm",
+          "original": "30 µm",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        },
+        {
+          "spec": "power_consumption",
+          "value": 900,
+          "unit": "W",
+          "original": "900 W",
+          "source_id": "src-demo-datasheets",
+          "evidence": "DEMO datasheet, specifications table",
+          "confidence": "LOW",
+          "extraction_status": "USER_ENTERED",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "documents": [
+        {
+          "kind": "Datasheet",
+          "title": "RB-A7 datasheet (DEMO)",
+          "source_id": "src-demo-datasheets"
+        }
+      ],
+      "data_type": "DEMO",
+      "provenance": {
+        "source_id": "src-demo-datasheets",
+        "verification_status": "DRAFT",
+        "note": "DEMO DATA — fictional record for demonstration. Not a real manufacturer, product, specification or price."
+      },
+      "tags": [
+        "demo"
+      ],
+      "interfaces": {
+        "communication": [
+          "Ethernet",
+          "EtherCAT"
+        ]
+      },
+      "prices": [
+        {
+          "price": 14000,
+          "currency": "USD",
+          "basis": "DEMO",
+          "date": "2026-09-27",
+          "source_id": "src-demo-datasheets",
+          "lead_time_weeks": 12
+        }
+      ]
+    },
+    {
       "id": "prt-demo-gripper",
       "entity": "part",
       "name": "DEMO electric 2-jaw gripper",

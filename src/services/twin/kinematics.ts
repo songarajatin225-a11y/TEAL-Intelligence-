@@ -38,6 +38,32 @@ export function scaraFK(t1: number, t2: number, L1: number, L2: number): [number
   return [L1 * Math.cos(t1) + L2 * Math.cos(t1 + t2), L1 * Math.sin(t1) + L2 * Math.sin(t1 + t2)];
 }
 
+/** Shoulder height above the robot base and flange-to-TCP tool length of the conceptual articulated arm (mm). */
+export const ARM_SHOULDER = 320;
+export const ARM_TOOL = 110;
+
+/**
+ * Six-axis articulated arm, conceptual (3D master prompt §33): base yaw, then shoulder and elbow in the
+ * vertical plane (the same two-link solution, elbow up), wrist pitch keeping the tool vertical. Target
+ * is the tool-centre point relative to the shoulder axis; `tool` is the flange-to-TCP length.
+ */
+export function articulatedIK(dx: number, dy: number, dz: number, L1: number, L2: number, tool: number): { yaw: number; shoulder: number; elbow: number; wrist: number; reachable: boolean } {
+  const yaw = Math.atan2(dz, dx);
+  const r = Math.hypot(dx, dz);
+  const { t1, t2, reachable } = scaraIK(r, dy + tool, L1, L2, -1);
+  return { yaw, shoulder: t1, elbow: t2, wrist: -(t1 + t2) - Math.PI / 2, reachable };
+}
+
+/** Forward kinematics of the articulated arm (for tests): TCP relative to the shoulder axis. */
+export function articulatedFK(j: { yaw: number; shoulder: number; elbow: number; wrist: number }, L1: number, L2: number, tool: number): V3 {
+  const a1 = j.shoulder;
+  const a2 = a1 + j.elbow;
+  const a3 = a2 + j.wrist;
+  const r = L1 * Math.cos(a1) + L2 * Math.cos(a2) + tool * Math.cos(a3);
+  const y = L1 * Math.sin(a1) + L2 * Math.sin(a2) + tool * Math.sin(a3);
+  return [r * Math.cos(j.yaw), y, r * Math.sin(j.yaw)];
+}
+
 export interface PickPlace {
   home: V3;
   pick: V3;

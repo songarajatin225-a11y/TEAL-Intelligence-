@@ -49,6 +49,14 @@ export interface SceneView {
   callouts: boolean;
   /** objects highlighted by the guided tour / explanation */
   highlight: Set<string> | null;
+  /** name tags: none, only the working station + selection, or every component */
+  labelMode: 'none' | 'step' | 'all';
+  /** design-check findings per object (warning badges) — null hides them */
+  findings: Map<string, { severity: 'critical' | 'major' | 'minor'; count: number; first: string }> | null;
+  /** part id the camera follows (inline lines) */
+  followPart: number | null;
+  /** vision station whose camera's-eye view is shown as an inset */
+  pov: string | null;
 }
 
 /** Live values refreshed a few times per second (smooth motion itself runs in useFrame). */
@@ -90,10 +98,20 @@ function Carried({ o, model, stateRef, children }: { o: Machine3DObject; model: 
   return <group ref={g}>{children}</group>;
 }
 
-function CameraRig({ model, api, ortho, reduced }: { model: MachineModel; api: MutableRefObject<SceneApi | null>; ortho: boolean; reduced: boolean }) {
+function CameraRig({ model, api, ortho, reduced, follow }: { model: MachineModel; api: MutableRefObject<SceneApi | null>; ortho: boolean; reduced: boolean; follow: MutableRefObject<THREE.Vector3 | null> }) {
   const { camera, gl, size } = useThree();
   const controls = useThree((s) => s.controls) as OrbitControlsImpl | null;
   const anim = useRef<{ from: THREE.Vector3; to: THREE.Vector3; tf: THREE.Vector3; tt: THREE.Vector3; t: number } | null>(null);
+  // following a part: the orbit target glides after it and the camera keeps its offset
+  const fd = useMemo(() => new THREE.Vector3(), []);
+  useFrame((_, dt) => {
+    const f = follow.current;
+    if (!f || !controls || anim.current) return;
+    fd.copy(f).sub(controls.target).multiplyScalar(reduced ? 1 : Math.min(1, dt * 4));
+    controls.target.add(fd);
+    camera.position.add(fd);
+    controls.update();
+  });
   const b = model.bounds;
   const c = new THREE.Vector3(((b.min[0] + b.max[0]) / 2) * MM, ((b.min[1] + b.max[1]) / 2) * MM, ((b.min[2] + b.max[2]) / 2) * MM);
   const r = (Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) / 2) * MM;
@@ -212,11 +230,14 @@ function Section({ view }: { view: SceneView }) {
  * the station anchor, or the gripper of the robot / gantry that is carrying it — so transfers are
  * continuous rather than jumps. Queued parts line up behind the station.
  */
-function FlowParts({ model, stateRef, reduced }: { model: MachineModel; stateRef: MutableRefObject<SimulationState | null>; reduced: boolean }) {
+function FlowParts({ model, stateRef, reduced, followPart, follow, onPartPick }: { model: MachineModel; stateRef: MutableRefObject<SimulationState | null>; reduced: boolean; followPart: number | null; follow: MutableRefObject<THREE.Vector3 | null>; onPartPick?: (id: number) => void }) {
   const pool = 32;
   const qpool = 24;
   const refs = useRef<(THREE.Group | null)[]>([]);
   const qrefs = useRef<(THREE.Group | null)[]>([]);
+  const halos = useRef<(THREE.Mesh | null)[]>([]);
+  const slotPart = useRef<number[]>([]);
+  const ngParts = useRef(new Set<number>());
   const track = useRef(new Map<number, { slot: number; pos: THREE.Vector3 }>());
   const keys = Object.keys(model.anchors);
   const tmp = useMemo(() => new THREE.Vector3(), []);
@@ -257,6 +278,7 @@ function FlowParts({ model, stateRef, reduced }: { model: MachineModel; stateRef
             t = [at[0], at[1] - thk, at[2]];
           }
           // a rejected part is pushed off the belt by the diverter and drops into the NG bin
+          if (sv.ng) ngParts.current.add(sv.part);
           const pu = pushers.get(st.key);
           if (pu && sv.ng && sv.state === 'busy') {
             const u = sv.step && sv.step.kind !== 'move' ? sv.stepProgress : 0;
@@ -299,15 +321,41 @@ function FlowParts({ model, stateRef, reduced }: { model: MachineModel; stateRef
         g.visible = true;
         g.position.set(tr.pos.x * MM, tr.pos.y * MM, tr.pos.z * MM);
       }
+      slotPart.current[tr.slot] = id;
+      // halo: teal on the followed part, red on a part rejected at its current station
+      const h = halos.current[tr.slot];
+      if (h) {
+        const ng = ngParts.current.has(id);
+        h.visible = id === followPart || ng;
+        (h.material as THREE.MeshBasicMaterial).color.set(id === followPart ? '#00e0cf' : '#e5484d');
+      }
+      if (id === followPart) (follow.current ??= new THREE.Vector3()).set(tr.pos.x * MM, tr.pos.y * MM, tr.pos.z * MM);
     }
+    if (followPart != null && !targets.has(followPart)) follow.current = null;
+    for (const id of ngParts.current) if (!targets.has(id)) ngParts.current.delete(id);
     for (let k = 0; k < pool; k++) if (!used.has(k) && refs.current[k]) refs.current[k]!.visible = false;
   });
+  useEffect(() => {
+    if (followPart == null) follow.current = null;
+  }, [followPart, follow]);
   const wpm = <WorkpieceMesh template={model.workpiece.template} l={model.workpiece.length} w={model.workpiece.width} t={model.workpiece.thickness} />;
   return (
     <group>
       {Array.from({ length: pool }, (_, i) => (
-        <group key={`p${i}`} ref={(g) => (refs.current[i] = g)} visible={false}>
+        <group
+          key={`p${i}`}
+          ref={(g) => (refs.current[i] = g)}
+          visible={false}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (slotPart.current[i] != null) onPartPick?.(slotPart.current[i]);
+          }}
+        >
           {wpm}
+          <mesh ref={(m) => (halos.current[i] = m)} rotation={[-Math.PI / 2, 0, 0]} position={[0, (model.workpiece.thickness + 3) * MM, 0]} visible={false}>
+            <ringGeometry args={[(Math.max(model.workpiece.length, model.workpiece.width) / 2 + 8) * MM, (Math.max(model.workpiece.length, model.workpiece.width) / 2 + 16) * MM, 32]} />
+            <meshBasicMaterial color="#00e0cf" transparent opacity={0.9} depthTest={false} />
+          </mesh>
         </group>
       ))}
       {Array.from({ length: qpool }, (_, i) => (
@@ -515,6 +563,8 @@ export interface ScreenLabel {
   color?: string;
   center?: boolean;
   dim?: boolean;
+  /** warning badge of a design-check finding */
+  finding?: 'critical' | 'major' | 'minor';
 }
 
 /**
@@ -549,7 +599,7 @@ function ScreenLabels({ items }: { items: ScreenLabel[] }) {
         host.appendChild(el);
         els.current.set(it.key, el);
       }
-      el.className = `twin-label twin-abs${it.dim ? ' twin-dim' : ''}${it.center ? ' twin-center' : ''}`;
+      el.className = `twin-label twin-abs${it.dim ? ' twin-dim' : ''}${it.center ? ' twin-center' : ''}${it.finding ? ` twin-finding twin-finding-${it.finding}` : ''}`;
       el.textContent = it.text;
       el.style.borderColor = it.color ?? '';
     }
@@ -664,9 +714,11 @@ export const MachineScene = forwardRef<
     factory?: { x: number; z: number; rot: number; label: string }[];
     debugRef?: MutableRefObject<HTMLDivElement | null>;
     hmi?: { title: string; recipe: string };
+    onPartPick?: (id: number) => void;
   }
->(function MachineScene({ model, view, live, stateRef, paths, onPick, onHover, onMeasure, onDecline, ghost, factory, debugRef, hmi }, ref) {
+>(function MachineScene({ model, view, live, stateRef, paths, onPick, onHover, onMeasure, onDecline, ghost, factory, debugRef, hmi, onPartPick }, ref) {
   const api = useRef<SceneApi | null>(null);
+  const follow = useRef<THREE.Vector3 | null>(null);
   useImperativeHandle(ref, () => ({
     view: (p, id) => api.current?.view(p, id),
     canvas: () => api.current?.canvas() ?? null,
@@ -777,17 +829,28 @@ export const MachineScene = forwardRef<
       out.push({ key: 'dim-d', pos: W([b.max[0] + 120, 2, (b.min[2] + b.max[2]) / 2]), text: `D ${Math.round(model.dims.depth)} mm`, dim: true, center: true });
       out.push({ key: 'dim-h', pos: W([b.min[0] - 120, b.max[1] / 2, b.max[2]]), text: `H ${Math.round(model.dims.height)} mm`, dim: true, center: true });
     }
-    if (view.callouts)
+    // name tags: every component, or only the working station(s) + the selection / highlight
+    const mode = view.callouts ? view.labelMode : 'none';
+    const working = new Set(Object.entries(live.stationState).filter(([, s]) => s === 'busy').map(([k]) => k));
+    if (mode !== 'none')
       for (const o of model.objects) {
         if (!CALLOUT_KINDS.has(o.kind) || !view.layers[o.layer] || view.hidden.has(o.id)) continue;
         if (o.carriedBy?.length && o.kind !== 'fixture') continue;
+        if (mode === 'step' && !(o.id === view.selected || view.highlight?.has(o.id) || (o.stationKey && working.has(o.stationKey)))) continue;
         const name = view.customer ? (o.name.split(' — ')[0] ?? o.name) : o.name.replace(/ \(part of the laser source\)/, '');
         out.push({ key: `co-${o.id}`, pos: W([o.position[0], o.position[1] + o.size[1] + 25, o.position[2]]), text: name.length > 38 ? `${name.slice(0, 36)}…` : name, center: true });
+      }
+    // design-check findings on components (always shown when on — they are the engineering to-do list)
+    if (view.findings && !view.customer)
+      for (const [id, f] of view.findings) {
+        const o = model.byId.get(id);
+        if (!o || !view.layers[o.layer] || view.hidden.has(id)) continue;
+        out.unshift({ key: `fd-${id}`, pos: W([o.position[0], o.position[1] + o.size[1] + 60, o.position[2]]), text: `⚠ ${f.count > 1 ? `${f.count} findings` : f.first.length > 44 ? `${f.first.slice(0, 42)}…` : f.first}`, color: f.severity === 'critical' ? '#e5484d' : f.severity === 'major' ? '#f5a524' : '#8d9a9a', center: true, finding: f.severity });
       }
     if (ghost) out.push({ key: 'ghost', pos: [ghost.bounds.min[0] * MM, (ghost.bounds.max[1] + 80) * MM, -(model.dims.depth + ghost.dims.depth / 2 + 900) * MM], text: 'Comparison scenario (outline)', color: '#a78bfa' });
     factory?.forEach((f, i) => out.push({ key: `fac-${i}`, pos: [f.x * MM + ((model.bounds.min[0] + model.bounds.max[0]) / 2) * MM, (model.dims.height + 120) * MM, f.z * MM], text: f.label, center: true }));
     return out;
-  }, [view.labels, view.fov, view.field, view.zones, view.zonesAll, view.dims, view.layers, view.customer, view.callouts, view.hidden, model, ghost, factory]);
+  }, [view.labels, view.fov, view.field, view.zones, view.zonesAll, view.dims, view.layers, view.customer, view.callouts, view.labelMode, view.findings, view.selected, view.highlight, view.hidden, live.stationState, model, ghost, factory]);
   const rt: TwinRuntime = useMemo(() => ({ stateRef, model, paths, detail: view.quality === 'performance' ? 'low' : 'high', enclosure: view.enclosure, hmi: hmi ?? { title: model.label, recipe: '—' }, reduced: view.reducedMotion }), [stateRef, model, paths, view.quality, view.enclosure, hmi, view.reducedMotion]);
   const shadows = view.quality === 'high';
   const b = model.bounds;
@@ -798,7 +861,8 @@ export const MachineScene = forwardRef<
     <RuntimeCtx.Provider value={rt}>
       {view.ortho ? <OrthographicCamera makeDefault position={[cx + 2.2, 2.2, cz + 2.6]} near={-50} far={100} /> : <PerspectiveCamera makeDefault fov={35} position={[cx + 2.4, 2.1, cz + 2.9]} near={0.01} far={200} />}
       <OrbitControls makeDefault target={[cx, 0.9, cz]} enableDamping={!view.reducedMotion} dampingFactor={0.12} maxPolarAngle={Math.PI * 0.495} />
-      <CameraRig model={model} api={api} ortho={view.ortho} reduced={view.reducedMotion} />
+      <CameraRig model={model} api={api} ortho={view.ortho} reduced={view.reducedMotion} follow={follow} />
+      {view.pov && model.vision.some((v) => v.stationKey === view.pov) && <CameraPov model={model} stationKey={view.pov} renderMain={!view.axes} />}
       <Section view={view} />
       {onDecline && <PerformanceMonitor onDecline={onDecline} />}
       {debugRef && <Debug out={debugRef} />}
@@ -818,7 +882,7 @@ export const MachineScene = forwardRef<
           <CarriedPart wp={wp} model={model} stateRef={stateRef} />
         </Carried>
       )}
-      {model.carrier === 'flow' && view.layers.Material && <FlowParts model={model} stateRef={stateRef} reduced={view.reducedMotion} />}
+      {model.carrier === 'flow' && view.layers.Material && <FlowParts model={model} stateRef={stateRef} reduced={view.reducedMotion} followPart={view.followPart} follow={follow} onPartPick={onPartPick} />}
       {view.layers.Laser && <LaserFx model={model} stateRef={stateRef} view={view} paths={paths} partOffset={partOffset} />}
       {view.fov && view.layers.Vision && <Fov model={model} live={live} />}
       {view.field && view.layers.Laser && <Field model={model} />}
@@ -893,6 +957,51 @@ function CarriedPart({ wp, model, stateRef }: { wp: Machine3DObject; model: Mach
       <WorkpieceMesh template={model.workpiece.template} l={model.workpiece.length} w={model.workpiece.width} t={model.workpiece.thickness} />
     </group>
   );
+}
+
+/** Inset size of the camera's-eye view (fraction of the viewport width), top-right corner. */
+export const POV_FRACTION = 0.3;
+
+/**
+ * Camera's-eye view (§31): the scene rendered from the lens position, looking at the part, with the field
+ * of view computed from the camera and lens records — an inset in the top-right corner. It shows what
+ * the camera frames, not a simulated image (no exposure, lighting or lens distortion).
+ */
+function CameraPov({ model, stationKey, renderMain }: { model: MachineModel; stationKey: string; renderMain: boolean }) {
+  const { gl, scene, camera, size } = useThree();
+  const pov = useMemo(() => new THREE.PerspectiveCamera(30, 1, 0.001, 20), []);
+  const v = model.vision.find((x) => x.stationKey === stationKey);
+  useFrame(() => {
+    if (renderMain) {
+      gl.autoClear = true;
+      gl.render(scene, camera);
+    }
+    const cam = v ? model.byId.get(v.cameraId) : undefined;
+    const a = model.anchors[stationKey];
+    if (!v || !cam || !a || v.fovX == null || v.fovY == null || v.wd == null) return;
+    const lensY = a[1] + v.wd;
+    pov.position.set(cam.position[0] * MM, lensY * MM, cam.position[2] * MM);
+    pov.up.set(0, 0, -1);
+    pov.lookAt(cam.position[0] * MM, a[1] * MM, cam.position[2] * MM);
+    pov.fov = (2 * Math.atan(v.fovY / 2 / v.wd) * 180) / Math.PI;
+    pov.aspect = v.fovX / v.fovY;
+    pov.near = Math.max(0.001, (v.wd * 0.2) * MM);
+    pov.updateProjectionMatrix();
+    const w = Math.round(size.width * POV_FRACTION);
+    const h = Math.round(w / pov.aspect);
+    const x = size.width - w - 10;
+    const y = size.height - h - 10;
+    gl.autoClear = false;
+    gl.setViewport(x, y, w, h);
+    gl.setScissor(x, y, w, h);
+    gl.setScissorTest(true);
+    gl.clear(true, true, false);
+    gl.render(scene, pov);
+    gl.setScissorTest(false);
+    gl.setViewport(0, 0, size.width, size.height);
+    gl.autoClear = true;
+  }, 2);
+  return null;
 }
 
 function Debug({ out }: { out: MutableRefObject<HTMLDivElement | null> }) {

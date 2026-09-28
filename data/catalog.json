@@ -309,7 +309,7 @@
       "entity": "part",
       "kind": "records",
       "version": "1.0.0",
-      "record_count": 51,
+      "record_count": 52,
       "last_updated": "2026-09-27",
       "schema": "schemas/part.schema.json",
       "source_ids": [
@@ -317,7 +317,7 @@
       ],
       "data_type": "DEMO",
       "partition": "engineering",
-      "sha256": "01245f5e41b72583"
+      "sha256": "b8311d4972d3c97e"
     },
     {
       "id": "demo-engineering-sources",
@@ -462,7 +462,7 @@
       ],
       "data_type": "DEMO",
       "partition": "engineering",
-      "sha256": "3d4cd25e6f446d04"
+      "sha256": "a5e1ec81c0e96785"
     },
     {
       "id": "demo-twin-requirements",

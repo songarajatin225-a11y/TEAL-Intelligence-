@@ -5,8 +5,9 @@ import { readSpec, type SpecDefs } from '../eng/specs';
 
 /*
  * MOTION ENGINE (3D master prompt §15–§19). Conceptual kinematics: trapezoidal (or triangular)
- * velocity profiles from stroke, speed, acceleration and deceleration. Not a servo-level model —
- * no jerk, following error, load inertia or controller tuning (§18).
+ * velocity profiles from stroke, speed, acceleration and deceleration; a jerk-limited S-curve when a
+ * jerk limit is entered; and an in-position settling time when one is entered. Not a servo-level
+ * model — no following error, load inertia or controller tuning (§18).
  */
 
 /** Read a part specification converted to `unit` (null when absent or not convertible). */
@@ -34,6 +35,10 @@ export interface AxisModel {
   speed: number | null;
   accel: number | null;
   decel: number | null;
+  /** mm/s³ — S-curve when set, trapezoidal otherwise */
+  jerk: number | null;
+  /** seconds added after every move of this axis; null = not defined (not included) */
+  settle: number | null;
   /** where each value came from */
   sources: { stroke: string; speed: string; accel: string };
   basis: Basis;
@@ -67,6 +72,8 @@ export function resolveAxis(a: TwinAxis, byId: Map<string, AnyRecord>, defs: Spe
     speed,
     accel,
     decel: a.decel_mm_s2 ?? accel,
+    jerk: a.jerk_mm_s3 ?? null,
+    settle: a.settle_ms != null ? a.settle_ms / 1000 : null,
     sources: { stroke: s1, speed: s2, accel: s3 },
     basis: a.basis ?? (a.speed_mm_s != null ? 'USER_INPUT' : partBasis),
     missing,
@@ -85,6 +92,63 @@ export function moveTime(dist: number, v: number, a: number, d = a): number {
     return vp / a + vp / d;
   }
   return v / a + (s - sa - sd) / v + v / d;
+}
+
+/**
+ * Jerk-limited (S-curve) point-to-point time. Acceleration ramps at `j`; when the move is too short to
+ * reach full acceleration or full speed, the peak speed is reduced until the ramps fit the distance.
+ */
+export function sCurveTime(dist: number, v: number, a: number, j: number, d = a): number {
+  const s = Math.abs(dist);
+  if (s === 0) return 0;
+  // time and distance to go 0 → vp (and vp → 0) with jerk j and acceleration limit acc
+  const ramp = (vp: number, acc: number) => {
+    if (vp >= (acc * acc) / j) {
+      const t = vp / acc + acc / j;
+      return { t, x: (vp * t) / 2 };
+    }
+    const t = 2 * Math.sqrt(vp / j);
+    return { t, x: (vp * t) / 2 };
+  };
+  const fits = (vp: number) => ramp(vp, a).x + ramp(vp, d).x <= s;
+  let vp = v;
+  if (!fits(v)) {
+    let lo = 0;
+    let hi = v;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (fits(mid)) lo = mid;
+      else hi = mid;
+    }
+    vp = lo;
+  }
+  const up = ramp(vp, a);
+  const dn = ramp(vp, d);
+  return up.t + dn.t + (vp > 0 ? (s - up.x - dn.x) / vp : 0);
+}
+
+/** Motion time of one axis for a distance: S-curve with a jerk limit, else trapezoidal; plus settling when defined. */
+export function axisMoveTime(dist: number, ax: Pick<AxisModel, 'speed' | 'accel' | 'decel' | 'jerk' | 'settle'>): number | null {
+  if (ax.speed == null || ax.accel == null) return null;
+  if (dist === 0) return 0;
+  const d = ax.decel ?? ax.accel;
+  const t = ax.jerk != null ? sCurveTime(dist, ax.speed, ax.accel, ax.jerk, d) : moveTime(dist, ax.speed, ax.accel, d);
+  return t + (ax.settle ?? 0);
+}
+
+/**
+ * Position along an axis move at time t, using the same total time as axisMoveTime: the trapezoidal
+ * shape is stretched over the S-curve duration, and the axis holds at the target while it settles.
+ */
+export function axisPositionAt(from: number, to: number, ax: Pick<AxisModel, 'speed' | 'accel' | 'decel' | 'jerk' | 'settle'>, t: number): { pos: number; vel: number } {
+  if (ax.speed == null || ax.accel == null) return { pos: to, vel: 0 };
+  const d = ax.decel ?? ax.accel;
+  const trap = moveTime(to - from, ax.speed, ax.accel, d);
+  const motion = ax.jerk != null ? sCurveTime(to - from, ax.speed, ax.accel, ax.jerk, d) : trap;
+  if (t >= motion) return { pos: to, vel: 0 };
+  const k = motion > 0 ? trap / motion : 1;
+  const p = positionAt(from, to, ax.speed, ax.accel, d, t * k);
+  return { pos: p.pos, vel: p.vel * k };
 }
 
 /** Position along a move at time t since the move started (same profile as moveTime). */
@@ -144,7 +208,7 @@ export function planMoves(moves: TwinMove[], axes: AxisModel[], stationOrder: st
     const perAxis = Object.entries(m.targets).map(([k, to]) => {
       const ax = byKey.get(k);
       const dist = to - (pos[k] ?? 0);
-      const time = ax && ax.speed != null && ax.accel != null ? moveTime(dist, ax.speed, ax.accel, ax.decel ?? ax.accel) : null;
+      const time = ax ? axisMoveTime(dist, ax) : null;
       return { axis: k, dist, time };
     });
     const limitViolations = Object.entries(m.targets)

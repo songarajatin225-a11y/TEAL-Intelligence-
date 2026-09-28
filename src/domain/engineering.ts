@@ -439,6 +439,10 @@ export const TwinAxis = z.object({
   speed_mm_s: z.number().positive().nullable().optional(),
   accel_mm_s2: z.number().positive().nullable().optional(),
   decel_mm_s2: z.number().positive().nullable().optional(),
+  /** jerk limit (S-curve); when absent the profile is trapezoidal */
+  jerk_mm_s3: z.number().positive().nullable().optional(),
+  /** in-position settling time after each move; when absent it is NOT included (stated, never assumed) */
+  settle_ms: z.number().nonnegative().nullable().optional(),
   basis: z.enum(BASES).optional(),
 });
 export type TwinAxis = z.infer<typeof TwinAxis>;
@@ -492,6 +496,14 @@ export const TwinInputs = z.object({
   zones: z.array(z.object({ key: z.string(), name: z.string(), type: z.enum(SAFETY_ZONE_TYPES), enabled: z.boolean(), rule: z.string().optional() })).optional(),
   snapshots: z.array(TwinSnapshot).optional(),
   runs: z.array(TwinRun).optional(),
+  /**
+   * Inline part transfer between stations (conveyor / shuttle). Time = distance ÷ speed (trapezoidal when
+   * an acceleration is given). Speed falls back to the selected conveyor's stated max speed. When the
+   * distance is not entered the transfer time is not included and the Studio says so.
+   */
+  transfer: z
+    .object({ distance_mm: z.number().positive().nullable().optional(), speed_mm_s: z.number().positive().nullable().optional(), accel_mm_s2: z.number().positive().nullable().optional(), basis: z.enum(BASES).optional() })
+    .optional(),
   /** §107 conceptual factory placement of machines (this and other scenarios) */
   factory: z.array(z.object({ id: z.string(), sim_id: ref, x_mm: z.number(), z_mm: z.number(), rot_deg: z.number() })).optional(),
 });
