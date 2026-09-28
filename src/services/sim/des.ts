@@ -236,7 +236,8 @@ export function runDes(res: Resolved, o: DesOptions): DesResult {
     tr({ t: now, type: 'queue', st: i, q: queues[i].length });
     tryStart(i);
   };
-  const exit = (part: number, good: boolean) => {
+  /** part leaves the system — from the last station, or from station `at` when it is rejected there */
+  const exit = (part: number, good: boolean, at = n - 1) => {
     setWip(-1);
     if (now >= warm) {
       if (good) ok++;
@@ -248,7 +249,7 @@ export function runDes(res: Resolved, o: DesOptions): DesResult {
       }
     }
     startTime.delete(part);
-    tr({ t: now, type: 'exit', st: n - 1, part, ok: good });
+    tr({ t: now, type: 'exit', st: at, part, ok: good });
     if (wipCap !== Infinity) tryStart(0);
   };
   /** a server at station i became free: pull work from the queue, then let blocked upstream servers push */
@@ -299,7 +300,7 @@ export function runDes(res: Resolved, o: DesOptions): DesResult {
       const p = sv.part;
       sv.part = -1;
       setState(i, j, 'idle');
-      exit(p, false);
+      exit(p, false, i);
       freed(i);
       return;
     }

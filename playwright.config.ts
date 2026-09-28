@@ -19,7 +19,8 @@ export default defineConfig({
     baseURL: base,
     trace: 'retain-on-failure',
     ...devices['Desktop Chrome'],
-    launchOptions: localChromium ? { executablePath: localChromium } : {},
+    // software WebGL so the 3D digital twin renders in headless runs (CI has no GPU)
+    launchOptions: { ...(localChromium ? { executablePath: localChromium } : {}), args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
   webServer: {
     command: 'npx vite preview --port 4173 --strictPort',
