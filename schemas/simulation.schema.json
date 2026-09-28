@@ -1261,6 +1261,28 @@
                   }
                 ]
               },
+              "jerk_mm_s3": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "settle_ms": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
               "basis": {
                 "type": "string",
                 "enum": [
@@ -1583,6 +1605,56 @@
               "results",
               "assumptions"
             ]
+          }
+        },
+        "transfer": {
+          "type": "object",
+          "properties": {
+            "distance_mm": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "speed_mm_s": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "accel_mm_s2": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "CALCULATED",
+                "EMPIRICAL",
+                "USER_INPUT",
+                "MANUFACTURER_DATA",
+                "VALIDATED",
+                "ASSUMPTION",
+                "DEMO"
+              ]
+            }
           }
         },
         "factory": {

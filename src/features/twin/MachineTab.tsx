@@ -1,7 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import clsx from 'clsx';
-import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, Expand, Eye, EyeOff, Focus, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, ListTree, Maximize2, Palette, PanelLeft, Pause, Play, Ruler, Scan, ScanEye, Scissors, Search, Square, Tag, X } from 'lucide-react';
+import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, CircleStop, Expand, Eye, EyeOff, Focus, Gauge, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, Link2, ListTree, Maximize2, Minimize2, Palette, PanelLeft, Pause, Play, RotateCcw, Ruler, Scan, ScanEye, Scissors, Search, SkipForward, Square, Video, X } from 'lucide-react';
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useSearchParams } from 'react-router-dom';
 import { recordPath } from '../../components/RecordLink';
 import { toast } from '../../components/toast';
@@ -12,7 +13,9 @@ import { displaySpec, KEY_SPECS, readSpec } from '../../services/eng/specs';
 import { sheetFor } from '../../services/eng/componentDetail';
 import { alternativesFor, selectedParts } from '../../services/sim/supply';
 import { resolveScenario } from '../../services/sim/model';
+import { findingsByObject, type TwinCheck } from '../../services/twin/checks';
 import { buildMachine, LAYERS, type Layer, type Machine3DObject } from '../../services/twin/machine';
+import { livePower, utilities } from '../../services/twin/utilities';
 import { PREVIEW_STATION_S } from '../../services/twin/preview';
 import type { SimulationState } from '../../services/twin/timeline';
 import { explainObject, machineTour, narrate, type ExplainCtx, type TourStep } from '../../services/twin/explain';
@@ -20,8 +23,8 @@ import { SheetBody } from '../engineering/ComponentSheet';
 import { big, money, num, pct } from '../studio/shared';
 import type { TabProps } from '../studio/ScenarioPage';
 import { NumInput, SmallSelect } from '../studio/tabs/edit';
-import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, InputsPanel, IoPanel, MotionPanel, RunsPanel, SequencePanel, TimelinePanel } from './panels';
-import { MachineScene, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
+import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, InputsPanel, IoPanel, MotionPanel, PartTracePanel, RunsPanel, SequencePanel, TimelinePanel, UtilitiesPanel } from './panels';
+import { MachineScene, POV_FRACTION, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
 import type { EnclosureMode } from './three/procedural';
 import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type RunOptions } from './useTwin';
 
@@ -75,10 +78,11 @@ export default function MachineTab(p: TabProps) {
 
 type Overlay = 'none' | 'state' | 'localization' | 'cost' | 'requirement' | 'risk';
 type CamMode = 'engineering' | 'customer' | 'exploded' | 'xray' | 'process' | 'laser' | 'inspection' | 'maintenance';
-type Bottom = 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'faults' | 'runs' | 'compare' | 'assumptions';
+type Bottom = 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'utilities' | 'trace' | 'faults' | 'runs' | 'compare' | 'assumptions';
 
 const reducedMotionQuery = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const allLayers = () => Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<Layer, boolean>;
+const narrowScreen = () => typeof window !== 'undefined' && window.innerWidth < 640;
 
 function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFail: () => void }) {
   // mount the WebGL canvas after the page has painted: context creation and shader compilation are
@@ -92,12 +96,14 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       clearTimeout(to);
     };
   }, []);
-  const [, setParams] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const twin = useTwinModel(eng, sim, d);
   const { model } = twin;
   const [run, setRunState] = useState<RunOptions>({ seed: 11, horizon_s: 3600, failures: false, scenarioFaults: false, injected: [] });
   const setRun = useCallback((f: (r: RunOptions) => RunOptions) => setRunState(f), []);
   const { des, player, baseline, error, preview } = useTwinRun(d, model, run);
+  const util = useMemo(() => utilities(d.res, eng.byId, eng.defs), [d.res, eng.byId, eng.defs]);
+  const findings = useMemo(() => findingsByObject(twin.checks), [twin.checks]);
 
   /* ---------------- central simulation clock (§127: render loop decoupled from the simulation) */
   const tRef = useRef(0);
@@ -108,6 +114,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const [speed, setSpeed] = useState(1);
   const [collision, setCollision] = useState<{ text: string; t: number; a: string; b: string } | null>(null);
   const ack = useRef(new Set<string>());
+  const planLabels = useMemo(() => new Set(model.plan.map((m) => m.label)), [model.plan]);
   const setT = useCallback(
     (x: number) => {
       const v = Math.max(0, Math.min(player?.end ?? 0, x));
@@ -133,11 +140,11 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       tRef.current = Math.min(player.end, tRef.current + dt * speed);
       const s = player.at(tRef.current);
       stateRef.current = s;
-      // §21 never continue silently through a collision
+      // §21 never continue silently through a collision — axis moves and robot / gantry sweeps alike
       for (const st of s.stations)
         for (const sv of st.servers) {
-          if (sv.state !== 'busy' || sv.step?.kind !== 'move') continue;
-          const hit = twin.collisions.find((h) => h.stationKey === st.key && h.moveLabel === sv.step!.name);
+          if (sv.state !== 'busy' || !sv.step) continue;
+          const hit = twin.collisions.find((h) => h.stationKey === st.key && (sv.step!.kind === 'move' ? h.moveLabel === sv.step!.name : !planLabels.has(h.moveLabel)));
           const key = hit ? `${hit.a}|${hit.b}` : '';
           if (hit && !ack.current.has(key)) {
             ack.current.add(key);
@@ -163,7 +170,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [playing, player, speed, twin.collisions]);
+  }, [playing, player, speed, twin.collisions, planLabels]);
 
   /* ---------------- view state */
   const [view, setView] = useState<SceneView>(() => ({
@@ -177,13 +184,17 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     explode: 0,
     section: { axis: null, pos: 0 },
     grid: true,
-    axes: true,
+    axes: !narrowScreen(),
     dims: false,
     labels: !customer,
     zones: true,
     routes: false,
     enclosure: customer ? 'closed' : 'cutaway',
-    callouts: !customer,
+    callouts: true,
+    labelMode: customer || narrowScreen() ? 'none' : 'step',
+    findings: null,
+    followPart: null,
+    pov: null,
     highlight: null,
     fov: true,
     field: true,
@@ -212,10 +223,37 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const [debug, setDebug] = useState(false);
   const [treeQ, setTreeQ] = useState('');
   const [open, setOpen] = useState<Set<string>>(new Set(['machine']));
+  // workspace: full-bleed studio mode and the two drawers over the viewport
+  const [studio, setStudio] = useState(false);
+  const [treeOpen, setTreeOpen] = useState(false);
+  const [propsOpen, setPropsOpen] = useState(() => typeof window !== 'undefined' && window.innerWidth >= 1600);
+  const [findingsOn, setFindingsOn] = useState(!customer);
+  const [recording, setRecording] = useState(false);
+  const recorder = useRef<MediaRecorder | null>(null);
   const scene = useRef<SceneApi | null>(null);
   const box = useRef<HTMLDivElement | null>(null);
   const debugOut = useRef<HTMLDivElement | null>(null);
-  useEffect(() => patch({ customer, labels: !customer, callouts: !customer, enclosure: customer ? 'closed' : 'cutaway' }), [customer]);
+  useEffect(() => patch({ customer, labels: !customer, labelMode: customer ? 'none' : 'step', enclosure: customer ? 'closed' : 'cutaway' }), [customer]);
+
+  // bring the machine into view when the tab opens on a short screen (the status, toolbar and viewport fit together)
+  useEffect(() => {
+    const el = box.current;
+    if (!el || typeof window === 'undefined') return;
+    if (el.getBoundingClientRect().top > window.innerHeight * 0.4) el.scrollIntoView({ block: 'start', behavior: reducedMotionQuery() ? 'auto' : 'smooth' });
+  }, []);
+  // entering / leaving studio mode re-mounts the canvas in its new place: keep the camera where it was
+  const toggleStudio = (on: boolean) => {
+    const cam = scene.current?.camera();
+    setStudio(on);
+    if (cam) setTimeout(() => scene.current?.setCamera(cam.position, cam.target), 700);
+  };
+  // studio mode: Esc returns to the page layout
+  useEffect(() => {
+    if (!studio) return;
+    const onEsc = (e: globalThis.KeyboardEvent) => e.key === 'Escape' && toggleStudio(false);
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [studio]);
 
   /* ---------------- explanation: per-component, guided tour, live narration (§139, §153, §164) */
   const xctx: ExplainCtx = useMemo(() => ({ model, res: d.res, cycle: d.cycle, byId: eng.byId, defs: eng.defs }), [model, d.res, d.cycle, eng.byId, eng.defs]);
@@ -233,6 +271,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     }
     const st: TourStep = tour[i];
     patch({ highlight: new Set(st.highlight), selected: st.focus });
+    if (st.focus) setPropsOpen(true);
     setTimeout(() => {
       if (st.preset === 'laser' || st.preset === 'inspection' || st.preset === 'maintenance') scene.current?.view(st.preset);
       else if (st.focus) scene.current?.view('fit', st.focus);
@@ -246,7 +285,6 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   }, [tourAuto, tourIdx]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // §154 command-palette actions arrive as ?cmd=… on this tab
-  const [params] = useSearchParams();
   const cmd = params.get('cmd');
   useEffect(() => {
     if (!cmd) return;
@@ -269,6 +307,87 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     setParams((p) => (p.delete('cmd'), p), { replace: true });
     return () => clearTimeout(id);
   }, [cmd]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // shared view link: ?cam=px,py,pz,tx,ty,tz&t=…&sel=…&pov=… restores the camera, time and selection
+  const shared = useRef<{ cam?: number[]; t?: number; sel?: string; pov?: string } | null>(null);
+  useEffect(() => {
+    const cam = params.get('cam');
+    const tt = params.get('t');
+    const sel = params.get('sel');
+    const pv = params.get('pov');
+    if (!cam && !tt && !sel && !pv) return;
+    const nums = cam?.split(',').map(Number);
+    shared.current = { cam: nums?.length === 6 && nums.every(Number.isFinite) ? nums : undefined, t: tt != null && Number.isFinite(Number(tt)) ? Number(tt) : undefined, sel: sel ?? undefined, pov: pv ?? undefined };
+    setParams(
+      (p) => {
+        ['cam', 't', 'sel', 'pov'].forEach((k) => p.delete(k));
+        return p;
+      },
+      { replace: true },
+    );
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const s = shared.current;
+    if (!s || !glReady || !player) return;
+    shared.current = null;
+    if (s.t != null) setT(s.t);
+    if (s.sel && model.byId.has(s.sel)) select(s.sel);
+    if (s.pov && model.vision.some((v) => v.stationKey === s.pov)) patch({ pov: s.pov });
+    if (s.cam) setTimeout(() => scene.current?.setCamera(s.cam!.slice(0, 3), s.cam!.slice(3)), 600);
+  }, [glReady, player]); // eslint-disable-line react-hooks/exhaustive-deps
+  const copyLink = async () => {
+    const cam = scene.current?.camera();
+    const q = new URLSearchParams(params);
+    q.set('tab', 'machine3d');
+    if (cam) q.set('cam', [...cam.position, ...cam.target].map((v) => v.toFixed(3)).join(','));
+    q.set('t', tRef.current.toFixed(2));
+    if (view.selected) q.set('sel', view.selected);
+    else q.delete('sel');
+    if (view.pov) q.set('pov', view.pov);
+    const base = window.location.href.split('#')[0];
+    const path = window.location.hash.replace(/^#/, '').split('?')[0];
+    const url = `${base}#${path}?${q.toString()}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      toast('View link copied', { tone: 'success', detail: 'It opens this machine at the same camera, time and selection.' });
+    } catch {
+      toast('Copy the view link', { tone: 'draft', detail: url });
+    }
+  };
+
+  /* ---------------- recording a cycle (WebM, in the browser — nothing is uploaded) */
+  const record = () => {
+    if (recording) {
+      recorder.current?.stop();
+      return;
+    }
+    const c = scene.current?.canvas();
+    if (!c || typeof MediaRecorder === 'undefined' || !('captureStream' in c)) {
+      toast('Video recording is not supported in this browser', { tone: 'error' });
+      return;
+    }
+    const stream = (c as HTMLCanvasElement & { captureStream(fps?: number): MediaStream }).captureStream(30);
+    const type = ['video/webm;codecs=vp9', 'video/webm'].find((m) => MediaRecorder.isTypeSupported?.(m)) ?? '';
+    const rec = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
+    const chunks: Blob[] = [];
+    rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    rec.onstop = () => {
+      setRecording(false);
+      recorder.current = null;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob(chunks, { type: 'video/webm' }));
+      a.download = `${sim.id}-3d-${Math.round(tRef.current)}s.webm`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    };
+    recorder.current = rec;
+    rec.start(500);
+    setRecording(true);
+    if (player && !playing) setPlaying(true);
+    // one representative cycle at the current playback speed (at most one minute of video)
+    const secs = Math.min(60, Math.max(3, (d.cycle?.cycle ?? 10) / speed));
+    setTimeout(() => rec.state === 'recording' && rec.stop(), secs * 1000);
+  };
 
   const bottleneckKey = d.cycle?.bottleneck.rs.station.key ?? null;
   useEffect(() => patch({ bottleneck: bottleneckKey }), [bottleneckKey]);
@@ -321,7 +440,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     }
     return m;
   }, [overlay, model, eng.byId, d.bom, reqSel, related, deps, snap]);
-  const sceneView = useMemo(() => ({ ...view, overlay: overlayMap, collisionIds: collision ? new Set([collision.a, collision.b]) : view.collisionIds }), [view, overlayMap, collision]);
+  const sceneView = useMemo(() => ({ ...view, overlay: overlayMap, findings: findingsOn && !customer ? findings : null, collisionIds: collision ? new Set([collision.a, collision.b]) : view.collisionIds }), [view, overlayMap, collision, findingsOn, customer, findings]);
 
   const live: LiveView = useMemo(() => {
     const stationState: LiveView['stationState'] = {};
@@ -335,8 +454,8 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const applyMode = (m: CamMode) => {
     setCamMode(m);
     const base: Partial<SceneView> = { xray: false, explode: 0, zonesAll: false, enclosure: 'cutaway' };
-    if (m === 'engineering') patch({ ...base, labels: true });
-    if (m === 'customer') patch({ ...base, labels: false, dims: false, routes: false, zones: false, enclosure: 'closed', callouts: false });
+    if (m === 'engineering') patch({ ...base, labels: true, labelMode: 'step' });
+    if (m === 'customer') patch({ ...base, labels: false, labelMode: 'none', dims: false, routes: false, zones: false, enclosure: 'closed' });
     if (m === 'exploded') patch({ ...base, explode: 1 });
     if (m === 'xray') patch({ ...base, xray: true, routes: true });
     if (m === 'maintenance') patch({ ...base, zones: true, zonesAll: true, xray: true, routes: true });
@@ -347,6 +466,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const select = (id: string | null) => {
     patch({ selected: id });
     if (id) {
+      setPropsOpen(true);
       const o = model.byId.get(id);
       let p = o?.parentId;
       const nx = new Set(open);
@@ -357,12 +477,17 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       setOpen(nx);
     }
   };
+  // choosing from the tree, a finding or a chip frames the component; clicking in the viewport only selects
   const focusObj = (id: string) => {
     select(id);
     scene.current?.view('fit', id);
   };
+  const followPart = (p: number | null) => {
+    patch({ followPart: p });
+    if (p != null) setBottom('trace');
+  };
   const onKey = (e: KeyboardEvent) => {
-    if ((e.target as HTMLElement).closest('input,select,textarea')) return;
+    if ((e.target as HTMLElement).closest('input,select,textarea,button')) return;
     const k = e.key.toLowerCase();
     const act: Record<string, () => void> = {
       f: () => scene.current?.view('fit', view.selected),
@@ -373,7 +498,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       h: () => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) }),
       r: () => (patch({ hidden: new Set(), isolate: null, explode: 0, xray: false, section: { axis: null, pos: 0 } }), scene.current?.view('iso')),
       ' ': () => setPlaying((p) => !p),
-      escape: () => (patch({ selected: null, measure: false, measurePts: [] }), setCollision(null)),
+      escape: () => (patch({ selected: null, measure: false, measurePts: [], followPart: null }), setCollision(null)),
     };
     if (act[k]) {
       e.preventDefault();
@@ -401,14 +526,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
     setT(s.t_s);
     setTimeout(() => scene.current?.setCamera(s.camera.position, s.camera.target), 30);
   };
-  const ghost = useMemo(() => {
-    if (!ghostOn || !other) return null;
-    const o = eng.byId.get(other);
-    if (!o) return null;
-    // imported lazily to keep this memo cheap to read
-    return { id: other };
-  }, [ghostOn, other, eng.byId]);
-  const ghostModel = useGhost(eng, ghost?.id ?? null);
+  const ghostModel = useGhost(eng, ghostOn && other && eng.byId.get(other) ? other : null);
   const factory = useMemo(() => (sim.twin?.factory ?? []).map((f, i) => ({ x: f.x_mm, z: f.z_mm, rot: f.rot_deg, label: `Machine ${i + 1}` })), [sim.twin?.factory]);
 
   const sel = view.selected ? model.byId.get(view.selected) : undefined;
@@ -424,341 +542,414 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const narration = useMemo(() => {
     if (!snap) return '';
     // several stations work at once on a line: explain the most significant step
-    const PRI: Record<string, number> = { laser: 0, laser_prep: 1, process: 2, inspect: 3, vision: 3, move: 4, clamp: 5, sort: 6, load: 7, unload: 8 };
-    const busy = snap.stations.flatMap((st) => st.servers.filter((sv) => sv.state === 'busy' && sv.step).map((sv) => ({ st, sv }))).sort((a, b) => (PRI[a.sv.step!.kind] ?? 9) - (PRI[b.sv.step!.kind] ?? 9));
+    const busy = snap.stations.flatMap((st) => st.servers.filter((sv) => sv.state === 'busy' && sv.step).map((sv) => ({ st, sv }))).sort((a, b) => (STEP_PRI[a.sv.step!.kind] ?? 9) - (STEP_PRI[b.sv.step!.kind] ?? 9));
     if (busy[0]) return narrate(busy[0].sv.step!, sim.stations.find((x) => x.key === busy[0].st.key)?.name ?? busy[0].st.key, busy[0].sv.stepProgress, xctx);
     if (snap.alarms.length) return `Fault: ${snap.alarms[0].text} — upstream stations block and downstream stations starve until it is cleared.`;
     return '';
-  }, [snap, sim.stations, xctx]);
+  }, [snap, sim.stations, xctx]); // eslint-disable-line react-hooks/exhaustive-deps
   const machineStatus = !player ? 'NOT RUNNABLE' : playing ? (snap?.machineState ?? 'Idle').toUpperCase() : t > 0 ? 'PAUSED' : 'READY';
   const recipe = sim.recipe_id ? (eng.byId.get(sim.recipe_id) as (Recipe & AnyRecord) | undefined) : undefined;
   const downMin = des ? des.stations.reduce((n, s) => Math.max(n, s.down), 0) * (des.horizon_s / 60) : null;
   const desBott = des ? [...des.stations].sort((a, b) => b.utilization - a.utilization)[0] : null;
   const totalQueue = snap ? snap.stations.reduce((n, s) => n + s.queue, 0) : 0;
+  const uphNow = snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : (snap?.cycles ?? 0) > 0 ? 'warming up' : '—';
+  const nextEvent = player ? player.events.find((e) => e.t > t + 1e-9) : undefined;
+  const livePw = livePower(util, snap);
 
   const bottomTabs: { key: Bottom; label: ReactNode; count?: number }[] = [
-    { key: 'inputs', label: 'Simulation inputs', count: d.res.blocking.length || undefined },
-    { key: 'timeline', label: 'Timeline & events' },
-    { key: 'sequence', label: 'Sequence (PLC)' },
+    { key: 'inputs', label: 'Inputs', count: d.res.blocking.length || undefined },
+    { key: 'timeline', label: 'Timeline' },
+    { key: 'sequence', label: 'PLC steps' },
     { key: 'checks', label: 'Design check', count: twin.checks.filter((c) => c.severity === 'critical' || c.severity === 'major').length },
-    { key: 'io', label: 'I/O & sensors' },
-    { key: 'hmi', label: 'Alarms & HMI' },
+    { key: 'io', label: 'I/O' },
+    { key: 'hmi', label: 'HMI & alarms' },
     { key: 'motion', label: 'Motion' },
-    { key: 'faults', label: 'Faults' },
-    { key: 'runs', label: 'Runs & snapshots' },
-    { key: 'compare', label: 'Scenarios & factory' },
-    { key: 'assumptions', label: 'Assumptions & export' },
+    { key: 'utilities', label: 'Utilities' },
+    ...(model.carrier === 'flow' ? [{ key: 'trace' as const, label: 'Part trace' }] : []),
+    { key: 'faults', label: 'Fault injection' },
+    { key: 'runs', label: 'Runs' },
+    { key: 'compare', label: 'Compare' },
+    { key: 'assumptions', label: 'Export' },
   ];
+  const povStation = view.pov ? model.vision.find((v) => v.stationKey === view.pov) : undefined;
 
-  return (
-    <div className="space-y-3" ref={box}>
-      {/* ---------------- header: machine / scenario / version / status / simulation (§6, §39) */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-card border border-line bg-[#0b0f11] px-3 py-2 font-mono text-micro text-[#c9d3d3]" role="status" aria-label="Machine status">
+  const body = (
+    <div className={clsx('scroll-mt-24', studio ? 'fixed inset-0 z-[70] space-y-2 overflow-auto bg-bg p-2 sm:p-3' : 'space-y-2')} ref={box}>
+      {/* ---------------- status: machine / cycle / part / UPH / alarms / time / bottleneck (§6, §39) */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-card border border-line bg-[#0b0f11] px-3 py-2 font-mono text-micro text-[#c9d3d3]" role="status" aria-label="Machine status">
         <span className="text-[#8d9a9a]">MACHINE STATUS</span>
         <span className={clsx('rounded px-1.5 py-0.5 font-semibold', machineStatus === 'FAULT' ? 'bg-bad/30 text-[#ff8a8a]' : playing ? 'bg-accent/25 text-[#35e0a1]' : 'bg-white/10')}>{machineStatus}</span>
         <span>CYCLE {snap?.cycles ?? 0}</span>
         <span>PART {current?.part != null && current.part >= 0 ? current.part : '—'}</span>
-        <span>UPH {snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'}</span>
+        <span title="Throughput so far in this run; shown after the first minute">UPH {uphNow}</span>
         <span className={clsx(snap?.alarms.length ? 'text-[#ff8a8a]' : '')}>ALARM {snap?.alarms.length ?? 0}</span>
         <span className="text-[#8d9a9a]">t {fmtT(t)}</span>
+        {d.cycle && (
+          <span className="hidden text-[#f5c46b] md:inline" title="Bottleneck from the cycle model and the run's utilization">
+            BOTTLENECK {d.cycle.bottleneck.rs.station.name} · {d.cycle.bottleneck.mean.toFixed(2)} s
+          </span>
+        )}
         <span className="ml-auto flex flex-wrap items-center gap-2 font-sans">
           <Badge tone="warn">{model.label}</Badge>
           <Badge>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
           <Badge>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
           {sim.data_type === 'DEMO' && <Badge tone="warn">DEMO</Badge>}
           {preview && <Badge tone="warn">SEQUENCE PREVIEW — not a result</Badge>}
+          {perfNotice && (
+            <span className="text-[#f5c46b]" title="The device was slow, so the rendering switched to Performance quality (Display menu to change)">
+              <Gauge className="inline size-3.5" aria-label="Performance mode on" />
+            </span>
+          )}
         </span>
       </div>
-      {!d.res.runnable && (
-        <Notice tone="warn">
-          <strong>Simulation input gaps:</strong> {d.res.blocking.join('; ')}. The machine runs as a <strong>sequence preview</strong> ({PREVIEW_STATION_S} s visual placeholder per undefined station, no variability) — it shows how the equipment works but produces no results; nothing is assumed (§161, §162).{' '}
+      {preview && (
+        <p className="rounded-control border border-warn/40 bg-warn/10 px-3 py-1.5 text-meta">
+          <strong>Sequence preview</strong> — {d.res.blocking.length} input{d.res.blocking.length === 1 ? '' : 's'} missing ({d.res.blocking.slice(0, 2).join('; ')}
+          {d.res.blocking.length > 2 ? '; …' : ''}). Undefined stations use a {PREVIEW_STATION_S} s visual placeholder and no result is reported.{' '}
           <button type="button" className="text-accent-2 underline" onClick={() => setBottom('inputs')}>
             Enter the missing inputs
           </button>
-        </Notice>
+        </p>
       )}
       {error && <Notice tone="warn">Simulation could not run: {error}</Notice>}
 
-      {/* ---------------- toolbar (glass, §87) */}
-      <div className="glass flex flex-wrap items-center gap-1 rounded-card px-2 py-1.5" role="toolbar" aria-label="3D viewport tools">
-        <Button size="sm" variant="primary" onClick={() => setPlaying((x) => !x)} disabled={!player} aria-label={playing ? 'Pause simulation' : 'Run simulation'}>
-          {playing ? <Pause className="size-4" aria-hidden /> : <Play className="size-4" aria-hidden />} {playing ? 'Pause' : 'Run cycle'}
-        </Button>
-        <Button size="sm" onClick={() => goTour(tourIdx == null ? 0 : null)} aria-pressed={tourIdx != null} aria-label={tourIdx == null ? 'Explain the machine (guided tour)' : 'End the guided tour'}>
-          <GraduationCap className="size-4" aria-hidden /> {tourIdx == null ? 'Explain machine' : 'End tour'}
-        </Button>
-        <Sep />
-        <Tool icon={Scan} label="Fit (F)" onClick={() => scene.current?.view('fit', view.selected)} />
-        <Tool icon={Square} label="Front (1)" onClick={() => scene.current?.view('front')} />
-        <Tool icon={LayoutGrid} label="Top (2)" onClick={() => scene.current?.view('top')} />
-        <Tool icon={PanelLeft} label="Side (3)" onClick={() => scene.current?.view('side')} />
-        <Tool icon={Box} label="Isometric (4)" onClick={() => scene.current?.view('iso')} />
-        <Tool icon={Grid3x3} label={view.ortho ? 'Orthographic (click for perspective)' : 'Perspective (click for orthographic)'} active={view.ortho} onClick={() => patch({ ortho: !view.ortho })} />
-        <Sep />
-        <Popover label="Section view" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Scissors} label="Section" active={!!secAxis || o} onClick={toggle} />}>
-          {() => (
-<div className="space-y-2 p-3 text-meta">
-            <SegmentedControl label="Section plane" size="sm" value={secAxis ?? 'off'} onChange={(a) => patch({ section: { axis: a === 'off' ? null : (a as 'x' | 'y' | 'z'), pos: a === 'off' ? 0 : (bounds.min[a === 'x' ? 0 : a === 'y' ? 1 : 2] + bounds.max[a === 'x' ? 0 : a === 'y' ? 1 : 2]) / 2 } })} options={[{ value: 'off', label: 'Off' }, { value: 'x', label: 'X' }, { value: 'y', label: 'Y' }, { value: 'z', label: 'Z' }]} />
-            {secAxis && <input type="range" aria-label="Section plane position" min={secRange[0]} max={secRange[1]} value={view.section.pos} onChange={(e) => patch({ section: { axis: secAxis, pos: Number(e.target.value) } })} className="w-full" />}
-            {secAxis && <div className="font-mono text-micro text-ink-3">{secAxis.toUpperCase()} = {Math.round(view.section.pos)} mm</div>}
-          </div>
-          )}
-        </Popover>
-        <Popover label="Exploded view" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Expand} label="Explode" active={view.explode > 0 || o} onClick={toggle} />}>
-          {() => (
-<div className="space-y-1 p-3 text-meta">
-            <div>Machine → system → subsystem → component</div>
-            <input type="range" aria-label="Explode amount" min={0} max={1} step={0.05} value={view.explode} onChange={(e) => patch({ explode: Number(e.target.value) })} className="w-full" />
-          </div>
-          )}
-        </Popover>
-        <Tool icon={ScanEye} label="Equipment X-ray" active={view.xray} onClick={() => patch({ xray: !view.xray, routes: !view.xray || view.routes })} />
-        <Popover label="Engineering layers" width="w-60" trigger={({ open: o, toggle }) => <Tool icon={Layers} label="Layers" active={o || LAYERS.some((l) => !view.layers[l])} onClick={toggle} />}>
-          {() => (
-<div className="grid grid-cols-2 gap-1 p-3 text-meta">
-            {LAYERS.map((l) => (
-              <label key={l} className="inline-flex items-center gap-1.5">
-                <input type="checkbox" checked={view.layers[l]} onChange={(e) => patch({ layers: { ...view.layers, [l]: e.target.checked } })} /> {l}
-              </label>
-            ))}
-            <button type="button" className="col-span-2 mt-1 text-left text-micro text-accent-2 hover:underline" onClick={() => patch({ layers: allLayers() })}>
-              Show all layers
-            </button>
-          </div>
-          )}
-        </Popover>
-        <Popover label="Display" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Eye} label="Display" active={o} onClick={toggle} />}>
-          {() => (
-<div className="space-y-1 p-3 text-meta">
-            {(
-              [
-                ['grid', 'Grid'],
-                ['axes', 'Axes gizmo'],
-                ['dims', 'Dimensions'],
-                ['labels', 'Labels'],
-                ['zones', 'Safety zones'],
-                ['routes', 'Control cables (conceptual routing)'],
-                ['fov', 'Camera field of view'],
-                ['field', model.lasers.length ? 'Marking field / process area' : 'Process area'],
-                ['trail', 'Scan path preview'],
-              ] as const
-            )
-              // only offer overlays this machine actually has
-              .filter(([k]) => (k === 'fov' ? model.vision.length > 0 : k === 'trail' ? model.lasers.length > 0 : k === 'field' ? model.lasers.length > 0 || !!model.processArea : true))
-              .map(([k, l]) => (
-              <label key={k} className="flex items-center gap-1.5">
-                <input type="checkbox" checked={view[k]} onChange={(e) => patch({ [k]: e.target.checked } as Partial<SceneView>)} /> {l}
-              </label>
-            ))}
-            {model.lasers.length > 0 && (
-            <div className="mt-2 border-t border-line pt-2">
-              <label className="flex items-center gap-1.5">
-                <input type="checkbox" checked={view.beam.on} onChange={(e) => patch({ beam: { ...view.beam, on: e.target.checked } })} /> Laser beam
-              </label>
-              <label className="mt-1 block text-micro text-ink-3">
-                Beam intensity (visual)
-                <input type="range" min={0.15} max={1} step={0.05} value={view.beam.intensity} onChange={(e) => patch({ beam: { ...view.beam, intensity: Number(e.target.value) } })} className="w-full" />
-              </label>
-              <label className="mt-1 block text-micro text-ink-3">
-                Spot marker (visual, mm)
-                <input type="range" min={0.5} max={6} step={0.1} value={view.beam.spot} onChange={(e) => patch({ beam: { ...view.beam, spot: Number(e.target.value) } })} className="w-full" />
-              </label>
-              <label className="mt-1 flex items-center gap-1.5 text-micro text-ink-3">
-                Beam colour <input type="color" value={view.beam.color ?? '#ff4d3d'} onChange={(e) => patch({ beam: { ...view.beam, color: e.target.value } })} aria-label="Beam colour" />
-                <button type="button" className="text-accent-2 hover:underline" onClick={() => patch({ beam: { ...view.beam, color: null } })}>
-                  by wavelength
-                </button>
-              </label>
-              <p className="mt-1 text-micro text-ink-3">The rendered beam is symbolic (IR is invisible) — not an optical simulation.</p>
-            </div>
+      {/* ---------------- toolbar in labelled groups (§87) */}
+      <div className="glass flex flex-wrap items-center gap-1.5 rounded-card px-2 py-1.5" role="toolbar" aria-label="3D viewport tools">
+        <Group label="Explain">
+          <Button size="sm" onClick={() => goTour(tourIdx == null ? 0 : null)} aria-pressed={tourIdx != null} aria-label={tourIdx == null ? 'Explain the machine (guided tour)' : 'End the guided tour'}>
+            <GraduationCap className="size-4" aria-hidden /> <span className="hidden sm:inline">{tourIdx == null ? 'Explain machine' : 'End tour'}</span>
+          </Button>
+          <Tool icon={Captions} label="Live explanation of each step" active={narrOn} onClick={() => setNarrOn((x) => !x)} />
+        </Group>
+        <Group label="View">
+          <Tool icon={Scan} label="Fit (F)" onClick={() => scene.current?.view('fit', view.selected)} />
+          <span className="hidden items-center gap-0.5 sm:flex">
+            <Tool icon={Square} label="Front (1)" onClick={() => scene.current?.view('front')} />
+            <Tool icon={LayoutGrid} label="Top (2)" onClick={() => scene.current?.view('top')} />
+            <Tool icon={PanelLeft} label="Side (3)" onClick={() => scene.current?.view('side')} />
+          </span>
+          <Tool icon={Box} label="Isometric (4)" onClick={() => scene.current?.view('iso')} />
+          <Tool icon={Grid3x3} label={view.ortho ? 'Orthographic (click for perspective)' : 'Perspective (click for orthographic)'} active={view.ortho} onClick={() => patch({ ortho: !view.ortho })} />
+          <SmallSelect label="Camera mode" value={camMode} options={[{ value: 'engineering', label: 'Engineering' }, { value: 'customer', label: 'Customer demo' }, { value: 'exploded', label: 'Exploded' }, { value: 'xray', label: 'X-ray' }, { value: 'process', label: 'Process' }, ...(model.lasers.length ? [{ value: 'laser', label: 'Laser' }] : []), ...(model.vision.length ? [{ value: 'inspection', label: 'Inspection' }] : []), { value: 'maintenance', label: 'Maintenance' }]} onChange={(v) => applyMode(v as CamMode)} className="!w-auto max-w-[10rem]" />
+        </Group>
+        <Group label="Inspect" className="hidden sm:flex">
+          <Popover label="Section view" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Scissors} label="Section" active={!!secAxis || o} onClick={toggle} />}>
+            {() => (
+              <div className="space-y-2 p-3 text-meta">
+                <SegmentedControl label="Section plane" size="sm" value={secAxis ?? 'off'} onChange={(a) => patch({ section: { axis: a === 'off' ? null : (a as 'x' | 'y' | 'z'), pos: a === 'off' ? 0 : (bounds.min[a === 'x' ? 0 : a === 'y' ? 1 : 2] + bounds.max[a === 'x' ? 0 : a === 'y' ? 1 : 2]) / 2 } })} options={[{ value: 'off', label: 'Off' }, { value: 'x', label: 'X' }, { value: 'y', label: 'Y' }, { value: 'z', label: 'Z' }]} />
+                {secAxis && <input type="range" aria-label="Section plane position" min={secRange[0]} max={secRange[1]} value={view.section.pos} onChange={(e) => patch({ section: { axis: secAxis, pos: Number(e.target.value) } })} className="w-full" />}
+                {secAxis && <div className="font-mono text-micro text-ink-3">{secAxis.toUpperCase()} = {Math.round(view.section.pos)} mm</div>}
+              </div>
             )}
-          </div>
-          )}
-        </Popover>
-        <Popover label="Overlay" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
-          {() => (
-<div className="space-y-2 p-3 text-meta">
-            <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
-            {overlay === 'requirement' && (
-              <SmallSelect label="Requirement" value={reqSel} options={[{ value: '', label: 'Select a requirement…' }, ...(sim.requirement_ids ?? []).map((id) => ({ value: id, label: `${String(eng.byId.get(id)?.code ?? id)} — ${eng.byId.get(id)?.name ?? ''}` }))]} onChange={setReqSel} className="w-full" />
+          </Popover>
+          <Popover label="Exploded view" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Expand} label="Explode" active={view.explode > 0 || o} onClick={toggle} />}>
+            {() => (
+              <div className="space-y-1 p-3 text-meta">
+                <div>Machine → system → subsystem → component</div>
+                <input type="range" aria-label="Explode amount" min={0} max={1} step={0.05} value={view.explode} onChange={(e) => patch({ explode: Number(e.target.value) })} className="w-full" />
+              </div>
             )}
-            <OverlayLegend kind={overlay} />
-          </div>
-          )}
-        </Popover>
-        <Tool icon={Ruler} label="Measure" active={view.measure} onClick={() => patch({ measure: !view.measure, measurePts: [] })} />
-        <Tool icon={Tag} label="Component call-outs" active={view.callouts} onClick={() => patch({ callouts: !view.callouts })} />
-        <Tool icon={Captions} label="Live explanation of each step" active={narrOn} onClick={() => setNarrOn((x) => !x)} />
-        <SmallSelect label="Enclosure" value={view.enclosure} options={[{ value: 'closed', label: 'Enclosure: closed' }, { value: 'cutaway', label: 'Enclosure: cutaway' }, { value: 'hidden', label: 'Enclosure: frame only' }]} onChange={(v) => patch({ enclosure: v as EnclosureMode })} className="!w-auto" />
-        <Sep />
-        <Tool icon={EyeOff} label="Hide selected (H)" disabled={!view.selected} onClick={() => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) })} />
-        <Tool icon={Focus} label={view.isolate ? 'Exit isolate' : 'Isolate selected'} active={!!view.isolate} disabled={!view.selected && !view.isolate} onClick={() => patch({ isolate: view.isolate ? null : view.selected })} />
-        <Tool icon={Eye} label="Show all" disabled={!view.hidden.size && !view.isolate} onClick={() => patch({ hidden: new Set(), isolate: null })} />
-        <Sep />
-        <SmallSelect label="Camera mode" value={camMode} options={[{ value: 'engineering', label: 'Engineering' }, { value: 'customer', label: 'Customer demo' }, { value: 'exploded', label: 'Exploded' }, { value: 'xray', label: 'X-ray' }, { value: 'process', label: 'Process' }, ...(model.lasers.length ? [{ value: 'laser', label: 'Laser' }] : []), ...(model.vision.length ? [{ value: 'inspection', label: 'Inspection' }] : []), { value: 'maintenance', label: 'Maintenance' }]} onChange={(v) => applyMode(v as CamMode)} className="!w-auto" />
-        <SmallSelect label="Rendering quality" value={view.quality} options={[{ value: 'high', label: 'High quality' }, { value: 'balanced', label: 'Balanced' }, { value: 'performance', label: 'Performance' }]} onChange={(v) => patch({ quality: v as SceneView['quality'] })} className="!w-auto" />
+          </Popover>
+          <Tool icon={ScanEye} label="Equipment X-ray" active={view.xray} onClick={() => patch({ xray: !view.xray, routes: !view.xray || view.routes })} />
+          <Tool icon={Focus} label={view.isolate ? 'Exit isolate' : 'Isolate selected'} active={!!view.isolate} disabled={!view.selected && !view.isolate} onClick={() => patch({ isolate: view.isolate ? null : view.selected })} />
+          <Tool icon={EyeOff} label="Hide selected (H)" disabled={!view.selected} onClick={() => view.selected && patch({ hidden: new Set([...view.hidden, view.selected]) })} />
+          <Tool icon={Eye} label="Show all" disabled={!view.hidden.size && !view.isolate} onClick={() => patch({ hidden: new Set(), isolate: null })} />
+          <Tool icon={Ruler} label="Measure" active={view.measure} onClick={() => patch({ measure: !view.measure, measurePts: [] })} />
+        </Group>
+        <Group label="Show">
+          <SegmentedControl label="Name tags" size="sm" value={view.labelMode} onChange={(m) => patch({ labelMode: m })} options={[{ value: 'none', label: 'No tags' }, { value: 'step', label: 'Working' }, { value: 'all', label: 'All' }]} />
+          {!customer && <Tool icon={AlertTriangle} label={`Design-check badges (${findings.size})`} active={findingsOn} onClick={() => setFindingsOn((x) => !x)} />}
+          <span className="hidden items-center gap-0.5 sm:flex">
+            <Popover label="Engineering layers" width="w-60" trigger={({ open: o, toggle }) => <Tool icon={Layers} label="Layers" active={o || LAYERS.some((l) => !view.layers[l])} onClick={toggle} />}>
+              {() => (
+                <div className="grid grid-cols-2 gap-1 p-3 text-meta">
+                  {LAYERS.map((l) => (
+                    <label key={l} className="inline-flex items-center gap-1.5">
+                      <input type="checkbox" checked={view.layers[l]} onChange={(e) => patch({ layers: { ...view.layers, [l]: e.target.checked } })} /> {l}
+                    </label>
+                  ))}
+                  <button type="button" className="col-span-2 mt-1 text-left text-micro text-accent-2 hover:underline" onClick={() => patch({ layers: allLayers() })}>
+                    Show all layers
+                  </button>
+                </div>
+              )}
+            </Popover>
+            <Popover label="Display" width="w-64" trigger={({ open: o, toggle }) => <Tool icon={Eye} label="Display" active={o} onClick={toggle} />}>
+              {() => (
+                <div className="space-y-1 p-3 text-meta">
+                  {(
+                    [
+                      ['grid', 'Grid'],
+                      ['axes', 'Axes gizmo'],
+                      ['dims', 'Dimensions'],
+                      ['labels', 'Measurement labels (FOV, field, zones)'],
+                      ['zones', 'Safety zones'],
+                      ['routes', 'Control cables (conceptual routing)'],
+                      ['fov', 'Camera field of view'],
+                      ['field', model.lasers.length ? 'Marking field / process area' : 'Process area'],
+                      ['trail', 'Scan path preview'],
+                    ] as const
+                  )
+                    // only offer overlays this machine actually has
+                    .filter(([k]) => (k === 'fov' ? model.vision.length > 0 : k === 'trail' ? model.lasers.length > 0 : k === 'field' ? model.lasers.length > 0 || !!model.processArea : true))
+                    .map(([k, l]) => (
+                      <label key={k} className="flex items-center gap-1.5">
+                        <input type="checkbox" checked={view[k]} onChange={(e) => patch({ [k]: e.target.checked } as Partial<SceneView>)} /> {l}
+                      </label>
+                    ))}
+                  <div className="mt-2 border-t border-line pt-2">
+                    <SmallSelect label="Rendering quality" value={view.quality} options={[{ value: 'high', label: 'High quality' }, { value: 'balanced', label: 'Balanced' }, { value: 'performance', label: 'Performance' }]} onChange={(v) => patch({ quality: v as SceneView['quality'] })} className="w-full" />
+                  </div>
+                  {model.lasers.length > 0 && (
+                    <div className="mt-2 border-t border-line pt-2">
+                      <label className="flex items-center gap-1.5">
+                        <input type="checkbox" checked={view.beam.on} onChange={(e) => patch({ beam: { ...view.beam, on: e.target.checked } })} /> Laser beam
+                      </label>
+                      <label className="mt-1 block text-micro text-ink-3">
+                        Beam intensity (visual)
+                        <input type="range" min={0.15} max={1} step={0.05} value={view.beam.intensity} onChange={(e) => patch({ beam: { ...view.beam, intensity: Number(e.target.value) } })} className="w-full" />
+                      </label>
+                      <label className="mt-1 block text-micro text-ink-3">
+                        Spot marker (visual, mm)
+                        <input type="range" min={0.5} max={6} step={0.1} value={view.beam.spot} onChange={(e) => patch({ beam: { ...view.beam, spot: Number(e.target.value) } })} className="w-full" />
+                      </label>
+                      <label className="mt-1 flex items-center gap-1.5 text-micro text-ink-3">
+                        Beam colour <input type="color" value={view.beam.color ?? '#ff4d3d'} onChange={(e) => patch({ beam: { ...view.beam, color: e.target.value } })} aria-label="Beam colour" />
+                        <button type="button" className="text-accent-2 hover:underline" onClick={() => patch({ beam: { ...view.beam, color: null } })}>
+                          by wavelength
+                        </button>
+                      </label>
+                      <p className="mt-1 text-micro text-ink-3">The rendered beam is symbolic (IR is invisible) — not an optical simulation.</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Popover>
+            <Popover label="Overlay" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
+              {() => (
+                <div className="space-y-2 p-3 text-meta">
+                  <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
+                  {overlay === 'requirement' && <SmallSelect label="Requirement" value={reqSel} options={[{ value: '', label: 'Select a requirement…' }, ...(sim.requirement_ids ?? []).map((id) => ({ value: id, label: `${String(eng.byId.get(id)?.code ?? id)} — ${eng.byId.get(id)?.name ?? ''}` }))]} onChange={setReqSel} className="w-full" />}
+                  <OverlayLegend kind={overlay} />
+                </div>
+              )}
+            </Popover>
+            <SmallSelect label="Enclosure" value={view.enclosure} options={[{ value: 'closed', label: 'Enclosure: closed' }, { value: 'cutaway', label: 'Enclosure: cutaway' }, { value: 'hidden', label: 'Enclosure: frame only' }]} onChange={(v) => patch({ enclosure: v as EnclosureMode })} className="!w-auto max-w-[11rem]" />
+            {model.vision.length > 0 && (
+              <SmallSelect
+                label="Camera view"
+                value={view.pov ?? ''}
+                options={[{ value: '', label: 'Camera view: off' }, ...model.vision.map((v) => ({ value: v.stationKey, label: `Camera view: ${sim.stations.find((s) => s.key === v.stationKey)?.name ?? v.stationKey}` }))]}
+                onChange={(v) => {
+                  patch({ pov: v || null });
+                  if (v) setPropsOpen(false);
+                }}
+                className="!w-auto max-w-[12rem]"
+              />
+            )}
+          </span>
+        </Group>
         <span className="ml-auto flex items-center gap-1">
-          <Tool icon={Camera} label="PNG snapshot" onClick={png} />
-          <Tool icon={Maximize2} label="Full screen" onClick={() => void box.current?.requestFullscreen?.()} />
+          <Group label="Export">
+            <Tool icon={Camera} label="PNG snapshot" onClick={png} />
+            <Tool icon={recording ? CircleStop : Video} label={recording ? 'Stop recording' : 'Record a cycle (WebM video)'} active={recording} onClick={record} />
+            <Tool icon={Link2} label="Copy view link" onClick={() => void copyLink()} />
+          </Group>
+          <Tool icon={studio ? Minimize2 : Maximize2} label={studio ? 'Exit studio mode (Esc)' : 'Studio mode (full window)'} active={studio} onClick={() => toggleStudio(!studio)} />
           {!customer && <Tool icon={Bug} label="Debug overlay" active={debug} onClick={() => setDebug((x) => !x)} />}
         </span>
       </div>
 
-      {/* ---------------- workspace: tree | viewport | properties (§6) */}
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[230px_minmax(0,1fr)] xl:grid-cols-[240px_minmax(0,1fr)_330px]">
-        <Card title="Component tree" icon={ListTree} className="order-2 lg:order-1" bodyClassName="p-2">
-          <div className="relative mb-2">
-            <Search className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-ink-3" aria-hidden />
-            <input aria-label="Filter components" value={treeQ} onChange={(e) => setTreeQ(e.target.value)} placeholder="Filter…" className="h-8 w-full rounded-control border border-line bg-panel pl-7 text-meta" />
-          </div>
-          <div className="scroll-thin max-h-[58vh] overflow-auto" role="tree" aria-label="Machine hierarchy">
-            <TreeNode id="machine" model={model} depth={0} open={open} setOpen={setOpen} q={treeQ.toLowerCase()} view={view} select={select} toggleHide={(id) => patch({ hidden: view.hidden.has(id) ? new Set([...view.hidden].filter((x) => x !== id)) : new Set([...view.hidden, id]) })} customer={customer} />
-          </div>
-        </Card>
-
-        <div className="order-1 space-y-2 lg:order-2">
-          <div className="twin-viewport relative h-[68vh] min-h-[380px] overflow-hidden rounded-card border border-line bg-[#0b0f11]" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
-            {!glReady ? (
-              <div className="grid h-full place-items-center text-meta text-ink-3" aria-live="polite">
-                Preparing 3D view…
-              </div>
-            ) : (
-            <GLBoundary onFail={onGLFail}>
-            <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onCreated={({ gl }) => (gl.debug.checkShaderErrors = import.meta.env.DEV)} onPointerMissed={() => !view.measure && select(null)}>
-              <Suspense fallback={null}>
-                <MachineScene
-                  ref={scene}
-                  model={model}
-                  view={sceneView}
-                  live={live}
-                  stateRef={stateRef}
-                  paths={twin.paths}
-                  onPick={(id) => select(id)}
-                  onHover={(id, x, y) => (id ? setHover({ id, x: x ?? 0, y: y ?? 0 }) : setHover(null))}
-                  onMeasure={(p) => patch({ measurePts: view.measurePts.length >= 2 ? [p] : [...view.measurePts, p] })}
-                  onDecline={() => {
-                    if (view.quality !== 'performance') {
-                      patch({ quality: 'performance' });
-                      setPerfNotice(true);
-                    }
-                  }}
-                  ghost={ghostModel}
-                  factory={factory}
-                  debugRef={debug ? debugOut : undefined}
-                />
-              </Suspense>
-            </Canvas>
-            </GLBoundary>
-            )}
-            {/* overlays in the viewport */}
-            <div className="pointer-events-none absolute top-2 left-2 flex flex-col gap-1">
-              <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink">{model.label}</span>
-              {d.cycle && (
-                <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink" title="Bottleneck from the cycle model and DES utilization">
-                  BOTTLENECK {d.cycle.bottleneck.rs.station.name} · {d.cycle.bottleneck.mean.toFixed(2)} s
-                </span>
-              )}
-              {current && (
-                <span className="glass rounded-control px-2 py-1 font-mono text-micro text-ink">
-                  {current.st}: {current.step ?? 'working'}
-                </span>
-              )}
-              {perfNotice && <span className="glass rounded-control px-2 py-1 text-micro text-warn">Performance mode enabled (device was slow)</span>}
+      {/* ---------------- viewport with component tree and properties as drawers (§6) */}
+      <div className={clsx('twin-viewport flex flex-col overflow-hidden rounded-card border border-line bg-[#0b0f11]', studio ? 'h-[calc(100dvh-150px)]' : 'h-[clamp(420px,calc(100dvh-200px),880px)]')}>
+        <div className="relative min-h-0 flex-1" tabIndex={0} onKeyDown={onKey} aria-label="3D machine viewport. Keys: F fit, 1 front, 2 top, 3 side, 4 isometric, H hide, R reset, Space play or pause, Esc cancel." role="application">
+          {!glReady ? (
+            <div className="grid h-full place-items-center text-meta text-ink-3" aria-live="polite">
+              Preparing 3D view…
             </div>
-            {tourIdx != null && tour[tourIdx] && (
-              <div className="glass-strong absolute bottom-2 left-2 z-10 w-[min(28rem,calc(100%-1rem))] rounded-card p-3 text-meta" role="dialog" aria-label="Guided machine tour">
-                <div className="mb-1 flex items-center gap-2">
-                  <BookOpen className="size-4 text-accent-2" aria-hidden />
-                  <strong className="flex-1">{tour[tourIdx].title}</strong>
-                  <span className="font-mono text-micro text-ink-3">
-                    {tourIdx + 1} / {tour.length}
-                  </span>
-                </div>
-                <div className="scroll-thin max-h-44 space-y-1 overflow-auto text-ink-2">
-                  {tour[tourIdx].lines.map((l, i) => (
-                    <p key={i}>{l}</p>
-                  ))}
-                </div>
-                <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                  <Button size="sm" onClick={() => goTour(tourIdx - 1)} disabled={tourIdx === 0} aria-label="Previous tour step">
-                    <ChevronLeft className="size-4" aria-hidden />
-                  </Button>
-                  <Button size="sm" variant="primary" onClick={() => goTour(tourIdx + 1 < tour.length ? tourIdx + 1 : null)}>
-                    {tourIdx + 1 < tour.length ? 'Next' : 'Finish'} <ChevronRight className="size-4" aria-hidden />
-                  </Button>
-                  <label className="ml-1 inline-flex items-center gap-1 text-micro">
-                    <input type="checkbox" checked={tourAuto} onChange={(e) => setTourAuto(e.target.checked)} /> Auto-advance
-                  </label>
-                  <button type="button" className="ml-auto text-micro text-ink-3 hover:text-ink" onClick={() => goTour(null)}>
-                    Close
-                  </button>
-                </div>
-              </div>
+          ) : (
+            <GLBoundary onFail={onGLFail}>
+              <Canvas shadows={view.quality === 'high'} dpr={view.quality === 'high' ? [1, 2] : view.quality === 'balanced' ? [1, 1.5] : 1} gl={{ antialias: view.quality !== 'performance', preserveDrawingBuffer: true, localClippingEnabled: true } as never} frameloop="always" onCreated={({ gl }) => (gl.debug.checkShaderErrors = import.meta.env.DEV)} onPointerMissed={() => !view.measure && select(null)}>
+                <Suspense fallback={null}>
+                  <MachineScene
+                    ref={scene}
+                    model={model}
+                    view={sceneView}
+                    live={live}
+                    stateRef={stateRef}
+                    paths={twin.paths}
+                    onPick={(id) => select(id)}
+                    onHover={(id, x, y) => (id ? setHover({ id, x: x ?? 0, y: y ?? 0 }) : setHover(null))}
+                    onMeasure={(p) => patch({ measurePts: view.measurePts.length >= 2 ? [p] : [...view.measurePts, p] })}
+                    onDecline={() => {
+                      if (view.quality !== 'performance') {
+                        patch({ quality: 'performance' });
+                        setPerfNotice(true);
+                      }
+                    }}
+                    onPartPick={(p) => followPart(p)}
+                    ghost={ghostModel}
+                    factory={factory}
+                    debugRef={debug ? debugOut : undefined}
+                  />
+                </Suspense>
+              </Canvas>
+            </GLBoundary>
+          )}
+          {/* top-left: drawer toggle + what is happening now */}
+          <div className="absolute top-2 left-2 z-10 flex flex-col items-start gap-1">
+            <button type="button" onClick={() => setTreeOpen((x) => !x)} aria-pressed={treeOpen} aria-label="Component tree" className={clsx('glass inline-flex items-center gap-1.5 rounded-control px-2 py-1 text-micro font-medium', treeOpen && 'text-accent-2')}>
+              <ListTree className="size-3.5" aria-hidden /> Components
+            </button>
+            <span className="glass pointer-events-none rounded-control px-2 py-0.5 font-mono text-micro text-ink">{model.label}</span>
+            {current && (
+              <span className="glass pointer-events-none max-w-[60vw] truncate rounded-control px-2 py-0.5 font-mono text-micro text-ink">
+                {current.st}: {current.step ?? 'working'}
+              </span>
             )}
-            {narrOn && tourIdx == null && narration && (
-              <div className="glass pointer-events-none absolute bottom-2 left-1/2 z-10 w-[min(44rem,calc(100%-1rem))] -translate-x-1/2 rounded-control px-3 py-1.5 text-center text-meta text-ink" aria-hidden>
-                {narration}
-              </div>
+            {view.followPart != null && (
+              <span className="glass inline-flex items-center gap-1.5 rounded-control px-2 py-0.5 text-micro text-accent-2">
+                Following part #{view.followPart}
+                <button type="button" className="text-ink-3 hover:text-ink" onClick={() => patch({ followPart: null })} aria-label="Stop following the part">
+                  <X className="size-3" />
+                </button>
+              </span>
             )}
-            {collision && (
-              <div className="absolute inset-x-2 top-2 z-10 mx-auto flex max-w-xl flex-wrap items-center gap-2 rounded-control border border-bad/60 bg-[#2a0f11]/95 px-3 py-2 text-meta text-[#ffd0d0]" role="alert">
-                <AlertTriangle className="size-4 shrink-0 text-bad" aria-hidden />
-                <span className="flex-1">
-                  {collision.text} · t = {fmtT(collision.t)}. Simulation paused.
+          </div>
+          {/* top-right: properties drawer toggle */}
+          {!propsOpen && (
+            <button type="button" onClick={() => setPropsOpen(true)} aria-label="Show component details" className="glass absolute top-2 right-2 z-10 inline-flex items-center gap-1.5 rounded-control px-2 py-1 text-micro font-medium">
+              <Info className="size-3.5" aria-hidden /> Details
+            </button>
+          )}
+          {povStation && !propsOpen && (
+            <span className="pointer-events-none absolute top-4 z-10 rounded bg-black/70 px-1.5 py-0.5 font-mono text-micro text-[#c9d3d3]" style={{ right: `calc(${POV_FRACTION * 100}% + 4px)`, transform: 'translateX(100%)' }}>
+              CAMERA VIEW · {povStation.fovX?.toFixed(0)} × {povStation.fovY?.toFixed(0)} mm
+            </span>
+          )}
+          {treeOpen && (
+            <aside className="absolute top-2 bottom-2 left-2 z-20 flex w-[min(19rem,calc(100%-1rem))] flex-col rounded-card border border-line bg-solid/95 p-2 shadow-xl backdrop-blur" aria-label="Component tree panel">
+              <div className="mb-1.5 flex items-center gap-1.5">
+                <ListTree className="size-4 text-accent-2" aria-hidden />
+                <strong className="flex-1 text-meta">Components</strong>
+                <button type="button" onClick={() => setTreeOpen(false)} aria-label="Close component tree" className="grid size-6 place-items-center rounded-md text-ink-3 hover:bg-panel-2">
+                  <X className="size-3.5" />
+                </button>
+              </div>
+              <div className="relative mb-2">
+                <Search className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-ink-3" aria-hidden />
+                <input aria-label="Filter components" value={treeQ} onChange={(e) => setTreeQ(e.target.value)} placeholder="Filter…" className="h-8 w-full rounded-control border border-line bg-panel pl-7 text-meta" />
+              </div>
+              <div className="scroll-thin min-h-0 flex-1 overflow-auto" role="tree" aria-label="Machine hierarchy">
+                <TreeNode id="machine" model={model} depth={0} open={open} setOpen={setOpen} q={treeQ.toLowerCase()} view={view} select={focusObj} toggleHide={(id) => patch({ hidden: view.hidden.has(id) ? new Set([...view.hidden].filter((x) => x !== id)) : new Set([...view.hidden, id]) })} customer={customer} findings={findingsOn && !customer ? findings : null} />
+              </div>
+            </aside>
+          )}
+          {propsOpen && (
+            <aside className="scroll-thin absolute top-2 right-2 bottom-2 z-20 w-[min(24rem,calc(100%-1rem))] overflow-auto rounded-card shadow-xl" aria-label="Component details">
+              <Properties o={sel} eng={eng} sim={sim} set={set} d={d} twin={twin} snap={snap} customer={customer} onClose={() => (sel ? select(null) : setPropsOpen(false))} onFocus={focusObj} related={related} recipe={recipe} xctx={xctx} onTour={() => goTour(0)} findings={findingsOn && !customer ? twin.checks.filter((c, i, all) => c.objectId === view.selected && c.severity !== 'ok' && all.findIndex((x) => x.objectId === c.objectId && x.text === c.text) === i) : []} />
+            </aside>
+          )}
+          {tourIdx != null && tour[tourIdx] && (
+            <div className="glass-strong absolute bottom-2 left-2 z-30 w-[min(28rem,calc(100%-1rem))] rounded-card p-3 text-meta" role="dialog" aria-label="Guided machine tour">
+              <div className="mb-1 flex items-center gap-2">
+                <BookOpen className="size-4 text-accent-2" aria-hidden />
+                <strong className="flex-1">{tour[tourIdx].title}</strong>
+                <span className="font-mono text-micro text-ink-3">
+                  {tourIdx + 1} / {tour.length}
                 </span>
-                <Button size="sm" onClick={() => (setCollision(null), setPlaying(true))}>
-                  Resume
-                </Button>
-                <Button size="sm" onClick={() => (setCollision(null), setT(0))}>
-                  Reset
-                </Button>
-                <Button size="sm" onClick={() => (focusObj(collision.a), setBottom('checks'))}>
-                  Inspect
-                </Button>
               </div>
-            )}
-            {hover && hoverObj && !view.measure && (
-              <div className="pointer-events-none absolute z-10 max-w-64 rounded-control border border-line bg-solid/95 px-2.5 py-1.5 text-micro shadow-lg" style={{ left: Math.min(hover.x + 14, 9999), top: hover.y + 14 }}>
-                <HoverCard o={hoverObj} eng={eng} customer={customer} />
+              <div className="scroll-thin max-h-44 space-y-1 overflow-auto text-ink-2">
+                {tour[tourIdx].lines.map((l, i) => (
+                  <p key={i}>{l}</p>
+                ))}
               </div>
-            )}
-            {(view.measure || dist) && (
-              <div className="glass absolute right-2 bottom-2 rounded-control px-2.5 py-1.5 font-mono text-micro">
-                {dist ? (
-                  <>
-                    Distance {Math.hypot(dist.dx, dist.dy, dist.dz).toFixed(1)} mm · X {dist.dx.toFixed(1)} · Y {dist.dy.toFixed(1)} · Z {dist.dz.toFixed(1)}
-                    <div className="font-sans text-ink-3">Geometry measurement on the conceptual model</div>
-                  </>
-                ) : (
-                  'Measure: click two points'
-                )}
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                <Button size="sm" onClick={() => goTour(tourIdx - 1)} disabled={tourIdx === 0} aria-label="Previous tour step">
+                  <ChevronLeft className="size-4" aria-hidden />
+                </Button>
+                <Button size="sm" variant="primary" onClick={() => goTour(tourIdx + 1 < tour.length ? tourIdx + 1 : null)}>
+                  {tourIdx + 1 < tour.length ? 'Next' : 'Finish'} <ChevronRight className="size-4" aria-hidden />
+                </Button>
+                <label className="ml-1 inline-flex items-center gap-1 text-micro">
+                  <input type="checkbox" checked={tourAuto} onChange={(e) => setTourAuto(e.target.checked)} /> Auto-advance
+                </label>
+                <button type="button" className="ml-auto text-micro text-ink-3 hover:text-ink" onClick={() => goTour(null)}>
+                  Close
+                </button>
               </div>
-            )}
-            {debug && <div ref={debugOut} className="glass absolute bottom-2 left-2 rounded-control px-2 py-1 font-mono text-micro" aria-label="Render statistics" />}
-          </div>
-          <p className="sr-only" aria-live="polite">
-            {snap ? `Machine ${snap.machineState}. ${current ? `Part ${current.part} at ${current.st}.` : ''} Good ${snap.ok}, not good ${snap.ng}.` : ''}
-          </p>
-          <div className="flex flex-wrap items-center gap-2 text-micro text-ink-3">
-            <Info className="size-3.5" aria-hidden /> Drag to orbit · right-drag to pan · wheel to zoom · click a component for its engineering data. 3D conceptual digital twin — engineering simulation model, not a CAD manufacturing release.
-          </div>
+            </div>
+          )}
+          {narrOn && tourIdx == null && narration && (
+            <div className="glass pointer-events-none absolute bottom-2 left-1/2 z-10 w-[min(44rem,calc(100%-1rem))] -translate-x-1/2 rounded-control px-3 py-1.5 text-center text-meta text-ink" aria-hidden>
+              {narration}
+            </div>
+          )}
+          {collision && (
+            <div className="absolute inset-x-2 top-2 z-30 mx-auto flex max-w-xl flex-wrap items-center gap-2 rounded-control border border-bad/60 bg-[#2a0f11]/95 px-3 py-2 text-meta text-[#ffd0d0]" role="alert">
+              <AlertTriangle className="size-4 shrink-0 text-bad" aria-hidden />
+              <span className="flex-1">
+                {collision.text} · t = {fmtT(collision.t)}. Simulation paused.
+              </span>
+              <Button size="sm" onClick={() => (setCollision(null), setPlaying(true))}>
+                Resume
+              </Button>
+              <Button size="sm" onClick={() => (setCollision(null), setT(0))}>
+                Reset
+              </Button>
+              <Button size="sm" onClick={() => (focusObj(collision.a), setBottom('checks'))}>
+                Inspect
+              </Button>
+            </div>
+          )}
+          {hover && hoverObj && !view.measure && (
+            <div className="pointer-events-none absolute z-10 max-w-64 rounded-control border border-line bg-solid/95 px-2.5 py-1.5 text-micro shadow-lg" style={{ left: Math.min(hover.x + 14, 9999), top: hover.y + 14 }}>
+              <HoverCard o={hoverObj} eng={eng} customer={customer} />
+            </div>
+          )}
+          {(view.measure || dist) && (
+            <div className="glass absolute right-2 bottom-14 z-10 rounded-control px-2.5 py-1.5 font-mono text-micro">
+              {dist ? (
+                <>
+                  Distance {Math.hypot(dist.dx, dist.dy, dist.dz).toFixed(1)} mm · X {dist.dx.toFixed(1)} · Y {dist.dy.toFixed(1)} · Z {dist.dz.toFixed(1)}
+                  <div className="font-sans text-ink-3">Geometry measurement on the conceptual model</div>
+                </>
+              ) : (
+                'Measure: click two points'
+              )}
+            </div>
+          )}
+          {debug && <div ref={debugOut} className="glass absolute bottom-2 left-2 z-10 rounded-control px-2 py-1 font-mono text-micro" aria-label="Render statistics" />}
         </div>
-
-        <div className="order-3 lg:col-span-2 xl:col-span-1">
-          <Properties o={sel} eng={eng} sim={sim} set={set} d={d} twin={twin} snap={snap} customer={customer} onClose={() => select(null)} onFocus={focusObj} related={related} recipe={recipe} xctx={xctx} onTour={() => goTour(0)} />
+        {/* ---------------- transport: the one play / step / scrub control for the central clock */}
+        <div className="flex flex-wrap items-center gap-2 border-t border-white/10 bg-[#0e1417] px-2 py-1.5 text-[#c9d3d3]">
+          <Button size="sm" variant="primary" onClick={() => setPlaying((x) => !x)} disabled={!player} aria-label={playing ? 'Pause simulation' : 'Run simulation'}>
+            {playing ? <Pause className="size-4" aria-hidden /> : <Play className="size-4" aria-hidden />} <span className="hidden sm:inline">{playing ? 'Pause' : 'Run cycle'}</span>
+          </Button>
+          <Tool icon={SkipForward} label="Step to next event" disabled={!nextEvent} onClick={() => nextEvent && (setPlaying(false), setT(nextEvent.t + 1e-6))} dark />
+          <Tool icon={RotateCcw} label="Reset simulation" onClick={() => (setPlaying(false), setT(0))} dark />
+          <input type="range" aria-label="Simulation time" min={0} max={player?.end ?? 0} step={0.05} value={t} disabled={!player} onChange={(e) => (setPlaying(false), setT(Number(e.target.value)))} className="min-w-24 flex-1 accent-[var(--c-accent)]" />
+          <span className="font-mono text-micro whitespace-nowrap" aria-live="off">
+            {fmtT(t)} / {fmtT(player?.end ?? 0)}
+          </span>
+          <SmallSelect label="Playback speed" value={String(speed)} options={['0.25', '0.5', '1', '2', '5', '10', '30', '120'].map((v) => ({ value: v, label: `${v}×` }))} onChange={(v) => setSpeed(Number(v))} className="!w-auto" />
         </div>
       </div>
+      <p className="sr-only" aria-live="polite">
+        {snap ? `Machine ${snap.machineState}. ${current ? `Part ${current.part} at ${current.st}.` : ''} Good ${snap.ok}, not good ${snap.ng}.` : ''}
+      </p>
 
-      {/* ---------------- KPI bar (§70, §71) */}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-8" aria-label="Live key figures">
+      {/* ---------------- key figures (§70, §71) */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-9" aria-label="Live key figures">
         <Kpi label="Cycle time" value={d.cycle ? `${d.cycle.cycle.toFixed(2)} s` : 'Not Available'} sub={d.cycle ? (d.cycle.layout === 'sequential' ? 'Σ station times' : 'slowest station') : 'input gaps'} />
         <Kpi label="Practical UPH" value={d.cycle ? num(d.cycle.practicalUph, 4) : 'Not Available'} sub={sim.targets?.uph ? `target ${sim.targets.uph}` : 'no target'} tone={d.cycle && sim.targets?.uph ? (d.cycle.practicalUph >= sim.targets.uph ? 'ok' : 'bad') : undefined} />
         <Kpi label="Parts processed" value={preview ? '—' : String((snap?.ok ?? 0) + (snap?.ng ?? 0))} sub={preview ? 'preview — not counted' : `good ${snap?.ok ?? 0} · rejects ${snap?.ng ?? 0}`} />
-        <Kpi label="Run UPH" value={preview ? '—' : snap?.uphSoFar != null ? snap.uphSoFar.toFixed(0) : '—'} sub={preview ? 'preview — not a result' : des ? `full run ${des.uph.toFixed(0)}` : '—'} />
+        <Kpi label="Run UPH" value={preview ? '—' : uphNow} sub={preview ? 'preview — not a result' : des ? `full run ${des.uph.toFixed(0)}` : '—'} />
         <Kpi label="Queue (WIP)" value={String(totalQueue)} sub={`${snap?.inSystem ?? 0} in system`} />
         <Kpi label="Bottleneck utilization" value={desBott && !preview ? pct(desBott.utilization) : 'Not Available'} sub={desBott && !preview ? desBott.name : preview ? 'preview' : '—'} />
         <Kpi label="OEE" value={d.cycle ? pct(d.cycle.oee) : 'Not Available'} sub={d.cycle ? `A ${pct(d.cycle.availability.value)} · P ${pct(d.cycle.performance.value)} · Q ${pct(d.cycle.quality.value)}` : 'factors not defined'} />
         <Kpi label="Downtime (run)" value={downMin != null && !preview ? `${downMin.toFixed(1)} min` : 'Not Available'} sub="longest station down time" tone={downMin ? 'warn' : undefined} />
+        <Kpi label="Power now (stated)" value={livePw != null ? `${(livePw / 1000).toFixed(2)} kW` : 'Not Available'} sub={util.energyPerPart != null ? `${util.energyPerPart.toFixed(2)} Wh / part` : 'no power data'} />
       </div>
       {d.cycle && (
         <p className="text-micro text-ink-3">
@@ -766,23 +957,39 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
         </p>
       )}
 
-      {/* ---------------- bottom workspace (§40, §42–§44, §72, §76, §92, §111–§116) */}
+      {/* ---------------- panels (§40, §42–§44, §72, §76, §92, §97, §111–§116) */}
       <Card padded={false} bodyClassName="p-3">
         <Tabs<Bottom> label="Digital twin panels" value={bottom} onChange={setBottom} tabs={bottomTabs.filter((b) => !(customer && (b.key === 'io' || b.key === 'assumptions' || b.key === 'motion')))} />
         <div className="pt-3">
           {bottom === 'inputs' && <InputsPanel sim={sim} set={set} d={d} preview={preview} />}
-          {bottom === 'timeline' && <TimelinePanel player={player} t={t} setT={setT} playing={playing} setPlaying={setPlaying} speed={speed} setSpeed={setSpeed} d={d} twin={twin} />}
+          {bottom === 'timeline' && <TimelinePanel player={player} t={t} setT={setT} playing={playing} setPlaying={setPlaying} speed={speed} setSpeed={setSpeed} d={d} twin={twin} transport={false} />}
           {bottom === 'sequence' && <SequencePanel sim={sim} snap={snap} />}
           {bottom === 'checks' && <ChecksPanel twin={twin} onObject={focusObj} onTab={(k) => setParams((p) => (p.set('tab', k), p), { replace: true })} />}
           {bottom === 'io' && <IoPanel model={model} snap={snap} faults={[...(run.scenarioFaults ? sim.faults ?? [] : []), ...run.injected]} onObject={focusObj} />}
           {bottom === 'hmi' && <AlarmsHmiPanel player={player} snap={snap} playing={playing} setPlaying={setPlaying} setT={setT} recipe={recipe} />}
           {bottom === 'motion' && <MotionPanel model={model} snap={snap} sim={sim} set={set} customer={customer} />}
+          {bottom === 'utilities' && <UtilitiesPanel u={util} live={livePw} customer={customer} />}
+          {bottom === 'trace' && <PartTracePanel player={player} snap={snap} part={view.followPart} setPart={followPart} t={t} setT={setT} />}
           {bottom === 'faults' && (preview ? <p className="text-meta text-ink-3">Fault injection needs a real simulation — enter the missing inputs first.</p> : <FaultsPanel sim={sim} run={run} setRun={setRun} t={t} des={des} baseline={baseline} customer={customer} />)}
           {bottom === 'runs' && <RunsPanel sim={sim} set={set} run={run} setRun={setRun} des={preview ? null : des} onSnapshot={saveSnapshot} onRestore={restoreSnapshot} onPng={png} />}
           {bottom === 'compare' && <ComparePanel eng={eng} sim={sim} d={d} twin={twin} other={other} setOther={setOther} ghost={ghostOn} setGhost={setGhostOn} set={set} customer={customer} />}
           {bottom === 'assumptions' && <AssumptionsPanel eng={eng} sim={sim} set={set} d={d} twin={twin} player={player} customer={customer} />}
         </div>
       </Card>
+    </div>
+  );
+  // studio mode renders over the whole window (a portal escapes any transformed ancestor)
+  return studio && typeof document !== 'undefined' ? createPortal(body, document.body) : body;
+}
+
+/** A labelled cluster of toolbar controls (the caption is visible on wide screens, always announced). */
+function Group({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
+  return (
+    <div role="group" aria-label={label} className={clsx('flex items-center gap-0.5 rounded-control border border-line/60 bg-panel/40 py-0.5 pr-0.5 pl-1', className)}>
+      <span className="hidden pr-1 text-micro font-semibold tracking-wider text-ink-3 uppercase 2xl:inline" aria-hidden>
+        {label}
+      </span>
+      {children}
     </div>
   );
 }
@@ -802,11 +1009,9 @@ function buildGhost(eng: TabProps['eng'], s: TabProps['sim']) {
   return buildMachine(resolveScenario(s, eng.byId, eng.defs), eng.byId, eng.defs);
 }
 
-const Sep = () => <span className="mx-0.5 h-5 w-px bg-line" aria-hidden />;
-
-function Tool({ icon: Icon, label, onClick, active, disabled }: { icon: typeof Box; label: string; onClick: () => void; active?: boolean; disabled?: boolean }) {
+function Tool({ icon: Icon, label, onClick, active, disabled, dark }: { icon: typeof Box; label: string; onClick: () => void; active?: boolean; disabled?: boolean; dark?: boolean }) {
   return (
-    <button type="button" onClick={onClick} disabled={disabled} aria-label={label} title={label} aria-pressed={active} className={clsx('inline-flex size-8 items-center justify-center rounded-control text-ink-2 transition-colors hover:bg-panel-2 hover:text-ink disabled:opacity-35', active && 'bg-accent-soft text-accent-2')}>
+    <button type="button" onClick={onClick} disabled={disabled} aria-label={label} title={label} aria-pressed={active} className={clsx('inline-flex size-8 items-center justify-center rounded-control transition-colors disabled:opacity-35', dark ? 'text-[#c9d3d3] hover:bg-white/10 hover:text-white' : 'text-ink-2 hover:bg-panel-2 hover:text-ink', active && 'bg-accent-soft text-accent-2')}>
       <Icon className="size-4" aria-hidden />
     </button>
   );
@@ -874,7 +1079,8 @@ function HoverCard({ o, eng, customer }: { o: Machine3DObject; eng: TabProps['en
   );
 }
 
-function TreeNode({ id, model, depth, open, setOpen, q, view, select, toggleHide, customer }: { id: string; model: TabModel; depth: number; open: Set<string>; setOpen: (s: Set<string>) => void; q: string; view: SceneView; select: (id: string) => void; toggleHide: (id: string) => void; customer: boolean }) {
+function TreeNode({ id, model, depth, open, setOpen, q, view, select, toggleHide, customer, findings = null }: { id: string; model: TabModel; depth: number; open: Set<string>; setOpen: (s: Set<string>) => void; q: string; view: SceneView; select: (id: string) => void; toggleHide: (id: string) => void; customer: boolean; findings?: ReturnType<typeof findingsByObject> | null }) {
+  const fd = findings?.get(id);
   const o = model.byId.get(id);
   const kids = model.objects.filter((x) => x.parentId === id);
   if (!o) return null;
@@ -892,16 +1098,17 @@ function TreeNode({ id, model, depth, open, setOpen, q, view, select, toggleHide
         ) : (
           <span className="size-5" />
         )}
-        <button type="button" className="min-w-0 flex-1 truncate py-1 text-left" onClick={() => select(id)} title={label}>
+        <button type="button" className="min-w-0 flex-1 truncate py-1 text-left" onClick={() => select(id)} title={fd ? `${label} — ${fd.first}` : label}>
           {label}
         </button>
+        {fd && <AlertTriangle className={clsx('size-3.5 shrink-0', fd.severity === 'critical' ? 'text-bad' : fd.severity === 'major' ? 'text-warn' : 'text-ink-3')} aria-label={`${fd.count} design-check finding${fd.count > 1 ? 's' : ''}`} />}
         {o.level !== 'machine' && (
           <button type="button" className="invisible grid size-5 place-items-center text-ink-3 group-hover:visible" aria-label={view.hidden.has(id) ? `Show ${label}` : `Hide ${label}`} onClick={() => toggleHide(id)}>
             {view.hidden.has(id) ? <EyeOff className="size-3.5" /> : <Eye className="size-3.5" />}
           </button>
         )}
       </div>
-      {isOpen && kids.map((k) => <TreeNode key={k.id} id={k.id} model={model} depth={depth + 1} open={open} setOpen={setOpen} q={q} view={view} select={select} toggleHide={toggleHide} customer={customer} />)}
+      {isOpen && kids.map((k) => <TreeNode key={k.id} id={k.id} model={model} depth={depth + 1} open={open} setOpen={setOpen} q={q} view={view} select={select} toggleHide={toggleHide} customer={customer} findings={findings} />)}
     </div>
   );
 }
@@ -909,11 +1116,19 @@ type TabModel = ReturnType<typeof buildMachine>;
 
 /* ---------------------------------------------------------------- properties (§58–§61, §75, §83, §100, §140, §141, §146) */
 
-function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocus, related, recipe, xctx, onTour }: { o?: Machine3DObject; eng: TabProps['eng']; sim: TabProps['sim']; set: TabProps['set']; d: TabProps['d']; twin: ReturnType<typeof useTwinModel>; snap: SimulationState | null; customer: boolean; onClose: () => void; onFocus: (id: string) => void; related: (reqId: string) => Set<string>; recipe?: Recipe & AnyRecord; xctx: ExplainCtx; onTour: () => void }) {
+function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocus, related, recipe, xctx, onTour, findings = [] }: { o?: Machine3DObject; eng: TabProps['eng']; sim: TabProps['sim']; set: TabProps['set']; d: TabProps['d']; twin: ReturnType<typeof useTwinModel>; snap: SimulationState | null; customer: boolean; onClose: () => void; onFocus: (id: string) => void; related: (reqId: string) => Set<string>; recipe?: Recipe & AnyRecord; xctx: ExplainCtx; onTour: () => void; findings?: TwinCheck[] }) {
   const model = twin.model;
   if (!o)
     return (
-      <Card title="Properties" icon={Info}>
+      <Card
+        title="Properties"
+        icon={Info}
+        actions={
+          <button type="button" onClick={onClose} aria-label="Close properties" className="grid size-7 place-items-center rounded-md text-ink-3 hover:bg-panel-2">
+            <X className="size-4" />
+          </button>
+        }
+      >
         <p className="text-meta text-ink-2">Select a component in the viewport or the tree for its explanation (what it is, how it works, what it does in this machine) and its engineering data — part number, specifications, supplier, cost, requirements and BOM.</p>
         <Button size="sm" variant="primary" className="mt-2" onClick={onTour}>
           <GraduationCap className="size-4" aria-hidden /> Explain the machine step by step
@@ -1023,6 +1238,20 @@ function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocu
             </Link>
           )}
         </div>
+        {findings.length > 0 && (
+          <section className="rounded-control border border-bad/40 bg-bad/5 p-2.5" aria-label="Design-check findings on this component">
+            <h4 className="mb-1 flex items-center gap-1.5 text-meta font-semibold">
+              <AlertTriangle className="size-4 text-bad" aria-hidden /> Design check
+            </h4>
+            <ul className="space-y-1 text-meta">
+              {findings.map((f, i) => (
+                <li key={i}>
+                  <Badge tone={f.severity === 'critical' ? 'bad' : f.severity === 'major' ? 'warn' : 'neutral'}>{f.severity}</Badge> {f.text}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         {o.kind !== 'group' && o.kind !== 'station' && <ExplainBlock o={o} xctx={xctx} customer={customer} />}
         {st && (
           <section>

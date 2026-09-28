@@ -365,7 +365,7 @@ const G: Record<string, Guide> = {
   robot: {
     title: 'Robot',
     what: 'Handles parts between positions.',
-    how: 'A multi-axis arm moves a gripper through taught or calculated paths.',
+    how: 'A multi-axis arm moves a gripper through taught or calculated paths. A SCARA (4 axes) swings two horizontal links and lowers a vertical quill — fast and stiff for flat pick-and-place. An articulated arm (6 axes) turns at the base and bends at shoulder, elbow and wrist — it reaches over, around and into parts. The 3D model draws the type the robot record states (number of axes).',
     checks: ['Reach and payload', 'Cycle time of the path', 'Safeguarding'],
     interfaces: ['Controller', 'Gripper', 'Safety'],
     care: ['Lubrication per maker schedule'],

@@ -2,7 +2,7 @@ import type { StationKind } from '../../domain/engineering';
 import type { DesResult, ServerState, TraceEvent } from '../sim/des';
 import type { Resolved } from '../sim/model';
 import type { MachineModel } from './machine';
-import { positionAt, type PlannedMove } from './motion';
+import { axisPositionAt, type PlannedMove } from './motion';
 
 /*
  * SEQUENCE + CENTRAL SIMULATION STATE (3D master prompt §40–§46, §69, §127–§129).
@@ -228,7 +228,7 @@ export class TwinPlayer {
           for (const [ax, to] of Object.entries(x.move.to)) {
             const am = this.model.axes.find((a) => a.key === ax);
             if (!am || am.speed == null || am.accel == null) continue;
-            const p = positionAt(x.move.from[ax] ?? am.home, to, am.speed, am.accel, am.decel ?? am.accel, el);
+            const p = axisPositionAt(x.move.from[ax] ?? am.home, to, am, el);
             axes[ax] = p.pos;
             axisVel[ax] = el < x.dur ? p.vel : 0;
           }

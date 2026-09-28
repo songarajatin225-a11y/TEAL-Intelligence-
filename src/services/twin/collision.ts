@@ -1,5 +1,6 @@
 import { carriedOffset, type Machine3DObject, type MachineModel } from './machine';
-import { positionAt } from './motion';
+import { pickPlacePose } from './kinematics';
+import { axisPositionAt } from './motion';
 
 /*
  * COLLISION ENGINE (3D master prompt §20, §21, §47). Conceptual axis-aligned bounding boxes, sampled
@@ -89,7 +90,7 @@ export function checkCollisions(model: MachineModel, samplesPerMove = 12): Colli
       const axes: Record<string, number> = { ...m.from };
       for (const [ax, to] of Object.entries(m.to)) {
         const am = model.axes.find((a) => a.key === ax);
-        axes[ax] = am && am.speed != null && am.accel != null ? positionAt(m.from[ax] ?? am.home, to, am.speed, am.accel, am.decel ?? am.accel, el).pos : to;
+        axes[ax] = am ? axisPositionAt(m.from[ax] ?? am.home, to, am, el).pos : to;
       }
       poses.push({ t: tc + el, label: m.label, station: m.stationKey, axes });
     }
@@ -123,12 +124,51 @@ export function checkCollisions(model: MachineModel, samplesPerMove = 12): Colli
       }
     }
   }
+  hits.push(...checkHandlerSweeps(model, samplesPerMove * 2));
+  return hits;
+}
+
+/** Gripper envelope around the tool-centre point (mm): the gripper body sits above the TCP. */
+const GRIP: [number, number, number] = [70, 70, 70];
+/** Things a handler is meant to touch at its own station (pick / place positions). */
+const HANDLER_CONTACT = new Set(['tray', 'fixture', 'conveyor', 'buffer', 'magazine', 'bin', 'table', 'frame', 'bench']);
+
+/**
+ * Robot and gantry sweeps (§20): the gripper — and the part when the handler carries it — sampled along
+ * the whole pick-and-place path, against every fixed collision object except what it is meant to touch
+ * at its own station. The arm links are not included (conceptual TCP envelope, not a robot-reach study).
+ */
+export function checkHandlerSweeps(model: MachineModel, samples = 24): CollisionHit[] {
+  const hits: CollisionHit[] = [];
+  const seen = new Set<string>();
+  const fixed = model.objects.filter((o) => o.collision && !o.carriedBy?.length && o.kind !== 'group' && o.kind !== 'station');
+  for (const hd of Object.values(model.handlers)) {
+    const self = model.byId.get(hd.objectId);
+    for (let k = 0; k <= samples; k++) {
+      const pose = pickPlacePose(hd.pp, k / samples);
+      const boxes: Aabb[] = [{ min: [pose.tcp[0] - GRIP[0] / 2, pose.tcp[1] + 2, pose.tcp[2] - GRIP[2] / 2], max: [pose.tcp[0] + GRIP[0] / 2, pose.tcp[1] + GRIP[1], pose.tcp[2] + GRIP[2] / 2] }];
+      if (pose.holding && hd.carries === 'part') {
+        const { length: l, width: w, thickness: t } = model.workpiece;
+        boxes.push({ min: [pose.tcp[0] - l / 2, pose.tcp[1] - t + 1, pose.tcp[2] - w / 2], max: [pose.tcp[0] + l / 2, pose.tcp[1], pose.tcp[2] + w / 2] });
+      }
+      for (const b of fixed) {
+        if (b.id === hd.objectId || b.parentId === hd.objectId) continue;
+        if (b.stationKey === hd.stationKey && HANDLER_CONTACT.has(b.kind)) continue;
+        if (['table', 'frame'].includes(b.id)) continue;
+        if (!boxes.some((bx) => intersects(bx, aabbOf(b)))) continue;
+        const key = `${hd.objectId}|${b.id}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        hits.push({ cycleT: 0, moveLabel: `${self?.name ?? 'Handler'} — ${pose.phase}`, stationKey: hd.stationKey, a: hd.objectId, b: b.id, text: `Collision detected: ${hd.kind === 'robot' ? 'robot gripper' : 'gantry gripper'}${pose.holding && hd.carries === 'part' ? ' with part' : ''} vs ${b.name} (${pose.phase})` });
+      }
+    }
+  }
   return hits;
 }
 
 export const BoundingBoxPhysics: PhysicsProvider = {
   name: 'Bounding-box collision (conceptual)',
-  capabilities: ['object-object AABB', 'moving stage vs fixed tooling', 'tool vs workpiece'],
+  capabilities: ['object-object AABB', 'moving stage vs fixed tooling', 'tool vs workpiece', 'robot / gantry gripper sweep'],
   check: (model) => checkCollisions(model),
 };
 

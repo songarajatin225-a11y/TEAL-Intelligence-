@@ -46,6 +46,8 @@ export interface Resolved {
   blocking: string[];
   warnings: string[];
   runnable: boolean;
+  /** inline part transfer (null for a sequential machine) */
+  transfer?: TransferModel | null;
 }
 
 const BASIS_LABEL: Record<Basis, string> = { CALCULATED: 'Calculated', EMPIRICAL: 'Empirical', USER_INPUT: 'User input', MANUFACTURER_DATA: 'Manufacturer data', VALIDATED: 'Validated data', ASSUMPTION: 'Assumption', DEMO: 'DEMO DATA' };
@@ -139,10 +141,19 @@ function addMotion(rs: ResolvedStation, moves: PlannedMove[], axes: AxisModel[])
   if (!moves.length) return rs;
   const missing = [...new Set(moves.flatMap((m) => m.perAxis.filter((p) => p.time == null).map((p) => axes.find((a) => a.key === p.axis)?.missing.join(', ') || `axis ${p.axis}: speed / acceleration`)))];
   const warnings = [...rs.warnings, ...moves.flatMap((m) => m.limitViolations)];
+  // settling time is never assumed: an axis without one is stated as not included
+  for (const k of new Set(moves.flatMap((m) => m.perAxis.map((p) => p.axis)))) {
+    const ax = axes.find((a) => a.key === k);
+    if (ax && ax.settle == null) warnings.push(`${ax.name}: in-position settling time not defined — not included in the move time`);
+  }
   if (missing.length) return { ...rs, missing: [...rs.missing, ...missing], warnings };
   if (rs.time == null) return { ...rs, warnings };
   const motion = moves.reduce((n, m) => n + (m.time ?? 0), 0);
-  const children: Lineage[] = moves.map((m) => ({ label: m.label, value: m.time, unit: 's', basis: 'CALCULATED', formula: 'slowest axis of the move · trapezoidal profile (distance, speed, acceleration)', children: m.perAxis.map((p) => { const ax = axes.find((a) => a.key === p.axis); return { label: `${ax?.name ?? p.axis}: ${fmtNum(Math.abs(p.dist), 6)} mm`, value: p.time, unit: 's', basis: ax?.basis ?? 'ASSUMPTION', source: ax ? `${ax.sources.speed}; ${ax.sources.accel}` : undefined }; }) }));
+  const profile = (k: string) => {
+    const ax = axes.find((a) => a.key === k);
+    return `${ax?.jerk != null ? 'S-curve (jerk-limited)' : 'trapezoidal'} profile${ax?.settle != null ? ` + ${fmtNum(ax.settle * 1000, 4)} ms settling` : ''}`;
+  };
+  const children: Lineage[] = moves.map((m) => ({ label: m.label, value: m.time, unit: 's', basis: 'CALCULATED', formula: `slowest axis of the move · ${[...new Set(m.perAxis.map((p) => profile(p.axis)))].join(' / ')}`, children: m.perAxis.map((p) => { const ax = axes.find((a) => a.key === p.axis); return { label: `${ax?.name ?? p.axis}: ${fmtNum(Math.abs(p.dist), 6)} mm`, value: p.time, unit: 's', basis: ax?.basis ?? 'ASSUMPTION', source: ax ? `${ax.sources.speed}; ${ax.sources.accel}` : undefined }; }) }));
   return {
     ...rs,
     time: rs.time + motion,
@@ -151,17 +162,90 @@ function addMotion(rs: ResolvedStation, moves: PlannedMove[], axes: AxisModel[])
   };
 }
 
+export interface TransferModel {
+  /** mm between stations; null = not entered (transfer time not included) */
+  distance: number | null;
+  /** mm/s — entered, or the selected conveyor's stated max speed */
+  speed: number | null;
+  accel: number | null;
+  /** seconds per inline transfer; null when it cannot be calculated */
+  time: number | null;
+  sources: { distance: string; speed: string };
+  basis: Basis;
+}
+
+/**
+ * Inline part transfer (§69): a station stays occupied until its part has left, so the transfer to the
+ * next station is part of its time. Distance must be entered; speed comes from the entry or from the
+ * selected conveyor's stated max speed. Nothing is estimated from the conceptual 3D layout.
+ */
+export function transferModel(sim: Simulation, byId: Map<string, AnyRecord>, defs: SpecDefs): TransferModel | null {
+  if ((sim.layout ?? 'inline') === 'sequential' || sim.stations.length < 2) return null;
+  const tr = sim.twin?.transfer;
+  const conv = (sim.selections ?? []).map((s) => byId.get(s.part_id) as (Part & AnyRecord) | undefined).find((p) => p?.product_type === 'conveyor');
+  let speed = tr?.speed_mm_s ?? null;
+  let speedSrc = speed != null ? 'Entered' : 'Not defined';
+  if (speed == null && conv) {
+    const sp = readSpec(conv, 'max_speed', defs);
+    if (sp?.value != null) {
+      speed = sp.value;
+      speedSrc = `${conv.model_number} · max speed`;
+    }
+  }
+  const distance = tr?.distance_mm ?? null;
+  const accel = tr?.accel_mm_s2 ?? null;
+  const time = distance != null && speed != null ? (accel != null ? transferMoveTime(distance, speed, accel) : distance / speed) : null;
+  const basis: Basis = tr?.basis ?? (conv?.data_type === 'DEMO' && tr?.speed_mm_s == null ? 'DEMO' : 'USER_INPUT');
+  return { distance, speed, accel, time, sources: { distance: distance != null ? 'Entered' : 'Not entered', speed: speedSrc }, basis };
+}
+
+function transferMoveTime(s: number, v: number, a: number) {
+  const sa = (v * v) / a;
+  return sa >= s ? 2 * Math.sqrt(s / a) : v / a + s / v;
+}
+
+function addTransfer(rs: ResolvedStation, tm: TransferModel | null, last: boolean): ResolvedStation {
+  if (!tm || last || rs.time == null) return rs;
+  if (tm.time == null) return { ...rs, warnings: [...rs.warnings, `Inline part transfer not included — ${tm.distance == null ? 'transfer distance not entered' : 'conveyor speed not defined'} (Simulation inputs)`] };
+  return {
+    ...rs,
+    time: rs.time + tm.time,
+    lineage: {
+      label: `${rs.station.name} incl. transfer out`,
+      value: rs.time + tm.time,
+      unit: 's',
+      formula: 'station time + transfer to the next station',
+      basis: 'MIXED',
+      children: [
+        rs.lineage,
+        {
+          label: 'Part transfer',
+          value: tm.time,
+          unit: 's',
+          basis: 'CALCULATED',
+          formula: tm.accel != null ? 'distance ÷ speed with acceleration ramps' : 'distance ÷ speed',
+          children: [
+            { label: 'Transfer distance', value: tm.distance, unit: 'mm', basis: tm.basis, source: tm.sources.distance },
+            { label: 'Transfer speed', value: tm.speed, unit: 'mm/s', basis: tm.basis, source: tm.sources.speed },
+          ],
+        },
+      ],
+    },
+  };
+}
+
 export function resolveScenario(sim: Simulation & AnyRecord, byId: Map<string, AnyRecord>, defs: SpecDefs): Resolved {
   const motion = scenarioMotion(sim, byId, defs);
-  const stations = sim.stations.map((s, i) => addMotion(resolveStation(s, i, sim, byId, defs), motion.plan.filter((m) => m.stationKey === s.key), motion.axes));
+  const tm = transferModel(sim, byId, defs);
+  const stations = sim.stations.map((s, i) => addTransfer(addMotion(resolveStation(s, i, sim, byId, defs), motion.plan.filter((m) => m.stationKey === s.key), motion.axes), tm, i === sim.stations.length - 1));
   const machineParts = (sim.selections ?? [])
     .filter((s: Selection) => s.station_key === '_machine')
     .map((s) => ({ role: s.role, part: byId.get(s.part_id) as Part & AnyRecord, qty: s.quantity ?? 1 }))
     .filter((x) => !!x.part);
   const blocking = stations.flatMap((s) => s.missing);
-  const warnings = stations.flatMap((s) => s.warnings);
+  const warnings = [...new Set(stations.flatMap((s) => s.warnings))];
   for (const s of sim.selections ?? []) if (!byId.has(s.part_id)) warnings.push(`Selected component ${s.part_id} (${s.role}) is not in the database`);
-  return { sim, layout: sim.layout ?? 'inline', stations, machineParts, blocking, warnings, runnable: blocking.length === 0 };
+  return { sim, layout: sim.layout ?? 'inline', stations, machineParts, blocking, warnings, runnable: blocking.length === 0, transfer: tm };
 }
 
 /** One sentence the Studio shows when a run is impossible (§163: "Simulation cannot run because …"). */
