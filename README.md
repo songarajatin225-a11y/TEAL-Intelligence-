@@ -10,6 +10,8 @@ engineering knowledge for the next product.
 
 Flagship module: **Equipment Simulation Studio** (see [docs/09](docs/09_ENGINEERING_SIMULATION_OS.md)) with the **3D Machine Digital Twin** — an interactive Three.js machine for every equipment template (laser marking and welding, assembly, test, handling, dispensing …) driven by the same simulation, BOM and requirements (see [docs/10](docs/10_3D_MACHINE_DIGITAL_TWIN.md), open `#/3d`). Every component has a technical + supplier datasheet at `#/component-datasheets`.
 
+**AI intelligence layer (BETA):** the **TEAL Copilot** (header button or key **I**, `#/copilot`), the **AI Product Configurator** (`#/ai-configure`) and the **AI Engine Control Center** (`#/ai-engine`). Answers are grounded in TEAL records, handbooks and deterministic engines — hybrid retrieval, knowledge graph / GraphRAG, compatibility rules, configurator, BOM, supply, change impact, DOE — with evidence, assumptions, data gaps, validation and a signal-based confidence on every answer. No language model is connected and no key is in the site; models plug in later through a server-side gateway (see [docs/ai](docs/ai/AI_ARCHITECTURE.md)).
+
 It begins with Laser, where TEAL is strongest, and is built so the same intelligence system extends
 across Electronics & EMS, Semiconductor, Battery & New Energy, Industrial Automation and Advanced
 Manufacturing — one reusable product-development intelligence OS, not a collection of tools.
@@ -180,3 +182,4 @@ datasets through the reviewed ingestion pipeline; the Advanced Manufacturing tax
 | [03 Target architecture](docs/03_TARGET_ARCHITECTURE.md) | [Knowledge](docs/KNOWLEDGE.md) · [Ingestion](docs/INGESTION.md) · [Global intelligence](docs/GLOBAL_INTELLIGENCE.md) |
 | [04 Data model](docs/04_DATA_MODEL.md) · [05 Migration](docs/05_MIGRATION_PLAN.md) · [06 Roadmap](docs/06_IMPLEMENTATION_ROADMAP.md) | [Security](docs/SECURITY.md) · [Deployment](docs/DEPLOYMENT.md) · [Testing](docs/TESTING.md) |
 | [07 UX redesign](docs/07_UX_REDESIGN.md) · [08 Intelligence OS](docs/08_INTELLIGENCE_OS.md) · [09 Engineering & Simulation OS](docs/09_ENGINEERING_SIMULATION_OS.md) · [10 3D Machine Digital Twin](docs/10_3D_MACHINE_DIGITAL_TWIN.md) | [Migration](docs/MIGRATION.md) |
+| **AI layer:** [Architecture](docs/ai/AI_ARCHITECTURE.md) · [Roadmap](docs/ai/AI_ROADMAP.md) · [Data model](docs/ai/AI_DATA_MODEL.md) · [API spec](docs/ai/AI_API_SPEC.md) | [Model registry](docs/ai/AI_MODEL_REGISTRY.md) · [Knowledge graph](docs/ai/AI_KNOWLEDGE_GRAPH.md) · [RAG](docs/ai/AI_RAG_ARCHITECTURE.md) · [Evaluation](docs/ai/AI_EVALUATION.md) |

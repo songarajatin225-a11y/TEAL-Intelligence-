@@ -54,6 +54,22 @@ export interface NotificationRow {
   link?: string;
 }
 
+/** AI interaction / feedback log (AI master prompt §94, §95) — local to this browser, exportable. */
+export interface AiLogRow {
+  id?: number;
+  kind: 'interaction' | 'feedback';
+  at: string;
+  query: string;
+  intent: string;
+  title: string;
+  confidence: string;
+  mode: string;
+  sources: string[];
+  engines: string[];
+  feedback?: 'correct' | 'incorrect' | 'needs_review';
+  correction?: string;
+}
+
 export class WorkspaceDb extends Dexie {
   drafts!: Table<DraftRow, string>;
   changelog!: Table<ChangeLogRow, number>;
@@ -61,6 +77,7 @@ export class WorkspaceDb extends Dexie {
   saved!: Table<SavedSearchRow, number>;
   prefs!: Table<PrefRow, string>;
   notifications!: Table<NotificationRow, number>;
+  ai_log!: Table<AiLogRow, number>;
 
   constructor(name = 'teal-os-workspace') {
     super(name);
@@ -72,6 +89,8 @@ export class WorkspaceDb extends Dexie {
       prefs: 'key',
       notifications: '++id, created_at, read',
     });
+    // v2 adds the AI log; existing tables are unchanged (Dexie carries them over)
+    this.version(2).stores({ ai_log: '++id, kind, at, intent' });
   }
 }
 

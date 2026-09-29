@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { DataTypeBadge, OriginBadge, VerificationBadge } from '../../components/badges';
 import { Badge, Button, Card, EmptyState, ErrorState, Input, Loading, PageHeader } from '../../components/ui';
@@ -9,6 +9,9 @@ import { facets, hitLink, search, type Hit } from '../../services/search';
 import { BOOK_TITLES } from '../../services/knowledgeChunks';
 import { ParametricPanel } from '../../components/ParametricPanel';
 export { hitLink };
+
+// the hybrid (AI) ranking loads only when switched on
+const HybridResults = lazy(() => import('../ai/HybridResults'));
 
 export function HitRow({ h, q }: { h: Hit; q: string }) {
   return (
@@ -32,6 +35,7 @@ export function HitRow({ h, q }: { h: Hit; q: string }) {
 export default function SearchPage() {
   const [params, setParams] = useSearchParams();
   const q = params.get('q') ?? '';
+  const hybrid = params.get('mode') === 'hybrid';
   const [text, setText] = useState(q);
   const [parts, setParts] = useState<SearchPartition[]>([]);
   const [entityF, setEntityF] = useState<string | null>(null);
@@ -64,7 +68,7 @@ export default function SearchPage() {
         className="mb-3 flex flex-wrap gap-2"
         onSubmit={(e) => {
           e.preventDefault();
-          setParams(text.trim() ? { q: text.trim() } : {});
+          setParams(text.trim() ? { q: text.trim(), ...(hybrid ? { mode: 'hybrid' } : {}) } : {});
         }}
       >
         <Input aria-label="Search query" value={text} onChange={(e) => setText(e.target.value)} className="max-w-2xl flex-1" placeholder="Search…" />
@@ -78,6 +82,9 @@ export default function SearchPage() {
         >
           Save search
         </Button>
+        <Button aria-pressed={hybrid} variant={hybrid ? 'primary' : 'default'} onClick={() => setParams({ ...(q ? { q } : {}), ...(hybrid ? {} : { mode: 'hybrid' }) })} title="Add hybrid (keyword + lexical vector + graph) results, reranked by technical relevance">
+          Hybrid ranking (BETA)
+        </Button>
       </form>
       <div className="mb-3 flex flex-wrap gap-1" role="group" aria-label="Partitions">
         {SEARCH_PARTITIONS.map((p) => (
@@ -89,6 +96,13 @@ export default function SearchPage() {
       {q && (
         <div className="mb-3">
           <ParametricPanel q={q} />
+        </div>
+      )}
+      {q && hybrid && (
+        <div className="mb-3">
+          <Suspense fallback={<Loading label="Loading hybrid ranking…" />}>
+            <HybridResults q={q} />
+          </Suspense>
         </div>
       )}
       {!q ? (

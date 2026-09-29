@@ -200,6 +200,7 @@ export const SECTIONS: NavSection[] = [
       { label: 'Product Variants', to: '/machines', icon: Layers, desc: 'Saved configurations and serialized machines', keywords: 'variants configurations' },
       { label: 'Product Roadmap', to: '/roadmap', icon: Route, desc: 'Technology and product roadmap 2026 → 2030+', keywords: 'roadmap 2026 2027 2028 2029 2030' },
       { label: 'Product Readiness', to: '/gates', icon: ClipboardCheck, desc: 'G0–G10 reviews and rules', keywords: 'g0 g10 gate review readiness' },
+      { label: 'AI Configurator', to: '/ai-configure', icon: Sparkles, desc: 'Requirement → technology → architecture → BOM → suppliers → cost → 3D → RFQ / URS', keywords: 'ai product configurator requirement machine configuration laser selection bom rfq urs 3d' },
       { label: 'Product from Inquiry', to: '/inquiry', icon: Sparkles, desc: 'Turn a customer inquiry into a draft product package', keywords: 'create product inquiry flagship' },
       { label: 'Configurator', to: '/configurator', icon: Layers, desc: 'Configure a machine: source, optics, modules, price, physics' },
       { label: 'Product Architecture', to: '/product-architecture', icon: Network, desc: 'Product → system → subsystem → module → component', keywords: 'architecture tree drill down system subsystem' },
@@ -329,6 +330,7 @@ export const SECTIONS: NavSection[] = [
     pages: [
       { label: 'Engineering Knowledge', to: '/knowledge', icon: BookOpen, desc: 'Laser, automation and semiconductor handbooks', keywords: 'handbook library' },
       { label: 'Knowledge Articles', to: '/articles', icon: FileText, desc: 'Engineering articles written by TEAL', keywords: 'article knowledge base' },
+      { label: 'TEAL Copilot', to: '/copilot', icon: Sparkles, desc: 'AI copilot grounded in TEAL records, engines and handbooks — every claim cited (local engines, no LLM)', keywords: 'ai copilot assistant ask chat rag graphrag llm explain compare alternatives compatibility bom rfq urs' },
       { label: 'Ask Intelligence', to: '/ask', icon: MessageSquareText, desc: 'Ask a question; answered from records and handbooks (no AI model)', keywords: 'ask question copilot answer' },
       { label: 'Search', to: '/search', icon: Search, desc: 'Search everything, including technical parameters' },
       { label: 'Knowledge Graph', to: '/graph', icon: Network, desc: 'Explore relationships across the thread' },
@@ -382,6 +384,7 @@ export const SECTIONS: NavSection[] = [
       { label: 'Data Health', to: '/data-quality', icon: HeartPulse, desc: 'Records, valid, warnings, errors, duplicates, missing sources', keywords: 'data quality validation' },
       { label: 'Import / Export & Backup', to: '/import-export', icon: ArrowDownUp, desc: 'CSV / JSON export, change packages, backup and restore, legacy import', keywords: 'import export backup restore' },
       { label: 'Duplicates', to: '/duplicates', icon: CopyCheck, desc: 'Likely duplicate records — review, never auto-merged', keywords: 'dedupe duplicate merge' },
+      { label: 'AI Engine Control Center', to: '/ai-engine', icon: Cpu, desc: 'Models and engines, status, data readiness, evaluation, usage and feedback', keywords: 'ai engine model registry mlops evaluation gateway llm status' },
       { label: 'System Configuration', to: '/settings', icon: Cog, desc: 'Appearance, view mode, workspace, providers, security limits', keywords: 'settings configuration' },
       { label: 'Legacy Applications', to: '/legacy', icon: Layers, desc: 'The original simulator, cost platform and PM tracker' },
       { label: 'Help', to: '/help', icon: Lightbulb, desc: 'Concepts, workflows, shortcuts, glossary' },

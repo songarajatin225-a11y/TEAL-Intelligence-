@@ -21,6 +21,7 @@ export const SHORTCUTS: { keys: string[]; label: string }[] = [
   { keys: ['⌘', 'K'], label: 'Command palette (Ctrl K on Windows / Linux)' },
   { keys: ['/'], label: 'Focus global search' },
   { keys: ['N'], label: 'Quick create' },
+  { keys: ['I'], label: 'Open the TEAL Copilot' },
   { keys: ['F'], label: 'Toggle focus mode' },
   { keys: ['?'], label: 'Show keyboard shortcuts' },
   { keys: ['Esc'], label: 'Close drawer, dialog or menu' },
@@ -32,7 +33,7 @@ const typing = (t: EventTarget | null) => {
   return !!el && (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
 };
 
-export function useShortcuts(h: { palette: () => void; search: () => void; create: () => void; focus: () => void; help: () => void; go: (to: string) => void }) {
+export function useShortcuts(h: { palette: () => void; search: () => void; create: () => void; focus: () => void; help: () => void; go: (to: string) => void; copilot?: () => void }) {
   const ref = useRef(h);
   ref.current = h;
   useEffect(() => {
@@ -61,6 +62,9 @@ export function useShortcuts(h: { palette: () => void; search: () => void; creat
       } else if (k === 'n' || k === 'N') {
         e.preventDefault();
         ref.current.create();
+      } else if ((k === 'i' || k === 'I') && ref.current.copilot) {
+        e.preventDefault();
+        ref.current.copilot();
       } else if (k === 'f' || k === 'F') ref.current.focus();
       else if (k === '?') ref.current.help();
     };

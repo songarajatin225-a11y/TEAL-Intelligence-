@@ -10,7 +10,9 @@ export interface ShellApi {
   focusMode: boolean;
   toggleFocusMode: () => void;
   openOnboarding: () => void;
+  /** open the TEAL Copilot, optionally asking a question right away */
+  openCopilot: (query?: string) => void;
 }
 const noop = () => {};
-export const ShellContext = createContext<ShellApi>({ openPalette: noop, openQuickCreate: noop, openHelp: noop, openShortcuts: noop, focusSearch: noop, focusMode: false, toggleFocusMode: noop, openOnboarding: noop });
+export const ShellContext = createContext<ShellApi>({ openPalette: noop, openQuickCreate: noop, openHelp: noop, openShortcuts: noop, focusSearch: noop, focusMode: false, toggleFocusMode: noop, openOnboarding: noop, openCopilot: noop });
 export const useShell = () => useContext(ShellContext);
