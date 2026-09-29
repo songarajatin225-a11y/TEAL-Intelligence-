@@ -421,7 +421,7 @@ export type Actual = z.infer<typeof Actual>;
  * inputs the 3D model and motion need that a station does not already carry. Geometry is generated
  * from stations + selected components; nothing important lives only in the scene.
  */
-export const WORKPIECE_TEMPLATES = ['pcb', 'plate', 'battery_tab', 'battery_can', 'wafer', 'metal_part'] as const;
+export const WORKPIECE_TEMPLATES = ['pcb', 'plate', 'battery_tab', 'battery_can', 'wafer', 'metal_part', 'sheet', 'tube', 'foil_web', 'glass'] as const;
 export const TWIN_MODEL_MATURITY = ['Procedural', 'Imported', 'Engineering Reviewed', 'CAD Linked', 'Released'] as const;
 export const TWIN_SIM_MATURITY = ['Conceptual', 'Configured', 'Engineering Reviewed', 'POC Calibrated', 'Validated'] as const;
 export const SAFETY_ZONE_TYPES = ['operator', 'robot', 'laser', 'maintenance', 'restricted'] as const;

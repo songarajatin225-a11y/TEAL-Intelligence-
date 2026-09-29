@@ -16,7 +16,7 @@ import { resolveScenario } from '../sim/model';
 import { latestPrice, localizationLayers, originOf, supplierDependency } from '../sim/supply';
 import { REQUIREMENT_FIELDS } from './agents';
 import { suggestNext, type Observation } from './bayesopt';
-import { claim, engineRef, fromRecord, gap, hbRef, recHref, recRef, weakest } from './claims';
+import { claim, classOf, classOfMeta, engineRef, fromRecord, gap, hbRef, recHref, recRef, weakest } from './claims';
 import { configure, type ConfigureResult } from './configure';
 import { design, type DesignKind, type DoeFactor } from './doe';
 import { fmeaDraft, rfqDraft, ursDraft } from './drafts';
@@ -78,7 +78,7 @@ function retrievalClaims(r: Retrieved, max = 3): { answer: Claim[]; evidence: Cl
   const recs = r.ranked.filter((h) => h.kind === 'record').slice(0, 8);
   const evidence: Claim[] = [];
   for (const h of recs.slice(0, max)) {
-    evidence.push(claim(`${label(h.entity)} “${h.name}” — ${h.why.slice(1, 3).join('; ') || h.reasons[0]}`, h.data_type === 'DEMO' ? 'ASSUMED' : h.verification === 'VERIFIED' || h.verification === 'SOURCE_DOCUMENTED' ? 'VERIFIED' : 'INFERRED', [{ kind: 'record', id: h.id, label: h.name, href: recHref(h.id), data_type: h.data_type, verification: h.verification }]));
+    evidence.push(claim(`${label(h.entity)} “${h.name}” — ${h.why.slice(1, 3).join('; ') || h.reasons[0]}`, classOfMeta(h.data_type, h.verification), [{ kind: 'record', id: h.id, label: h.name, href: recHref(h.id), data_type: h.data_type, verification: h.verification }]));
   }
   const table: AnswerTable = {
     title: 'Retrieved (hybrid: keyword + lexical vectors + graph, reranked)',
@@ -154,7 +154,7 @@ const search: Handler = async (c) => {
         ...paths.slice(0, 6).map((p) =>
           claim(
             pathText(p),
-            p.some((s) => s.derived) ? 'INFERRED' : weakest(...p.map((s) => (c.deps.byId.get(s.id)?.data_type === 'DEMO' ? ('ASSUMED' as const) : ('VERIFIED' as const)))),
+            p.some((s) => s.derived) ? 'INFERRED' : weakest(...p.map((s) => (c.deps.byId.has(s.id) ? classOf(c.deps.byId.get(s.id)) : ('VERIFIED' as const)))),
             p.map((s) => recRef(c.deps.byId.get(s.id)!)),
           ),
         ),
@@ -190,7 +190,7 @@ const findParts: Handler = async (c) => {
     tables.push({
       title: 'Candidates (engineering database)',
       columns: ['Model', 'Type', 'Manufacturer', 'Matched', 'Failed', 'Not available', 'Checks'],
-      rows: [...res.candidates, ...res.near].slice(0, 12).map((x) => ({ cells: [x.part.model_number, productTypeLabel(x.part.product_type), originOf(x.part, c.deps.byId).manufacturer, String(x.matched), String(x.failed), String(x.unknown), x.checks.map((k) => `${k.state === 'match' ? '✓' : k.state === 'fail' ? '✗' : '?'} ${k.label}: ${k.detail}`).join(' · ')], href: recHref(x.part.id), cls: x.failed ? 'CONFLICTING' : x.part.data_type === 'DEMO' ? 'ASSUMED' : 'VERIFIED' })),
+      rows: [...res.candidates, ...res.near].slice(0, 12).map((x) => ({ cells: [x.part.model_number, productTypeLabel(x.part.product_type), originOf(x.part, c.deps.byId).manufacturer, String(x.matched), String(x.failed), String(x.unknown), x.checks.map((k) => `${k.state === 'match' ? '✓' : k.state === 'fail' ? '✗' : '?'} ${k.label}: ${k.detail}`).join(' · ')], href: recHref(x.part.id), cls: x.failed ? 'CONFLICTING' : classOf(x.part) })),
       note: 'DEMO parts are fictional placeholders until real datasheets are ingested.',
     });
     const unk = [...res.candidates].filter((x) => x.unknown).length;
@@ -386,7 +386,7 @@ function configureSections(cfg: ConfigureResult, intent: Intent, query: string):
   if (cfg.cost.knownLines) costClaims.push(claim(`${cfg.cost.knownLines} BOM line(s) carry list-price estimates summing to ${inr(cfg.cost.knownTotal)}; ${cfg.cost.unknownLines} line(s) have no cost.`, 'ESTIMATED', [engineRef('local-configurator', 'BOM generator')]));
   // components from the engineering DB + compatibility
   agents.push({ agent: 'component', task: 'components per subsystem', requirements: { process: req.process.value, technology: cfg.lasers[0]?.source.name }, constraints: [], candidates: cfg.components.map((x) => `${x.role}: ${x.parts.map((p) => p.model_number).join(', ') || 'none'}`), evidence: cfg.components.flatMap((x) => x.parts.slice(0, 1).map((p) => recRef(p))), confidence: 'low', verification_required: true, notes: ['Engineering-database parts are DEMO until real datasheets are ingested'] });
-  tables.push({ title: 'Components from the engineering database', columns: ['Role', 'Candidates', 'Note'], rows: cfg.components.map((x) => ({ cells: [x.role, x.parts.map((p) => `${p.model_number}${p.data_type === 'DEMO' ? ' (DEMO)' : ''}`).join(', ') || '—', x.note], href: x.parts[0] ? recHref(x.parts[0].id) : undefined, cls: x.parts.length ? (x.parts[0].data_type === 'DEMO' ? 'ASSUMED' : 'VERIFIED') : 'UNKNOWN' })) });
+  tables.push({ title: 'Components from the engineering database', columns: ['Role', 'Candidates', 'Note'], rows: cfg.components.map((x) => ({ cells: [x.role, x.parts.map((p) => `${p.model_number}${p.data_type === 'DEMO' ? ' (DEMO)' : ''}`).join(', ') || '—', x.note], href: x.parts[0] ? recHref(x.parts[0].id) : undefined, cls: x.parts.length ? classOf(x.parts[0]) : 'UNKNOWN' })) });
   let pass = 0;
   let fail = 0;
   let unknown = 0;
@@ -463,7 +463,7 @@ const supplier: Handler = async (c) => {
         answer: [rows.length ? claim(`${rows.length} record(s) match the controlled query (${cq.filters.map((f) => f.label).join('; ')}).`, 'INFERRED', rows.slice(0, 8).map((r) => recRef(r.record))) : gap(`No supplier or manufacturer record matches ${cq.filters.map((f) => f.label).join('; ')}.${relaxed.length ? ` Without the country filter, ${relaxed.length} match.` : ''}`)],
         tables: [
           { title: 'Controlled query (no SQL — whitelisted filters)', columns: ['Entities', 'Filters'], rows: [{ cells: [cq.entities.join(', '), cq.filters.map((f) => f.label).join('; ')] }] },
-          { title: rows.length ? 'Matches' : 'Matches without the country filter', columns: ['Name', 'Type', 'Why'], rows: (rows.length ? rows : relaxed).slice(0, 20).map((r) => ({ cells: [r.record.name, label(r.record.entity), r.reasons.join('; ')], href: recHref(r.record.id), cls: r.record.data_type === 'DEMO' ? 'ASSUMED' : 'VERIFIED' })) },
+          { title: rows.length ? 'Matches' : 'Matches without the country filter', columns: ['Name', 'Type', 'Why'], rows: (rows.length ? rows : relaxed).slice(0, 20).map((r) => ({ cells: [r.record.name, label(r.record.entity), r.reasons.join('; ')], href: recHref(r.record.id), cls: classOf(r.record) })) },
         ],
         alternatives: rows.length ? [] : relaxed.slice(0, 5).map((r) => fromRecord(`${r.record.name} — ${r.reasons.join('; ')}`, r.record)),
         validation: [claim('Supplier capability, quality system and delivery performance must be assessed — records list names and categories, not qualification', 'ASSUMED', [engineRef('local-graph', 'Controlled query')])],
@@ -586,7 +586,7 @@ const projectStatus: Handler = async (c) => {
       title: 'Open work',
       sections: {
         answer: [claim(`${active.length} project / opportunity / POC record(s) have a recorded next action. Open one (or name it) for a project-specific answer.`, 'INFERRED', active.map((r) => recRef(r, 'next_action')))],
-        tables: [{ title: 'Next actions on record', columns: ['Record', 'Next action', 'Due'], rows: active.map((r) => ({ cells: [r.name, r.next_action!.action, r.next_action!.due ?? '—'], href: recHref(r.id), cls: r.data_type === 'DEMO' ? 'ASSUMED' : 'VERIFIED' })) }],
+        tables: [{ title: 'Next actions on record', columns: ['Record', 'Next action', 'Due'], rows: active.map((r) => ({ cells: [r.name, r.next_action!.action, r.next_action!.due ?? '—'], href: recHref(r.id), cls: classOf(r) })) }],
       },
     };
   }

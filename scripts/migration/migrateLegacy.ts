@@ -492,6 +492,16 @@ function products() {
       });
     }
   }
+  // two platforms can reuse a legacy label for different processes — keep list names unambiguous
+  const seen = new Set<string>();
+  for (const a of apps) {
+    const n = String(a.name).toLowerCase();
+    if (seen.has(n)) {
+      a.provenance = { ...(a.provenance as Json), note: `Name disambiguated from the legacy label “${a.name}”, which another platform's application also uses.` };
+      a.name = `${a.name} (${String(a.process).toLowerCase()})`;
+    }
+    seen.add(String(a.name).toLowerCase());
+  }
   writeJson(join(DATA_DIR, 'applications', 'applications.json'), {
     dataset: header({
       id: 'applications',

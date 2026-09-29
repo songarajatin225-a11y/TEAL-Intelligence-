@@ -246,7 +246,18 @@ const GEN_OF: Partial<Record<string, GenKind>> = {
 };
 
 /** default workpiece per template when a scenario gives none (dimensions shown as ASSUMPTION) */
-const WORKPIECE_DEFAULTS: Record<string, [number, number, number]> = { pcb: [160, 100, 1.6], plate: [100, 60, 2], battery_tab: [120, 40, 0.3], battery_can: [70, 70, 21], wafer: [300, 300, 0.775], metal_part: [80, 50, 5] };
+const WORKPIECE_DEFAULTS: Record<string, [number, number, number]> = { pcb: [160, 100, 1.6], plate: [100, 60, 2], battery_tab: [120, 40, 0.3], battery_can: [70, 70, 21], wafer: [300, 300, 0.775], metal_part: [80, 50, 5], sheet: [300, 200, 2], tube: [300, 40, 40], foil_web: [300, 120, 0.2], glass: [150, 80, 0.7] };
+
+/** Visual placeholder part from the scenario name when no workpiece is entered (first match wins). */
+const WORKPIECE_BY_NAME: [RegExp, string][] = [
+  [/pcb|board|depanel/i, 'pcb'],
+  [/wafer|semi/i, 'wafer'],
+  [/tube|profile|stent|hypotube/i, 'tube'],
+  [/sheet|flatbed/i, 'sheet'],
+  [/electrode|notch|foil|web\b/i, 'foil_web'],
+  [/glass|sapphire|display/i, 'glass'],
+  [/battery|tab/i, 'battery_tab'],
+];
 
 /** clamp jaws stand above the fixture plate (conceptual) */
 const CLAMP_H = 25;
@@ -325,7 +336,7 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
   const { axes, plan } = scenarioMotion(sim, byId, defs);
   const notes: string[] = [];
   const wpIn = sim.twin?.workpiece;
-  const tmpl = wpIn?.template ?? (/pcb/i.test(sim.name) ? 'pcb' : /wafer|semi/i.test(sim.name) ? 'wafer' : /battery|tab/i.test(sim.name) ? 'battery_tab' : 'metal_part');
+  const tmpl = wpIn?.template ?? WORKPIECE_BY_NAME.find(([re]) => re.test(sim.name))?.[1] ?? 'metal_part';
   const [wl, ww, wt] = wpIn ? [wpIn.length_mm, wpIn.width_mm, wpIn.thickness_mm] : WORKPIECE_DEFAULTS[tmpl];
   if (!wpIn) notes.push(`Workpiece dimensions are a visual placeholder for “${tmpl.replace('_', ' ')}” — not entered for this scenario.`);
   const carrier: MachineModel['carrier'] = res.layout === 'sequential' && axes.length ? 'axes' : 'flow';

@@ -120,7 +120,8 @@ const SUPPLIER_MATCH: Record<string, RegExp> = {
 
 export function solve(input: SolutionInput, records: AnyRecord[], e: ConfiguratorEngine | null): SolutionResult | null {
   const opts = solutionOptions(input, records);
-  const app = opts.applications.find((a) => a.id === input.applicationId) ?? (input.process && input.materialId ? opts.applications[0] : undefined);
+  // an AI-drafted application has no TEAL platform — prefer one that names a platform
+  const app = opts.applications.find((a) => a.id === input.applicationId) ?? (input.process && input.materialId ? (opts.applications.find((a) => a.product_id) ?? opts.applications[0]) : undefined);
   const productId = input.productKey ? `prd-${input.productKey}` : app?.product_id;
   const product = records.find((r) => r.id === productId) as unknown as Product | undefined;
   if (!e || !product || !e.products.has(product.key)) return null;

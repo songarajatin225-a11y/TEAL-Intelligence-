@@ -1,0 +1,39 @@
+{
+  "dataset": {
+    "id": "reference-drafts-source",
+    "title": "AI-generated drafts — source",
+    "entity": "source",
+    "description": "The source record every AI-generated reference draft cites.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-29",
+    "data_type": "AI_GENERATED",
+    "source_ids": [
+      "src-ai-draft-knowledge"
+    ],
+    "partition": "knowledge",
+    "notes": "Every record is an AI-generated DRAFT. Review against a primary source before relying on it."
+  },
+  "records": [
+    {
+      "id": "src-ai-draft-knowledge",
+      "entity": "source",
+      "name": "AI-generated engineering drafts (unreviewed)",
+      "description": "Reference records drafted by an AI assistant from general engineering knowledge: application descriptions, material classes, equipment categories and equipment station structures. No manufacturer, model, price, market figure, certification or performance value is included.",
+      "kind": "internal",
+      "source_type": "Derived",
+      "organization": "AI assistant (draft for TEAL engineering review)",
+      "retrieved_at": "2026-09-29",
+      "next_review": "2026-12-31",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "draft"
+      ]
+    }
+  ]
+}

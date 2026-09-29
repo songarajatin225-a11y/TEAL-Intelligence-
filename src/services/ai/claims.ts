@@ -8,6 +8,7 @@ import type { Claim, ClaimClass, ClaimValue, SourceRef } from './types';
  *   verified / source-documented (not DEMO)   → VERIFIED
  *   calculated / inferred / draft              → INFERRED
  *   DEMO data (fictional placeholders)         → ASSUMED, and the text says DEMO
+ *   AI_GENERATED data (unreviewed drafts)      → INFERRED at best, and the text says AI-generated
  *   assumption                                 → ASSUMED
  *   unknown                                    → UNKNOWN
  *   conflicted                                 → CONFLICTING
@@ -22,12 +23,18 @@ export const engineRef = (id: string, label: string, locator?: string): SourceRe
 export const ruleRef = (id: string, label: string, href?: string): SourceRef => ({ kind: 'rule', id, label, href });
 export const hbRef = (p: Passage): SourceRef => ({ kind: 'handbook', id: p.ref, label: `${p.bookTitle} — ${p.heading}`, href: p.href, data_type: 'TEAL_INTERNAL', verification: 'SOURCE_DOCUMENTED', excerpt: p.text });
 
-export function classOf(r: AnyRecord): ClaimClass {
-  const v = r.provenance?.verification_status;
-  if (r.data_type === 'DEMO') return 'ASSUMED';
+export function classOf(r: Pick<AnyRecord, 'data_type' | 'provenance'> | undefined): ClaimClass {
+  return classOfMeta(r?.data_type, r?.provenance?.verification_status);
+}
+
+/** Same rule from the two provenance fields alone (retrieval hits carry only these). */
+export function classOfMeta(dataType: string | undefined, v: string | undefined): ClaimClass {
+  if (dataType === 'DEMO') return 'ASSUMED';
   if (v === 'CONFLICTED') return 'CONFLICTING';
   if (v === 'UNKNOWN') return 'UNKNOWN';
   if (v === 'ASSUMPTION') return 'ASSUMED';
+  // an AI-generated record is never VERIFIED until a reviewer changes its data type
+  if (dataType === 'AI_GENERATED') return 'INFERRED';
   if (v === 'VERIFIED' || v === 'SOURCE_DOCUMENTED') return 'VERIFIED';
   return 'INFERRED';
 }
@@ -38,10 +45,11 @@ export const weakest = (...cls: ClaimClass[]): ClaimClass => cls.reduce((a, b) =
 
 export const claim = (text: string, cls: ClaimClass, sources: SourceRef[], values?: ClaimValue[]): Claim => ({ text, cls, sources, values });
 
-/** A statement read from one record; DEMO records say so in the text. */
+/** A statement read from one record; DEMO and AI-generated records say so in the text. */
 export function fromRecord(text: string, r: AnyRecord, locator?: string, excerpt?: string, values?: ClaimValue[]): Claim {
   const cls = classOf(r);
-  return { text: r.data_type === 'DEMO' && !/DEMO/.test(text) ? `${text} (DEMO data — fictional)` : text, cls, sources: [recRef(r, locator, excerpt)], values };
+  const note = r.data_type === 'DEMO' && !/DEMO/.test(text) ? ' (DEMO data — fictional)' : r.data_type === 'AI_GENERATED' && !/AI-generated/.test(text) ? ' (AI-generated draft — engineering review required)' : '';
+  return { text: `${text}${note}`, cls, sources: [recRef(r, locator, excerpt)], values };
 }
 
 export const gap = (text: string, sources: SourceRef[] = []): Claim => ({ text, cls: 'UNKNOWN', sources });

@@ -1,0 +1,2078 @@
+{
+  "dataset": {
+    "id": "reference-drafts-equipment",
+    "title": "Equipment types (AI-generated drafts)",
+    "entity": "equipment",
+    "description": "Equipment CATEGORIES by domain (semiconductor, electronics, battery, laser, automation, advanced manufacturing). No manufacturer, model, price, throughput or accuracy — those enter only from sourced datasheets.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-29",
+    "data_type": "AI_GENERATED",
+    "source_ids": [
+      "src-ai-draft-knowledge"
+    ],
+    "partition": "records",
+    "notes": "Every record is an AI-generated DRAFT. Review against a primary source before relying on it."
+  },
+  "records": [
+    {
+      "id": "eqp-wafer-backgrinder",
+      "entity": "equipment",
+      "name": "Wafer back-grinder",
+      "description": "Grinds wafers to final thickness before dicing; often combined with stress-relief polishing.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — thinning",
+      "process": "Wafer thinning",
+      "material": "Silicon, SiC, compound-semiconductor wafers",
+      "automation_level": "Cassette-to-cassette automatic",
+      "motion": "Spindles, rotary chuck table",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wafer-mounter",
+      "entity": "equipment",
+      "name": "Wafer mounter / tape laminator",
+      "description": "Mounts the wafer on dicing tape in a frame; UV-release tapes are cured afterwards.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — preparation",
+      "process": "Tape mounting",
+      "material": "Wafers, dicing tape, frames",
+      "automation_level": "Automatic",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-blade-dicer",
+      "entity": "equipment",
+      "name": "Blade dicing saw",
+      "description": "Singulates wafers with a rotating diamond blade along the streets.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — singulation",
+      "process": "Dicing",
+      "material": "Silicon, glass, ceramics, packages",
+      "automation_level": "Automatic with vision alignment",
+      "vision": "Street alignment and kerf inspection",
+      "motion": "High-speed spindle, X/Y/Z/θ stages",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-laser-dicer",
+      "entity": "equipment",
+      "name": "Laser dicing / grooving system",
+      "description": "Singulates or grooves wafers by laser — ablation, internal modification or grooving before blade dicing.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — singulation",
+      "process": "Dicing",
+      "material": "Silicon, SiC, low-k stacks, glass",
+      "automation_level": "Automatic",
+      "laser_requirement": "Pulsed UV, IR or ultrafast depending on method — see laser source classes",
+      "vision": "Street alignment",
+      "motion": "X/Y/θ stages, autofocus",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-laser",
+        "tec-ultrafast",
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-die-bonder",
+      "entity": "equipment",
+      "name": "Die bonder",
+      "description": "Picks dies from the tape and places them on substrates or lead frames with adhesive, solder or sinter.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — assembly",
+      "process": "Die attach",
+      "material": "Dies, lead frames, substrates",
+      "automation_level": "Automatic",
+      "vision": "Die and substrate recognition",
+      "motion": "Bond head, wafer table, ejector",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor",
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-flipchip-bonder",
+      "entity": "equipment",
+      "name": "Flip-chip / thermocompression bonder",
+      "description": "Places bumped dies face-down and bonds them by reflow or thermocompression.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — assembly",
+      "process": "Die attach",
+      "material": "Bumped dies, substrates",
+      "automation_level": "Automatic",
+      "vision": "Up/down-looking alignment",
+      "motion": "High-precision bond head with force control",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wire-bonder",
+      "entity": "equipment",
+      "name": "Wire bonder",
+      "description": "Connects die pads to the package with fine gold, copper or aluminium wire (ball or wedge bonding).",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — interconnect",
+      "process": "Wire bonding",
+      "material": "Au / Cu / Al wire",
+      "automation_level": "Automatic",
+      "vision": "Pad recognition",
+      "motion": "Bond head with ultrasonic transducer, X/Y table",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-plasma-cleaner",
+      "entity": "equipment",
+      "name": "Plasma cleaner",
+      "description": "Removes organic contamination before wire bonding or moulding to improve adhesion.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — surface preparation",
+      "process": "Cleaning",
+      "material": "Strips, substrates",
+      "automation_level": "Batch or inline",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-mould-press",
+      "entity": "equipment",
+      "name": "Transfer / compression moulding system",
+      "description": "Encapsulates dies and wires in epoxy mould compound.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — encapsulation",
+      "process": "Moulding",
+      "material": "Epoxy mould compound",
+      "automation_level": "Automatic",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-package-marker",
+      "entity": "equipment",
+      "name": "Package laser marker",
+      "description": "Marks logos, codes and serials on moulded packages or strips.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — identification",
+      "process": "Marking",
+      "material": "Epoxy mould compound, substrates",
+      "automation_level": "Strip or tray automatic",
+      "laser_requirement": "Pulsed fiber, green or UV — see laser source classes",
+      "vision": "Mark inspection (OCR / 2D)",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-laser",
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-trim-form",
+      "entity": "equipment",
+      "name": "Trim & form system",
+      "description": "Cuts dam bars and forms leads of lead-frame packages.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — lead finishing",
+      "process": "Trim & form",
+      "material": "Lead frames",
+      "automation_level": "Automatic",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-package-saw",
+      "entity": "equipment",
+      "name": "Package singulation saw",
+      "description": "Cuts moulded strips into individual packages (QFN, BGA).",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — singulation",
+      "process": "Singulation",
+      "material": "Moulded strips",
+      "automation_level": "Automatic with vision",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-test-handler",
+      "entity": "equipment",
+      "name": "Test handler",
+      "description": "Presents packaged devices to the tester at temperature and sorts them into bins.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — test",
+      "process": "Final test",
+      "material": "Packaged devices",
+      "automation_level": "Automatic (pick-and-place, gravity or turret)",
+      "motion": "Pick-and-place heads, soak chamber",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "technology_ids": [
+        "tec-semiconductor",
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wafer-prober",
+      "entity": "equipment",
+      "name": "Wafer prober",
+      "description": "Aligns wafers under a probe card for electrical testing of each die.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Test — wafer sort",
+      "process": "Wafer test",
+      "material": "Wafers",
+      "automation_level": "Cassette automatic",
+      "vision": "Probe-to-pad alignment",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wafer-aoi",
+      "entity": "equipment",
+      "name": "Wafer / die optical inspection",
+      "description": "Detects defects on wafers, dies or bumps with optical imaging.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Inspection",
+      "process": "Inspection",
+      "automation_level": "Automatic",
+      "vision": "Bright-/dark-field imaging",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-aoi",
+        "tec-vision",
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-xray-semi",
+      "entity": "equipment",
+      "name": "X-ray inspection (packages)",
+      "description": "Inspects wire sweep, voids and bump joints inside packages.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Inspection",
+      "process": "Inspection",
+      "automation_level": "Offline or inline",
+      "safety": "Radiation shielding and interlocks — conformity must be assessed",
+      "technology_ids": [
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-tape-reel",
+      "entity": "equipment",
+      "name": "Tape & reel system",
+      "description": "Places tested devices into carrier tape, seals it and winds it on reels.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Back-end — packing",
+      "process": "Packing",
+      "automation_level": "Automatic",
+      "vision": "Orientation and lead inspection",
+      "technology_ids": [
+        "tec-semiconductor",
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wafer-id-marker",
+      "entity": "equipment",
+      "name": "Wafer ID laser marker",
+      "description": "Writes the wafer ID (hard or soft mark) near the notch or flat.",
+      "domain_id": "dom-semiconductor",
+      "equipment_type": "Front-end support — identification",
+      "process": "Marking",
+      "material": "Silicon and compound wafers",
+      "automation_level": "Cassette / FOUP automatic",
+      "laser_requirement": "Pulsed UV or IR — see laser source classes",
+      "vision": "Notch finding and ID read-back",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "qualification_requirements": "Fab qualification typically asks for SEMI S2 / S8 safety and ergonomics assessment and SECS/GEM host communication — confirm with the customer",
+      "cleanroom_requirement": "Cleanroom class set by the customer process — Not Available",
+      "technology_ids": [
+        "tec-laser",
+        "tec-semiconductor"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-paste-printer",
+      "entity": "equipment",
+      "name": "Solder-paste stencil printer",
+      "description": "Prints solder paste through a stencil onto PCB pads.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "SMT",
+      "process": "Printing",
+      "material": "PCBs, solder paste",
+      "automation_level": "Inline",
+      "vision": "Board-to-stencil alignment",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-spi",
+      "entity": "equipment",
+      "name": "Solder-paste inspection (SPI)",
+      "description": "Measures paste volume, area and height after printing, usually in 3D.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "SMT inspection",
+      "process": "Inspection",
+      "automation_level": "Inline",
+      "vision": "3D measurement",
+      "technology_ids": [
+        "tec-aoi",
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-pick-place",
+      "entity": "equipment",
+      "name": "SMT pick-and-place mounter",
+      "description": "Places surface-mount components from feeders onto the board.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "SMT",
+      "process": "Assembly",
+      "automation_level": "Inline",
+      "vision": "Component centring, fiducials",
+      "motion": "Gantry heads, nozzles, feeders",
+      "technology_ids": [
+        "tec-automation",
+        "tec-vision",
+        "tec-motion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-reflow-oven",
+      "entity": "equipment",
+      "name": "Reflow oven",
+      "description": "Melts the solder paste with a controlled temperature profile, optionally in nitrogen.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "SMT",
+      "process": "Soldering",
+      "automation_level": "Inline conveyor",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-aoi",
+      "entity": "equipment",
+      "name": "Automated optical inspection (AOI)",
+      "description": "Checks placement and solder joints after reflow.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Inspection",
+      "process": "Inspection",
+      "automation_level": "Inline",
+      "vision": "2D / 3D imaging",
+      "technology_ids": [
+        "tec-aoi",
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-axi",
+      "entity": "equipment",
+      "name": "Automated X-ray inspection (AXI)",
+      "description": "Inspects hidden joints such as BGA and QFN.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Inspection",
+      "process": "Inspection",
+      "automation_level": "Inline or offline",
+      "safety": "Radiation shielding and interlocks — conformity must be assessed",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-selective-solder",
+      "entity": "equipment",
+      "name": "Selective soldering system",
+      "description": "Solders through-hole joints with a mini-wave after fluxing and preheating.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "THT soldering",
+      "process": "Soldering",
+      "automation_level": "Inline",
+      "motion": "X/Y/Z board or nozzle motion",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-wave-solder",
+      "entity": "equipment",
+      "name": "Wave soldering machine",
+      "description": "Solders through-hole boards over a solder wave.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "THT soldering",
+      "process": "Soldering",
+      "automation_level": "Inline conveyor",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-laser-solder",
+      "entity": "equipment",
+      "name": "Laser soldering system",
+      "description": "Solders individual joints with a laser and wire, paste or ball feed.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Selective soldering",
+      "process": "Soldering",
+      "automation_level": "Cell or inline",
+      "laser_requirement": "Diode laser — see laser source classes",
+      "vision": "Joint alignment",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-closed-loop-control"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-conformal-coat",
+      "entity": "equipment",
+      "name": "Selective conformal-coating system",
+      "description": "Applies protective coating selectively, followed by curing and UV inspection.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Coating",
+      "process": "Coating",
+      "automation_level": "Inline",
+      "vision": "UV-fluorescence inspection",
+      "motion": "X/Y/Z valve motion",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-ict",
+      "entity": "equipment",
+      "name": "In-circuit tester (ICT)",
+      "description": "Tests components and nets through a bed-of-nails fixture.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Test",
+      "process": "Testing",
+      "automation_level": "Inline or offline",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-flying-probe",
+      "entity": "equipment",
+      "name": "Flying-probe tester",
+      "description": "Tests boards with moving probes, without a dedicated fixture — suits low volume and prototypes.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Test",
+      "process": "Testing",
+      "automation_level": "Offline or inline",
+      "motion": "Multiple probe axes",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-fct",
+      "entity": "equipment",
+      "name": "Functional test station (FCT)",
+      "description": "Powers the assembly and checks its functions against the product specification.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Test",
+      "process": "Testing",
+      "automation_level": "Manual, semi or fully automatic",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-depaneler",
+      "entity": "equipment",
+      "name": "PCB depaneling system (router or laser)",
+      "description": "Separates boards from the panel by routing, sawing or laser cutting.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Depaneling",
+      "process": "Cutting",
+      "automation_level": "Offline or inline",
+      "laser_requirement": "UV laser for stress-free depaneling (laser variant)",
+      "vision": "Fiducial alignment",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-uv"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-pcb-marker",
+      "entity": "equipment",
+      "name": "PCB laser marker",
+      "description": "Marks 2D codes and serials on boards for traceability.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Identification",
+      "process": "Marking",
+      "automation_level": "Inline",
+      "laser_requirement": "CO₂, UV or fiber depending on surface — see laser source classes",
+      "vision": "Code verification",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-mes"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-press-fit",
+      "entity": "equipment",
+      "name": "Press-fit connector press",
+      "description": "Presses compliant-pin connectors into boards with force–distance monitoring.",
+      "domain_id": "dom-electronics",
+      "equipment_type": "Assembly",
+      "process": "Pressing",
+      "automation_level": "Semi or fully automatic",
+      "motion": "Servo press",
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-electrode-coater",
+      "entity": "equipment",
+      "name": "Electrode coater & dryer",
+      "description": "Coats slurry onto current-collector foil and dries it in a long oven.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Electrode manufacturing",
+      "process": "Coating",
+      "material": "Cathode / anode slurry, Al / Cu foil",
+      "automation_level": "Continuous roll-to-roll",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-calender",
+      "entity": "equipment",
+      "name": "Calender",
+      "description": "Compresses the dried electrode to target density and thickness.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Electrode manufacturing",
+      "process": "Calendering",
+      "automation_level": "Continuous roll-to-roll",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-slitter",
+      "entity": "equipment",
+      "name": "Electrode slitter",
+      "description": "Slits wide electrode rolls into narrower strips.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Electrode manufacturing",
+      "process": "Slitting",
+      "automation_level": "Continuous roll-to-roll",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-laser-notcher",
+      "entity": "equipment",
+      "name": "Laser electrode notcher",
+      "description": "Cuts tabs into the moving electrode web with galvo-scanned lasers.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Electrode manufacturing",
+      "process": "Notching",
+      "material": "Coated Al / Cu foil",
+      "automation_level": "Continuous roll-to-roll",
+      "laser_requirement": "Pulsed fiber — see laser source classes",
+      "vision": "Burr and tab-position inspection",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-galvo",
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-winder",
+      "entity": "equipment",
+      "name": "Cell winder",
+      "description": "Winds electrodes and separator into jelly rolls for cylindrical or prismatic cells.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell assembly",
+      "process": "Winding",
+      "automation_level": "Automatic",
+      "cleanroom_requirement": "Dry-room / low-dew-point environment usually required for cell assembly — value set by the cell maker",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-stacker",
+      "entity": "equipment",
+      "name": "Electrode stacker (Z-fold)",
+      "description": "Stacks anode and cathode sheets with Z-folded separator for pouch and prismatic cells.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell assembly",
+      "process": "Stacking",
+      "automation_level": "Automatic",
+      "vision": "Sheet alignment",
+      "cleanroom_requirement": "Dry-room / low-dew-point environment usually required for cell assembly — value set by the cell maker",
+      "technology_ids": [
+        "tec-lithium-ion",
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-tab-welder-us",
+      "entity": "equipment",
+      "name": "Ultrasonic tab welder",
+      "description": "Joins foil stacks to tabs by ultrasonic welding.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell assembly",
+      "process": "Welding",
+      "automation_level": "Automatic",
+      "cleanroom_requirement": "Dry-room / low-dew-point environment usually required for cell assembly — value set by the cell maker",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-tab-welder-laser",
+      "entity": "equipment",
+      "name": "Laser tab / terminal welder",
+      "description": "Welds tabs to terminals or lids with a laser.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell assembly",
+      "process": "Welding",
+      "automation_level": "Automatic",
+      "laser_requirement": "CW fiber, green or blue — see laser source classes",
+      "vision": "Seam finding",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-electrolyte-filler",
+      "entity": "equipment",
+      "name": "Electrolyte filling system",
+      "description": "Evacuates the cell, doses electrolyte and lets it wet the electrodes before sealing.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell assembly",
+      "process": "Filling",
+      "automation_level": "Automatic",
+      "safety": "Electrolyte handling (flammable, toxic) — process safety assessment required",
+      "cleanroom_requirement": "Dry-room / low-dew-point environment usually required for cell assembly — value set by the cell maker",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-formation",
+      "entity": "equipment",
+      "name": "Formation & ageing system",
+      "description": "First charge / discharge cycles and storage to form the SEI and screen out weak cells.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell finishing",
+      "process": "Formation",
+      "automation_level": "Automatic racks with tray handling",
+      "safety": "Thermal-runaway detection and suppression — assessment required",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-grader",
+      "entity": "equipment",
+      "name": "Cell grading & OCV/IR sorter",
+      "description": "Measures open-circuit voltage and internal resistance and sorts cells into grades.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Cell finishing",
+      "process": "Testing",
+      "automation_level": "Automatic",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-module-line",
+      "entity": "equipment",
+      "name": "Module stacking & compression station",
+      "description": "Stacks cells with spacers and compresses them into module frames.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Module assembly",
+      "process": "Assembly",
+      "automation_level": "Automatic",
+      "vision": "Cell polarity and position check",
+      "technology_ids": [
+        "tec-lithium-ion",
+        "tec-robotics"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-busbar-welder",
+      "entity": "equipment",
+      "name": "Busbar laser welder",
+      "description": "Welds busbars to cell terminals in modules and packs.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Module assembly",
+      "process": "Welding",
+      "automation_level": "Automatic",
+      "laser_requirement": "CW fiber with beam oscillation, or green / blue — see laser source classes",
+      "vision": "Terminal position measurement",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-pack-eol",
+      "entity": "equipment",
+      "name": "Pack end-of-line tester",
+      "description": "Electrical, insulation and BMS communication tests of the finished pack.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Pack assembly",
+      "process": "Testing",
+      "automation_level": "Semi or fully automatic",
+      "safety": "High-voltage safety concept required",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-battery-leak",
+      "entity": "equipment",
+      "name": "Pack / module leak tester",
+      "description": "Checks enclosure tightness by pressure decay or tracer gas.",
+      "domain_id": "dom-battery",
+      "equipment_type": "Pack assembly",
+      "process": "Leak testing",
+      "automation_level": "Semi or fully automatic",
+      "technology_ids": [
+        "tec-lithium-ion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-fiber-cutter",
+      "entity": "equipment",
+      "name": "Flatbed fiber-laser cutting machine",
+      "description": "2D sheet cutting with a gantry-mounted cutting head and shuttle tables.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser cutting",
+      "process": "Cutting",
+      "material": "Steel, stainless, aluminium, brass, copper sheet",
+      "automation_level": "Standalone; optional load / unload towers",
+      "laser_requirement": "CW fiber — see laser source classes",
+      "motion": "Gantry with linear or rack-and-pinion drives, capacitive height control",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-fiber-laser",
+        "tec-cw",
+        "tec-motion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-tube-cutter",
+      "entity": "equipment",
+      "name": "Tube laser cutting machine",
+      "description": "Cuts tubes and profiles with rotary chucks and a cutting head.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser cutting",
+      "process": "Cutting",
+      "automation_level": "Bundle loader and part unloader optional",
+      "laser_requirement": "CW fiber — see laser source classes",
+      "motion": "Rotary chucks, linear axes",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-fiber-laser",
+        "tec-cw"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-co2-cutter",
+      "entity": "equipment",
+      "name": "CO₂ laser cutting / engraving system",
+      "description": "Cuts and engraves non-metals: wood, acrylic, textiles, paper, rubber.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser cutting",
+      "process": "Cutting",
+      "automation_level": "Standalone or roll-fed",
+      "laser_requirement": "Sealed CO₂ — see laser source classes",
+      "safety": "Fire risk and fume extraction; laser safety conformity must be assessed",
+      "technology_ids": [
+        "tec-co2-laser"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-galvo-marker",
+      "entity": "equipment",
+      "name": "Galvo laser marking workstation",
+      "description": "Class 1 workstation or integrable head for marking and engraving.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser marking",
+      "process": "Marking",
+      "automation_level": "Manual load or integrated",
+      "laser_requirement": "Fiber, MOPA, UV, green or CO₂ — see laser source classes",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-galvo",
+        "tec-laser"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-weld-cell",
+      "entity": "equipment",
+      "name": "Laser welding cell (robot or gantry)",
+      "description": "Welds 2D/3D seams with a fixed optic, wobble head or remote scanner on a robot or gantry.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser welding",
+      "process": "Welding",
+      "automation_level": "Cell with fixtures and turntable",
+      "laser_requirement": "CW fiber, QCW or diode — see laser source classes",
+      "vision": "Seam tracking optional",
+      "motion": "Robot or gantry",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-robotics",
+        "tec-in-process-sensing"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-cleaning-system",
+      "entity": "equipment",
+      "name": "Laser cleaning system",
+      "description": "Removes rust, paint, oxide and contamination; handheld or integrated.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser cleaning",
+      "process": "Cleaning",
+      "automation_level": "Handheld, robot or inline",
+      "laser_requirement": "Pulsed fiber — see laser source classes",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-cladding-cell",
+      "entity": "equipment",
+      "name": "Laser cladding / DED cell",
+      "description": "Deposits metal powder or wire with a laser for coating and repair.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser deposition",
+      "process": "Cladding",
+      "automation_level": "Robot or CNC cell",
+      "laser_requirement": "Direct diode or CW fiber — see laser source classes",
+      "motion": "Robot or 5-axis CNC with powder feeder",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-robotics"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-hardening-cell",
+      "entity": "equipment",
+      "name": "Laser hardening cell",
+      "description": "Selective surface hardening with temperature-controlled laser heating.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser heat treatment",
+      "process": "Hardening",
+      "automation_level": "Robot or CNC cell",
+      "laser_requirement": "Direct diode — see laser source classes",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-laser",
+        "tec-closed-loop-control"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-ultrafast-station",
+      "entity": "equipment",
+      "name": "Ultrafast micromachining workstation",
+      "description": "Precision cutting, drilling and structuring with picosecond or femtosecond lasers.",
+      "domain_id": "dom-laser",
+      "equipment_type": "Laser micromachining",
+      "process": "Micromachining",
+      "automation_level": "Standalone with vision alignment",
+      "laser_requirement": "Picosecond / femtosecond — see laser source classes",
+      "vision": "Coaxial alignment camera",
+      "motion": "Precision stages plus galvo",
+      "safety": "Laser Class 4 source inside a Class 1 enclosure with interlocked doors — conformity must be assessed, not assumed",
+      "technology_ids": [
+        "tec-ultrafast",
+        "tec-picosecond",
+        "tec-femtosecond"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-robot-cell",
+      "entity": "equipment",
+      "name": "6-axis robot cell",
+      "description": "Articulated robot for handling, assembly or process tasks inside a guarded cell.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Robotics",
+      "process": "Handling",
+      "automation_level": "Automatic",
+      "safety": "Guarding and safety functions per risk assessment — conformity must be assessed",
+      "technology_ids": [
+        "tec-robotics"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-scara-cell",
+      "entity": "equipment",
+      "name": "SCARA pick-and-place cell",
+      "description": "Fast planar pick-and-place of small parts.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Robotics",
+      "process": "Handling",
+      "automation_level": "Automatic",
+      "vision": "Part location optional",
+      "technology_ids": [
+        "tec-robotics",
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-cobot",
+      "entity": "equipment",
+      "name": "Collaborative robot station",
+      "description": "Robot working near people with speed and force limits.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Robotics",
+      "process": "Handling",
+      "automation_level": "Semi-automatic / collaborative",
+      "safety": "Collaborative operation needs an application-level risk assessment",
+      "technology_ids": [
+        "tec-robotics"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-screwdriver",
+      "entity": "equipment",
+      "name": "Automatic screwdriving station",
+      "description": "Feeds and drives screws with torque / angle monitoring.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Assembly",
+      "process": "Assembly",
+      "automation_level": "Semi or fully automatic",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-servo-press",
+      "entity": "equipment",
+      "name": "Servo press station",
+      "description": "Press-fit with force–displacement monitoring and evaluation windows.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Assembly",
+      "process": "Pressing",
+      "automation_level": "Semi or fully automatic",
+      "motion": "Servo press",
+      "technology_ids": [
+        "tec-automation",
+        "tec-motion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-dispenser",
+      "entity": "equipment",
+      "name": "Adhesive / sealant dispensing station",
+      "description": "Applies beads or dots of adhesive, sealant or thermal material.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Assembly",
+      "process": "Dispensing",
+      "automation_level": "Semi or fully automatic",
+      "vision": "Bead inspection",
+      "motion": "X/Y/Z or robot-guided valve",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-vision-station",
+      "entity": "equipment",
+      "name": "Machine-vision inspection station",
+      "description": "Camera-based presence, dimension and defect checks.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Inspection",
+      "process": "Inspection",
+      "automation_level": "Inline",
+      "vision": "2D / 3D cameras, lighting",
+      "technology_ids": [
+        "tec-vision",
+        "tec-aoi"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-leak-tester",
+      "entity": "equipment",
+      "name": "Leak test station",
+      "description": "Pressure-decay, flow or tracer-gas leak testing.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Test",
+      "process": "Leak testing",
+      "automation_level": "Semi or fully automatic",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-palletizer",
+      "entity": "equipment",
+      "name": "Robot palletizer",
+      "description": "Stacks cases or trays onto pallets in programmed patterns.",
+      "domain_id": "dom-automation",
+      "equipment_type": "End-of-line",
+      "process": "Palletizing",
+      "automation_level": "Automatic",
+      "technology_ids": [
+        "tec-robotics"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-amr",
+      "entity": "equipment",
+      "name": "Autonomous mobile robot (AMR) transport",
+      "description": "Moves material between stations without fixed conveyors.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Intralogistics",
+      "process": "Transport",
+      "automation_level": "Automatic with fleet management",
+      "safety": "Safety scanners and route risk assessment",
+      "technology_ids": [
+        "tec-robotics",
+        "tec-industry-4-0"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-conveyor",
+      "entity": "equipment",
+      "name": "Pallet / belt conveyor system",
+      "description": "Links stations with belts, rollers or workpiece-carrier pallets.",
+      "domain_id": "dom-automation",
+      "equipment_type": "Transfer",
+      "process": "Transport",
+      "automation_level": "Automatic",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-lpbf",
+      "entity": "equipment",
+      "name": "Metal powder-bed fusion system",
+      "description": "Builds metal parts layer by layer from powder with one or more galvo-scanned lasers.",
+      "domain_id": "dom-advanced-manufacturing",
+      "equipment_type": "Additive manufacturing",
+      "process": "Additive manufacturing",
+      "material": "Titanium, nickel alloys, stainless, aluminium powders",
+      "automation_level": "Build-job automatic; powder handling separate",
+      "laser_requirement": "Single-mode CW fiber — see laser source classes",
+      "safety": "Laser safety plus reactive-powder and inert-gas hazards — assessment required",
+      "technology_ids": [
+        "tec-laser",
+        "tec-galvo"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-cnc-5axis",
+      "entity": "equipment",
+      "name": "5-axis CNC machining centre",
+      "description": "Subtractive machining of complex parts in one set-up.",
+      "domain_id": "dom-advanced-manufacturing",
+      "equipment_type": "Machining",
+      "process": "Machining",
+      "automation_level": "Standalone or with pallet / robot loading",
+      "technology_ids": [
+        "tec-motion"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-cmm",
+      "entity": "equipment",
+      "name": "Coordinate measuring machine (CMM)",
+      "description": "Measures part geometry against the drawing with tactile or optical probes.",
+      "domain_id": "dom-advanced-manufacturing",
+      "equipment_type": "Metrology",
+      "process": "Metrology",
+      "automation_level": "Offline or shop-floor",
+      "technology_ids": [
+        "tec-vision"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    },
+    {
+      "id": "eqp-ultrasonic-welder",
+      "entity": "equipment",
+      "name": "Ultrasonic welding system",
+      "description": "Joins plastics or thin metals with high-frequency vibration.",
+      "domain_id": "dom-advanced-manufacturing",
+      "equipment_type": "Joining",
+      "process": "Welding",
+      "automation_level": "Semi or fully automatic",
+      "technology_ids": [
+        "tec-automation"
+      ],
+      "capex": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Equipment CATEGORY, not a product: no manufacturer, model, price, throughput or accuracy is stated."
+      },
+      "tags": [
+        "ai-generated",
+        "equipment-type"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { AnyRecord } from '../../src/domain';
 import * as C from '../../src/calculations/cost';
 import * as L from '../../src/calculations/laser';
 import { progressFromTasks, projectProgress, scheduleVariance } from '../../src/calculations/project';
@@ -45,7 +46,17 @@ describe('TEAL Intelligence OS engines on master data', async () => {
   it('six domains are data, and every domain the data references exists', () => {
     const domains = records.filter((r) => r.entity === 'domain');
     expect(domains.map((d) => d.name)).toEqual(expect.arrayContaining(['Laser & Photonics', 'Electronics & EMS', 'Semiconductor', 'Battery & New Energy', 'Industrial Automation', 'Advanced Manufacturing']));
-    expect(records.filter((r) => r.entity === 'equipment' || r.entity === 'article' || r.entity === 'roadmap_item')).toEqual([]);
+    expect(records.filter((r) => r.entity === 'article' || r.entity === 'roadmap_item')).toEqual([]);
+    // equipment exists only as AI-drafted CATEGORIES: no supplier, price, throughput or accuracy is invented
+    const eq = records.filter((r) => r.entity === 'equipment') as (AnyRecord & Record<string, unknown>)[];
+    const domainIds = new Set(domains.map((d) => d.id));
+    for (const e of eq) {
+      expect(e.data_type, e.id).toBe('AI_GENERATED');
+      expect(e.provenance.verification_status, e.id).toBe('DRAFT');
+      expect(domainIds.has(String(e.domain_id)), e.id).toBe(true);
+      for (const k of ['supplier_id', 'throughput', 'accuracy', 'wafer_size']) expect(e[k], `${e.id}.${k}`).toBeUndefined();
+      expect(e.capex ?? null, e.id).toBeNull();
+    }
   });
 
   it('parametric search reads the example query and answers honestly (no UV platform at 20–50 W)', () => {

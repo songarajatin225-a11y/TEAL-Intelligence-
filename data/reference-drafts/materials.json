@@ -1,0 +1,402 @@
+{
+  "dataset": {
+    "id": "reference-drafts-materials",
+    "title": "Material classes (AI-generated drafts)",
+    "entity": "material",
+    "description": "Material classes not yet in the TEAL library. Thermal properties and absorptance are UNKNOWN (null) until entered from a primary handbook.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-29",
+    "data_type": "AI_GENERATED",
+    "source_ids": [
+      "src-ai-draft-knowledge"
+    ],
+    "partition": "applications",
+    "notes": "Every record is an AI-generated DRAFT. Review against a primary source before relying on it."
+  },
+  "records": [
+    {
+      "id": "mat-brass",
+      "entity": "material",
+      "name": "Brass (Cu–Zn alloys)",
+      "category": "Metal",
+      "description": "Copper–zinc alloys used for connectors, fittings and decorative parts. Reflective in the near-infrared; zinc vaporises well below the copper melting range, which affects welding.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-precious",
+      "entity": "material",
+      "name": "Precious metals (gold, silver, platinum)",
+      "category": "Metal",
+      "description": "Jewellery, contacts and medical parts. Highly reflective and highly conductive; small, high-value parts.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-coated-steel",
+      "entity": "material",
+      "name": "Coated steel sheet (zinc / Al–Si)",
+      "category": "Metal",
+      "description": "Galvanised or aluminised steel sheet used in automotive bodies and appliances. The coating vaporises during welding and can cause porosity in lap joints.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-tool-steel",
+      "entity": "material",
+      "name": "Tool & die steels",
+      "category": "Metal",
+      "description": "Hardenable steels for moulds, dies and cutting tools — typical substrates for laser hardening, cladding repair and texturing.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-superalloy",
+      "entity": "material",
+      "name": "Nickel-based superalloys",
+      "category": "Metal",
+      "description": "Heat-resistant alloys used in turbine and exhaust parts; common in cooling-hole drilling, cladding and powder-bed fusion.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-nitinol",
+      "entity": "material",
+      "name": "Nitinol (Ni–Ti shape-memory alloy)",
+      "category": "Metal",
+      "description": "Shape-memory alloy used for stents and guidewires; the heat-affected zone influences the transformation behaviour.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-wood",
+      "entity": "material",
+      "name": "Wood, plywood & MDF",
+      "category": "Organic",
+      "description": "Natural and engineered wood. Absorbs far-infrared (CO₂) wavelengths well; cut edges char.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-pmma",
+      "entity": "material",
+      "name": "Acrylic (PMMA)",
+      "category": "Polymer",
+      "description": "Transparent thermoplastic for signage, light guides and displays. Vaporises cleanly under CO₂ lasers, giving a polished edge.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-paper",
+      "entity": "material",
+      "name": "Paper, label stock & cardboard",
+      "category": "Organic",
+      "description": "Packaging and label materials; used for coding, perforation and kiss-cutting.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-textile",
+      "entity": "material",
+      "name": "Textiles, leather & technical fabrics",
+      "category": "Organic",
+      "description": "Natural and synthetic fabrics, leather and non-wovens. Synthetic edges fuse (seal) when laser-cut.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-rubber",
+      "entity": "material",
+      "name": "Rubber & silicone elastomers",
+      "category": "Polymer",
+      "description": "Gaskets, seals and keypads. Cut edges may leave residue; fume extraction and filtration are required.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-sapphire",
+      "entity": "material",
+      "name": "Sapphire (Al₂O₃ single crystal)",
+      "category": "Ceramic",
+      "description": "Hard, transparent crystal used for cover windows, LED substrates and watch glasses; brittle, so crack-free processing is the main challenge.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-thin-film",
+      "entity": "material",
+      "name": "Thin-film coatings (TCO, metal, absorber layers)",
+      "category": "Coating",
+      "description": "Functional layers on glass or foil — ITO / TCO, metallisation and photovoltaic absorbers — patterned by selective ablation.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-nd-magnet",
+      "entity": "material",
+      "name": "NdFeB magnets & electrical steel",
+      "category": "Metal",
+      "description": "Rotor magnets and laminated electrical steel in e-motors; relevant to marking and welding of motor components.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-ptfe",
+      "entity": "material",
+      "name": "Fluoropolymers (PTFE, FEP)",
+      "category": "Polymer",
+      "description": "Wire insulation and medical tubing; decomposition products are hazardous, so extraction and filtration design matter.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    },
+    {
+      "id": "mat-lfp-nmc-cathode",
+      "entity": "material",
+      "name": "Cathode-coated aluminium foil",
+      "category": "Battery",
+      "description": "Aluminium current collector carrying a cathode coating (e.g. LFP or NMC). Notching and slitting must avoid burrs and coating delamination.",
+      "thermal_conductivity": null,
+      "melting_point": null,
+      "density": null,
+      "specific_heat": null,
+      "absorption": null,
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Thermal properties and absorptance are UNKNOWN here — enter them from a primary handbook with the grade, temper and surface condition."
+      },
+      "tags": [
+        "ai-generated",
+        "material-class"
+      ]
+    }
+  ]
+}

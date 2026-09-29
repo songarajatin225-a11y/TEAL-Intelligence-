@@ -1585,8 +1585,45 @@ export const ObjectBody = forwardRef<THREE.Group, GenProps>(function ObjectBody(
 
 /** Workpiece templates (§25) — conceptual geometry per template. */
 export function WorkpieceMesh({ template, l, w, t, state }: { template: string; l: number; w: number; t: number; state?: 'raw' | 'processing' | 'ok' | 'ng' }) {
-  const color = template === 'pcb' ? '#1f6b3a' : template === 'wafer' ? '#5b6770' : template === 'battery_tab' ? '#b87333' : template === 'battery_can' ? '#9aa4aa' : '#b9c2c6';
+  const color = template === 'pcb' ? '#1f6b3a' : template === 'wafer' ? '#5b6770' : template === 'battery_tab' ? '#b87333' : template === 'battery_can' ? '#9aa4aa' : template === 'foil_web' ? '#3a3f44' : template === 'glass' ? '#a9d6e5' : '#b9c2c6';
   void state;
+  if (template === 'tube') {
+    // round tube along the machine's X axis; width = outer diameter, thickness = height on the fixture
+    const r = (Math.min(w, t) / 2) * MM;
+    return (
+      <group position={[0, r, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <mesh castShadow>
+          <cylinderGeometry args={[r, r, l * MM, 32, 1, true]} />
+          <meshStandardMaterial color={color} metalness={0.75} roughness={0.3} side={THREE.DoubleSide} />
+        </mesh>
+        <mesh>
+          <cylinderGeometry args={[r * 0.86, r * 0.86, l * MM * 1.001, 32, 1, true]} />
+          <meshStandardMaterial color="#6d757a" metalness={0.6} roughness={0.5} side={THREE.BackSide} />
+        </mesh>
+      </group>
+    );
+  }
+  if (template === 'glass')
+    return (
+      <mesh position={[0, (Math.max(t, 0.6) / 2) * MM, 0]}>
+        <boxGeometry args={[l * MM, Math.max(t, 0.6) * MM, w * MM]} />
+        <meshPhysicalMaterial color={color} transparent opacity={0.45} roughness={0.05} metalness={0} />
+      </mesh>
+    );
+  if (template === 'foil_web')
+    // electrode on a web: dark coating with a bare current-collector edge where tabs are notched
+    return (
+      <group>
+        <mesh position={[0, (0.6 / 2) * MM, -(w * 0.1) * MM]}>
+          <boxGeometry args={[l * MM, 0.6 * MM, w * 0.8 * MM]} />
+          <meshStandardMaterial color={color} metalness={0.1} roughness={0.8} />
+        </mesh>
+        <mesh position={[0, (0.6 / 2) * MM, (w * 0.4) * MM]}>
+          <boxGeometry args={[l * MM, 0.5 * MM, w * 0.2 * MM]} />
+          <meshStandardMaterial color="#c9ccce" metalness={0.8} roughness={0.25} />
+        </mesh>
+      </group>
+    );
   if (template === 'wafer')
     return (
       <mesh position={[0, (Math.max(t, 0.8) / 2) * MM, 0]}>

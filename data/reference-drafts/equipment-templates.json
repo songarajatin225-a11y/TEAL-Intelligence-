@@ -1,0 +1,3870 @@
+{
+  "dataset": {
+    "id": "reference-drafts-templates",
+    "title": "Equipment templates (AI-generated drafts)",
+    "entity": "equipment_template",
+    "description": "Additional station structures for the Simulation Studio and the 3D digital twin. Station times, capacities and costs are deliberately empty.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-29",
+    "data_type": "AI_GENERATED",
+    "source_ids": [
+      "src-ai-draft-knowledge"
+    ],
+    "partition": "engineering",
+    "notes": "Every record is an AI-generated DRAFT. Review against a primary source before relying on it."
+  },
+  "records": [
+    {
+      "id": "eqt-sheet-laser-cutting",
+      "entity": "equipment_template",
+      "name": "Flatbed Sheet-Metal Laser Cutting",
+      "code": "SHEET-LASER-CUTTING",
+      "group": "Laser",
+      "application": "Sheet-metal profile cutting",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Sheet load (shuttle table)",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Slat bed / sheet support",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cutting (gantry head)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Edge / dimension check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "Part sorting / de-skeleton",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Parts & skeleton unload",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.sheetcut",
+        "app-ai.reflectcut"
+      ]
+    },
+    {
+      "id": "eqt-tube-laser-cutting",
+      "entity": "equipment_template",
+      "name": "Tube & Profile Laser Cutting",
+      "code": "TUBE-LASER-CUTTING",
+      "group": "Laser",
+      "application": "Tube and profile cutting",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Bundle loader",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Rotary chucks",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cutting (rotary + head)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Cut-feature check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Part outfeed",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.tubecut"
+      ]
+    },
+    {
+      "id": "eqt-co2-cutting",
+      "entity": "equipment_template",
+      "name": "CO₂ Laser Cutting (non-metals)",
+      "code": "CO2-CUTTING",
+      "group": "Laser",
+      "application": "Cutting / engraving of wood, acrylic, textile, paper, rubber",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Sheet / roll feed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Honeycomb / conveyor bed",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "CO₂ laser cutting (flying optics)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Edge check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Part removal",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.woodcut",
+        "app-ai.pmmacut",
+        "app-ai.textilecut",
+        "app-ai.gasketcut"
+      ]
+    },
+    {
+      "id": "eqt-laser-cladding",
+      "entity": "equipment_template",
+      "name": "Laser Cladding / DED",
+      "code": "LASER-CLADDING",
+      "group": "Laser",
+      "application": "Cladding and repair by directed-energy deposition",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Surface scan",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser cladding (powder / wire feed)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Robot",
+              "product_type": "robot",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Clad height / defect check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cladding",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.cladding"
+      ]
+    },
+    {
+      "id": "eqt-laser-hardening",
+      "entity": "equipment_template",
+      "name": "Laser Hardening",
+      "code": "LASER-HARDENING",
+      "group": "Laser",
+      "application": "Selective surface hardening",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser hardening (temperature-controlled)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Pattern / hardness check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Hardening",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.hardening"
+      ]
+    },
+    {
+      "id": "eqt-laser-soldering",
+      "entity": "equipment_template",
+      "name": "Laser Soldering",
+      "code": "LASER-SOLDERING",
+      "group": "Laser",
+      "application": "Selective laser soldering",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in (conveyor)",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine",
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "fixture",
+          "name": "Board clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Pad / pin alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser soldering (wire / paste feed)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Joint inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Board out (conveyor)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Soldering",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.lasersolder"
+      ]
+    },
+    {
+      "id": "eqt-plastic-laser-welding",
+      "entity": "equipment_template",
+      "name": "Plastic Laser Welding",
+      "code": "PLASTIC-LASER-WELDING",
+      "group": "Laser",
+      "application": "Laser transmission welding of plastics",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Clamp (transparent pressing plate)",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Transmission welding (quasi-simultaneous)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Seam / collapse check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "leak",
+          "name": "Leak test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Welding",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.plasticweld"
+      ]
+    },
+    {
+      "id": "eqt-laser-texturing",
+      "entity": "equipment_template",
+      "name": "Laser Surface Texturing",
+      "code": "LASER-TEXTURING",
+      "group": "Laser",
+      "application": "Functional surface texturing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Fixture / clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Surface texturing (ultrafast)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Surface / roughness check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Texturing",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.texture"
+      ]
+    },
+    {
+      "id": "eqt-stent-cutting",
+      "entity": "equipment_template",
+      "name": "Stent / Hypotube Micro-Cutting",
+      "code": "STENT-CUTTING",
+      "group": "Laser",
+      "application": "Micro-cutting of thin-walled tubes",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Tube feed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Rotary collet / guide bushing",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Micro-cutting (rotary + linear)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "post",
+          "name": "Post-process hand-off (descale / polish)",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Strut inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.stentcut"
+      ]
+    },
+    {
+      "id": "eqt-laser-depaneling",
+      "entity": "equipment_template",
+      "name": "PCB Laser Depaneling",
+      "code": "LASER-DEPANELING",
+      "group": "Laser",
+      "application": "UV laser singulation of PCBs",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Panel in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Vacuum panel fixture",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Fiducial alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "UV laser depaneling",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "clean",
+          "name": "Debris extraction / cleaning",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Edge inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Board unload / tray",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.pcbdepanel"
+      ]
+    },
+    {
+      "id": "eqt-glass-cutting",
+      "entity": "equipment_template",
+      "name": "Glass & Sapphire Cutting (ultrafast)",
+      "code": "GLASS-CUTTING",
+      "group": "Laser",
+      "application": "Crack-free cutting of thin glass and sapphire",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Vacuum chuck",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Vision alignment",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Ultrafast filamentation / modification",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a processing head and motion",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Processing head",
+              "product_type": "laser_head",
+              "required": true
+            },
+            {
+              "role": "Motion axis",
+              "product_type": "linear_stage",
+              "required": true
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "cleave",
+          "name": "Cleave / break",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Edge-chipping check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.glasscut"
+      ]
+    },
+    {
+      "id": "eqt-hairpin-welding",
+      "entity": "equipment_template",
+      "name": "Hairpin Stator Welding",
+      "code": "HAIRPIN-WELDING",
+      "group": "Laser",
+      "application": "Hairpin pin-pair welding for e-motor stators",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Stator load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Hairpin clamping",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "align",
+          "name": "Pin-pair 3D vision",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Hairpin welding (scanner)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Weld inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Welding",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-weldb.hairpin"
+      ]
+    },
+    {
+      "id": "eqt-wire-stripping",
+      "entity": "equipment_template",
+      "name": "Laser Wire Stripping",
+      "code": "WIRE-STRIPPING",
+      "group": "Laser",
+      "application": "Insulation / enamel removal",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Wire feed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Wire clamp",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "laser",
+          "name": "Laser stripping",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Strip-length / residue check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-laser",
+      "process": "Stripping",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.wirestrip"
+      ]
+    },
+    {
+      "id": "eqt-laser-trimming",
+      "entity": "equipment_template",
+      "name": "Laser Resistor Trimming",
+      "code": "LASER-TRIMMING",
+      "group": "Electronics",
+      "application": "Closed-loop resistor trimming",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Substrate load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "probe",
+          "name": "Probe contact",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "laser",
+          "name": "Laser trimming",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "measure",
+          "name": "Resistance measurement (closed loop)",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Trimming",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.trimming"
+      ]
+    },
+    {
+      "id": "eqt-powder-bed-fusion",
+      "entity": "equipment_template",
+      "name": "Metal Powder-Bed Fusion (AM)",
+      "code": "POWDER-BED-FUSION",
+      "group": "Laser",
+      "application": "Additive manufacturing of metal parts",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Build-plate load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "recoat",
+          "name": "Powder recoating",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "laser",
+          "name": "Layer exposure",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "depowder",
+          "name": "De-powdering",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Build inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-advanced-manufacturing",
+      "process": "Additive manufacturing",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.lpbf"
+      ]
+    },
+    {
+      "id": "eqt-smt-line",
+      "entity": "equipment_template",
+      "name": "SMT Assembly Line",
+      "code": "SMT-LINE",
+      "group": "Electronics",
+      "application": "Surface-mount assembly (print → SPI → place → reflow → AOI)",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board loader (magazine)",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine",
+          "slots": [
+            {
+              "role": "Conveyor",
+              "product_type": "conveyor",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "print",
+          "name": "Solder-paste printing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "spi",
+          "name": "Solder-paste inspection (SPI)",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "place",
+          "name": "Pick & place",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "reflow",
+          "name": "Reflow soldering",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "aoi",
+          "name": "Automated optical inspection (AOI)",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Board unloader",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Assembly"
+    },
+    {
+      "id": "eqt-selective-soldering",
+      "entity": "equipment_template",
+      "name": "Selective Soldering",
+      "code": "SELECTIVE-SOLDERING",
+      "group": "Electronics",
+      "application": "Through-hole selective soldering",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "flux",
+          "name": "Fluxing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "preheat",
+          "name": "Preheat",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "solder",
+          "name": "Selective solder (mini-wave)",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Joint inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Board out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Soldering"
+    },
+    {
+      "id": "eqt-conformal-coating",
+      "entity": "equipment_template",
+      "name": "Conformal Coating",
+      "code": "CONFORMAL-COATING",
+      "group": "Electronics",
+      "application": "Selective conformal coating",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "coat",
+          "name": "Selective coating",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "cure",
+          "name": "Cure (UV / thermal)",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "UV-fluorescence inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Board out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Coating"
+    },
+    {
+      "id": "eqt-xray-inspection",
+      "entity": "equipment_template",
+      "name": "X-ray Inspection",
+      "code": "XRAY-INSPECTION",
+      "group": "Electronics",
+      "application": "Hidden-joint inspection (BGA / QFN)",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Board in",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "xray",
+          "name": "X-ray imaging",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Board out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-electronics",
+      "process": "Inspection"
+    },
+    {
+      "id": "eqt-wire-bonding",
+      "entity": "equipment_template",
+      "name": "Wire Bonding",
+      "code": "WIRE-BONDING",
+      "group": "Semiconductor",
+      "application": "Die-to-package wire interconnect",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Magazine / strip load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "align",
+          "name": "Pad recognition",
+          "kind": "align",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Find fiducials / part position",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "bond",
+          "name": "Wire bonding",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Bond inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Magazine unload",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-semiconductor",
+      "process": "Wire bonding"
+    },
+    {
+      "id": "eqt-moulding",
+      "entity": "equipment_template",
+      "name": "Package Moulding",
+      "code": "MOULDING",
+      "group": "Semiconductor",
+      "application": "Encapsulation of dies in mould compound",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Strip load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "preheat",
+          "name": "Pre-heat",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "mould",
+          "name": "Transfer / compression moulding",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "degate",
+          "name": "Degate",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Strip unload",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-semiconductor",
+      "process": "Moulding"
+    },
+    {
+      "id": "eqt-test-handler",
+      "entity": "equipment_template",
+      "name": "Final Test Handler",
+      "code": "TEST-HANDLER",
+      "group": "Semiconductor",
+      "application": "Package test at temperature and binning",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Tray / tube input",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "soak",
+          "name": "Temperature soak",
+          "kind": "buffer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "test",
+          "name": "Contact & test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "Bin sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Output trays",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-semiconductor",
+      "process": "Testing"
+    },
+    {
+      "id": "eqt-tape-reel",
+      "entity": "equipment_template",
+      "name": "Tape & Reel",
+      "code": "TAPE-REEL",
+      "group": "Semiconductor",
+      "application": "Packing of devices into carrier tape",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Device input",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "inspect",
+          "name": "Orientation / lead inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "pocket",
+          "name": "Pocket placement",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "seal",
+          "name": "Cover-tape sealing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Reel out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-semiconductor",
+      "process": "Packing"
+    },
+    {
+      "id": "eqt-wafer-backgrinding",
+      "entity": "equipment_template",
+      "name": "Wafer Back-Grinding",
+      "code": "WAFER-BACKGRINDING",
+      "group": "Semiconductor",
+      "application": "Wafer thinning",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Load port",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "tape",
+          "name": "Protective-tape lamination",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "grind",
+          "name": "Coarse / fine grinding",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "polish",
+          "name": "Stress-relief polish",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Thickness check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Load port (out)",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-semiconductor",
+      "process": "Thinning"
+    },
+    {
+      "id": "eqt-electrode-notching",
+      "entity": "equipment_template",
+      "name": "Electrode Laser Notching",
+      "code": "ELECTRODE-NOTCHING",
+      "group": "Battery",
+      "application": "Tab notching on a moving electrode web",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Unwinder (electrode roll)",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "web",
+          "name": "Web guiding / tension control",
+          "kind": "motion",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "laser",
+          "name": "Laser notching (on the fly)",
+          "kind": "laser",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Laser process with a galvo scanner",
+          "laser": {},
+          "slots": [
+            {
+              "role": "Laser source",
+              "product_type": "laser_source",
+              "required": true
+            },
+            {
+              "role": "Beam expander",
+              "product_type": "beam_expander",
+              "required": false
+            },
+            {
+              "role": "Galvo scanner",
+              "product_type": "galvo",
+              "required": true
+            },
+            {
+              "role": "F-theta lens",
+              "product_type": "f_theta",
+              "required": true
+            },
+            {
+              "role": "Galvo controller",
+              "product_type": "galvo_controller",
+              "required": false
+            },
+            {
+              "role": "Chiller",
+              "product_type": "chiller",
+              "required": false
+            },
+            {
+              "role": "Fume extraction",
+              "product_type": "fume_extraction",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "inspect",
+          "name": "Burr / tab-position inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Rewinder",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Cutting",
+      "has_laser_chain": true,
+      "application_ids": [
+        "app-ai.notching"
+      ]
+    },
+    {
+      "id": "eqt-cell-stacking",
+      "entity": "equipment_template",
+      "name": "Cell Stacking (Z-fold)",
+      "code": "CELL-STACKING",
+      "group": "Battery",
+      "application": "Electrode and separator stacking",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Electrode magazines",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "stack",
+          "name": "Z-fold stacking",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "tape",
+          "name": "Stack taping",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Alignment check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Stacking"
+    },
+    {
+      "id": "eqt-cell-winding",
+      "entity": "equipment_template",
+      "name": "Cell Winding",
+      "code": "CELL-WINDING",
+      "group": "Battery",
+      "application": "Jelly-roll winding",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Electrode & separator unwind",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "wind",
+          "name": "Winding",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Jelly-roll inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Winding"
+    },
+    {
+      "id": "eqt-electrolyte-filling",
+      "entity": "equipment_template",
+      "name": "Electrolyte Filling",
+      "code": "ELECTROLYTE-FILLING",
+      "group": "Battery",
+      "application": "Evacuation, dosing, wetting and sealing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Cell infeed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "vac",
+          "name": "Evacuation",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "fill",
+          "name": "Electrolyte dosing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "soak",
+          "name": "Wetting / soak",
+          "kind": "buffer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "seal",
+          "name": "Sealing",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Filling"
+    },
+    {
+      "id": "eqt-formation-grading",
+      "entity": "equipment_template",
+      "name": "Formation & Grading",
+      "code": "FORMATION-GRADING",
+      "group": "Battery",
+      "application": "Formation, ageing and OCV / IR grading",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Tray load",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "form",
+          "name": "Formation (charge / discharge)",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "age",
+          "name": "Ageing",
+          "kind": "buffer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "ocv",
+          "name": "OCV / IR grading",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "Grade sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-battery",
+      "process": "Formation"
+    },
+    {
+      "id": "eqt-palletizing",
+      "entity": "equipment_template",
+      "name": "Robot Palletizing",
+      "code": "PALLETIZING",
+      "group": "General Automation",
+      "application": "End-of-line palletizing",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Case infeed",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "pal",
+          "name": "Robot palletizing",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Robot",
+              "product_type": "robot",
+              "required": true
+            },
+            {
+              "role": "Gripper",
+              "product_type": "gripper",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Pallet out",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Palletizing"
+    },
+    {
+      "id": "eqt-vision-inspection",
+      "entity": "equipment_template",
+      "name": "Vision Inspection Cell",
+      "code": "VISION-INSPECTION",
+      "group": "General Automation",
+      "application": "Camera-based inspection and sorting",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "inspect",
+          "name": "Multi-camera inspection",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Inspection"
+    },
+    {
+      "id": "eqt-leak-testing",
+      "entity": "equipment_template",
+      "name": "Leak Testing",
+      "code": "LEAK-TESTING",
+      "group": "General Automation",
+      "application": "Pressure-decay / tracer-gas leak test",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Sealing fixture",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "leak",
+          "name": "Leak test",
+          "kind": "test",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "sort",
+          "name": "OK / NG sorting",
+          "kind": "sort",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Separate rejected parts"
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Leak testing"
+    },
+    {
+      "id": "eqt-ultrasonic-welding",
+      "entity": "equipment_template",
+      "name": "Ultrasonic Welding",
+      "code": "ULTRASONIC-WELDING",
+      "group": "General Automation",
+      "application": "Ultrasonic joining of plastics or foils",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "fixture",
+          "name": "Anvil / nest",
+          "kind": "fixture",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Locate and hold the part",
+          "slots": [
+            {
+              "role": "Fixture",
+              "product_type": "fixture",
+              "required": true
+            },
+            {
+              "role": "Clamp cylinder",
+              "product_type": "cylinder",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "usw",
+          "name": "Ultrasonic welding",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Weld check",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Welding"
+    },
+    {
+      "id": "eqt-machine-tending",
+      "entity": "equipment_template",
+      "name": "Robot Machine Tending",
+      "code": "MACHINE-TENDING",
+      "group": "General Automation",
+      "application": "Robot loading of a CNC or press",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Raw-part tray",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "tend",
+          "name": "Robot load / unload",
+          "kind": "transfer",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "slots": [
+            {
+              "role": "Robot",
+              "product_type": "robot",
+              "required": true
+            },
+            {
+              "role": "Gripper",
+              "product_type": "gripper",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "machine",
+          "name": "Machine cycle",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "unload",
+          "name": "Finished-part tray",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Handling"
+    },
+    {
+      "id": "eqt-labeling",
+      "entity": "equipment_template",
+      "name": "Print & Apply Labelling",
+      "code": "LABELING",
+      "group": "General Automation",
+      "application": "Label print, apply and verify",
+      "stations": [
+        {
+          "key": "load",
+          "name": "Loading",
+          "kind": "load",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Bring the part into the machine"
+        },
+        {
+          "key": "print",
+          "name": "Label print",
+          "kind": "process",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "apply",
+          "name": "Label apply",
+          "kind": "assembly",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0
+        },
+        {
+          "key": "inspect",
+          "name": "Code verification",
+          "kind": "inspect",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Check the result against the quality criteria",
+          "slots": [
+            {
+              "role": "Camera",
+              "product_type": "camera",
+              "required": true
+            },
+            {
+              "role": "Lens",
+              "product_type": "vision_lens",
+              "required": true
+            },
+            {
+              "role": "Lighting",
+              "product_type": "lighting",
+              "required": false
+            }
+          ]
+        },
+        {
+          "key": "unload",
+          "name": "Unloading",
+          "kind": "unload",
+          "time_s": null,
+          "parallel": 1,
+          "buffer_after": 0,
+          "function": "Remove the finished part"
+        }
+      ],
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN. Station structure only — times, capacities and costs are deliberately empty; enter them per scenario with their basis."
+      },
+      "tags": [
+        "ai-generated"
+      ],
+      "domain_id": "dom-automation",
+      "process": "Labelling"
+    }
+  ]
+}

@@ -1564,7 +1564,7 @@
     {
       "id": "app-cutxt.plastics",
       "entity": "application",
-      "name": "Engineering plastics",
+      "name": "Engineering plastics (cutting)",
       "description": "Acrylic, PC, technical sheet",
       "process": "Cutting",
       "industries": [
@@ -1587,7 +1587,8 @@
         "retrieved_at": "2026-09-26",
         "verification_status": "SOURCE_DOCUMENTED",
         "confidence": "MEDIUM",
-        "section": "PLAT.cutxt.apps.plastics"
+        "section": "PLAT.cutxt.apps.plastics",
+        "note": "Name disambiguated from the legacy label “Engineering plastics”, which the Mark F-Series marking application also uses."
       },
       "tags": [
         "cut"

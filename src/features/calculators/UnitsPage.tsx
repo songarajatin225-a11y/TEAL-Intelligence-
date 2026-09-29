@@ -19,6 +19,20 @@ const DIM_LABEL: Partial<Record<Dimension, string>> = {
   flow: 'Flow',
   thermal_conductivity: 'Thermal conductivity',
   specific_heat: 'Specific heat',
+  voltage: 'Voltage',
+  current: 'Current',
+  angle: 'Angle',
+  force: 'Force',
+  torque: 'Torque',
+  acceleration: 'Acceleration',
+  inertia: 'Inertia',
+  data: 'Data size',
+  count: 'Count / pixels',
+  volume: 'Volume',
+  illuminance: 'Illuminance',
+  sound: 'Sound level',
+  intensity: 'Intensity / irradiance',
+  throughput: 'Throughput (UPH)',
 };
 
 /**
