@@ -69,10 +69,22 @@ Local drafts, backups and change packages are **plain, unencrypted** data:
 
 ## 4. AI
 
-The core platform does not depend on AI and contains **no AI keys**. The *AI context generator*
-only builds text for you to copy into an assistant of your choice. Do not paste confidential
-context into a public AI service; the prompts themselves instruct the assistant not to invent
-data.
+The core platform does not depend on AI and contains **no AI keys**. The AI layer
+([docs/ai](ai/AI_ARCHITECTURE.md)) runs **local deterministic engines in the browser**; every
+language / embedding / vision model is listed as OFFLINE with provider “Not configured”, and the
+`LocalGateway` refuses to complete. A CI test fails if a provider key pattern or provider endpoint
+appears in `src/services/ai`. Models can only be connected through a **server-side AI gateway** in a
+private deployment (contract in [AI_API_SPEC.md](ai/AI_API_SPEC.md)): keys in the server's secret
+store, RBAC, audit log, rate limits, upload validation, retrieved text treated as data (prompt-injection
+defence) and every model answer re-checked by the frontend validator.
+
+Natural-language questions compile to a whitelisted filter object — never SQL, never `eval`. The
+Copilot's interaction and feedback log stays in this browser (exportable, clearable); decisions become
+ordinary `decision` drafts that reach GitHub only through a reviewed change package.
+
+The *AI context generator* only builds text for you to copy into an assistant of your choice. Do not
+paste confidential context into a public AI service; the prompts themselves instruct the assistant
+not to invent data.
 
 ## 5. External data
 

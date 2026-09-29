@@ -73,7 +73,11 @@ export default function AskPage() {
     <div className="space-y-5">
       <PageHeader title="Ask Intelligence" subtitle="Ask in plain language. Answers are assembled from TEAL records and handbooks — every line links to where it came from." />
       <Notice tone="info">
-        No AI model is connected in this GitHub-only version. This is <b>local retrieval</b>: search, the digital-thread graph and the gap engine. To reason further, open <Link to="/ai" className="font-medium text-accent-2 hover:underline">AI Context</Link> and paste the context into your own assistant.
+        No AI model is connected in this GitHub-only version. This is <b>local retrieval</b>: search, the digital-thread graph and the gap engine. To reason further, open <Link to="/ai" className="font-medium text-accent-2 hover:underline">AI Context</Link> and paste the context into your own assistant. For configuration, alternatives, compatibility, change impact and RFQ / URS drafts, use the{' '}
+        <Link to={q ? `/copilot?q=${encodeURIComponent(q)}` : '/copilot'} className="font-medium text-accent-2 hover:underline">
+          TEAL Copilot
+        </Link>
+        .
       </Notice>
       <form onSubmit={submit} className="surface glass-edge flex flex-col gap-2 rounded-panel p-3 sm:flex-row" role="search">
         <label htmlFor="ask-q" className="sr-only">

@@ -12,6 +12,7 @@ import { fieldLabel, renderValue } from '../../components/fieldValue';
 import { RecordLink } from '../../components/RecordLink';
 import { AiContextDrawer, GapsPanel, LinkedRecords, NextActionLine, SimilarPanel } from '../../components/ThreadPanels';
 import { toast } from '../../components/toast';
+import { useShell } from '../../app/shell/ShellContext';
 import { Badge, Button, buttonClass, Card, Drawer, EmptyState, IconButton, KV, Loading, Notice, Popover, Tabs, Unknown } from '../../components/ui';
 import { WhyButton } from '../../components/why';
 import type { AnyRecord } from '../../domain';
@@ -126,6 +127,7 @@ export default function RecordPage() {
     if (r) void trackRecent({ id: r.id, entity: r.entity, name: r.name });
   }, [r?.id, r?.name, r?.entity]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const shell = useShell();
   const related = useMemo(() => {
     if (!r) return [];
     const m = new Map<string, number>();
@@ -163,6 +165,7 @@ export default function RecordPage() {
   const relatedCount = related.reduce((s, [, n]) => s + n, 0);
 
   const menu: { icon: typeof Copy; label: string; danger?: boolean; run: () => unknown }[] = [
+    { icon: Sparkles, label: 'Ask TEAL Copilot about this', run: () => shell.openCopilot() },
     { icon: Sparkles, label: 'AI context for this record', run: () => setAi(true) },
     {
       icon: Copy,

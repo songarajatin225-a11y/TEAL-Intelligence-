@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Briefcase, Home, Keyboard, LifeBuoy, Maximize2, Menu, Minimize2, MoonStar, Plus, Search, SunMedium, X } from 'lucide-react';
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Briefcase, Home, Keyboard, LifeBuoy, Maximize2, Menu, Minimize2, MoonStar, Plus, Search, Sparkles, SunMedium, X } from 'lucide-react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ToastHost } from '../components/toast';
 import { ErrorState, IconButton, Loading, Modal, Popover, useFocusTrap } from '../components/ui';
@@ -19,6 +19,8 @@ import { TealMark } from '../components/TealLogo';
 import { AttentionCenter, DraftsIndicator, SystemStatus } from './shell/StatusCenter';
 
 const FOCUS_KEY = 'teal-os:focus';
+// the AI layer is loaded only when the Copilot is first opened
+const CopilotDrawer = lazy(() => import('../features/ai/CopilotDrawer'));
 
 /** The TEAL Intelligence shell (docs/07_UX_REDESIGN.md): sidebar · command header · workspace. */
 export function Layout() {
@@ -34,6 +36,8 @@ export function Layout() {
   const [help, setHelp] = useState(false);
   const [shortcuts, setShortcuts] = useState(false);
   const [onboarding, setOnboarding] = useState(() => !prefs.onboarded);
+  const [copilot, setCopilot] = useState<{ open: boolean; query?: string; n: number } | null>(null);
+  const openCopilot = useCallback((query?: string) => setCopilot((c) => ({ open: true, query, n: (c?.n ?? 0) + (query ? 1 : 0) })), []);
   const [focusMode, setFocusMode] = useState(() => {
     try {
       return sessionStorage.getItem(FOCUS_KEY) === '1';
@@ -75,11 +79,12 @@ export function Layout() {
       focusMode,
       toggleFocusMode,
       openOnboarding: () => setOnboarding(true),
+      openCopilot,
     }),
-    [openQuickCreate, focusSearch, focusMode, toggleFocusMode],
+    [openQuickCreate, focusSearch, focusMode, toggleFocusMode, openCopilot],
   );
 
-  useShortcuts({ palette: () => setPalette((p) => !p), search: focusSearch, create: () => setCreate('__menu'), focus: toggleFocusMode, help: () => setShortcuts(true), go: nav });
+  useShortcuts({ palette: () => setPalette((p) => !p), search: focusSearch, create: () => setCreate('__menu'), focus: toggleFocusMode, help: () => setShortcuts(true), go: nav, copilot: () => openCopilot() });
 
   useEffect(() => {
     setMobileNav(false);
@@ -120,6 +125,7 @@ export function Layout() {
                 {!focusMode && <GlobalSearch ref={searchRef} className="hidden w-[clamp(14rem,28vw,32rem)] shrink md:block" />}
                 <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-1">
                   <IconButton className="md:hidden" label="Search" icon={Search} onClick={() => setPalette(true)} />
+                  <IconButton label="Open TEAL Copilot (I)" icon={Sparkles} onClick={() => openCopilot()} active={!!copilot?.open} />
                   {!focusMode && (
                     <>
                       <SystemStatus />
@@ -181,6 +187,11 @@ export function Layout() {
         <HelpDrawer open={help} onClose={() => setHelp(false)} onShortcuts={() => (setHelp(false), setShortcuts(true))} />
         <ShortcutsModal open={shortcuts} onClose={() => setShortcuts(false)} />
         <Onboarding open={onboarding && status === 'ready'} onClose={() => setOnboarding(false)} onSearch={focusSearch} onCreate={() => setCreate('__menu')} />
+        {copilot && status === 'ready' && (
+          <Suspense fallback={null}>
+            <CopilotDrawer key={copilot.n} open={copilot.open} query={copilot.query} onClose={() => setCopilot((c) => (c ? { ...c, open: false, query: undefined } : c))} />
+          </Suspense>
+        )}
         <ToastHost />
       </ShellContext.Provider>
     </WhyProvider>
