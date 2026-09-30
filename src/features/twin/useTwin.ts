@@ -79,3 +79,9 @@ export function costColor(share: number) {
   const l = 78 - s * 48;
   return `hsl(174 70% ${l}%)`;
 }
+
+/** Sequential single-hue scale (light → dark blue) for station utilization, 0–1. */
+export function utilColor(u: number) {
+  const s = Math.max(0, Math.min(1, u));
+  return `hsl(211 80% ${84 - s * 50}%)`;
+}

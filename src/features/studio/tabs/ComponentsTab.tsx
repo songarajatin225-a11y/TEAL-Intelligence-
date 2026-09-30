@@ -59,6 +59,7 @@ export default function ComponentsTab({ eng, sim, set, customer }: TabProps) {
   return (
     <div className="space-y-4">
       {customer && <Notice tone="info">Customer mode shows the technology per function; manufacturer identities and part numbers are hidden.</Notice>}
+      {!customer && sim.twin?.build?.mode === 'components' && <Notice tone="info">This machine is built from its components: selecting, swapping or clearing a component here rebuilds the stations (3D machine → Builder shows why each station exists).</Notice>}
       {groups.map((g) => {
         const extra = selections.filter((x) => x.station_key === g.key && !g.slots.some((sl) => sl.role === x.role));
         const slots: Slot[] = [...g.slots, ...extra.map((x) => ({ role: x.role, product_type: partOf(x.part_id)?.product_type ?? 'other', required: false }))];

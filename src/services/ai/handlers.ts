@@ -406,6 +406,8 @@ function configureSections(cfg: ConfigureResult, intent: Intent, query: string):
   const dedupRisks = [...new Map(risks.map((r) => [r.text, r])).values()];
   const actions: AnswerAction[] = [];
   const tpl = cfg.templates[0];
+  const picks = [...new Set(cfg.components.map((x) => x.parts[0]?.id).filter((id): id is string => !!id))];
+  if (picks.length) actions.push({ kind: 'build3d', label: `Build a 3D machine from the ${picks.length} picked components`, partIds: picks, process: typeof req.process.value === 'string' ? req.process.value : undefined, templateId: tpl?.template.id, uph: typeof req.throughput.value === 'number' ? req.throughput.value : null });
   if (tpl) actions.push({ kind: 'open3d', label: `Open a 3D scenario from “${tpl.template.name}”`, templateId: tpl.template.id, uph: typeof req.throughput.value === 'number' ? req.throughput.value : null });
   actions.push({ kind: 'open', label: 'Open in AI Configurator', href: `/ai-configure?q=${encodeURIComponent(query)}` });
   if (intent !== 'rfq') actions.push({ kind: 'ask', label: 'Generate RFQ', query: `Generate an RFQ for: ${query}` });

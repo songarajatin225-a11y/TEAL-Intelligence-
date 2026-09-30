@@ -14,6 +14,7 @@ import { capacity, cycleTime } from '../../services/sim/capacity';
 import { cannotRun, resolveScenario } from '../../services/sim/model';
 import { designReview } from '../../services/sim/review';
 import { supplierDependency } from '../../services/sim/supply';
+import { rebuildIfNeeded } from '../../services/twin/architect';
 import { todayIso } from '../../utils/dates';
 import { ModeToggle, num, useCustomerMode, useEngineering, type Eng } from './shared';
 import { studioPath } from './StudioPage';
@@ -102,7 +103,8 @@ function Workspace({ eng, rec, work, setWork, dirty, setDirty }: { eng: Eng; rec
   let tab = (params.get('tab') as TabKey) ?? 'overview';
   if (!TABS[tab] || (customer && CUSTOMER_HIDDEN.includes(tab))) tab = 'overview';
   const set = (f: (s: Sim) => Sim) => {
-    setWork(f(work));
+    // component mode: a changed component pool rebuilds the stations (the builder decides the machine)
+    setWork(rebuildIfNeeded(work, f(work), eng.byId));
     setDirty(true);
   };
   const save = async () => {

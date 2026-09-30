@@ -318,6 +318,23 @@ export function cameraFov(rs: ResolvedStation, sim: Simulation, defs: SpecDefs):
   const k = f != null && wd != null ? wd / f : null;
   return { fovX: sw != null && k != null ? sw * k : null, fovY: sh != null && k != null ? sh * k : null, wd, target, basis: 'thin-lens estimate: sensor × WD ÷ f', missing };
 }
+/**
+ * Outer size from the component's datasheet "dimensions" (L × W × H mm), as [x, y, z] = [L, H, W].
+ * null when the datasheet does not state it — the drawing then uses a placeholder size.
+ */
+export function datasheetSize(p: Pick<Part, 'specs'> | undefined): [number, number, number] | null {
+  const s = (p?.specs ?? []).find((x) => x.spec === 'dimensions');
+  const t = String((s as { text?: string } | undefined)?.text ?? s?.original ?? '');
+  const m = /(\d+(?:\.\d+)?)\s*[×x*]\s*(\d+(?:\.\d+)?)\s*[×x*]\s*(\d+(?:\.\d+)?)\s*(mm|cm|m)?\b/i.exec(t);
+  if (!m) return null;
+  const k = m[4]?.toLowerCase() === 'cm' ? 10 : m[4]?.toLowerCase() === 'm' ? 1000 : 1;
+  const [l, w, h] = [Number(m[1]) * k, Number(m[2]) * k, Number(m[3]) * k];
+  if (![l, w, h].every((v) => v >= 5 && v <= 5000)) return null;
+  return [l, h, w];
+}
+/** Component kinds drawn at their datasheet size when it is known. */
+const SIZED_BY_DATASHEET = new Set<GenKind>(['laser_source', 'chiller', 'fume', 'camera', 'laser_head']);
+
 function readNum(p: Pick<Part, 'specs'>, key: string) {
   const s = (p.specs ?? []).find((x) => x.spec === key);
   return s?.value ?? null;
@@ -412,7 +429,8 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
     const selected = (type: string) => partOf(rs, type);
     const partIn = (type: string, id: string, name: string, kind: GenKind, pos: [number, number, number], size: [number, number, number], extra: Partial<Machine3DObject> = {}) => {
       const p = selected(type);
-      return add(c, { id, name: p ? `${name} — ${partName(p)}` : `${name} (not selected)`, kind, layer: LAYER_OF[type] ?? 'Mechanical', parentId: sid, stationKey: st.key, partId: p?.part.id, role: p?.role, position: pos, size, ...extra });
+      const ds = SIZED_BY_DATASHEET.has(kind) ? datasheetSize(p?.part) : null;
+      return add(c, { id, name: p ? `${name} — ${partName(p)}` : `${name} (not selected)`, kind, layer: LAYER_OF[type] ?? 'Mechanical', parentId: sid, stationKey: st.key, partId: p?.part.id, role: p?.role, position: pos, size: ds ?? size, ...extra, params: { ...(extra.params ?? {}), sizeBasis: ds ? 'datasheet' : 'placeholder' } });
     };
     // flow hardware (inline) — conveyor segment per station
     if (carrier === 'flow') {
@@ -521,7 +539,8 @@ export function buildMachine(res: Resolved, byId: Map<string, AnyRecord>, defs: 
       }
       const ch = selected('chiller') ?? res.machineParts.find((p) => p.part.product_type === 'chiller');
       if (ch) {
-        add(c, { id: `${sid}-chiller`, name: `Chiller — ${ch.part.model_number}`, kind: 'chiller', layer: 'Laser', parentId: sid, stationKey: st.key, partId: ch.part.id, role: ch.role, position: [minX - 300, 0, D / 2 - 260], size: [420, 800, 420], explode: [-1, 0, 0] });
+        const chs = datasheetSize(ch.part);
+        add(c, { id: `${sid}-chiller`, name: `Chiller — ${ch.part.model_number}`, kind: 'chiller', layer: 'Laser', parentId: sid, stationKey: st.key, partId: ch.part.id, role: ch.role, position: [minX - 300, 0, D / 2 - 260], size: chs ?? [420, 800, 420], params: { sizeBasis: chs ? 'datasheet' : 'placeholder' }, explode: [-1, 0, 0] });
         routes.push({ id: `cool-${sid}`, kind: 'cooling', from: `${sid}-chiller`, to: `${sid}-source`, points: [] });
       }
       DI('Laser ready', src ? `${src.part.model_number}` : 'Laser source', 'enable', `${sid}-source`);

@@ -78,7 +78,7 @@ export interface AnswerTable {
 }
 
 export interface AnswerAction {
-  kind: 'open' | 'open3d' | 'draft' | 'decision' | 'ask' | 'copy';
+  kind: 'open' | 'open3d' | 'build3d' | 'draft' | 'decision' | 'ask' | 'copy';
   label: string;
   href?: string;
   /** for `ask`: the follow-up question */
@@ -86,6 +86,9 @@ export interface AnswerAction {
   /** for `open3d`: equipment template to start a scenario from */
   templateId?: string;
   uph?: number | null;
+  /** for `build3d`: components the machine is built from, and the process */
+  partIds?: string[];
+  process?: string;
 }
 
 export interface ConflictNote {

@@ -10,6 +10,7 @@ import { recordDecision, recordFeedback } from '../../services/ai/feedback';
 import { INTENT_LABEL } from '../../services/ai/intent';
 import type { AnswerAction, AnswerTable, Claim, ClaimClass, ConfidenceLabel, EngineeringAnswer, SourceRef } from '../../services/ai/types';
 import { scenarioFromTemplate } from '../../services/sim/build';
+import { scenarioFromComponents } from '../../services/twin/architect';
 import { useData } from '../../hooks/useData';
 import { todayIso } from '../../utils/dates';
 import type { EquipmentTemplate } from '../../domain/engineering';
@@ -271,9 +272,16 @@ export function AnswerView({ a, onAsk, compact }: { a: EngineeringAnswer; onAsk:
       await repo().workspace.save(rec as unknown as Record<string, unknown>, `Copilot 3D scenario: ${rec.name}`);
       toast('Draft scenario created', { tone: 'draft', detail: 'It previews as a labelled sequence until its inputs exist.' });
       nav(`/studio/${encodeURIComponent(rec.id)}?tab=machine3d`);
+    } else if (x.kind === 'build3d' && x.partIds?.length) {
+      const tpl = x.templateId ? byId.get(x.templateId) : undefined;
+      const sim = scenarioFromComponents(x.partIds, byId, { newId: newLocalId, today: todayIso(), name: `Copilot build — ${tpl?.name ?? x.process ?? 'machine'} from components`, process: x.process ?? null, uph: x.uph ?? null, templateId: x.templateId, note: `Built from the components the TEAL Copilot picked for “${a.query.slice(0, 160)}”. Stations derived by the machine architect's rules; components and times need engineering review.` });
+      const rec = { ...sim, tags: ['ai-assisted', 'draft', 'built-from-components'] };
+      await repo().workspace.save(rec as unknown as Record<string, unknown>, `Copilot machine from components: ${rec.name}`);
+      toast('Machine built from the picked components', { tone: 'draft', detail: 'Open the Builder panel to swap or add components — the machine rebuilds as you change them.' });
+      nav(`/studio/${encodeURIComponent(rec.id)}?tab=machine3d`);
     }
   };
-  const actionIcon = (k: AnswerAction['kind']) => (k === 'open3d' ? Box : k === 'decision' ? Gavel : k === 'ask' ? MessageSquarePlus : FileText);
+  const actionIcon = (k: AnswerAction['kind']) => (k === 'open3d' || k === 'build3d' ? Box : k === 'decision' ? Gavel : k === 'ask' ? MessageSquarePlus : FileText);
   const sections: [string, Claim[], ('warn' | 'bad')?][] = [
     ['Technical basis', a.basis],
     ['Evidence', a.evidence],
@@ -367,7 +375,7 @@ export function AnswerView({ a, onAsk, compact }: { a: EngineeringAnswer; onAsk:
           {a.actions.map((x, i) => {
             const I = actionIcon(x.kind);
             return (
-              <Button key={i} size="sm" variant={x.kind === 'open3d' ? 'primary' : 'secondary'} onClick={() => act(x)}>
+              <Button key={i} size="sm" variant={x.kind === 'build3d' || (x.kind === 'open3d' && !a.actions.some((y) => y.kind === 'build3d')) ? 'primary' : 'secondary'} onClick={() => act(x)}>
                 <I className="size-3.5" aria-hidden /> {x.label}
               </Button>
             );
