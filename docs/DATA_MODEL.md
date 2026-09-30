@@ -103,6 +103,11 @@ kept in `original`; `value: null` means UNKNOWN.
 | `data/modules/module-conflicts.json` | module_conflict | 7 | TEAL_INTERNAL |
 | `data/optics/f-theta-objectives.json` | optic | 5 | TEAL_INTERNAL |
 | `data/products/platforms.json` | product | 22 | TEAL_INTERNAL |
+| `data/reference-drafts/applications.json` | application | 45 | AI_GENERATED |
+| `data/reference-drafts/equipment-templates.json` | equipment_template | 35 | AI_GENERATED |
+| `data/reference-drafts/equipment-types.json` | equipment | 73 | AI_GENERATED |
+| `data/reference-drafts/materials.json` | material | 16 | AI_GENERATED |
+| `data/reference-drafts/source.json` | source | 1 | AI_GENERATED |
 | `data/products/product-families.json` | product_family | 7 | TEAL_INTERNAL |
 | `data/semiconductor/value-chain.json` | semi_step | 21 | TEAL_INTERNAL |
 | `data/sources/sources.json` | source | 8 | TEAL_INTERNAL |
@@ -110,6 +115,8 @@ kept in `original`; `value: null` means UNKNOWN.
 | `data/technology/technologies.json` | technology | 16 | TEAL_INTERNAL |
 
 Counts are from `data/catalog.json` at the time of writing; the catalog is regenerated on every build.
+
+**AI-generated reference drafts** (`data/reference-drafts/`, built by `scripts/data/buildReferenceDrafts.ts`) extend the library with applications, material classes, equipment categories and equipment station structures drafted from general engineering knowledge. Every record is `data_type: AI_GENERATED`, `verification_status: DRAFT`, `confidence: LOW` and cites `src-ai-draft-knowledge`. They contain **no** manufacturer, model, price, market figure, certification or performance value: application power / speed / quality, material properties, equipment throughput / accuracy / capex and template station times are UNKNOWN (null or absent). An application draft names a candidate technology class and its rationale but no TEAL platform. The UI labels them *AI-generated — requires review*; the Copilot classes them INFERRED (never VERIFIED), says so in the claim text and ranks them below curated records. A reviewer promotes a record by changing its data type and verification status after checking a primary source.
 
 ## Key nested structures
 

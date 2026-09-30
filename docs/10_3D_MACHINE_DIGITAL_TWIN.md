@@ -11,6 +11,7 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 | Twin inputs (schema) | `src/domain/engineering.ts` → `Simulation.twin` | Holds only what the model needs beyond the stations: workpiece, process area, axes, per-part moves, camera working distance, layout overrides, zones, snapshots, recorded runs and factory placement. |
 | Motion engine | `src/services/twin/motion.ts` | Axis model (§17). Travel, speed and acceleration come from the linked stage record unless you enter them. Moves use a trapezoidal or triangular profile, or a **jerk-limited S-curve** when a jerk limit is entered. An in-position **settling time** is added when it is entered; when it is not, it is left out and the scenario says so (§18). |
 | Canonical cycle | `src/services/sim/model.ts` (`addMotion`, `transferModel`) | Axis move time is **calculated** and added to the station time. The 3D cycle is therefore the simulated cycle (§69). A missing axis speed blocks the run with an input gap and is never assumed. On an inline line the **part transfer** to the next station is added too. The distance is entered; the speed is entered or read from the selected conveyor's max speed. Without a distance the transfer is not included, and the Studio says so. |
+| Machine architect | `src/services/twin/architect.ts` | **Builds the machine from its components** (build mode *components*). Deterministic rules read the chosen components, the process and the automation level, and derive the stations, their slots, the selections and the PLC sequence. Every station names its rule and the components that triggered it; gaps and unused parts are stated. Station times already entered are kept. See *Build from components* below. |
 | Machine generator | `src/services/twin/machine.ts` | Builds the conceptual scene graph from stations and selected components (§8–§13, §118–§120). Every object carries `partId`, `stationKey`, layer and BOM level, and links to its BOM line. It also computes camera FOV (§31), laser beam path and field, safety zones, cable routes and the conceptual I/O list. |
 | Kinematics | `src/services/twin/kinematics.ts` | SCARA two-link and **6-axis articulated** inverse/forward kinematics (the robot record's number of axes picks the type), pick-and-place phases (to pick → descend → grip → lift → to place → lower → release → retract) and tool strokes. Poses are a function of the station's progress, so the same central state drives robots, gantries and tool heads. Geometry only; no dynamics (§16). |
 | Sequence preview | `src/services/twin/preview.ts` | When station inputs are missing, the machine still runs as a **sequence preview**: every undefined station gets the same 2 s visual placeholder, with no variability or failures. Nothing from a preview is reported as a result (§161, §162). |
@@ -23,7 +24,7 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 | Scene | `src/features/twin/three/MachineScene.tsx` | React Three Fiber scene. Covers views, orthographic/perspective, section, explode, X-ray, layers, overlays, measure, beam and scan, FOV, zones, dimensions, comparison ghost, factory boxes, performance monitor, debug stats and screen-space labels. |
 | Workbench | `src/features/twin/MachineTab.tsx`, `panels.tsx` | Status bar, grouped toolbar, full-width viewport with drawers for the component tree and properties, one transport bar, KPI strip and 13 panels. Properties include the component datasheet, design-check findings, BOM, live component swap, requirements, service, laser and camera parameters and layout override. |
 
-`three`, `@react-three/fiber` and `@react-three/drei` load only with the 3D tab, in a separate lazy chunk. The canvas mounts after the page has painted, so the status, toolbar and panels appear first. If WebGL is unavailable, the tab shows the 2D engineering simulator instead (§82).
+`three`, `@react-three/fiber` and `@react-three/drei` load only with the 3D tab, in their own long-cached `three` vendor chunk (the 3D code itself is a ~290 kB chunk; the glTF exporter loads only when used). The canvas mounts after the page has painted, so the status, toolbar and panels appear first. If WebGL is unavailable, the tab shows the 2D engineering simulator instead (§82).
 
 ## Workspace
 
@@ -35,7 +36,7 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
   - **View:** fit, front, top, side, isometric, orthographic, camera mode.
   - **Inspect:** section, explode, X-ray, isolate, hide, show all, measure.
   - **Show:** name tags, design-check badges, layers, display and quality, overlay, enclosure, camera view.
-  - **Export:** PNG, video of a cycle, view link.
+  - **Export:** PNG, video of a cycle, view link, and the **3D model as glTF (.glb)** — engineering mode only.
 - **Name tags: No tags / Working / All.** *Working* (the default) tags only the stations busy now, plus the selection and highlights. Measurement labels (FOV, field, zones) are a separate Display setting.
 - **Design-check badges.** A component with an open finding carries a red or amber warning badge in 3D and a warning icon in the tree, and its findings are listed at the top of its properties. The Design check panel orders engineering physics before commercial findings. Repeated single-source findings collapse into one expandable row.
 - **Status bar.** It adds the bottleneck. *UPH* reads *warming up* until the first minute of the run. A single line explains a sequence preview, and the performance-mode notice is a small icon.
@@ -51,9 +52,37 @@ The 3D machine simulator is part of the **Equipment Simulation Studio**, not a s
 - **Camera's-eye view.** **Camera view** renders the scene from the lens position with the FOV computed from the camera and lens records, as an inset. It shows what the camera frames, not a simulated image (no exposure, lighting or distortion).
 - **Utilities.** Stated power and live power (components at working stations), energy per part as stated power × working time, and extraction airflow. Values come from the records only. Missing values are listed and compressed air is *Not Available*.
 
+## Build from components (the machine architect)
+
+A template fixes the stations. In **Build from components** mode (3D machine → **Builder** panel, the Studio's *Build from components* button, or the Copilot's *Build a 3D machine from the picked components*) the stations are **derived from the components**, and any change rebuilds the machine — the 3D view, the simulation, the BOM and the PLC steps follow because they all read the same scenario.
+
+| Components | The architect decides |
+|---|---|
+| Laser source + galvo scanner (+ f-theta, expander, controller) | Scanned laser station; one parallel head per laser source (scanners and lenses are counted per head) |
+| Laser source + processing head (+ linear stage / servo) | Head-and-axis (gantry) laser station; a missing axis is a stated gap |
+| Laser source without delivery, or delivery without a source | Station with open slots and a stated gap |
+| One camera | Alignment when the process needs the part position (welding, soldering, drilling, dicing, scribing, micromachining, trimming), otherwise inline inspection; the other use is suggested |
+| Two or more cameras | Alignment + inspection; telecentric lenses and lighting go to inspection first |
+| Inspection on a machine that is not manual | OK / NG sorting |
+| Conveyor | Inline infeed / outfeed; automation inferred as *Inline* |
+| Robot (+ gripper) | Robot loading, or the process station itself for Assembly / Handling / Packaging |
+| No robot or conveyor | Operator load / unload (semi-automatic, stated as an assumption); fully automatic without handling hardware is a stated gap |
+| Fixture, cylinders, vacuum, rotary stage | Fixture station; a laser process without a fixture is a stated gap |
+| PLC, HMI, safety, power, enclosure … | Machine level (matching the Studio's machine slots) |
+| Operator loading next to a laser | Light curtain / scanner acknowledged, or a stated safety gap |
+
+The process comes from the builder, else the linked application, else the template, else the scenario's own process station name — and is shown with that basis. The rules are engineering heuristics, **not a language model**: the same components always give the same machine, every decision is listed with its reason, and nothing is invented — station times stay empty until entered, and times already entered survive a rebuild. Parts the architecture cannot use (scanner optics after a switch to a welding head, lenses without a camera, a gripper without a robot) are named, not hidden.
+
+**Datasheet sizes.** A component whose datasheet states *dimensions* (L × W × H) is drawn at that size — laser source, chiller, fume extraction, camera and processing head — so a larger source or chiller changes the machine. Properties say whether a size is from the datasheet or a placeholder.
+
+**Workpieces.** Besides PCB, plate, battery tab / can, wafer and metal part, the twin draws a sheet, a round tube, an electrode foil web and a glass panel. Without an entered workpiece the shape is picked from the scenario name and its size is shown as a placeholder.
+
+**Utilization heat map.** Overlay → *Utilization heat map (run)* colours every station by its share of busy time over the whole run (single-hue scale) and lists busy / blocked / starved / down per station. It is not available for a sequence preview.
+
 ## Sharing and export
 
 - **Copy view link**: the URL carries the camera, time, selection and camera view (`?cam=…&t=…&sel=…&pov=…`). Opening it restores them.
+- **Export 3D model (glTF .glb)**: one node per machine object, named `<object> [<id>]` with its kind, layer, station and component id, so a CAD or review tool can map it back. The file's metadata says *CONCEPTUAL 3D MODEL — not manufacturing geometry*. Helpers (grid, labels, beams, parts in flow) are left out. Engineering mode only.
 - **Record a cycle**: a WebM video of one representative cycle at the current playback speed (at most 60 s), made in the browser. Nothing is uploaded.
 - **Performance**: frames, tables, cabinets, bridges and other components with no moving parts are merged into one mesh per material after they mount. This cuts draw calls without changing picking or selection.
 

@@ -85,7 +85,8 @@ function Reader({ path }: { path: string }) {
           </Link>
           / {parsed.meta.handbook_title} <DataTypeBadge t={parsed.meta.data_type} /> <VerificationBadge v={parsed.meta.verification_status} />
         </div>
-        <Markdown source={parsed.body} highlight={hl} />
+        {/* chapters that start at '##' (automation handbook) are promoted so the page has one h1 */}
+        <Markdown source={parsed.body} highlight={hl} shift={/^# /m.test(parsed.body) ? 0 : -1} />
         <div className="mt-4 flex justify-between text-body">
           {prev ? <Link className="text-accent-2" to={`/knowledge/${book}/${prev.file}`}>← {prev.title}</Link> : <span />}
           {next ? <Link className="text-accent-2" to={`/knowledge/${book}/${next.file}`}>{next.title} →</Link> : <span />}

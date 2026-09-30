@@ -33,7 +33,8 @@ export type Dimension =
   | 'volume'
   | 'illuminance'
   | 'sound'
-  | 'intensity';
+  | 'intensity'
+  | 'throughput';
 
 interface UnitDef {
   dim: Dimension;
@@ -170,6 +171,13 @@ const U: Record<string, UnitDef> = {
   mg: { dim: 'mass', factor: 1e-6, symbol: 'mg' },
   // time extras
   d: { dim: 'time', factor: 86400, symbol: 'd' },
+  // throughput (parts per second) — UPH is the industry's "units per hour"
+  UPH: { dim: 'throughput', factor: 1 / 3600, symbol: 'UPH' },
+  'parts/h': { dim: 'throughput', factor: 1 / 3600, symbol: 'parts/h' },
+  'units/h': { dim: 'throughput', factor: 1 / 3600, symbol: 'units/h' },
+  'pcs/h': { dim: 'throughput', factor: 1 / 3600, symbol: 'pcs/h' },
+  'parts/min': { dim: 'throughput', factor: 1 / 60, symbol: 'parts/min' },
+  UPM: { dim: 'throughput', factor: 1 / 60, symbol: 'UPM' },
   // dimensionless
   '%': { dim: 'dimensionless', factor: 0.01, symbol: '%' },
   '': { dim: 'dimensionless', factor: 1, symbol: '' },

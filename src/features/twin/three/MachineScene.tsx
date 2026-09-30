@@ -71,6 +71,8 @@ export interface LiveView {
 export interface SceneApi {
   view(p: ViewPreset, focusId?: string | null): void;
   canvas(): HTMLCanvasElement | null;
+  /** the rendered scene graph (for glTF export) */
+  root(): THREE.Object3D | null;
   camera(): { position: number[]; target: number[] };
   setCamera(position: number[], target: number[]): void;
 }
@@ -99,7 +101,7 @@ function Carried({ o, model, stateRef, children }: { o: Machine3DObject; model: 
 }
 
 function CameraRig({ model, api, ortho, reduced, follow }: { model: MachineModel; api: MutableRefObject<SceneApi | null>; ortho: boolean; reduced: boolean; follow: MutableRefObject<THREE.Vector3 | null> }) {
-  const { camera, gl, size } = useThree();
+  const { camera, gl, size, scene } = useThree();
   const controls = useThree((s) => s.controls) as OrbitControlsImpl | null;
   const anim = useRef<{ from: THREE.Vector3; to: THREE.Vector3; tf: THREE.Vector3; tt: THREE.Vector3; t: number } | null>(null);
   // following a part: the orbit target glides after it and the camera keeps its offset
@@ -198,6 +200,7 @@ function CameraRig({ model, api, ortho, reduced, follow }: { model: MachineModel
         go(c.clone().add(new THREE.Vector3(d * 0.75, d * 0.55, d * 0.9)), c);
       },
       canvas: () => gl.domElement,
+      root: () => scene,
       camera: () => ({ position: camera.position.toArray(), target: controls ? controls.target.toArray() : c.toArray() }),
       setCamera(position, target) {
         go(new THREE.Vector3(...(position as [number, number, number])), new THREE.Vector3(...(target as [number, number, number])));
@@ -722,6 +725,7 @@ export const MachineScene = forwardRef<
   useImperativeHandle(ref, () => ({
     view: (p, id) => api.current?.view(p, id),
     canvas: () => api.current?.canvas() ?? null,
+    root: () => api.current?.root() ?? null,
     camera: () => api.current?.camera() ?? { position: [0, 0, 0], target: [0, 0, 0] },
     setCamera: (p, t) => api.current?.setCamera(p, t),
   }));

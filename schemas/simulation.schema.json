@@ -1100,6 +1100,63 @@
     "twin": {
       "type": "object",
       "properties": {
+        "build": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "template",
+                "components"
+              ]
+            },
+            "process": {
+              "type": "string",
+              "enum": [
+                "Marking",
+                "Engraving",
+                "Welding",
+                "Cutting",
+                "Cleaning",
+                "Drilling",
+                "Soldering",
+                "Scribing",
+                "Dicing",
+                "Micromachining",
+                "Trimming",
+                "Texturing",
+                "Cladding",
+                "Hardening",
+                "Assembly",
+                "Handling",
+                "Dispensing",
+                "Testing",
+                "Inspection",
+                "Packaging"
+              ]
+            },
+            "automation": {
+              "type": "string",
+              "enum": [
+                "Manual",
+                "Semi-automatic",
+                "Fully automatic",
+                "Inline"
+              ]
+            },
+            "inspect": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "yes",
+                "no"
+              ]
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
         "model_maturity": {
           "type": "string",
           "enum": [
@@ -1131,7 +1188,11 @@
                 "battery_tab",
                 "battery_can",
                 "wafer",
-                "metal_part"
+                "metal_part",
+                "sheet",
+                "tube",
+                "foil_web",
+                "glass"
               ]
             },
             "length_mm": {

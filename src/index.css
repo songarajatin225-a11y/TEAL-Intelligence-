@@ -214,6 +214,16 @@ body {
 }
 
 @layer components {
+  /* WCAG 2.2 AA target size (2.5.8): links that stand alone in lists, tables, definition lists and
+     link groups get a 24 px tall hit area. Links inside running text are exempt and unchanged. */
+  main :is(li, td, dd) > a:not(.truncate),
+  main li > div > a:not(.truncate),
+  main span.inline-flex > a:not(.truncate) {
+    min-height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
   /* Shell and overlays: real glass (blur) */
   .glass {
     background: var(--glass-bg);

@@ -32,10 +32,11 @@ export function confidence(i: ConfidenceInputs): ConfidenceResult {
 
   if (!src.length) signals.push({ signal: 'Source quality', level: 'n/a', detail: 'No record or handbook source — the answer rests on engine calculations only' });
   else {
-    const trusted = src.filter((s) => s.kind === 'handbook' || (TRUSTED.has(s.verification ?? '') && s.data_type !== 'DEMO')).length;
+    const trusted = src.filter((s) => s.kind === 'handbook' || (TRUSTED.has(s.verification ?? '') && s.data_type !== 'DEMO' && s.data_type !== 'AI_GENERATED')).length;
     const demo = src.filter((s) => s.data_type === 'DEMO').length;
+    const aiGen = src.filter((s) => s.data_type === 'AI_GENERATED').length;
     const share = trusted / src.length;
-    signals.push({ signal: 'Source quality', level: share >= 0.6 ? 'high' : share >= 0.3 ? 'medium' : 'low', detail: `${trusted} of ${src.length} sources are verified, source-documented or handbook${demo ? `; ${demo} are DEMO (fictional)` : ''}` });
+    signals.push({ signal: 'Source quality', level: share >= 0.6 ? 'high' : share >= 0.3 ? 'medium' : 'low', detail: `${trusted} of ${src.length} sources are verified, source-documented or handbook${demo ? `; ${demo} are DEMO (fictional)` : ''}${aiGen ? `; ${aiGen} are AI-generated drafts (unreviewed)` : ''}` });
   }
   if (i.coverage && i.coverage.total) {
     const f = i.coverage.known / i.coverage.total;

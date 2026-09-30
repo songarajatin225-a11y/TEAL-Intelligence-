@@ -11,6 +11,7 @@ import { TEMPLATE_GROUPS } from '../../domain/engineering';
 import { newLocalId, repo, ValidationFailure } from '../../repositories';
 import { scenarioMetrics } from '../../services/sim/analysis';
 import { scenarioFromTemplate } from '../../services/sim/build';
+import { scenarioFromComponents } from '../../services/twin/architect';
 import { planDraft } from '../../services/sim/report';
 import { supplierDisruption } from '../../services/sim/supply';
 import { todayIso } from '../../utils/dates';
@@ -331,10 +332,13 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
   const tId = template || state?.template || eng.templates[0]?.id || '';
   const customers = eng.records.filter((r) => r.entity === 'customer');
   const requirements = eng.records.filter((r) => r.entity === 'requirement');
-  const save = async (open3d = false) => {
+  const save = async (open3d = false, fromComponents = false) => {
     const t = eng.byId.get(tId) as (EquipmentTemplate & AnyRecord) | undefined;
     if (!t) return setError('Choose an equipment template');
-    const sim = scenarioFromTemplate(t, { newId: newLocalId, today: todayIso(), name: name.trim() || undefined, customer_id: customer || undefined, requirement_ids: reqs, uph: uph ? Number(uph) : null });
+    const base = fromComponents
+      ? { ...scenarioFromComponents([], eng.byId, { newId: newLocalId, today: todayIso(), name: name.trim() || `${t.name} — built from components`, process: t.process ?? null, uph: uph ? Number(uph) : null, templateId: t.id }), ...(customer ? { customer_id: customer } : {}), ...(reqs.length ? { requirement_ids: reqs } : {}) }
+      : scenarioFromTemplate(t, { newId: newLocalId, today: todayIso(), name: name.trim() || undefined, customer_id: customer || undefined, requirement_ids: reqs, uph: uph ? Number(uph) : null });
+    const sim = base;
     try {
       await repo().workspace.save(sim as unknown as Record<string, unknown>, `New scenario: ${sim.name}`);
       toast('Scenario created as a local draft', { tone: 'draft', detail: 'Enter station times, select components, then run the simulation.' });
@@ -388,12 +392,15 @@ function CreateDrawer({ eng, state, onClose }: { eng: Eng; state: { template?: s
           </select>
         </Field>
         {error && <Notice tone="warn">{error}</Notice>}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="primary" onClick={() => void save()}>
             <Workflow className="size-4" aria-hidden /> Create scenario
           </Button>
           <Button onClick={() => void save(true)}>
             <Box className="size-4" aria-hidden /> Create and open in 3D
+          </Button>
+          <Button onClick={() => void save(true, true)} title="Start with no stations: add components in the 3D Builder and the machine is built from them">
+            <Sparkles className="size-4" aria-hidden /> Build from components
           </Button>
           <Button onClick={onClose}>Cancel</Button>
         </div>

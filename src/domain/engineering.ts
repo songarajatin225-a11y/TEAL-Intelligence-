@@ -421,7 +421,7 @@ export type Actual = z.infer<typeof Actual>;
  * inputs the 3D model and motion need that a station does not already carry. Geometry is generated
  * from stations + selected components; nothing important lives only in the scene.
  */
-export const WORKPIECE_TEMPLATES = ['pcb', 'plate', 'battery_tab', 'battery_can', 'wafer', 'metal_part'] as const;
+export const WORKPIECE_TEMPLATES = ['pcb', 'plate', 'battery_tab', 'battery_can', 'wafer', 'metal_part', 'sheet', 'tube', 'foil_web', 'glass'] as const;
 export const TWIN_MODEL_MATURITY = ['Procedural', 'Imported', 'Engineering Reviewed', 'CAD Linked', 'Released'] as const;
 export const TWIN_SIM_MATURITY = ['Conceptual', 'Configured', 'Engineering Reviewed', 'POC Calibrated', 'Validated'] as const;
 export const SAFETY_ZONE_TYPES = ['operator', 'robot', 'laser', 'maintenance', 'restricted'] as const;
@@ -479,7 +479,22 @@ export const TwinRun = z.object({
 });
 export type TwinRun = z.infer<typeof TwinRun>;
 
+/** How the machine's stations are decided: fixed by the template, or derived from the chosen components. */
+export const BUILD_MODES = ['template', 'components'] as const;
+export const BUILD_AUTOMATION = ['Manual', 'Semi-automatic', 'Fully automatic', 'Inline'] as const;
+export const BUILD_PROCESSES = ['Marking', 'Engraving', 'Welding', 'Cutting', 'Cleaning', 'Drilling', 'Soldering', 'Scribing', 'Dicing', 'Micromachining', 'Trimming', 'Texturing', 'Cladding', 'Hardening', 'Assembly', 'Handling', 'Dispensing', 'Testing', 'Inspection', 'Packaging'] as const;
+export const TwinBuild = z.object({
+  mode: z.enum(BUILD_MODES),
+  process: z.enum(BUILD_PROCESSES).optional(),
+  automation: z.enum(BUILD_AUTOMATION).optional(),
+  /** auto = decided from the process and the cameras available */
+  inspect: z.enum(['auto', 'yes', 'no']).optional(),
+});
+export type TwinBuild = z.infer<typeof TwinBuild>;
+
 export const TwinInputs = z.object({
+  /** component-driven architecture (the builder) — absent = stations as the template defined them */
+  build: TwinBuild.optional(),
   model_maturity: z.enum(TWIN_MODEL_MATURITY).optional(),
   sim_maturity: z.enum(TWIN_SIM_MATURITY).optional(),
   workpiece: z

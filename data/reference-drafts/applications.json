@@ -1,0 +1,1383 @@
+{
+  "dataset": {
+    "id": "reference-drafts-applications",
+    "title": "Applications (AI-generated drafts)",
+    "entity": "application",
+    "description": "Laser process applications beyond the TEAL configurator library: process, materials, industries, candidate technology class and engineering rationale. Power, speed, quality and cycle time are UNKNOWN; no TEAL platform is assigned.",
+    "version": "1.0.0",
+    "last_updated": "2026-09-29",
+    "data_type": "AI_GENERATED",
+    "source_ids": [
+      "src-ai-draft-knowledge"
+    ],
+    "partition": "applications",
+    "notes": "Every record is an AI-generated DRAFT. Review against a primary source before relying on it."
+  },
+  "records": [
+    {
+      "id": "app-ai.sheetcut",
+      "entity": "application",
+      "name": "Sheet-metal profile cutting (steel & stainless)",
+      "description": "Flatbed 2D cutting of steel and stainless sheet with a CW fiber laser and assist gas.",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "Automotive",
+        "Aerospace"
+      ],
+      "material_ids": [
+        "mat-steel",
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "Steels absorb the ~1 µm fiber wavelength well and CW fiber sources dominate 2D sheet cutting. Oxygen assist is typical for mild steel and nitrogen for oxide-free stainless edges. Multi-kilowatt cutting sources are usually multimode — confirm the source class with the supplier.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting"
+      ]
+    },
+    {
+      "id": "app-ai.reflectcut",
+      "entity": "application",
+      "name": "Reflective-metal sheet cutting (aluminium, brass, copper)",
+      "description": "Cutting of highly reflective sheet metals.",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "EMS",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-al",
+        "mat-brass",
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "The ~1 µm fiber wavelength couples far better than 10.6 µm CO₂ into reflective metals. Back-reflection protection of the source must be confirmed for copper and brass.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting"
+      ]
+    },
+    {
+      "id": "app-ai.tubecut",
+      "entity": "application",
+      "name": "Tube & profile cutting",
+      "description": "Rotary cutting of round, square and open profiles for frames, furniture and exhaust parts.",
+      "process": "Cutting",
+      "industries": [
+        "General Engineering",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-steel",
+        "mat-ss",
+        "mat-al"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "CW fiber with a rotary chuck axis. Chucking, support of long tubes and slag inside the tube are the main design points.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "tube"
+      ]
+    },
+    {
+      "id": "app-ai.woodcut",
+      "entity": "application",
+      "name": "Wood, plywood & MDF cutting and engraving",
+      "description": "Cutting and engraving of wood-based panels for signage, models and furniture parts.",
+      "process": "Cutting",
+      "industries": [
+        "Consumer",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-wood"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "Organic materials absorb the 10.6 µm CO₂ wavelength strongly. Edge charring and fume / fire risk drive extraction and air-assist design.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "organic"
+      ]
+    },
+    {
+      "id": "app-ai.pmmacut",
+      "entity": "application",
+      "name": "Acrylic (PMMA) cutting with polished edge",
+      "description": "Cutting of acrylic sheet for displays, light guides and signage.",
+      "process": "Cutting",
+      "industries": [
+        "Consumer",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-pmma"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "PMMA absorbs CO₂ radiation and vaporises cleanly, which leaves a flame-polished edge without post-processing.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "polymer"
+      ]
+    },
+    {
+      "id": "app-ai.textilecut",
+      "entity": "application",
+      "name": "Textile, leather & technical-fabric cutting",
+      "description": "Contour cutting of fabrics, airbag material, filters and leather.",
+      "process": "Cutting",
+      "industries": [
+        "Consumer",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-textile"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ lasers cut without tool wear and seal synthetic edges against fraying. Material handling (conveyor bed, roll feed) usually sets the throughput.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "organic"
+      ]
+    },
+    {
+      "id": "app-ai.papercut",
+      "entity": "application",
+      "name": "Paper, label & carton cutting / perforation",
+      "description": "Kiss-cutting of labels, perforation and die-less carton cutting.",
+      "process": "Cutting",
+      "industries": [
+        "Consumer"
+      ],
+      "material_ids": [
+        "mat-paper"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ radiation is well absorbed by paper; a galvo scanner allows die-less, on-the-fly cutting of changing shapes.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "packaging"
+      ]
+    },
+    {
+      "id": "app-ai.gasketcut",
+      "entity": "application",
+      "name": "Rubber & silicone gasket cutting",
+      "description": "Tool-less cutting of seals, gaskets and keypads.",
+      "process": "Cutting",
+      "industries": [
+        "Automotive",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-rubber"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ lasers cut elastomers without tooling; residue and fumes need extraction and filtration.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "polymer"
+      ]
+    },
+    {
+      "id": "app-ai.stentcut",
+      "entity": "application",
+      "name": "Stent & hypotube micro-cutting",
+      "description": "Micro-cutting of thin-walled tubes into stents, catheter shafts and hypotubes.",
+      "process": "Cutting",
+      "industries": [
+        "Medical"
+      ],
+      "material_ids": [
+        "mat-ss",
+        "mat-nitinol"
+      ],
+      "recommended_source_id": "las-femto",
+      "recommended_power_w": null,
+      "rationale": "Ultrafast pulses keep the heat-affected zone and recast minimal, which matters for fatigue life and for nitinol transformation behaviour. Rotary + linear motion under a fixed head.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "medical",
+        "ultrafast"
+      ]
+    },
+    {
+      "id": "app-ai.glasscut",
+      "entity": "application",
+      "name": "Display & cover-glass cutting (ultrafast)",
+      "description": "Crack-free cutting of thin glass and sapphire, including curved contours.",
+      "process": "Cutting",
+      "industries": [
+        "Consumer",
+        "EMS"
+      ],
+      "material_ids": [
+        "mat-glass",
+        "mat-sapphire"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Ultrafast filamentation or modification inside the transparent material followed by cleaving gives low chipping compared with mechanical scribing.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "glass",
+        "ultrafast"
+      ]
+    },
+    {
+      "id": "app-ai.pcbdepanel",
+      "entity": "application",
+      "name": "PCB depaneling (UV laser)",
+      "description": "Singulation of rigid, rigid-flex and flex boards from the panel.",
+      "process": "Cutting",
+      "industries": [
+        "EMS"
+      ],
+      "material_ids": [
+        "mat-fr4",
+        "mat-pi"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "UV laser depaneling is stress-free and dust-free compared with routing or punching; carbonisation of the edge and cycle time per cut length must be validated.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "pcb"
+      ]
+    },
+    {
+      "id": "app-ai.cfrptrim",
+      "entity": "application",
+      "name": "CFRP trimming & contour cutting",
+      "description": "Trimming and cut-outs in carbon-fibre composites.",
+      "process": "Cutting",
+      "industries": [
+        "Aerospace",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-composite"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Carbon fibre and matrix react very differently to heat; short pulses limit matrix damage and delamination. Extraction of hazardous fibre dust is mandatory.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "composite"
+      ]
+    },
+    {
+      "id": "app-ai.notching",
+      "entity": "application",
+      "name": "Electrode notching (continuous web)",
+      "description": "Cutting tabs into coated electrode foil moving on a web.",
+      "process": "Cutting",
+      "industries": [
+        "Battery"
+      ],
+      "material_ids": [
+        "mat-battery-electrode",
+        "mat-lfp-nmc-cathode"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": null,
+      "rationale": "Pulsed fiber lasers with galvo scanners cut on the fly without tool wear. Burr height, coating delamination and particles are the critical quality criteria.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cutting",
+        "battery"
+      ]
+    },
+    {
+      "id": "app-ai.sicdicing",
+      "entity": "application",
+      "name": "SiC wafer laser dicing",
+      "description": "Singulation of silicon-carbide power-device wafers.",
+      "process": "Dicing",
+      "industries": [
+        "Semiconductor",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-sic"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "SiC is very hard, so blade dicing is slow and wears blades; laser-based dicing (internal modification or ablation) is an alternative. Die strength after dicing must be validated.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "dicing",
+        "semiconductor"
+      ]
+    },
+    {
+      "id": "app-ai.grooving",
+      "entity": "application",
+      "name": "Low-k grooving before blade dicing",
+      "description": "Laser removal of the low-k / metal stack in the street before the blade cut.",
+      "process": "Dicing",
+      "industries": [
+        "Semiconductor"
+      ],
+      "material_ids": [
+        "mat-si"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "Mechanical dicing can peel fragile low-k layers; a laser groove first removes them. Debris and heat-affected zone must be controlled.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "dicing",
+        "semiconductor"
+      ]
+    },
+    {
+      "id": "app-ai.pvscribe",
+      "entity": "application",
+      "name": "Thin-film PV scribing (P1 / P2 / P3)",
+      "description": "Selective scribing of the layers that interconnect thin-film solar cells.",
+      "process": "Micromachining",
+      "industries": [
+        "Semiconductor",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-thin-film",
+        "mat-glass"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Each scribe removes one layer without damaging the one below, so wavelength and pulse duration are chosen per layer. Short pulses reduce thermal damage.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "scribing",
+        "solar"
+      ]
+    },
+    {
+      "id": "app-ai.thinfilm",
+      "entity": "application",
+      "name": "Selective thin-film ablation (ITO / coatings)",
+      "description": "Patterning of transparent conductors and functional coatings on glass or film.",
+      "process": "Micromachining",
+      "industries": [
+        "Consumer",
+        "EMS"
+      ],
+      "material_ids": [
+        "mat-thin-film",
+        "mat-glass"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Ultrafast ablation removes the coating with little damage to the substrate. Isolation resistance of the pattern is the usual acceptance test.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "micromachining"
+      ]
+    },
+    {
+      "id": "app-ai.texture",
+      "entity": "application",
+      "name": "Functional surface texturing",
+      "description": "Micro-structures that change friction, wetting or adhesion (dimples, grooves, periodic structures).",
+      "process": "Micromachining",
+      "industries": [
+        "Medical",
+        "Automotive",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-steel",
+        "mat-ti",
+        "mat-tool-steel"
+      ],
+      "recommended_source_id": "las-femto",
+      "recommended_power_w": null,
+      "rationale": "Ultrafast pulses create micro- and nano-structures with minimal melt. Area rate is usually the economic limit.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "micromachining",
+        "surface"
+      ]
+    },
+    {
+      "id": "app-ai.wirestrip",
+      "entity": "application",
+      "name": "Laser wire stripping (insulation & enamel)",
+      "description": "Removal of polymer insulation or enamel from fine wires and hairpins.",
+      "process": "Micromachining",
+      "industries": [
+        "EMS",
+        "Automotive",
+        "Medical"
+      ],
+      "material_ids": [
+        "mat-cu",
+        "mat-ptfe",
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ radiation is absorbed by polymer insulation and largely reflected by the copper, so the conductor is not damaged. Enamel removal on hairpins often uses fiber or pulsed sources instead — choose per coating.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "stripping"
+      ]
+    },
+    {
+      "id": "app-ai.trimming",
+      "entity": "application",
+      "name": "Thick / thin-film resistor trimming",
+      "description": "Closed-loop trimming of resistors on ceramic substrates to a target value.",
+      "process": "Trimming",
+      "industries": [
+        "EMS",
+        "Semiconductor"
+      ],
+      "material_ids": [
+        "mat-al2o3"
+      ],
+      "recommended_source_id": "las-green",
+      "recommended_power_w": null,
+      "rationale": "The laser cuts a kerf while the resistance is measured in real time. Shorter wavelengths give narrower kerfs and less micro-cracking; the source class is chosen by film type.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "trimming"
+      ]
+    },
+    {
+      "id": "app-ai.galvweld",
+      "entity": "application",
+      "name": "Coated (galvanised) steel lap welding",
+      "description": "Lap welding of zinc-coated sheet in body and appliance parts.",
+      "process": "Welding",
+      "industries": [
+        "Automotive",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-coated-steel"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "Zinc vaporises well below the steel melting range; without a degassing gap or beam oscillation, the vapour causes porosity and spatter.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding"
+      ]
+    },
+    {
+      "id": "app-ai.tailored",
+      "entity": "application",
+      "name": "Tailor-welded blanks",
+      "description": "Butt welding of sheets of different thickness or grade before stamping.",
+      "process": "Welding",
+      "industries": [
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-steel",
+        "mat-coated-steel"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "A narrow, low-distortion laser weld survives the later forming step. Edge preparation and gap control dominate quality.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding"
+      ]
+    },
+    {
+      "id": "app-ai.plasticweld",
+      "entity": "application",
+      "name": "Laser transmission welding of plastics",
+      "description": "Joining a laser-transparent upper part to an absorbing lower part through the top part.",
+      "process": "Welding",
+      "industries": [
+        "Automotive",
+        "Medical",
+        "EMS"
+      ],
+      "material_ids": [
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-diode",
+      "recommended_power_w": null,
+      "rationale": "Near-infrared diode radiation passes the transparent part and is absorbed at the interface, giving a hermetic, particle-free seam. Clamping pressure and the transmission of the upper part must be validated.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding",
+        "polymer"
+      ]
+    },
+    {
+      "id": "app-ai.bluecu",
+      "entity": "application",
+      "name": "Copper welding with blue or green lasers",
+      "description": "Conduction and keyhole welding of copper with visible wavelengths.",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "EMS",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-blue",
+      "recommended_power_w": null,
+      "rationale": "Copper absorbs visible light much better than 1 µm, giving a more stable process with less spatter — see the absorption values on the copper material record.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding",
+        "copper"
+      ]
+    },
+    {
+      "id": "app-ai.cual",
+      "entity": "application",
+      "name": "Dissimilar copper–aluminium joints",
+      "description": "Welding of copper to aluminium in busbars and cell connectors.",
+      "process": "Welding",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-cu",
+        "mat-al"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "Brittle intermetallic phases form when the two metals mix; beam oscillation and low dilution limit them. Joint resistance and ageing must be tested.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding",
+        "battery"
+      ]
+    },
+    {
+      "id": "app-ai.jewelweld",
+      "entity": "application",
+      "name": "Jewellery & precious-metal spot welding",
+      "description": "Repair and assembly welding of small precious-metal parts.",
+      "process": "Welding",
+      "industries": [
+        "Consumer"
+      ],
+      "material_ids": [
+        "mat-precious"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": null,
+      "rationale": "Pulsed, small-spot welding limits heat input on small, high-value parts; reflectivity varies strongly with alloy.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding",
+        "jewellery"
+      ]
+    },
+    {
+      "id": "app-ai.motorweld",
+      "entity": "application",
+      "name": "E-motor rotor & lamination welding",
+      "description": "Welding of lamination stacks and rotor components.",
+      "process": "Welding",
+      "industries": [
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-nd-magnet",
+        "mat-steel"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "Low heat input keeps magnetic properties of the electrical steel. Magnet temperature limits must be respected.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "welding",
+        "e-motor"
+      ]
+    },
+    {
+      "id": "app-ai.lasersolder",
+      "entity": "application",
+      "name": "Selective laser soldering (pins, connectors, flex)",
+      "description": "Non-contact soldering of through-hole pins, connectors and flex-to-board joints.",
+      "process": "Soldering",
+      "industries": [
+        "EMS",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-fr4",
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-diode",
+      "recommended_power_w": null,
+      "rationale": "A diode laser heats only the joint, which suits heat-sensitive neighbours and dense layouts. Solder feed (wire, paste, ball) and pyrometer control are key design points.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "soldering"
+      ]
+    },
+    {
+      "id": "app-ai.prebondal",
+      "entity": "application",
+      "name": "Surface activation before adhesive bonding",
+      "description": "Removal of oils, release agents and weak oxide before bonding or coating.",
+      "process": "Cleaning",
+      "industries": [
+        "Automotive",
+        "Aerospace"
+      ],
+      "material_ids": [
+        "mat-al",
+        "mat-composite"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": null,
+      "rationale": "Pulsed laser cleaning removes contaminants selectively and repeatably without chemicals. Bond strength after ageing is the acceptance test.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cleaning"
+      ]
+    },
+    {
+      "id": "app-ai.oxidecell",
+      "entity": "application",
+      "name": "Oxide removal before welding (aluminium)",
+      "description": "Removal of the oxide layer from aluminium joints just before welding.",
+      "process": "Cleaning",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-al"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": null,
+      "rationale": "Aluminium oxide causes porosity; laser cleaning directly before welding limits re-oxidation time.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cleaning"
+      ]
+    },
+    {
+      "id": "app-ai.microvia",
+      "entity": "application",
+      "name": "PCB micro-via drilling",
+      "description": "Blind micro-vias in HDI boards and IC substrates.",
+      "process": "Drilling",
+      "industries": [
+        "EMS",
+        "Semiconductor"
+      ],
+      "material_ids": [
+        "mat-fr4",
+        "mat-cu"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "UV lasers ablate both copper and dielectric; CO₂ lasers are also common for dielectric-only openings under a copper window. Via taper and the bottom copper condition are the quality criteria.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "drilling",
+        "pcb"
+      ]
+    },
+    {
+      "id": "app-ai.coolinghole",
+      "entity": "application",
+      "name": "Cooling-hole drilling in turbine parts",
+      "description": "Percussion or trepanning drilling of shaped cooling holes in blades and vanes.",
+      "process": "Drilling",
+      "industries": [
+        "Aerospace"
+      ],
+      "material_ids": [
+        "mat-superalloy"
+      ],
+      "recommended_source_id": "las-qcw",
+      "recommended_power_w": null,
+      "rationale": "Long-pulse percussion drilling removes material quickly; recast layer and micro-cracks must stay within the customer specification.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "drilling",
+        "aerospace"
+      ]
+    },
+    {
+      "id": "app-ai.finehole",
+      "entity": "application",
+      "name": "Fine-hole drilling in foils & nozzles",
+      "description": "Small, precise holes for injectors, filters, sieves and medical parts.",
+      "process": "Drilling",
+      "industries": [
+        "Automotive",
+        "Medical",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Ultrafast pulses give clean holes with little recast; helical optics control taper.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "drilling",
+        "ultrafast"
+      ]
+    },
+    {
+      "id": "app-ai.tgv",
+      "entity": "application",
+      "name": "Through-glass via (TGV) drilling",
+      "description": "Via formation in glass interposers and substrates.",
+      "process": "Drilling",
+      "industries": [
+        "Semiconductor"
+      ],
+      "material_ids": [
+        "mat-glass"
+      ],
+      "recommended_source_id": "las-pico",
+      "recommended_power_w": null,
+      "rationale": "Laser modification followed by selective etching, or direct ultrafast drilling, avoids cracks in glass.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "drilling",
+        "packaging"
+      ]
+    },
+    {
+      "id": "app-ai.organicmark",
+      "entity": "application",
+      "name": "Wood & leather engraving (personalisation)",
+      "description": "Engraving of logos, text and images on wood and leather goods.",
+      "process": "Marking",
+      "industries": [
+        "Consumer"
+      ],
+      "material_ids": [
+        "mat-wood",
+        "mat-textile"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ radiation is absorbed strongly by organic materials; the contrast comes from controlled charring.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "organic"
+      ]
+    },
+    {
+      "id": "app-ai.glassmark",
+      "entity": "application",
+      "name": "Glass & sapphire marking",
+      "description": "Codes and logos on glass vials, displays and sapphire windows.",
+      "process": "Marking",
+      "industries": [
+        "Consumer",
+        "Medical"
+      ],
+      "material_ids": [
+        "mat-glass",
+        "mat-sapphire"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "Short-wavelength or ultrafast sources mark transparent materials with less micro-cracking than CO₂.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "glass"
+      ]
+    },
+    {
+      "id": "app-ai.jewelmark",
+      "entity": "application",
+      "name": "Jewellery & precious-metal engraving",
+      "description": "Hallmarks, serials and decoration on precious-metal items.",
+      "process": "Marking",
+      "industries": [
+        "Consumer"
+      ],
+      "material_ids": [
+        "mat-precious"
+      ],
+      "recommended_source_id": "las-mopa",
+      "recommended_power_w": null,
+      "rationale": "Adjustable pulse duration helps control depth and appearance on reflective, high-value parts.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "jewellery"
+      ]
+    },
+    {
+      "id": "app-ai.ceramicmark",
+      "entity": "application",
+      "name": "Ceramic substrate marking",
+      "description": "Serials and codes on alumina and AlN substrates.",
+      "process": "Marking",
+      "industries": [
+        "EMS",
+        "Semiconductor"
+      ],
+      "material_ids": [
+        "mat-al2o3",
+        "mat-aln"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "Short wavelengths and short pulses reduce micro-cracks in brittle ceramics.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "ceramic"
+      ]
+    },
+    {
+      "id": "app-ai.packcode",
+      "entity": "application",
+      "name": "Packaging date & batch coding",
+      "description": "On-the-fly coding of cartons, labels and films on packaging lines.",
+      "process": "Marking",
+      "industries": [
+        "Consumer"
+      ],
+      "material_ids": [
+        "mat-paper",
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-co2",
+      "recommended_power_w": null,
+      "rationale": "CO₂ galvo coders mark without inks or consumables; line speed and code content decide the scanner and field size.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "packaging"
+      ]
+    },
+    {
+      "id": "app-ai.cablemark",
+      "entity": "application",
+      "name": "Cable & wire insulation marking",
+      "description": "Identification marks on wire insulation, including fluoropolymers.",
+      "process": "Marking",
+      "industries": [
+        "Aerospace",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-ptfe",
+        "mat-poly"
+      ],
+      "recommended_source_id": "las-uv",
+      "recommended_power_w": null,
+      "rationale": "UV marking changes colour without cutting through thin insulation; insulation integrity must be tested.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking",
+        "wire"
+      ]
+    },
+    {
+      "id": "app-ai.toolmark",
+      "entity": "application",
+      "name": "Tool & die marking (deep, wear-resistant)",
+      "description": "Durable identification on moulds, dies and cutting tools.",
+      "process": "Marking",
+      "industries": [
+        "General Engineering",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-tool-steel"
+      ],
+      "recommended_source_id": "las-fiber",
+      "recommended_power_w": null,
+      "rationale": "Deep engraving with pulsed fiber survives wear and re-coating; depth per pass is validated on the actual hardness.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "marking"
+      ]
+    },
+    {
+      "id": "app-ai.cladding",
+      "entity": "application",
+      "name": "Laser cladding / directed-energy deposition repair",
+      "description": "Deposition of wear- or corrosion-resistant layers and repair of worn parts with powder or wire.",
+      "process": "Other",
+      "industries": [
+        "Aerospace",
+        "General Engineering",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-tool-steel",
+        "mat-superalloy"
+      ],
+      "recommended_source_id": "las-diode",
+      "recommended_power_w": null,
+      "rationale": "Direct diode or fiber sources with a wide spot give low dilution; powder feed and robot path are the main design points.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "cladding",
+        "additive"
+      ]
+    },
+    {
+      "id": "app-ai.hardening",
+      "entity": "application",
+      "name": "Laser surface hardening",
+      "description": "Selective transformation hardening of wear zones without quenching media.",
+      "process": "Other",
+      "industries": [
+        "Automotive",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-steel",
+        "mat-tool-steel"
+      ],
+      "recommended_source_id": "las-diode",
+      "recommended_power_w": null,
+      "rationale": "A rectangular diode beam profile heats the surface evenly; pyrometer control keeps below melting. Hardness depth is validated by sectioning.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "hardening"
+      ]
+    },
+    {
+      "id": "app-ai.lpbf",
+      "entity": "application",
+      "name": "Metal powder-bed fusion (additive manufacturing)",
+      "description": "Layer-by-layer melting of metal powder into complex parts.",
+      "process": "Other",
+      "industries": [
+        "Aerospace",
+        "Medical",
+        "General Engineering"
+      ],
+      "material_ids": [
+        "mat-ti",
+        "mat-superalloy",
+        "mat-ss"
+      ],
+      "recommended_source_id": "las-smcw",
+      "recommended_power_w": null,
+      "rationale": "Single-mode CW fiber lasers with galvo scanners are typical. Powder handling, inert gas flow and part qualification dominate engineering effort.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "additive"
+      ]
+    },
+    {
+      "id": "app-ai.weldmonitor",
+      "entity": "application",
+      "name": "In-process weld monitoring",
+      "description": "Monitoring of laser welds while they are made (photodiodes, cameras, optical coherence).",
+      "process": "Inspection",
+      "industries": [
+        "Battery",
+        "Automotive"
+      ],
+      "material_ids": [
+        "mat-cu",
+        "mat-al"
+      ],
+      "recommended_power_w": null,
+      "rationale": "In-process sensing detects defects at the weld instead of after it; correlation to destructive tests must be established per joint.",
+      "data_type": "AI_GENERATED",
+      "provenance": {
+        "source_id": "src-ai-draft-knowledge",
+        "retrieved_at": "2026-09-29",
+        "verification_status": "DRAFT",
+        "confidence": "LOW",
+        "note": "AI-generated draft from general engineering knowledge — not taken from a cited document. Engineering review required before use; values that need a source are left UNKNOWN."
+      },
+      "tags": [
+        "ai-generated",
+        "inspection",
+        "sensing"
+      ]
+    }
+  ]
+}

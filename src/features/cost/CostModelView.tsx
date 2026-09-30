@@ -116,7 +116,7 @@ export default function CostModelView({ record }: { record: Rec }) {
             <div className="mb-2 flex flex-wrap gap-1">
               {COST_MODULE_KEYS.map((k) => (
                 <Button key={k} size="sm" variant={mod === k ? 'primary' : 'default'} onClick={() => setMod(k)}>
-                  {COST_MODULE_META[k].label} <span className="num ml-1 text-micro opacity-80">{lakh(c.buckets[k])}</span>
+                  {COST_MODULE_META[k].label} <span className="num ml-1 text-micro">{lakh(c.buckets[k])}</span>
                 </Button>
               ))}
             </div>

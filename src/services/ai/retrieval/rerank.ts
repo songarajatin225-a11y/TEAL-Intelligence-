@@ -140,6 +140,9 @@ export function rerank(query: string, hits: HybridHit[], ctx: RerankContext): Ra
       if (h.data_type === 'DEMO') {
         score -= 0.4;
         why.push('DEMO record (fictional)');
+      } else if (h.data_type === 'AI_GENERATED') {
+        score -= 0.2;
+        why.push('AI-generated draft (unreviewed)');
       }
       if (ctx.focusId && h.id !== ctx.focusId) {
         if (near1.has(h.id)) {

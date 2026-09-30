@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import clsx from 'clsx';
-import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, CircleStop, Expand, Eye, EyeOff, Focus, Gauge, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, Link2, ListTree, Maximize2, Minimize2, Palette, PanelLeft, Pause, Play, RotateCcw, Ruler, Scan, ScanEye, Scissors, Search, SkipForward, Square, Video, X } from 'lucide-react';
+import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, CircleStop, Expand, Eye, EyeOff, FileDown, Focus, Gauge, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, Link2, ListTree, Maximize2, Minimize2, Palette, PanelLeft, Pause, Play, RotateCcw, Ruler, Scan, ScanEye, Scissors, Search, SkipForward, Square, Video, X } from 'lucide-react';
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -26,7 +26,9 @@ import { NumInput, SmallSelect } from '../studio/tabs/edit';
 import { AlarmsHmiPanel, AssumptionsPanel, ChecksPanel, ComparePanel, FaultsPanel, fmtT, InputsPanel, IoPanel, MotionPanel, PartTracePanel, RunsPanel, SequencePanel, TimelinePanel, UtilitiesPanel } from './panels';
 import { MachineScene, POV_FRACTION, type LiveView, type SceneApi, type SceneView, type ViewPreset } from './three/MachineScene';
 import type { EnclosureMode } from './three/procedural';
-import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, type RunOptions } from './useTwin';
+import type { DesResult } from '../../services/sim/des';
+import { BuilderPanel } from './BuilderPanel';
+import { costColor, ORIGIN_COLOR, originColors, useTwinModel, useTwinRun, utilColor, type RunOptions } from './useTwin';
 
 /*
  * 3D MACHINE SIMULATOR + DIGITAL TWIN WORKBENCH (3D master prompt §5–§7, §38–§46, §55–§61, §83–§90).
@@ -76,9 +78,11 @@ export default function MachineTab(p: TabProps) {
   return <Workbench {...p} onGLFail={() => setOk(false)} />;
 }
 
-type Overlay = 'none' | 'state' | 'localization' | 'cost' | 'requirement' | 'risk';
+const DARK_WARN = '!bg-[#f5c46b]/10 !text-[#f5c46b] !ring-[#f5c46b]/35';
+const DARK_NEUTRAL = '!bg-white/5 !text-[#c9d3d3] !ring-white/15';
+type Overlay = 'none' | 'state' | 'utilization' | 'localization' | 'cost' | 'requirement' | 'risk';
 type CamMode = 'engineering' | 'customer' | 'exploded' | 'xray' | 'process' | 'laser' | 'inspection' | 'maintenance';
-type Bottom = 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'utilities' | 'trace' | 'faults' | 'runs' | 'compare' | 'assumptions';
+type Bottom = 'builder' | 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'utilities' | 'trace' | 'faults' | 'runs' | 'compare' | 'assumptions';
 
 const reducedMotionQuery = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const allLayers = () => Object.fromEntries(LAYERS.map((l) => [l, true])) as Record<Layer, boolean>;
@@ -216,7 +220,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const [reqSel, setReqSel] = useState('');
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
   const [camMode, setCamMode] = useState<CamMode>(customer ? 'customer' : 'engineering');
-  const [bottom, setBottom] = useState<Bottom>(d.res.runnable ? 'timeline' : 'inputs');
+  const [bottom, setBottom] = useState<Bottom>(sim.twin?.build?.mode === 'components' && !customer ? 'builder' : d.res.runnable ? 'timeline' : 'inputs');
   const [other, setOther] = useState('');
   const [ghostOn, setGhostOn] = useState(false);
   const [perfNotice, setPerfNotice] = useState(false);
@@ -429,6 +433,13 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       }
       return m;
     }
+    if (overlay === 'utilization') {
+      // heat map of the whole run: every object of a station takes that station's utilization
+      if (!des || preview) return m;
+      const u = new Map(des.stations.map((x) => [x.key, x.utilization]));
+      for (const o of model.objects) if (o.stationKey && u.has(o.stationKey)) m.set(o.id, utilColor(u.get(o.stationKey)!));
+      return m;
+    }
     if (overlay === 'state' && snap) {
       for (const o of model.objects) {
         if (!o.stationKey) continue;
@@ -439,7 +450,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       return m;
     }
     return m;
-  }, [overlay, model, eng.byId, d.bom, reqSel, related, deps, snap]);
+  }, [overlay, model, eng.byId, d.bom, reqSel, related, deps, snap, des, preview]);
   const sceneView = useMemo(() => ({ ...view, overlay: overlayMap, findings: findingsOn && !customer ? findings : null, collisionIds: collision ? new Set([collision.a, collision.b]) : view.collisionIds }), [view, overlayMap, collision, findingsOn, customer, findings]);
 
   const live: LiveView = useMemo(() => {
@@ -505,6 +516,22 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       act[k]();
     }
   };
+  const glb = async () => {
+    const root = scene.current?.root();
+    if (!root) return;
+    try {
+      const { exportGlb } = await import('./three/exportGlb');
+      const { blob, nodes } = await exportGlb(root, model, { title: `${sim.name} — conceptual 3D model`, scenarioId: sim.id, date: new Date().toISOString().slice(0, 10) });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${sim.id}-conceptual.glb`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      toast('3D model exported (glTF)', { tone: 'draft', detail: `${nodes} objects · CONCEPTUAL 3D MODEL — not manufacturing geometry` });
+    } catch (e) {
+      toast('Export failed', { tone: 'error', detail: String(e) });
+    }
+  };
   const png = () => {
     const c = scene.current?.canvas();
     if (!c) return;
@@ -557,6 +584,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
   const livePw = livePower(util, snap);
 
   const bottomTabs: { key: Bottom; label: ReactNode; count?: number }[] = [
+    { key: 'builder', label: sim.twin?.build?.mode === 'components' ? 'Builder (live)' : 'Builder' },
     { key: 'inputs', label: 'Inputs', count: d.res.blocking.length || undefined },
     { key: 'timeline', label: 'Timeline' },
     { key: 'sequence', label: 'PLC steps' },
@@ -590,11 +618,22 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
           </span>
         )}
         <span className="ml-auto flex flex-wrap items-center gap-2 font-sans">
-          <Badge tone="warn">{model.label}</Badge>
-          <Badge>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
-          <Badge>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
-          {sim.data_type === 'DEMO' && <Badge tone="warn">DEMO</Badge>}
-          {preview && <Badge tone="warn">SEQUENCE PREVIEW — not a result</Badge>}
+          {/* the status bar is dark in both themes, so its badges use dark-surface colours (WCAG contrast) */}
+          <Badge tone="warn" className={DARK_WARN}>
+            {model.label}
+          </Badge>
+          <Badge className={DARK_NEUTRAL}>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
+          <Badge className={DARK_NEUTRAL}>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
+          {sim.data_type === 'DEMO' && (
+            <Badge tone="warn" className={DARK_WARN}>
+              DEMO
+            </Badge>
+          )}
+          {preview && (
+            <Badge tone="warn" className={DARK_WARN}>
+              SEQUENCE PREVIEW — not a result
+            </Badge>
+          )}
           {perfNotice && (
             <span className="text-[#f5c46b]" title="The device was slow, so the rendering switched to Performance quality (Display menu to change)">
               <Gauge className="inline size-3.5" aria-label="Performance mode on" />
@@ -725,12 +764,12 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
                 </div>
               )}
             </Popover>
-            <Popover label="Overlay" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
+            <Popover label="Overlay" width={overlay === 'utilization' ? 'w-[26rem]' : 'w-72'} trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
               {() => (
                 <div className="space-y-2 p-3 text-meta">
-                  <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
+                  <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'utilization', label: 'Utilization heat map (run)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
                   {overlay === 'requirement' && <SmallSelect label="Requirement" value={reqSel} options={[{ value: '', label: 'Select a requirement…' }, ...(sim.requirement_ids ?? []).map((id) => ({ value: id, label: `${String(eng.byId.get(id)?.code ?? id)} — ${eng.byId.get(id)?.name ?? ''}` }))]} onChange={setReqSel} className="w-full" />}
-                  <OverlayLegend kind={overlay} />
+                  <OverlayLegend kind={overlay} des={preview ? null : des} />
                 </div>
               )}
             </Popover>
@@ -752,6 +791,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
         <span className="ml-auto flex items-center gap-1">
           <Group label="Export">
             <Tool icon={Camera} label="PNG snapshot" onClick={png} />
+            {!customer && <Tool icon={FileDown} label="Export 3D model (glTF .glb)" onClick={() => void glb()} />}
             <Tool icon={recording ? CircleStop : Video} label={recording ? 'Stop recording' : 'Record a cycle (WebM video)'} active={recording} onClick={record} />
             <Tool icon={Link2} label="Copy view link" onClick={() => void copyLink()} />
           </Group>
@@ -959,8 +999,9 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
 
       {/* ---------------- panels (§40, §42–§44, §72, §76, §92, §97, §111–§116) */}
       <Card padded={false} bodyClassName="p-3">
-        <Tabs<Bottom> label="Digital twin panels" value={bottom} onChange={setBottom} tabs={bottomTabs.filter((b) => !(customer && (b.key === 'io' || b.key === 'assumptions' || b.key === 'motion')))} />
+        <Tabs<Bottom> label="Digital twin panels" value={bottom} onChange={setBottom} tabs={bottomTabs.filter((b) => !(customer && (b.key === 'io' || b.key === 'assumptions' || b.key === 'motion' || b.key === 'builder')))} />
         <div className="pt-3">
+          {bottom === 'builder' && !customer && <BuilderPanel eng={eng} sim={sim} set={set} customer={customer} />}
           {bottom === 'inputs' && <InputsPanel sim={sim} set={set} d={d} preview={preview} />}
           {bottom === 'timeline' && <TimelinePanel player={player} t={t} setT={setT} playing={playing} setPlaying={setPlaying} speed={speed} setSpeed={setSpeed} d={d} twin={twin} transport={false} />}
           {bottom === 'sequence' && <SequencePanel sim={sim} snap={snap} />}
@@ -1027,7 +1068,47 @@ function Kpi({ label, value, sub, tone }: { label: string; value: string; sub?: 
   );
 }
 
-function OverlayLegend({ kind }: { kind: Overlay }) {
+function OverlayLegend({ kind, des }: { kind: Overlay; des: DesResult | null }) {
+  if (kind === 'utilization') {
+    if (!des) return <p className="text-micro text-ink-3">Not available — the scenario previews without station times, so there is no run to measure. Enter the missing inputs first.</p>;
+    const p = (v: number) => `${Math.round(v * 100)} %`;
+    return (
+      <div className="text-micro">
+        <div className="h-2 rounded" style={{ background: `linear-gradient(90deg, ${utilColor(0)}, ${utilColor(1)})` }} />
+        <div className="flex justify-between text-ink-3">
+          <span>idle</span>
+          <span>100 % busy</span>
+        </div>
+        <table className="mt-1.5 w-full">
+          <caption className="sr-only">Share of run time per station</caption>
+          <thead className="text-ink-3">
+            <tr>
+              <th scope="col" className="text-left font-normal">Station</th>
+              <th scope="col" className="pl-2 text-right font-normal">Busy</th>
+              <th scope="col" className="pl-2 text-right font-normal">Blocked</th>
+              <th scope="col" className="pl-2 text-right font-normal">Starved</th>
+              <th scope="col" className="pl-2 text-right font-normal">Down</th>
+            </tr>
+          </thead>
+          <tbody className="num">
+            {des.stations.map((s) => (
+              <tr key={s.key}>
+                <th scope="row" className="max-w-40 truncate text-left font-normal">
+                  <span className="mr-1 inline-block size-2 rounded-sm align-middle" style={{ background: utilColor(s.utilization) }} aria-hidden />
+                  {s.name}
+                </th>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.utilization)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.blocked)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.starved)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.down)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-1 text-ink-3">Over the whole run (seed {des.seed}, {Math.round(des.horizon_s / 60)} min). Blocked = waiting for space downstream; starved = waiting for parts.</p>
+      </div>
+    );
+  }
   if (kind === 'localization')
     return (
       <ul className="space-y-0.5 text-micro">
@@ -1395,6 +1476,7 @@ function Properties({ o, eng, sim, set, d, twin, snap, customer, onClose, onFocu
             <h4 className="mb-1 text-micro font-semibold uppercase tracking-wider text-ink-3">Geometry (conceptual)</h4>
             <p className="font-mono text-micro">
               position {o.position.map((v) => Math.round(v)).join(', ')} mm · size {o.size.map((v) => Math.round(v)).join(' × ')} mm
+              {o.params.sizeBasis === 'datasheet' ? ' (from the datasheet dimensions)' : o.params.sizeBasis === 'placeholder' ? ' (placeholder — datasheet dimensions not stated)' : ''}
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-2 text-meta">
               Manual layout override

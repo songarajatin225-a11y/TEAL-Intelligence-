@@ -342,7 +342,7 @@ function Manufacturers({ eng, onAdd }: { eng: Eng; onAdd: () => void }) {
               <ul className="grid grid-cols-1 gap-x-4 gap-y-1 text-meta sm:grid-cols-2 xl:grid-cols-3">
                 {xs.map((m) => (
                   <li key={m.id} className="flex items-center justify-between gap-2">
-                    <Link to={recordPath(m.id)} className="truncate text-accent-2 hover:underline">
+                    <Link to={recordPath(m.id)} className="block min-h-6 truncate leading-6 text-accent-2 hover:underline">
                       {m.name}
                     </Link>
                     <span className="shrink-0 text-micro text-ink-3">
@@ -639,7 +639,7 @@ function Analytics({ eng, a }: { eng: Eng; a: ReturnType<typeof databaseAnalytic
         <ul className="space-y-1.5">
           {byType.map(([t, n]) => (
             <li key={t} className="grid grid-cols-[minmax(8rem,12rem)_1fr_2.5rem] items-center gap-3 text-meta">
-              <Link to={`/engineering-db?type=${t}`} className="truncate text-accent-2 hover:underline">
+              <Link to={`/engineering-db?type=${t}`} className="block min-h-6 truncate leading-6 text-accent-2 hover:underline">
                 {productTypeLabel(t)}
               </Link>
               <div className="h-2.5 rounded-full bg-ink/10">

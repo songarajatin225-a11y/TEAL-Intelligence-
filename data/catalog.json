@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27",
+  "generated_at": "2026-09-29",
   "datasets": [
     {
       "id": "applications",
@@ -17,7 +17,7 @@
       ],
       "data_type": "TEAL_INTERNAL",
       "partition": "applications",
-      "sha256": "2a059d9a2d424b97"
+      "sha256": "fa08c37db04c1f6d"
     },
     {
       "id": "industries",
@@ -444,7 +444,7 @@
       ],
       "data_type": "DEMO",
       "relative_dates": true,
-      "sha256": "cfc9c0e414715cc5"
+      "sha256": "2129ad3ccc4c07ed"
     },
     {
       "id": "demo-simulations",
@@ -864,6 +864,96 @@
       "data_type": "TEAL_INTERNAL",
       "partition": "products",
       "sha256": "a01b4ff46b56c51b"
+    },
+    {
+      "id": "reference-drafts-applications",
+      "title": "Applications (AI-generated drafts)",
+      "path": "reference-drafts/applications.json",
+      "description": "Laser process applications beyond the TEAL configurator library: process, materials, industries, candidate technology class and engineering rationale. Power, speed, quality and cycle time are UNKNOWN; no TEAL platform is assigned.",
+      "entity": "application",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 45,
+      "last_updated": "2026-09-29",
+      "schema": "schemas/application.schema.json",
+      "source_ids": [
+        "src-ai-draft-knowledge"
+      ],
+      "data_type": "AI_GENERATED",
+      "partition": "applications",
+      "sha256": "7ee85f6f41df758a"
+    },
+    {
+      "id": "reference-drafts-templates",
+      "title": "Equipment templates (AI-generated drafts)",
+      "path": "reference-drafts/equipment-templates.json",
+      "description": "Additional station structures for the Simulation Studio and the 3D digital twin. Station times, capacities and costs are deliberately empty.",
+      "entity": "equipment_template",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 35,
+      "last_updated": "2026-09-29",
+      "schema": "schemas/equipment_template.schema.json",
+      "source_ids": [
+        "src-ai-draft-knowledge"
+      ],
+      "data_type": "AI_GENERATED",
+      "partition": "engineering",
+      "sha256": "27e16cf17045c8c0"
+    },
+    {
+      "id": "reference-drafts-equipment",
+      "title": "Equipment types (AI-generated drafts)",
+      "path": "reference-drafts/equipment-types.json",
+      "description": "Equipment CATEGORIES by domain (semiconductor, electronics, battery, laser, automation, advanced manufacturing). No manufacturer, model, price, throughput or accuracy — those enter only from sourced datasheets.",
+      "entity": "equipment",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 73,
+      "last_updated": "2026-09-29",
+      "schema": "schemas/equipment.schema.json",
+      "source_ids": [
+        "src-ai-draft-knowledge"
+      ],
+      "data_type": "AI_GENERATED",
+      "partition": "records",
+      "sha256": "812ca80abbac147c"
+    },
+    {
+      "id": "reference-drafts-materials",
+      "title": "Material classes (AI-generated drafts)",
+      "path": "reference-drafts/materials.json",
+      "description": "Material classes not yet in the TEAL library. Thermal properties and absorptance are UNKNOWN (null) until entered from a primary handbook.",
+      "entity": "material",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 16,
+      "last_updated": "2026-09-29",
+      "schema": "schemas/material.schema.json",
+      "source_ids": [
+        "src-ai-draft-knowledge"
+      ],
+      "data_type": "AI_GENERATED",
+      "partition": "applications",
+      "sha256": "f7e44611e034429f"
+    },
+    {
+      "id": "reference-drafts-source",
+      "title": "AI-generated drafts — source",
+      "path": "reference-drafts/source.json",
+      "description": "The source record every AI-generated reference draft cites.",
+      "entity": "source",
+      "kind": "records",
+      "version": "1.0.0",
+      "record_count": 1,
+      "last_updated": "2026-09-29",
+      "schema": "schemas/source.schema.json",
+      "source_ids": [
+        "src-ai-draft-knowledge"
+      ],
+      "data_type": "AI_GENERATED",
+      "partition": "knowledge",
+      "sha256": "434a370cce24f261"
     },
     {
       "id": "roadmap-items",
