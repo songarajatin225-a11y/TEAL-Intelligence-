@@ -14,6 +14,8 @@ const VENDOR: [RegExp, string][] = [
   [/node_modules\/@tanstack\//, 'table'],
   [/node_modules\/react-hook-form\//, 'forms'],
   [/node_modules\/lucide-react\//, 'icons'],
+  // the 3D stack loads only with the 3D machine view; glTF exporters stay separate (on demand)
+  [/node_modules\/(three(?!\/examples\/jsm\/exporters)|@react-three|three-stdlib|three-mesh-bvh|troika-[^/]+|camera-controls|maath|meshline|@monogrid|stats-gl|stats\.js|detect-gpu|hls\.js|zustand|its-fine|suspend-react|react-reconciler|react-use-measure|tunnel-rat|@use-gesture)\//, 'three'],
 ];
 
 export default defineConfig({
@@ -22,7 +24,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    chunkSizeWarningLimit: 900,
+    // the 3D vendor chunk (three + react-three) is ~1 MB and loads only with the 3D machine view
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: (id) => VENDOR.find(([re]) => re.test(id))?.[1],

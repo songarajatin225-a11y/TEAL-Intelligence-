@@ -147,7 +147,7 @@ writeJson(join(DATA_DIR, 'demo', 'projects.json'), {
 writeJson(join(DATA_DIR, 'demo', 'risks.json'), {
   dataset: hdr('demo-risks', 'DEMO risks', 'risk', 'Starter risks for Scenario 1. S/O/D are not scored (would require engineering judgement).'),
   records: [
-    { ...base, id: 'rsk-demo-s1-laser', entity: 'risk', kind: 'Risk', name: 'Customer-supplied laser: interface, safety and warranty boundary undefined', cause: 'Laser model and control interface not yet known', effect: 'Integration rework; unclear responsibility at FAT/SAT', risk_status: 'Open', opportunity_id: 'opp-demo-pkg-marking', next_action: { action: 'Obtain laser model, interface specification and interlock scheme', due: '@today+3' } },
+    { ...base, id: 'rsk-demo-s1-laser', entity: 'risk', kind: 'Risk', name: 'Customer-supplied laser: interface, safety and warranty boundary not defined', cause: 'Laser model and control interface not yet known', effect: 'Integration rework; unclear responsibility at FAT/SAT', risk_status: 'Open', opportunity_id: 'opp-demo-pkg-marking', next_action: { action: 'Obtain laser model, interface specification and interlock scheme', due: '@today+3' } },
     { ...base, id: 'rsk-demo-s1-uph', entity: 'risk', kind: 'Process Risk', name: 'Throughput target unknown', cause: '"High throughput" not quantified', effect: 'Architecture (stations, heads) cannot be sized', risk_status: 'Open', opportunity_id: 'opp-demo-pkg-marking', next_action: { action: 'Get UPH and OEE target; compute CT_ideal (Handbook Part 4)', due: '@today+2' } },
   ],
 });

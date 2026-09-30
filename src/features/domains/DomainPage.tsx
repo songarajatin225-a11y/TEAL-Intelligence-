@@ -159,7 +159,7 @@ export default function DomainPage() {
             <ul className="space-y-1">
               {view.work.slice(0, 10).map((r) => (
                 <li key={r.id} className="flex items-center justify-between gap-2">
-                  <Link to={recordPath(r.id)} className="truncate text-accent-2 hover:underline">
+                  <Link to={recordPath(r.id)} className="block min-h-6 truncate leading-6 text-accent-2 hover:underline">
                     {r.name}
                   </Link>
                   <StatusBadge s={((r as { stage?: string; poc_status?: string; status?: string }).stage ?? (r as { poc_status?: string }).poc_status) as string | undefined} />

@@ -23,7 +23,7 @@
       "id": "rsk-demo-s1-laser",
       "entity": "risk",
       "kind": "Risk",
-      "name": "Customer-supplied laser: interface, safety and warranty boundary undefined",
+      "name": "Customer-supplied laser: interface, safety and warranty boundary not defined",
       "cause": "Laser model and control interface not yet known",
       "effect": "Integration rework; unclear responsibility at FAT/SAT",
       "risk_status": "Open",

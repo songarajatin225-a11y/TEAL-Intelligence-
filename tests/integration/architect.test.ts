@@ -70,6 +70,9 @@ describe('machine architect — stations from components', async () => {
     expect(robot.stations[0].name).toBe('Robot loading');
     expect(robot.automation).toBe('Fully automatic');
     expect(robot.stations.at(-1)?.name).toMatch(/robot/i);
+    const inlineNoConveyor = architect({ pool: pool(MARKER), process: 'Marking', automation: 'Inline' });
+    expect(inlineNoConveyor.stations[0].name).toBe('Infeed (conveyor not selected)');
+    expect(inlineNoConveyor.notes.some((x) => x.kind === 'gap' && /Inline automation needs a conveyor/.test(x.text))).toBe(true);
     const manual = architect({ pool: pool(MARKER), process: 'Marking', automation: 'Manual' });
     expect(manual.stations.some((s) => s.key === 'sort')).toBe(false);
   });

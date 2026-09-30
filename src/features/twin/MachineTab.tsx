@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import clsx from 'clsx';
-import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, CircleStop, Expand, Eye, EyeOff, Focus, Gauge, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, Link2, ListTree, Maximize2, Minimize2, Palette, PanelLeft, Pause, Play, RotateCcw, Ruler, Scan, ScanEye, Scissors, Search, SkipForward, Square, Video, X } from 'lucide-react';
+import { AlertTriangle, BookOpen, Box, Bug, Camera, Captions, ChevronDown, ChevronLeft, ChevronRight, CircleStop, Expand, Eye, EyeOff, FileDown, Focus, Gauge, GraduationCap, Grid3x3, Info, Layers, LayoutGrid, Lightbulb, Link2, ListTree, Maximize2, Minimize2, Palette, PanelLeft, Pause, Play, RotateCcw, Ruler, Scan, ScanEye, Scissors, Search, SkipForward, Square, Video, X } from 'lucide-react';
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -78,6 +78,8 @@ export default function MachineTab(p: TabProps) {
   return <Workbench {...p} onGLFail={() => setOk(false)} />;
 }
 
+const DARK_WARN = '!bg-[#f5c46b]/10 !text-[#f5c46b] !ring-[#f5c46b]/35';
+const DARK_NEUTRAL = '!bg-white/5 !text-[#c9d3d3] !ring-white/15';
 type Overlay = 'none' | 'state' | 'utilization' | 'localization' | 'cost' | 'requirement' | 'risk';
 type CamMode = 'engineering' | 'customer' | 'exploded' | 'xray' | 'process' | 'laser' | 'inspection' | 'maintenance';
 type Bottom = 'builder' | 'inputs' | 'timeline' | 'sequence' | 'checks' | 'io' | 'hmi' | 'motion' | 'utilities' | 'trace' | 'faults' | 'runs' | 'compare' | 'assumptions';
@@ -514,6 +516,22 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
       act[k]();
     }
   };
+  const glb = async () => {
+    const root = scene.current?.root();
+    if (!root) return;
+    try {
+      const { exportGlb } = await import('./three/exportGlb');
+      const { blob, nodes } = await exportGlb(root, model, { title: `${sim.name} — conceptual 3D model`, scenarioId: sim.id, date: new Date().toISOString().slice(0, 10) });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${sim.id}-conceptual.glb`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      toast('3D model exported (glTF)', { tone: 'draft', detail: `${nodes} objects · CONCEPTUAL 3D MODEL — not manufacturing geometry` });
+    } catch (e) {
+      toast('Export failed', { tone: 'error', detail: String(e) });
+    }
+  };
   const png = () => {
     const c = scene.current?.canvas();
     if (!c) return;
@@ -600,11 +618,22 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
           </span>
         )}
         <span className="ml-auto flex flex-wrap items-center gap-2 font-sans">
-          <Badge tone="warn">{model.label}</Badge>
-          <Badge>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
-          <Badge>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
-          {sim.data_type === 'DEMO' && <Badge tone="warn">DEMO</Badge>}
-          {preview && <Badge tone="warn">SEQUENCE PREVIEW — not a result</Badge>}
+          {/* the status bar is dark in both themes, so its badges use dark-surface colours (WCAG contrast) */}
+          <Badge tone="warn" className={DARK_WARN}>
+            {model.label}
+          </Badge>
+          <Badge className={DARK_NEUTRAL}>3D: {sim.twin?.model_maturity ?? 'Procedural'}</Badge>
+          <Badge className={DARK_NEUTRAL}>Simulation: {sim.twin?.sim_maturity ?? 'Conceptual'}</Badge>
+          {sim.data_type === 'DEMO' && (
+            <Badge tone="warn" className={DARK_WARN}>
+              DEMO
+            </Badge>
+          )}
+          {preview && (
+            <Badge tone="warn" className={DARK_WARN}>
+              SEQUENCE PREVIEW — not a result
+            </Badge>
+          )}
           {perfNotice && (
             <span className="text-[#f5c46b]" title="The device was slow, so the rendering switched to Performance quality (Display menu to change)">
               <Gauge className="inline size-3.5" aria-label="Performance mode on" />
@@ -735,7 +764,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
                 </div>
               )}
             </Popover>
-            <Popover label="Overlay" width="w-72" trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
+            <Popover label="Overlay" width={overlay === 'utilization' ? 'w-[26rem]' : 'w-72'} trigger={({ open: o, toggle }) => <Tool icon={Palette} label="Overlay" active={overlay !== 'none' || o} onClick={toggle} />}>
               {() => (
                 <div className="space-y-2 p-3 text-meta">
                   <SmallSelect label="Overlay" value={overlay} options={[{ value: 'none', label: 'No overlay' }, { value: 'state', label: 'Machine state (live)' }, { value: 'utilization', label: 'Utilization heat map (run)' }, { value: 'localization', label: 'Localization (origin)' }, ...(customer ? [] : [{ value: 'cost', label: 'Cost contribution' }, { value: 'risk', label: 'Supply risk' }]), { value: 'requirement', label: 'Requirement' }]} onChange={(v) => setOverlay(v as Overlay)} className="w-full" />
@@ -762,6 +791,7 @@ function Workbench({ eng, sim, set, d, customer, onGLFail }: TabProps & { onGLFa
         <span className="ml-auto flex items-center gap-1">
           <Group label="Export">
             <Tool icon={Camera} label="PNG snapshot" onClick={png} />
+            {!customer && <Tool icon={FileDown} label="Export 3D model (glTF .glb)" onClick={() => void glb()} />}
             <Tool icon={recording ? CircleStop : Video} label={recording ? 'Stop recording' : 'Record a cycle (WebM video)'} active={recording} onClick={record} />
             <Tool icon={Link2} label="Copy view link" onClick={() => void copyLink()} />
           </Group>
@@ -1054,23 +1084,23 @@ function OverlayLegend({ kind, des }: { kind: Overlay; des: DesResult | null }) 
           <thead className="text-ink-3">
             <tr>
               <th scope="col" className="text-left font-normal">Station</th>
-              <th scope="col" className="text-right font-normal">Busy</th>
-              <th scope="col" className="text-right font-normal">Blocked</th>
-              <th scope="col" className="text-right font-normal">Starved</th>
-              <th scope="col" className="text-right font-normal">Down</th>
+              <th scope="col" className="pl-2 text-right font-normal">Busy</th>
+              <th scope="col" className="pl-2 text-right font-normal">Blocked</th>
+              <th scope="col" className="pl-2 text-right font-normal">Starved</th>
+              <th scope="col" className="pl-2 text-right font-normal">Down</th>
             </tr>
           </thead>
           <tbody className="num">
             {des.stations.map((s) => (
               <tr key={s.key}>
-                <th scope="row" className="max-w-24 truncate text-left font-normal">
+                <th scope="row" className="max-w-40 truncate text-left font-normal">
                   <span className="mr-1 inline-block size-2 rounded-sm align-middle" style={{ background: utilColor(s.utilization) }} aria-hidden />
                   {s.name}
                 </th>
-                <td className="text-right">{p(s.utilization)}</td>
-                <td className="text-right">{p(s.blocked)}</td>
-                <td className="text-right">{p(s.starved)}</td>
-                <td className="text-right">{p(s.down)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.utilization)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.blocked)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.starved)}</td>
+                <td className="whitespace-nowrap pl-2 text-right">{p(s.down)}</td>
               </tr>
             ))}
           </tbody>

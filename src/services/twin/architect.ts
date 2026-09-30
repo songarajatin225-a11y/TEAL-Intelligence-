@@ -213,6 +213,9 @@ export function architect(input: ArchitectInput): Architecture {
       for (const p of rc) place('load', 'Robot controller', [p]);
       if (!g.length) notes.push({ kind: 'gap', text: 'The loading robot has no gripper or end effector selected.' });
       station('load', 'Robot loading', 'load', [slot('Robot', 'robot'), slot('Gripper', 'gripper')], 'Robot selected (no conveyor) → robot loads the machine from a tray', `${models(r)} picks parts from the supply tray${g.length ? ` with ${models(g)}` : ''}.`, [...r, ...g, ...rc]);
+    } else if (automation === 'Inline') {
+      station('load', 'Infeed (conveyor not selected)', 'load', [slot('Conveyor', 'conveyor')], 'Inline automation → conveyor infeed (slot open)', 'Inline means parts arrive on a conveyor; no conveyor is selected, so the slot is open.', []);
+      notes.push({ kind: 'gap', text: 'Inline automation needs a conveyor — none is selected.' });
     } else if (automation === 'Fully automatic') {
       station('load', 'Automatic infeed (magazine)', 'load', [], 'Fully automatic without robot or conveyor → magazine infeed placeholder', 'Fully automatic loading needs a feeder, robot or conveyor — none is selected, so a magazine is drawn as a placeholder.', []);
       notes.push({ kind: 'gap', text: 'Fully automatic loading needs a robot, conveyor or feeder — none is selected.' });
@@ -221,7 +224,7 @@ export function architect(input: ArchitectInput): Architecture {
     }
   };
   const unloadStation = () => {
-    if (conveyorN) station('unload', 'Outfeed (conveyor)', 'unload', [], 'Conveyor selected → inline outfeed', 'Finished parts leave on the line.', []);
+    if (conveyorN || automation === 'Inline') station('unload', 'Outfeed (conveyor)', 'unload', [], conveyorN ? 'Conveyor selected → inline outfeed' : 'Inline automation → conveyor outfeed', 'Finished parts leave on the line.', []);
     else if (stations.some((s) => s.key === 'load' && /robot/i.test(s.name))) station('unload', 'Unloading (robot, same cycle)', 'unload', [], 'Loading robot → the same robot unloads', 'The loading robot also removes finished parts (one robot, counted once in the BOM).', []);
     else if (automation === 'Fully automatic') station('unload', 'Automatic outfeed (magazine)', 'unload', [], 'Fully automatic without robot or conveyor → magazine outfeed placeholder', 'Outfeed placeholder until handling hardware is selected.', []);
     else station('unload', automation === 'Manual' ? 'Manual unload (operator)' : 'Operator unload', 'unload', [], `${automation} → operator unloads`, 'The operator removes the finished part.', [], { operator: true });
